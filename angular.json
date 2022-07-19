@@ -23,6 +23,7 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -90,12 +91,26 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "made-to:build:production",
+            "firebaseProject": "made-to-cassie",
+            "firebaseHostingSite": "made-to-cassie"
+          }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "a1b2d527-e366-44af-a841-e3ccc058f4ac"
   }
 }

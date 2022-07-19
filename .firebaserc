@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "made-to-cassie": {
+      "hosting": {
+        "made-to": [
+          "made-to-cassie"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "made-to-cassie"
+  }
+}
