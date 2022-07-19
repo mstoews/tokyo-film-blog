@@ -82,7 +82,7 @@
       <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
         Our Creations
       </p>
-      <a href="#" class="hidden btn md:block">Top</a>
+      <a href="#" class="hidden btn md:block text-justify">Top</a>
     </div>
 
     <!-- Items Container -->
@@ -326,14 +326,14 @@
         <!-- Copy -->
         <div class="font-bold">
           &copy; 2022 Made-To. All Rights Reserved
-          <div *ngIf="auth.user | async as user; else showLogin">
+          <!-- <div *ngIf="auth.user | async as user; else showLogin">
             <h1 class="text-white">Hello {{ user.displayName }}!</h1>
             <button class="text-white" (click)="logout()">Logout</button>
           </div>
           <ng-template #showLogin>
             <p class="text-white">Please login.</p>
             <button class="text-white" (click)="login()">Login with Google</button>
-          </ng-template>
+          </ng-template> -->
         </div>
       </div>
     </div>

@@ -12,10 +12,15 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { LandingPageComponent } from './components/landing-page/landing-page.component';
+import { MaterialModule } from './MaterialModule';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     provideFirestore(() => getFirestore()),
     provideFunctions(() => getFunctions()),
     providePerformance(() => getPerformance()),
-    provideStorage(() => getStorage())
+    provideStorage(() => getStorage()),
+    LandingPageComponent,
+    MaterialModule,
+    CommonModule,
   ],
   providers: [
     ScreenTrackingService,UserTrackingService

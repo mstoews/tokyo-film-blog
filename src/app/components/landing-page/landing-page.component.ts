@@ -3,12 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, RouterModule } from '@angular/router';
 import { GalleryComponent } from '../gallery/gallery.component';
 import { DndComponent } from '../loaddnd/dnd.component';
-import { MaterialModule } from '../MaterialModule';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
+import { MaterialModule } from '../../MaterialModule';
+// import { AngularFireAuth } from '@angular/fire/compat/auth';
+// import firebase from 'firebase/compat/app';
 import { GoogleAuthProvider } from '@angular/fire/auth';
 import { CommonModule } from '@angular/common';
-import { IconsModule } from '../icons.module';
+import { IconsModule } from '../../icons.module';
 import { MenubarComponent } from '../menubar/menubar.component';
 import { BlogComponent } from '../blog/blog.component';
 
@@ -17,14 +17,16 @@ import { BlogComponent } from '../blog/blog.component';
   imports: [RouterModule, GalleryComponent, DndComponent, MaterialModule, CommonModule, IconsModule, MenubarComponent, BlogComponent],
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  providers: [ GoogleAuthProvider, AngularFireAuth ],
+  providers: [ GoogleAuthProvider,
+    //AngularFireAuth
+  ],
 })
 export class LandingPageComponent implements OnInit {
 
   constructor(
     private  router: Router,
     private matDialog: MatDialog,
-    public auth: AngularFireAuth,
+    //public auth: AngularFireAuth,
     ) {}
 
   ngOnInit(): void {
@@ -55,10 +57,10 @@ export class LandingPageComponent implements OnInit {
   }
 
   login() {
-    this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    //this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
   }
   logout() {
-    this.auth.signOut();
+    //this.auth.signOut();
   }
 
 }

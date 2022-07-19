@@ -5,12 +5,12 @@ import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AngularFireStorage} from '@angular/fire/compat/storage';
 import { catchError, concatMap, last, map, take, tap} from 'rxjs/operators';
 import { EMPTY, Observable, Subscription, throwError } from 'rxjs';
-import { MaterialModule } from '../MaterialModule';
+import { MaterialModule } from '../../MaterialModule';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageUrl} from '../models/imageUrl.model'
-import { persistenceEnabled as _persistenceEnabled } from '../app.module';
+// import { persistenceEnabled as _persistenceEnabled } from '../../app.module';
 import { traceUntilFirst } from '@angular/fire/performance';
 import {
   collection,

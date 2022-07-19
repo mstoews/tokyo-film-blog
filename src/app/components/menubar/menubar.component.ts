@@ -5,8 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../MaterialModule';
-import { IconsModule } from '../icons.module';
+import { MaterialModule } from '../../MaterialModule';
+import { IconsModule } from '../../icons.module';
 
 @Component({
   standalone: true,
