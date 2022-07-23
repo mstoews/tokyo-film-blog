@@ -1,0 +1,16 @@
+<li class="side-nav__item">
+  <a mat-list-item [ngStyle]="{'padding-left': (depth * 15) + 'px'}" (click)="onItemSelected(item)"
+    [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}">
+    <mat-icon class="side-nav__icon" [svgIcon]=item.iconName> </mat-icon>
+    <span class="fill-space">{{item.displayName}}</span>
+    <div *ngIf="item.parent == true" >
+      <div class="menu-button" [ngStyle]="{'color': '#797575'}" [ngClass]="{'clicked': isClicked}" >
+          <mat-icon #chevron [svgIcon]="'heroicons_outline:chevron-right'"></mat-icon>
+      </div>
+    </div>
+  </a>
+</li>
+<div *ngIf="expanded">
+  <app-nav-list-item *ngFor="let child of item.children" [item]="child" [depth]="depth+1">
+  </app-nav-list-item>
+</div>

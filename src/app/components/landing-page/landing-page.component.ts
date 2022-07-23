@@ -4,29 +4,39 @@ import { Router, RouterModule } from '@angular/router';
 import { GalleryComponent } from '../gallery/gallery.component';
 import { DndComponent } from '../loaddnd/dnd.component';
 import { MaterialModule } from '../../MaterialModule';
-// import { AngularFireAuth } from '@angular/fire/compat/auth';
-// import firebase from 'firebase/compat/app';
-import { GoogleAuthProvider } from '@angular/fire/auth';
+
 import { CommonModule } from '@angular/common';
 import { IconsModule } from '../../icons.module';
 import { MenubarComponent } from '../menubar/menubar.component';
 import { BlogComponent } from '../blog/blog.component';
+import { getAnalytics } from '@angular/fire/analytics';
+
+// import { persistenceEnabled as _persistenceEnabled } from '../../app.component';
+import { traceUntilFirst } from '@angular/fire/performance';
+import { doc, docData, Firestore } from '@angular/fire/firestore';
+
+import { getAuth, Auth, authState, signInAnonymously, signOut, User, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { EMPTY, Observable, Subscription } from 'rxjs';
+import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
+
 
 @Component({
   standalone: true,
   imports: [RouterModule, GalleryComponent, DndComponent, MaterialModule, CommonModule, IconsModule, MenubarComponent, BlogComponent],
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
-  providers: [ GoogleAuthProvider,
-    //AngularFireAuth
+  providers: [ GoogleAuthProvider
   ],
 })
 export class LandingPageComponent implements OnInit {
 
+  public testDocValue$: Observable<any> | undefined;
+  // public readonly persistenceEnabled = _persistenceEnabled;
+
   constructor(
     private  router: Router,
     private matDialog: MatDialog,
-    //public auth: AngularFireAuth,
+    private firestore: Firestore,
     ) {}
 
   ngOnInit(): void {
@@ -35,6 +45,7 @@ export class LandingPageComponent implements OnInit {
     console.log('Products');
     this.router.navigate(['products']);
   }
+
   onEvent(){
     console.log('Event');
     const dialogRef = this.matDialog.open(DndComponent, {
@@ -61,6 +72,13 @@ export class LandingPageComponent implements OnInit {
   }
   logout() {
     //this.auth.signOut();
+  }
+
+  getData() {
+     const ref = doc(this.firestore, 'test/1');
+     this.testDocValue$ = docData(ref).pipe(
+       traceUntilFirst('firestore')
+     );
   }
 
 }

@@ -78,11 +78,18 @@
   <!-- Creations Container -->
   <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
     <!-- Creations Header -->
-    <div class="flex justify-center my-32 mb-20 md:justify-between">
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
       <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
         Our Creations
       </p>
-      <a href="#" class="hidden btn md:block text-justify">Top</a>
+      <!-- <a href="#" class="absolute top-0 right-0 btn md:block">
+        <span class="inline-block align-middle">
+          TOP
+        </span>
+      </a> -->
+      <a href="#" class="absolute top-0 right-0 btn items-center align-middle text-2xl font-normal text-gray-100 rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+     </a>
     </div>
 
     <!-- Items Container -->
@@ -205,11 +212,13 @@
   <!-- Feature Container -->
   <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
     <!-- Creations Header -->
-    <div class="flex justify-center my-32 mb-20 md:justify-between">
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
       <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
         features
       </p>
-      <a href="#" class="hidden btn md:block">Top</a>
+      <a href="#" class="absolute top-0 right-0 btn items-center align-middle text-2xl font-normal text-gray-100 rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+     </a>
     </div>
     <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
       <!-- Image -->
@@ -234,11 +243,13 @@
   <!-- Creations Container -->
   <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
     <!-- Creations Header -->
-    <div class="flex justify-center my-32 mb-20 md:justify-between">
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
       <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
         Gallery
       </p>
-      <a href="#" class="hidden text-center btn md:block">Top</a>
+      <a href="#" class="absolute top-0 right-0 btn items-center align-middle text-2xl font-normal text-gray-100 rounded-lg dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+     </a>
     </div>
     <app-gallery></app-gallery>
   </div>

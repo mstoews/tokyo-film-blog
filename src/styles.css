@@ -1,4 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+::-webkit-scrollbar {
+  width: 6px;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  background: grey;
+  box-shadow: inset 0 0 4px #707070;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00578e;
+  border-radius: 10px;
+}
+
+* {
+  -webkit-font-smoothing: antialased;
+  -moz-osx-font-smoothing: antialased;
+  font-family: 'Roboto', sans-serif;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,7 +14,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { MaterialModule } from './MaterialModule';
 import { CommonModule } from '@angular/common';
-
+import { ShellComponent } from './shell/shell.component';
+import { NavService } from './shell/static-sidebar/nav-list-item/nav-service';
 
 @NgModule({
   declarations: [
@@ -34,11 +34,12 @@ import { CommonModule } from '@angular/common';
     providePerformance(() => getPerformance()),
     provideStorage(() => getStorage()),
     LandingPageComponent,
+    ShellComponent,
     MaterialModule,
     CommonModule,
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService
+    ScreenTrackingService,UserTrackingService, NavService
   ],
   bootstrap: [AppComponent]
 })
