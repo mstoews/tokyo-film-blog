@@ -1,0 +1,276 @@
+<!-- Top of the screen  Section -->
+
+
+<section id="hero">
+  <!-- <menubar class="bg-red-50"></menubar> -->
+  <!-- Hero Container -->
+
+  <div class="container h-screen px-6 py-12 max-w-8xl">
+    <!-- Menu/Logo Container -->
+    <nav class="flex items-center justify-between text-2xl text-white">
+      <!-- Logo -->
+
+      <p class="text-4xl font-black uppercase text-white-700 ">Made To</p>
+      <!-- Menu -->
+      <div class="hidden h-10 text-2xl md:flex md:space-x-8">
+        <div class="text-gray-200 uppercase text-1xl group">
+          <button class="uppercase" (click)="scrollToId('creations')">Creations</button>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="text-gray-200 uppercase text-1xl group">
+          <button class="uppercase" (click)="scrollToId('feature')">Features</button>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="text-gray-200 uppercase text-1xl group">
+          <button class="uppercase" (click)="scrollToId('gallery')">Gallery</button>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="text-gray-200 uppercase text-1xl group">
+          <button class="uppercase" (click)="scrollToId('blog')">Blog</button>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="text-gray-200 uppercase text-1xl group">
+          <button class="uppercase" (click)="scrollToId('shop')">shop</button>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+      </div>
+      <!-- Hamburger Button -->
+      <div class="md:hidden">
+        <button id="menu-btn" type="button" class="z-40 block hamburger md:hidden focus:outline-none">
+          <span class="hamburger-top"></span>
+          <span class="hamburger-middle"></span>
+          <span class="hamburger-bottom"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- Mobile Menu -->
+    <div id="menu"
+      class="absolute top-0 bottom-0 left-0 flex-col self-end hidden w-full min-h-screen py-1 pt-40 pl-12 space-y-3 text-white uppercase bg-black">
+      <a href="#" class="hover:text-pink-500">Made-To</a>
+      <a href="#" class="hover:text-pink-500">Creations</a>
+      <a href="#" class="hover:text-pink-500">Gallery</a>
+      <a href="#" class="hover:text-pink-500">Blog</a>
+      <a href="#" class="hover:text-pink-500">Shop</a>
+    </div>
+
+    <div
+      class="max-w-4xl p-4 mt-32 mb-32 text-2xl text-white uppercase border-2 font-alata max-h-6xl md:p-10 md:m-32 md:mx-0 md:text-6xl">
+      Beautifully Hand Crafted Products
+    </div>
+  </div>
+</section>
+
+<section id="creations" class="scroll-mt-20">
+  <!-- Creations Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        Our Creations
+      </p>
+      <!-- <a href="#" class="absolute top-0 right-0 btn md:block">
+        <span class="inline-block align-middle">
+          TOP
+        </span>
+      </a> -->
+      <button class="uppercase" (click)="scrollToId('hero')"
+        class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+      <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+      </button>
+    </div>
+
+    <!-- Items Container -->
+    <div class="item-container">
+      <!-- Item 1 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+    </div>
+
+    <!-- Item Container 2 -->
+    <div class="mt-10 item-container">
+      <!-- Item 1 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+    </div>
+    <!-- Bottom Button Container -->
+    <div class="flex justify-center mt-10 md:hidden">
+      <button class="w-full btn md:hidden">See All</button>
+    </div>
+  </div>
+</section>
+<!-- Feature Section -->
+<section id="feature" class="scroll-mt-20">
+  <!-- Feature Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        features
+      </p>
+
+      <button class="uppercase" (click)="scrollToId('hero')"
+        class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+      <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+      </button>
+    </div>
+    <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
+      <!-- Image -->
+      <img src="assets/cassie_suit_dummy.jpg" alt="" />
+
+      <!-- Text Container -->
+      <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20">
+        <h2
+          class="max-w-lg mt-10 mb-6 font-sans text-4xl text-center text-gray-900 uppercase md:text-5xl md:mt-0 md:text-left">
+          Leader in Hand Made Knitted Products
+        </h2>
+
+        <p class="max-w-md text-center md:text-left">
+          Founded in 2018, Made-to has been producing world-class hand knitted products for over a decade.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Gallery Section -->
+<section id="gallery" class="scroll-mt-20">
+  <!-- Creations Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        Gallery
+      </p>
+      <button class="uppercase" (click)="scrollToId('hero')"
+        class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+      <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+      </button>
+    </div>
+    <app-gallery></app-gallery>
+  </div>
+</section>
+<section id="featured_new">
+<div class="px-4 py-8 lg:px-20 md:px-6 md:py-12">
+    <div class="items-center justify-between lg:flex">
+        <div class="lg:w-1/3">
+            <h1 class="text-4xl font-semibold leading-9 text-gray-800">Indoor Interiors</h1>
+            <p class="mt-4 text-base leading-6 text-gray-600">Get inspired by our curated selection of luxiwood interiors. We hope get inspired to have luxiwood interior yourself. You’ll find tips here where you can buy a lot of cool furniture.</p>
+            <button role="button" aria-label="view catalogue" class="flex items-center mt-6 text-base font-semibold leading-none text-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none md:mt-8 hover:underline">
+                View Catalogue
+                <svg class="mt-1 ml-2" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.33325 4H10.6666" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 6.66667L10.6667 4" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 1.33398L10.6667 4.00065" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+        </div>
+        <div class="mt-8 lg:w-7/12 lg:mt-0">
+            <div class="w-full h-full bg-red-200">
+                <img src="https://i.ibb.co/cbyDY74/pexels-max-vakhtbovych-6782351-1-1.png" alt="apartment design" class="hidden w-full sm:block" />
+                <img src="https://i.ibb.co/ZVPGjGJ/pexels-max-vakhtbovych-6782351-1.png" alt="apartment design" class="block w-full sm:hidden" />
+            </div>
+            <div class="grid gap-6 mt-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 lg:gap-8 lg:mt-8 md:mt-6">
+                <img src="https://i.ibb.co/4Jrp5TB/pexels-max-vakhtbovych-6782370-1.png" class="w-full" alt="kitchen" />
+                <img src="https://i.ibb.co/0Jv3FSy/pexels-max-vakhtbovych-6436799-1-1.png" class="w-full" alt="sitting room" />
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+

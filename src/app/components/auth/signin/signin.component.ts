@@ -8,7 +8,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { IconsModule } from 'src/app/icons.module';
 import { MaterialModule } from 'src/app/MaterialModule';
-import { BlogComponent } from '../../blog/blog.component';
+import { BlogComponent } from '../../../modules/blog/blog/blog.component';
 import { GalleryComponent } from '../../gallery/gallery.component';
 import { DndComponent } from '../../loaddnd/dnd.component';
 import { MenubarComponent } from '../../menubar/menubar.component';

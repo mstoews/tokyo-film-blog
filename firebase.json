@@ -1,7 +1,7 @@
 {
   "hosting": {
     "target": "made-to",
-    "public": "dist/made-to",
+    "public": "dist",
     "ignore": [
       "**/.*"
     ],

@@ -44,8 +44,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import {OverlayModule} from '@angular/cdk/overlay';
 import { HttpClientModule } from '@angular/common/http'
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
+  imports: [FormsModule, ReactiveFormsModule],
   exports: [
     A11yModule,
     CdkAccordionModule,
@@ -92,7 +95,9 @@ import { HttpClientModule } from '@angular/common/http'
     OverlayModule,
     PortalModule,
     ScrollingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class MaterialModule {}

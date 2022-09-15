@@ -4,13 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../MaterialModule';
-import { IconsModule } from '../../icons.module';
+
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, MaterialModule, IconsModule],
   selector: 'menubar',
   templateUrl: './menubar.component.html',
   styleUrls: ['./menubar.component.scss']

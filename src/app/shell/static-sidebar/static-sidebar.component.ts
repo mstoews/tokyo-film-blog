@@ -13,13 +13,7 @@ import {
   group,
 } from '@angular/animations';
 import { MatDrawer } from '@angular/material/sidenav';
-import { MaterialModule } from '../../MaterialModule';
-import { NavItemComponent } from './nav-list-item/nav-item.component';
-import { CommonModule } from '@angular/common';
-
 @Component({
-  standalone: true,
-  imports: [MaterialModule, NavItemComponent, CommonModule],
   selector: 'app-static-sidebar',
   templateUrl: './static-sidebar.component.html',
   styleUrls: ['./static-sidebar.component.scss'],

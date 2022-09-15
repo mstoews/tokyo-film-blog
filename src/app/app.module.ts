@@ -6,26 +6,29 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideFunctions,getFunctions } from '@angular/fire/functions';
 import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideStorage,getStorage } from '@angular/fire/storage';
-import { LandingPageComponent } from './components/landing-page/landing-page.component';
-import { MaterialModule } from './MaterialModule';
 import { CommonModule } from '@angular/common';
-import { ShellComponent } from './shell/shell.component';
 import { NavService } from './shell/static-sidebar/nav-list-item/nav-service';
+import { SharedModule } from './modules/shared-module/shared.module';
+import { AuthModule } from './services/auth/auth.module';
+import { ScrollService } from './services/scroll.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    CommonModule,
+
+    SharedModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
@@ -33,13 +36,11 @@ import { NavService } from './shell/static-sidebar/nav-list-item/nav-service';
     provideFunctions(() => getFunctions()),
     providePerformance(() => getPerformance()),
     provideStorage(() => getStorage()),
-    LandingPageComponent,
-    ShellComponent,
-    MaterialModule,
-    CommonModule,
+
   ],
   providers: [
-    ScreenTrackingService,UserTrackingService, NavService
+    ScrollService,
+    ScreenTrackingService,UserTrackingService, NavService,
   ],
   bootstrap: [AppComponent]
 })

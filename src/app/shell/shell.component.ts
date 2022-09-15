@@ -3,16 +3,11 @@ import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { MaterialModule } from '../MaterialModule';
 import { onMainContentChange } from './animations';
-import { IconsModule } from '../icons.module';
-import { CommonModule } from '@angular/common';
-import { StaticSidebarComponent } from './static-sidebar/static-sidebar.component';
+import { Router } from '@angular/router';
 
 @Component({
-  standalone: true,
-  imports: [MaterialModule, IconsModule, CommonModule, StaticSidebarComponent],
-  selector: 'app-shell',
+  selector: 'shell',
   templateUrl: './shell.component.html',
   animations: [onMainContentChange],
 })
@@ -25,7 +20,7 @@ export class ShellComponent implements AfterViewInit {
   divClicked = false;
   isClicked = false;
   doAnimation = false;
-  // envConnected: string = localStorage.getItem('env');
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.Handset])
     .pipe(
@@ -41,6 +36,7 @@ export class ShellComponent implements AfterViewInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
+    public router: Router,
     // private afAuth: AuthService,
      // private sidenavService: MenuService
   ) {
@@ -65,5 +61,9 @@ export class ShellComponent implements AfterViewInit {
     this.loading = true;
     // this.afAuth.logout();
     this.loading = false;
+  }
+
+  login() {
+    // this.router.navigate(["authenication/sign-in/classic"]);
   }
 }

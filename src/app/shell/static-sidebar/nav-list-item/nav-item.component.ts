@@ -17,12 +17,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { CommonModule } from '@angular/common';
-import { MaterialModule } from '../../../MaterialModule';
 
 @Component({
-  standalone: true,
-  imports: [CommonModule, MaterialModule],
   selector: 'app-nav-list-item',
   templateUrl: './nav-item.component.html',
   styleUrls: ['./nav-item.component.scss'],

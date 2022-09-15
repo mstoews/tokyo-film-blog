@@ -1,0 +1,352 @@
+<section id="hero">
+  <!-- <menubar class="bg-red-50"></menubar> -->
+  <!-- Hero Container -->
+  <div class="container max-w-6xl px-6 py-10 mx-auto scroll-smooth">
+    <!-- Menu/Logo Container -->
+    <nav class="flex items-center justify-between font-bold text-white">
+      <!-- Logo -->
+      <!-- <img src="assets/madetowhitesmol.svg" alt="" /> -->
+      <p class="text-4xl font-black uppercase text-white-700 ">Made To</p>
+      <!-- Menu -->
+      <div class="hidden h-10 font-alata md:flex md:space-x-8">
+        <div class="uppercase text-1xl group">
+          <a href="/">made-to</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+
+        <div class="font-black uppercase text-1xl group">
+          <!-- <a (click)="onEvent()">Events</a> -->
+          <a href="creations">Creation 2 </a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="font-black uppercase text-1xl group">
+          <a href="#feature">Features</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="font-black uppercase text-1xl group">
+          <a href="gallery">Gallery</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <!-- <div class="font-black uppercase text-1xl group">
+          <a href="/feature">Feature</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div> -->
+        <div class="font-black uppercase text-1xl group">
+          <a href="/blog">Blog</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="uppercase text-1xl group">
+          <a href="/products">Shop</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+        <div class="font-black uppercase text-1xl group">
+          <a href="/admin">Admin</a>
+          <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+        </div>
+      </div>
+      <!-- Hamburger Button -->
+      <div class="md:hidden">
+        <button id="menu-btn" type="button" class="z-40 block hamburger md:hidden focus:outline-none">
+          <span class="hamburger-top"></span>
+          <span class="hamburger-middle"></span>
+          <span class="hamburger-bottom"></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="menu"
+      class="absolute top-0 bottom-0 left-0 flex-col self-end hidden w-full min-h-screen py-1 pt-40 pl-12 space-y-3 text-lg text-white uppercase bg-black">
+      <a href="#" class="hover:text-pink-500">Made-To</a>
+      <a href="#" class="hover:text-pink-500">About</a>
+      <a href="#" class="hover:text-pink-500">Products</a>
+      <a href="#" class="hover:text-pink-500">Events</a>
+      <a href="#" class="hover:text-pink-500">Questions</a>
+    </div>
+
+    <div
+      class="max-w-lg p-4 mt-32 mb-32 font-sans text-4xl text-white uppercase border-2 md:p-10 md:m-32 md:mx-0 md:text-6xl">
+      Beautifully Crafted Products
+    </div>
+  </div>
+</section>
+
+<!-- Feature Section -->
+
+<!-- Creations Section -->
+<section id="creations" class="scroll-mt-10">
+  <!-- Creations Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        Our Creations
+      </p>
+      <!-- <a href="#" class="absolute top-0 right-0 btn md:block">
+        <span class="inline-block align-middle">
+          TOP
+        </span>
+      </a> -->
+      <a href="#" class="absolute top-0 right-0 items-center text-2xl font-normal text-gray-100 align-middle rounded-lg btn dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+     </a>
+    </div>
+
+    <!-- Items Container -->
+    <div class="item-container">
+      <!-- Item 1 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+    </div>
+
+    <!-- Item Container 2 -->
+    <div class="mt-10 item-container">
+      <!-- Item 1 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="group item">
+        <!-- Desktop Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt=""
+          class="hidden w-full duration-200 md:block group-hover:scale-110" />
+        <!-- Mobile Image -->
+        <img src="assets/cassie_vertical_scissors.jpg" alt="" class="w-full md:hidden" />
+        <!-- Item Gradient -->
+        <div class="item-gradient"></div>
+        <!-- Item Text -->
+        <h5>Buttons Hold Us Together</h5>
+      </div>
+    </div>
+    <!-- Bottom Button Container -->
+    <div class="flex justify-center mt-10 md:hidden">
+      <button class="w-full btn md:hidden">See All</button>
+    </div>
+  </div>
+</section>
+
+<section id="feature" class="scroll-mt-10">
+  <!-- Feature Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        features
+      </p>
+      <a href="#" class="absolute top-0 right-0 items-center text-2xl font-normal text-gray-100 align-middle rounded-lg btn dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+     </a>
+    </div>
+    <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
+      <!-- Image -->
+      <img src="assets/cassie_suit_dummy.jpg" alt="" />
+
+      <!-- Text Container -->
+      <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20">
+        <h2
+          class="max-w-lg mt-10 mb-6 font-sans text-4xl text-center text-gray-900 uppercase md:text-5xl md:mt-0 md:text-left">
+          Leader in Hand Made Knitted Products
+        </h2>
+
+        <p class="max-w-md text-center md:text-left">
+          Founded in 2018, Made-to has been producing world-class hand knitted products for over a decade.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="scroll-mt-10">
+  <!-- Creations Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        Gallery
+      </p>
+      <a href="#" class="absolute top-0 right-0 items-center text-2xl font-normal text-gray-100 align-middle rounded-lg btn dark:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+     </a>
+    </div>
+    <app-gallery></app-gallery>
+  </div>
+</section>
+
+
+<footer class="bg-black">
+  <!-- Container -->
+  <div class="container max-w-6xl py-10 mx-auto">
+    <!-- Footer Flex Container -->
+    <div class="flex flex-col items-center mb-8 space-y-6 md:flex-row md:space-y-0 md:justify-between md:items-start">
+      <!-- Menu & Logo Container -->
+      <div class="flex flex-col items-center space-y-8 md:items-start md:space-y-4">
+        <!-- Logo -->
+        <div class="h-8">
+          <!-- <img src="assets/logo.svg" alt="" class="w-44 md:ml-3" /> -->
+          <p class="text-4xl">Made To</p>
+        </div>
+        <!-- Menu Container -->
+        <div
+          class="flex flex-col items-center space-y-4 font-bold text-white md:flex-row md:space-y-0 md:space-x-6 md:ml-3">
+          <!-- Item 1 -->
+          <div class="h-10 group">
+            <a href="#">About Us</a>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
+          <!-- Item 2 -->
+          <div class="h-10 group">
+            <a href="#">Products</a>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
+          <!-- Item 3 -->
+          <div class="h-10 group">
+            <a href="#">Events</a>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
+          <!-- Item 4 -->
+          <div class="h-10 group">
+            <a href="#">Personal Requests</a>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
+          <!-- Item 5 -->
+          <div class="h-10 group">
+            <a href="#">Questions</a>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
+          <!-- Item 6 -->
+          <div class="h-10 group">
+            <a href="/admin">Admin</a>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social & Copy Container -->
+      <div class="flex flex-col items-start justify-between space-y-4 text-gray-500">
+        <!-- icons Container -->
+        <div class="flex items-center justify-center mx-auto space-x-4 md:justify-end md:mx-0">
+          <!-- Icon 1 -->
+          <div class="h-8 group">
+            <a href="https://www.facebook.com/Made_To-10747724203476">
+              <img src="assets/img/icon-facebook.svg" alt="" class="h-6" />
+            </a>
+          </div>
+          <!-- Icon 2 -->
+          <div class="h-8 group">
+            <a href="#">
+              <img src="assets/img/icon-twitter.svg" alt="" class="h-6" />
+            </a>
+          </div>
+          <!-- Icon 3 -->
+          <div class="h-8 group">
+            <a href="#">
+              <img src="assets/img/icon-pinterest.svg" alt="" class="h-6" />
+            </a>
+          </div>
+          <!-- Icon 4 -->
+          <div class="h-8 group">
+            <a href="#">
+              <img src="assets/img/icon-instagram.svg" alt="" class="h-6" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Copy -->
+        <div class="font-bold">
+          &copy; 2022 Made-To. All Rights Reserved
+          <!-- <div *ngIf="auth.user | async as user; else showLogin">
+            <h1 class="text-white">Hello {{ user.displayName }}!</h1>
+            <button class="text-white" (click)="logout()">Logout</button>
+          </div>
+          <ng-template #showLogin>
+            <p class="text-white">Please login.</p>
+            <button class="text-white" (click)="login()">Login with Google</button>
+          </ng-template> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
