@@ -1,6 +1,4 @@
 <!-- Top of the screen  Section -->
-
-
 <section id="hero">
   <!-- <menubar class="bg-red-50"></menubar> -->
   <!-- Hero Container -->
@@ -26,11 +24,11 @@
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
         <div class="text-gray-200 uppercase text-1xl group">
-          <button class="uppercase" (click)="scrollToId('blog')">Blog</button>
+          <button class="uppercase" routerLink="/blog">Blog</button>
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
         <div class="text-gray-200 uppercase text-1xl group">
-          <button class="uppercase" (click)="scrollToId('shop')">shop</button>
+          <button class="uppercase" routerLink="/shop">shop</button>
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
       </div>
@@ -62,6 +60,7 @@
 
 <section id="creations" class="scroll-mt-20">
   <!-- Creations Container -->
+
   <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
     <!-- Creations Header -->
     <div class="relative justify-center my-32 mb-20 md:justify-between">

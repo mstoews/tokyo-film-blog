@@ -31,6 +31,19 @@ const routes: Route[] = [
     path: 'products',
     loadChildren: () => import('./modules/products/products.module').then( (mod) => mod.ProductsModule),
   },
+  {
+    path: 'shop',
+    loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
+  },
+  {
+    path: 'blog',
+    loadChildren: () => import('./modules/blog/blog.module').then( (mod) => mod.BlogModule),
+  },
+
   // {
   //   path: 'blog',
   //   loadChildren: () => import('./modules/blog/blog.module').then((mod) => mod.BlogModule),
