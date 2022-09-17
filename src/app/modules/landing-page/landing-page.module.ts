@@ -5,6 +5,7 @@ import { GalleryCardComponent } from '../../components/gallery-card/gallery-card
 import { GalleryComponent } from '../../components/gallery/gallery.component'
 import { SharedModule } from 'app/modules/shared-module/shared.module';
 import { RouterModule, Routes } from '@angular/router';
+import { BannerComponent } from './banner/banner.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [LandingPageComponent],
+  declarations: [LandingPageComponent, BannerComponent],
   imports: [
     CommonModule,
     GalleryCardComponent,

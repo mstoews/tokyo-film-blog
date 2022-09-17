@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Optional, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
-import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
+import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, EmailAuthProvider, signInWithPopup} from 'firebase/auth'
 import { Router } from '@angular/router';
-import { setPersistence, browserSessionPersistence } from '@angular/fire/auth';
+import { Auth, setPersistence, browserSessionPersistence, browserLocalPersistence, signInAnonymously, } from '@angular/fire/auth';
 
 @Component({
     selector     : 'sign-in-split-screen',
@@ -21,8 +21,10 @@ export class SignInSplitScreenComponent implements OnInit
     };
     signInForm!: UntypedFormGroup;
     showAlert: boolean = false;
+    redirect = ['/home'];
 
     constructor(
+        @Optional() private auth: Auth,
         private _formBuilder: UntypedFormBuilder,
         public router: Router) {}
 
@@ -38,39 +40,44 @@ export class SignInSplitScreenComponent implements OnInit
         const provider = new GoogleAuthProvider();
     }
 
-    email = 'mstoews@hotmail.com';
-    password = '162888';
+  signInEmail() {
+    // this.loginWithEmail();
+    const email = this.signInForm.get('email');
+    const password = this.signInForm.get('password');
+    const pw = password?.value;
+    const em = email?.value;
+    const loggedOn = this.signIn(em, pw);
+  }
 
-  signIn() {
-      const auth = getAuth();
-      setPersistence(auth, browserSessionPersistence);
-      signInWithEmailAndPassword(auth, this.email, this.password).then((creds) => {
+  async signIn(email : string, password : string) {
+
+      return signInWithEmailAndPassword(this.auth, email, password ).then((creds) => {
           const user = creds.user;
+          console.log(user.email);
           console.log('successfuly logged in... : ', user);
-          this.router.navigate(['/landing']);
+          this.router.navigate(this.redirect);
       }).catch ((error) => {
         const erroCode = error.code;
         const errorMsg = error.message;
         console.log(`${errorMsg} : ${erroCode}`)
-      })
+      });
   }
 
-  signInWithGoogle() {
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-      signInWithPopup(auth, provider)
-        .then((result) => {
-          const credential = GoogleAuthProvider.credentialFromResult(result);
-          const token = credential!.accessToken;
-          const user = result.user;
-          this.router.navigate(['/landing']);
-       }).catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          const email = error.customData.email;
-          const credential = GoogleAuthProvider.credentialFromError(error);
-      });
+  async loginWithEmail() {
+    const provider = new EmailAuthProvider();
+    await signInWithPopup(this.auth, provider);
+    await this.router.navigate(this.redirect);
+  }
+
+  async signInWithGoogle() {
+    const provider = new GoogleAuthProvider();
+    await signInWithPopup(this.auth, provider);
+    await this.router.navigate(this.redirect);
+  }
+
+  async loginAnonymously() {
+    await signInAnonymously(this.auth);
+    await this.router.navigate(this.redirect);
   }
 }
 

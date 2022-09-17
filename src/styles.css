@@ -19,6 +19,24 @@
   font-family: 'Roboto', sans-serif;
 }
 
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+.swiper-slide img {
+  object-fit: cover;
+}
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

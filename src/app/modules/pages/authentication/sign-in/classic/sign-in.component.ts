@@ -23,7 +23,7 @@ export class SignInClassicComponent implements OnInit
      * Constructor
      */
     constructor(
-        // private _authService: AuthService,
+        private _authService: AuthService,
         private _formBuilder: UntypedFormBuilder
     )
     {

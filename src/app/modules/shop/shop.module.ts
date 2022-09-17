@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ShopComponent } from './shop.component';
 import { Routes, RouterModule } from '@angular/router';
+import { MainShopComponent } from './main-shop/main-shop.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   {
@@ -15,7 +17,9 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ShopComponent
+    ShopComponent,
+    MainShopComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,

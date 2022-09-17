@@ -13,18 +13,15 @@ export class AuthService
     isLoggedOut$!: Observable<boolean>;
     pictureUrl$!: Observable<string>;
 
-
-
     /**
      * Constructor
      */
     constructor(
         private _httpClient: HttpClient,
         private _userService: UserService
-
     )
     {
-    
+
     }
 
     // -----------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
-import { LandingPage2Component } from './modules/landing-page/landing-page2.component';
+import { AuthGuard } from './modules/users/user/auth.guard';
 
 const routes: Route[] = [
   // {
@@ -15,7 +15,8 @@ const routes: Route[] = [
     path: 'home',
       loadChildren: () => import('./modules/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
         // component: LandingPage2Component,
-        // canActivate: [AuthGuard],
+      /// canActivate: [AuthGuard],
+      canActivate: [AuthGuard],
    },
    {
     path: 'authentication',
@@ -26,28 +27,34 @@ const routes: Route[] = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+    canActivate: [AuthGuard],
   },
   {
     path: 'products',
     loadChildren: () => import('./modules/products/products.module').then( (mod) => mod.ProductsModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'shop',
     loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'home',
     loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
+    canActivate: [AuthGuard],
   },
   {
     path: 'blog',
     loadChildren: () => import('./modules/blog/blog.module').then( (mod) => mod.BlogModule),
+    canActivate: [AuthGuard],
   },
-
-  // {
-  //   path: 'blog',
-  //   loadChildren: () => import('./modules/blog/blog.module').then((mod) => mod.BlogModule),
-  // },
+  {
+    path: 'login',
+    redirectTo: 'authentication',
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({
