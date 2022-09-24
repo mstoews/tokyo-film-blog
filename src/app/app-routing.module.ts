@@ -55,6 +55,18 @@ const routes: Route[] = [
     pathMatch: 'full',
     canActivate: [AuthGuard],
   },
+  {
+    path: 'animation',
+    loadChildren: () => import('./modules/ui/animations/animations.module').then( (mod) => mod.AnimationsModule),
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'cards',
+    loadChildren: () => import('./modules/ui/cards/cards.module').then( (mod) => mod.CardsModule),
+    pathMatch: 'full',
+    canActivate: [AuthGuard],
+  },
 ];
 
 @NgModule({

@@ -12,12 +12,12 @@ import { FuseHighlightService } from '@fuse/components/highlight/highlight.servi
 })
 export class FuseHighlightComponent implements OnChanges, AfterViewInit
 {
-    @Input() code: string;
-    @Input() lang: string;
-    @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
+    @Input() code!: string;
+    @Input() lang!: string;
+    @ViewChild(TemplateRef) templateRef!: TemplateRef<any>;
 
-    highlightedCode: string;
-    private _viewRef: EmbeddedViewRef<any>;
+    highlightedCode!: string | null;
+    private _viewRef!: EmbeddedViewRef<any>;
 
     /**
      * Constructor
@@ -108,7 +108,7 @@ export class FuseHighlightComponent implements OnChanges, AfterViewInit
         if ( this._viewRef )
         {
             this._viewRef.destroy();
-            this._viewRef = null;
+            // this._viewRef = null;
         }
 
         // Highlight and sanitize the code just in case

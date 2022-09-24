@@ -26,7 +26,6 @@ import { ScrollService } from './services/scroll.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
-
     SharedModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),

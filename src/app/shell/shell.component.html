@@ -16,26 +16,37 @@
           [ngClass]="{ animate: doAnimation }"
           class="side-nav__icon"
           [svgIcon]="'heroicons_outline:chevron-double-right'"
-        ></mat-icon>
+        >
+        </mat-icon>
       </button>
       <span class="logo" routerLink="/server"></span>
       <span class="flex flex-1 text-2xl">Made To v0.0.01</span>
       <div *ngIf="!(isHandset$ | async)">
         <a
-          routerLink="/authentication/sign-in/split-screen"
-          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700"
+          routerLink="/cards"
+          matTooltip="Shopping Cart"
+          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700"
         >
-          <span class="flex-1 ml-3 whitespace-nowrap">🔑 Login</span>
+          <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+        </a>
+      </div>
+      <div *ngIf="!(isHandset$ | async)">
+        <a
+          routerLink="/authentication/sign-in/split-screen"
+          matTooltip="Login"
+          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700"
+        >
+          <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
         </a>
       </div>
     </mat-toolbar>
   </header>
-  <div class="flex flex-col flex-1 sm:flex-row">
+    <div class="flex flex-col flex-1 sm:flex-row">
+      <nav class="flex-initial order-first mt-1 ml-1 mr-1 bg-gray-700 rounded-lg top" >
+        <app-sidenav></app-sidenav>
+      </nav>
     <main class="flex-1 m-1 bg-gray-100 rounded">
       <ng-content></ng-content>
     </main>
-    <nav class="flex-initial order-first mt-1 ml-1 mr-1 bg-gray-700 rounded-lg top">
-      <app-sidenav></app-sidenav>
-    </nav>
   </div>
 </div>

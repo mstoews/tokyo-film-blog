@@ -11,8 +11,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FuseCardModule } from '@fuse/components/card';
-import { SharedModule } from 'app/shared/shared.module';
-import { CardsComponent } from 'app/modules/admin/ui/cards/cards.component';
+import { SharedModule } from 'app/modules/shared-module/shared.module';
+import { CardsComponent } from './cards.component';
 
 export const routes: Route[] = [
     {
