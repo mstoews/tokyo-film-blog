@@ -5,7 +5,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { MaterialModule } from '../MaterialModule';
 import { MenubarComponent } from '../menubar/menubar.component';
 import { IconsModule } from '../icons.module';
-import { SidenavComponent } from '../sidenav/sidenav.component';
+import { SidenavComponent } from '../../shell/sidenav/sidenav.component';
 
 @Component({
   standalone: true,
