@@ -41,7 +41,7 @@ const options = {
 @Component({
   standalone: true,
   imports: [CommonModule, MaterialModule, ProgressComponent, DndDirective, MatDialogModule, ReactiveFormsModule, FormsModule ],
-  selector: 'app-dnd',
+  selector: 'image-dnd',
   templateUrl: './dnd.component.html',
   styleUrls: ['./dnd.component.scss'],
 })

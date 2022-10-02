@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { AuthUtils } from './auth.utils';
 import { UserService } from 'app/modules/users/user/user.service';
-import { Auth, EmailAuthProvider, getAuth, getRedirectResult } from 'firebase/auth';
 
 @Injectable()
 export class AuthService

@@ -1,7 +1,7 @@
 <div class="flex flex-col flex-auto min-w-0">
 
     <!-- Header -->
-    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+    <div class="flex flex-col p-6 border-b sm:flex-row flex-0 sm:items-center sm:justify-between sm:py-8 sm:px-10 bg-card dark:bg-transparent">
         <div class="flex-1 min-w-0">
             <!-- Breadcrumbs -->
             <div class="flex flex-wrap items-center font-medium">
@@ -11,7 +11,7 @@
             </div>
             <!-- Title -->
             <div class="mt-2">
-                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                <h2 class="text-3xl font-extrabold leading-7 tracking-tight truncate md:text-4xl sm:leading-10">
                     Advanced Search
                 </h2>
             </div>
@@ -22,7 +22,7 @@
     <div class="flex-auto p-6 sm:p-10">
 
         <div class="max-w-3xl">
-            <div class="max-w-3xl prose prose-sm">
+            <div class="max-w-3xl prose-sm prose">
                 <p>
                     This page demonstrates a query parameters based search using Angular's built-in <code>routerLink</code> directive and its
                     <code>queryParams</code> input.
@@ -40,11 +40,11 @@
 
             <!-- Advanced search form -->
             <form
-                class="flex flex-col items-start w-full max-w-3xl mt-8 p-8 space-y-8 rounded-2xl shadow overflow-hidden bg-card"
+                class="flex flex-col items-start w-full max-w-3xl p-8 mt-8 space-y-8 overflow-hidden shadow rounded-2xl bg-card"
                 [formGroup]="searchForm">
 
                 <!-- Keywords -->
-                <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-form-field class="w-full fuse-mat-no-subscript">
                     <mat-label>Keywords</mat-label>
                     <input
                         [autocomplete]="'off'"
@@ -53,7 +53,7 @@
                 </mat-form-field>
 
                 <!-- Type -->
-                <mat-form-field class="fuse-mat-no-subscript w-full">
+                <mat-form-field class="w-full fuse-mat-no-subscript">
                     <mat-label>Type</mat-label>
                     <mat-select [formControlName]="'type'">
                         <mat-option [value]="'any'">Any</mat-option>
@@ -103,7 +103,7 @@
             </form>
 
             <!-- Query params as json -->
-            <div class="dark w-full mt-8 p-4 rounded-2xl overflow-hidden">
+            <div class="w-full p-4 mt-8 overflow-hidden dark rounded-2xl">
                 <textarea
                     fuse-highlight
                     [code]="queryParams | json"
@@ -112,3 +112,4 @@
         </div>
     </div>
 </div>
+<app-drag-n-drop></app-drag-n-drop>

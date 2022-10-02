@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { FuseHighlightModule } from '@fuse/components/highlight';
 import { SharedModule } from 'app/modules/shared-module/shared.module';
 import { AdvancedSearchComponent } from './advanced-search.component';
+import { DragNDropComponent } from '../../../components/drag-n-drop/drag-n-drop.component';
 
 export const routes: Route[] = [
     {
@@ -28,8 +29,10 @@ export const routes: Route[] = [
         MatInputModule,
         MatSelectModule,
         FuseHighlightModule,
-        SharedModule
-    ]
+        SharedModule,
+        DragNDropComponent
+    ],
+    exports: [DragNDropComponent]
 })
 export class AdvancedSearchModule
 {

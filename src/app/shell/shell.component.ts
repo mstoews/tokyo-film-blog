@@ -9,11 +9,13 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'shell',
   templateUrl: './shell.component.html',
+  styleUrls: ['./shell.component.css'],
   animations: [onMainContentChange],
 })
 export class ShellComponent implements AfterViewInit {
   loading = false;
   public onSideNavChange = false;
+  showFiller = false;
 
   @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
   bSideNavMenu!: boolean;

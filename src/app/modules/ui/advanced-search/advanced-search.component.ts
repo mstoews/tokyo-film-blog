@@ -20,7 +20,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy
         isArchived: false,
         isStarred : false
     };
-    queryParams: Params;
+    queryParams!: Params;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
     /**

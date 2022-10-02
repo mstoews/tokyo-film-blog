@@ -1,12 +1,11 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
+import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable, of } from 'rxjs';
 import { finalize} from 'rxjs/operators';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 
 import { tap} from 'rxjs/operators';
-
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import firebase from 'firebase/compat/app';
@@ -18,54 +17,51 @@ import { DndDirective } from '../../loaddnd/dnd.directive';
 @Component({
   standalone: true,
   imports: [CommonModule, DndDirective, MatDialogModule, ReactiveFormsModule, FormsModule ],
-  selector: 'upload-task',
+  selector: 'upload-image',
   templateUrl: './upload-task.component.html',
   styleUrls: ['./upload-task.component.scss']
 })
-export class UploadTaskComponent implements OnInit {
+export class UploadTaskComponent  {
 
-  @Input() file!: File;
-  task!: AngularFireUploadTask;
+  public file: any ={};
+
 
   percentage: any;
   snapshot: Observable<firebase.storage.UploadTaskSnapshot> | undefined;
   downloadURL!: string;
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) {
+  constructor(private storage: Storage) {
     this.percentage = of(0);
   }
 
-  ngOnInit() {
-    this.startUpload();
+  chooseFile(event: any) {
+    this.file = event.target.files[0];
   }
 
-  startUpload() {
 
-    // The storage path
-    const path = `test/${Date.now()}_${this.file.name}`;
+  addData() {
+    const storageRef = ref(this.storage, this.file.name);
+    const uploadTask = uploadBytesResumable(storageRef, this.file);
 
-    // Reference to storage bucket
-    const ref = this.storage.ref(path);
+    uploadTask.on('state_changed',
+    (snapshot) => {
+      const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case 'paused':
+          console.log('Upload is paused');
+          break;
+        case 'running':
+          console.log('Upload is running');
+          break;
+      }
+    },
+    () => {
 
-    // The main task
-    this.task = this.storage.upload(path, this.file);
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      tap(console.log),
-      // The file's download URL
-      finalize( async() =>  {
-       await ref.getDownloadURL().subscribe(url => {
-         this.db.collection('files').add( { downloadURL: url, path });
-        });
-      }),
-    );
-  }
-
-  isActive(snapshot: firebase.storage.UploadTaskSnapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
+      getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        console.log('File available at', downloadURL);
+      });
+    });
   }
 
 }

@@ -1,74 +1,48 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable, of } from 'rxjs';
-import { finalize} from 'rxjs/operators';
-
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
-import { tap} from 'rxjs/operators';
-
-import { MaterialModule } from '../MaterialModule';
-import { ProgressComponent } from '../progress/progress.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import firebase from 'firebase/compat/app';
-import { CommonModule } from '@angular/common';
-import { DndDirective } from '../loaddnd/dnd.directive';
-
-
+import {CommonModule} from '@angular/common';
+import {Component, Input }  from '@angular/core';
+import {getDownloadURL, percentage, ref, Storage, uploadBytesResumable} from '@angular/fire/storage';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatDialogModule } from '@angular/material/dialog';
+import {Observable} from 'rxjs';
+import {MaterialModule} from '../../MaterialModule';
+import {DndDirective} from '../loaddnd/dnd.directive';
+import {ProgressComponent} from '../progress/progress.component';
 
 @Component({
   standalone: true,
-  imports: [CommonModule, MaterialModule, DndDirective, ProgressComponent, MatDialogModule, ReactiveFormsModule, FormsModule ],
+  imports: [
+    CommonModule, MaterialModule, DndDirective, ProgressComponent,
+    MatDialogModule, ReactiveFormsModule, FormsModule
+  ],
   selector: 'app-drag-n-drop',
   templateUrl: './drag-n-drop.component.html',
   styleUrls: ['./drag-n-drop.component.scss']
 })
-export class DragNDropComponent implements OnInit {
-
+export class DragNDropComponent {
+  public readonly downloadUrl$!: Observable<string>;
   @Input() file!: File;
-  task!: AngularFireUploadTask;
+  uploadPercent!: Observable<any>;
 
-  percentage: any;
-  snapshot: Observable<firebase.storage.UploadTaskSnapshot> | undefined;
-  downloadURL!: string;
+  constructor(private storage: Storage) {}
 
-  constructor(private storage: AngularFireStorage, private db: AngularFirestore) {
-    this.percentage = of(0);
+  async uploadFile() {
+    if (this.file) {
+      try {
+        const storageRef = ref(this.storage, this.file.name);
+        const task = uploadBytesResumable(storageRef, this.file);
+        this.uploadPercent = percentage(task);
+        await task;
+        const url = await getDownloadURL(storageRef);
+      } catch (e: any) {
+        console.error(e);
+      }
+    } else {
+      // handle invalid file
+    }
   }
-
-  ngOnInit() {
-    this.startUpload();
-  }
-
-  startUpload() {
-
-    // The storage path
-    const path = `test/${Date.now()}_${this.file.name}`;
-
-    // Reference to storage bucket
-    const ref = this.storage.ref(path);
-
-    // The main task
-    this.task = this.storage.upload(path, this.file);
-
-    // Progress monitoring
-    this.percentage = this.task.percentageChanges();
-
-    this.snapshot   = this.task.snapshotChanges().pipe(
-      tap(console.log),
-      // The file's download URL
-      finalize( async() =>  {
-       await ref.getDownloadURL().subscribe(url => {
-         this.db.collection('files').add( { downloadURL: url, path });
-        });
-      }),
-    );
-  }
-
-  isActive(snapshot: firebase.storage.UploadTaskSnapshot) {
-    return snapshot.state === 'running' && snapshot.bytesTransferred < snapshot.totalBytes;
-  }
-
 }
+
+
+
+const TRANSPARENT_PNG =
+    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';

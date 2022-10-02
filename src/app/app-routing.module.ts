@@ -22,7 +22,12 @@ const routes: Route[] = [
     path: 'authentication',
     loadChildren: () => import('./modules/pages/authentication/authentication.module')
                             .then((mod) => mod.AuthenticationModule),
-  },
+    },
+    {
+      path: 'image-design',
+      loadChildren: () => import('./modules/ui/advanced-search/advanced-search.module')
+                              .then((mod) => mod.AdvancedSearchModule),
+      },
    {
     path: '',
     redirectTo: 'home',

@@ -1,0 +1,39 @@
+.flex-nav {
+  color: white;
+  flex: 0 0 240px;
+  overflow-y: none;
+}
+
+
+.flex-main {
+  display: flex;
+  flex: 1;
+
+}
+
+.flex-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+}
+
+.mat-sidenav-container {
+  flex: 1;
+  overflow: hidden;
+  /* Hide scrollbars */
+}
+
+.flex-header {
+  background-color: var(--color-primary-dark);
+  height: 4rem;
+}
+
+.flex-article {
+  height: 100%;
+  color: white;
+  background-color: var(--color-grey-light-1);
+  min-width: 0;
+  flex: 1 0 0;
+}
+
