@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 0px;
   overflow-y: scroll;
   overflow-x: scroll;
   background: grey;
@@ -10,7 +10,7 @@
 
 ::-webkit-scrollbar-thumb {
   background: #00578e;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 * {
@@ -18,24 +18,6 @@
   -moz-osx-font-smoothing: antialased;
   font-family: 'Roboto', sans-serif;
 }
-
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  /* Center slide text vertically */
-  display: -webkit-box;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  align-items: center;
-}
-.swiper-slide img {
-  object-fit: cover;
-}
-
 
 @tailwind base;
 @tailwind components;
@@ -125,6 +107,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translateX(-6px);
 }
-
-
 

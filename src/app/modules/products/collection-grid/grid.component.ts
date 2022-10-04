@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-grid',
+  selector: 'collection-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.css']
 })

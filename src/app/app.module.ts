@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { NavService } from './shell/static-sidebar/nav-list-item/nav-service';
 import { SharedModule } from './modules/shared-module/shared.module';
 import { ScrollService } from './services/scroll.service';
+import { SwiperModule } from 'swiper/angular';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ScrollService } from './services/scroll.service';
     BrowserAnimationsModule,
     CommonModule,
     SharedModule,
+    SwiperModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAnalytics(() => getAnalytics()),
     provideAuth(() => getAuth()),
