@@ -4,8 +4,8 @@ import { LandingPageComponent } from './landing-page.component';
 import { GalleryCardComponent } from '../../components/gallery-card/gallery-card.component';
 import { GalleryComponent } from '../../components/gallery/gallery.component'
 import { SharedModule } from 'app/modules/shared-module/shared.module';
-import { RouterModule, Routes } from '@angular/router';
 import { BannerComponent } from './banner/banner.component';
+import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {

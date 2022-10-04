@@ -22,6 +22,15 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "allowedCommonJsDependencies": [
+              "lodash",
+              "graphql-tag",
+              "zen-observable",
+              "highlight.js",
+              "apexcharts",
+              "ng-apexcharts",
+              "fast-xml-parser"
+            ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
