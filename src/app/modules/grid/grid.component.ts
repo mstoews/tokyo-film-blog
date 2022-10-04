@@ -108,7 +108,7 @@ export class GridAGComponent implements OnInit {
   public colDef: any;
   // public autoGroupColumnDef: { minWidth: number; };
 
-  public paginationPageSize = 15;
+  public paginationPageSize = 18;
   // public getRowNodeId;
 
   @Input() public cols: any[];

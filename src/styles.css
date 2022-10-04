@@ -4,7 +4,7 @@
 @import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 ::-webkit-scrollbar {
-  width: 0px;
+  width: 2px;
   overflow-y: scroll;
   overflow-x: scroll;
   background: grey;
