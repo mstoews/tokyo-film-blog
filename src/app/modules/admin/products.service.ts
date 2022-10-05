@@ -5,11 +5,10 @@ import {
   collection,
   deleteDoc,
   doc,
-  updateDoc,
 } from '@firebase/firestore';
 
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, docData } from '@angular/fire/firestore';
+import { Firestore, collectionData, docData, setDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { IProducts} from 'app/interfaces/mt-products';
 
@@ -37,14 +36,12 @@ export class ProductsService {
   }
 
   update(mtProducts: IProducts) {
-    const mtProductsDocumentReference = doc(
-      this.firestore,
-      `products/${mtProducts.id}`
-    );
-    return updateDoc(mtProductsDocumentReference, { ...mtProducts });
+    const mtProductsDocumentReference = doc(this.firestore,`inventory/${mtProducts.id}` );
+    return setDoc(mtProductsDocumentReference, mtProducts );
   }
 
   delete(id: string) {
+    console.log('delete :', id);
     const mtProductsDocumentReference = doc(this.firestore, `inventory/${id}`);
     return deleteDoc(mtProductsDocumentReference);
   }

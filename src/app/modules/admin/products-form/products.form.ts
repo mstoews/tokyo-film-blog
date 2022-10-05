@@ -45,7 +45,7 @@ export class ProductsFormComponent implements OnInit {
         @Optional() @Inject(MAT_DIALOG_DATA) public product: IProducts
     ) 
     {
-        this.createForm(product);
+        this.createEmptyForm();
     }
 
     trackByFn(index: number, item: any): any {
@@ -58,7 +58,6 @@ export class ProductsFormComponent implements OnInit {
             //  console.log (`Value changed  ${value}, ${value.id}`);
             this.changeDetectorRef.markForCheck();
         });
-
     }
 
     OnDestroy() {
@@ -66,9 +65,29 @@ export class ProductsFormComponent implements OnInit {
         this.subPriority.unsubscribe();
     }
 
+
+    createEmptyForm() {
+        this.prdGroup = this.fb.group({
+            id:                 [''],
+            description:        [''],
+            rich_description:   [''],
+            image:              [''],
+            images:             [''],
+            brand:              [''],
+            price:              [''],
+            category:           [''],
+            rating:             [''],
+            is_featured:        [''],
+            user_updated:       [''],
+            date_created:       [''],
+            date_updated:       [''],
+        });
+      }
+    
+
     
     createForm(prd: IProducts) {
-        this.sTitle = 'Kanban prd - ' + prd.id;
+        this.sTitle = 'Products - ' + prd.id;
 
         const dDate = new Date(prd.date_updated);
         const dueDate = dDate.toISOString().split('T')[0];

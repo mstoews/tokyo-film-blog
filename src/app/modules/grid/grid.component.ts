@@ -146,14 +146,14 @@ export class GridAGComponent implements OnInit {
   onRowDoubleClicked(event: any) {
     const data = event.node.data;
     this.notifyOpenDialog.emit(data);
+    
   }
 
   onCellClicked(event: any) {}
 
   onSelectionChanged(event: any) {
     const data = event.node.data;
-    
-    // this.onSelectedPartyRef.emit(data);
+    this.notifyOpenDialog.emit(data);
   }
 
   ngOnInit() {
