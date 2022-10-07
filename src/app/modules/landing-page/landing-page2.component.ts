@@ -12,9 +12,9 @@ import { getAnalytics } from '@angular/fire/analytics';
 
 // import { persistenceEnabled as _persistenceEnabled } from '../../app.component';
 import { traceUntilFirst } from '@angular/fire/performance';
-import { doc, docData, Firestore } from '@angular/fire/firestore';
 
-import { getAuth, Auth, authState, signInAnonymously, signOut, User, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from '@angular/fire/auth';
+
+
 import { EMPTY, Observable, Subscription } from 'rxjs';
 import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
 
@@ -24,8 +24,7 @@ import { getTreeNoValidDataSourceError } from '@angular/cdk/tree';
   imports: [RouterModule, GalleryComponent, DndComponent, MaterialModule, CommonModule, IconsModule],
   selector: 'landing-page',
   templateUrl: './landing-page2.component.html',
-  providers: [ GoogleAuthProvider
-  ],
+  providers: [ ],
 })
 export class LandingPage2Component implements OnInit {
 
@@ -35,7 +34,6 @@ export class LandingPage2Component implements OnInit {
   constructor(
     private  router: Router,
     private matDialog: MatDialog,
-    private firestore: Firestore,
     ) {}
 
   ngOnInit(): void {
@@ -73,11 +71,11 @@ export class LandingPage2Component implements OnInit {
     //this.auth.signOut();
   }
 
-  getData() {
-     const ref = doc(this.firestore, 'test/1');
-     this.testDocValue$ = docData(ref).pipe(
-       traceUntilFirst('firestore')
-     );
-  }
+  // getData() {
+  //    const ref = doc(this.firestore, 'test/1');
+  //    this.testDocValue$ = docData(ref).pipe(
+  //      traceUntilFirst('firestore')
+  //    );
+  // }
 
 }

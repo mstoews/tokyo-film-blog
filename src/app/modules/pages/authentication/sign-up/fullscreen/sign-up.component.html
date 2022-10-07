@@ -36,7 +36,7 @@
       </fuse-alert>
 
       <!-- Sign Up form -->
-      <form class="mt-8" [formGroup]="signUpForm">
+      <form class="mt-8" [formGroup]="signUpForm" (ngSubmit)="signUp()">
         <!-- Name field -->
         <mat-form-field class="w-full">
           <mat-label>Full name</mat-label>

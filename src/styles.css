@@ -1,10 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import 'ag-grid-community/styles/ag-grid.css';
-@import 'ag-grid-community/styles/ag-theme-alpine.css';
+@import 'ag-grid-community/styles/ag-grid.min.css';
+@import 'ag-grid-community/styles/ag-theme-alpine-no-font.css';
 
 ::-webkit-scrollbar {
   width: 2px;
+  height: 2px;
   overflow-y: scroll;
   overflow-x: scroll;
   background: grey;
@@ -22,12 +23,9 @@
   font-family: 'Roboto', sans-serif;
 }
 
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 
 
 /* html, body { height: 100%; }

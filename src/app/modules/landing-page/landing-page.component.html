@@ -10,11 +10,12 @@
       <!-- Menu -->
       <div class="hidden h-10 text-2xl md:flex md:space-x-8">
         <div class="text-gray-200 uppercase text-1xl group">
-          <button class="uppercase" (click)="scrollToId('creations')">Creations</button>
+          <button class="uppercase" (click)="scrollToId('feature')">Features</button>
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
+
         <div class="text-gray-200 uppercase text-1xl group">
-          <button class="uppercase" (click)="scrollToId('feature')">Features</button>
+          <button class="uppercase" (click)="scrollToId('creations')">Creations</button>
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
         <div class="text-gray-200 uppercase text-1xl group">
@@ -52,6 +53,41 @@
     <div
       class="max-w-4xl p-4 mt-32 mb-32 text-2xl text-white uppercase border-2 font-alata max-h-6xl md:p-10 md:m-32 md:mx-0 md:text-6xl">
       Beautifully Hand Crafted Products
+    </div>
+  </div>
+</section>
+
+<!-- Feature Section -->
+<section id="feature" class="scroll-mt-20">
+  <!-- Feature Container -->
+  <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
+    <!-- Creations Header -->
+
+    <div class="relative justify-center my-32 mb-20 md:justify-between">
+      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        features
+      </p>
+
+      <button class="uppercase" (click)="scrollToId('hero')"
+        class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+      <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+      </button>
+    </div>
+    <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
+      <!-- Image -->
+      <img src="assets/cassie_suit_dummy.jpg" alt="" />
+
+      <!-- Text Container -->
+      <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20">
+        <h2
+          class="max-w-lg mt-10 mb-6 font-sans text-4xl text-center text-gray-900 uppercase md:text-5xl md:mt-0 md:text-left">
+          Leader in Hand Made Knitted Products
+        </h2>
+
+        <p class="max-w-md text-center md:text-left">
+          Founded in 2018, Made-to has been producing world-class hand knitted products for over a decade.
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -188,40 +224,7 @@
     </div>
   </div>
 </section>
-<!-- Feature Section -->
-<section id="feature" class="scroll-mt-20">
-  <!-- Feature Container -->
-  <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
-    <!-- Creations Header -->
 
-    <div class="relative justify-center my-32 mb-20 md:justify-between">
-      <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
-        features
-      </p>
-
-      <button class="uppercase" (click)="scrollToId('hero')"
-        class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
-      <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
-      </button>
-    </div>
-    <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
-      <!-- Image -->
-      <img src="assets/cassie_suit_dummy.jpg" alt="" />
-
-      <!-- Text Container -->
-      <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20">
-        <h2
-          class="max-w-lg mt-10 mb-6 font-sans text-4xl text-center text-gray-900 uppercase md:text-5xl md:mt-0 md:text-left">
-          Leader in Hand Made Knitted Products
-        </h2>
-
-        <p class="max-w-md text-center md:text-left">
-          Founded in 2018, Made-to has been producing world-class hand knitted products for over a decade.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
 <!-- Gallery Section -->
 <section id="gallery" class="scroll-mt-20">
   <!-- Creations Container -->

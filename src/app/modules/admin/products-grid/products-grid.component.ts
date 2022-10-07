@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import {ProductsService } from '../products.service';
-import { IProducts } from 'app/interfaces/mt-products';
+import { ProductsService } from '../products.service';
+import { IProduct } from 'app/interfaces/mt-products';
 
 
 export type PriorityQuery = {
@@ -20,7 +20,7 @@ export interface PriorityType  {
     <ng-container *ngIf="allProducts$ | async as rows">
       <grid-menubar></grid-menubar>
       <grid
-        
+
         [rows]="rows"
         (notifyOpenDialog)="onNotify($event)"
       >
@@ -31,8 +31,8 @@ export interface PriorityType  {
 
 export class ProductsGridComponent implements OnInit  {
 
-    allProducts$: Observable<IProducts[]>;
-    
+    allProducts$: Observable<IProduct[]>;
+
 
     constructor(private readonly productService: ProductsService) {}
 

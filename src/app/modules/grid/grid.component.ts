@@ -50,7 +50,7 @@ import { GridReadyEvent, RowSelectedEvent } from 'ag-grid-community';
     </div>
     <ag-grid-angular
       class="grid-card"
-      style="width: 100%;"
+      style="width: 100%; height: 100%"
       class="ag-theme-alpine-dark"
       [defaultColDef]="defaultColDef"
       [enableRangeSelection]="true"
@@ -80,7 +80,7 @@ export class GridAGComponent implements OnInit {
   progress = 0;
   timer!: number;
   constructor(
-  
+
     private matDialog: MatDialog,
     private menuBarShowUploadService: MenuBarService
   ) {
@@ -99,7 +99,7 @@ export class GridAGComponent implements OnInit {
   @Output() private notifyCellChange: EventEmitter<any> = new EventEmitter();
   @Output() private notifyFileUpload: EventEmitter<any> = new EventEmitter();
 
-    
+
 
   showBar = false;
   page = 0;
@@ -108,7 +108,7 @@ export class GridAGComponent implements OnInit {
   public colDef: any;
   // public autoGroupColumnDef: { minWidth: number; };
 
-  public paginationPageSize = 18;
+  public paginationPageSize = 15;
   // public getRowNodeId;
 
   @Input() public cols: any[];
@@ -146,7 +146,7 @@ export class GridAGComponent implements OnInit {
   onRowDoubleClicked(event: any) {
     const data = event.node.data;
     this.notifyOpenDialog.emit(data);
-    
+
   }
 
   onCellClicked(event: any) {}

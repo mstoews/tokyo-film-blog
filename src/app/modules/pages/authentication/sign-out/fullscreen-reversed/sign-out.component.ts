@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {fuseAnimations} from '@fuse/animations';
-import {AuthService} from 'app/services/auth/auth.service';
+import { AuthService} from 'app/services/auth/auth.service';
 
 @Component({
   selector: 'sign-out-fullscreen-reversed',

@@ -59,6 +59,7 @@ export class SignUpFullscreenComponent implements OnInit
      * Sign in
      */
     signUp(): void
-    {
+    { 
+        console.log(this.signUpForm.value);
     }
 }

@@ -12,7 +12,7 @@ deploy:
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
 start:
 	@echo "start web app"
-	npm run start
+	pnpm run start
 
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose

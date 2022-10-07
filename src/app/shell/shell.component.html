@@ -31,13 +31,21 @@
           <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
         </a>
       </div>
+
       <div *ngIf="!(isHandset$ | async)">
         <a
           routerLink="/authentication/sign-in/split-screen"
-          matTooltip="Login"
-          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700"
-        >
+          matTooltip="Log In"
+          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700" >
           <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
+        </a>
+      </div>
+      <div *ngIf="!(isHandset$ | async)">
+        <a
+          routerLink="/authentication/sign-out/fullscreen"
+          matTooltip="Log Out"
+          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700" >
+          <mat-icon [svgIcon]="'mat_outline:logout'"></mat-icon>
         </a>
       </div>
     </mat-toolbar>

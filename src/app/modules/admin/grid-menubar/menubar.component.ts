@@ -20,23 +20,13 @@ export class GridMenubarComponent implements OnInit {
   @Output() notifyMenuItemChanged: EventEmitter<any> = new EventEmitter();
 
   @Input() public inTitle: string;
-  @Input() public inPartyRef: string;
   @Input() public selected: string;
-  public partyReference$: any;
-  public partyMenu$: any;
   public menuItems: IValue[];
-  
 
   constructor() { }
 
   ngOnInit(): void {
-  
-  }
 
-  // tslint:disable-next-line:variable-name
-  onRefreshPartyRef(party_ref: string): void {
-  
-    this.onRefresh();
   }
 
   onRefresh(): void {
@@ -44,18 +34,22 @@ export class GridMenubarComponent implements OnInit {
   }
 
   onClickAdd(): void {
+    console.log('Menu bar nofication emit');
     this.notifyParentAdd.emit();
   }
 
   onClickDelete(): void {
+    console.log('Menu bar nofication emit');
     this.notifyParentDelete.emit();
   }
 
   onClickClone(): void {
+    console.log('Menu bar nofication emit');
     this.notifyParentClone.emit();
   }
 
   onClickRefresh(): void {
+    console.log('Menu bar nofication emit');
     this.onRefresh();
   }
 }

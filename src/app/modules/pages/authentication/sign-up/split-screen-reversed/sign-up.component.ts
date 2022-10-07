@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgForm, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
 import {fuseAnimations} from '@fuse/animations';
 import {FuseAlertType} from '@fuse/components/alert';
-import {AuthService} from 'app/services/auth/auth.service';
+
 
 @Component({
   selector: 'sign-up-split-screen-reversed',
@@ -22,7 +22,6 @@ export class SignUpSplitScreenReversedComponent implements OnInit {
    * Constructor
    */
   constructor(
-      private _authService: AuthService,
       private _formBuilder: UntypedFormBuilder) {}
 
   // -----------------------------------------------------------------------------------------------------

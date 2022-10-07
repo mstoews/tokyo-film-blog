@@ -3,13 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router} from '@angular/router';
 import { DndComponent } from '../../components/loaddnd/dnd.component';
 import { ViewportScroller } from '@angular/common';
-
 import { traceUntilFirst } from '@angular/fire/performance';
-import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { ScrollService } from 'app/services/scroll.service';
 import {animate, style, transition, trigger} from '@angular/animations';
-
-import { getAuth, Auth, authState, signInAnonymously, signOut, User, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword } from '@angular/fire/auth';
 import { EMPTY, Observable, Subscription } from 'rxjs';
 
 
@@ -44,13 +40,9 @@ export class LandingPageComponent implements OnInit {
 
   public testDocValue$: Observable<any> | undefined;
   // public readonly persistenceEnabled = _persistenceEnabled;
-
-  auth = Auth;
-
   constructor(
     private  router: Router,
     private matDialog: MatDialog,
-    private firestore: Firestore,
     private scrollTo: ScrollService,
     ) {}
 
@@ -86,27 +78,6 @@ export class LandingPageComponent implements OnInit {
           break;
       }
     });
-  }
-
-  login() {
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, "","").then((creds) => {
-        const user = creds.user;
-    }).catch ((error) => {
-      const erroCode = error.code;
-      const errorMsg = error.message;
-      console.log(`${errorMsg} : ${erroCode}`)
-    })
-  }
-  logout() {
-
-  }
-
-  getData() {
-     const ref = doc(this.firestore, 'test/1');
-     this.testDocValue$ = docData(ref).pipe(
-       traceUntilFirst('firestore')
-     );
   }
 
 }

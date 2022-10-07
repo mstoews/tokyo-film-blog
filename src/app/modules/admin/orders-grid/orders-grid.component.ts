@@ -1,12 +1,10 @@
-import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../products.service';
-import { IProducts } from 'app/interfaces/mt-products';
-import { collection, collectionData, Firestore, query, where} from '@angular/fire/firestore';
-import { MatDrawer, MatSidenav } from '@angular/material/sidenav';
+import { IProduct } from 'app/interfaces/mt-products';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MatDrawer } from '@angular/material/sidenav';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-
 
 @Component({
   selector: 'order-list',
@@ -18,22 +16,18 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 <div mat-dialog-content>
     <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form">
 
-        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '31%' }">
-            <input matInput placeholder="ID" formControlName="id" />
-        </mat-form-field>
-
-        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '31%' }">
+        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
             <input matInput placeholder="Brand" formControlName="brand" />
         </mat-form-field>
 
-        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '31%' }">
+        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
             <input matInput placeholder="Price" formControlName="price" />
         </mat-form-field>
 
         <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
             <input matInput placeholder="Description" formControlName="description" />
         </mat-form-field>
-        
+
         <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
             <input matInput placeholder="Rich Description" formControlName="rich_description" />
         </mat-form-field>
@@ -41,12 +35,11 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
         <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
             <input matInput placeholder="Main Image" formControlName="image" />
         </mat-form-field>
-        
+
         <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
             <input matInput placeholder="Image List" formControlName="images" />
         </mat-form-field>
 
-    
         <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
             <input matInput placeholder="Category" formControlName="category" />
         </mat-form-field>
@@ -75,13 +68,13 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
     </form>
 </div>
 <div mat-dialog-actions>
-    <button mat-button (click)="onUpdate(product)" mat-flat-button color="primary">
+    <button mat-button (click)="onUpdate(product)" mat-flat-button color="primary" [disabled]="!prdGroup.valid">
         Update
     </button>
-    <button mat-button (click)="onCreate(product)" mat-flat-button color="primary">
+    <button mat-button (click)="onCreate()" mat-flat-button color="primary" [disabled]="!prdGroup.valid">
         Insert
     </button>
-    <button mat-button (click)="onDelete(product)" mat-flat-button color="primary">
+    <button mat-button (click)="onDelete(product)" mat-flat-button color="primary" [disabled]="!prdGroup.valid">
         Delete
     </button>
     <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
@@ -97,7 +90,14 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
    </mat-card>
    </mat-drawer>
     <ng-container *ngIf="allProducts$ | async as rows">
-    <grid-menubar [inTitle]="sTitle"></grid-menubar>
+      <grid-menubar
+            [inTitle]="sTitle"
+            (notifyParentRefresh)="Refresh()"
+            (notifyParentDelete)="Delete()"
+            (notifyParentAdd)="Add()"
+            (notifyParentClone)="Clone()"
+        >
+      </grid-menubar>
       <grid
         [cols]="cols"
         [rows]="rows"
@@ -121,57 +121,25 @@ export class OrdersGridComponent implements OnInit  {
     cRAG: string;
     cType: string;
     currentDate: Date;
-    product: IProducts;
+    product: IProduct;
+    productId: string;
 
-    prod: {
-    id:   number,
-    description:   string,
-    rich_description: string,
-    image:     string,
-    images:    string,
-    brand:        string,
-    price:        number,
-    category:     string, 
-    rating:       string, 
-    is_featured:  string, 
-    user_updated: string   
-    date_created: string, 
-    date_updated: string, 
-    } =
-  
-    {
-      id:   2,
-      description: "Red Sweater",
-      rich_description: "Super Red Sweater",
-      image:        "Image",
-      images:       "Second Image",
-      brand:        "Cassie",
-      price:         200.00,
-      category:     "Sweater",
-      rating:       "5",
-      is_featured:  "True",
-      user_updated: "MST",
-      date_created: "2022-10-04",
-      date_updated: "2022-10-04",  
-  }
-
-
-    allProducts$: Observable<IProducts[]>;
+    allProducts$: Observable<IProduct[]>;
     prd: any;
 
+    Refresh() {
+      this.allProducts$ = this.productService.getAll();
+    }
+
     constructor(
-      private readonly productService: ProductsService, 
+      private readonly productService: ProductsService,
       private fb: FormBuilder,
-      private firestore: Firestore)   {
-        this.prd = this.productType;
-        this.createEmptyForm();
+      private afs: AngularFirestore)   {
+      this.prd = this.productType;
+      this.createEmptyForm();
       }
 
     ngOnInit() {
-      // for (let i = 0; i < 5; i++) {
-      //   this.prod.id = i+10;
-      //   this.productService.create(this.prod);
-      // }
       this.sTitle = 'Product Inventory'
       this.allProducts$ = this.productService.getAll();
     }
@@ -194,48 +162,67 @@ export class OrdersGridComponent implements OnInit  {
       }
     }
 
-    dateFormatter(params: any) {
+    openDrawer() {
+      const opened = this.drawer.opened;
+      if (opened !== true) {
+        this.drawer.toggle();
+      } else {
+        return;
+        }
+      }
+
+    closeDrawer() {
+      const opened = this.drawer.opened;
+      if (opened === true) {
+        this.drawer.toggle();
+      } else {
+        return;
+        }
+      }
+
+
+  dateFormatter(params: any) {
       const dateAsString = params.value;
       const dateParts = dateAsString.split('-');
       return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
     }
-  
-    cols = [
-      { headerName: 'ID', field: 'id' },
-      { headerName: 'Description', field: 'description' },
-      { headerName: 'Detailed Description', field: 'rich_description'},
-      { headerName: 'Image', field: 'image' },
-      { headerName: 'Image List', field: 'images' },
-      { headerName: 'Brand', field: 'brand' },
-      { headerName: 'Price', field: 'price' },
-      { headerName: 'Category', field: 'category' },
-      { headerName: 'Rating', field: 'rating' },
-      { headerName: 'Featured', field: 'is_featured' },
-      { headerName: 'User', field: 'user_updated' },
-      { headerName: 'Date Created', field: 'date_created' },
-      { headerName: 'Date Updated', field: 'date_updated' },
-    ];
 
-  onCreate(data: IProducts) {
-      data = this.prdGroup.getRawValue();
-      this.productService.create(data);
-      
+  Add() {
+    console.log('open drawer to add ... ');
+    this.openDrawer();
   }
 
-  onUpdate(data: IProducts) {
+  Delete() {
+    console.log('open drawer to delete ... ');
+    this.openDrawer();
+  }
+
+  Clone() {
+    console.log('open drawer to clone ... ');
+    this.openDrawer();
+  }
+
+  onCreate() {
+      const newProduct = { ...this.prdGroup.value} as IProduct;
+      console.log(`onCreate ${newProduct}`);
+      this.productService.create(newProduct);
+  }
+
+  onUpdate(data: IProduct) {
+      console.log(`onUpdate:  ${data}`);
       data = this.prdGroup.getRawValue();
       this.productService.update(data);
-      
+
   }
 
-  onDelete(data: IProducts) {
+  onDelete(data: IProduct) {
       data = this.prdGroup.getRawValue();
       this.productService.delete(data.id.toString());
-      
+
   }
-  
+
   closeDialog() {
-    this.drawer.toggle();
+    this.closeDrawer();
   }
 
   public productType = {
@@ -274,8 +261,8 @@ export class OrdersGridComponent implements OnInit  {
 
 
 
-createForm(prd: IProducts) {
-    this.sTitle = 'Products  - ' + prd.id;
+createForm(prd: IProduct) {
+    this.sTitle = 'Inventory - ' + prd.description;
 
     const dDate = new Date(prd.date_updated);
     const dueDate = dDate.toISOString().split('T')[0];
@@ -298,5 +285,21 @@ createForm(prd: IProducts) {
         date_created:       [prd.date_created],
         date_updated:       [prd.date_updated]
     });
-  }   
+  }
+
+  cols = [
+   // { headerName: 'ID', field: 'id' },
+    { headerName: 'Description', field: 'description' },
+    { headerName: 'Detailed Description', field: 'rich_description'},
+    // { headerName: 'Image', field: 'image' },
+    // { headerName: 'Image List', field: 'images' },
+    { headerName: 'Brand', field: 'brand' },
+    { headerName: 'Price', field: 'price' },
+    { headerName: 'Category', field: 'category' },
+    { headerName: 'Rating', field: 'rating' },
+    { headerName: 'Featured', field: 'is_featured' },
+    // { headerName: 'User', field: 'user_updated' },
+    // { headerName: 'Date Created', field: 'date_created' },
+    { headerName: 'Date Updated', field: 'date_updated' },
+  ];
 }

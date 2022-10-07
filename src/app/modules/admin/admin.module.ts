@@ -7,23 +7,24 @@ import { GridAGModule } from '../grid/gridAG.module';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'app/MaterialModule';
 import { GridMenubarComponent } from './grid-menubar/menubar.component';
-import { ProductsFormComponent } from './products-form/products.form';
+import { BlogGridComponent } from './blog-grid/blog-grid.component';
+
 
 const routes: Routes = [
   {
     path: 'landing',
     pathMatch: 'full',
-    component: OrdersGridComponent,
+    component: AdminComponent,
   },
   {
     path: '**',
     pathMatch: 'full',
-    component: OrdersGridComponent,
+    component: AdminComponent,
   },
   {
     path: '',
     pathMatch: 'full',
-    component: OrdersGridComponent,
+    component: AdminComponent,
   },
 ];
 
@@ -32,9 +33,9 @@ const routes: Routes = [
   declarations: [
     AdminComponent,
     OrdersGridComponent,
-    ProductsFormComponent,
     ProductsGridComponent,
     GridMenubarComponent,
+    BlogGridComponent,
   ],
   imports: [
     CommonModule,

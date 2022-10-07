@@ -1,7 +1,7 @@
 import {Component, ViewEncapsulation} from '@angular/core';
 import {Router} from '@angular/router';
 import {fuseAnimations} from '@fuse/animations';
-import {AuthService} from 'app/services/auth/auth.service';
+
 
 @Component({
   selector: 'sign-out-classic',
@@ -16,5 +16,5 @@ export class SignOutClassicComponent {
   /**
    * Constructor
    */
-  constructor(private _authService: AuthService, private _router: Router) {}
+  constructor(private _router: Router) {}
 }

@@ -16,5 +16,5 @@ export class SignOutFullscreenComponent {
   /**
    * Constructor
    */
-  constructor(private _authService: AuthService, private _router: Router) {}
+  constructor(private _router: Router) {}
 }

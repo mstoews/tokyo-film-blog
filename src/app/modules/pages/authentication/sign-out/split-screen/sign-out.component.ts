@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { fuseAnimations } from '@fuse/animations';
-import { AuthService } from 'app/services/auth/auth.service';
+import { Auth, GoogleAuthProvider,EmailAuthProvider,signInWithPopup ,signInWithEmailAndPassword , setPersistence, browserSessionPersistence, browserLocalPersistence, signInAnonymously, } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,6 @@ export class SignOutSplitScreenComponent
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
         private _router: Router
     )
     {

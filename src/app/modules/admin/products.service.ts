@@ -1,48 +1,38 @@
-import {
-  CollectionReference,
-  DocumentData,
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-} from '@firebase/firestore';
-
 import { Injectable } from '@angular/core';
-import { Firestore, collectionData, docData, setDoc } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { IProducts} from 'app/interfaces/mt-products';
+import { IProduct } from 'app/interfaces/mt-products';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private mtProductsCollection: CollectionReference<DocumentData>;
+  private mtProductsCollection: AngularFirestoreCollection<IProduct>;
+  private inventoryItems: Observable<IProduct[]>;
 
-  constructor(private readonly firestore: Firestore) {
-    this.mtProductsCollection = collection(this.firestore, 'inventory');
+  constructor(public afs: AngularFirestore) {
+    this.mtProductsCollection = afs.collection<IProduct>('inventory')
+    this.inventoryItems = this.mtProductsCollection.valueChanges({idField: 'id'});
   }
 
   getAll() {
-    return collectionData(this.mtProductsCollection) as Observable<IProducts[]>;
+    console.log(`Inventory ${this.inventoryItems}`);
+    return this.inventoryItems;
   }
 
   get(id: string) {
-    const mtProductsDocumentReference = doc(this.firestore, `inventory/${id}`);
-    return docData(mtProductsDocumentReference, { idField: 'ID' });
+     this.mtProductsCollection.doc(id).get();
   }
 
-  create(mtProducts: IProducts) {
-    return addDoc(this.mtProductsCollection, mtProducts);
+  create(mtProduct: IProduct) {
+    this.mtProductsCollection.add(mtProduct);
   }
 
-  update(mtProducts: IProducts) {
-    const mtProductsDocumentReference = doc(this.firestore,`inventory/${mtProducts.id}` );
-    return setDoc(mtProductsDocumentReference, mtProducts );
+  update(mtProduct: IProduct) {
+    this.mtProductsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
 
   delete(id: string) {
-    console.log('delete :', id);
-    const mtProductsDocumentReference = doc(this.firestore, `inventory/${id}`);
-    return deleteDoc(mtProductsDocumentReference);
+    this.mtProductsCollection.doc(id).delete();
   }
 }
