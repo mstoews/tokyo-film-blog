@@ -16,7 +16,7 @@ start:
 
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
-push:
+add:
 	@echo "push to git"
 	git add .
 	@echo "update"
@@ -24,3 +24,7 @@ push:
 	@echo "push"
 	git push origin main
 
+## up_build: stops docker-compose (if running), builds all projects and starts docker compose
+push:
+	@echo "push"
+	git push origin main
