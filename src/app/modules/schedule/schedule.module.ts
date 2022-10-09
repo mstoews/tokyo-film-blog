@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { ScheduleComponent } from './schedule/schedule.component';
+import { GalleryComponent } from '../../components/gallery/gallery.component'
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ScheduleComponent,
+
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    GalleryComponent
   ]
 })
 export class ScheduleModule { }

@@ -1,0 +1,36 @@
+
+  <images-menubar>
+    [inTitle]="sTitle"
+    (notifyParentRefresh)="Refresh()"
+    (notifyParentDelete)="Delete()"
+    (notifyParentAdd)="Add()"
+    (notifyParentClone)="Clone()"
+  </images-menubar>
+<dx-data-grid class="m-1" *ngIf="allImageList$ | async as rows"
+  id="imagesGrid"
+  [dataSource]="rows"
+  [showBorders]="true"
+  [focusedRowEnabled]="true"
+  [columns]="columns"
+  [focusedRowIndex]="0"
+  (onCellDblClick)="onCellDoublClicked($event)"
+  [repaintChangesOnly]="true"
+  (onSelectionChanged)="selectionChanged($event)"
+  keyExpr="id">
+  <dxo-paging
+    [pageSize]="20">
+  </dxo-paging>
+  <dxo-pager
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[20, 40, 50, 100]">
+  </dxo-pager>
+    <dxi-column dataField="title"> </dxi-column>
+    <dxi-column dataField="sub_title"> </dxi-column>
+    <dxi-column dataField="image_url" width="400px"> </dxi-column>
+    <dxi-column dataField="applied" width="70px"> </dxi-column>
+    <dxi-column dataField="user_updated"> </dxi-column>
+    <dxi-column dataField="date_created" type="timestamp"> </dxi-column>
+    <dxi-column dataField="date_updated" type="date"></dxi-column>
+
+</dx-data-grid>
+

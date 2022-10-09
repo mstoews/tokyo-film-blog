@@ -10,9 +10,10 @@ import { GridMenubarComponent } from './grid-menubar/menubar.component';
 import { BlogGridComponent } from './blog-grid/blog-grid.component';
 
 
+
 const routes: Routes = [
   {
-    path: 'landing',
+    path: 'admin',
     pathMatch: 'full',
     component: AdminComponent,
   },
@@ -42,6 +43,12 @@ const routes: Routes = [
     GridAGModule,
     MaterialModule,
     RouterModule.forChild(routes),
-  ]
+  ],
+  exports: [
+    GridMenubarComponent,
+    AdminComponent,
+    OrdersGridComponent,
+    
+  ],
 })
 export class AdminModule { }

@@ -29,10 +29,16 @@
               "highlight.js",
               "apexcharts",
               "ng-apexcharts",
-              "fast-xml-parser"
+              "fast-xml-parser",
+              "devextreme-quill",
+              "devexpress-diagram",
+              "devexpress-gantt",
+              "jszip",
+              "luxon"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
+              "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -100,7 +106,8 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "node_modules/devextreme/dist/css/dx.light.css",
               "src/styles.css"
             ],
             "scripts": []

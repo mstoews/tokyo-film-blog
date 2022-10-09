@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../products.service';
-import { IProduct } from 'app/interfaces/mt-products';
+import { IProduct } from 'app/interfaces/mt-Products';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FormBuilder, FormGroup } from '@angular/forms';

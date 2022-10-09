@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { IProduct } from 'app/interfaces/mt-products';
+import { IProduct } from 'app/interfaces/mt-Products';
 
 @Injectable({
   providedIn: 'root',

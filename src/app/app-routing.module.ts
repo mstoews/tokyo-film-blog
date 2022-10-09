@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
-import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
+import { AngularFireAuthGuard, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['authentication/split-screen/sign-in']);
+const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
 
 const routes: Route[] = [
    {
-    path: 'home',
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'home'
+   },
+   { path: 'home',
       loadChildren: () => import('./modules/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
    },
    {
@@ -12,55 +19,60 @@ const routes: Route[] = [
     loadChildren: () => import('./modules/pages/authentication/authentication.module').then((mod) => mod.AuthenticationModule),
    },
    {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
+    path: 'shop',
+    loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
+   },
+   {
+    path: 'blog',
+    loadChildren: () => import('./modules/blog/blog.module').then( (mod) => mod.BlogModule),
    },
    {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then( (mod) => mod.AdminModule),
     canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
    },
    {
     path: 'products',
     loadChildren: () => import('./modules/products/products.module').then( (mod) => mod.ProductsModule),
     canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
    },
-   {
-    path: 'shop',
-    loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
-    canActivate: [AngularFireAuthGuard],
-   },
-   {
-    path: 'home',
-    loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
-    canActivate: [AngularFireAuthGuard],
-   },
-   {
-    path: 'blog',
-    loadChildren: () => import('./modules/blog/blog.module').then( (mod) => mod.BlogModule),
-    canActivate: [AngularFireAuthGuard],
-   },
-   {
-    path: 'login',
-    redirectTo: 'authentication',
-    pathMatch: 'full',
-   },
+
    {
     path: 'animation',
     loadChildren: () => import('./modules/ui/animations/animations.module').then( (mod) => mod.AnimationsModule),
     pathMatch: 'full',
     canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
    },
    {
-    path: 'cards',
-    loadChildren: () => import('./modules/ui/cards/cards.module').then( (mod) => mod.CardsModule),
+    path: 'admin',
+    loadChildren: () => import('./modules/admin/admin.module').then( (mod) => mod.AdminModule),
     pathMatch: 'full',
     canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
    },
    {
-    path: 'image-design',
-    loadChildren: () => import('./modules/ui/advanced-search/advanced-search.module').then((mod) => mod.AdvancedSearchModule),
+    path: 'schedule',
+    loadChildren: () => import('./modules/schedule/schedule.module').then( (mod) => mod.ScheduleModule),
+    pathMatch: 'full',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
+   },
+   {
+    path: 'images',
+    loadChildren: () => import('./modules/maintenance/maintenance.module').then((mod) => mod.MaintenanceModule),
+    pathMatch: 'full',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
+   },
+   {
+    path: 'pricing',
+    loadChildren: () => import('./modules/pages/pricing/modern/modern.module').then((mod) => mod.PricingModernModule),
+    pathMatch: 'full',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome }
    },
 
 ];

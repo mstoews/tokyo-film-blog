@@ -12,9 +12,7 @@ import { AuthService} from 'app/services/auth/auth.service';
 export class SignOutFullscreenReversedComponent {
   countdown: number = 5;
   countdownMapping: any = {'=1': '# second', 'other': '# seconds'};
+  constructor(private _authService: AuthService, private _router: Router) {
+  }
 
-  /**
-   * Constructor
-   */
-  constructor(private _authService: AuthService, private _router: Router) {}
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../products.service';
-import { IProduct } from 'app/interfaces/mt-products';
+import { IProduct } from 'app/interfaces/mt-Products';
 
 
 export type PriorityQuery = {

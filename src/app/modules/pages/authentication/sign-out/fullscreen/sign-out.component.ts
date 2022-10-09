@@ -7,7 +7,8 @@ import {AuthService} from 'app/services/auth/auth.service';
   selector: 'sign-out-fullscreen',
   templateUrl: './sign-out.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations
+  animations: fuseAnimations,
+
 })
 export class SignOutFullscreenComponent {
   countdown: number = 5;
@@ -16,5 +17,10 @@ export class SignOutFullscreenComponent {
   /**
    * Constructor
    */
-  constructor(private _router: Router) {}
+  constructor(private _router: Router,
+    authService: AuthService
+    )
+    {
+      authService.signOut();
+    }
 }

@@ -19,6 +19,5 @@ import { pricingModernRoutes } from './modern.routing';
         SharedModule
     ]
 })
-export class PricingModernModule
-{
-}
+
+export class PricingModernModule{}

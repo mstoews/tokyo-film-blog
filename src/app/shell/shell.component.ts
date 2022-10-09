@@ -4,6 +4,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { onMainContentChange } from './animations';
+import { AuthService } from 'app/services/auth/auth.service'
 import { Router } from '@angular/router';
 
 @Component({
@@ -38,15 +39,8 @@ export class ShellComponent implements AfterViewInit {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    public router: Router,
-    // private afAuth: AuthService,
-     // private sidenavService: MenuService
-  ) {
-    // this.sidenavService.sideNavState$.subscribe((result) => {
-
-    //   this.onSideNavChange = result;
-    // });
-  }
+    private authService: AuthService,
+    public router: Router) {}
 
   ngAfterViewInit(): void {}
 
@@ -61,7 +55,7 @@ export class ShellComponent implements AfterViewInit {
 
   logout() {
     this.loading = true;
-    // this.afAuth.logout();
+    this.authService.SignOut();
     this.loading = false;
   }
 

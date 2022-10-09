@@ -22,6 +22,7 @@
       </button>
       <span class="logo" routerLink="/server"></span>
       <span class="flex flex-1 text-2xl">Made To v0.0.01</span>
+
       <div *ngIf="!(isHandset$ | async)">
         <a
           routerLink="/cards"
@@ -40,6 +41,7 @@
           <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
         </a>
       </div>
+
       <div *ngIf="!(isHandset$ | async)">
         <a
           routerLink="/authentication/sign-out/fullscreen"

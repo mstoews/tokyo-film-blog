@@ -1,4 +1,4 @@
-import { IProduct } from './mt-products'
+import { IProduct } from './mt-Products'
 export interface IOrders {
     orderId:          number;
     price:            number;

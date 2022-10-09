@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
-  selector: 'app-admin',
+  selector: 'admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
@@ -19,7 +19,7 @@ export class AdminComponent implements OnInit {
     {
       index = 0;
     }
-    
+
     const tabLabel = this.tabGroup._tabs.toArray()[index].textLabel;
     {
       switch (tabLabel) {
@@ -30,7 +30,7 @@ export class AdminComponent implements OnInit {
           break;
         }
         case 'Board Tasks': {
- 
+
           break;
         }
         case 'Dependency': {
