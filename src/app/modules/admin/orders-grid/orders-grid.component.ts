@@ -105,7 +105,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
       >
       </grid>
     </ng-container>
-    <mat-drawer-container>
+</mat-drawer-container>
   `,
     styleUrls: ['./orders-grid.component.css'],
 })

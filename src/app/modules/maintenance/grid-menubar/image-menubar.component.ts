@@ -1,4 +1,6 @@
 import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { IProduct } from 'app/interfaces/mt-Products';
 import { Observable } from 'rxjs';
 
 interface IValue {
@@ -26,7 +28,7 @@ export class ImagesMenubarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
   onRefresh(): void {
