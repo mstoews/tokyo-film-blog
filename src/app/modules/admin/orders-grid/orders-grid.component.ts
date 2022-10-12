@@ -12,8 +12,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
    <mat-drawer-container>
    <mat-drawer #drawer [opened]="false" mode="side" [position]="'end'" [disableClose]="false">
    <mat-card class="text-base bg-gray-100">
-   <div mat-dialog-title [ngStyle]="{'border-left': '10px solid' + cRAG  }">{{sTitle}}</div>
-<div mat-dialog-content>
+   <div mat-dialog-title [ngStyle]="{'border-left': '10px solid'  }">{{sTitle}}</div>
+   <div mat-dialog-content>
     <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form">
 
         <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">

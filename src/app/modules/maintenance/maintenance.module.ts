@@ -10,8 +10,7 @@ import {
 } from 'devextreme-angular';
 import { RouterModule, Routes } from '@angular/router';
 import { ImagesMenubarComponent } from './grid-menubar/image-menubar.component';
-
-
+import { DndComponent } from 'app/components/loaddnd/dnd.component';
 
 const routes: Routes = [
   {
@@ -45,6 +44,7 @@ const routes: Routes = [
     DxDataGridModule,
     DxBulletModule,
     DxTemplateModule,
+    DndComponent
   ]
 })
 export class MaintenanceModule { }

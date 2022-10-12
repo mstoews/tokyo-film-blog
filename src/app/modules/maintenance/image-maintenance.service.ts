@@ -1,33 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { map, Observable } from 'rxjs';
-import { IImageMaintenance } from 'app/interfaces/mt-ImageMaintenance';
-import { Timestamp } from 'firebase/firestore';
+import { Observable } from 'rxjs';
+import { IImageMaintenance, IImageStorage } from 'app/interfaces/mt-ImageMaintenance';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageMaintenanceService {
   private mtImageMaintenanceCollection: AngularFirestoreCollection<IImageMaintenance>;
+  private mtImageStorageCollection: AngularFirestoreCollection<IImageStorage>;
   private inventoryItems: Observable<IImageMaintenance[]>;
 
   constructor(public afs: AngularFirestore) {
     this.mtImageMaintenanceCollection = afs.collection<IImageMaintenance>('images')
+    this.mtImageStorageCollection = afs.collection<IImageStorage>('files')
     this.inventoryItems = this.mtImageMaintenanceCollection.valueChanges({idField: 'id'});
-
-    // .snapshotChanges().pipe(
-    //   map(changes => {
-    //      return changes.map(a =>{
-    //       const data = a.payload.doc.data() as any;
-    //       Object.keys(data).filter(key => data[key] instanceof Timestamp)
-    //                     .forEach(key => data[key] = data[key].toDate())
-    //                 data._id = a.payload.doc.id;
-    //                 console.log(data._id);
-    //                 return data;
-    //      } )
-
-    //   })
-    // );
   }
 
   getAll() {
@@ -41,6 +28,16 @@ export class ImageMaintenanceService {
 
   create(mtImage: IImageMaintenance) {
     this.mtImageMaintenanceCollection.add(mtImage);
+  }
+
+  createImageFirebaseInput(mtImageStorage: IImageStorage)
+  {
+    console.log(mtImageStorage);
+    this.mtImageStorageCollection.add(mtImageStorage);
+  }
+
+  getImageFile(id: string) {
+    this.mtImageStorageCollection.doc(id).get();
   }
 
   update(mtImage: IImageMaintenance) {

@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
+import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { IImageMaintenance } from 'app/interfaces/mt-ImageMaintenance';
-import { Timestamp } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { ImageMaintenanceService } from '../image-maintenance.service';
-
+import { IImageStorage} from 'app/interfaces/mt-ImageMaintenance'
 
 
 @Component({
@@ -19,19 +20,38 @@ export class ImagesComponent implements OnInit {
   collapsed = false;
   sTitle: string;
   drawOpen: 'open' | 'close' = 'open';
-  prdGroup: FormGroup;
-  action: string;
-  currentDate: Date;
+  imageForm: FormGroup;
   image: IImageMaintenance;
-  imageId: string;
-
+  columns = ['title', 'sub_title' , 'image_url',  'applied', 'user_updated','date_created',  'date_updated']
+  selectedItemKeys: any[] = [];
+  current_Url: string;
 
   constructor(
-    private imageMaintanenceService: ImageMaintenanceService) {
-    this.allImageList$ = this.imageMaintanenceService.getAll();
+    private fb: FormBuilder,
+    private matDialog: MatDialog,
+    @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string,
+    private imageMaintanenceService: ImageMaintenanceService)  {
+      this.allImageList$ = this.imageMaintanenceService.getAll();
+      this.createEmptyForm();
+
+    }
+
+  createEmptyForm() {
+    this.imageForm = this.fb.group({
+        id:           [''],
+        title:        [''],
+        sub_title:    [''],
+        image_url:    [''],
+        applied:      [''],
+        user_updated: [''],
+        date_created: [''],
+        date_updated: ['']
+    });
   }
 
-    ngOnInit(): void {
+
+
+  ngOnInit(): void {
       console.log('Starting Image Maintenance');
       this.sTitle = "Image Maintenance"
   }
@@ -43,48 +63,53 @@ export class ImagesComponent implements OnInit {
     }
   };
 
-  onCellDoublClicked(data: any ){
-    console.log(data);
+  onCellDoublClicked(e: any ){
+    console.log(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
+    this.current_Url = e.data.image_url;
+    this.imageForm.setValue(e.data);
     this.openDrawer()
   }
 
-
-  selectedItemKeys: any[] = [];
+  onCellClicked(e: any) {
+    console.log(`onCellClicked: ${JSON.stringify(e.data)}`);
+    //this.current_Url = e.data.image_url;
+    this.imageForm.setValue(e.data);
+    this.openDrawer()
+  }
 
   onNotify(event: any) {
-    console.log(event);
-    this.prd = event;
-    this.createForm(this.prd);
+    this.imageForm.setValue(event.data);
+    //this.current_Url = event.data.image_url;
     this.toggleDrawer();
   }
 
-  createForm(prd: IImageMaintenance) {
-    this.sTitle = 'Inventory - ' + prd.title;
+  onFocusedRowChanged(e: any){
 
-    const dDate = new Date(prd.date_updated);
-    const dueDate = dDate.toISOString().split('T')[0];
+    const rowData = e.row && e.row.data;
+    console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`)
+    this.current_Url = rowData.image_url;
+    this.imageForm.setValue(rowData);
 
-    const sDate = new Date(prd.date_created);
-    const startDate = sDate.toISOString().split('T')[0];
-
-    this.prdGroup = this.fb.group({
-        id:                 [prd.id],
-        description:        [prd.title],
-        rich_description:   [prd.sub_title],
-        image:              [prd.image_url],
-        user_updated:       [prd.user_updated],
-        date_created:       [prd.date_created],
-        date_updated:       [prd.date_updated]
-    });
   }
 
+  createForm(image: IImageMaintenance) {
+    this.sTitle = 'Inventory - ' + image.title;
+    this.imageForm = this.fb.group({
+        id: [image.id],
+        title: [image.title],
+        sub_title: [image.sub_title],
+        image_url: [image.image_url],
+        applied: [image.applied],
+        user_updated: [image.user_updated],
+        date_created: [image.date_created],
+        date_updated: [image.date_updated]
+    });
+  }
 
   selectionChanged(data: any) {
     console.log(`selectionChanged ${data}`);
     this.selectedItemKeys = data.selectedRowKeys;
   }
-
-  columns = ['title', 'sub_title' , 'image_url',  'applied', 'user_updated','date_created',  'date_updated']
 
   Add() {
     console.log('open drawer to add ... ');
@@ -102,44 +127,55 @@ export class ImagesComponent implements OnInit {
   }
 
   onCreate() {
-      const newItem = { ...this.prdGroup.value} as IImageMaintenance;
+      const newItem = { ...this.imageForm.value} as IImageMaintenance;
       console.log(`onCreate ${newItem}`);
       this.imageMaintanenceService.create(newItem);
   }
 
+  onImages() {
+    console.log('onImages');
+    const parentId = this.imageForm.getRawValue();
+    const dialogRef = this.matDialog.open(DndComponent, {
+      width: '500px',
+      data: parentId.id
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result === undefined) {
+        result = { event: 'Cancel' };
+      }
+      switch (result.event) {
+        case 'Create':
+          console.log(`create Images to save: ${JSON.stringify(result.data)}`);
+          this.create(result);
+          break;
+        case 'Cancel':
+          console.log(`Image transfer cancelled`);
+          break;
+      }
+    });
+  }
+
+  create(data: any ){
+    const rawData = this.imageForm.getRawValue();
+    rawData.image_url = data.data.url;
+    this.imageMaintanenceService.update(rawData);
+  }
+
   onUpdate(data: IImageMaintenance) {
       console.log(`onUpdate:  ${data}`);
-      data = this.prdGroup.getRawValue();
+      data = this.imageForm.getRawValue();
       this.imageMaintanenceService.update(data);
-
   }
 
   onDelete(data: IImageMaintenance) {
-      data = this.prdGroup.getRawValue();
+      data = this.imageForm.getRawValue();
       this.imageMaintanenceService.delete(data.id.toString());
 
   }
 
   closeDialog() {
     this.closeDrawer();
-  }
-
-  testInput (){
-
-    const date = new Date();
-
-
-    const image = {
-      id:               1,
-      title:            'TEST',
-      sub_title:        'TEST',
-      image_url:        'TEST',
-      applied:           true,
-      user_updated:     'TEST',
-      date_created:      date,
-      date_updated:      date
-    }
-    this.imageMaintanenceService.create(image)
   }
 
   toggleDrawer() {
@@ -170,9 +206,5 @@ export class ImagesComponent implements OnInit {
       return;
       }
     }
-
-  customizeTooltip = (pointsInfo: any) => ({ text: `${parseInt(pointsInfo.originalValue)}%` });
-
+    customizeTooltip = (pointsInfo: any) => ({ text: `${parseInt(pointsInfo.originalValue)}%` });
 }
-
-

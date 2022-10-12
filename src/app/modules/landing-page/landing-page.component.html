@@ -68,12 +68,18 @@
         features
       </p>
 
+      <button class="uppercase" (click)="scrollToId('creations')"
+         class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+         <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
+      </button>
+
       <button class="uppercase" (click)="scrollToId('hero')"
         class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
-      <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
+        <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
       </button>
+
     </div>
-    <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
+     <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
       <!-- Image -->
       <img src="assets/cassie_suit_dummy.jpg" alt="" />
 
@@ -103,7 +109,12 @@
       </p>
       <landing-banner></landing-banner>
 
-      <button class="uppercase" (click)="scrollToId('hero')"
+      <button class="uppercase" (click)="scrollToId('gallery')"
+         class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+         <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
+      </button>
+
+      <button class="uppercase" (click)="scrollToId('feature')"
         class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
       <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
       </button>
@@ -234,7 +245,7 @@
       <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
         Gallery
       </p>
-      <button class="uppercase" (click)="scrollToId('hero')"
+      <button class="uppercase" (click)="scrollToId('creations')"
         class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
       <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
       </button>

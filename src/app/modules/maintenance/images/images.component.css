@@ -1,0 +1,26 @@
+
+.mat-raise-button {
+  margin: 5px;
+}
+.mat-button {
+  margin: 5px;
+}
+
+.mat-flat-button {
+  margin: 5px;
+}
+
+.mat-card {
+  margin: 1px;
+}
+
+.mat-radio-button {
+  margin: 5px;
+}
+
+.form-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}

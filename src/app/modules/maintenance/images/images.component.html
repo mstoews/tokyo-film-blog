@@ -1,80 +1,83 @@
+<mat-card class="grid grid-template-rows: auto 1fx max-w-full max-h-full ">
+<images-menubar>
+  [inTitle]="sTitle"
+  (notifyParentRefresh)="Refresh()"
+  (notifyParentDelete)="Delete()"
+  (notifyParentAdd)="Add()"
+  (notifyParentClone)="Clone()"
+</images-menubar>
+
 <mat-drawer-container>
-  <mat-drawer #drawer [opened]="false" mode="side" [position]="'end'" [disableClose]="false">
-    <mat-card class="text-base bg-gray-100">
-  <div mat-dialog-title [ngStyle]="{'border-left': '10px solid' }">{{sTitle}}</div>
-  <div mat-dialog-content>
-   <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form">
+  <mat-drawer class="w-1/4 h-800 bg-gray-200" #drawer [opened]="false" mode="side" [position]="'end'" [disableClose]="false">
+    <mat-card >
+      <div mat-dialog-title class="bg-gray-200 rounded-sm"  [ngStyle]="{'border-left': '10px solid' }">{{sTitle}}</div>
+      <div mat-dialog-content>
+       <form [formGroup]="imageForm" (ngSubmit)="onUpdate(imageForm.value)" class="form">
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-           <input matInput placeholder="Brand" formControlName="title" />
-       </mat-form-field>
+        <mat-form-field class="form-element m-1 w-1/8">
+          <input matInput placeholder="Title" formControlName="title" />
+        </mat-form-field>
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-           <input matInput placeholder="Price" formControlName="sub_title" />
-       </mat-form-field>
+        <mat-form-field class="form-element m-1 w-1/8">
+          <input matInput placeholder="Sub Title" formControlName="sub_title" />
+        </mat-form-field>
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-           <input matInput placeholder="Description" formControlName="image_url" />
-       </mat-form-field>
+        <img class="center w-140 h-80" [src]="current_Url" *ngIf="current_Url">
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-           <input matInput placeholder="Rich Description" formControlName="applied" />
-       </mat-form-field>
+        <!-- <mat-form-field class="form-element m-1" [ngStyle]="{ width: '95%' }">
+          <input matInput placeholder="image_url" formControlName="image_url" />
+        </mat-form-field> -->
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-           <input matInput placeholder="Main Image" formControlName="user_updated" />
-       </mat-form-field>
+        <mat-form-field class="form-element m-2" [ngStyle]="{ width: '95%' }">
+          <input matInput placeholder="User Updated" formControlName="user_updated" />
+        </mat-form-field>
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-           <input matInput placeholder="Image List" type="date" formControlName="date_created" />
-       </mat-form-field>
+        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '46%' }">
+          <input matInput placeholder="Created Date" type="date" formControlName="date_created" />
+        </mat-form-field>
 
-       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-           <input matInput placeholder="Created Date" type="date" id="date_created" formControlName="date_created" />
-       </mat-form-field>
+        <mat-form-field class="form-element m-1" [ngStyle]="{ width: '46%' }">
+          <input matInput placeholder="Updated Date" type="date" id="date_created" formControlName="date_updated" />
+        </mat-form-field>
 
-   </form>
-</div>
-<div mat-dialog-actions>
-   <button mat-button (click)="onUpdate(image)" mat-flat-button color="primary" [disabled]="!prdGroup.valid">
-       Update
-   </button>
-   <button mat-button (click)="onCreate()" mat-flat-button color="primary" [disabled]="!prdGroup.valid">
-       Insert
-   </button>
-   <button mat-button (click)="onDelete(image)" mat-flat-button color="primary" [disabled]="!prdGroup.valid">
-       Delete
-   </button>
-   <button mat-button (click)="closeDrawer()" mat-flat-button color="warn">
-       Close
-   </button>
-</div>
-<div mat-dialog-actions>
-   <mat-radio-group [(ngModel)]="drawOpen">
-       <mat-radio-button class="example-margin" value="open">Remain Open</mat-radio-button>
-       <mat-radio-button class="example-margin" value="close">Close on Complete</mat-radio-button>
-   </mat-radio-group>
-</div>
-    </mat-card>
+        <mat-checkbox class="m-1" formControlName="applied">Applied</mat-checkbox>
+
+      </form>
+   </div>
+    <div mat-dialog-actions>
+      <button mat-icon-button  mat-flat-button (click)="onUpdate(image)" color="primary"  aria-label="Add">
+        <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="onCreate()" mat-flat-button color="primary" [disabled]="!imageForm.valid">
+        <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDelete(image)" mat-flat-button color="primary" [disabled]="!imageForm.valid">
+        <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="onImages()" mat-flat-button color="primary" [disabled]="!imageForm.valid">
+        <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="closeDialog()" mat-flat-button color="warn">
+        <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+      </button>
+    </div>
+
+  </mat-card>
   </mat-drawer>
-  <images-menubar>
-    [inTitle]="sTitle"
-    (notifyParentRefresh)="Refresh()"
-    (notifyParentDelete)="Delete()"
-    (notifyParentAdd)="Add()"
-    (notifyParentClone)="Clone()"
-  </images-menubar>
-  <dx-data-grid class="m-1" *ngIf="allImageList$ | async as rows"
-  id="imagesGrid"
-  [dataSource]="rows"
-  [showBorders]="true"
-  [focusedRowEnabled]="true"
-  [columns]="columns"
-  [focusedRowIndex]="0"
-  (onCellDblClick)="onCellDoublClicked($event)"
-  [repaintChangesOnly]="true"
-  (onSelectionChanged)="selectionChanged($event)"
-  keyExpr="id">
+
+<dx-data-grid [height]="770" *ngIf="allImageList$ | async as rows"
+        id="imagesGrid"
+        [dataSource]="rows"
+        [showBorders]="true"
+        [focusedRowEnabled]="true"
+        [columns]="columns"
+        [focusedRowIndex]="0"
+        (onCellDblClick)="onCellDoublClicked($event)"
+        (onCellClicked)="onCellClicked($event)"
+        [repaintChangesOnly]="true"
+        (onSelectionChanged)="selectionChanged($event)"
+        (onFocusedRowChanged)="onFocusedRowChanged($event)"
+        keyExpr="id">
   <dxo-paging
     [pageSize]="20">
   </dxo-paging>
@@ -85,11 +88,11 @@
     <dxi-column dataField="title"> </dxi-column>
     <dxi-column dataField="sub_title"> </dxi-column>
     <dxi-column dataField="image_url" width="400px"> </dxi-column>
-    <dxi-column dataField="applied" width="70px"> </dxi-column>
+    <dxi-column dataField="applied" datatype="boolean" width="70px"> </dxi-column>
     <dxi-column dataField="user_updated"> </dxi-column>
-    <dxi-column dataField="date_created" type="timestamp"> </dxi-column>
-    <dxi-column dataField="date_updated" type="date"></dxi-column>
+    <dxi-column dataField="date_created" datatype="date"> </dxi-column>
+    <dxi-column dataField="date_updated" datatype="date"></dxi-column>
   </dx-data-grid>
 </mat-drawer-container>
 
-
+</mat-card>

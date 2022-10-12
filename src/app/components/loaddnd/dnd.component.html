@@ -23,9 +23,16 @@
           <p class="size">
             {{ formatBytes(file?.size) }}
           </p>
-          <app-progress [progress]="file?.progress"></app-progress>
-        </div>
-        <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+          <div *ngIf="(percentageChange$ | async) as percentage">
+              <mat-progress-bar class="progress-bar"
+                  mode="determinate"
+                  [value]="percentage">
+
+              </mat-progress-bar>
+              <span>{{percentage / 100 | percent}}</span>
+            </div>
+          </div>
+          <img src="assets/img/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
       </div>
     </div>
   </form>

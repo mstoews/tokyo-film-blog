@@ -25,7 +25,9 @@ export class ImagesMenubarComponent implements OnInit {
   @Input() public selected: string;
   public menuItems: IValue[];
 
-  constructor() { }
+  constructor() {
+    this.inTitle="Image Maintenance";
+  }
 
   ngOnInit(): void {
 

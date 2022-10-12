@@ -10,7 +10,6 @@ import { GridMenubarComponent } from './grid-menubar/menubar.component';
 import { BlogGridComponent } from './blog-grid/blog-grid.component';
 
 
-
 const routes: Routes = [
   {
     path: 'admin',
@@ -48,7 +47,7 @@ const routes: Routes = [
     GridMenubarComponent,
     AdminComponent,
     OrdersGridComponent,
-    
+
   ],
 })
 export class AdminModule { }
