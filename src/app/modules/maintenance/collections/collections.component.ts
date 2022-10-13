@@ -14,10 +14,10 @@ import { IServerSideTransactionManager } from 'ag-grid-community';
 
 @Component({
   selector: 'app-images',
-  templateUrl: './images.component.html',
-  styleUrls: ['./images.component.css']
+  templateUrl: './collections.component.html',
+  styleUrls: ['./collections.component.css']
 })
-export class ImagesComponent implements OnInit {
+export class CollectionsComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;
   allImageList$: Observable<IImageMaintenance[]>;
   collapsed = false;

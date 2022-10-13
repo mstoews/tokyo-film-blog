@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImagesComponent } from './images/images.component';
+import { CollectionsComponent } from './collections/collections.component'
 import { MaterialModule } from 'app/MaterialModule';
 
 import {
@@ -19,6 +20,12 @@ const routes: Routes = [
     component: ImagesComponent,
   },
   {
+    path: 'collections',
+    pathMatch: 'full',
+    component: CollectionsComponent,
+  },
+
+  {
     path: '**',
     pathMatch: 'full',
     component: ImagesComponent,
@@ -34,6 +41,7 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
+    CollectionsComponent,
     ImagesComponent,
     ImagesMenubarComponent
   ],

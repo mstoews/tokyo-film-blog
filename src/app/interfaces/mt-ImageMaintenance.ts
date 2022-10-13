@@ -1,4 +1,5 @@
 import { Timestamp } from "firebase/firestore";
+import { IProduct } from './mt-Products';
 
 export interface IImageMaintenance {
   id:               number;
@@ -6,10 +7,25 @@ export interface IImageMaintenance {
   sub_title:        string;
   image_url:        string;
   applied:          boolean;
-  user_updated:     string;
+  user_updated:     string | null | undefined;
   date_created:     string;
   date_updated:     string;
 }
+
+export interface ICollectionMaintenance {
+  id:               number;
+  title:            string;
+  color:            string;
+  price:            string;
+  sub_title:        string;
+  image_url:        string;
+  applied:          boolean;
+  inventory:        IProduct[];
+  user_updated:     string | null | undefined;
+  date_created:     string;
+  date_updated:     string;
+}
+
 
 export interface IImageStorage {
   name: string;

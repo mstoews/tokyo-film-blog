@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { IImageMaintenance, IImageStorage } from 'app/interfaces/mt-ImageMaintenance';
+import { IImageMaintenance, IImageStorage, ICollectionMaintenance  } from 'app/interfaces/mt-ImageMaintenance';
 
 @Injectable({
   providedIn: 'root',
