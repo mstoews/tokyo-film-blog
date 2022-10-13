@@ -6,6 +6,7 @@ import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from 'app/modules/shared-module/shared.module';
 import { PricingModernComponent } from './modern.component';
 import { pricingModernRoutes } from './modern.routing';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
     declarations: [
@@ -15,6 +16,7 @@ import { pricingModernRoutes } from './modern.routing';
         RouterModule.forChild(pricingModernRoutes),
         MatButtonModule,
         MatIconModule,
+        MatCardModule,
         FuseCardModule,
         SharedModule
     ]

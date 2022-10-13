@@ -33,7 +33,7 @@ const routes: Route[] = [
     data: { authGuardPipe: redirectLoggedInToHome }
    },
    {
-    path: 'products',
+    path: 'collections',
     loadChildren: () => import('./modules/products/products.module').then( (mod) => mod.ProductsModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome }
