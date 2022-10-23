@@ -8,21 +8,15 @@ import { EMPTY, Observable, Subscription, throwError } from 'rxjs';
 import { MaterialModule } from '../../MaterialModule';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IImageStorage} from 'app/interfaces/mt-ImageMaintenance'
+import { ReactiveFormsModule } from '@angular/forms';
+import { IImageStorage} from 'app/models/maintenance/mt-ImageMaintenance'
 import { AuthService } from 'app/services/auth/auth.service';
 import { ImageMaintenanceService } from 'app/modules/maintenance/image-maintenance.service';
 
 
-const options = {
-  ignoreAttributes: true,
-  removeNSPrefix: true,
-  htmlEntities: true,
-};
-
 @Component({
   standalone: true,
-  imports: [CommonModule, MaterialModule, ProgressComponent, DndDirective, MatDialogModule, ReactiveFormsModule, FormsModule ],
+  imports: [CommonModule, MaterialModule, ProgressComponent, DndDirective, MatDialogModule, ReactiveFormsModule],
   selector: 'image-dnd',
   templateUrl: './dnd.component.html',
   styleUrls: ['./dnd.component.scss'],

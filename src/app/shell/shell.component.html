@@ -33,7 +33,7 @@
         </a>
       </div>
 
-      <div *ngIf="!(isHandset$ | async)">
+      <div *ngIf="isLoggedIn">
         <a
           routerLink="/authentication/sign-in/split-screen"
           matTooltip="Log In"
@@ -42,7 +42,7 @@
         </a>
       </div>
 
-      <div *ngIf="!(isHandset$ | async)">
+      <div *ngIf="!isLoggedIn">
         <a
           routerLink="/authentication/sign-out/fullscreen"
           matTooltip="Log Out"

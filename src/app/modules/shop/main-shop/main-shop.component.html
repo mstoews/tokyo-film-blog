@@ -1,275 +1,29 @@
+
+<div *ngIf="Products$ | async as products">
 <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9">
     <div class="flex flex-col items-start justify-start">
-
         <div class="flex items-end justify-between w-full mt-4">
             <div class="flex flex-col sm:flex-row sm:space-x-4">
                 <div>
-                    <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">All Hand Made To</p>
+                    <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">
+                      All Hand Made To</p>
                 </div>
-                
             </div>
             <button class="relative flex py-3 pr-12 rounded-sm hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 jusitfy-center item-center">
                 <p class="text-base font-normal leading-3 text-gray-600">Filters</p>
                 <div class="absolute top-0.5 right-2 flex jusitfy-center items-center">
-                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M21.3334 10.6666L21.3334 5.33325L16.0001 5.33325L16.0001 10.6666L21.3334 10.6666Z" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M26.6666 8L21.3332 8" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M16 8L5.33333 8" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M13.3335 18.6666L13.3335 13.3333L8.00011 13.3333L8.00011 18.6666L13.3335 18.6666Z" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M26.6665 16L13.3332 16" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M8 16L5.33333 16" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M25.3334 26.6666L25.3334 21.3333L20.0001 21.3333L20.0001 26.6666L25.3334 26.6666Z" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M26.6665 24L25.3332 24" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M20 24L5.33333 24" stroke="#4B5563" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+
                 </div>
             </button>
         </div>
     </div>
     <div class="flex items-center justify-center">
-        <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-2 lg:grid-cols-3 gap-y-12 lg:gap-x-8 lg:gap-y-8 md:gap-x-6 md:gap-y-10 2xl:flex 2xl:flex-wrap">
-            <div class="flex flex-col justify-center">
-                <div class="relative flex items-center justify-center group">
-                    <img src="https://i.ibb.co/RvYb6Y8/pexels-ray-piedra-1464625-1.png" alt="shoes-1" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Running Sport Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart" ngClass="cursor-pointer fill-current text-white" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/KXNYmpp/pesce-huang-p-Ez-Lon-Df-M-unsplash.png" alt="shoes-2" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Leather Court Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart2" class="text-white cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/5kB1Gwx/pat-kwon-EJTjetc8t-Ps-unsplash-1.png" alt="shoes-3" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Leather Court Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart3" class="text-white cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/d27vHmD/mostafa-mahmoudi-KKs-B-e-OAj-Vo-unsplash.png" alt="shoes-4" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Running Sport Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart4" class="text-white cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/QFFHNYJ/daniel-storek-JM-q-KEd1-GMI-unsplash.png" alt="shoes-5" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Leather Court Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart5" class="text-white cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/Z8vRQdh/mostafa-mahmoudi-3-OZr-h-Lbsq0-unsplash.png" alt="shoes-6" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Leather Court Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart6" class="cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/BrHxKmN/munro-studio-b4-Xk6bzg-QWU-unsplash.png" alt="shoes-7" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Running Sport Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart7" class="text-white cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/whk9Q1T/irene-kredenets-dw-Ki-Hoqqxk8-unsplash-2.png" alt="shoes-8" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Leather Court Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart8" class="text-white cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col jusitfy-center">
-                <div class="relative group">
-                    <img src="https://i.ibb.co/4Y30YCL/mostafa-mahmoudi-uian-Ikmhuvk-unsplash-1.png" alt="shoes-9" />
-                    <div>
-                        <button class="absolute flex items-center justify-center w-10/12 py-4 bg-white shadow opacity-0 group-hover:opacity-100 sm:w-11/12 md:w-10/12 xl:w-11/12 bottom-6 inset-x-6 sm:inset-x-3 md:inset-x-6 lg:inset-x-5 xl:inset-x-4">
-                            <p class="flex flex-shrink-0 text-base font-medium leading-4 text-center text-gray-800">Quick View</p>
-                        </button>
-                    </div>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div><p class="text-2xl font-semibold leading-6 text-gray-800">Leather Court Shoes</p></div>
-                    <div class="focus:text-black">
-                        <svg id="heart9" class="cursor-pointer fill-current" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 17.75L5.82802 20.995L7.00702 14.122L2.00702 9.25495L8.90702 8.25495L11.993 2.00195L15.079 8.25495L21.979 9.25495L16.979 14.122L18.158 20.995L12 17.75Z" stroke="#1F2937" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </div>
-                </div>
-                <div class="mt-2">
-                    <p class="text-base leading-none text-gray-800">Sports</p>
-                </div>
-                <div class="flex justify-between w-full mt-6">
-                    <div>
-                        <p class="text-2xl font-semibold leading-normal text-gray-600">$89</p>
-                    </div>
-                </div>
-            </div>
+        <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-4 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap">
+            <li *ngFor="let product of products ">
+              <shop-card [product]="product"></shop-card>
+            </li>
         </div>
     </div>
 </div>
+</div>
+

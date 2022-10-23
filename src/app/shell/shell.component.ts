@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -13,16 +13,31 @@ import { Router } from '@angular/router';
   styleUrls: ['./shell.component.css'],
   animations: [onMainContentChange],
 })
-export class ShellComponent implements AfterViewInit {
+export class ShellComponent implements OnInit {
   loading = false;
   public onSideNavChange = false;
   showFiller = false;
+  isLoggedIn: boolean;
+  loggedInUser: string;
 
   @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
   bSideNavMenu!: boolean;
   divClicked = false;
   isClicked = false;
   doAnimation = false;
+
+  ngOnInit() {
+       this.authService.getAuth().subscribe( res => {
+        if (res === true)
+        {
+          this.isLoggedIn = true;
+        }
+        else
+        {
+          this.isLoggedIn = false;
+        }
+       })
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.Handset])
@@ -40,9 +55,10 @@ export class ShellComponent implements AfterViewInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
-    public router: Router) {}
+    public router: Router)
+     {}
 
-  ngAfterViewInit(): void {}
+
 
   onToggleMenu() {
     if (this.isClicked === false) {

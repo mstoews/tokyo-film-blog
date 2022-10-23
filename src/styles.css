@@ -1,9 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
-
-@import 'ag-grid-community/styles/ag-grid.min.css';
-@import 'ag-grid-community/styles/ag-theme-alpine-no-font.css';
-
-::-webkit-scrollbar {
+/* You can add global styles to this file, and also import other style files */::-webkit-scrollbar {
   width: 2px;
   height: 2px;
   overflow-y: scroll;
@@ -55,14 +50,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 }
 
 #hero {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/themanager-cdac2.appspot.com/o/casie_knitting_horizontal.jpg?alt=media&token=f6e06a81-b307-4507-b946-e8dbdda4d9b1');
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/IMG_0841_polarr.JPEG?alt=media&token=4d2f8207-d93f-4b45-b7b7-24fe2b18dacc');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @media (max-width: 576px) {
   #hero {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/themanager-cdac2.appspot.com/o/casie_knitting_horizontal.jpg?alt=media&token=f6e06a81-b307-4507-b946-e8dbdda4d9b1');
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/IMG_0841_polarr.JPEG?alt=media&token=4d2f8207-d93f-4b45-b7b7-24fe2b18dacc');
     background-position: center;
   }
 }

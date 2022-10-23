@@ -9,13 +9,20 @@ import {
    Firestore
 } from '@angular/fire/firestore'
 import { User } from 'firebase/auth';
-
+import { authInstance$ } from '@angular/fire/auth';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userData: any;
+
+  // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
+
+  isLoggedOut$: Observable<User>
+
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
@@ -34,6 +41,19 @@ export class AuthService {
 
   }
 
+  getAuth(): Observable<boolean> {
+     let loggedIn: boolean = false
+     this.afAuth.authState.subscribe(res => {
+      if (res && res.uid){
+        loggedIn  = true;
+      }
+      else {
+        loggedIn  = false;
+      }
+    });
+    return of(loggedIn);
+  }
+
   async signIn(email: string, password: string){
     try {
        const credentials = await this.afAuth.signInWithEmailAndPassword(email as string, password as string)
@@ -50,7 +70,7 @@ export class AuthService {
       }
       catch (e) {
         console.error(e)
-        return
+      return
       }
   }
 

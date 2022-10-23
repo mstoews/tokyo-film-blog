@@ -83,7 +83,8 @@
               "browserTarget": "made-to:build:production"
             },
             "development": {
-              "browserTarget": "made-to:build:development"
+              "browserTarget": "made-to:build:development",
+              "port": 4208
             }
           },
           "defaultConfiguration": "development"

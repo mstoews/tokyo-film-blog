@@ -1,23 +1,37 @@
 import { Component, OnInit } from '@angular/core';
+import { IProduct } from 'app/models/products/mt-Products';
+import { ProductsService } from 'app/services/products.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'shop',
-  templateUrl: './main-shop.component.html',
+  templateUrl:'./main-shop.component.html',
   styleUrls: ['./main-shop.component.css']
 })
 export class MainShopComponent implements OnInit {
 
-dropdown: boolean = false
-filters: boolean = false
+  dropdown: boolean = false
+  filters: boolean = false
 
-showDropdown(){
-  this.dropdown =! this.dropdown
-}
+  Products$: Observable<IProduct[]>;
+  prd: any;
+  sTitle = 'Inventory';
 
-filtershow(){
-  this.filters =! this.filters
-}
+  constructor ( private readonly productService: ProductsService ) {
+    this.sTitle = 'Product Inventory'
 
-  constructor () {}
-  ngOnInit(): void {}
+  }
+
+  ngOnInit(): void {
+    this.Products$ = this.productService.getAll();
+  }
+
+  showDropdown(){
+    this.dropdown =! this.dropdown
+  }
+
+  filtershow(){
+    this.filters =! this.filters
+  }
+
 }

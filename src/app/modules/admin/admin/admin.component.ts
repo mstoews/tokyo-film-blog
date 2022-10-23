@@ -30,7 +30,6 @@ export class AdminComponent implements OnInit {
           break;
         }
         case 'Board Tasks': {
-
           break;
         }
         case 'Dependency': {

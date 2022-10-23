@@ -3,11 +3,19 @@ import { CommonModule } from '@angular/common';
 import { AdminComponent } from './admin/admin.component';
 import { ProductsGridComponent } from './products-grid/products-grid.component';
 import { OrdersGridComponent } from './orders-grid/orders-grid.component';
-import { GridAGModule } from '../grid/gridAG.module';
 import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'app/MaterialModule';
-import { GridMenubarComponent } from './grid-menubar/menubar.component';
 import { BlogGridComponent } from './blog-grid/blog-grid.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { GridMenubarComponent } from './grid-menubar/grid-menubar.component';
+
+import {
+  DxDataGridModule,
+  DxBulletModule,
+  DxTemplateModule,
+
+} from 'devextreme-angular';
+
 
 
 const routes: Routes = [
@@ -28,26 +36,26 @@ const routes: Routes = [
   },
 ];
 
-
 @NgModule({
   declarations: [
     AdminComponent,
     OrdersGridComponent,
     ProductsGridComponent,
-    GridMenubarComponent,
     BlogGridComponent,
+    GridMenubarComponent,
   ],
   imports: [
     CommonModule,
-    GridAGModule,
     MaterialModule,
+    DxDataGridModule,
+    DxBulletModule,
+    DxTemplateModule,
+    NgImageSliderModule,
     RouterModule.forChild(routes),
   ],
   exports: [
-    GridMenubarComponent,
     AdminComponent,
     OrdersGridComponent,
-
   ],
 })
 export class AdminModule { }
