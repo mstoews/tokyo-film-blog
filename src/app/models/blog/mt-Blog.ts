@@ -3,7 +3,7 @@ export interface IBlog {
   title:            string;
   paragraph:        string;
   summary:          string;
-  main_blog:        string;
+  body:             string;
   conclusion:       string;
   detail:           string;
   images:           string;

@@ -37,8 +37,7 @@ export class BlogGridComponent implements OnInit  {
       private  blogService: BlogService,
       private fb: FormBuilder)   {
       this.blog = this.blogType;
-      this.createEmptyForm();
-      this.allBlogs$ = this.blogService.getAll();
+
       }
 
     ngOnInit() {
@@ -101,7 +100,7 @@ export class BlogGridComponent implements OnInit  {
     onCellClicked(e: any) {
       console.log(`onCellClicked: ${JSON.stringify(e.data)}`);
       this.current_Url = e.data.images;
-      this.blogGroup.setValue(e.data);
+      // this.blogGroup.setValue(e.data);
       this.openDrawer()
     }
 
@@ -115,7 +114,7 @@ export class BlogGridComponent implements OnInit  {
        const rowData = e.row && e.row.data;
        console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`)
        this.current_Url = rowData.images;
-       this.blogGroup.setValue(rowData);
+       // this.blogGroup.setValue(rowData);
     }
 
     openDrawer() {
@@ -154,12 +153,12 @@ export class BlogGridComponent implements OnInit  {
     Refresh() {
       this.sTitle = 'Blog Lists'
       // this.blogId = this.afs.createId();
+      this.createEmptyForm();
       this.allBlogs$ = this.blogService.getAll();
     }
 
     onCreate() {
         const newBlog = { ...this.blogGroup.value} as IBlog;
-        console.log(`onCreate ${newBlog}`);
         this.blogService.create(newBlog);
     }
 
@@ -237,6 +236,8 @@ createForm(blog: IBlog) {
       title: [blog.title],
       paragraph: [blog.paragraph],
       images: [blog.images],
+      body: [blog.body],
+      conclusion: [blog.conclusion],
       user_updated: [blog.user_updated],
       date_created: [blog.date_created],
       date_updated: [blog.date_updated]
