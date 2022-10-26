@@ -55,9 +55,7 @@ export class ShellComponent implements OnInit {
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
-    public router: Router)
-     {}
-
+    public router: Router) {}
 
 
   onToggleMenu() {

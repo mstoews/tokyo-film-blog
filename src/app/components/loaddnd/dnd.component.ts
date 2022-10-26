@@ -11,7 +11,7 @@ import { DndDirective } from './dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IImageStorage} from 'app/models/maintenance/mt-ImageMaintenance'
 import { AuthService } from 'app/services/auth/auth.service';
-import { ImageMaintenanceService } from 'app/modules/maintenance/image-maintenance.service';
+import { ImageMaintenanceService } from 'app/features/maintenance/image-maintenance.service';
 
 
 @Component({
