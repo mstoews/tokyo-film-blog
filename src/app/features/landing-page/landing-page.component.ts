@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router} from '@angular/router';
 import { DndComponent } from '../../components/loaddnd/dnd.component';
-import { ViewportScroller } from '@angular/common';
-import { traceUntilFirst } from '@angular/fire/performance';
 import { ScrollService } from 'app/services/scroll.service';
-import {animate, style, transition, trigger} from '@angular/animations';
-import { EMPTY, Observable, Subscription } from 'rxjs';
-
+import { animate, style, transition, trigger} from '@angular/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-landing-page',
@@ -38,9 +35,7 @@ import { EMPTY, Observable, Subscription } from 'rxjs';
 })
 export class LandingPageComponent implements OnInit {
 
-HamburgerClick() {
-  console.log("hamburger clicked");
-}
+  titleMessage = "Beautifully Hand Crafted Products";
 
   public testDocValue$: Observable<any> | undefined;
   // public readonly persistenceEnabled = _persistenceEnabled;
@@ -50,8 +45,8 @@ HamburgerClick() {
     private scrollTo: ScrollService,
     ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
   onProducts() {
     console.log('Products');
     this.router.navigate(['products']);
@@ -61,7 +56,6 @@ HamburgerClick() {
       console.log("element id : ", id);
       this.scrollTo.scrollToElementById(id);
   }
-
 
   onEvent(){
     console.log('Event');

@@ -1,11 +1,9 @@
 <!-- Top of the screen  Section -->
 <section id="hero">
-
   <div class="container h-screen px-6 py-12 max-w-8xl">
     <!-- Menu/Logo Container -->
     <nav class="flex items-center justify-between text-2xl text-white">
       <!-- Logo -->
-
       <p class="text-4xl font-black uppercase text-white-700 ">Made To</p>
       <!-- Menu -->
       <div class="hidden h-10 text-2xl md:flex md:space-x-8">
@@ -13,7 +11,6 @@
           <button class="uppercase" (click)="scrollToId('feature')">Features</button>
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
-
         <div class="text-gray-200 uppercase text-1xl group">
           <button class="uppercase" (click)="scrollToId('creations')">Creations</button>
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
@@ -35,31 +32,13 @@
           <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
         </div>
       </div>
-      <!-- <div class="md:hidden">
-        <button
-          id="menu-btn"
-          type="button"
-          class="z-40 block hamburger md:hidden focus:outline-none"
-          (click)="HamburgerClick()" >
-          <span class="hamburger-top"></span>
-          <span class="hamburger-middle"></span>
-          <span class="hamburger-bottom"></span>
-        </button>
-      </div> -->
     </nav>
-
-    <div
-      class="max-w-4xl p-4 mt-32 mb-32 text-2xl text-white uppercase border-2 font-alata max-h-6xl md:p-10 md:m-32 md:mx-0 md:text-6xl">
-      Beautifully Hand Crafted Products
+    <div class="max-w-4xl p-4 mt-32 mb-32 text-2xl text-white uppercase border-2 font-alata max-h-6xl md:p-10 md:m-32 md:mx-0 md:text-6xl">
+      {{titleMessage}}
     </div>
     <app-service-description></app-service-description>
   </div>
 </section>
-
-<!-- <section id="service-description" class="scroll-mt-20">
-  <app-service-description></app-service-description>
-</section> -->
-
 
 <!-- Feature Section -->
 <section id="feature" class="scroll-mt-20">
@@ -102,7 +81,6 @@
     </div>
   </div>
 </section>
-
 
 <section id="creations" class="scroll-mt-20">
   <!-- Creations Container -->
@@ -181,7 +159,7 @@
       </div>
     </div>
 
-    
+
     <!-- Bottom Button Container -->
     <div class="flex justify-center mt-10 md:hidden">
       <button class="w-full btn md:hidden">See All</button>
@@ -207,6 +185,7 @@
   </div>
 </section>
 
+<!-- Contacts Section -->
 <section id="contact" class="scroll-mt-2">
 <div class="py-10 px-4">
   <div class="mx-auto py-12 lg:px-24 md:px-6 px-4 lg:max-w-[1440px] bg-white md:max-w-[744px] max-w-[375px]" >
@@ -391,102 +370,3 @@
 </section>
 
 
-
-<div class="px-4 py-12">
-  <div
-    class="lg:max-w-[1440px] md:max-w-[744px] max-w-[373px] lg:px-10 md:px-6 px-4 py-12 bg-white mx-auto"
-  >
-    <p class="text-4xl font-semibold text-center text-gray-800">
-      Eco-Repair
-    </p>
-    <div class="lg:flex justify-center mt-8 gap-8">
-      <div>
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/chmist12.png"
-          alt="deodorent"
-          class="lg:block hidden"
-        />
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/chemist56.png"
-          alt="deodorent"
-          class="md:block lg:hidden hidden"
-        />
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/2018.png"
-          alt="deodorent"
-          class="md:hidden block"
-        />
-
-        <p
-          class="text-2xl font-medium text-center leading-normal text-gray-800 md:mt-10 mt-4"
-        >
-          Necessaire
-        </p>
-        <p class="text-base leading-none text-center text-gray-600 mt-4">
-          Eco-Friendly Deodorant Fancy word
-        </p>
-        <p class="text-base leading-none text-center text-gray-600 mt-2">
-          50 ml / 1.7 fl oz
-        </p>
-      </div>
-      <div class="lg:mt-0 md:mt-8 mt-6">
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/deeeoood.png"
-          alt="chemist"
-          class="lg:block hidden"
-        />
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/ddeerrff.png"
-          alt="chemist"
-          class="md:block lg:hidden hidden"
-        />
-        <img
-          src="https://tuk-cdn.s3.amazonaws.com/can-uploader/b%20vc.png"
-          alt="deodorent"
-          class="md:hidden block"
-        />
-
-        <p
-          class="text-2xl font-medium text-center leading-normal text-gray-800 lg:mt-10 md:mt-6 mt-4"
-        >
-          Grown Alchemist
-        </p>
-        <p class="text-base leading-none text-center text-gray-600 mt-4">
-          Hydra repair day and night cream
-        </p>
-        <p class="text-base leading-none text-center text-gray-600 mt-2">
-          65 ml / 2.19 fl oz
-        </p>
-      </div>
-      <div class="w-3/8 lg:mt-0 md:mt-8 mt-6">
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/thumbnails%2FIMG_2547_polarr_200x200.JPEG?alt=media&token=204529e5-81c8-4904-bc9a-126e24e2b961"
-          alt="deodorent"
-          class="lg:block hidden"
-        />
-        <img
-        src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/thumbnails%2FIMG_2547_polarr_200x200.JPEG?alt=media&token=204529e5-81c8-4904-bc9a-126e24e2b961"
-          alt=""
-          class="md:block lg:hidden hidden"
-        />
-        <img
-          src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/thumbnails%2FIMG_2547_polarr_200x200.JPEG?alt=media&token=204529e5-81c8-4904-bc9a-126e24e2b961"
-          alt="deodorent"
-          class="md:hidden block"
-        />
-
-        <p
-          class="text-2xl font-medium text-center leading-normal text-gray-800 lg:mt-10 md:mt-6 mt-4"
-        >
-          Blue Toque
-        </p>
-        <p class="text-base leading-none text-center text-gray-600 mt-4">
-          Wool Winter Toque
-        </p>
-        <p class="text-base leading-none text-center text-gray-600 mt-2">
-          Light Wool
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
