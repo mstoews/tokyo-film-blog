@@ -88,8 +88,8 @@
       [focusedRowIndex]="0"
       (onCellDblClick)="onCellDoublClicked($event)"
       [repaintChangesOnly]="true"
-      (onSelectionChanged)="selectionChanged($event)"
-      (onFocusedRowChanged)="onFocusedRowChanged($event)" keyExpr="id">
+      (onFocusedRowChanged)="onFocusedRowChanged($event)"
+      keyExpr="id">
       <dxo-paging [pageSize]="20"> </dxo-paging>
       <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 50, 100]"> </dxo-pager>
       <dxi-column width="200px" dataField="title"> </dxi-column>

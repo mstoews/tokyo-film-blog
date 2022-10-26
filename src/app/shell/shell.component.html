@@ -8,7 +8,7 @@
         type="button"
         (click)="onToggleMenu()"
         mat-icon-button
-        matTooltip="Toggle Menu"
+        matTooltip="Toggle Side Nav"
         aria-label="Toggle"
       >
         <mat-icon
@@ -52,8 +52,8 @@
       </div>
     </mat-toolbar>
   </header>
-  <mat-sidenav-container class="flex-1 overflow-hidden mat-sidenav-container main">
-    <mat-sidenav class="ml-1 overflow-hidden bg-gray-700 rounded-lg flex-nav" #drawer mode="side" opened  [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
+  <mat-sidenav-container class="flex-1">
+    <mat-sidenav class="ml-1 bg-gray-700 rounded-lg " #drawer mode="side" opened  [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
       <app-sidenav></app-sidenav>
     </mat-sidenav>
     <main class="ml-2 mr-1 text-gray-800 bg-gray-100 rounded-lg flex-main">
@@ -63,64 +63,3 @@
     </main>
   </mat-sidenav-container>
 </div>
-
-
-
-
-<!--
-<mat-drawer-container class="flex-col flex-1" autosize>
-  <header class="sticky top-0 z-50 p-1 bg-red-50">
-    <mat-toolbar class="text-white bg-gray-700 rounded-lg">
-      <button
-        class="transition hover:rotate-180"
-        [ngClass]="{ clicked: isClicked }"
-        type="button"
-        (click)="onToggleMenu()"
-        mat-icon-button
-        matTooltip="Toggle Menu"
-        aria-label="Toggle"
-      >
-        <mat-icon
-          id="icon"
-          (click)="doAnimate()"
-          [ngClass]="{ animate: doAnimation }"
-          class="side-nav__icon"
-          [svgIcon]="'heroicons_outline:chevron-double-right'"
-        >
-        </mat-icon>
-      </button>
-      <span class="logo" routerLink="/server"></span>
-      <span class="flex flex-1 text-2xl">Made To v0.0.01</span>
-      <div *ngIf="!(isHandset$ | async)">
-        <a
-          routerLink="/cards"
-          matTooltip="Shopping Cart"
-          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700"
-        >
-          <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-        </a>
-      </div>
-      <div *ngIf="!(isHandset$ | async)">
-        <a
-          routerLink="/authentication/sign-in/split-screen"
-          matTooltip="Login"
-          class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700"
-        >
-          <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
-        </a>
-      </div>
-    </mat-toolbar>
-  </header>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-      <nav class = "sticky top-0 z-20 flex-col flex-auto h-screen mt-1 ml-1 mr-1 overflow-hidden shrink-0 shadow-5">
-      <app-sidenav></app-sidenav>
-    </nav>
-  </mat-drawer>
-<div class="flex flex-col min-h-screen">
-    <div class="flex flex-col flex-1 sm:flex-row">
-    <main class="flex-1 m-1 bg-gray-100 rounded">
-      <ng-content></ng-content>
-    </main>
-  </div>
-</div>
-</mat-drawer-container> -->

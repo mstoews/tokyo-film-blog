@@ -1,4 +1,12 @@
 <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
+  <mat-tab label="Blog Entries">
+    <ng-template matTabContent>
+      <div class="container">
+        <blog-list></blog-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+
     <mat-tab label="Inventory List">
       <ng-template matTabContent>
         <div class="container">
@@ -7,13 +15,7 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="Blog Entries">
-      <ng-template matTabContent>
-        <div class="container">
-          <blog-list></blog-list>
-        </div>
-      </ng-template>
-    </mat-tab>
+
 
     <mat-tab label="Category">
       <ng-template matTabContent>

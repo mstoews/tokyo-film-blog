@@ -1,52 +1,31 @@
-
-    <div class="px-4 py-12">
-      <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white lg:px-10 md:px-6 px-4 py-12"     >
-        <div>
-          <p class="text-3xl font-semibold leading-9 text-center text-gray-800 lg:text-4xl md:text-3xl"  >
-            {{title}}
-          </p>
-          <div class="justify-center gap-6 mt-4 md:flex lg:gap-8 lg:mt-8 md:mt-6" >
-            <div>
-              <!-- large image -->
-              <img src={{blog_image}} alt="" class="hidden lg:block md:hidden" />
-              <img src={{blog_image}} alt="" class="hidden lg:hidden md:block" />
-              <img src={{blog_image}} alt="" class="block mt-6 md:hidden" />
-              <div class="flex justify-between mt-6">
-                <div class="items-center gap-2 lg:flex">
-                  <p class="text-base font-medium leading-none text-gray-800">
-                    {{blog_description}}
-                  </p>
-                  <p class="mt-2 text-base italic leading-none text-gray-600 font-italic lg:mt-0" >
-                    {{date}}
-                  </p>
-                </div>
-                <button class="-mt-5 text-base font-semibold leading-none text-center text-gray-800 hover:underline lg:-mt-0 md:-mt-5" routerLink="/blog/detail" >
-                  Read
-                </button>
+<section id="featured_new">
+  <div class="px-4 py-8 lg:px-20 md:px-6 md:py-12">
+    <div class="items-center justify-between lg:flex">
+              <div class="lg:w-1/3">
+                  <h1 class="text-4xl font-semibold leading-9 text-gray-800">Thoughts and Images</h1>
+                  <p class="mt-4 text-base leading-6 text-gray-600">Be inspired by our experience of sharing our work and making our lives better through communication.</p>
+                  <button role="button" aria-label="view catalogue" class="flex items-center mt-6 text-base font-semibold leading-none text-gray-800 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none md:mt-8 hover:underline">
+                      Read more 
+                      <svg class="mt-1 ml-2" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M1.33325 4H10.6666" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M8 6.66667L10.6667 4" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M8 1.33398L10.6667 4.00065" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                      </svg>
+                  </button>
               </div>
-            </div>
-
-            <div>
-              <!-- large image -->
-              <img [src]="blog_image" alt="" class="hidden lg:block md:hidden" />
-              <img [src]="blog_image" alt="" class="hidden lg:hidden md:block" />
-              <img [src]="blog_image2" alt="" class="block mt-6 md:hidden" />
-              <div class="flex justify-between mt-6">
-                <div class="items-center gap-2 lg:flex">
-                  <p class="text-base font-medium leading-none text-gray-800">
-                    {{blog_description}}
-                  </p>
-                  <p class="mt-2 text-base italic leading-none text-gray-600 font-italic lg:mt-0" >
-                    {{date}}
-                  </p>
-                </div>
-                <button class="-mt-5 text-base font-semibold leading-none text-center text-gray-800 hover:underline lg:-mt-0 md:-mt-5" routerLink="/blog/detail" >
-                  Read
-                </button>
+              <div class="mt-8 lg:w-7/12 lg:mt-0">
+                  <div class="w-full h-full bg-red-200">
+                      <img [src]="main_image" alt="apartment design" class="hidden w-full sm:block" />
+                      <img [src]="blog_image" alt="apartment design" class="block w-full sm:hidden" />
+                  </div>
+                  <div class="grid gap-6 mt-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 lg:gap-8 lg:mt-8 md:mt-6">
+                      <img [src]="blog_image" class="w-full" alt="kitchen" />
+                      <img [src]="blog_image2" class="w-full" alt="sitting room" />
+                  </div>
               </div>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
+ </section>
+
+
 

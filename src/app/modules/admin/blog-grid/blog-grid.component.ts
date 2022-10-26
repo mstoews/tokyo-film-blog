@@ -97,13 +97,6 @@ export class BlogGridComponent implements OnInit  {
       this.openDrawer()
     }
 
-    onCellClicked(e: any) {
-      console.log(`onCellClicked: ${JSON.stringify(e.data)}`);
-      this.current_Url = e.data.images;
-      // this.blogGroup.setValue(e.data);
-      this.openDrawer()
-    }
-
     onNotify(event: any) {
       this.blogGroup.setValue(event.data);
       this.current_Url = event.data.images;
@@ -114,7 +107,8 @@ export class BlogGridComponent implements OnInit  {
        const rowData = e.row && e.row.data;
        console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`)
        this.current_Url = rowData.images;
-       // this.blogGroup.setValue(rowData);
+       this.blogGroup.setValue(rowData);
+       this.openDrawer()
     }
 
     openDrawer() {
