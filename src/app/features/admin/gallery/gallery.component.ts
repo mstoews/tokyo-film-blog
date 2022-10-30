@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 interface Item {
   imageSrc: string;
@@ -12,11 +13,34 @@ interface Item {
   styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit {
-
-  constructor() { }
+  inventoryImages: Item[] = [];
+  constructor(public storage: AngularFireStorage) { }
 
   ngOnInit(): void {
+    this.ImagesList();
   }
+
+  ImagesList() {
+    var imageCount = 0;
+    this.storage
+      .ref('/')
+      .listAll()
+      .subscribe((files) => {
+
+        files.items.forEach((imageRef) => {
+          imageCount++;
+          imageRef.getDownloadURL().then((downloadURL) => {
+            const imageUrl = downloadURL;
+            const imageData: Item = {
+              imageSrc: imageUrl,
+              imageAlt: imageCount.toString(),
+            };
+            this.inventoryImages.push(imageData);
+          });
+        });
+      });
+  }
+
 
   title = 'gallery-lightbox';
 

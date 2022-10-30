@@ -53,6 +53,7 @@ export class GalleryLightboxComponent implements OnInit {
   }
 
   onPreviewImage(index: number): void {
+    this.totalImageCount = this.galleryData.length;
     this.showMask = true;
     this.previewImage = true;
     this.currentIndex = index;
