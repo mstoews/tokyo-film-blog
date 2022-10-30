@@ -10,9 +10,9 @@
       <div class="mt-8 text-4xl font-extrabold leading-tight tracking-tight">
         Sign in
       </div>
-      <div class="flex items-baseline mt-0.5 font-medium">
+      <div class="flex items-baseline mt-0.5 font-small">
         <div>Don't have an account?</div>
-        <a class="ml-2 text-primary-500 hover:underline" [routerLink]="['/']">
+        <a class="ml-2 text-primary-500 hover:underline font-small" [routerLink]="['/']">
           Sign Up
         </a>
       </div>
@@ -77,15 +77,18 @@
         </mat-form-field>
 
         <!-- Actions -->
-        <div class="inline-flex items-end justify-between w-full mt-1.5 ml-1">
+        <div class="inline-flex items-end justify-between w-full mt-1.5 ml-1 font-small">
           <mat-checkbox [color]="'primary'" [formControlName]="'rememberMe'">
             Remember me
           </mat-checkbox>
-          <a class="font-medium text-md text-primary-500 hover:underline"
-            [routerLink]="['/forgot-password']">
-            Forgot password?
-          </a>
         </div>
+        <div class="inline-flex items-end justify-between w-full mt-1.5 ml-1 font-small">
+          <a class="font-small text-md text-primary-500 hover:underline"
+          [routerLink]="['/forgot-password']">
+          Forgot password?
+        </a>
+        </div>
+
 
         <!-- Submit button -->
         <button

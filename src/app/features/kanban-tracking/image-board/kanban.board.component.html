@@ -1,0 +1,136 @@
+<mat-drawer-container>
+  <mat-drawer #drawer [opened]="false" mode="side" [position]="'end'" [disableClose]="false">
+    <mat-card>
+      <div mat-card-title class="card-title" [ngStyle]="{'border-left': '10px solid' + cRAG }"> {{sTitle}} </div>
+      <div mat-card-content>
+        <form [formGroup]="taskGroup" (ngSubmit)="onUpdate(taskGroup.value)" class="form">
+
+          <mat-form-field class="form-element" [ngStyle]="{ width: '100%' }">
+            <input matInput placeholder="Title" formControlName="title" />
+          </mat-form-field>
+
+          <mat-form-field class="mat-form-field" [ngStyle]="{ width: '100%' }">
+            <input matInput placeholder="Description" formControlName="description" />
+          </mat-form-field>
+
+
+          <mat-form-field [ngStyle]="{ width: '20%' }">
+            <mat-select placeholder="RAG" formControlName="color" (selectionChange)="changeRag($event.value)">
+              <mat-option *ngFor="let p of rag" [value]="p.value"> {{ p.viewValue }} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field [ngStyle]="{ width: '20%' }">
+            <mat-select placeholder="Type" formControlName="type" (selectionChange)="changeType($event.value)">
+              <mat-option *ngFor="let p of types" [value]="p.value"> {{ p.viewValue }} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+
+          <mat-form-field [ngStyle]="{ width: '20%' }">
+            <mat-select placeholder="Priority" formControlName="priority"
+              (selectionChange)="changePriority($event.value)">
+              <mat-option *ngFor="let p of priorities" [value]="p.value"> {{ p.viewValue }} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field [ngStyle]="{ width: '20%' }" class="form-element"><input matInput placeholder="Tags"
+              formControlName="tags" /></mat-form-field>
+
+          <mat-form-field [ngStyle]="{ width: '20%' }" class="form-element">
+            <input matInput placeholder="Estimate (Days)" formControlName="estimate" />
+          </mat-form-field>
+
+          <mat-form-field [ngStyle]="{ width: '33%' }" class="form-element">
+            <mat-select placeholder="Assigned" formControlName="assignee" (selectionChange)="changeType($event.value)">
+                <mat-option *ngFor="let p of team" [value]="p.userid"> {{ p.firstname }} </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field [ngStyle]="{ width: '34%' }" class="form-element">
+            <input matInput placeholder="Start Date" type="date" id="start_date" formControlName="start_date" />
+          </mat-form-field>
+
+          <mat-form-field [ngStyle]="{ width: '33%' }" class="form-element">
+            <input matInput placeholder="Due Date" type="date" id="due_date" formControlName="due_date" />
+          </mat-form-field>
+
+          <mat-form-field class="mat-form-field" [ngStyle]="{ width: '100%' }">
+            <textarea matInput placeholder="Summary" formControlName="summary" [ngStyle]="{ height: '6em' }">
+          </textarea>
+          </mat-form-field>
+
+        </form>
+
+        <div mat-card-actions>
+          <button mat-raised-button (click)="onUpdate(task)" mat-flat-button color="primary">
+            Update Task
+          </button>
+          <button mat-raised-button (click)="onCreate(task)" mat-flat-button color="primary">
+            Copy Task
+          </button>
+          <button mat-raised-button (click)="onDelete(task)" mat-flat-button color="primary">
+            Delete Task
+          </button>
+          <!-- <button mat-button (click)="onVerify(task)" [mat-dialog-close]="task" mat-flat-button color="primary">
+            Verify Complete
+        </button>
+        <button mat-button (click)="onAddComment(task)" [mat-dialog-close]="task" mat-flat-button color="primary">
+            Comment
+        </button> -->
+          <button mat-raised-button (click)="closeDrawer()" mat-flat-button color="warn">
+            Cancel
+          </button>
+        </div>
+        <mat-radio-group [(ngModel)]="drawOpen">
+          <mat-radio-button class="example-margin" value="open">Remain Open</mat-radio-button>
+          <mat-radio-button class="example-margin" value="close">Close on Complete</mat-radio-button>
+        </mat-radio-group>
+
+      </div>
+    </mat-card>
+  </mat-drawer>
+  <mat-drawer-content>
+    
+      <div class="item item--1">
+        <div cdkDropListGroup class="container">
+          <div class="item item--1">
+            <div class="kanban_title">Open</div>
+            <div class="list" cdkDropList #open="cdkDropList" [id]="OPEN" [cdkDropListData]="openTasks"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngFor="let item of openTasks" cdkDrag>
+                <app-task (notifyOpenTaskDialog)="onOpenForm($event)" [item]="item"></app-task>
+              </div>
+            </div>
+          </div>
+          <div class="item item--2">
+            <div class="kanban_title">In Progress</div>
+            <div class="list" cdkDropList #progress="cdkDropList" [id]="IN_PROGRESS" [cdkDropListData]="progressTasks"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngFor="let item of progressTasks" cdkDrag>
+                <app-task (notifyOpenTaskDialog)="onOpenForm($event)" [item]="item"></app-task>
+              </div>
+            </div>
+          </div>
+          <div class="item item--3">
+            <div class="kanban_title">In Review</div>
+            <div cdkDropList #review="cdkDropList" [id]="IN_REVIEW" [cdkDropListData]="reviewTasks" class="list"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngFor="let item of reviewTasks" cdkDrag>
+                <app-task (notifyOpenTaskDialog)="onOpenForm($event)" [item]="item"></app-task>
+              </div>
+            </div>
+          </div>
+          <div class="item item--4">
+            <div class="kanban_title">Completed</div>
+            <div cdkDropList [id]="COMPLETED" [cdkDropListData]="completeTasks" class="list"
+              (cdkDropListDropped)="drop($event)">
+              <div *ngFor="let item of completeTasks" cdkDrag>
+                <app-task (notifyOpenTaskDialog)="onOpenForm($event)" [item]="item"></app-task>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </mat-drawer-content>
+</mat-drawer-container>

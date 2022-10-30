@@ -20,12 +20,12 @@
         >
         </mat-icon>
       </button>
-      <span class="logo" routerLink="/server"></span>
-      <span class="flex flex-1 text-2xl">Made To v0.0.01</span>
+      <span class="logo mb-2" routerLink="/home"></span>
+      <span class="flex flex-1 text-2xl"></span>
 
-      <div *ngIf="!(isHandset$ | async)">
+      <div>
         <a
-          routerLink="/cards"
+          routerLink="/shopping-cart"
           matTooltip="Shopping Cart"
           class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700"
         >
@@ -54,7 +54,7 @@
   </header>
   <mat-sidenav-container class="flex-1">
     <mat-sidenav class="ml-1 bg-gray-700 rounded-lg " #drawer mode="over" closed  [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
-      <app-sidenav></app-sidenav>
+      <app-sidenav (notifyParentCloseDrawer)="closeDrawer()"></app-sidenav>
     </mat-sidenav>
     <main class="ml-2 mr-1 text-gray-800 bg-gray-100 rounded-lg flex-main">
       <article class="flex-article">

@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
-  private mtProductsCollection: AngularFirestoreCollection<IProduct>;
-  private inventoryItems: Observable<IProduct[]>;
+  private mtProductsCollection: AngularFirestoreCollection<Product>;
+  private inventoryItems: Observable<Product[]>;
 
   constructor(public afs: AngularFirestore) {
-    this.mtProductsCollection = afs.collection<IProduct>('inventory')
+    this.mtProductsCollection = afs.collection<Product>('inventory')
     this.inventoryItems = this.mtProductsCollection.valueChanges({idField: 'id'});
   }
 
@@ -24,11 +24,11 @@ export class ProductsService {
      this.mtProductsCollection.doc(id).get();
   }
 
-  create(mtProduct: IProduct) {
+  create(mtProduct: Product) {
     this.mtProductsCollection.add(mtProduct);
   }
 
-  update(mtProduct: IProduct) {
+  update(mtProduct: Product) {
     this.mtProductsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
 

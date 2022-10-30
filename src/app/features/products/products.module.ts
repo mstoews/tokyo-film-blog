@@ -8,7 +8,7 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { GridComponent } from './collection-grid/grid.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { MaterialModule } from 'app/MaterialModule';
+import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 

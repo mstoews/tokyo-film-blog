@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../../services/products.service';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
 
 
 export type PriorityQuery = {
@@ -24,9 +24,9 @@ export interface PriorityType  {
   `,
 })
 
-export class ProductsGridComponent implements OnInit  {
+export class CreationsGridComponent implements OnInit  {
 
-    allProducts$: Observable<IProduct[]>;
+    allProducts$: Observable<Product[]>;
 
 
     constructor(private readonly productService: ProductsService) {}

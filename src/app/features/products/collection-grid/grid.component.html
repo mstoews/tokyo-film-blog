@@ -13,9 +13,9 @@
       </div>
       <div class="flex items-center justify-center">
           <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-3 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap">
-              <li *ngFor="let product of products ">
+              <div *ngFor="let product of products ">
                 <app-product-card [product]="product"></app-product-card>
-              </li>
+              </div>
           </div>
       </div>
   </div>

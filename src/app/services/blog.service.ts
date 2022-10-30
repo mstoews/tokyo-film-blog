@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import  { IBlog } from 'app/models/blog/mt-Blog';
+import  { Blog } from 'app/models/blog/mt-Blog';
+import { FieldValue } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
-  private blogCollection: AngularFirestoreCollection<IBlog>;
-  private blogItems: Observable<IBlog[]>;
+  private blogCollection: AngularFirestoreCollection<Blog>;
+  private blogItems: Observable<Blog[]>;
 
   constructor(public afs: AngularFirestore) {
-    this.blogCollection = afs.collection<IBlog>('blog')
+    this.blogCollection = afs.collection<Blog>('blog')
     this.blogItems = this.blogCollection.valueChanges({idField: 'id'});
   }
 
@@ -19,12 +20,13 @@ export class BlogService {
     return this.blogItems;
   }
 
-  create(blog: IBlog) {
+  create(blog: Blog) {
+    // console.log(JSON.stringify(blog));
     this.blogCollection.add(blog);
   }
 
-  update(blog: IBlog) {
-    console.log(JSON.stringify(blog));
+  update(blog: Blog) {
+    // console.log(JSON.stringify(blog));
     this.blogCollection.doc(blog.id.toString()).update(blog);
   }
 

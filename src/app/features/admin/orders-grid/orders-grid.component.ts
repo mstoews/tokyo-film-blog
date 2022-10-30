@@ -1,9 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../../services/products.service';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CategoryService } from 'app/services/category.service';
+import { Category } from 'app/models/category';
+import { TitleStrategy } from '@angular/router';
+import { DndComponent } from 'app/components/loaddnd/dnd.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'order-list',
@@ -12,6 +17,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 
 export class OrdersGridComponent implements OnInit  {
+  [x: string]: any;
     @ViewChild('drawer') drawer: MatDrawer;
     drawOpen: 'open' | 'close' = 'open';
     prdGroup: FormGroup;
@@ -22,19 +28,55 @@ export class OrdersGridComponent implements OnInit  {
     cRAG: string;
     cType: string;
     currentDate: Date;
-    product: IProduct;
+    product: Product;
     productId: string;
     current_Url: string;
+    updated_category: string;
     selectedItemKeys: string;
+    categories: Category[];
 
-    allProducts$: Observable<IProduct[]>;
+    allProducts$: Observable<Product[]>;
+    category$: Observable<Category[]>;
     prd: any;
 
     Refresh() {
       this.allProducts$ = this.productService.getAll();
+
+    }
+
+    onImages() {
+      console.log('onImages');
+      const parentId = this.prdGroup.getRawValue();
+      const dialogRef = this.matDialog.open(DndComponent, {
+        width: '500px',
+        data: parentId.id
+      });
+
+      dialogRef.afterClosed().subscribe((result: any) => {
+        if (result === undefined) {
+          result = { event: 'Cancel' };
+        }
+        switch (result.event) {
+          case 'Create':
+            console.log(`create Images to save: ${JSON.stringify(result.data)}`);
+            this.create(result);
+            break;
+          case 'Cancel':
+            console.log(`Image transfer cancelled`);
+            break;
+        }
+      });
+    }
+
+
+    changeCategory(category: any) {
+      this.updated_category = category;
+      console.log(`update category ${this.updated_category}`);
     }
 
     constructor(
+      private matDialog: MatDialog,
+      private readonly categoryService: CategoryService,
       private readonly productService: ProductsService,
       private fb: FormBuilder )
       {
@@ -43,8 +85,13 @@ export class OrdersGridComponent implements OnInit  {
       }
 
     ngOnInit() {
-      this.sTitle = 'Product Inventory'
+      this.sTitle = 'Product Inventory and Images'
       this.allProducts$ = this.productService.getAll();
+      this.category$ = this.categoryService.getAll()
+      this.category$.subscribe(result => {
+          this.categories = result;
+          console.log(this.categories);
+      });
     }
 
     onNotify(event: any) {
@@ -131,18 +178,19 @@ export class OrdersGridComponent implements OnInit  {
     }
 
     onCreate() {
-      const newProduct = { ...this.prdGroup.value} as IProduct;
+      const newProduct = { ...this.prdGroup.value} as Product;
       console.log(`onCreate ${newProduct}`);
       this.productService.create(newProduct);
     }
 
-    onUpdate(data: IProduct) {
-      console.log(`onUpdate:  ${data}`);
+    onUpdate(data: Product) {
       data = this.prdGroup.getRawValue();
+      data.category = this.updated_category;
+      console.log(`onUpdate:  ${JSON.stringify(data)}`);
       this.productService.update(data);
     }
 
-    onDelete(data: IProduct) {
+    onDelete(data: Product) {
       data = this.prdGroup.getRawValue();
       this.productService.delete(data.id.toString());
     }
@@ -185,12 +233,8 @@ export class OrdersGridComponent implements OnInit  {
       });
     }
 
-  createForm(prd: IProduct) {
+  createForm(prd: Product) {
     this.sTitle = 'Inventory - ' + prd.description;
-    const dDate = new Date(prd.date_updated);
-    const dueDate = dDate.toISOString().split('T')[0];
-    const sDate = new Date(prd.date_created);
-    const startDate = sDate.toISOString().split('T')[0];
 
     this.prdGroup = this.fb.group({
         id:                 [prd.id],

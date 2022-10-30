@@ -20,14 +20,14 @@
         <li>
           <a routerLink="blog"
             class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+            <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Blog</span>
           </a>
         </li>
         <li>
           <a routerLink="collections"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
+            <mat-icon  [svgIcon]="'mat_outline:shop_2'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
           </a>
         </li>
@@ -35,14 +35,7 @@
           <a routerLink="admin"
             class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Admin</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="images"
-            class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Images</span>
+            <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
           </a>
         </li>
       </ul>

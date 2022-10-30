@@ -16,6 +16,7 @@
   -webkit-font-smoothing: antialased;
   -moz-osx-font-smoothing: antialased;
   font-family: 'Roboto', sans-serif;
+  caret-color: transparent;
 }
 
 @tailwind base;
@@ -107,4 +108,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translateX(-6px);
 }
+
+.logo {
+  float: left;
+  font-size: 1.2em;
+  cursor: pointer;
+  outline: none;
+  height: 5rem;
+  width: 10rem;
+  /* overflow: hidden; */
+  text-indent: 100%;
+  white-space: nowrap;
+  background-size: 80% auto;
+  background-position: 5px center;
+  background-repeat: no-repeat;
+  background-image: url('./assets/made-to-logo-white.svg');
+}
+
 

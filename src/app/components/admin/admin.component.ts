@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { MaterialModule } from '../MaterialModule';
+import { MaterialModule } from '../material.module';
 import { MenubarComponent } from '../menubar/menubar.component';
 import { IconsModule } from '../icons.module';
 import { SidenavComponent } from '../../shell/sidenav/sidenav.component';

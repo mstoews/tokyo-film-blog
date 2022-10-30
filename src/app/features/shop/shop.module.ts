@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { ShopComponent } from './shop.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MainShopComponent } from './main-shop/main-shop.component';
-import { CartComponent } from './cart/cart.component';
 import { ShopCardComponent } from './shop-card/shop-card.component';
-import { MaterialModule } from 'app/MaterialModule';
+import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
+import { CartComponent } from './cart/cart.component';
 
 
 const routes: Routes = [
@@ -17,13 +17,11 @@ const routes: Routes = [
     component: ShopComponent,
   },
   {
-    path: 'cards',
+    path: 'cart',
     pathMatch: 'full',
-    loadChildren: () => import('../ui/cards/cards.module').then((mod) => mod.CardsModule),
+    component: CartComponent
   },
 ];
-
-
 
 @NgModule({
   declarations: [

@@ -38,43 +38,6 @@ const routes: Route[] = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome }
    },
-
-   {
-    path: 'animation',
-    loadChildren: () => import('./features/ui/animations/animations.module').then( (mod) => mod.AnimationsModule),
-    pathMatch: 'full',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
-   },
-   {
-    path: 'admin',
-    loadChildren: () => import('./features/admin/admin.module').then( (mod) => mod.AdminModule),
-    pathMatch: 'full',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
-   },
-   {
-    path: 'schedule',
-    loadChildren: () => import('./features/schedule/schedule.module').then( (mod) => mod.ScheduleModule),
-    pathMatch: 'full',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
-   },
-   {
-    path: 'images',
-    loadChildren: () => import('./features/maintenance/maintenance.module').then((mod) => mod.MaintenanceModule),
-    pathMatch: 'full',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
-   },
-   {
-    path: 'pricing',
-    loadChildren: () => import('./features/pages/pricing/modern/modern.module').then((mod) => mod.PricingModernModule),
-    pathMatch: 'full',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
-   },
-
 ];
 
 @NgModule({

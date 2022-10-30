@@ -4,14 +4,14 @@ import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFireStorage} from '@angular/fire/compat/storage';
 import { AngularFirestore} from '@angular/fire/compat/firestore';
-import { EMPTY, Observable, Subscription, throwError } from 'rxjs';
-import { MaterialModule } from '../../MaterialModule';
+import { Observable } from 'rxjs';
+import { MaterialModule } from '../../material.module';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
 import { IImageStorage} from 'app/models/maintenance/mt-ImageMaintenance'
 import { AuthService } from 'app/services/auth/auth.service';
-import { ImageMaintenanceService } from 'app/features/maintenance/image-maintenance.service';
+import { ImageMaintenanceService } from 'app/services/image-maintenance.service';
 
 
 @Component({

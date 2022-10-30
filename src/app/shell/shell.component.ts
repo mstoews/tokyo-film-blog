@@ -67,6 +67,10 @@ export class ShellComponent implements OnInit {
     this.drawer.toggle();
   }
 
+  closeDrawer() {
+    this.drawer.close();
+  }
+
   logout() {
     this.loading = true;
     this.authService.SignOut();

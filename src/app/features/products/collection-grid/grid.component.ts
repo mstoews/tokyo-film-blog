@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class GridComponent implements OnInit {
 
-  Products$: Observable<IProduct[]>;
+  Products$: Observable<Product[]>;
   constructor(private productService: ProductsService) { }
 
   ngOnInit(): void {

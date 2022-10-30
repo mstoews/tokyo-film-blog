@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
@@ -13,7 +13,7 @@ export class MainShopComponent implements OnInit {
   dropdown: boolean = false
   filters: boolean = false
 
-  Products$: Observable<IProduct[]>;
+  Products$: Observable<Product[]>;
   prd: any;
   sTitle = 'Inventory';
 

@@ -4,7 +4,7 @@ import {getDownloadURL, percentage, ref, Storage, uploadBytesResumable} from '@a
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDialogModule } from '@angular/material/dialog';
 import {Observable} from 'rxjs';
-import {MaterialModule} from '../../MaterialModule';
+import {MaterialModule} from '../../material.module';
 import {DndDirective} from '../loaddnd/dnd.directive';
 import {ProgressComponent} from '../progress/progress.component';
 

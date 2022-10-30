@@ -5,7 +5,7 @@
             <div class="flex flex-col sm:flex-row sm:space-x-4">
                 <div>
                     <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">
-                      All Hand Made To</p>
+                      Shopping</p>
                 </div>
             </div>
             <button class="relative flex py-3 pr-12 rounded-sm hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 jusitfy-center item-center">
@@ -17,7 +17,7 @@
         </div>
     </div>
     <div class="flex items-center justify-center">
-        <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-4 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap">
+        <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-3 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap">
             <li *ngFor="let product of products ">
               <shop-card [product]="product"></shop-card>
             </li>

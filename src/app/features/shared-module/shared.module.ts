@@ -2,7 +2,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from '../../MaterialModule';
+import { MaterialModule } from '../../material.module';
 import { StaticSidebarComponent } from 'app/shell/static-sidebar/static-sidebar.component';
 import { IconsModule } from 'app/icons.module';
 import { FooterComponent } from 'app/components/footer/footer.component';

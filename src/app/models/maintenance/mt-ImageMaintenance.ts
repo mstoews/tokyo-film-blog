@@ -28,8 +28,8 @@ export interface ICollectionMaintenance {
 
 
 export interface IImageStorage {
-  name: string;
-  parentId: string;
+  name: string | null;
+  parentId: string | null;
   url: string | null;
   version_no: number;
 }

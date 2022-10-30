@@ -12,7 +12,7 @@ export interface IImageMaintenance {
   date_updated:     FieldValue;
 }
 
-export interface ICollectionMaintenance {
+export interface Collection {
   id:               number;
   title:            string;
   color:            string;

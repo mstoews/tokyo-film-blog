@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'shop-card',
@@ -8,12 +9,17 @@ import { IProduct } from 'app/models/products/mt-Products';
 })
 export class ShopCardComponent implements OnInit {
 
-  @Input() product: IProduct;
+  @Input() product: Product;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
 
   }
+
+  openCart(){
+    console.log('Open cart');
+    this.router.navigate(['shop/cart'])    ;
+  };
 
 }

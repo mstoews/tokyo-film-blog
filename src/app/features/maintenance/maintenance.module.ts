@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ImagesComponent } from './images/images.component';
 import { CollectionsComponent } from './collections/collections.component'
-import { MaterialModule } from 'app/MaterialModule';
+import { MaterialModule } from 'app/material.module';
 
 import {
   DxDataGridModule,
