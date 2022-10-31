@@ -1,92 +1,98 @@
 import { Injectable } from '@angular/core';
-import {IUser } from './users';
-import { AngularFireAuth } from '@angular/fire/compat/auth'
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore'
-import { Router } from '@angular/router';
-
-
+import { IUser } from './users';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
-   Firestore
-} from '@angular/fire/firestore'
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { authInstance$ } from '@angular/fire/auth';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { UntypedFormBuilder } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   userData: any;
 
   // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
+  private userCollection: AngularFirestoreCollection<User>;
+  private userItems: Observable<User[]>;
 
-  isLoggedOut$: Observable<User>
+  isLoggedOut$: Observable<User>;
 
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
-    public router: Router) {
-
-     this.afAuth.authState.subscribe((user) => {
-        if (user) {
-          this.userData = user;
-          localStorage.setItem('user', JSON.stringify(this.userData));
-          JSON.parse(localStorage.getItem('user')!);
-        } else {
-          localStorage.setItem('user', 'null');
-          JSON.parse(localStorage.getItem('user')!);
-        }
-      });
-
+    public router: Router
+  ) {
+    this.afAuth.authState.subscribe((user) => {
+      if (user) {
+        this.userData = user;
+        localStorage.setItem('user', JSON.stringify(this.userData));
+        JSON.parse(localStorage.getItem('user')!);
+      } else {
+        localStorage.setItem('user', 'null');
+        JSON.parse(localStorage.getItem('user')!);
+      }
+    });
   }
 
   getAuth(): Observable<boolean> {
-     let loggedIn: boolean = false
-     this.afAuth.authState.subscribe(res => {
-      if (res && res.uid){
-        loggedIn  = true;
-      }
-      else {
-        loggedIn  = false;
+    let loggedIn: boolean = false;
+    this.afAuth.authState.subscribe((res) => {
+      if (res && res.uid) {
+        loggedIn = true;
+      } else {
+        loggedIn = false;
       }
     });
     return of(loggedIn);
   }
 
-  async signIn(email: string, password: string){
+  async signIn(email: string, password: string) {
     try {
-       const credentials = await this.afAuth.signInWithEmailAndPassword(email as string, password as string)
-    }
-    catch (e) {
-      console.error(e)
-      return
+      const credentials = await this.afAuth.signInWithEmailAndPassword(
+        email as string,
+        password as string
+      );
+    } catch (e) {
+      console.error(e);
+      return;
     }
   }
 
-  async signOut(){
+  async signOut() {
     try {
       this.afAuth.signOut();
-      }
-      catch (e) {
-        console.error(e)
-      return
-      }
+    } catch (e) {
+      console.error(e);
+      return;
+    }
   }
 
   async registerUser(user: IUser, password: string) {
     try {
-      const credentials = await this.afAuth.createUserWithEmailAndPassword(user.email as string, password as string)
-      await this.afs.collection('user').add({
-        name: user.displayName,
-        email: user.email,
-        age: user.age,
-        phoneNumber: user.phoneNumber
-      });
-    } catch (e)
-    {
-      console.error(e)
-      return
+      const credentials = await this.afAuth.createUserWithEmailAndPassword(
+        user.email as string,
+        password as string
+      );
+
+      if (!credentials.user) {
+        throw new Error("User can't be found");
+      }
+
+      // await this.userCollection.doc(credentials.user.uid).update({
+      //   name: user.displayName,
+      //   email: user.email,
+      //   age: user.age,
+      //   phoneNumber: user.phoneNumber,
+      //   uid: credentials.user.uid
+      // });
+    } catch (e) {
+      console.error(e);
+      return;
     }
   }
 
@@ -118,7 +124,8 @@ export class AuthService {
   }
 
   async ForgotPassword(passwordResetEmail: string) {
-    await this.afAuth.sendPasswordResetEmail(passwordResetEmail)
+    await this.afAuth
+      .sendPasswordResetEmail(passwordResetEmail)
       .then(() => {
         window.alert('Password reset email sent, check your inbox.');
       })

@@ -1,0 +1,71 @@
+<mat-card class="m-4 max-w-3/8  filter-article filter-interactive text-gray-700">
+  <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
+    {{ sTitle }}
+  </div>
+  <div mat-dialog-content>
+    <form  [formGroup]="adminGroup"  (ngSubmit)="onUpdate(adminGroup.value)" class="form"
+    >
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
+        <input matInput placeholder="Landing Page Hero" formControlName="hero_title" />
+      </mat-form-field>
+
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
+        <input matInput placeholder="Hero Header" formControlName="features_header" />
+      </mat-form-field>
+
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
+        <input matInput placeholder="Sub Header" formControlName="features_subheader" />
+      </mat-form-field>
+
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '49%' }">
+        <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
+      </mat-form-field>
+
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '50%' }">
+        <input matInput placeholder="Call to Action Right" formControlName="cat_right" />
+      </mat-form-field>
+
+
+      <section>
+        <div mat-dialog-title class="font-bold">
+          Contact Information
+        </div>
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '32%' }">
+        <input matInput placeholder="Contact Email" formControlName="contact_email" />
+      </mat-form-field>
+
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '32%' }">
+        <input matInput placeholder="Telephone" formControlName="contact_telephone" />
+      </mat-form-field>
+
+      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '33%' }">
+        <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
+      </mat-form-field>
+      </section>
+
+      <mat-radio-group>
+        <mat-radio-button class="m-1" value="true">Active</mat-radio-button>
+        <mat-radio-button class="m-1" value="false">InActive</mat-radio-button>
+      </mat-radio-group>
+
+    </form>
+  </div>
+  <div mat-dialog-actions class="mt-10">
+    <button class="m-1" mat-icon-button mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
+      <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+    </button>
+    <button class="m-1" mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!adminGroup.valid"       >
+      <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+    </button>
+    <button class="m-1" mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!adminGroup.valid"        >
+      <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+    </button>
+    <button class="m-1"  mat-icon-button mat-flat-button (click)="onImages()" color="primary" [disabled]="!adminGroup.valid"  >
+      <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+    </button>
+    <button class="m-1" mat-icon-button mat-flat-button (click)="closeDialog()" color="warn"  >
+      <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+    </button>
+  </div>
+</mat-card>
+

@@ -1,4 +1,12 @@
 <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
+  <mat-tab label="Company Setup">
+    <ng-template matTabContent>
+      <div class="container">
+        <admin-form></admin-form>
+      </div>
+    </ng-template>
+  </mat-tab>
+
   <mat-tab label="Blog Entries">
     <ng-template matTabContent>
       <div class="container">
@@ -7,7 +15,15 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab label="Inventory List">
+  <mat-tab label="Inventory">
+    <ng-template matTabContent>
+      <div class="container">
+        <inventory-list></inventory-list>
+      </div>
+    </ng-template>
+  </mat-tab>
+
+  <mat-tab label="Orders">
     <ng-template matTabContent>
       <div class="container">
         <order-list></order-list>

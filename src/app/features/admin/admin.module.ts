@@ -10,6 +10,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { GridMenubarComponent } from './grid-menubar/grid-menubar.component';
 import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.module';
 
+
 import {
   DxDataGridModule,
   DxBulletModule,
@@ -25,6 +26,8 @@ import { CollectionCardComponent } from './collection-card/collection-card.compo
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ScreenCardComponent } from './screen-card/screen-card.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { InventoryComponent } from './inventory-grid/inventory-grid.component'
+import { AdminFormComponent } from './admin-form/admin-form.component';
 
 
 const routes: Routes = [
@@ -61,6 +64,8 @@ const routes: Routes = [
     ProductCardComponent,
     ScreenCardComponent,
     GalleryComponent,
+    InventoryComponent,
+    AdminFormComponent,
   ],
   imports: [
     CommonModule,

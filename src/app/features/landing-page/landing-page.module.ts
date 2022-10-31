@@ -8,6 +8,7 @@ import { BannerComponent } from './banner/banner.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared-module/shared.module';
 import { MadeToServicesModule } from '../made-to-services/made-to-services.module';
+import { LightboxModule } from '../lightbox';
 
 const routes: Routes = [
   {
@@ -29,13 +30,13 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [LandingPageComponent, BannerComponent],
+  declarations: [LandingPageComponent, BannerComponent, GalleryComponent],
   imports: [
     CommonModule,
     GalleryCardComponent,
-    GalleryComponent,
     SharedModule,
     MadeToServicesModule,
+    LightboxModule,
     RouterModule.forChild(routes),
   ]
 })

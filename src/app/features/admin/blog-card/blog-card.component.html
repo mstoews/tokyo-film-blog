@@ -1,4 +1,4 @@
-<fuse-card class="flex flex-col w-full max-w-100 filter-article m-1">
+<mat-card class="flex flex-col w-3/8 filter-article m-1">
   <div class="flex-none">
   <ng-container *ngFor="let image of blog.images;">
   <img
@@ -17,6 +17,6 @@
   (cdkDropListDropped)="drop($event)">
   <div class="example-box" *ngFor="let item of blog.images" cdkDrag>{{item}}</div>
 </div>
-</fuse-card>
+</mat-card>
 
 
