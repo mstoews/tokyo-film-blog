@@ -7,6 +7,7 @@ import { FashionComponent } from './fashion/fashion.component';
 import { LifestyleComponent } from './lifestyle/lifestyle.component';
 import { DetailComponent } from './detail/detail.component';
 import { WeeklyComponent } from './weekly/weekly.component';
+import { MaterialModule } from 'app/material.module';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    MaterialModule
   ]
 })
 export class BlogModule { }

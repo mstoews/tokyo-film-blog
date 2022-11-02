@@ -1,4 +1,9 @@
 
 <!-- <blog-lifestyle></blog-lifestyle> -->
-<app-weekly></app-weekly>
+<ng-container *ngIf="allBlogs$ | async as rows">
+  <div *ngFor="let blog of rows" >
+    <!-- <app-weekly ></app-weekly> -->
+    <blog-fashion [blog]="blog"></blog-fashion>
+  </div>
+</ng-container>
 

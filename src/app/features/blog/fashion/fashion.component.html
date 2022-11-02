@@ -1,26 +1,31 @@
 <div class="flex flex-col items-center justify-center w-full px-4 py-12 2xl:mx-auto 2xl:container xl:px-20 md:px-6">
     <div class="space-y-10 sm:w-96 md:w-8/12 xl:w-full">
         <div class="flex flex-col items-center justify-center space-y-4 text-center">
-            <h1 class="text-3xl font-semibold leading-9 text-center text-gray-800 lg:text-4xl">Latest Scissors Fashion Blog</h1>
-            <p class="text-base leading-6 text-center text-gray-600 md:leading-4">Dive deep into the world of fashion with our lastest cuts and slices updates.</p>
+            <h1 class="text-3xl font-semibold leading-9 text-center text-gray-800 lg:text-4xl">Thoughts and Images</h1>
+            <p class="text-base leading-6 text-center text-gray-600 md:leading-4">The latest thoughts and musing from life in Tokyo</p>
         </div>
         <div class="flex flex-col items-center justify-center space-y-6 xl:space-y-8">
-            <div class="relative w-full">
-                <img class="hidden object-cover  xl:block" [src]="fashion_image_1" alt="clothes" />
-                <img class="hidden object-cover w-1/8 md:block xl:hidden" [src]="fashion_image_1" alt="clothes" />
-                <img class="w-full md:hidden" [src]="fashion_image_1" alt="scissors" />
+            <div class="relative w-5/8">
+                <img class="hidden object-cover h-200 xl:block" [src]="blog.images[0].image" alt="clothes" />
+                <img class="hidden object-cover w-1/8 md:block xl:hidden" [src]="blog.images[0].image" alt="clothes" />
+                <img class="w-3/8 md:hidden" [src]="blog.images[0].image" alt="scissors" />
                 <div class="absolute flex flex-col items-start justify-start p-6 text-left bottom-2 md:bottom-8 inset-x-2 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur md:p-8">
-                    <p class="text-sm leading-none text-gray-600">16 September 2022</p>
-                    <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">The Scirrors Tour</p>
-                    <p class="mt-4 text-base leading-6 text-gray-600">Read about how your favourite cutters and pruners. You might want to click read story if you want to know their slices secrets.</p>
-                    <a href="javascript:void(0)" class="mt-6 text-base font-medium leading-4 text-gray-800 focus:outline-none focus:underline hover:underline">Read Story</a>
+                    <p class="text-sm leading-none text-gray-600">{{blog.date_updated}}</p>
+                    <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">{{blog.title}}</p>
+                    <p class="mt-4 text-base leading-6 text-gray-600" [innerHTML]="blog.paragraph"></p>
+                    <a routerLink="blog" (click)="onOpenBlog()"
+                      class="flex items-center p-2 pr-5 font-normal text-gray-600 rounded-lg text-1xl grow hover:bg-gray-800 hover:text-gray-200 dark:hover:bg-gray-300">
+                     <mat-icon (onclick)="onOpenBlog()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+                    <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
+          </a>
+                    <!-- <a href="javascript:void(0)" class="mt-6 text-base font-medium leading-4 text-gray-800 focus:outline-none focus:underline hover:underline">Read Story</a> -->
                 </div>
             </div>
             <div class="flex flex-col items-center justify-center w-full space-y-6 xl:flex-row xl:space-y-0 xl:space-x-8">
                 <div class="relative w-full">
-                    <img class="hidden object-cover w-full xl:object-contain xl:block" src="https://i.ibb.co/B2yXD4Y/pexels-tanya-satina-6558010.png" alt="girls" />
-                    <img class="hidden object-cover w-full md:block xl:hidden" src="https://i.ibb.co/pndL2sx/pexels-tanya-satina-6558010.png" alt="girls" />
-                    <img class="w-full md:hidden" src="https://i.ibb.co/FYFnDJN/Group-2233.png" alt="girls" />
+                    <img class="hidden object-cover w-full xl:object-contain xl:block" [src]="blog.images[1].image" alt="girls" />
+                    <img class="hidden object-cover w-full md:block xl:hidden" [src]="blog.images[1].image" alt="blog" />
+                    <img class="w-full md:hidden" [src]="blog.images[1].image" alt="blog" />
                     <div class="absolute flex flex-col items-start justify-start p-6 text-left bottom-2 md:bottom-8 inset-x-2 md:inset-x-8 bg-blur md:p-8">
                         <p class="text-sm leading-none text-gray-600">23 July 2021</p>
                         <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">The Wardrobe Tour</p>
@@ -29,9 +34,9 @@
                     </div>
                 </div>
                 <div class="relative w-full">
-                    <img class="hidden object-cover w-full xl:object-contain xl:block" src="https://i.ibb.co/B4bchqF/flaunter-b-ETVkpm2u-Mw-unsplash-1.png" alt="girl" />
-                    <img class="hidden object-cover w-full md:block xl:hidden" src="https://i.ibb.co/NxcL40w/pexels-michelle-leman-6774877.png" alt="girl" />
-                    <img class="w-full md:hidden" src="https://i.ibb.co/yWCt1kH/Group-2235.png" alt="girl" />
+                    <img class="hidden object-cover w-full xl:object-contain xl:block" [src]="blog.images[0].image" alt="girl" />
+                    <img class="hidden object-cover w-full md:block xl:hidden" [src]="blog.images[0].image" alt="girl" />
+                    <img class="w-full md:hidden" [src]="blog.images[0].image" alt="girl" />
                     <div class="absolute flex flex-col items-start justify-start p-6 text-left md:bottom-8 bottom-2 inset-x-2 md:inset-x-8 bg-blur md:p-8">
                         <p class="text-sm leading-none text-gray-600">23 July 2021</p>
                         <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">The Wardrobe Tour</p>

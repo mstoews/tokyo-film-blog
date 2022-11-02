@@ -9,6 +9,7 @@ import { Category } from 'app/models/category';
 import { TitleStrategy } from '@angular/router';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Item } from 'app/models/item';
 
 @Component({
   selector: 'inventory-list',
@@ -17,7 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 })
 
 export class InventoryComponent implements OnInit  {
-  [x: string]: any;
+
     @ViewChild('drawer') drawer: MatDrawer;
     drawOpen: 'open' | 'close' = 'open';
     prdGroup: FormGroup;
@@ -34,10 +35,22 @@ export class InventoryComponent implements OnInit  {
     updated_category: string;
     selectedItemKeys: string;
     categories: Category[];
+    data: Item[] = []
 
     allProducts$: Observable<Product[]>;
     category$: Observable<Category[]>;
     prd: any;
+
+    constructor(
+      private matDialog: MatDialog,
+      private readonly categoryService: CategoryService,
+      private readonly productService: ProductsService,
+      private fb: FormBuilder )
+      {
+      this.prd = this.productType;
+      this.createEmptyForm();
+      }
+
 
     Refresh() {
       this.allProducts$ = this.productService.getAll();
@@ -67,21 +80,19 @@ export class InventoryComponent implements OnInit  {
       });
     }
 
+    create(data: any ){
+      const newProduct = { ...this.prdGroup.value} as Product;
+      console.log(`onCreate ${newProduct}`);
+      newProduct.image = data.data.url;
+      this.productService.update(newProduct);
+      this.prdGroup.setValue(newProduct);
+    }
 
     changeCategory(category: any) {
       this.updated_category = category;
       console.log(`update category ${this.updated_category}`);
     }
 
-    constructor(
-      private matDialog: MatDialog,
-      private readonly categoryService: CategoryService,
-      private readonly productService: ProductsService,
-      private fb: FormBuilder )
-      {
-      this.prd = this.productType;
-      this.createEmptyForm();
-      }
 
     ngOnInit() {
       this.sTitle = 'Product Inventory and Images'
@@ -121,8 +132,26 @@ export class InventoryComponent implements OnInit  {
     }
 
     onCellDoublClicked(e: any ){
+        this.data = [];
+        var counter = 0;
         console.log(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
-        this.current_Url = e.data.images;
+        this.current_Url = e.data.image;
+        var Image = {
+          imageSrc: e.data.image,
+          imageAlt: counter.toString(),
+        }
+
+        // if (e.data.images.length > 0){
+        //   e.data.images.forEach((img: any) => {
+        //   counter++;
+        //      var Image = {
+        //        imageSrc: img.image,
+        //        imageAlt: counter.toString(),
+        //        }
+        //        this.data.push(Image);
+        //      });
+        //   }
+        this.data.push(Image);
         this.prdGroup.setValue(e.data);
         this.openDrawer()
     }

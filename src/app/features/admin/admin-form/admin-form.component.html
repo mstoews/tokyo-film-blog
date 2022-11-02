@@ -51,18 +51,19 @@
     </form>
   </div>
   <div mat-dialog-actions class="mt-10">
-    <button class="m-1" mat-icon-button mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
+    <button class="m-1"  mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
       <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+      Update
     </button>
-    <button class="m-1" mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!adminGroup.valid"       >
+    <!-- <button class="m-1" mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!adminGroup.valid"       >
       <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
     </button>
     <button class="m-1" mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!adminGroup.valid"        >
       <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-    </button>
-    <button class="m-1"  mat-icon-button mat-flat-button (click)="onImages()" color="primary" [disabled]="!adminGroup.valid"  >
+    </button> -->
+    <!-- <button class="m-1"  mat-icon-button mat-flat-button (click)="onImages()" color="primary" [disabled]="!adminGroup.valid"  >
       <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-    </button>
+    </button> -->
   </div>
 </mat-card>
 

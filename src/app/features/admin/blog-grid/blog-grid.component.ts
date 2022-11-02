@@ -9,17 +9,7 @@ import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { TextService } from '../text-editor/text.service';
-
-export interface IAlbum {
-  imageSrc: string;
-  imageAlt: string;
-}
-
-
-interface Item {
-  imageSrc: string;
-  imageAlt: string;
-}
+import { Item } from 'app/models/item'
 
 @Component({
   selector: 'blog-list',
@@ -36,7 +26,7 @@ export class BlogGridComponent implements OnInit {
   sTitle: string;
   cRAG: string;
   currentDate: Date;
-  blog: Blog;
+
   collapsed = false;
   current_Url: string;
   blogId: string;
@@ -50,6 +40,8 @@ export class BlogGridComponent implements OnInit {
 
   // blog dictionary
   allBlogs$: Observable<Blog[]>;
+  blog: Blog;
+
   selectedItemKeys: any;
 
   constructor(
@@ -145,38 +137,6 @@ export class BlogGridComponent implements OnInit {
     this.current_Url = event.data.images;
     this.toggleDrawer();
   }
-
-
-
-   //onFocusedRowChanged(e: any) {
-   // onFocusedRowChanged)="onFocusedRowChanged($event)"
-
-    // there might be a necessity to record dirty data to ensure
-    // the focus change does not override updated data
-    // or it is just saved on exit automatically
-
-    // const rowData = e.row && e.row.data;
-    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`);
-    // this.current_Url = rowData.images[0].thumbImage;
-    // this.paragraph = rowData.paragraph;
-    // this.conclusion = rowData.conclusion;
-    // this.body = rowData.body;
-
-    // this.data = [];
-    // var counter = 0
-    // rowData.images.forEach((img: any) => {
-    //     counter++;
-    //     var Image = {
-    //       imageSrc: img.image,
-    //       imageAlt: counter.toString(),
-    //       }
-    //       this.data.push(Image);
-    //     }
-    // );
-
-    // this.blogGroup.setValue(rowData);
-    // this.openDrawer();
-    // }
 
   openDrawer() {
     const opened = this.drawer.opened;

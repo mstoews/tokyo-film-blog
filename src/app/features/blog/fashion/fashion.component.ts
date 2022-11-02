@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Blog } from 'app/models/blog'
 
 @Component({
   selector: 'blog-fashion',
@@ -7,11 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class FashionComponent implements OnInit {
 
-  @Input() fashion_image_1!: string ;
+  @Input() blog: Blog;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onOpenBlog() {
+     console.log('open blog window...')
   }
 
 }
