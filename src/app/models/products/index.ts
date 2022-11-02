@@ -1,4 +1,5 @@
 import { FieldValue } from "firebase/firestore";
+import { imageItem } from '../imageItem'
 export interface Product {
   id:   number;
   description:   string;
@@ -12,11 +13,5 @@ export interface Product {
   user_updated: string;
   date_created: FieldValue;
   date_updated: FieldValue;
-  imageUrls: Images[];
+  imageUrls: imageItem[];
 }
-
-export interface Images {
-  url: string;
-  description: string;
-}
-

@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { IProduct } from 'app/models/products/mt-Products';
+import { Product } from 'app/models/products';
 import { Observable } from 'rxjs';
 
 interface IValue {

@@ -1,5 +1,5 @@
 import { FieldValue } from "firebase/firestore";
-import { IProduct } from '../products/mt-Products';
+import { Product } from '../products'
 
 export interface IImageMaintenance {
   id:               number;
@@ -20,7 +20,7 @@ export interface Collection {
   sub_title:        string;
   image_url:        string;
   applied:          boolean;
-  inventory:        IProduct[];
+  inventory:        Product[];
   user_updated:     string | null | undefined;
   date_created:     string;
   date_updated:     string;

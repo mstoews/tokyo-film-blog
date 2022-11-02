@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { Mainpage } from 'app/models/main_page';
+import { Mainpage } from 'app/models/mainpage';
 import { MainPageService } from 'app/services/main-page.service';
 
 
@@ -11,8 +11,9 @@ import { MainPageService } from 'app/services/main-page.service';
   styleUrls: ['./admin-form.component.css']
 })
 export class AdminFormComponent implements OnInit {
-sTitle: any;
-adminGroup: FormGroup;
+  sTitle: any;
+  adminGroup: FormGroup;
+  product: any;
 
   constructor(
     private fb: FormBuilder,
@@ -40,22 +41,20 @@ adminGroup: FormGroup;
     });
   }
 
-
-    closeDialog() {
-    throw new Error('Method not implemented.');
-    }
     onImages() {
-    throw new Error('Method not implemented.');
+
     }
-    product: any;
-    onDelete(arg0: any) {
-    throw new Error('Method not implemented.');
+
+    onDelete(landingPage: any) {
+
     }
+
     onCreate() {
-    throw new Error('Method not implemented.');
+
     }
-    onUpdate(arg0: any) {
-    throw new Error('Method not implemented.');
+
+    onUpdate(landingPage: any) {
+
     }
 
 }

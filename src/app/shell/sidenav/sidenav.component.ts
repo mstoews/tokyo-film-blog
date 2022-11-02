@@ -13,6 +13,7 @@ export class SideNavComponent implements OnInit {
   }
 
   onClose(){
+    console.log('Sidenav emit close');
     this.notifyParentCloseDrawer.emit();
   }
 

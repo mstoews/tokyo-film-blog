@@ -9,13 +9,7 @@ import { BlogGridComponent } from './blog-grid/blog-grid.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { GridMenubarComponent } from './grid-menubar/grid-menubar.component';
 import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.module';
-
-
-import {
-  DxDataGridModule,
-  DxBulletModule,
-  DxTemplateModule,
-} from 'devextreme-angular';
+import { DxDataGridModule, DxBulletModule,  DxTemplateModule, DxPopupModule} from 'devextreme-angular';
 import { FuseCardModule } from '@fuse/components/card';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { ImagesGridComponent } from './images/images.component';
@@ -28,7 +22,8 @@ import { ScreenCardComponent } from './screen-card/screen-card.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { InventoryComponent } from './inventory-grid/inventory-grid.component'
 import { AdminFormComponent } from './admin-form/admin-form.component';
-
+import { TextEditorModule } from './text-editor/text-editor.module';
+import { DxHtmlEditorModule  } from 'devextreme-angular';
 
 const routes: Routes = [
   {
@@ -66,6 +61,7 @@ const routes: Routes = [
     GalleryComponent,
     InventoryComponent,
     AdminFormComponent,
+
   ],
   imports: [
     CommonModule,
@@ -76,7 +72,10 @@ const routes: Routes = [
     NgImageSliderModule,
     RouterModule.forChild(routes),
     FuseCardModule,
-    GalleryLightboxModule
+    GalleryLightboxModule,
+    DxPopupModule,
+    TextEditorModule,
+    DxHtmlEditorModule
   ],
   exports: [
     AdminComponent,

@@ -4,35 +4,35 @@
     <div class="px-3 py-10 text-white bg-gray-700 rounded w-50 dark:bg-gray-800">
       <ul class="space-y-2">
         <li>
-          <a routerLink="home"
+          <a routerLink="home" (click)="onClose()"
             class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Home</span>
           </a>
         </li>
         <li>
-          <a routerLink="shop"
+          <a routerLink="shop" (click)="onClose()"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
           </a>
         </li>
         <li>
-          <a routerLink="blog"
+          <a routerLink="blog" (click)="onClose()"
             class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Blog</span>
+            <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
           </a>
         </li>
         <li>
-          <a routerLink="collections"
+          <a routerLink="collections" (click)="onClose()"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon  [svgIcon]="'mat_outline:shop_2'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
           </a>
         </li>
         <li>
-          <a routerLink="admin"
+          <a routerLink="admin" (click)="onClose()"
             class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>

@@ -33,6 +33,7 @@
               "devextreme-quill",
               "devexpress-diagram",
               "devexpress-gantt",
+              "file-saver",
               "jszip",
               "luxon"
             ],

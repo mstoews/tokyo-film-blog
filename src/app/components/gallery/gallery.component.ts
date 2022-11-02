@@ -18,7 +18,16 @@ export class GalleryComponent implements OnInit {
    }
 
   public onPreviewImage(index: number) {
-    // const image = this.inventoryImages[index].imageSrc;
+    var url: string;
+    if (index < 3)
+     {
+       url = this.topCollection[index].imageSrc;
+     }
+     else {
+      index = index - 3;
+       url = this.bottomCollection[index].imageSrc;
+     }
+
     // console.log(`Preview image ${image}`);
   }
 }

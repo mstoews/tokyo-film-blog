@@ -1,10 +1,10 @@
-import { IProduct } from '../products'
-export interface IOrders {
+import { Product } from '../products'
+export interface Orders {
     orderId:          number;
-    price:            number;
-    is_filled:        string;
+    is_filled:        boolean;
+    is_completed:     boolean;
     user_updated:     string;
     date_created:     string;
     date_updated:     string;
-    product:          IProduct;
+    products:         Product[];
 }

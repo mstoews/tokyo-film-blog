@@ -13,11 +13,11 @@
     class="h-screen"
     #drawer
     [opened]="false"
-    mode="side"
+    mode="over"
     [position]="'end'"
     [disableClose]="false"
   >
-    <fuse-card class="flex flex-col w-full max-w-120 filter-article filter-interactive text-gray-700">
+    <fuse-card class="flex flex-col  filter-article filter-interactive text-gray-700">
       <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
         {{ sTitle }}
       </div>

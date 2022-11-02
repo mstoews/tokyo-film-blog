@@ -9,7 +9,7 @@ import { MaterialModule } from '../../material.module';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IImageStorage} from 'app/models/maintenance/mt-ImageMaintenance'
+import { IImageStorage} from 'app/models/maintenance'
 import { AuthService } from 'app/services/auth/auth.service';
 import { ImageMaintenanceService } from 'app/services/image-maintenance.service';
 

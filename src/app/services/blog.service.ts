@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import  { Blog } from 'app/models/blog/mt-Blog';
+import  { Blog } from 'app/models/blog';
 import { FieldValue } from 'firebase/firestore';
 
 @Injectable({

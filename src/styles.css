@@ -16,7 +16,6 @@
   -webkit-font-smoothing: antialased;
   -moz-osx-font-smoothing: antialased;
   font-family: 'Roboto', sans-serif;
-  caret-color: transparent;
 }
 
 @tailwind base;

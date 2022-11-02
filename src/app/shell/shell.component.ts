@@ -39,6 +39,7 @@ export class ShellComponent implements OnInit {
        })
   }
 
+
   isHandset$: Observable<boolean> = this.breakpointObserver
     .observe([Breakpoints.Handset])
     .pipe(

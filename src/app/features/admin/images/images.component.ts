@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
-import { IImageMaintenance } from 'app/models/maintenance/mt-ImageMaintenance';
+import { IImageMaintenance } from 'app/models/maintenance';
 import { ImageMaintenanceService } from 'app/services/image-maintenance.service';
-import { IImageStorage} from 'app/models/maintenance/mt-ImageMaintenance'
+import { IImageStorage} from 'app/models/maintenance'
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { User } from 'firebase/auth';
 import { Observable } from 'rxjs';

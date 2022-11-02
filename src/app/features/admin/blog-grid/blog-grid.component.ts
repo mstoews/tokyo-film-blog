@@ -1,13 +1,14 @@
-import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { BlogService } from '../../../services/blog.service';
 import { Blog } from 'app/models/blog';
 import { MatDrawer } from '@angular/material/sidenav';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { TextEditorComponent } from '../text-editor/text-editor.component'
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { BlogImages } from 'app/models/blog';
+import { TextService } from '../text-editor/text.service';
 
 export interface IAlbum {
   imageSrc: string;
@@ -20,14 +21,16 @@ interface Item {
   imageAlt: string;
 }
 
-
 @Component({
   selector: 'blog-list',
   templateUrl: './blog-grid.component.html',
   styleUrls: ['./blog-grid.component.css'],
+  providers: [TextService]
 })
 export class BlogGridComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;
+
+
   drawOpen: 'open' | 'close' = 'open';
   blogGroup: FormGroup;
   sTitle: string;
@@ -37,6 +40,10 @@ export class BlogGridComponent implements OnInit {
   collapsed = false;
   current_Url: string;
   blogId: string;
+  data: Item[] = []
+  @Input() para: string;
+  @Input() body: string;
+  @Input() conclusion: string;
 
   // Lightbox setup
   private _subscription: Subscription;
@@ -50,7 +57,8 @@ export class BlogGridComponent implements OnInit {
     private auth: AngularFireAuth,
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string,
     private blogService: BlogService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private textService: TextService
   ){}
 
   ngOnInit() {
@@ -64,7 +72,6 @@ export class BlogGridComponent implements OnInit {
       e.component.expandRow(['Id']);
     }
   };
-
 
   selectionChanged(data: any) {
     console.log(`selectionChanged ${data}`);
@@ -98,18 +105,37 @@ export class BlogGridComponent implements OnInit {
 
   create(data: Blog) {
     const rawData = this.blogGroup.getRawValue();
-    // rawData.images = data.data.url;
-    // rawData.images = this.imgCollection;
     this.current_Url = data.images[0].thumbImage;
     this.blogService.update(rawData);
   }
 
+  onUpdate(data: Blog) {
+    data = this.blogGroup.getRawValue();
+    data.paragraph = this.para;
+    data.body = this.body;
+    data.conclusion = this.conclusion;
+    console.log(`onUpdate: ${JSON.stringify(data)}`);
+    this.blogService.update(data);
+  }
+
   onCellDoublClicked(e: any) {
-    console.log(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
-    this.current_Url = e.data.images;
-    e.images.array.forEach((element: ImageData) => {
-      console.log(element);
-    });
+    console.log(`onCellDoubleClicked: ${JSON.stringify(e.body)}`);
+    this.data = [];
+    var counter = 0
+    this.para = e.data.paragraph;
+    this.conclusion = e.data.conclusion;
+    this.body = e.data.body;
+    this.current_Url = e.data.images[0].image;
+     if (e.data.images.length > 0){
+      e.data.images.forEach((img: any) => {
+      counter++;
+         var Image = {
+           imageSrc: img.image,
+           imageAlt: counter.toString(),
+           }
+           this.data.push(Image);
+         });
+      }
     this.blogGroup.setValue(e.data);
     this.openDrawer();
   }
@@ -121,46 +147,36 @@ export class BlogGridComponent implements OnInit {
   }
 
 
-  data: Item[] = []
 
-  onFocusedRowChanged(e: any) {
+   //onFocusedRowChanged(e: any) {
+   // onFocusedRowChanged)="onFocusedRowChanged($event)"
 
-    const rowData = e.row && e.row.data;
-    console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`);
-    this.current_Url = rowData.images[0].thumbImage;
-    this.data = [];
-    var counter = 0
-    rowData.images.forEach((img: any) => {
-        counter++;
-        var Image = {
-          imageSrc: img.image,
-          imageAlt: counter.toString(),
+    // there might be a necessity to record dirty data to ensure
+    // the focus change does not override updated data
+    // or it is just saved on exit automatically
 
-          }
-          this.data.push(Image);
-        }
-    );
+    // const rowData = e.row && e.row.data;
+    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`);
+    // this.current_Url = rowData.images[0].thumbImage;
+    // this.paragraph = rowData.paragraph;
+    // this.conclusion = rowData.conclusion;
+    // this.body = rowData.body;
 
-    this.blogGroup.setValue(rowData);
-    this.openDrawer();
-  }
+    // this.data = [];
+    // var counter = 0
+    // rowData.images.forEach((img: any) => {
+    //     counter++;
+    //     var Image = {
+    //       imageSrc: img.image,
+    //       imageAlt: counter.toString(),
+    //       }
+    //       this.data.push(Image);
+    //     }
+    // );
 
-  /**
-   *
-   * @returns
-   * "images":[
-        {"image":"https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fgray_sweater_knitted.JPG?alt=media&token=45d4f132-80db-4895-acf0-10832d44a30a",
-        "thumbImage":"https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fthumbnails%2Fgray_sweater_knitted_200x200.JPG?alt=media&token=656b0ce0-0f52-4f3e-aaf9-1ecad1553fc6",
-        "index":0,
-        "title":"Gray Sweater",
-        "alt":"Gray Sweater"},
-        {"index":1,
-        "thumbImage":"https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fthumbnails%2Fgray_and_red_sweater_200x200.JPG?alt=media&token=0eab2522-b628-4611-b759-3559fffbf29c",
-        "image":"https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fgray_and_red_sweater.JPG?alt=media&token=918ef104-ce7e-4c2d-bcd4-6de4a7dee148",
-        "title":"Red Wool",
-        "alt":"Red Wool"}]
-   */
-
+    // this.blogGroup.setValue(rowData);
+    // this.openDrawer();
+    // }
 
   openDrawer() {
     const opened = this.drawer.opened;
@@ -224,12 +240,6 @@ export class BlogGridComponent implements OnInit {
     return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
   }
 
-  onUpdate(data: Blog) {
-    data = this.blogGroup.getRawValue();
-    // data.images = this.imgCollection;
-    console.log(`onUpdate: ${JSON.stringify(data)}`);
-    this.blogService.update(data);
-  }
 
   onDelete(data: Blog) {
     data = this.blogGroup.getRawValue();
@@ -253,6 +263,10 @@ export class BlogGridComponent implements OnInit {
     date_updated: '',
   };
 
+  valueChangedEvent(e: any){
+      console.log(`blog grid value changed ${e}`)
+  }
+
   createEmptyForm() {
     this.blogGroup = this.fb.group({
       id: [''],
@@ -269,12 +283,11 @@ export class BlogGridComponent implements OnInit {
 
   createForm(blog: Blog) {
     this.sTitle = 'Blog - ' + blog.title;
-
     this.blogGroup = this.fb.group({
       id: [blog.id],
       title: [blog.title],
-      paragraph: [blog.paragraph],
       images: [blog.images],
+      paragraph: [blog.paragraph],
       body: [blog.body],
       conclusion: [blog.conclusion],
       user_updated: [blog.user_updated],
@@ -282,4 +295,5 @@ export class BlogGridComponent implements OnInit {
       date_updated: [blog.date_updated],
     });
   }
+
 }
