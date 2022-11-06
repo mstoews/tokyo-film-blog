@@ -13,16 +13,25 @@ export class ProductDetailsFiveComponent implements OnInit {
 
   productId: string;
   productItem: Observable<Product>;
+  product: Product;
   sub: any;
+  Products$: Observable<Product[]>;
 
   constructor(private route: ActivatedRoute,
     private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe(params => {
-      this.productId =  params['id']; // (+) converts string 'id' to a number
+      this.productId =  params['id'];
+      this.productService.getAll().subscribe( (products) => {
+        products.forEach((product) => {
+          if (product.id === this.productId) {
+            this.product = product;
+          }
+        });
+      });
    });
-   
+
   }
 
 }

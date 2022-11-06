@@ -1,7 +1,7 @@
 import { FieldValue } from "firebase/firestore";
 import { imageItem } from '../imageItem'
 export interface Product {
-  id:   number;
+  id:   string;
   description:   string;
   rich_description: string;
   image:     string;
