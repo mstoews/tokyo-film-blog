@@ -8,18 +8,26 @@ import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 import { CartComponent } from './cart/cart.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductDetailsFiveComponent } from './product-details-five/product-details-five.component';
+import { ProductResolver } from 'app/services/product.resolver';
 
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    title: 'Shopping',
     component: ShopComponent,
   },
   {
-    path: 'cart',
+    path: 'cart/:id',
     pathMatch: 'full',
-    component: CartComponent
+    title: 'Shopping Cart',
+    component: ProductDetailsFiveComponent,
+    resolve: {
+      product: ProductResolver
+    }
   },
 ];
 
@@ -28,7 +36,9 @@ const routes: Routes = [
     ShopComponent,
     MainShopComponent,
     CartComponent,
-    ShopCardComponent
+    ShopCardComponent,
+    ProductDetailsComponent,
+    ProductDetailsFiveComponent
   ],
   imports: [
     CommonModule,

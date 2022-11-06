@@ -118,7 +118,7 @@ export class BlogGridComponent implements OnInit {
     this.conclusion = e.data.conclusion;
     this.body = e.data.body;
     this.current_Url = e.data.images[0].image;
-     if (e.data.images.length > 0){
+    if (e.data.images.length > 0){
       e.data.images.forEach((img: any) => {
       counter++;
          var Image = {

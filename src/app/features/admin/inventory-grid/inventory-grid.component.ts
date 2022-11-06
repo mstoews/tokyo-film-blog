@@ -134,13 +134,11 @@ export class InventoryComponent implements OnInit  {
     onCellDoublClicked(e: any ){
         this.data = [];
         var counter = 0;
-        console.log(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
         this.current_Url = e.data.image;
         var Image = {
           imageSrc: e.data.image,
           imageAlt: counter.toString(),
         }
-
         // if (e.data.images.length > 0){
         //   e.data.images.forEach((img: any) => {
         //   counter++;
