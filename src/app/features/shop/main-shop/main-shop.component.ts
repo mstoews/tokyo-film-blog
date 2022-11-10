@@ -4,7 +4,7 @@ import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'shop',
+  selector: 'main-shop',
   templateUrl:'./main-shop.component.html',
   styleUrls: ['./main-shop.component.css']
 })

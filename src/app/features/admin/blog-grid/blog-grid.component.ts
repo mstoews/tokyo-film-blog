@@ -102,10 +102,13 @@ export class BlogGridComponent implements OnInit {
   }
 
   onUpdate(data: Blog) {
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
     data = this.blogGroup.getRawValue();
     data.paragraph = this.para;
     data.body = this.body;
     data.conclusion = this.conclusion;
+    data.date_updated = updateDate;
     console.log(`onUpdate: ${JSON.stringify(data)}`);
     this.blogService.update(data);
   }
@@ -179,7 +182,11 @@ export class BlogGridComponent implements OnInit {
   }
 
   onCreate() {
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
     const newBlog = { ...this.blogGroup.value } as Blog;
+    newBlog.date_updated = updateDate;
+    newBlog.date_created = updateDate;
     this.blogService.create(newBlog);
   }
 

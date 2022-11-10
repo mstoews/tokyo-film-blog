@@ -1,33 +1,50 @@
 <div class="flex justify-center items-center w-full">
   <div class="md:w-10/12 lg:w-8/12 xl:w-full flex justify-start flex-col items-start py-16 px-4 md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
       <div class="flex jusitfy-start items-start flex-col space-y-3">
-          <p class="text-4xl font-semibold leading-9 text-gray-800">{{product.description}}</p>
+          <p class="text-4xl font-semibold leading-9 text-gray-800">{{product.description}}
+
+          </p>
+          <button
+          mat-icon-button
+          (click)="onContinueShopping()"
+          class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
+          <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+        </button>
       </div>
+      <span>
+
+      </span>
       <div class="mt-5 flex jusitfy-start items-start xl:items-center flex-col xl:flex-row space-y-8 xl:space-y-0 xl:space-x-8">
           <div class="w-full mt-5 flex jusitfy-start items-stretch flex-col flex-col-reverse xl:flex-row gap-y-4 xl:gap-y-0 xl:space-x-8">
               <div class="flex justify-start items-start flex-row">
-                  <!-- <div class="grid grid-cols-2 gap-y-2 md:gap-y-0 md:grid-cols-3 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-4">
-                      <img class="w-full" src="https://i.ibb.co/1JRMyk1/Group-548.png" alt="headphones-1" />
+                  <div class="grid grid-cols-2 gap-y-2 md:gap-y-0 md:grid-cols-3 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-12">
+                      <img class="w-full" src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fthumbs%2FGREEN_RAGAN_400x400.JPG?alt=media&token=351bc75c-c5dc-442b-a8f5-057b794b878b" alt="headphones-1" />
 
-                      <img class="w-full" src="https://i.ibb.co/bNkN5sC/Group-547.png" alt="headphones-2" />
+                      <img class="w-full" src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fthumbs%2FGREEN_RAGAN_400x400.JPG?alt=media&token=351bc75c-c5dc-442b-a8f5-057b794b878b" alt="headphones-2" />
 
-                      <img class="w-full" src="https://i.ibb.co/fH2nrrj/Group-546.png" alt="headphones-3" />
-                  </div> -->
+                      <img class="w-full" src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2Fthumbs%2Fcassie_m1_400x400.jpg?alt=media&token=2ff364bf-a47f-4eb2-a3c5-e86dc1281893" alt="headphones-3" />
+                  </div>
               </div>
               <div>
-                  <img class="hidden xl:block w-full" [src]="product.image" alt="headphones-4" />
-                  <img class="xl:hidden w-full" [src]="product.image" alt="headphones-4" />
+                  <img class="hidden xl:block w-full" [src]="product.image" alt="headphones-1" />
+                  <img class="xl:hidden w-full" [src]="product.image" alt="headphones-2" />
               </div>
           </div>
           <div class="w-full xl:w-7/12 flex justify-start items-start flex-col">
               <p class="text-xl lg:text-2xl font-semibold leading-5 xl:leading-6 text-gray-800">{{product.category}}</p>
-              <p class="text-lg md:text-xl font-medium leading-5 text-gray-600 mt-3">${{product.price}}</p>
               <p class="text-base leading-normal text-gray-600 mt-5">{{product.rich_description}}</p>
+              <p class="text-lg md:text-xl font-medium leading-5 text-gray-600 mt-3">${{product.price}}</p>
 
 
               <div class="mt-10 w-full xl:w-auto flex jusitfy-start items-start space-x-4">
                   <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black text-base font-medium leading-4 md:px-8 bg-gray-800 text-center text-white border border-gray-800">Add to cart</button>
                   <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 text-base font-medium leading-4 bg-white border border-gray-800 md:px-8 text-center text-gray-800">Add to wishlist</button>
+                  <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 text-base font-medium leading-4 bg-white border border-gray-800 md:px-8 text-center text-gray-800"
+                  (click)="onContinueShopping()"
+                  >Continue Shopping</button>
+                  <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 text-base font-medium leading-4 bg-white border border-gray-800 md:px-8 text-center text-gray-800"
+                  (click)="onGoShoppingCart()"
+                  >Shopping Cart</button>
               </div>
           </div>
       </div>

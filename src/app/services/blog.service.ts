@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { first, map, Observable } from 'rxjs';
 import  { Blog } from 'app/models/blog';
 import { FieldValue } from 'firebase/firestore';
+import { convertSnaps } from './db-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,20 @@ export class BlogService {
   getAll() {
     return this.blogItems;
   }
+
+  findBlogByUrl(id: string): Observable<Blog | undefined > {
+    return this.afs.collection('blog',
+        ref => ref.where("id", "==", id))
+        .snapshotChanges()
+        .pipe(
+            map(snaps => {
+                const blog = convertSnaps<Blog>(snaps);
+                return blog.length == 1 ? blog[0]  : undefined
+            }),
+          first()
+        );
+}
+
 
   create(blog: Blog) {
     // console.log(JSON.stringify(blog));

@@ -8,6 +8,8 @@ import { LifestyleComponent } from './lifestyle/lifestyle.component';
 import { DetailComponent } from './detail/detail.component';
 import { WeeklyComponent } from './weekly/weekly.component';
 import { MaterialModule } from 'app/material.module';
+import { BlogCardComponent } from './blog-card/blog-card.component';
+import { BlogResolver} from 'app/services/blog.resolver';
 
 const routes: Routes = [
   {
@@ -16,9 +18,13 @@ const routes: Routes = [
     component: BlogComponent,
   },
   {
-    path: 'detail',
+    path: 'cart/:id',
     pathMatch: 'full',
+    title: 'Shopping Items',
     component: DetailComponent,
+    resolve: {
+      blog: BlogResolver
+    }
   },
   {
     path: 'weekly',
@@ -40,7 +46,8 @@ const routes: Routes = [
     FashionComponent,
     LifestyleComponent,
     DetailComponent,
-    WeeklyComponent
+    WeeklyComponent,
+    BlogCardComponent
   ],
   imports: [
     CommonModule,

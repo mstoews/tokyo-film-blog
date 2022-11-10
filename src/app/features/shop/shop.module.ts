@@ -7,7 +7,7 @@ import { ShopCardComponent } from './shop-card/shop-card.component';
 import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
-import { CartComponent } from './cart/cart.component';
+import { ShoppingCartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductDetailsFiveComponent } from './product-details-five/product-details-five.component';
 import { ProductResolver } from 'app/services/product.resolver';
@@ -18,16 +18,22 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     title: 'Shopping',
-    component: ShopComponent,
+    component: MainShopComponent,
   },
   {
     path: 'cart/:id',
     pathMatch: 'full',
-    title: 'Shopping Cart',
+    title: 'Shopping Items',
     component: ProductDetailsFiveComponent,
     resolve: {
       product: ProductResolver
     }
+  },
+  {
+    path: 'payment',
+    pathMatch: 'full',
+    title: 'Shopping Cart',
+    component: ShoppingCartComponent,
   },
 ];
 
@@ -35,7 +41,7 @@ const routes: Routes = [
   declarations: [
     ShopComponent,
     MainShopComponent,
-    CartComponent,
+    ShoppingCartComponent,
     ShopCardComponent,
     ProductDetailsComponent,
     ProductDetailsFiveComponent

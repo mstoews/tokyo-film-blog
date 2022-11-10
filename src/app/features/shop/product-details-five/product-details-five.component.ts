@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from 'app/models/products';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router, TitleStrategy } from '@angular/router';
 import { ProductsService } from 'app/services/products.service';
-import { Observable } from 'rxjs';
+import { Observable, pluck, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-details-five',
@@ -13,25 +13,32 @@ export class ProductDetailsFiveComponent implements OnInit {
 
   productId: string;
   productItem: Observable<Product>;
-  product: Product;
-  sub: any;
+  product!: Product;
+  sub: Subscription;
   Products$: Observable<Product[]>;
 
-  constructor(private route: ActivatedRoute,
-    private productService: ProductsService) { }
+  constructor(
+    private activateRoute: ActivatedRoute,
+    private route: Router,
+    private productService: ProductsService)
+    { }
 
   ngOnInit(): void {
-    this.sub = this.route.params.subscribe(params => {
-      this.productId =  params['id'];
-      this.productService.getAll().subscribe( (products) => {
-        products.forEach((product) => {
-          if (product.id === this.productId) {
-            this.product = product;
-          }
-        });
-      });
-   });
-
+    this.sub = this.activateRoute.params.subscribe(params => {
+         const prd = this.productService.findProductByUrl(params['id']);
+         prd.subscribe((prod) => {
+            this.product = prod as Product;
+         })
+    });
   }
+
+  onContinueShopping() {
+    this.route.navigate(['/shop']);
+  }
+
+  onGoShoppingCart() {
+    this.route.navigate(['/shop/payment']);
+  }
+
 
 }

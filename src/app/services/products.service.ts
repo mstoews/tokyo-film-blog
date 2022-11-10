@@ -8,13 +8,12 @@ import { convertSnaps } from './db-utils';
   providedIn: 'root',
 })
 export class ProductsService {
-  private ProductsCollection: AngularFirestoreCollection<Product>;
+  private productsCollection: AngularFirestoreCollection<Product>;
   private inventoryItems: Observable<Product[]>;
-  private inventory: Observable<Product>
 
   constructor(public afs: AngularFirestore) {
-    this.ProductsCollection = afs.collection<Product>('inventory')
-    this.inventoryItems = this.ProductsCollection.valueChanges({idField: 'id'});
+    this.productsCollection = afs.collection<Product>('inventory')
+    this.inventoryItems = this.productsCollection.valueChanges({idField: 'id'});
   }
 
   getAll() {
@@ -23,32 +22,32 @@ export class ProductsService {
   }
 
   get(id: string) {
-    return this.ProductsCollection.doc(id).get();
+    return this.productsCollection.doc(id).get();
   }
 
   findProductByUrl(id: string): Observable<Product | undefined > {
       return this.afs.collection('inventory',
-          ref=> ref.where("id", "==", id))
+          ref => ref.where("id", "==", id))
           .snapshotChanges()
           .pipe(
               map(snaps => {
                   const product = convertSnaps<Product>(snaps);
-                  return product.length == 1 ? product[0] : undefined
+                  return product.length == 1 ? product[0]  : undefined
               }),
             first()
-          )
+          );
   }
 
   create(mtProduct: Product) {
-    this.ProductsCollection.add(mtProduct);
+    this.productsCollection.add(mtProduct);
   }
 
   update(mtProduct: Product) {
-    this.ProductsCollection.doc(mtProduct.id.toString()).update(mtProduct);
+    this.productsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
 
   delete(id: string) {
-    this.ProductsCollection.doc(id).delete();
+    this.productsCollection.doc(id).delete();
   }
 
 }
