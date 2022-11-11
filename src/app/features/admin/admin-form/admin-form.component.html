@@ -1,9 +1,10 @@
+
 <mat-card class="m-4 max-w-3/8  filter-article filter-interactive text-gray-700">
   <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
     {{ sTitle }}
   </div>
   <div mat-dialog-content>
-    <form  [formGroup]="adminGroup"  (ngSubmit)="onUpdate(adminGroup.value)" class="form"
+    <form  [formGroup]="mainpageGroup"  (ngSubmit)="onUpdate(mainpageGroup.value)" class="form"
     >
       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
         <input matInput placeholder="Landing Page Hero" formControlName="hero_title" />
@@ -22,9 +23,8 @@
       </mat-form-field>
 
       <mat-form-field class="form-element m-1" [ngStyle]="{ width: '50%' }">
-        <input matInput placeholder="Call to Action Right" formControlName="cat_right" />
+        <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
       </mat-form-field>
-
 
       <section>
         <div mat-dialog-title class="font-bold">
@@ -51,7 +51,7 @@
     </form>
   </div>
   <div mat-dialog-actions class="mt-10">
-    <button class="m-1"  mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
+    <button class="m-1"  mat-flat-button (click)="onUpdate(mainPage)"   color="primary" aria-label="Add" >
       <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
       Update
     </button>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ScrollService } from 'app/services/scroll.service';
 
 @Component({
   selector: 'app-service-description',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./service-description.component.css']
 })
 export class ServiceDescriptionComponent implements OnInit {
+  @Input() public cta_left: string = '';
+  @Input() public cta_right: string = '';
 
-  constructor() { }
+  constructor(private scrollTo: ScrollService)
+   { }
 
   ngOnInit(): void {
   }
+
+
+  scrollToId(id: string) {
+    console.log('element id : ', id);
+    this.scrollTo.scrollToElementById(id);
+  }
+
 
 }
