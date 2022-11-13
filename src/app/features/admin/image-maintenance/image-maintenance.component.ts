@@ -51,25 +51,12 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   Refresh() {
-    this.subNotUsed = this.imageListService.getImagesByType(this.NOT_USED).subscribe((item) => { this.not_used = item; });
+    this.subNotUsed =     this.imageListService.getImagesByType(this.NOT_USED).subscribe((item) => { this.not_used = item; });
     this.subFeatured =    this.imageListService.getImagesByType(this.FEATURED).subscribe((item) => { this.featured = item; });
     this.subCollections = this.imageListService.getImagesByType(this.COLLECTIONS).subscribe((item) => { this.collections = item; });
     this.subCreations =   this.imageListService.getImagesByType(this.CREATIONS).subscribe((item) => { this.creations = item; });
     this.subGallery =     this.imageListService.getImagesByType(this.GALLERY).subscribe((item) => { this.gallery = item; });
-
-    this.not_used.forEach(item => {
-        console.log(JSON.stringify(item));
-    });
-
-    // const imageList = this.imageListService.getImagesList();
-    // imageList.subscribe(images => {
-    //   images.forEach(img => {
-    //       console.log(JSON.stringify(img));
-    //   }
-    //   );
-    // })
   }
-
 
   ngOnInit() {
     this.imageListService.createRawImagesList();
@@ -80,10 +67,12 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   Clone() {
     throw new Error('Method not implemented.');
   }
+
   Add() {
     console.log('toggle drawer');
     this.toggleDrawer();
   }
+
   Delete() {
     throw new Error('Method not implemented.');
   }
@@ -111,9 +100,6 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   drop(event: CdkDragDrop<imageItem[]>): void {
-    // transfers position of the data in memory,
-    // if the drop was within the same container and reordering only Index is the position vertically
-
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -121,9 +107,10 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
         event.currentIndex
       );
       this.updateRanking(event.container.data);
-    } else {
-
-      transferArrayItem(
+    }
+    else
+    {
+      transferArrayItem (
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
@@ -143,9 +130,9 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     const cnt = previousData.length;
     if (cnt > 0) {
       let i = 1;
-      previousData.forEach((task) => {
-          task.ranking = i;
-          this.imageListService.update(task, task.id );
+      previousData.forEach((image) => {
+          image.ranking = i;
+          this.imageListService.update(image, image.id );
         i++;
       });
     }
@@ -162,13 +149,11 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     const cnt = newData.length;
     if (cnt > 0) {
       let i = 1;
-
-      // this.imageListService.update(newData[0], newData[0].id );
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
         console.log(JSON.stringify(image));
-        this.imageListService.update(image, image.id );
+        this.imageListService.update(image, image.id);
         i++;
       });
     }

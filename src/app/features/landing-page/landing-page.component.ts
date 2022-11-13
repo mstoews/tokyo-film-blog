@@ -1,23 +1,22 @@
 import {
   Component,
-  createEnvironmentInjector,
   OnInit,
   Output,
 } from '@angular/core';
+
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { DndComponent } from '../../components/loaddnd/dnd.component';
 import { ScrollService } from 'app/services/scroll.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Observable } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { imageItem } from 'app/models/imageItem';
 import { ContactService } from 'app/services/contact.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Contact } from 'app/models/contact';
 import { MainPageService } from 'app/services/main-page.service';
 import { Mainpage } from 'app/models/mainpage';
 import { rawImageItem } from 'app/models/rawImagesList';
+import { ImageListService } from 'app/services/image-list.service';
 
 const CUT_OFF = 4;
 
@@ -50,11 +49,10 @@ export class LandingPageComponent implements OnInit {
   titleMessage = 'Beautifully Hand Crafted Products';
 
   public testDocValue$: Observable<any> | undefined;
-  // public readonly persistenceEnabled = _persistenceEnabled;
   constructor(
     private contactService: ContactService,
+    private imageListSerive: ImageListService,
     private mainPage: MainPageService,
-    private storage: AngularFireStorage,
     private router: Router,
     private matDialog: MatDialog,
     private scrollTo: ScrollService,
@@ -70,8 +68,7 @@ export class LandingPageComponent implements OnInit {
       }
     });
     this.createEmptyForm();
-    this.ImagesListTop();
-    this.ImagesListBottom();
+    this.populateImageList();
   }
 
   onUpdate(contact: Contact) {
@@ -120,52 +117,27 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
-  ImagesListBottom() {
+  populateImageList() {
     var imageCount = 0;
-    this.storage
-      .ref('/uploaded')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          imageRef.getDownloadURL().then((downloadURL) => {
-            const imageUrl = downloadURL;
-            const imageData: rawImageItem = {
-              caption: 'caption',
-              type: 'GALLERY',
-              imageSrc: imageUrl,
-              imageAlt: imageCount.toString(),
-            };
-              this.topCollection.push(imageData)
-          });
-        });
-      });
-  }
+    const featuredList = this.imageListSerive.getImagesByType('IN_FEATURED');
+    featuredList.subscribe((img) => {
+        img.forEach((image) => {
+          const imageData:  rawImageItem = {
+            imageSrc: image.imageSrc,
+            caption: image.caption,
+            imageAlt: image.imageAlt,
+            type: image.type
+          }
+          if (imageCount < 3) {
+            this.topCollection.push(imageData)
 
-  ImagesListTop() {
-    var imageCount = 0;
-    this.storage
-      .ref('/uploaded')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          imageRef.getDownloadURL().then((downloadURL) => {
-            imageCount++;
-            if (imageCount > 6) {
-              return;
-            }
-            const imageUrl = downloadURL;
-            const imageData: rawImageItem = {
-              caption: 'caption',
-              type: 'GALLERY',
-              imageSrc: imageUrl,
-              imageAlt: imageCount.toString(),
-            };
-            if (imageCount < CUT_OFF) {
-              this.bottomCollection.push(imageData);
-            }
-          });
+          }
+          else {
+            this.bottomCollection.push(imageData)
+          }
+          imageCount++;
         });
-      });
+    });
   }
 }
 
