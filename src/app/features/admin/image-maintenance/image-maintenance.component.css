@@ -131,3 +131,14 @@ drop_container .item-- {
 .mat-radio-button {
   margin: 5px;
 }
+
+.list {
+  background: rgb(245, 246, 250);
+  font-size: 10px;
+  overflow: hidden;
+  min-height: 60vh;
+  display: block;
+  margin: 0;
+  align-items: left;
+}
+

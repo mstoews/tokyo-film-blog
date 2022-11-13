@@ -37,19 +37,11 @@
           style="height: 900px; overflow-y: auto"
           cdkScrollable >
           <div class="kanban_title">Unused Images</div>
-          <ul
-            cdkDropList
-            #open="cdkDropList"
-            [id]="NOT_USED"
-            [cdkDropListData]="inventoryImages"
-            (cdkDropListDropped)="drop($event)" >
-            <li *ngFor="let item of not_used" cdkDrag>
-              <app-image-card
-                [url]="item.imageSrc"
-                [file_name]="item.caption"
-              ></app-image-card>
-            </li>
-          </ul>
+          <div cdkDropList #notused="cdkDropList"  [id]="NOT_USED" [cdkDropListData]="not_used" (cdkDropListDropped)="drop($event)" >
+            <div *ngFor="let item of not_used" cdkDrag>
+              <app-image-card [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
+            </div>
+          </div>
 
         </div>
         <!-- FEATURED -->
@@ -61,16 +53,15 @@
           <div
             class="block h-screen"
             cdkDropList
-            #progress="cdkDropList"
+            #feature="cdkDropList"
             [id]="FEATURED"
             [cdkDropListData]="featured"
-            (cdkDropListDropped)="drop($event)"
-          >
+            (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of featured" cdkDrag>
               <app-image-card
                 [url]="item.imageSrc"
-                [file_name]="item.caption"
-              ></app-image-card>
+                [file_name]="item.caption">
+              </app-image-card>
             </div>
           </div>
         </div>
@@ -82,16 +73,16 @@
           <div class="kanban_title">CREATIONS</div>
           <div
             cdkDropList
-            #review="cdkDropList"
+            #creation="cdkDropList"
             [id]="COLLECTIONS"
-            [cdkDropListData]="collections"
+            [cdkDropListData]="creations"
             class="list"
             (cdkDropListDropped)="drop($event)" >
             <div *ngFor="let item of creations" cdkDrag>
               <app-image-card
                 [url]="item.imageSrc"
-                [file_name]="item.caption"
-              ></app-image-card>
+                [file_name]="item.caption">
+              </app-image-card>
             </div>
           </div>
         </div>
@@ -102,13 +93,12 @@
           cdkScrollable
         >
           <div class="kanban_title">collections</div>
-          <div
-            cdkDropList
+          <div cdkDropList
+            #collection="cdkDropList"
             [cdkDropListData]="collections"
             [id]="CREATIONS"
             class="list"
-            (cdkDropListDropped)="drop($event)"
-          >
+            (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of collections" cdkDrag>
               <app-image-card
                 [url]="item.imageSrc"
@@ -122,6 +112,7 @@
           <div class="kanban_title uppercase lg-rounded">GALLERY</div>
           <div
             cdkDropList
+            #galleries="cdkDropList"
             [cdkDropListData]="gallery"
             [id]="GALLERY"
             class="list"

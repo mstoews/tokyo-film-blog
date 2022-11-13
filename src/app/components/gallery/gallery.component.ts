@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, AfterContentInit} from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { imageItem } from 'app/models/imageItem'
+import { rawImageItem } from 'app/models/rawImagesList';
 
 
 @Component({
@@ -8,8 +9,8 @@ import { imageItem } from 'app/models/imageItem'
   templateUrl: './gallery.component.html',
 })
 export class GalleryComponent implements AfterContentInit {
-  @Input() public topCollection: imageItem[] = [];
-  @Input() public bottomCollection: imageItem[] = [];
+  @Input() public topCollection: rawImageItem[] = [];
+  @Input() public bottomCollection: rawImageItem[] = [];
   image1: string;
   image2: string;
   image3: string;

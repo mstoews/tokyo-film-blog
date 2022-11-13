@@ -17,6 +17,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Contact } from 'app/models/contact';
 import { MainPageService } from 'app/services/main-page.service';
 import { Mainpage } from 'app/models/mainpage';
+import { rawImageItem } from 'app/models/rawImagesList';
 
 const CUT_OFF = 4;
 
@@ -39,8 +40,8 @@ const CUT_OFF = 4;
 })
 
 export class LandingPageComponent implements OnInit {
-  @Output() public topCollection: imageItem[] = [];
-  @Output() public bottomCollection: imageItem[] = [];
+  @Output() public topCollection: rawImageItem[] = [];
+  @Output() public bottomCollection: rawImageItem[] = [];
 
   contactGroup: FormGroup;
   mainPage$: Observable<Mainpage[]>;
@@ -65,9 +66,9 @@ export class LandingPageComponent implements OnInit {
     this.mainPage$.subscribe(doc => {
       if (doc.length > 0 ){
         this.mainPageDoc = doc[0];
+        this.titleMessage = this.mainPageDoc.hero_title;
       }
     });
-    this.titleMessage = this.mainPageDoc.hero_title;
     this.createEmptyForm();
     this.ImagesListTop();
     this.ImagesListBottom();
@@ -128,7 +129,7 @@ export class LandingPageComponent implements OnInit {
         files.items.forEach((imageRef) => {
           imageRef.getDownloadURL().then((downloadURL) => {
             const imageUrl = downloadURL;
-            const imageData: imageItem = {
+            const imageData: rawImageItem = {
               caption: 'caption',
               type: 'GALLERY',
               imageSrc: imageUrl,
@@ -153,7 +154,7 @@ export class LandingPageComponent implements OnInit {
               return;
             }
             const imageUrl = downloadURL;
-            const imageData: imageItem = {
+            const imageData: rawImageItem = {
               caption: 'caption',
               type: 'GALLERY',
               imageSrc: imageUrl,

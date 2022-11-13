@@ -1,5 +1,5 @@
-export interface imageItem {
-  parentId: string;
+export interface rawImageItem {
+  id?: string;
   imageSrc: string;
   imageAlt: string;
   caption: string;
