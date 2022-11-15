@@ -8,7 +8,6 @@ import { rawImageItem } from 'app/models/rawImagesList';
 import { convertSnaps } from './db-utils';
 import { Observable, BehaviorSubject, map, first, of } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { StringFormat } from 'firebase/storage';
 import {
   Firestore, addDoc, collection, collectionData,
   doc, docData, deleteDoc, updateDoc, setDoc
@@ -22,7 +21,6 @@ export class ImageListService {
   private RawImagesCollection: AngularFirestoreCollection<rawImageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private imageItems: Observable<imageItem[]>;
-  private rawImagesItems: Observable<rawImageItem[]>;
   items$: Observable<imageItem[]>;
   typeFilter$: BehaviorSubject<string | null>;
   rawImagesArray: imageItem[] = [];
@@ -30,10 +28,10 @@ export class ImageListService {
   constructor(public afs: AngularFirestore,
 
     private storage: AngularFireStorage) {
+
     this.RawImagesCollection = afs.collection<rawImageItem>('rawimagelist');
-    this.rawImageItems = this.RawImagesCollection.valueChanges({
-      idField: 'id',
-    });
+    this.rawImageItems = this.RawImagesCollection.valueChanges({ idField: 'id' });
+
     this.ImageItemsCollection = afs.collection<imageItem>('imageslist');
     this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
   }
@@ -52,8 +50,7 @@ export class ImageListService {
   }
 
   getImagesByType(imageType: string){
-    return this.imageItems.pipe(
-      map(images => images.filter(type => type.type === imageType)));
+    return this.imageItems.pipe( map(images => images.filter(type => type.type === imageType)));
   }
 
   findRawImageByUrl(caption: string): Observable<rawImageItem | undefined> {

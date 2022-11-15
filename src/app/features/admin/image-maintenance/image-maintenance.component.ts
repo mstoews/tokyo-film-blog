@@ -27,11 +27,11 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   cRAG: any;
   sTitle: any;
 
-  public NOT_USED = 'IN_NOT_USED';
-  public FEATURED = 'IN_FEATURED';
-  public COLLECTIONS = 'IN_COLLECTIONS';
-  public CREATIONS = 'IN_CREATIONS';
-  public GALLERY = 'IN_GALLERY';
+  IN_NOT_USED = 'IN_NOT_USED';
+  IN_FEATURED = 'IN_FEATURED';
+  IN_COLLECTION = 'IN_COLLECTION';
+  IN_CREATION = 'IN_CREATION';
+  IN_GALLERY = 'IN_GALLERY';
 
   subNotUsed: Subscription;
   subFeatured: Subscription;
@@ -39,11 +39,11 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   subCreations: Subscription;
   subGallery: Subscription;
 
-  not_used: imageItem[] = [];
-  featured: imageItem[] = [];
-  collections: imageItem[];
-  creations: imageItem[];
-  gallery: imageItem[];
+  not_usedImages: imageItem[] = [];
+  featuredImages: imageItem[] = [];
+  collectionsImages: imageItem[] =[];
+  creationsImages: imageItem[] = [];
+  galleryImages: imageItem[] = [];
 
   constructor(
     public imageListService: ImageListService ) {
@@ -51,11 +51,23 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   Refresh() {
-    this.subNotUsed =     this.imageListService.getImagesByType(this.NOT_USED).subscribe((item) => { this.not_used = item; });
-    this.subFeatured =    this.imageListService.getImagesByType(this.FEATURED).subscribe((item) => { this.featured = item; });
-    this.subCollections = this.imageListService.getImagesByType(this.COLLECTIONS).subscribe((item) => { this.collections = item; });
-    this.subCreations =   this.imageListService.getImagesByType(this.CREATIONS).subscribe((item) => { this.creations = item; });
-    this.subGallery =     this.imageListService.getImagesByType(this.GALLERY).subscribe((item) => { this.gallery = item; });
+    this.subNotUsed =     this.imageListService.getImagesByType(this.IN_NOT_USED).subscribe((item) => { this.not_usedImages = item; });
+    this.subFeatured =    this.imageListService.getImagesByType(this.IN_FEATURED).subscribe((item) => { this.featuredImages = item; });
+    this.subCollections = this.imageListService.getImagesByType(this.IN_COLLECTION).subscribe((item) => { this.collectionsImages = item; });
+    this.subCreations =   this.imageListService.getImagesByType(this.IN_CREATION).subscribe((item) => { this.creationsImages = item; });
+    this.subGallery =     this.imageListService.getImagesByType(this.IN_GALLERY).subscribe((item) => { this.galleryImages = item; });
+
+    this.printImageList('Featured',this.featuredImages);
+    this.printImageList('Collections',this.collectionsImages);
+    this.printImageList('Creations',this.creationsImages);
+    this.printImageList('Gallery',this.galleryImages);
+  }
+
+  printImageList(title: string, images: imageItem[])
+  {
+    images.forEach(img => {
+      console.log(`${title} caption: ${img.caption} ranking: ${img.ranking} ${img.imageSrc}`);
+    });
   }
 
   ngOnInit() {
@@ -152,7 +164,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        console.log(JSON.stringify(image));
+        console.log('Updating ', image.imageSrc);
         this.imageListService.update(image, image.id);
         i++;
       });

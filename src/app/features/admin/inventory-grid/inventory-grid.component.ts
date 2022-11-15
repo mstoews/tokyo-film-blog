@@ -56,6 +56,10 @@ export class InventoryComponent implements OnInit  {
       this.allProducts$ = this.productService.getAll();
     }
 
+    onTabClick() {
+      throw new Error('Method not implemented.');
+      }
+
     onImages() {
       console.log('onImages');
       const parentId = this.prdGroup.getRawValue();

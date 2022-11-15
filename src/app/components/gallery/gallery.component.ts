@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, AfterContentInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { imageItem } from 'app/models/imageItem'
 import { rawImageItem } from 'app/models/rawImagesList';
@@ -8,32 +8,45 @@ import { rawImageItem } from 'app/models/rawImagesList';
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
 })
-export class GalleryComponent implements AfterContentInit {
-  @Input() public topCollection: rawImageItem[] = [];
-  @Input() public bottomCollection: rawImageItem[] = [];
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
-  image5: string;
-  image6: string;
+export class GalleryComponent implements OnInit {
 
-  ngAfterContentInit(): void {
-    if (this.topCollection.length > 0) {
-      this.image1 = this.topCollection[0].imageSrc;
-      this.image2 = this.topCollection[1].imageSrc;
-      this.image3 = this.topCollection[2].imageSrc;
-    }
+  @Input() public imageCollection: imageItem[] = [];
 
-    if (this.bottomCollection.length > 0) {
-      this.image4 = this.topCollection[0].imageSrc;
-      this.image5 = this.topCollection[1].imageSrc;
-      this.image6 = this.topCollection[2].imageSrc;
-    }
+  // image1: string;
+  // image2: string;
+  // image3: string;
+  // image4: string;
+  // image5: string;
+  // image6: string;
 
+  ngOnInit(): void {
+    // if (this.imageCollection.length > 0) {
+    //   this.image1 = this.imageCollection[0].imageSrc;
+    // }
+    // if (this.imageCollection.length > 0) {
+    //   this.image2 = this.imageCollection[1].imageSrc;
+    // }
+
+    // if (this.imageCollection.length > 0) {
+    //   this.image3 = this.imageCollection[2].imageSrc;
+    // }
+
+    // if (this.imageCollection.length > 0) {
+    //   this.image4 = this.imageCollection[3].imageSrc;
+    // }
+
+    // if (this.imageCollection.length > 0) {
+    //   this.image5 = this.imageCollection[4].imageSrc;
+    // }
+
+    // if (this.imageCollection.length > 0) {
+    //   this.image6 = this.imageCollection[5].imageSrc;
+    // }
    }
 
-  public onPreviewImage(index: number) {
+   onPreviewImage(imageNumber: number) {
+      throw new Error('Method not implemented.');
+   }
 
-  }
+
 }

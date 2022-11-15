@@ -1,39 +1,37 @@
 
-<ng-container *ngIf="bottomCollection.length > 0">
+<ng-container *ngIf="imageCollection.length > 0">
 <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
    <div class="overflow-hidden text-gray-700">
               <div class="flex flex-wrap -m-1 md:-m-2">
                 <div class="flex flex-wrap w-1/2">
-                  <div class="w-1/2 p-1 md:p-2" *ngIf="topCollection.length > 0">
+                  <div class="w-1/2 p-1 md:p-2" *ngIf="imageCollection.length > 0">
                     <img  alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
                       (click)="onPreviewImage(0)"
-                      [src]="topCollection[0].imageSrc">
+                      [src]="imageCollection[0].imageSrc">
                   </div>
-                  <div class="w-1/2 p-1 md:p-2" *ngIf="topCollection.length > 1">
+                  <div class="w-1/2 p-1 md:p-2" *ngIf="imageCollection.length > 1">
                     <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
                     (click)="onPreviewImage(1)"
-                    [src]="topCollection[1].imageSrc">
+                    [src]="imageCollection[1].imageSrc">
                   </div>
-                  <div class="w-full p-1 md:p-2" *ngIf="topCollection.length > 2">
+                  <div class="w-full p-1 md:p-2" *ngIf="imageCollection.length > 2">
                     <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
                     (click)="onPreviewImage(2)"
-                    [src]="topCollection[2].imageSrc">
+                    [src]="imageCollection[2].imageSrc">
                   </div>
                 </div>
-
                 <div class="flex flex-wrap w-1/2">
-                  <div class="w-full p-1 md:p-2" *ngIf="bottomCollection.length > 0">
-                    <img (click)="onPreviewImage(3)"  alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                    [src]="bottomCollection[0].imageSrc">
+                  <div class="w-full p-1 md:p-2" *ngIf="imageCollection.length > 3">
+                    <img   alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                    (click)="onPreviewImage(3)" [src]="imageCollection[3].imageSrc">
                   </div>
-                  <div class="w-1/2 p-1 md:p-2" *ngIf="bottomCollection.length > 1">
-                     <img  (click)="onPreviewImage(4)"  alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                     [src]="bottomCollection[1].imageSrc">
+                  <div class="w-1/2 p-1 md:p-2" *ngIf="imageCollection.length > 4">
+                     <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                     (click)="onPreviewImage(4)" [src]="imageCollection[4].imageSrc">
                   </div>
-                  <div class="w-1/2 p-1 md:p-2" *ngIf="bottomCollection.length > 2">
-                    <img  alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-                    (click)="onPreviewImage(5)"
-                    [src]="bottomCollection[2].imageSrc">
+                  <div class="w-1/2 p-1 md:p-2" *ngIf="imageCollection.length > 5">
+                     <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                      (click)="onPreviewImage(5)"  [src]="imageCollection[5].imageSrc">
                   </div>
                 </div>
               </div>

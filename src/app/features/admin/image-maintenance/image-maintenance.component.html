@@ -23,8 +23,8 @@
         <!-- NOT_USED -->
         <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
           <div class="image_title">Unused Images</div>
-          <div cdkDropList #notused="cdkDropList" [id]="NOT_USED" [cdkDropListData]="not_used" class="list" (cdkDropListDropped)="drop($event)" >
-            <div *ngFor="let item of not_used" cdkDrag>
+          <div cdkDropList #notused="cdkDropList" [id]="IN_NOT_USED" [cdkDropListData]="not_usedImages" class="list" (cdkDropListDropped)="drop($event)" >
+            <div *ngFor="let item of not_usedImages" cdkDrag>
               <app-image-card [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
             </div>
           </div>
@@ -32,8 +32,8 @@
         <!-- FEATURED -->
         <div class="item--2 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
           <div class="image_title">FEATURED</div>
-            <div cdkDropList #feature="cdkDropList" [id]="FEATURED" [cdkDropListData]="featured" class="list" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let item of featured" cdkDrag>
+            <div cdkDropList #featured="cdkDropList" [id]="IN_FEATURED" [cdkDropListData]="featuredImages" class="list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of featuredImages" cdkDrag>
               <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
             </div>
           </div>
@@ -41,8 +41,8 @@
         <!-- CREATIONS -->
         <div class="item--3 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
           <div class="image_title">CREATIONS</div>
-            <div cdkDropList #creation="cdkDropList" [id]="CREATIONS" [cdkDropListData]="creations" class="list" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let item of creations" cdkDrag>
+            <div cdkDropList #creations="cdkDropList" [id]="IN_CREATION" [cdkDropListData]="creationsImages" class="list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of creationsImages" cdkDrag>
               <app-image-card [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
             </div>
           </div>
@@ -50,8 +50,8 @@
         <!-- COLLECTIONS -->
         <div class="item--4 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
           <div class="image_title uppercase lg-rounded">collections</div>
-          <div cdkDropList #collection="cdkDropList" [cdkDropListData]="collections" [id]="CREATIONS" class="list" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let item of collections" cdkDrag>
+          <div cdkDropList #collections="cdkDropList" [id]="IN_COLLECTION" [cdkDropListData]="collectionsImages"  class="list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of collectionsImages" cdkDrag>
               <app-image-card [url]="item.imageSrc"  [file_name]="item.caption"></app-image-card>
             </div>
           </div>
@@ -59,8 +59,8 @@
         <!-- GALLERY -->
         <div class="item--5 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
           <div class="image_title uppercase lg-rounded">gallery</div>
-          <div cdkDropList #gallerys="cdkDropList" [cdkDropListData]="gallery" [id]="GALLERY" class="list" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let item of gallery" cdkDrag>
+          <div cdkDropList #gallerys="cdkDropList" [cdkDropListData]="galleryImages" [id]="IN_GALLERY" class="list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of galleryImages" cdkDrag>
               <app-image-card [url]="item.imageSrc" [file_name]="item.caption"></app-image-card>
             </div>
           </div>

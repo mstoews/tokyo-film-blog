@@ -8,143 +8,111 @@
 >
 </grid-menubar>
 
-<mat-drawer-container class="flex-col h-full">
+<mat-drawer-container class="flex-col h-full m-1">
   <mat-drawer
     class="h-screen"
     #drawer
     [opened]="false"
     mode="over"
     [position]="'end'"
-    [disableClose]="false"
-  >
-    <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
-      <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
-        {{ sTitle }}
-      </div>
-      <div mat-dialog-content>
-        <form
-          [formGroup]="prdGroup"
-          (ngSubmit)="onUpdate(prdGroup.value)"
-          class="form"
-        >
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input matInput placeholder="Brand" formControlName="brand" />
-          </mat-form-field>
+    [disableClose]="false" >
+    <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
+      <mat-tab label="Inventory Description">
+        <ng-template matTabContent>
+          <div class="container">
+            <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
+              <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
+                {{ sTitle }}
+              </div>
+              <div mat-dialog-content>
+                <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form" >
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input matInput placeholder="Brand" formControlName="brand" />
+                  </mat-form-field>
 
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input matInput placeholder="Price" formControlName="price" />
-          </mat-form-field>
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input matInput placeholder="Price" formControlName="price" />
+                  </mat-form-field>
 
-          <mat-form-field
-            class="form-element m-1"
-            [ngStyle]="{ width: '100%' }"
-          >
-            <input
-              matInput
-              placeholder="Description"
-              formControlName="description"
-            />
-          </mat-form-field>
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }" >
+                    <input matInput placeholder="Description" formControlName="description" />
+                  </mat-form-field>
 
-          <mat-form-field
-            class="form-element m-1"
-            [ngStyle]="{ width: '100%' }"
-          >
-            <input
-              matInput
-              placeholder="Rich Description"
-              formControlName="rich_description"
-            />
-          </mat-form-field>
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%'}" >
+                  <mat-label>Rich Description</mat-label>
+                    <textarea matInput formControlName="rich_description"> </textarea>
+                  </mat-form-field>
 
-          <!-- <mat-form-field
-            class="form-element m-1"
-            [ngStyle]="{ width: '100%' }"
-          >
-            <input matInput placeholder="Main Image" formControlName="image" />
-          </mat-form-field> -->
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <mat-select placeholder="Category" formControlName="category" (selectionChange)="changeCategory($event.value)">
+                      <mat-option *ngFor="let p of categories" [value]="p.name">  {{ p.name }}  </mat-option>
+                   </mat-select>
+                  </mat-form-field>
 
-          <!-- <mat-form-field
-            class="form-element m-1"
-            [ngStyle]="{ width: '100%' }"
-          >
-            <input matInput placeholder="Image List" formControlName="images" />
-          </mat-form-field>
-          <mat-card class="w-96">
-          <img class="center w-90 h-60" [src]="current_Url" *ngIf="current_Url">
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input matInput placeholder="Rating" formControlName="rating" />
+                  </mat-form-field>
+
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input matInput placeholder="Featured" formControlName="is_featured"/>
+                  </mat-form-field>
+
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input matInput placeholder="User" formControlName="user_updated" />
+                  </mat-form-field>
+
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input  matInput placeholder="Created Date"  type="date"  id="date_created"  formControlName="date_created"  />
+                  </mat-form-field>
+
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                    <input matInput placeholder="Updated Date" type="date" id="date_updated"  formControlName="date_updated" />
+                  </mat-form-field>
+                </form>
+              </div>
+              <div mat-dialog-actions>
+                <button mat-icon-button mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
+                  <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+                </button>
+                <button mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!prdGroup.valid"       >
+                  <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+                </button>
+                <button  mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!prdGroup.valid"        >
+                  <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+                </button>
+                <button  mat-icon-button mat-flat-button (click)="closeDialog()" color="warn"  >
+                  <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+                </button>
+              </div>
+            </mat-card>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab label="Inventory Images">
+        <ng-template matTabContent>
+          <div class="container">
+            <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
+            <app-gallery-lightbox [galleryData]="data" [showCount]="true"> </app-gallery-lightbox>
+
+            <div mat-dialog-actions class="mt-10">
+              <button class="m-1" (click)="onImages()" mat-flat-button color="primary" aria-label="Add" >
+                <mat-icon [svgIcon]="'mat_outline:upload'"></mat-icon>
+                Upload Images
+              </button>
+
+              <button class="m-1" (click)="onImages()" mat-flat-button color="primary" aria-label="Add" >
+                <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
+                Select Images
+              </button>
+            </div>
+            <br>
+            <p>Each image should have four 400x400 picture of the item. Importing an image will create a 400px imagine automatically.</p>
           </mat-card>
-          -->
-
-          <app-gallery-lightbox [galleryData]="data" [showCount]="true">
-          </app-gallery-lightbox>
-
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <mat-select
-              placeholder="Category"
-              formControlName="category"
-              (selectionChange)="changeCategory($event.value)"
-            >
-              <mat-option *ngFor="let p of categories" [value]="p.name">
-                {{ p.name }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input matInput placeholder="Rating" formControlName="rating" />
-          </mat-form-field>
-
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input
-              matInput
-              placeholder="Featured"
-              formControlName="is_featured"
-            />
-          </mat-form-field>
-
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input matInput placeholder="User" formControlName="user_updated" />
-          </mat-form-field>
-
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input
-              matInput
-              placeholder="Created Date"
-              type="date"
-              id="date_created"
-              formControlName="date_created"
-            />
-          </mat-form-field>
-
-          <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-            <input
-              matInput
-              placeholder="Updated Date"
-              type="date"
-              id="date_updated"
-              formControlName="date_updated"
-            />
-          </mat-form-field>
-        </form>
-      </div>
-      <div mat-dialog-actions>
-        <button mat-icon-button mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
-          <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
-        </button>
-        <button mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!prdGroup.valid"       >
-          <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
-        </button>
-        <button  mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!prdGroup.valid"        >
-          <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-        </button>
-        <button  mat-icon-button mat-flat-button (click)="onImages()" color="primary" [disabled]="!prdGroup.valid"  >
-          <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-        </button>
-        <button  mat-icon-button mat-flat-button (click)="closeDialog()" color="warn"  >
-          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
-        </button>
-      </div>
-    </mat-card>
+          </div>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
   </mat-drawer>
 
   <ng-container *ngIf="allProducts$ | async as rows">
@@ -153,6 +121,7 @@
       id="imagesGrid"
       [dataSource]="rows"
       [showBorders]="true"
+      [allowColumnResizing]="true"
       [focusedRowEnabled]="true"
       [focusedRowIndex]="0"
       (onCellDblClick)="onCellDoublClicked($event)"
@@ -160,22 +129,20 @@
       [repaintChangesOnly]="true"
       (onSelectionChanged)="selectionChanged($event)"
       (onFocusedRowChanged)="onFocusedRowChanged($event)"
-      keyExpr="id"
-    >
+      keyExpr="id" >
       <dxo-paging [pageSize]="20"></dxo-paging>
-      <dxo-pager
-        [showPageSizeSelector]="true"
-        [allowedPageSizes]="[20, 40, 50, 100]"
-      ></dxo-pager>
+      <dxo-pager  [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 50, 100]" > </dxo-pager>
       <dxi-column width="300px" dataField="description"></dxi-column>
-      <dxi-column width="500px" dataField="rich_description"></dxi-column>
-      <dxi-column dataField="brand"></dxi-column>
-      <dxi-column dataField="price" type="number"></dxi-column>
-      <dxi-column dataField="category"></dxi-column>
-      <dxi-column dataField="rating"></dxi-column>
-      <dxi-column dataField="is_featured"></dxi-column>
-      <dxi-column dataField="user_updated"></dxi-column>
-      <dxi-column dataField="date_created"></dxi-column>
+      <dxi-column width="100%" dataField="rich_description"></dxi-column>
+      <dxi-column width="120px" dataField="brand"></dxi-column>
+      <dxi-column width="80px" dataField="price" type="number"></dxi-column>
+      <dxi-column width="80px" dataField="category"></dxi-column>
+      <!--
+          <dxi-column dataField="rating"></dxi-column>
+          <dxi-column dataField="is_featured"></dxi-column>
+          <dxi-column dataField="user_updated"></dxi-column>
+          <dxi-column dataField="date_created"></dxi-column>
+      -->
       <dxi-column dataField="date_updated"></dxi-column>
     </dx-data-grid>
   </ng-container>

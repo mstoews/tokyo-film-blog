@@ -17,8 +17,7 @@ import { MainPageService } from 'app/services/main-page.service';
 import { Mainpage } from 'app/models/mainpage';
 import { rawImageItem } from 'app/models/rawImagesList';
 import { ImageListService } from 'app/services/image-list.service';
-
-const CUT_OFF = 4;
+import { imageItem } from 'app/models/imageItem';
 
 @Component({
   selector: 'app-landing-page',
@@ -28,30 +27,29 @@ const CUT_OFF = 4;
     trigger('inOutAnimation', [
       transition(':enter', [
         style({ opacity: 0 }),
-        animate('0.5s ease-out', style({ opacity: 1 })),
+        animate('0.2s ease-out', style({ opacity: 1 })),
       ]),
       transition(':leave', [
         style({ opacity: 1 }),
-        animate('0.5s ease-in', style({ opacity: 0 })),
+        animate('0.2s ease-in', style({ opacity: 0 })),
       ]),
     ]),
   ],
 })
 
 export class LandingPageComponent implements OnInit {
-  @Output() public topCollection: rawImageItem[] = [];
-  @Output() public bottomCollection: rawImageItem[] = [];
+  @Output() public topCollection: imageItem[] = [];
+  @Output() public bottomCollection: imageItem[] = [];
 
   contactGroup: FormGroup;
   mainPage$: Observable<Mainpage[]>;
+  featuredList$: Observable<imageItem[]>;
   mainPageDoc: Mainpage;
+  titleMessage = '';
 
-  titleMessage = 'Beautifully Hand Crafted Products';
-
-  public testDocValue$: Observable<any> | undefined;
   constructor(
     private contactService: ContactService,
-    private imageListSerive: ImageListService,
+    private imageListService: ImageListService,
     private mainPage: MainPageService,
     private router: Router,
     private matDialog: MatDialog,
@@ -61,6 +59,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainPage$ = this.mainPage.getAll();
+    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
     this.mainPage$.subscribe(doc => {
       if (doc.length > 0 ){
         this.mainPageDoc = doc[0];
@@ -119,21 +118,15 @@ export class LandingPageComponent implements OnInit {
 
   populateImageList() {
     var imageCount = 0;
-    const featuredList = this.imageListSerive.getImagesByType('IN_FEATURED');
+    const featuredList = this.imageListService.getImagesByType('IN_GALLERY');
     featuredList.subscribe((img) => {
         img.forEach((image) => {
-          const imageData:  rawImageItem = {
-            imageSrc: image.imageSrc,
-            caption: image.caption,
-            imageAlt: image.imageAlt,
-            type: image.type
-          }
           if (imageCount < 3) {
-            this.topCollection.push(imageData)
+            this.topCollection.push(image)
 
           }
           else {
-            this.bottomCollection.push(imageData)
+            this.bottomCollection.push(image)
           }
           imageCount++;
         });
