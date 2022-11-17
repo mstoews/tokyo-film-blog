@@ -3,7 +3,6 @@ import { Observable, Subscription } from 'rxjs';
 import { BlogService } from '../../../services/blog.service';
 import { Blog } from 'app/models/blog';
 import { MatDrawer } from '@angular/material/sidenav';
-import { TextEditorComponent } from '../text-editor/text-editor.component'
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -19,7 +18,6 @@ import { Item } from 'app/models/item'
 })
 export class BlogGridComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;
-
 
   drawOpen: 'open' | 'close' = 'open';
   blogGroup: FormGroup;
@@ -50,7 +48,6 @@ export class BlogGridComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string,
     private blogService: BlogService,
     private fb: FormBuilder,
-    private textService: TextService
   ){}
 
   ngOnInit() {
@@ -97,7 +94,7 @@ export class BlogGridComponent implements OnInit {
 
   create(data: Blog) {
     const rawData = this.blogGroup.getRawValue();
-    this.current_Url = data.images[0].thumbImage;
+    // this.current_Url = data.images[0].thumbImage;
     this.blogService.update(rawData);
   }
 
@@ -114,30 +111,31 @@ export class BlogGridComponent implements OnInit {
   }
 
   onCellDoublClicked(e: any) {
-    console.log(`onCellDoubleClicked: ${JSON.stringify(e.body)}`);
     this.data = [];
     var counter = 0
     this.para = e.data.paragraph;
     this.conclusion = e.data.conclusion;
     this.body = e.data.body;
-    this.current_Url = e.data.images[0].image;
-    if (e.data.images.length > 0){
-      e.data.images.forEach((img: any) => {
-      counter++;
-         var Image = {
-           imageSrc: img.image,
-           imageAlt: counter.toString(),
-           }
-           this.data.push(Image);
-         });
-      }
+    // if(e.data.images !== null && e.data.images !== undefined){
+    // if (e.data.images.length > 0){
+    //   this.current_Url = e.data.images[0].image;
+    //   e.data.images.forEach((img: any) => {
+    //   counter++;
+    //      var Image = {
+    //        imageSrc: img.image,
+    //        imageAlt: counter.toString(),
+    //        }
+    //        this.data.push(Image);
+    //      });
+    //   }
+    // }
     this.blogGroup.setValue(e.data);
     this.openDrawer();
   }
 
   onNotify(event: any) {
     this.blogGroup.setValue(event.data);
-    this.current_Url = event.data.images;
+    //this.current_Url = event.data.images;
     this.toggleDrawer();
   }
 
@@ -224,7 +222,6 @@ export class BlogGridComponent implements OnInit {
     paragraph: '',
     body: '',
     conclusion: '',
-    images: '',
     user_updated: '',
     date_created: '',
     date_updated: '',
@@ -241,7 +238,6 @@ export class BlogGridComponent implements OnInit {
       paragraph: [''],
       body: [''],
       conclusion: [''],
-      images: [''],
       user_updated: [''],
       date_created: [''],
       date_updated: [''],
@@ -253,7 +249,6 @@ export class BlogGridComponent implements OnInit {
     this.blogGroup = this.fb.group({
       id: [blog.id],
       title: [blog.title],
-      images: [blog.images],
       paragraph: [blog.paragraph],
       body: [blog.body],
       conclusion: [blog.conclusion],

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'app/models/products';
+import { CategoryService } from 'app/services/category.service';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
@@ -10,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MainShopComponent implements OnInit {
 
+  categories: any;
   dropdown: boolean = false
   filters: boolean = false
 
@@ -17,9 +19,15 @@ export class MainShopComponent implements OnInit {
   prd: any;
   sTitle = 'Inventory';
 
-  constructor ( private readonly productService: ProductsService ) {
+  constructor (
+    private readonly productService: ProductsService,
+    private readonly categoryService: CategoryService ) {
+    this.categories = categoryService.getAll();
     this.sTitle = 'Product Inventory'
+  }
 
+  changeCategory(arg0: any) {
+    throw new Error('Method not implemented.');
   }
 
   ngOnInit(): void {

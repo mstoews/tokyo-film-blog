@@ -15,7 +15,7 @@ import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { ImagesGridComponent } from './images/images.component';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 import { ImageCardComponent } from './image-card/image-card.component';
-import { BlogCardComponent } from './blog-card/blog-card.component';
+
 import { CollectionCardComponent } from './collection-card/collection-card.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ScreenCardComponent } from './screen-card/screen-card.component';
@@ -54,7 +54,6 @@ const routes: Routes = [
     ImagesGridComponent,
     ImageMaintenanceComponent,
     ImageCardComponent,
-    BlogCardComponent,
     CollectionCardComponent,
     ProductCardComponent,
     ScreenCardComponent,

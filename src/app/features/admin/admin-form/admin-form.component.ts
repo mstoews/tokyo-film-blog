@@ -1,40 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { Mainpage } from 'app/models/mainpage';
 import { MainPageService } from 'app/services/main-page.service';
 import { Observable } from 'rxjs';
 
-
 @Component({
   selector: 'admin-form',
   templateUrl: './admin-form.component.html',
-  styleUrls: ['./admin-form.component.css']
+  styleUrls: ['./admin-form.component.css'],
 })
 export class AdminFormComponent implements OnInit {
   sTitle: any;
   mainpageGroup: FormGroup;
   mainPage$: Observable<Mainpage[]>;
-  mainPage: Mainpage
+  mainPage: Mainpage;
 
   constructor(
     private fb: FormBuilder,
-    private matDialog: MatDialog,
-    private mainPageService: MainPageService )
-    {
-      this.sTitle = "Administrative Main Page"
-    }
+    private mainPageService: MainPageService
+  ) {
+    this.sTitle = 'Administrative Main Page';
+  }
 
   ngOnInit(): void {
     this.mainPage$ = this.mainPageService.getAll();
     this.createEmptyForm();
     this.mainPage$.subscribe((page) => {
-      if (page.length > 0)
-      {
+      if (page.length > 0) {
         this.mainPage = page[0];
         this.createForm(this.mainPage);
-      }
-      else {
+      } else {
         this.createEmptyForm();
       }
     });
@@ -42,15 +37,15 @@ export class AdminFormComponent implements OnInit {
 
   createEmptyForm() {
     this.mainpageGroup = this.fb.group({
-      hero_title: ['TEST'],
-      features_header: ['Feature Header'],
-      features_subheader:['Sub Header'],
-      cta_left: ['CAT_Left'],
-      cta_right:  ['CTA Right'],
-      contact_email:[''],
-      contact_telephone:[''],
+      hero_title: [''],
+      features_header: [''],
+      features_subheader: [''],
+      cta_left: [''],
+      cta_right: [''],
+      contact_email: [''],
+      contact_telephone: [''],
       contact_shipping: [''],
-      active: ['false']
+      active: [''],
     });
   }
 
@@ -59,45 +54,36 @@ export class AdminFormComponent implements OnInit {
       id: [mainPage.id],
       hero_title: [mainPage.hero_title],
       features_header: [mainPage.features_header],
-      features_subheader:[mainPage.features_subheader],
+      features_subheader: [mainPage.features_subheader],
       cta_left: [mainPage.cta_left],
-      cta_right:  [mainPage.cta_right],
-      contact_email:[mainPage.contact_email],
-      contact_telephone:[mainPage.contact_telephone],
+      cta_right: [mainPage.cta_right],
+      contact_email: [mainPage.contact_email],
+      contact_telephone: [mainPage.contact_telephone],
       contact_shipping: [mainPage.contact_shipping],
-      active: [mainPage.active]
+      active: [mainPage.active],
     });
   }
 
-   onImages() {
+  dateFormatter(params: any) {
+    const dateAsString = params.value;
+    const dateParts = dateAsString.split('-');
+    return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
+  }
 
-    }
-
-    onDelete(landingPage: any) {
-
-    }
-
-    dateFormatter(params: any) {
-      const dateAsString = params.value;
-      const dateParts = dateAsString.split('-');
-      return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
-    }
-
-
-    onCreate() {
-
-    }
-
-    onUpdate(mainPage: Mainpage) {
+  onUpdate(mainPage: Mainpage) {
     mainPage = this.mainpageGroup.getRawValue();
     console.log(`onUpdate: ${JSON.stringify(mainPage)}`);
     this.mainPageService.update(mainPage);
-    }
+  }
 
+  onCreate() {}
+
+  onDelete(landingPage: any) {}
+
+  onImages() {}
 }
 
 /**
- * 
+ *
  *
  */
-

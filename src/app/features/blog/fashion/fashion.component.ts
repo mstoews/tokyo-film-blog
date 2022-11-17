@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Blog } from 'app/models/blog'
 import { Router } from '@angular/router';
+import { BlogService } from 'app/services/blog.service';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'blog-fashion',
@@ -9,16 +11,24 @@ import { Router } from '@angular/router';
 })
 export class FashionComponent implements OnInit {
 
-  @Input() blog: Blog;
 
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
+  valueChangedEvent($event: Event) {
+  throw new Error('Method not implemented.');
   }
 
-  onOpenBlog() {
-     console.log('open blog window...')
-     this.router.navigate(['shop/blog-detail',this.blog.id]);
+  @Input() blog: Blog;
+
+
+  constructor(
+    private router: Router,
+    private blogService: BlogService ) { }
+
+  ngOnInit(): void { }
+
+  onOpenBlog(id: string) {
+     // this.router.navigate(['blog/detail', id]);
+     // this.toggleDrawer();
+
   }
 
 }

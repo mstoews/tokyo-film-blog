@@ -17,6 +17,7 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { ProductResolver } from './services/product.resolver';
+import { BlogResolver } from './services/blog.resolver';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ProductResolver } from './services/product.resolver';
     ScrollService,
     NavService,
     ProductResolver,
+    BlogResolver
   ],
   bootstrap: [AppComponent]
 })

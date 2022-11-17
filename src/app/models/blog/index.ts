@@ -6,17 +6,14 @@ export interface BlogImages {
 }
 
 export interface Blog {
-  id:               number;
+  id:               string;
   title:            string;
   paragraph:        string;
-  summary:          string;
   body:             string;
   conclusion:       string;
-  detail:           string;
   user_updated:     string;
   date_created:     string;
   date_updated:     string;
-  images:           BlogImages[];
 }
 
 

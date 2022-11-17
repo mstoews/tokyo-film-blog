@@ -15,7 +15,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Contact } from 'app/models/contact';
 import { MainPageService } from 'app/services/main-page.service';
 import { Mainpage } from 'app/models/mainpage';
-import { rawImageItem } from 'app/models/rawImagesList';
 import { ImageListService } from 'app/services/image-list.service';
 import { imageItem } from 'app/models/imageItem';
 

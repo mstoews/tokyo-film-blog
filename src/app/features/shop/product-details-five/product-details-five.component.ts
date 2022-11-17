@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from 'app/models/products';
-import { ActivatedRoute, Route, Router, TitleStrategy } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/services/products.service';
-import { Observable, pluck, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-details-five',
@@ -20,8 +20,7 @@ export class ProductDetailsFiveComponent implements OnInit {
   constructor(
     private activateRoute: ActivatedRoute,
     private route: Router,
-    private productService: ProductsService)
-    { }
+    private productService: ProductsService) { }
 
   ngOnInit(): void {
     this.sub = this.activateRoute.params.subscribe(params => {
@@ -40,5 +39,8 @@ export class ProductDetailsFiveComponent implements OnInit {
     this.route.navigate(['/shop/payment']);
   }
 
+  ngOnDestroy() {
+    this.sub.unsubscribe();
+  }
 
 }

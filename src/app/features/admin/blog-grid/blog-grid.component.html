@@ -45,7 +45,7 @@
               <mat-tab label="Introduction">
                 <ng-template matTabContent>
                   <!-- <text-editor [valueContent]="para" ></text-editor> -->
-                  <dx-html-editor height="300px" [(value)]="para">
+                  <dx-html-editor height="400px" [(value)]="para">
                     <dxo-toolbar>
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
@@ -101,14 +101,6 @@
                       <dxi-item name="codeBlock"></dxi-item>
                       <dxi-item name="blockquote"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="insertTable"></dxi-item>
-                      <dxi-item name="deleteTable"></dxi-item>
-                      <dxi-item name="insertRowAbove"></dxi-item>
-                      <dxi-item name="insertRowBelow"></dxi-item>
-                      <dxi-item name="deleteRow"></dxi-item>
-                      <dxi-item name="insertColumnLeft"></dxi-item>
-                      <dxi-item name="insertColumnRight"></dxi-item>
-                      <dxi-item name="deleteColumn"></dxi-item>
                     </dxo-toolbar>
                   </dx-html-editor>
                 </ng-template>
@@ -116,7 +108,7 @@
               <mat-tab label="Main">
                 <ng-template matTabContent>
                   <!-- <text-editor [valueContent]="body"></text-editor> -->
-                  <dx-html-editor height="300px" [(value)]="body">
+                  <dx-html-editor height="400px" [(value)]="body">
                     <dxo-toolbar>
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
@@ -187,7 +179,7 @@
               <mat-tab label="Conclusion">
                 <ng-template matTabContent>
                   <!-- <text-editor [valueContent]="conclusion"></text-editor> -->
-                  <dx-html-editor height="300px" [(value)]="conclusion">
+                  <dx-html-editor height="400px" [(value)]="conclusion">
                     <dxo-toolbar>
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
@@ -255,10 +247,17 @@
                   </dx-html-editor>
                 </ng-template>
               </mat-tab>
+              <mat-tab  label="Images">
+                <p>Images</p>
+                <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
+                </app-gallery-lightbox>
+              </mat-tab>
             </mat-tab-group>
 
-            <app-gallery-lightbox [galleryData]="data" [showCount]="true">
-            </app-gallery-lightbox>
+            <!--
+              <app-gallery-lightbox [galleryData]="data" [showCount]="true">
+              </app-gallery-lightbox>
+          -->
 
 
             <!-- <mat-form-field
