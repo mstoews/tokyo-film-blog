@@ -1,21 +1,25 @@
-<div class="px-4 py-12">
+
+<div class="px-4 py-12" *ngIf="blogImages$ | async as blogImages">
   <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white py-12 lg:px-10 md-px-6 px-4" >
-    <p class="text-base leading-normal text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4" [innerHTML]="blog.title"> </p>
-    <p class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4" [innerHTML]="blog.paragraph"> </p>
-        <!-- <div *ngIf="blog.images.length > 0">
-        <img [src]="blog.images[0].image"  alt="caps" class="hidden mx-auto lg:block sm:flex md:hidden" />
-        </div> -->
-        <div class="gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
-           <p class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4" [innerHTML]="blog.body"> </p>
-        </div>
-        <div>
-          <!-- <div *ngIf="blog.images.length > 0">
-           <img [src]="blog.images[1].image"  alt="caps" class="hidden mx-auto lg:block md:flex" />
-          </div> -->
-           <!-- <p class="text-base leading-normal mt-1 text-gray-600 lg:max-w-[624px] w-full" [innerHTML]="blog.conclusion" ></p> -->
-           <dx-html-editor
-              class="text-base leading-normal mt-1 text-gray-600 lg:max-w-[624px] w-full"
-              height="400px" [(value)]="blog.conclusion"></dx-html-editor>
-        </div>
+    <p
+      class="text-base leading-normal text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
+      [innerHTML]="blog.title"
+    ></p>
+    <p
+      class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
+      [innerHTML]="blog.paragraph" >
+    </p>
+     <img [src]="blogImages[0].url"  alt="caps" class="object-cover h-100 w-140" />
+
+  <div class="gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
+    <p
+      class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
+      [innerHTML]="blog.body"
+    ></p>
+  </div>
+      <img [src]="blogImages[1].url" alt="caps" class="object-cover h-100 w-140" />
+
+  <p  class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4" [innerHTML]="blog.conclusion" ></p>
   </div>
 </div>
+

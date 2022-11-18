@@ -248,43 +248,12 @@
                 </ng-template>
               </mat-tab>
               <mat-tab  label="Images">
-                <p>Images</p>
+                <ng-container *ngIf="blogImages$ | async as data">
                 <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
                 </app-gallery-lightbox>
+              </ng-container>
               </mat-tab>
             </mat-tab-group>
-
-            <!--
-              <app-gallery-lightbox [galleryData]="data" [showCount]="true">
-              </app-gallery-lightbox>
-          -->
-
-
-            <!-- <mat-form-field
-              class="form-element m-1"
-              [ngStyle]="{ width: '49%' }"
-            >
-              <input
-                matInput
-                placeholder="Created Date"
-                type="date"
-                id="date_created"
-                formControlName="date_created"
-              />
-            </mat-form-field>
-
-            <mat-form-field
-              class="form-element m-1"
-              [ngStyle]="{ width: '48%' }"
-            >
-              <input
-                matInput
-                placeholder="Updated Date"
-                type="date"
-                id="date_updated"
-                formControlName="date_updated"
-              />
-            </mat-form-field> -->
           </form>
         </div>
         <div mat-dialog-actions>

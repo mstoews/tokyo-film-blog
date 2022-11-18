@@ -7,7 +7,9 @@ import { IImageMaintenance, IImageStorage} from 'app/models/maintenance';
   providedIn: 'root',
 })
 export class ImageMaintenanceService {
+
   private mtImageMaintenanceCollection: AngularFirestoreCollection<IImageMaintenance>;
+
   private mtImageStorageCollection: AngularFirestoreCollection<IImageStorage>;
   private inventoryItems: Observable<IImageMaintenance[]>;
 

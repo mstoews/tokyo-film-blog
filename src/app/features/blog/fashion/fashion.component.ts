@@ -26,7 +26,7 @@ export class FashionComponent implements OnInit {
   ngOnInit(): void { }
 
   onOpenBlog(id: string) {
-     // this.router.navigate(['blog/detail', id]);
+     this.router.navigate(['blog/detail', id]);
      // this.toggleDrawer();
 
   }

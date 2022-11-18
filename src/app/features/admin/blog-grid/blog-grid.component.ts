@@ -1,14 +1,15 @@
-import { Component, ElementRef, Inject, Input, OnInit, Optional, Output, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { BlogService } from '../../../services/blog.service';
 import { Blog } from 'app/models/blog';
 import { MatDrawer } from '@angular/material/sidenav';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { TextService } from '../text-editor/text.service';
 import { Item } from 'app/models/item'
+import { IImageStorage } from 'app/models/maintenance';
 
 @Component({
   selector: 'blog-list',
@@ -38,6 +39,9 @@ export class BlogGridComponent implements OnInit {
 
   // blog dictionary
   allBlogs$: Observable<Blog[]>;
+  blogImages$: Observable<IImageStorage[]> ;
+  
+
   blog: Blog;
 
   selectedItemKeys: any;
@@ -45,9 +49,9 @@ export class BlogGridComponent implements OnInit {
   constructor(
     private matDialog: MatDialog,
     private auth: AngularFireAuth,
-    @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string,
     private blogService: BlogService,
     private fb: FormBuilder,
+    @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string,
   ){}
 
   ngOnInit() {
@@ -95,6 +99,7 @@ export class BlogGridComponent implements OnInit {
   create(data: Blog) {
     const rawData = this.blogGroup.getRawValue();
     // this.current_Url = data.images[0].thumbImage;
+    // this.updateBlogImage(rawData.id,)
     this.blogService.update(rawData);
   }
 
@@ -116,6 +121,10 @@ export class BlogGridComponent implements OnInit {
     this.para = e.data.paragraph;
     this.conclusion = e.data.conclusion;
     this.body = e.data.body;
+    const parentId = e.data.id;
+
+    this.blogImages$ = this.blogService.getBlogImage(parentId)
+
     // if(e.data.images !== null && e.data.images !== undefined){
     // if (e.data.images.length > 0){
     //   this.current_Url = e.data.images[0].image;

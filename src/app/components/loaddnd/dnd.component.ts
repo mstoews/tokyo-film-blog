@@ -1,22 +1,38 @@
-import { Component, ViewChild, ElementRef, Inject, Optional } from '@angular/core';
+import {
+  Component,
+  ViewChild,
+  ElementRef,
+  Inject,
+  Optional,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AngularFireStorage} from '@angular/fire/compat/storage';
-import { AngularFirestore} from '@angular/fire/compat/firestore';
+import {
+  MatDialogModule,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IImageStorage} from 'app/models/maintenance'
+import { IImageStorage } from 'app/models/maintenance';
 import { AuthService } from 'app/services/auth/auth.service';
 import { ImageMaintenanceService } from 'app/services/image-maintenance.service';
 
-
 @Component({
   standalone: true,
-  imports: [CommonModule, MaterialModule, ProgressComponent, DndDirective, MatDialogModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    ProgressComponent,
+    DndDirective,
+    MatDialogModule,
+    ReactiveFormsModule,
+  ],
   selector: 'image-dnd',
   templateUrl: './dnd.component.html',
   styleUrls: ['./dnd.component.scss'],
@@ -29,7 +45,8 @@ export class DndComponent {
     public storage: AngularFireStorage,
     public afs: AngularFirestore,
     private auth: AuthService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public parentImage: any ) {
+    @Optional() @Inject(MAT_DIALOG_DATA) public parentImage: any
+  ) {
     this.createForm();
   }
 
@@ -41,7 +58,7 @@ export class DndComponent {
   formGroup!: UntypedFormGroup;
   fileData: any;
   VERSION_NO = 1;
-  percentageChange$: Observable<number|undefined>;
+  percentageChange$: Observable<number | undefined>;
   public imageData!: IImageStorage;
 
   createForm() {
@@ -58,7 +75,6 @@ export class DndComponent {
   }
 
   prepareFilesList(files: any) {
-
     for (const item of files) {
       console.log(`file list: ${item.name}`);
       this.upLoadFiles.push(item);
@@ -69,7 +85,7 @@ export class DndComponent {
 
   deleteFile(index: number) {
     if (this.files[index].progress < 100) {
-      console.log ('delete files ');
+      console.log('delete files ');
       return;
     }
     this.files.splice(index, 1);
@@ -81,11 +97,11 @@ export class DndComponent {
         return;
       } else {
         const progressInterval = setInterval(() => {
-           if (this.files[index].progress === 100) {
-             clearInterval(progressInterval);
-             this.uploadFileProgress(index + 1);
-           } else {
-           this.files[index].progress += 5;
+          if (this.files[index].progress === 100) {
+            clearInterval(progressInterval);
+            this.uploadFileProgress(index + 1);
+          } else {
+            this.files[index].progress += 5;
           }
         }, 4);
       }
@@ -109,7 +125,6 @@ export class DndComponent {
   }
 
   async startUpload(file: File) {
-
     const path = `uploaded/${file.name}`;
 
     console.log(`File path: ${path}`);
@@ -117,24 +132,29 @@ export class DndComponent {
     const fileRef = this.storage.ref(path);
 
     const task = this.storage.upload(path, file, {
-      cacheControl: 'max-age=2592000, public'
+      cacheControl: 'max-age=2592000, public',
     });
 
     this.percentageChange$ = task.percentageChanges();
 
     this.downloadUrl = fileRef.getDownloadURL();
 
-    this.downloadUrl.subscribe(dw => {
-       this.imageData = {
-           url:  dw,
-           parentId: this.parentImage,
-           name: file.name,
-           version_no: this.VERSION_NO
-       }
-       this.imageMaintenanceService.createImageFirebaseInput(this.imageData);
-       let data = this.imageData;
-       this.dialogRef.close({ event: 'Create', data});
-    })
+    this.downloadUrl.subscribe((dw) => {
+      this.imageData = {
+        url: dw,
+        parentId: this.parentImage,
+        name: file.name,
+        version_no: this.VERSION_NO,
+      };
+      this.imageMaintenanceService.createImageFirebaseInput(this.imageData);
+      this.afs
+        .collection('blog')
+        .doc(this.imageData.parentId)
+        .collection('images')
+        .add(this.imageData);
+      let data = this.imageData;
+      this.dialogRef.close({ event: 'Create', data });
+    });
   }
 
   onCreate() {

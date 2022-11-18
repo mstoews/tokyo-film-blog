@@ -1,7 +1,7 @@
 <div class="gallery-lightbox-container">
     <div class="gallery">
         <div *ngFor="let data of galleryData; let i=index" class="gallery-img">
-            <img (click)="onPreviewImage(i)" [src]="data.imageSrc" [alt]="data.imageAlt">
+            <img (click)="onPreviewImage(i)" [src]="data.url" [alt]="data.name">
         </div>
     </div>
     <div *ngIf="showMask" class="lightbox" @animation2>
@@ -21,7 +21,7 @@
         <div *ngIf="previewImage"
             [@animation]="{value: 'visible'}"
             (@animation.done)="onAnimationEnd($event)" >
-            <img class="object-scale-down h-600 w-400"  [src]="currentLightboxImage.imageSrc" [alt]="currentLightboxImage.imageAlt">
+            <img class="object-scale-down h-600 w-400"  [src]="currentLightboxImage.url" [alt]="currentLightboxImage.name">
         </div>
     </div>
 </div>

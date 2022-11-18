@@ -15,15 +15,14 @@ import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { ImagesGridComponent } from './images/images.component';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 import { ImageCardComponent } from './image-card/image-card.component';
-
 import { CollectionCardComponent } from './collection-card/collection-card.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { ScreenCardComponent } from './screen-card/screen-card.component';
-import { GalleryComponent } from './gallery/gallery.component';
 import { InventoryComponent } from './inventory-grid/inventory-grid.component'
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { TextEditorModule } from './text-editor/text-editor.module';
 import { DxHtmlEditorModule  } from 'devextreme-angular';
+import { GalleryComponent } from './gallery/gallery.component';
 
 const routes: Routes = [
   {
@@ -57,9 +56,10 @@ const routes: Routes = [
     CollectionCardComponent,
     ProductCardComponent,
     ScreenCardComponent,
-    GalleryComponent,
+
     InventoryComponent,
     AdminFormComponent,
+    GalleryComponent,
 
   ],
   imports: [

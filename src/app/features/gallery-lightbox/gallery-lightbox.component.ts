@@ -6,6 +6,8 @@ import {
   AnimationEvent
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
+import { IImageStorage } from 'app/models/maintenance';
+
 
 interface Item {
   imageSrc: string;
@@ -36,12 +38,12 @@ interface Item {
   ]
 })
 export class GalleryLightboxComponent implements OnInit {
-  @Input() galleryData: Item[] = [];
+  @Input() galleryData: IImageStorage[] = [];
   @Input() showCount = false;
 
   previewImage = false;
   showMask = false;
-  currentLightboxImage: Item = this.galleryData[0];
+  currentLightboxImage: IImageStorage = this.galleryData[0];
   currentIndex = 0;
   controls = true;
   totalImageCount = 0;
