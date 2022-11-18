@@ -6,10 +6,10 @@
       [innerHTML]="blog.title"
     ></p>
     <p
-      class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
+      class="prose prose-sm max-w-3xl leading-normal text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
       [innerHTML]="blog.paragraph" >
     </p>
-     <img [src]="blogImages[0].url"  alt="caps" class="object-cover h-100 w-140" />
+     <img [src]="blogImages[0].url"  alt="caps" class="object-cover h-100 w-140 md:object-scale-down" />
 
   <div class="gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
     <p
@@ -17,7 +17,7 @@
       [innerHTML]="blog.body"
     ></p>
   </div>
-      <img [src]="blogImages[1].url" alt="caps" class="object-cover h-100 w-140" />
+      <img [src]="blogImages[1].url" alt="caps" class="object-cover h-100 w-140 md:object-scale-down" />
 
   <p  class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4" [innerHTML]="blog.conclusion" ></p>
   </div>
