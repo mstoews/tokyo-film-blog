@@ -10,6 +10,8 @@ import { TitleStrategy } from '@angular/router';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Item } from 'app/models/item';
+import { IImageStorage } from 'app/models/maintenance';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'inventory-list',
@@ -35,7 +37,7 @@ export class InventoryComponent implements OnInit  {
     updated_category: string;
     selectedItemKeys: string;
     categories: Category[];
-    data: Item[] = []
+    data: IImageStorage[] = []
 
     allProducts$: Observable<Product[]>;
     category$: Observable<Category[]>;
@@ -43,6 +45,7 @@ export class InventoryComponent implements OnInit  {
 
     constructor(
       private matDialog: MatDialog,
+      private afs: AngularFirestore,
       private readonly categoryService: CategoryService,
       private readonly productService: ProductsService,
       private fb: FormBuilder )
@@ -60,7 +63,14 @@ export class InventoryComponent implements OnInit  {
       throw new Error('Method not implemented.');
       }
 
-    onImages() {
+
+    /**
+     * The dialogue entry is passed the current entry and parentId which is subsequently
+     * passed back so the images collection can be created from the parent inventory item.
+     * The parentID must exist before the image collection could be created.
+     */
+
+    onImages(): void {
       console.log('onImages');
       const parentId = this.prdGroup.getRawValue();
       const dialogRef = this.matDialog.open(DndComponent, {
@@ -84,12 +94,16 @@ export class InventoryComponent implements OnInit  {
       });
     }
 
-    create(data: any ){
+    create(results: any ){
       const newProduct = { ...this.prdGroup.value} as Product;
-      console.log(`onCreate ${newProduct}`);
-      newProduct.image = data.data.url;
+      newProduct.image = results.data.url;
       this.productService.update(newProduct);
       this.prdGroup.setValue(newProduct);
+      this.afs
+      .collection('inventory')
+      .doc(newProduct.id)
+      .collection('images')
+      .add(results.data);
     }
 
     changeCategory(category: any) {
@@ -139,20 +153,12 @@ export class InventoryComponent implements OnInit  {
         this.data = [];
         var counter = 0;
         this.current_Url = e.data.image;
-        var Image = {
-          imageSrc: e.data.image,
-          imageAlt: counter.toString(),
+        var Image: IImageStorage = {
+          url: e.data.image,
+          name: e.data.description,
+          parentId: e.data.id,
+          version_no: 1,
         }
-        // if (e.data.images.length > 0){
-        //   e.data.images.forEach((img: any) => {
-        //   counter++;
-        //      var Image = {
-        //        imageSrc: img.image,
-        //        imageAlt: counter.toString(),
-        //        }
-        //        this.data.push(Image);
-        //      });
-        //   }
         this.data.push(Image);
         this.prdGroup.setValue(e.data);
         this.openDrawer()
@@ -297,4 +303,21 @@ export class InventoryComponent implements OnInit  {
     // { headerName: 'Date Created', field: 'date_created' },
     { headerName: 'Date Updated', field: 'date_updated' },
   ];
+
+  onToggleDrawer(element: any) {
+    console.log('Toggle the drawer!', element)
+  }
+
+
+  columnsToDisplay: string[] = [
+    'actions',
+    'description',
+    'image',
+    'rich_description',
+    'brand',
+    'price',
+    'category',
+    'rating',
+    'is_featured',
+    'user_updated'];
 }

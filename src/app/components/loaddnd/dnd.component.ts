@@ -147,11 +147,11 @@ export class DndComponent {
         version_no: this.VERSION_NO,
       };
       this.imageMaintenanceService.createImageFirebaseInput(this.imageData);
-      this.afs
-        .collection('blog')
-        .doc(this.imageData.parentId)
-        .collection('images')
-        .add(this.imageData);
+      // this.afs
+      //   .collection('blog')
+      //   .doc(this.imageData.parentId)
+      //   .collection('images')
+      //   .add(this.imageData);
       let data = this.imageData;
       this.dialogRef.close({ event: 'Create', data });
     });

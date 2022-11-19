@@ -23,6 +23,8 @@ import { AdminFormComponent } from './admin-form/admin-form.component';
 import { TextEditorModule } from './text-editor/text-editor.module';
 import { DxHtmlEditorModule  } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
+import { ServicesComponent } from './services/services.component';
+import { ExampleGridComponent } from './example-grid/example-grid.component';
 
 const routes: Routes = [
   {
@@ -60,6 +62,8 @@ const routes: Routes = [
     InventoryComponent,
     AdminFormComponent,
     GalleryComponent,
+    ServicesComponent,
+    ExampleGridComponent,
 
   ],
   imports: [

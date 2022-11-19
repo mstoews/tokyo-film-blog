@@ -93,7 +93,7 @@
         <ng-template matTabContent>
           <div class="container">
             <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
-            <!-- <app-gallery-lightbox [galleryData]="data" [showCount]="true"> </app-gallery-lightbox> -->
+            <app-gallery-lightbox [galleryData]="data" [showCount]="true"> </app-gallery-lightbox>
 
             <div mat-dialog-actions class="mt-10">
               <button class="m-1" (click)="onImages()" mat-flat-button color="primary" aria-label="Add" >
@@ -114,37 +114,75 @@
       </mat-tab>
     </mat-tab-group>
   </mat-drawer>
+    <mat-card class="overflow" *ngIf="allProducts$ | async as rows" >
+      <table mat-table [dataSource]="rows" class="mat-elevation-z8">
 
-  <ng-container *ngIf="allProducts$ | async as rows">
-    <dx-data-grid
-      [height]="720"
-      id="imagesGrid"
-      [dataSource]="rows"
-      [showBorders]="true"
-      [allowColumnResizing]="true"
-      [focusedRowEnabled]="true"
-      [focusedRowIndex]="0"
-      (onCellDblClick)="onCellDoublClicked($event)"
-      (onCellClicked)="onCellClicked($event)"
-      [repaintChangesOnly]="true"
-      (onSelectionChanged)="selectionChanged($event)"
-      (onFocusedRowChanged)="onFocusedRowChanged($event)"
-      keyExpr="id" >
-      <dxo-paging [pageSize]="20"></dxo-paging>
-      <dxo-pager  [showPageSizeSelector]="true" [allowedPageSizes]="[20, 40, 50, 100]" > </dxo-pager>
-      <dxi-column width="300px" dataField="description"></dxi-column>
-      <dxi-column width="100%" dataField="rich_description"></dxi-column>
-      <dxi-column width="120px" dataField="brand"></dxi-column>
-      <dxi-column width="80px" dataField="price" type="number"></dxi-column>
-      <dxi-column width="80px" dataField="category"></dxi-column>
-      <!--
-          <dxi-column dataField="rating"></dxi-column>
-          <dxi-column dataField="is_featured"></dxi-column>
-          <dxi-column dataField="user_updated"></dxi-column>
-          <dxi-column dataField="date_created"></dxi-column>
-      -->
-      <dxi-column dataField="date_updated"></dxi-column>
-    </dx-data-grid>
-  </ng-container>
+        <ng-container matColumnDef="image">
+          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Image </th>
+          <td mat-cell *matCellDef="let element"> <img class="w-30 m-1" [src]="element.image"/> </td>
+        </ng-container>
+
+        <ng-container matColumnDef="description">
+          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Description </th>
+          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="rich_description">
+          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Detail Description </th>
+          <td  mat-cell *matCellDef="let element"> <p class="w-200"> {{element.rich_description}} </p> </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="brand">
+          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Brand </th>
+          <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+        <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+        </ng-container>
+
+
+          <ng-container matColumnDef="category">
+            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Category </th>
+            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="rating">
+            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Rating </th>
+            <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="is_featured">
+            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Used </th>
+            <td mat-cell *matCellDef="let element"> {{element.is_featured}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="user_updated">
+            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> User </th>
+            <td mat-cell *matCellDef="let element"> {{element.user_updated}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th class="text-base font-bold ml-2" mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button (click)="onToggleDrawer(element.id)" mat-flat-button color="primary">
+                <mat-icon [svgIcon]="'mat_outline:edit'"></mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+        <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr class="hover:bg-gray-100 m-1" mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+
+      </table>
+    </mat-card>
+
 </mat-drawer-container>
 </div>
+
+

@@ -10,6 +10,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { TextService } from '../text-editor/text.service';
 import { Item } from 'app/models/item'
 import { IImageStorage } from 'app/models/maintenance';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'blog-list',
@@ -40,7 +41,7 @@ export class BlogGridComponent implements OnInit {
   // blog dictionary
   allBlogs$: Observable<Blog[]>;
   blogImages$: Observable<IImageStorage[]> ;
-  
+
 
   blog: Blog;
 
@@ -48,6 +49,7 @@ export class BlogGridComponent implements OnInit {
 
   constructor(
     private matDialog: MatDialog,
+    private afs: AngularFirestore,
     private auth: AngularFireAuth,
     private blogService: BlogService,
     private fb: FormBuilder,
@@ -87,7 +89,7 @@ export class BlogGridComponent implements OnInit {
       switch (result.event) {
         case 'Create':
           console.log(`create Images to save: ${JSON.stringify(result.data)}`);
-          this.create(result);
+          this.create(result.data);
           break;
         case 'Cancel':
           console.log(`Image transfer cancelled`);
@@ -96,11 +98,14 @@ export class BlogGridComponent implements OnInit {
     });
   }
 
-  create(data: Blog) {
+  create(data: any) {
     const rawData = this.blogGroup.getRawValue();
-    // this.current_Url = data.images[0].thumbImage;
-    // this.updateBlogImage(rawData.id,)
     this.blogService.update(rawData);
+    this.afs
+        .collection('blog')
+        .doc(rawData.id)
+        .collection('images')
+        .add(data);
   }
 
   onUpdate(data: Blog) {
