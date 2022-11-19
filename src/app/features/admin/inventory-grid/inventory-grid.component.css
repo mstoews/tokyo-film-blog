@@ -11,10 +11,13 @@
 
 .mat-card {
     margin: 5px;
-    width: 800px;
+    width: 100%;
   }
 
 .mat-radio-button {
     margin: 5px;
   }
 
+  table {
+    width: 100%;
+  }

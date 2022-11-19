@@ -306,6 +306,19 @@ export class InventoryComponent implements OnInit  {
 
   onToggleDrawer(element: any) {
     console.log('Toggle the drawer!', element)
+    this.data = [];
+    var counter = 0;
+    this.current_Url = element.image;
+    console.log(JSON.stringify(element));
+        // var Image: IImageStorage = {
+        //   url: e.data.image,
+        //   name: e.data.description,
+        //   parentId: e.data.id,
+        //   version_no: 1,
+        // }
+        // this.data.push(Image);
+    this.prdGroup.setValue(element);
+    this.openDrawer()
   }
 
 
@@ -314,10 +327,11 @@ export class InventoryComponent implements OnInit  {
     'description',
     'image',
     'rich_description',
-    'brand',
+    //'brand',
     'price',
-    'category',
-    'rating',
-    'is_featured',
-    'user_updated'];
+   // 'category',
+   // 'rating',
+   // 'is_featured',
+   // 'user_updated'
+  ];
 }
