@@ -309,37 +309,8 @@
     </mat-drawer>
 
     <ng-container *ngIf="allBlogs$ | async as rows">
-      <!-- <dx-data-grid
-        flex
-        id="imagesGrid"
-        [dataSource]="rows"
-        [showBorders]="true"
-        [focusedRowEnabled]="true"
-        [focusedRowIndex]="0"
-        (onCellDblClick)="onCellDoublClicked($event)"
-        [repaintChangesOnly]="true"
-        keyExpr="id"
-      >
-        <dxo-paging [pageSize]="20"> </dxo-paging>
-        <dxo-pager
-          [showPageSizeSelector]="true"
-          [allowedPageSizes]="[20, 40, 50, 100]"
-        >
-        </dxo-pager>
-        <dxi-column width="200px" dataField="title"> </dxi-column>
-        <dxi-column width="500px" dataField="paragraph"> </dxi-column>
-        <dxi-column dataField="body"> </dxi-column>
-        <dxi-column dataField="conclusion"> </dxi-column>
-        <dxi-column width="100px" dataField="date_created"> </dxi-column>
-        <dxi-column width="100px" dataField="date_updated"> </dxi-column>
-      </dx-data-grid> -->
 
         <table mat-table [dataSource]="rows" class="mat-elevation-z8">
-
-          <!-- <ng-container matColumnDef="image">
-            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Image </th>
-            <td mat-cell *matCellDef="let element"> <img class="h-30 m-1" [src]="element.image"/> </td>
-          </ng-container> -->
 
           <ng-container matColumnDef="title">
             <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell *matHeaderCellDef> Title </th>

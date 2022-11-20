@@ -1,25 +1,33 @@
 
 <div class="px-4 py-12" *ngIf="blogImages$ | async as blogImages">
   <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white py-12 lg:px-10 md-px-6 px-4" >
-    <p
-      class="text-base leading-normal text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
-      [innerHTML]="blog.title"
-    ></p>
-    <p
-      class="prose prose-sm max-w-3xl leading-normal text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
-      [innerHTML]="blog.paragraph" >
-    </p>
-     <img [src]="blogImages[0].url"  alt="caps" class="object-cover h-100 w-140 md:object-scale-down" />
 
-  <div class="gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
-    <p
-      class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4"
-      [innerHTML]="blog.body"
-    ></p>
-  </div>
-      <img [src]="blogImages[1].url" alt="caps" class="object-cover h-100 w-140 md:object-scale-down" />
+    <div class="text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4">
+      {{blog.title}}
+    </div>
 
-  <p  class="text-base leading-normal text-gray-700 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4" [innerHTML]="blog.conclusion" ></p>
+    <div class="top-48 gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
+      <p class="max-w-lg text-base text-gray-700 text-center md:text-left" [innerHTML]="blog.paragraph" ></p>
+    </div>
+     <img [src]="blogImages[0].url" alt="caps" class="rounded-lg h-140 w-140" />
+
+  <div class="top-48 gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
+    <p class="bg-white max-w-lg text-base text-gray-700 text-center md:text-left" [innerHTML]="blog.body" ></p>
   </div>
+
+  <img [src]="blogImages[1].url" alt="caps" class="rounded-lg h-140 w-140" />
+
+  <div class="top-48 gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly">
+    <p class="max-w-lg text-base text-gray-700 text-center md:text-left" [innerHTML]="blog.conclusion" ></p>
+  </div>
+
 </div>
+<!--
+<div  class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20" >
 
+  <p class="max-w-md text-base text-gray-700 text-center md:text-left">
+    Founded in 2011, Loopstudios has been producing world-class virtual
+    reality projects for some of the best companies around the globe.
+    Our award-winning creations have transformed businesses through
+    digital experiences that bind to their brand. </p>
+</div> -->

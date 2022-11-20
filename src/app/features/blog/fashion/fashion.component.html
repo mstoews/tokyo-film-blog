@@ -24,7 +24,7 @@
         <div class="w-full" *ngIf="blogImages$ | async as blogImages">
             <img class="w-full rounded-lg" [src]="blogImages[0].url" alt="blog image" />
         </div>
-        <div class="absolute bottom-2 md:bottom-8 inset-x-4 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur flex flex-col justify-start items-start text-left p-6 md:p-8">
+        <div class="absolute bottom-2 md:bottom-8 inset-x-8 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur flex flex-col justify-start items-start text-left p-6 md:p-8">
             <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">{{ blog.title }}</p>
 
             <div class="flex justify-start items-start text-left m-2">
@@ -35,6 +35,8 @@
           </div>
         </div>
     </div>
+
+
 
 
 <!--
