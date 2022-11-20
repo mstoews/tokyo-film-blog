@@ -17,11 +17,11 @@
     [position]="'end'"
     [disableClose]="false" >
     <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
-
+     <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
       <mat-tab label="Inventory Description">
         <ng-template matTabContent>
           <div class="container">
-            <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
+
               <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
                 {{ sTitle }}
               </div>
@@ -85,15 +85,15 @@
                   <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                 </button>
               </div>
-            </mat-card>
+
           </div>
         </ng-template>
       </mat-tab>
 
       <mat-tab label="Inventory Images">
         <ng-template matTabContent>
-            <mat-card class="flex flex-col w-screen filter-article filter-interactive text-gray-700">q
-            <app-gallery-lightbox  [galleryData]="data" [showCount]="true">
+
+            <app-gallery-lightbox [galleryData]="data" [showCount]="true">
             </app-gallery-lightbox>
 
             <div mat-dialog-actions class="mt-10">
@@ -109,9 +109,10 @@
             </div>
             <br>
             <p>Each image should have four 400x400 picture of the item. Importing an image will create a 400px imagine automatically.</p>
-          </mat-card>
+
         </ng-template>
       </mat-tab>
+    </mat-card>
     </mat-tab-group>
   </mat-drawer>
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">

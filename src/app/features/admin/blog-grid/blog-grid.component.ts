@@ -41,7 +41,13 @@ export class BlogGridComponent implements OnInit {
   // blog dictionary
   allBlogs$: Observable<Blog[]>;
   blogImages$: Observable<IImageStorage[]> ;
-
+  columnsToDisplay : string[] = [
+    'actions',
+    'title',
+    'paragraph',
+    'body',
+    'conclusion'
+    ];
 
   blog: Blog;
 
@@ -123,27 +129,13 @@ export class BlogGridComponent implements OnInit {
   onCellDoublClicked(e: any) {
     this.data = [];
     var counter = 0
-    this.para = e.data.paragraph;
-    this.conclusion = e.data.conclusion;
-    this.body = e.data.body;
-    const parentId = e.data.id;
+    this.para = e.paragraph;
+    this.conclusion = e.conclusion;
+    this.body = e.body;
+    const parentId = e.id;
 
     this.blogImages$ = this.blogService.getBlogImage(parentId)
-
-    // if(e.data.images !== null && e.data.images !== undefined){
-    // if (e.data.images.length > 0){
-    //   this.current_Url = e.data.images[0].image;
-    //   e.data.images.forEach((img: any) => {
-    //   counter++;
-    //      var Image = {
-    //        imageSrc: img.image,
-    //        imageAlt: counter.toString(),
-    //        }
-    //        this.data.push(Image);
-    //      });
-    //   }
-    // }
-    this.blogGroup.setValue(e.data);
+    this.blogGroup.setValue(e);
     this.openDrawer();
   }
 
@@ -193,7 +185,7 @@ export class BlogGridComponent implements OnInit {
     this.allBlogs$ = this.blogService.getAll();
   }
 
-  onCreate() {
+  onCreate(data: any) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
     const newBlog = { ...this.blogGroup.value } as Blog;

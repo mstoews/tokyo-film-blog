@@ -25,6 +25,7 @@ import { DxHtmlEditorModule  } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
 import { ExampleGridComponent } from './example-grid/example-grid.component';
+import { SafePipe } from './safe.pipe';
 
 const routes: Routes = [
   {
@@ -64,6 +65,7 @@ const routes: Routes = [
     GalleryComponent,
     ServicesComponent,
     ExampleGridComponent,
+    SafePipe,
 
   ],
   imports: [

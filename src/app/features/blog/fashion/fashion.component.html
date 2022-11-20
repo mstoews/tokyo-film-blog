@@ -20,21 +20,22 @@
     </div>
   </div> -->
 
-    <div (click)="onOpenBlog(blog.id)" class="flex justify-center items-start flex-col space-y-6 m-2 bg-gray-100 ">
+    <div (click)="onOpenBlog(blog.id)" class="flex justify-center items-start flex-col space-y-6 m-2 bg-gray-100 rounded-lg">
         <div class="w-full" *ngIf="blogImages$ | async as blogImages">
-            <img class="w-full" [src]="blogImages[0].url" alt="blog image" />
+            <img class="w-full rounded-lg" [src]="blogImages[0].url" alt="blog image" />
         </div>
         <div>
             <div class="flex justify-start items-start text-left">
                 <h1 class="text-xl md:text-2xl font-semibold leading-6 text-gray-800 m-2" >{{ blog.title }}</h1>
             </div>
-            <div class="flex justify-start items-start text-left flex-col space-y-3 m-2">
-                <p class="text-sm leading-none text-gray-800"><span class="text-gray-600">By:</span>Made-To</p>
-                <p class="text-sm leading-none text-gray-800"><span class="text-gray-600">Date:</span> {{blog.date_updated}}</p>
-            </div>
+
             <div class="flex justify-start items-start text-left m-2">
                 <p class="text-base leading-6 text-gray-600" [innerHTML]="blog.paragraph"></p>
             </div>
+            <div class="flex justify-start items-start text-left flex-col space-y-3 m-2">
+              <p class="text-sm leading-none text-gray-800"><span class="text-gray-600">By:</span>Made-To</p>
+              <p class="text-sm leading-none text-gray-800"><span class="text-gray-600">Date:</span> {{blog.date_updated}}</p>
+          </div>
         </div>
     </div>
 
