@@ -15,6 +15,7 @@ interface Item {
 })
 export class GalleryComponent implements OnInit {
   inventoryImages: Item[] = [];
+  imagesArray: IImageStorage[] = [];
   constructor(public storage: AngularFireStorage) { }
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class GalleryComponent implements OnInit {
   ImagesList() {
     var imageCount = 0;
     this.storage
-      .ref('/')
+      .ref('/800')
       .listAll()
       .subscribe((files) => {
 
@@ -32,11 +33,14 @@ export class GalleryComponent implements OnInit {
           imageCount++;
           imageRef.getDownloadURL().then((downloadURL) => {
             const imageUrl = downloadURL;
-            const imageData: Item = {
-              imageSrc: imageUrl,
-              imageAlt: imageCount.toString(),
+            const imageData: IImageStorage = {
+              name: 'image' ,
+              parentId: 'parent',
+              url: imageUrl,
+              version_no: imageCount,
+
             };
-            this.inventoryImages.push(imageData);
+            this.imagesArray.push(imageData);
           });
         });
       });

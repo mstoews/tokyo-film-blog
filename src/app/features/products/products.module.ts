@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HighlightComponent } from './highlight/highlight.component';
+import { HighlightComponent } from '../landing-page/highlight/highlight.component';
 import { BannerComponent } from './banner/banner.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { GridComponent } from './collection-grid/grid.component';
@@ -21,7 +21,7 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [ProductsComponent, HighlightComponent, BannerComponent, OrderSummaryComponent, GridComponent, CarouselComponent, ProductCardComponent],
+  declarations: [ProductsComponent, BannerComponent, OrderSummaryComponent, GridComponent, CarouselComponent, ProductCardComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
@@ -29,6 +29,5 @@ const routes: Routes = [
     FuseCardModule,
     SharedModule,
   ],
-  exports:  [HighlightComponent]
 })
 export class ProductsModule { }

@@ -44,7 +44,7 @@ const routes: Route[] = [
    },
    {
     path: '**',
-    redirectTo: '/'
+    redirectTo: '/home'
    },
 
 ];

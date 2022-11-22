@@ -59,13 +59,13 @@
       <!-- CTA Section -->
       <div class="container flex mx-auto px-2 pb-12">
         <div class="hidden md:block mx-auto max-w-7xl py-6 px-4 text-center sm:px-6 lg:py-16 lg:px-8">
-          <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
-          <span class="hidden sm:block">{{mainPageDoc.cta_left}}</span>
+          <h2 class="text-3xl  font-bold tracking-tight text-gray-100 sm:text-4xl">
+          <span class="hidden sm:block font-garamond">{{mainPageDoc.cta_left}}</span>
           </h2>
           <div class="mt-4 flex justify-center">
             <div class="hidden md:block sm:inline-flex rounded-md shadow">
               <button (click)="scrollToId('creations')"
-                class="hidden md:block inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-400">
+                class="hidden md:block font-garamond inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-400">
                 Made-To Services
               </button>
             </div>
@@ -73,12 +73,12 @@
         </div>
         <div class="mx-auto max-w-7xl py-6 px-4 text-center sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
-            <span class="hidden sm:block">{{mainPageDoc.cta_right}}</span>
+            <span class="hidden sm:block font-garamond">{{mainPageDoc.cta_right}}</span>
           </h2>
           <div class="mt-4 flex justify-center">
           <div class="ml-3 inline-flex">
             <button (click)="scrollToId('contact')"
-              class="hidden sm:inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-400">
+              class="hidden sm:inline-flex font-garamond items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-400">
                 Contact Made-To
             </button>
           </div>
@@ -96,7 +96,7 @@
       <!-- Creations Header -->
 
       <div class="relative justify-center my-32 mb-20 md:justify-between">
-        <p class="text-4xl text-left uppercase md:text-left md:text-5xl">
+        <p class="text-4xl font-garamond text-left uppercase md:text-left md:text-5xl">
           Features
         </p>
 
@@ -141,7 +141,7 @@
     <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
       <!-- Creations Header -->
       <div class="relative justify-center my-32 mb-20 md:justify-between">
-        <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        <p class="text-4xl font-garamond text-center uppercase md:text-left md:text-5xl">
           Services
         </p>
         <!-- <landing-banner></landing-banner> -->
@@ -168,7 +168,7 @@
       <!-- Items Container -->
       <div class="item-container">
         <!-- Item 1 -->
-        <div class="group item" (click)="onServices('tailoring')">
+        <div class="group item" (click)="onServices('home/tailoring')">
           <!-- Desktop Image -->
           <img
             src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/161714D0-73C9-4C75-8D15-B8B2F08EE5E1_400x400.JPG?authuser=0"
@@ -188,7 +188,7 @@
         </div>
 
         <!-- Item 2 -->
-        <div class="group item" (click)="onServices('knitting')">
+        <div class="group item" (click)="onServices('home/knitting')">
           <!-- Desktop Image -->
           <img
             src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F707D9404-83DC-4057-B788-440AEE148599_800x800.JPG?alt=media&token=9dd50397-faa5-45f0-948b-bdbf875f922c"
@@ -208,7 +208,7 @@
         </div>
 
         <!-- Item 3 -->
-        <div class="group item" (click)="onServices('repairs')">
+        <div class="group item" (click)="onServices('home/repairs')">
           <!-- Desktop Image -->
           <img
             src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/63ADAB64-1D80-43A3-B761-BB82817EB4AE_400x400.JPG?authuser=0"
@@ -228,7 +228,7 @@
         </div>
 
         <!-- Item 4 -->
-        <div class="group item" (click)="onServices('ready')">
+        <div class="group item" (click)="onServices('home/ready-to-wear')">
           <!-- Desktop Image -->
           <img
             src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F43662996-AD26-4EC1-AEAF-FDE9A137A76F_800x800.jpeg?alt=media&token=6885cc4e-28c1-4d88-ba6e-a94fb3121ab0"
@@ -261,7 +261,7 @@
     <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
       <!-- Creations Header -->
       <div class="relative justify-center my-32 mb-20 md:justify-between">
-        <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        <p class="text-4xl font-garamond text-center uppercase md:text-left md:text-5xl">
           Gallery
         </p>
         <button
@@ -283,7 +283,7 @@
     <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
       <!-- Creations Header -->
       <div class="relative justify-center my-32 mb-20 md:justify-between">
-        <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
+        <p class="text-4xl font-garamond text-center uppercase md:text-left md:text-5xl">
           Contact
         </p>
         <button

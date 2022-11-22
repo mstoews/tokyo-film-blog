@@ -71,7 +71,8 @@ export class LandingPageComponent implements OnInit {
   }
 
   onServices(service: string) {
-     console.log(service);
+      console.log(service);
+      this.router.navigate([service]);
   }
 
   onUpdate(contact: Contact) {
