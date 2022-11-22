@@ -6,10 +6,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from 'app/services/category.service';
 import { Category } from 'app/models/category';
-import { TitleStrategy } from '@angular/router';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Item } from 'app/models/item';
 import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 
@@ -20,6 +18,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 
 export class InventoryComponent implements OnInit  {
+
 
     @ViewChild('drawer') drawer: MatDrawer;
     drawOpen: 'open' | 'close' = 'open';
@@ -37,7 +36,8 @@ export class InventoryComponent implements OnInit  {
     updated_category: string;
     selectedItemKeys: string;
     categories: Category[];
-    data: IImageStorage[] = []
+    imageArray: IImageStorage[] = []
+    inventoryImages$: Observable<IImageStorage[]> ;
 
     allProducts$: Observable<Product[]>;
     category$: Observable<Category[]>;
@@ -54,15 +54,17 @@ export class InventoryComponent implements OnInit  {
       this.createEmptyForm();
       }
 
-
-    Refresh() {
+    onRefresh() {
       this.allProducts$ = this.productService.getAll();
     }
 
     onTabClick() {
-      throw new Error('Method not implemented.');
-      }
+      console.log('onTabClick');
+    }
 
+     valueChangedEvent($event: Event) {
+      console.log('valueChangedEvent');
+     }
 
     /**
      * The dialogue entry is passed the current entry and parentId which is subsequently
@@ -85,7 +87,7 @@ export class InventoryComponent implements OnInit  {
         switch (result.event) {
           case 'Create':
             console.log(`create Images to save: ${JSON.stringify(result.data)}`);
-            this.create(result);
+            this.createProduct(result);
             break;
           case 'Cancel':
             console.log(`Image transfer cancelled`);
@@ -94,7 +96,7 @@ export class InventoryComponent implements OnInit  {
       });
     }
 
-    create(results: any ){
+    createProduct(results: any ){
       const newProduct = { ...this.prdGroup.value} as Product;
       newProduct.image = results.data.url;
       this.productService.update(newProduct);
@@ -111,7 +113,6 @@ export class InventoryComponent implements OnInit  {
       console.log(`update category ${this.updated_category}`);
     }
 
-
     ngOnInit() {
       this.sTitle = 'Product Inventory and Images'
       this.allProducts$ = this.productService.getAll();
@@ -120,13 +121,6 @@ export class InventoryComponent implements OnInit  {
           this.categories = result;
           console.log(this.categories);
       });
-    }
-
-    onNotify(event: any) {
-      console.log(event);
-      this.prd = event;
-      this.createForm(this.prd);
-      this.toggleDrawer();
     }
 
     toggleDrawer() {
@@ -149,25 +143,27 @@ export class InventoryComponent implements OnInit  {
         }
     }
 
-    onCellDoublClicked(e: any ){
-        this.data = [];
+    onOpenButtonClicked(event: any ){
+        console.log(JSON.stringify(event));
         var counter = 0;
-        this.current_Url = e.data.image;
-        var Image: IImageStorage = {
-          url: e.data.image,
-          name: e.data.description,
-          parentId: e.data.id,
-          version_no: 1,
-        }
-        this.data.push(Image);
-        this.prdGroup.setValue(e.data);
-        this.openDrawer()
-    }
+        this.imageArray = [];
+        this.inventoryImages$ = this.productService.getProductImage(event.id)
+        this.current_Url = event.image;
 
-    onCellClicked(e: any) {
-        console.log(`onCellClicked: ${JSON.stringify(e.data)}`);
-        this.current_Url = e.data.images;
-        this.prdGroup.setValue(e.data);
+        this.inventoryImages$.subscribe(image => {
+          image.forEach(img =>{
+            counter++;
+            const Image: IImageStorage = {
+              url: img.url,
+              name: img.name,
+              parentId: img.parentId,
+              version_no: counter,
+            }
+            this.imageArray.push(Image);
+          } )
+        });
+
+        this.prdGroup.setValue(event);
         this.openDrawer()
     }
 
@@ -187,29 +183,14 @@ export class InventoryComponent implements OnInit  {
         }
     }
 
-    selectionChanged(data: any) {
-        console.log(`selectionChanged ${data}`);
-        this.selectedItemKeys = data.selectedRowKeys;
-    }
-
     dateFormatter(params: any) {
       const dateAsString = params.value;
       const dateParts = dateAsString.split('-');
       return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
     }
 
-    Add() {
+    onAdd() {
       console.log('open drawer to add ... ');
-      this.openDrawer();
-    }
-
-    Delete() {
-      console.log('open drawer to delete ... ');
-      this.openDrawer();
-    }
-
-    Clone() {
-      console.log('open drawer to clone ... ');
       this.openDrawer();
     }
 
@@ -229,10 +210,6 @@ export class InventoryComponent implements OnInit  {
     onDelete(data: Product) {
       data = this.prdGroup.getRawValue();
       this.productService.delete(data.id.toString());
-    }
-
-    closeDialog() {
-      this.closeDrawer();
     }
 
     public productType = {
@@ -288,50 +265,11 @@ export class InventoryComponent implements OnInit  {
     });
   }
 
-  cols = [
-   // { headerName: 'ID', field: 'id' },
-    { headerName: 'Description', field: 'description' },
-    { headerName: 'Detailed Description', field: 'rich_description'},
-    // { headerName: 'Image', field: 'image' },
-    // { headerName: 'Image List', field: 'images' },
-    { headerName: 'Brand', field: 'brand' },
-    { headerName: 'Price', field: 'price' },
-    { headerName: 'Category', field: 'category' },
-    { headerName: 'Rating', field: 'rating' },
-    { headerName: 'Featured', field: 'is_featured' },
-    // { headerName: 'User', field: 'user_updated' },
-    // { headerName: 'Date Created', field: 'date_created' },
-    { headerName: 'Date Updated', field: 'date_updated' },
-  ];
-
-  onToggleDrawer(element: any) {
-    console.log('Toggle the drawer!', element)
-    this.data = [];
-    var counter = 0;
-    this.current_Url = element.image;
-    console.log(JSON.stringify(element));
-        // var Image: IImageStorage = {
-        //   url: e.data.image,
-        //   name: e.data.description,
-        //   parentId: e.data.id,
-        //   version_no: 1,
-        // }
-        // this.data.push(Image);
-    this.prdGroup.setValue(element);
-    this.openDrawer()
-  }
-
-
   columnsToDisplay: string[] = [
     'actions',
     'description',
     'image',
     'rich_description',
-    //'brand',
-    'price',
-   // 'category',
-   // 'rating',
-   // 'is_featured',
-   // 'user_updated'
+    'price'
   ];
 }

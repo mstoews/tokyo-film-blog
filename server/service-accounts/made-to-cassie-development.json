@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "made-to-cassie",
+  "private_key_id": "7e4683151d497bd31f31048ea85706bbd96fda4a",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDLJD8GuRNe1J1A\nodwPB6mrZczvQ8tSykzZd/hpUV4SvT5nSN+J8d0/dc7zWFdtzBy/kgQYnfg51xEK\n9fnxg+ce+6Rd+UzeqlYAjocWgjgRX85TMTC3AJKBjif/s12BOrnY5/nYl9Z4+fM4\n2DAzXaB4axUXVZuVKMgIRdfkyOMHnyOr9U5IHul+Kmh8w2M8VLxGGC2JcKXTZlg+\ndB/pYwDyVSxxPVG2wx0pqQ4rTqsqSejuduadkV/dV2FrY3qoixj9MxFGY6RrHdNK\nZuvqweDRWwVNTaeWKc87xLuIwaECABbIpkDPV/69Fn0t6X8lt3g6Lwq4LJ1QiG5R\ndL80G2obAgMBAAECggEAEWq7KKVnnsLV9Lur9XHvvy1MQ9tpLGEB88dQeh8q1Kp7\nFjnuSJJ/KLi+FKknXdeZQ2eOiFnK9ZKV+H2cf3OStlpW/mOojpLGKugNdwWVLxAq\nzYEzLw2Sgh8hGNBVHQZe9tT02/gwwFCV5PLMNys43fo4ZbbGTySe+e6bExeSN43r\nUsMpReI8R2CpsbnnZ4eIn4zLfQIGG370hHoDuxN5Q0anJQ7LdErYrCrB+Y9ALbc9\njFE/tTJkjoxmta7nUPnhi65lZZ5RVdK4ufnIFwv+XDtIJ4qyaFHOhoHK8thFR4Ai\nn3PEMG4xJQBcUCMp4bVrRkJPVGROvLRHsiebKwME+QKBgQDmUQfJCYGb8TUte6aC\nZb8LtGvhiz4Z3jHMFSGS8JDgoZ/XAF3mb/+NBab6iXDuFS25LBliBCWCEFI9OAsN\nGgqW0zjhp/BeaRAo20Rn7E0kcwlZieAU1nV804c7+lB47+6c43lu1fmp4MR2kq72\n4jBBY3q5u0gBz5/QIHIbbVbydwKBgQDhy3AvInsgMNa/bb7WS0+/pT6iBMe/30nH\nGJPrXhc5kRaJ/APMROHcooIAe5XyzIOvql1VpwoD7+ALRosudkFWw/jFJS7vntJe\nFv/LzctfMEZDcI/Kd7XVGoviwaQh1t4Im2Vr9Po16rG7gFOigxH9Zw5zw3VvlV07\niO1B7nyqfQKBgAaId+MQ/PcycWK35jI+tpubY5ADRiCvt9PlKY2ke0eT7hfIL+Gw\nfZw/c8wZh/WI7kIZaSLpoTK+Scboxw95FKHQngVwoRXcfxPZnGgiQNHu3W4Hxi5x\nIuYGjgh6gjvb+nXC0hf9w9Y4xPnkEUh5hArmyn1oPZOnkw3xTatPf67jAoGAEEPo\na+zO882w2o9cTPGV6BdOQLuZbA/4r5fsp+raP3JdLklyOJfJsWwfc0tzzM7AubnL\nCW2EAi6YdBd71Tf9kvOBCyqXi/lj7BU6DgNgIBZJKXiFUy92cMh9xTLv0OQ6kGIp\nVzKJh7LFZN1kqPNKK3fuCZbN8eDPm4dMmBBG+L0CgYAeH/2vLJYuOCKOTMpDPCHV\nVUM/6j2QWfB+S9pfEPcEaCd2ZH7kGIraeTkpnmp4F1Pn+PM7HDr0nvNVsvW5tbUo\n7kQSb+JTJ1NmQWg7hNYZQWgX7/nECGnKGIaAwkuavCtkgRK0LMSw3Hy3jbT0E8KU\nrIuI6Y9RjQqfHNbNLwG7Gw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "stripe-developement@made-to-cassie.iam.gserviceaccount.com",
+  "client_id": "116764053142020396146",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/stripe-developement%40made-to-cassie.iam.gserviceaccount.com"
+}

@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/comp
 import { first, map, Observable } from 'rxjs';
 import { Product } from 'app/models/products';
 import { convertSnaps } from './db-utils';
+import { IImageStorage } from 'app/models/maintenance';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +25,15 @@ export class ProductsService {
   get(id: string) {
     return this.productsCollection.doc(id).get();
   }
+
+  getProductImage(parentId: string): any {
+    var productImages: Observable<IImageStorage[]>;
+    var productImagesCollection: AngularFirestoreCollection<IImageStorage>;
+    productImagesCollection = this.afs.collection<IImageStorage>(`inventory/${parentId}/images`);
+    productImages = productImagesCollection.valueChanges({ idField: 'id' });
+    return productImages;
+  }
+
 
   findProductByUrl(id: string): Observable<Product | undefined > {
       return this.afs.collection('inventory',

@@ -37,6 +37,7 @@ import { imageItem } from 'app/models/imageItem';
 })
 
 export class LandingPageComponent implements OnInit {
+
   @Output() public topCollection: imageItem[] = [];
   @Output() public bottomCollection: imageItem[] = [];
 
@@ -67,6 +68,10 @@ export class LandingPageComponent implements OnInit {
     });
     this.createEmptyForm();
     this.populateImageList();
+  }
+
+  onServices(service: string) {
+     console.log(service);
   }
 
   onUpdate(contact: Contact) {

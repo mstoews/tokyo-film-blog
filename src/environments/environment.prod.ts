@@ -9,5 +9,8 @@ export const environment = {
     messagingSenderId: '819679326368',
     measurementId: 'G-WGMMJK9NR3',
   },
-  production: true
+  production: true,
+  api: {
+    baseUrl: "https://made-to-cassie.appspot.com"
+  }
 };

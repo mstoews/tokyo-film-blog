@@ -14,6 +14,10 @@ export const environment = {
     measurementId: 'G-WGMMJK9NR3',
   },
   production: false
+  ,
+  api: {
+    baseUrl: ""
+  }
 };
 
 /*

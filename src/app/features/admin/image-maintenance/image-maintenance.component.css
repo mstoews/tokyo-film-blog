@@ -61,13 +61,14 @@ drop_container .item--5 {
 
 .list {
   background: #f5f6fa;
-  font-size: 10px;
+  font-size: 12px;
   overflow: hidden;
   min-height: 100vh;
   display: block;
-  margin: 0;
+  margin: 5px;
   align-items: left;
 }
+
 .cdk-drop-list {
   padding: 0.5rem;
 }

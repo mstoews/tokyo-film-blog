@@ -1,187 +1,231 @@
-
-<!-- <grid-menubar
-  [inTitle]="sTitle"
-  (notifyParentRefresh)="Refresh()"
-  (notifyParentDelete)="Delete()"
-  (notifyParentAdd)="Add()"
-  (notifyParentClone)="Clone()"
->
-</grid-menubar> -->
-<mat-card *ngIf="allProducts$ | async as rows" >
-<mat-drawer-container class="flex-col h-full m-1">
-  <mat-drawer
-    class="h-screen"
-    #drawer
-    [opened]="false"
-    mode="over"
-    [position]="'end'"
-    [disableClose]="false" >
-    <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
-     <mat-card class="flex flex-col w-fill filter-article filter-interactive text-gray-700">
-      <mat-tab label="Inventory Description">
-        <ng-template matTabContent>
-          <div class="container">
-
-              <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
-                {{ sTitle }}
-              </div>
+<div class="h-screen">
+  <mat-drawer-container  class="flex-col h-full"  (onValueChangedEvent)="valueChangedEvent($event)" >
+    <mat-drawer
+      class="lg:w-5/8 md:w-3/4 sm:w-full bg-white-100"
+      #drawer
+      [opened]="false"
+      mode="over"
+      [position]="'end'"
+      [disableClose]="false" >
+      <mat-card>
+        <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">  {{ sTitle }}  </div>
+        <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
+          <mat-tab label="Inventory Details">
+            <ng-template matTabContent>
               <div mat-dialog-content>
-                <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form" >
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <input matInput placeholder="Brand" formControlName="brand" />
+                <form
+                  [formGroup]="prdGroup"
+                  (ngSubmit)="onUpdate(prdGroup.value)"
+                  class="form"  >
+
+                  <mat-form-field   class="form-element m-1" [ngStyle]="{ width: '48%' }" >
+                    <input  matInput placeholder="Brand" formControlName="brand" />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <input matInput placeholder="Price" formControlName="price" />
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }" >
+                    <input  matInput placeholder="Price" formControlName="price" />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }" >
-                    <input matInput placeholder="Description" formControlName="description" />
+                  <mat-form-field
+                    class="form-element m-1"
+                    [ngStyle]="{ width: '100%' }" >
+                    <input
+                      matInput
+                      placeholder="Description"
+                      formControlName="description" />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%'}" >
-                  <mat-label>Rich Description</mat-label>
-                    <textarea matInput formControlName="rich_description"> </textarea>
+                  <mat-form-field
+                    class="form-element m-1"
+                    [ngStyle]="{ width: '100%' }" >
+                    <mat-label>Rich Description</mat-label>
+                    <textarea matInput formControlName="rich_description">  </textarea>
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <mat-select placeholder="Category" formControlName="category" (selectionChange)="changeCategory($event.value)">
-                      <mat-option *ngFor="let p of categories" [value]="p.name">  {{ p.name }}  </mat-option>
-                   </mat-select>
+                  <mat-form-field
+                    class="form-element m-1"
+                    [ngStyle]="{ width: '48%' }" >
+                    <mat-select
+                      placeholder="Category"
+                      formControlName="category"
+                      (selectionChange)="changeCategory($event.value)"  >
+                      <mat-option *ngFor="let p of categories" [value]="p.name"> {{ p.name }} </mat-option>
+                    </mat-select>
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }" >
                     <input matInput placeholder="Rating" formControlName="rating" />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <input matInput placeholder="Featured" formControlName="is_featured"/>
+                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }" >
+                    <input matInput placeholder="Featured" formControlName="is_featured" />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <input matInput placeholder="User" formControlName="user_updated" />
+                  <mat-form-field
+                    class="form-element m-1"
+                    [ngStyle]="{ width: '48%' }"
+                  >
+                    <input
+                      matInput
+                      placeholder="User"
+                      formControlName="user_updated"
+                    />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <input  matInput placeholder="Created Date"  type="date"  id="date_created"  formControlName="date_created"  />
+                  <mat-form-field
+                    class="form-element m-1"
+                    [ngStyle]="{ width: '48%' }"
+                  >
+                    <input
+                      matInput
+                      placeholder="Created Date"
+                      type="date"
+                      id="date_created"
+                      formControlName="date_created"
+                    />
                   </mat-form-field>
 
-                  <mat-form-field class="form-element m-1" [ngStyle]="{ width: '48%' }">
-                    <input matInput placeholder="Updated Date" type="date" id="date_updated"  formControlName="date_updated" />
+                  <mat-form-field
+                    class="form-element m-1"
+                    [ngStyle]="{ width: '48%' }"
+                  >
+                    <input
+                      matInput
+                      placeholder="Updated Date"
+                      type="date"
+                      id="date_updated"
+                      formControlName="date_updated"
+                    />
                   </mat-form-field>
                 </form>
               </div>
               <div mat-dialog-actions>
-                <button mat-icon-button mat-flat-button (click)="onUpdate(product)"   color="primary" aria-label="Add" >
+                <button
+                  mat-icon-button
+                  mat-flat-button
+                  (click)="onUpdate(product)"
+                  color="primary"
+                  aria-label="Add"
+                >
                   <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
                 </button>
-                <button mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!prdGroup.valid"       >
+                <button
+                  mat-icon-button
+                  mat-flat-button
+                  (click)="onCreate()"
+                  color="primary"
+                  [disabled]="!prdGroup.valid"
+                >
                   <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
                 </button>
-                <button  mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!prdGroup.valid"        >
+                <button
+                  mat-icon-button
+                  mat-flat-button
+                  (click)="onDelete(product)"
+                  color="primary"
+                  [disabled]="!prdGroup.valid"
+                >
                   <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
                 </button>
-                <button  mat-icon-button mat-flat-button (click)="closeDialog()" color="warn"  >
+                <button
+                  mat-icon-button
+                  mat-flat-button
+                  (click)="closeDrawer()"
+                  color="warn"
+                >
                   <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                 </button>
               </div>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Inventory Images">
+            <ng-template matTabContent>
+              
+              <app-gallery-lightbox [galleryData]="imageArray" [showCount]="true">
+              </app-gallery-lightbox>
 
-          </div>
-        </ng-template>
-      </mat-tab>
+              <div mat-dialog-actions class="mt-10">
+                <button
+                  class="m-1"
+                  (click)="onImages()"
+                  mat-flat-button
+                  color="primary"
+                  aria-label="Add"
+                >
+                  <mat-icon [svgIcon]="'mat_outline:upload'"></mat-icon>
+                  Upload Images
+                </button>
 
-      <mat-tab label="Inventory Images">
-        <ng-template matTabContent>
+                <button
+                  class="m-1"
+                  (click)="onImages()"
+                  mat-flat-button
+                  color="primary"
+                  aria-label="Add"
+                >
+                  <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
+                  Select Images
+                </button>
+              </div>
+              <br />
+              <p>
+                Each image should have four 400x400 picture of the item.
+                Importing an image will create a 400px imagine automatically.
+              </p>
+            </ng-template>
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
+    </mat-drawer>
+    <ng-container *ngIf="allProducts$ | async as rows">
 
-            <app-gallery-lightbox [galleryData]="data" [showCount]="true">
-            </app-gallery-lightbox>
-
-            <div mat-dialog-actions class="mt-10">
-              <button class="m-1" (click)="onImages()" mat-flat-button color="primary" aria-label="Add" >
-                <mat-icon [svgIcon]="'mat_outline:upload'"></mat-icon>
-                Upload Images
-              </button>
-
-              <button class="m-1" (click)="onImages()" mat-flat-button color="primary" aria-label="Add" >
-                <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
-                Select Images
-              </button>
-            </div>
-            <br>
-            <p>Each image should have four 400x400 picture of the item. Importing an image will create a 400px imagine automatically.</p>
-
-        </ng-template>
-      </mat-tab>
-    </mat-card>
-    </mat-tab-group>
-  </mat-drawer>
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">
-        <ng-container matColumnDef="image">
-          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Image </th>
-          <td mat-cell *matCellDef="let element"> <img class="w-30 m-1" [src]="element.image"/> </td>
+
+        <ng-container  matColumnDef="image">
+          <th class="text-base font-bold text-gray-100" mat-header-cell *matHeaderCellDef>
+            Image
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <img class="w-30 m-1" [src]="element.image" />
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="description">
-          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Description </th>
-          <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          <th class="text-base font-bold text-gray-100" mat-header-cell *matHeaderCellDef>
+            Description
+          </th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="rich_description">
-          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Detail Description </th>
-          <td  mat-cell *matCellDef="let element"> <p class="w-200"> {{element.rich_description}} </p> </td>
-        </ng-container>
-
-
-        <ng-container matColumnDef="brand">
-          <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Brand </th>
-          <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+        <ng-container  matColumnDef="rich_description">
+          <th class="text-base font-bold text-gray-100" mat-header-cell *matHeaderCellDef>
+            Detail Description
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <p class="w-200">{{ element.rich_description }}</p>
+          </td>
         </ng-container>
 
         <ng-container matColumnDef="price">
-        <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Price </th>
-        <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          <th class="text-base font-bold text-gray-100" mat-header-cell *matHeaderCellDef>
+            Price
+          </th>
+          <td mat-cell *matCellDef="let element">$ {{ element.price }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="actions">
+          <th class="text-base font-bold ml-2" mat-header-cell *matHeaderCellDef > </th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button mat-flat-button (click)="onOpenButtonClicked(element)" color="primary">
+              <mat-icon [svgIcon]="'mat_outline:open_in_new'"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="category">
-            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Category </th>
-            <td mat-cell *matCellDef="let element"> {{element.category}} </td>
-          </ng-container>
-
-
-          <ng-container matColumnDef="rating">
-            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Rating </th>
-            <td mat-cell *matCellDef="let element"> {{element.rating}} </td>
-          </ng-container>
-
-
-          <ng-container matColumnDef="is_featured">
-            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> Used </th>
-            <td mat-cell *matCellDef="let element"> {{element.is_featured}} </td>
-          </ng-container>
-
-
-          <ng-container matColumnDef="user_updated">
-            <th class="text-base font-bold" mat-header-cell *matHeaderCellDef> User </th>
-            <td mat-cell *matCellDef="let element"> {{element.user_updated}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="actions">
-            <th class="text-base font-bold ml-2" mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-icon-button (click)="onToggleDrawer(element)" mat-flat-button color="primary">
-                <mat-icon [svgIcon]="'mat_outline:edit'"></mat-icon>
-              </button>
-            </td>
-          </ng-container>
-
-        <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr class="hover:bg-gray-100 m-1" mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
-
+        <tr class="text-base font-bold bg-gray-500 text-gray-100"  mat-header-row *matHeaderRowDef="columnsToDisplay" ></tr>
+        <tr class="hover:bg-gray-100 m-1" mat-row *matRowDef="let row; columns: columnsToDisplay" ></tr>
       </table>
 
-</mat-drawer-container>
-</mat-card>
-
-
-
+    </ng-container>
+  </mat-drawer-container>
+</div>

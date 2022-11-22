@@ -8,7 +8,7 @@
         <!-- Menu -->
         <div class="hidden h-10 text-2xl md:flex md:space-x-8">
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase" (click)="scrollToId('feature')">
+            <button class="uppercase font-garamond" (click)="scrollToId('feature')">
               Features
             </button>
             <div
@@ -16,7 +16,7 @@
             ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase" (click)="scrollToId('creations')">
+            <button class="uppercase  font-garamond" (click)="scrollToId('creations')">
               Services
             </button>
             <div
@@ -24,7 +24,7 @@
             ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase" (click)="scrollToId('gallery')">
+            <button class="uppercase  font-garamond" (click)="scrollToId('gallery')">
               Gallery
             </button>
             <div
@@ -32,19 +32,19 @@
             ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase" routerLink="/blog">Thoughts</button>
+            <button class="uppercase  font-garamond" routerLink="/blog">Thoughts</button>
             <div
               class="mx-2 group-hover:border-b group-hover:border-blue-50"
             ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase" routerLink="/shop">shop</button>
+            <button class="uppercase  font-garamond" routerLink="/shop">shop</button>
             <div
               class="mx-2 group-hover:border-b group-hover:border-blue-50"
             ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase" (click)="scrollToId('contact')">
+            <button class="uppercase  font-garamond" (click)="scrollToId('contact')">
               Contact
             </button>
             <div
@@ -53,11 +53,11 @@
           </div>
         </div>
       </nav>
-      <div class="max-w-4xl p-4 mt-32 mb-32 text-2xl text-white uppercase border-2 font-alata max-h-6xl md:p-10 md:m-32 md:mx-0 md:text-6xl" >
+      <div class="max-w-4xl p-4 mt-32 mb-32 text-2xl text-white uppercase border-2 font-garamond max-h-6xl md:p-10 md:m-32 md:mx-0 md:text-6xl" >
         {{ titleMessage }}
       </div>
       <!-- CTA Section -->
-      <div class="container flex mx-auto px-2 pb-32">
+      <div class="container flex mx-auto px-2 pb-12">
         <div class="hidden md:block mx-auto max-w-7xl py-6 px-4 text-center sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
           <span class="hidden sm:block">{{mainPageDoc.cta_left}}</span>
@@ -119,7 +119,7 @@
 
       <div  class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0"   >
         <!-- Image -->
-        <img src="assets/cassie_suit_dummy.jpg" alt="" />
+        <img src="https://storage.cloud.google.com/made-to-cassie.appspot.com/161714D0-73C9-4C75-8D15-B8B2F08EE5E1.JPG?authuser=0" alt="" />
 
         <!-- Text Container -->
         <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20"  >
@@ -142,7 +142,7 @@
       <!-- Creations Header -->
       <div class="relative justify-center my-32 mb-20 md:justify-between">
         <p class="text-4xl text-center uppercase md:text-left md:text-5xl">
-          Our Services
+          Services
         </p>
         <!-- <landing-banner></landing-banner> -->
 
@@ -168,83 +168,83 @@
       <!-- Items Container -->
       <div class="item-container">
         <!-- Item 1 -->
-        <div class="group item">
+        <div class="group item" (click)="onServices('tailoring')">
           <!-- Desktop Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/161714D0-73C9-4C75-8D15-B8B2F08EE5E1_400x400.JPG?authuser=0"
             alt=""
-            class="hidden w-full duration-200 md:block group-hover:scale-110"
+            class="hidden h-120 duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+          src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/161714D0-73C9-4C75-8D15-B8B2F08EE5E1_400x400.JPG?authuser=0"
             alt=""
             class="w-full md:hidden"
           />
           <!-- Item Gradient -->
           <div class="item-gradient"></div>
           <!-- Item Text -->
-          <h5>Buttons Hold Us Together</h5>
+          <h5>Bespoke Tailoring</h5>
         </div>
 
         <!-- Item 2 -->
-        <div class="group item">
+        <div class="group item" (click)="onServices('knitting')">
           <!-- Desktop Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F707D9404-83DC-4057-B788-440AEE148599_800x800.JPG?alt=media&token=9dd50397-faa5-45f0-948b-bdbf875f922c"
             alt=""
-            class="hidden w-full duration-200 md:block group-hover:scale-110"
+            class="hidden h-120  duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F707D9404-83DC-4057-B788-440AEE148599_800x800.JPG?alt=media&token=9dd50397-faa5-45f0-948b-bdbf875f922c"
             alt=""
             class="w-full md:hidden"
           />
           <!-- Item Gradient -->
           <div class="item-gradient"></div>
           <!-- Item Text -->
-          <h5>Buttons Hold Us Together</h5>
+          <h5>Bespoke Knitware</h5>
         </div>
 
         <!-- Item 3 -->
-        <div class="group item">
+        <div class="group item" (click)="onServices('repairs')">
           <!-- Desktop Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/63ADAB64-1D80-43A3-B761-BB82817EB4AE_400x400.JPG?authuser=0"
             alt=""
-            class="hidden w-full duration-200 md:block group-hover:scale-110"
+            class="hidden h-120  duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/63ADAB64-1D80-43A3-B761-BB82817EB4AE_400x400.JPG?authuser=0"
             alt=""
             class="w-full md:hidden"
           />
           <!-- Item Gradient -->
           <div class="item-gradient"></div>
           <!-- Item Text -->
-          <h5>Buttons Hold Us Together</h5>
+          <h5>Mending and Repairs</h5>
         </div>
 
         <!-- Item 4 -->
-        <div class="group item">
+        <div class="group item" (click)="onServices('ready')">
           <!-- Desktop Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F43662996-AD26-4EC1-AEAF-FDE9A137A76F_800x800.jpeg?alt=media&token=6885cc4e-28c1-4d88-ba6e-a94fb3121ab0"
             alt=""
-            class="hidden w-full duration-200 md:block group-hover:scale-110"
+            class="hidden h-120  duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
           <img
-            src="assets/cassie_vertical_scissors.jpg"
+            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F43662996-AD26-4EC1-AEAF-FDE9A137A76F_800x800.jpeg?alt=media&token=6885cc4e-28c1-4d88-ba6e-a94fb3121ab0"
             alt=""
             class="w-full md:hidden"
           />
           <!-- Item Gradient -->
           <div class="item-gradient"></div>
           <!-- Item Text -->
-          <h5>Buttons Hold Us Together</h5>
+          <h5>Ready to Wear</h5>
         </div>
       </div>
 

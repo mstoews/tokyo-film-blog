@@ -12,8 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 export class ProductDetailsFiveComponent implements OnInit {
 
   productId: string;
-  productItem: Observable<Product>;
-  product!: Product;
+  productItem$: Observable<Product | undefined>;
   sub: Subscription;
   Products$: Observable<Product[]>;
 
@@ -25,10 +24,29 @@ export class ProductDetailsFiveComponent implements OnInit {
   ngOnInit(): void {
     this.sub = this.activateRoute.params.subscribe(params => {
          const prd = this.productService.findProductByUrl(params['id']);
-         prd.subscribe((prod) => {
-            this.product = prod as Product;
-         })
+         if (prd){
+          this.productItem$ = prd;
+         }
     });
+  }
+
+  onAddToWishList()
+  {
+    this.productItem$.subscribe(product => {
+      if (product){
+         console.log('Add to wish list ...', product.id);
+      }
+    })
+
+  }
+
+  onAddToShoppingCart()
+  {
+    this.productItem$.subscribe(product => {
+      if (product){
+         console.log('Add to shopping cart ...', product.id);
+      }
+    })
   }
 
   onContinueShopping() {

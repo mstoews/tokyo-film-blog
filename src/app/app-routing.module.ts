@@ -38,6 +38,15 @@ const routes: Route[] = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome }
    },
+   {
+    path: 'stripe-checkout',
+    loadChildren: () => import('./features/stripe/stripe.module').then( (mod) => mod.StripeModule),
+   },
+   {
+    path: '**',
+    redirectTo: '/'
+   },
+
 ];
 
 @NgModule({

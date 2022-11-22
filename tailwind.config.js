@@ -88,9 +88,7 @@ const config = {
                 '0': '0 0 auto'
             },
             fontFamily              : {
-                sans: `"Inter var", ${defaultTheme.fontFamily.sans.join(',')}`,
-                mono: `"IBM Plex Mono", ${defaultTheme.fontFamily.mono.join(',')}`,
-                alata: `"Alata", ${defaultTheme.fontFamily.mono.join(',')}`,
+                'garamond': ['"Cormorant Garamond"', 'serif']
             },
             opacity                 : {
                 12: '0.12',
@@ -275,7 +273,7 @@ const config = {
 
         // Other third party and/or custom plugins
         require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),
-        require('@tailwindcss/line-clamp')
+        require('@tailwindcss/line-clamp'),
     ]
 };
 
