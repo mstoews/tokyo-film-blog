@@ -243,6 +243,4 @@ export class ImageListService {
         });
       });
   }
-
-
 }

@@ -29,7 +29,12 @@
         <!-- FEATURED -->
         <div class="item--2 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
           <div class="image_title sticky top-0 z-50">FEATURED</div>
-            <div cdkDropList #featured="cdkDropList" [id]="IN_FEATURED" [cdkDropListData]="featuredImages" class="list" (cdkDropListDropped)="drop($event)">
+            <div
+            cdkDropList #featured="cdkDropList"
+            [id]="IN_FEATURED"
+            [cdkDropListData]="featuredImages"
+            class="list"
+            (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of featuredImages" cdkDrag>
               <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
             </div>
@@ -56,7 +61,12 @@
         <!-- GALLERY -->
         <div class="item--5 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
           <div class="image_title sticky top-0 z-50 uppercase lg-rounded">gallery</div>
-          <div cdkDropList #gallerys="cdkDropList" [cdkDropListData]="galleryImages" [id]="IN_GALLERY" class="list" (cdkDropListDropped)="drop($event)">
+          <div
+             cdkDropList #gallerys="cdkDropList"
+             [cdkDropListData]="galleryImages"
+             [id]="IN_GALLERY"
+             class="list"
+             (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of galleryImages" cdkDrag>
               <app-image-card [url]="item.imageSrc" [file_name]="item.caption"></app-image-card>
             </div>
