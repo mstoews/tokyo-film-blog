@@ -1,9 +1,9 @@
-<fuse-card  class="flex flex-col w-full max-w-120 filter-article filter-interactive text-gray-700"
+<fuse-card  class="flex flex-col w-full max-w-140 filter-article filter-interactive text-gray-700"
                 [flippable]="true"
                 [face]="'front'"
                 #flippableCard01="fuseCard">
     <ng-container fuseCardFront>
-        <img  class="object-cover w-120 h-80"
+        <img  class="object-cover w-140"
               [src]="product.image"
               alt="Card cover image"/>
               <div class="m-8 mb-4">
@@ -34,6 +34,9 @@
                         <div class="mt-4">
                                 {{product.rich_description}}
                         </div>
+                        <div class="mt-4">
+                          $ {{product.price}}
+                  </div>
         </div>
       </div>
     </ng-container>

@@ -3,15 +3,27 @@ import { BlogService } from 'app/services/blog.service';
 import { Blog } from 'app/models/blog'
 import { Observable } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
 })
 export class BlogComponent implements OnInit {
-valueChangedEvent($event: Event) {
+
+
+constructor(
+    private route: Router,
+    private blogService: BlogService ) { }
+
+  valueChangedEvent($event: Event) {
 throw new Error('Method not implemented.');
 }
+
+backToHome() {
+  this.route.navigate(['home']);
+}
+
 
 @ViewChild('drawer') drawer: MatDrawer;
 
@@ -47,7 +59,7 @@ toggleDrawer() {
 }
 
 
-  constructor(private blogService: BlogService ) { }
+
 
   allBlogs$: Observable<Blog[]>;
   blog: Blog;

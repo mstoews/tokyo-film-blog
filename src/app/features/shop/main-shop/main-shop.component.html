@@ -7,6 +7,12 @@
                     <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">Shopping</p>
                 </div>
             </div>
+            <button
+            mat-icon-button
+            (click)="backToHome()"
+            class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
+            <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+          </button>
             <!--
               <button class="relative flex py-3 pr-12 rounded-sm hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 jusitfy-center item-center">
                 <p class="text-base font-normal leading-3 text-gray-600">Filters</p>
