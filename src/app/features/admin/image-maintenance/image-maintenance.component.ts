@@ -111,7 +111,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
 
-  drop(event: CdkDragDrop<imageItem[]>): void {
+  drop(event: CdkDragDrop<imageItem[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

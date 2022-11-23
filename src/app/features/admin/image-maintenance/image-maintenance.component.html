@@ -15,8 +15,12 @@
         <!-- NOT_USED -->
         <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
           <div class="image_title sticky top-0 z-50">Unused Images</div>
-          <div cdkDropList #notused="cdkDropList" [id]="IN_NOT_USED" [cdkDropListData]="not_usedImages"
-            class="list" (cdkDropListDropped)="drop($event)" >
+          <div cdkDropList
+            #notused="cdkDropList"
+            [id]="IN_NOT_USED"
+            [cdkDropListData]="not_usedImages"
+            class="list"
+            (cdkDropListDropped)="drop($event)" >
             <div *ngFor="let item of not_usedImages" cdkDrag>
               <app-image-card [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
             </div>

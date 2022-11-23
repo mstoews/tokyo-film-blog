@@ -32,7 +32,7 @@ export class ImageListService {
     this.RawImagesCollection = afs.collection<rawImageItem>('rawimagelist');
     this.rawImageItems = this.RawImagesCollection.valueChanges({ idField: 'id' });
 
-    this.ImageItemsCollection = afs.collection<imageItem>('imageslist');
+    this.ImageItemsCollection = afs.collection<imageItem>('imageslist', ref => ref.orderBy('ranking'));
     this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
   }
 
