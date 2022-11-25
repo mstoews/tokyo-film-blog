@@ -28,7 +28,6 @@ export class GalleryComponent implements OnInit {
       .ref('/800')
       .listAll()
       .subscribe((files) => {
-
         files.items.forEach((imageRef) => {
           imageCount++;
           imageRef.getDownloadURL().then((downloadURL) => {

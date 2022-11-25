@@ -43,6 +43,7 @@ specifiers:
   ngx-filesaver: ^14.0.0
   ngx-image-cropper: ^6.2.2
   ngx-lightbox: ^2.6.2
+  ngx-useful-swiper: ^10.0.1
   postcss: ^8.4.14
   prettier: ^2.7.1
   prettier-standalone: 1.3.1-0
@@ -86,6 +87,7 @@ dependencies:
   ngx-filesaver: 14.0.0_wjbx3jsmwztujm3ulvhxwpytxe
   ngx-image-cropper: 6.2.2_h6njdmy6yexu34525ahnjen7e4
   ngx-lightbox: 2.6.2_@types+file-saver@2.0.5
+  ngx-useful-swiper: 10.0.1_xcl5hprfagligkl5b6m353zjkq
   prettier: 2.7.1
   prettier-standalone: 1.3.1-0
   rxfire: 6.0.3_firebase@9.13.0+rxjs@7.5.7
@@ -6425,6 +6427,19 @@ packages:
       ngx-filesaver: 8.1.0_wjbx3jsmwztujm3ulvhxwpytxe
     transitivePeerDependencies:
       - '@types/file-saver'
+    dev: false
+
+  /ngx-useful-swiper/10.0.1_xcl5hprfagligkl5b6m353zjkq:
+    resolution: {integrity: sha512-mkjdcnx7ampyzlv3F8wzNfeVvRfS0frJjLUljIL0VGUkKGBW9D0C4zvENygY5kjX8KMRJk4wh0c1pA3S7prLzw==}
+    peerDependencies:
+      '@angular/common': '>=6.0.0 || >=7.0.0 || >=8.0.0 || >=9.0.0 || >=10.0.0'
+      '@angular/core': '>=6.0.0 || >=7.0.0 || >=8.0.0 || >=9.0.0  || >=10.0.0'
+      swiper: ^6.0.0
+    dependencies:
+      '@angular/common': 14.2.3_dl6nhes4q4z2qmdibnjjcqvs3m
+      '@angular/core': 14.2.3_rxjs@7.5.7+zone.js@0.11.8
+      swiper: 8.4.2
+      tslib: 2.4.0
     dev: false
 
   /nice-napi/1.0.2:

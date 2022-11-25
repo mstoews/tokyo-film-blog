@@ -26,6 +26,9 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
 import { ExampleGridComponent } from './example-grid/example-grid.component';
 import { SafePipe } from './safe.pipe';
+import { InventoryContentComponent } from './inventory-content/inventory-content.component';
+import { SwiperModule } from 'swiper/angular';
+
 
 const routes: Routes = [
   {
@@ -66,6 +69,7 @@ const routes: Routes = [
     ServicesComponent,
     ExampleGridComponent,
     SafePipe,
+    InventoryContentComponent,
 
   ],
   imports: [
@@ -80,7 +84,9 @@ const routes: Routes = [
     GalleryLightboxModule,
     DxPopupModule,
     TextEditorModule,
-    DxHtmlEditorModule
+    DxHtmlEditorModule,
+    SwiperModule,
+  
   ],
   exports: [
     AdminComponent,
