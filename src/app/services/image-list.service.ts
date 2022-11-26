@@ -183,48 +183,8 @@ export class ImageListService {
 
   createRawImagesList() {
     var ranking = 0;
-    this.storage
-      .ref('/400')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          ranking++;
-          imageRef.getDownloadURL().then((downloadURL) => {
-            const imageUrl = downloadURL;
-            const imageData: any = {
-              caption: imageRef.fullPath,
-              type: 'IN_NOT_USED',
-              imageSrc: imageUrl,
-              imageAlt: imageRef.name,
-              ranking: ranking
-            };
-            this.createRawImage(imageData)
-          });
-        });
-      });
-
       this.storage
       .ref('/800')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          ranking++;
-          imageRef.getDownloadURL().then((downloadURL) => {
-            const imageUrl = downloadURL;
-            const imageData: any = {
-              caption: imageRef.fullPath,
-              type: 'IN_NOT_USED',
-              imageSrc: imageUrl,
-              imageAlt: imageRef.name,
-              ranking: ranking
-            };
-            this.createRawImage(imageData)
-          });
-        });
-      });
-
-      this.storage
-      .ref('/')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {

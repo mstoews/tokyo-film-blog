@@ -8,48 +8,28 @@
         <!-- Menu -->
         <div class="hidden h-10 text-2xl md:flex md:space-x-8">
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase font-garamond" (click)="scrollToId('feature')">
-              Features
-            </button>
-            <div
-              class="mx-2 group-hover:border-b group-hover:border-blue-50"
-            ></div>
+            <button class="uppercase font-garamond" (click)="scrollToId('feature')"> Features </button>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50" ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase  font-garamond" (click)="scrollToId('creations')">
-              Services
-            </button>
-            <div
-              class="mx-2 group-hover:border-b group-hover:border-blue-50"
-            ></div>
+            <button class="uppercase font-garamond" (click)="scrollToId('services')">  Services </button>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50" ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase  font-garamond" (click)="scrollToId('gallery')">
-              Gallery
-            </button>
-            <div
-              class="mx-2 group-hover:border-b group-hover:border-blue-50"
-            ></div>
+            <button class="uppercase  font-garamond" (click)="scrollToId('gallery')"> Gallery </button>
+            <div  class="mx-2 group-hover:border-b group-hover:border-blue-50" ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
             <button class="uppercase  font-garamond" routerLink="/blog">Thoughts</button>
-            <div
-              class="mx-2 group-hover:border-b group-hover:border-blue-50"
-            ></div>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50" ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
             <button class="uppercase  font-garamond" routerLink="/shop">shop</button>
-            <div
-              class="mx-2 group-hover:border-b group-hover:border-blue-50"
-            ></div>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50" ></div>
           </div>
           <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase  font-garamond" (click)="scrollToId('contact')">
-              Contact
-            </button>
-            <div
-              class="mx-2 group-hover:border-b group-hover:border-blue-50"
-            ></div>
+            <button class="uppercase  font-garamond" (click)="scrollToId('contact')"> Contact </button>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50" ></div>
           </div>
         </div>
       </nav>
@@ -64,8 +44,8 @@
           </h2>
           <div class="mt-4 flex justify-center">
             <div class="hidden md:block sm:inline-flex rounded-md shadow">
-              <button (click)="scrollToId('creations')"
-                class="hidden md:block font-garamond inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-400">
+              <button (click)="scrollToId('services')"
+                class="hidden md:block font-garamond inline-flex items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 font-medium text-gray-600 hover:bg-gray-700 hover:text-gray-100">
                 Made-To Services
               </button>
             </div>
@@ -78,7 +58,7 @@
           <div class="mt-4 flex justify-center">
           <div class="ml-3 inline-flex">
             <button (click)="scrollToId('contact')"
-              class="hidden sm:inline-flex font-garamond items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-400">
+              class="hidden sm:inline-flex font-garamond items-center justify-center rounded-md border border-transparent bg-gray-200 px-5 py-3 text-base font-medium text-gray-600 hover:bg-gray-700 hover:text-gray-100">
                 Contact Made-To
             </button>
           </div>
@@ -93,33 +73,28 @@
   <section id="feature" class="scroll-mt-20">
     <!-- Feature Container -->
     <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
-      <!-- Creations Header -->
 
       <div class="relative justify-center my-32 mb-20 md:justify-between">
-        <p class="text-4xl font-garamond text-left uppercase md:text-left md:text-5xl">
+        <p class="text-4xl font-garamond text-center uppercase md:text-left md:text-5xl">
           Features
         </p>
 
         <div class="hidden md:block sm:block">
-          <button
-            mat-icon-button
-            (click)="scrollToId('creations')"
-            class="uppercase absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"   >
+          <button  mat-icon-button  class="uppercase"  (click)="scrollToId('services')"          class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"        >
             <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
           </button>
 
-          <button
-            mat-icon-button
-            (click)="scrollToId('hero')"
-            class="uppercase absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button  mat-icon-button  class="uppercase"  (click)="scrollToId('hero')"    class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"        >
             <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
           </button>
-        </div>
+          </div>
       </div>
 
       <div  class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0"   >
         <!-- Image -->
-        <img src="https://storage.cloud.google.com/made-to-cassie.appspot.com/161714D0-73C9-4C75-8D15-B8B2F08EE5E1.JPG?authuser=0" alt="" />
+        <img [src]="features_image"   alt="features"  class="hidden w-400 duration-200 md:block group-hover:scale-110"          />
+          <!-- Mobile Image -->
+        <img [src]="features_image"  alt="features"  class="w-full md:hidden" />
 
         <!-- Text Container -->
         <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20"  >
@@ -135,7 +110,7 @@
     </div>
   </section>
 
-  <section id="creations" class="scroll-mt-20">
+  <section id="services" class="scroll-mt-20">
     <!-- Creations Container -->
 
     <div class="container max-w-6xl px-6 mx-auto my-32 text-gray-900 md:px-0">
@@ -144,23 +119,12 @@
         <p class="text-4xl font-garamond text-center uppercase md:text-left md:text-5xl">
           Services
         </p>
-        <!-- <landing-banner></landing-banner> -->
 
-        <button
-          mat-icon-button
-          class="uppercase"
-          (click)="scrollToId('gallery')"
-          class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
-        >
+        <button  mat-icon-button  class="uppercase"  (click)="scrollToId('gallery')"          class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"        >
           <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
         </button>
 
-        <button
-          mat-icon-button
-          class="uppercase"
-          (click)="scrollToId('feature')"
-          class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
-        >
+        <button  mat-icon-button  class="uppercase"  (click)="scrollToId('hero')"    class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"        >
           <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
         </button>
       </div>
@@ -171,15 +135,10 @@
         <div class="group item" (click)="onServices('home/tailoring')">
           <!-- Desktop Image -->
           <img
-            src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/161714D0-73C9-4C75-8D15-B8B2F08EE5E1_400x400.JPG?authuser=0"
-            alt=""
-            class="hidden h-120 duration-200 md:block group-hover:scale-110"
+            [src]="services_one"   alt="services"  class="hidden h-120 duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
-          <img
-          src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/161714D0-73C9-4C75-8D15-B8B2F08EE5E1_400x400.JPG?authuser=0"
-            alt=""
-            class="w-full md:hidden"
+          <img [src]="services_one"  alt="services"  class="w-full md:hidden"
           />
           <!-- Item Gradient -->
           <div class="item-gradient"></div>
@@ -191,14 +150,12 @@
         <div class="group item" (click)="onServices('home/knitting')">
           <!-- Desktop Image -->
           <img
-            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F707D9404-83DC-4057-B788-440AEE148599_800x800.JPG?alt=media&token=9dd50397-faa5-45f0-948b-bdbf875f922c"
+          [src]="services_two"
             alt=""
             class="hidden h-120  duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F707D9404-83DC-4057-B788-440AEE148599_800x800.JPG?alt=media&token=9dd50397-faa5-45f0-948b-bdbf875f922c"
-            alt=""
+          <img [src]="services_two"  alt=""
             class="w-full md:hidden"
           />
           <!-- Item Gradient -->
@@ -211,13 +168,13 @@
         <div class="group item" (click)="onServices('home/repairs')">
           <!-- Desktop Image -->
           <img
-            src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/63ADAB64-1D80-43A3-B761-BB82817EB4AE_400x400.JPG?authuser=0"
+            [src]="services_three"
             alt=""
             class="hidden h-120  duration-200 md:block group-hover:scale-110"
           />
           <!-- Mobile Image -->
           <img
-            src="https://storage.cloud.google.com/made-to-cassie.appspot.com/400/63ADAB64-1D80-43A3-B761-BB82817EB4AE_400x400.JPG?authuser=0"
+            [src]="services_three"
             alt=""
             class="w-full md:hidden"
           />
@@ -230,14 +187,10 @@
         <!-- Item 4 -->
         <div class="group item" (click)="onServices('home/ready-to-wear')">
           <!-- Desktop Image -->
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/IMG_1257_polarr.JPEG?alt=media&token=e4e3c251-4c5f-4f77-8bdc-1c99cded82bb"
-            alt=""
-            class="hidden h-120  duration-200 md:block group-hover:scale-110"
-          />
+          <img [src]="services_four" alt="" class="hidden h-120  duration-200 md:block group-hover:scale-110" />
           <!-- Mobile Image -->
           <img
-          src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/IMG_1257_polarr.JPEG?alt=media&token=e4e3c251-4c5f-4f77-8bdc-1c99cded82bb"
+            [src]="services_four"
             alt=""
             class="w-full md:hidden"
           />
@@ -267,7 +220,7 @@
         <button
           mat-icon-button
           class="uppercase"
-          (click)="scrollToId('creations')"
+          (click)="scrollToId('services')"
           class="absolute top-0 mb-1 items-center text-3xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700"
         >
           <mat-icon [svgIcon]="'heroicons_outline:arrow-up'"></mat-icon>
@@ -278,7 +231,7 @@
   </section>
 
   <!-- Contacts Section -->
-  <section id="contact" class="scroll-mt-2">
+  <section id="contact" class="scroll-mt-20">
     <!-- Creations Container -->
     <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
       <!-- Creations Header -->
@@ -289,7 +242,7 @@
         <button
           mat-icon-button
           class="uppercase"
-          (click)="scrollToId('creations')"
+          (click)="scrollToId('services')"
           class="absolute top-0 mb-1 items-center text-3xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700"
         >
           <mat-icon [svgIcon]="'heroicons_outline:arrow-up'"></mat-icon>
