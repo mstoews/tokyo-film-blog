@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AdminComponent } from './admin/admin.component';
 import { CreationsGridComponent } from './products-grid/products-grid.component';
 import { OrdersGridComponent } from './orders-grid/orders-grid.component';
@@ -20,7 +20,6 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { ScreenCardComponent } from './screen-card/screen-card.component';
 import { InventoryComponent } from './inventory-grid/inventory-grid.component'
 import { AdminFormComponent } from './admin-form/admin-form.component';
-import { TextEditorModule } from './text-editor/text-editor.module';
 import { DxHtmlEditorModule  } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
@@ -28,6 +27,7 @@ import { ExampleGridComponent } from './example-grid/example-grid.component';
 import { SafePipe } from './safe.pipe';
 import { InventoryContentComponent } from './inventory-content/inventory-content.component';
 import { SwiperModule } from 'swiper/angular';
+
 
 
 const routes: Routes = [
@@ -83,10 +83,9 @@ const routes: Routes = [
     FuseCardModule,
     GalleryLightboxModule,
     DxPopupModule,
-    TextEditorModule,
     DxHtmlEditorModule,
     SwiperModule,
-  
+    NgOptimizedImage
   ],
   exports: [
     AdminComponent,

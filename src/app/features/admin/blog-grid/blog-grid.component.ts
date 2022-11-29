@@ -7,7 +7,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { TextService } from '../text-editor/text.service';
 import { Item } from 'app/models/item'
 import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -16,7 +15,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
   selector: 'blog-list',
   templateUrl: './blog-grid.component.html',
   styleUrls: ['./blog-grid.component.css'],
-  providers: [TextService]
 })
 export class BlogGridComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;

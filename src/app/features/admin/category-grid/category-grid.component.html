@@ -1,86 +1,38 @@
 <div class="h-screen">
-  <grid-menubar
-    [inTitle]="sTitle"
-    (notifyParentRefresh)="Refresh()"
-    (notifyParentDelete)="Delete()"
-    (notifyParentAdd)="Add()"
-    (notifyParentClone)="Clone()"
-  >
+  <grid-menubar [inTitle]="sTitle" (notifyParentRefresh)="Refresh()" (notifyParentDelete)="Delete()"
+    (notifyParentAdd)="Add()" (notifyParentClone)="Clone()">
   </grid-menubar>
   <mat-drawer-container class="flex-col h-full">
-    <mat-drawer
-      class="lg:w-1/4 sm:w-full bg-white-100"
-      #drawer
-      [opened]="false"
-      mode="side"
-      [position]="'end'"
-      [disableClose]="false"
-    >
-      <fuse-card  class="flex flex-col w-full max-w-120 filter-article filter-interactive text-gray-700 m-2"  >
-        <div
-          mat-dialog-title
-          [ngStyle]="{ 'border-left': '10px solid' + cRAG }" >
+    <mat-drawer class="lg:w-1/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
+      [disableClose]="false">
+      <fuse-card class="flex flex-col w-full max-w-120 filter-article filter-interactive text-gray-700 m-2">
+        <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }">
           {{ sTitle }}
         </div>
         <div mat-dialog-content>
-          <form
-            [formGroup]="categoryGroup"
-            (ngSubmit)="onUpdate(categoryGroup.value)"
-            class="form" >
-            <mat-form-field
-              class="form-element m-1"
-              [ngStyle]="{ width: '100%' }" >
-              <input
-                matInput
-                placeholder="Category Name"
-                formControlName="name"
-              />
+          <form [formGroup]="categoryGroup" (ngSubmit)="onUpdate(categoryGroup.value)" class="form">
+            <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
+              <input matInput placeholder="Category Name" formControlName="name" />
             </mat-form-field>
           </form>
         </div>
         <div mat-dialog-actions>
-          <button
-            mat-icon-button
-            mat-flat-button
-            (click)="onUpdate(category)"
-            color="primary"
-            aria-label="Add"
-          >
+          <button mat-icon-button (click)="onUpdate(category)" color="primary" aria-label="Add">
             <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="onCreate()"
-            mat-flat-button
-            color="primary"
-            [disabled]="!categoryGroup.valid"
-          >
+          <button mat-icon-button (click)="onCreate()"  color="primary"
+            [disabled]="!categoryGroup.valid">
             <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="onDelete(category)"
-            mat-flat-button
-            color="primary"
-            [disabled]="!categoryGroup.valid"
-          >
+          <button mat-icon-button (click)="onDelete(category)" color="primary"
+            [disabled]="!categoryGroup.valid">
             <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="onImages()"
-            mat-flat-button
-            color="primary"
-            [disabled]="!categoryGroup.valid"
-          >
+          <button mat-icon-button (click)="onImages()" color="primary"
+            [disabled]="!categoryGroup.valid">
             <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="closeDialog()"
-            mat-flat-button
-            color="warn"
-          >
+          <button mat-icon-button (click)="closeDialog()" color="warn">
             <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
           </button>
         </div>
@@ -88,18 +40,9 @@
     </mat-drawer>
 
     <ng-container *ngIf="allCategories$ | async as rows">
-      <dx-data-grid
-        flex
-        id="categoryGrid"
-        [dataSource]="rows"
-        [showBorders]="true"
-        [focusedRowEnabled]="true"
-        [focusedRowIndex]="0"
-        (onCellDblClick)="onCellDoublClicked($event)"
-        [repaintChangesOnly]="true"
-        (onFocusedRowChanged)="onFocusedRowChanged($event)"
-        keyExpr="id"
-      >
+      <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
+        [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true"
+        (onFocusedRowChanged)="onFocusedRowChanged($event)" keyExpr="id">
         <dxi-column width="500px" dataField="name"> </dxi-column>
       </dx-data-grid>
     </ng-container>

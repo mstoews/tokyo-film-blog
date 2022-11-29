@@ -2,9 +2,8 @@
     <div class="gallery">
         <mat-card
             cdkDropList
-            
             *ngFor="let data of galleryData; let i=index" class="gallery-img" cdkDrag>
-            <img (click)="onPreviewImage(i)" [src]="data.url" [alt]="data.name">
+            <img (click)="onPreviewImage(i)" [ngSrc]="data.url" width="200" height="200" [alt]="data.name">
         </mat-card>
 
         <!-- <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
@@ -17,16 +16,16 @@
             {{currentIndex + 1}}/{{totalImageCount}}
         </span>
 
-        <button *ngIf="controls" class="close-btn"  mat-icon-button (click)="onClosePreview()"  mat-flat-button  color="primary" >
+        <button *ngIf="controls" class="close-btn"  mat-icon-button (click)="onClosePreview()"   color="primary" >
           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
 
-        <button *ngIf="controls" class="btn-lightbox-carousel btn-prev"  mat-icon-button (click)="prev()"  mat-flat-button  color="primary" >
+        <button *ngIf="controls" class="btn-lightbox-carousel btn-prev"  mat-icon-button (click)="prev()"  color="primary" >
           <mat-icon [svgIcon]="'heroicons_outline:arrow-circle-left'"></mat-icon>
         </button>
 
 
-        <button *ngIf="controls" class="btn-lightbox-carousel btn-next"  mat-icon-button (click)="next()"  mat-flat-button  color="primary" >
+        <button *ngIf="controls" class="btn-lightbox-carousel btn-next"  mat-icon-button (click)="next()"  color="primary" >
             <mat-icon [svgIcon]="'heroicons_outline:arrow-circle-right'"></mat-icon>
         </button>
 
@@ -34,7 +33,7 @@
         <div *ngIf="previewImage"
             [@animation]="{value: 'visible'}"
             (@animation.done)="onAnimationEnd($event)" >
-            <img class="object-scale-down w-160"  [src]="currentLightboxImage.url" [alt]="currentLightboxImage.name">
+            <img [src]="currentLightboxImage.url" width="600" height="600" [alt]="currentLightboxImage.name">
         </div>
       </mat-card>
     </div>

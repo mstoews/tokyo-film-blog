@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LandingPageComponent } from './landing-page.component';
 import { GalleryCardComponent } from '../../components/gallery-card/gallery-card.component';
 import { GalleryComponent } from '../../components/gallery/gallery.component'
@@ -59,6 +59,10 @@ const routes: Routes = [
     MadeToServicesModule,
     LightboxModule,
     RouterModule.forChild(routes),
+    NgOptimizedImage
   ]
 })
-export class LandingPageModule { }
+
+export class LandingPageModule {
+
+}

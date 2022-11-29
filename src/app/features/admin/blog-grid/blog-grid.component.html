@@ -1,36 +1,15 @@
-
-
 <div class="h-screen">
 
-  <mat-drawer-container   class="flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)" >
-    <mat-drawer
-      class="lg:w-5/8 md:w-3/4 sm:w-full bg-white-100"
-      #drawer
-      [opened]="false"
-      mode="over"
-      [position]="'end'"
-      [disableClose]="false"
-    >
-      <mat-card
-        class="flex flex-col w-full filter-article filter-interactive text-gray-700"
-      >
-        <div
-          mat-dialog-title
-          [ngStyle]="{ 'border-left': '10px solid' + cRAG }"
-        >
+  <mat-drawer-container class="flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
+    <mat-drawer class="lg:w-5/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'"
+      [disableClose]="false">
+      <mat-card class="flex flex-col w-full filter-article filter-interactive text-gray-700">
+        <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }">
           {{ sTitle }}
         </div>
         <div mat-dialog-content>
-          <form
-            #blogForm="ngForm"
-            [formGroup]="blogGroup"
-            (ngSubmit)="onUpdate(blogGroup.value)"
-            class="form"
-          >
-            <mat-form-field
-              class="form-element m-1"
-              [ngStyle]="{ width: '100%' }"
-            >
+          <form #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)" class="form">
+            <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
               <input matInput placeholder="Title" formControlName="title" />
             </mat-form-field>
             <mat-tab-group #tabGroup class="m-2">
@@ -42,19 +21,14 @@
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
-                      <dxi-item
-                        name="size"
-                        [acceptedValues]="['8pt','10pt',
+                      <dxi-item name="size" [acceptedValues]="['8pt','10pt',
                           '12pt',
                           '14pt',
                           '18pt',
                           '24pt',
                           '36pt'
-                        ]"
-                      ></dxi-item>
-                      <dxi-item
-                        name="font"
-                        [acceptedValues]="[
+                        ]"></dxi-item>
+                      <dxi-item name="font" [acceptedValues]="[
                           'Arial',
                           'Courier New',
                           'Georgia',
@@ -63,8 +37,7 @@
                           'Tahoma',
                           'Times New Roman',
                           'Verdana'
-                        ]"
-                      ></dxi-item>
+                        ]"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
                       <dxi-item name="bold"></dxi-item>
                       <dxi-item name="italic"></dxi-item>
@@ -79,10 +52,7 @@
                       <dxi-item name="orderedList"></dxi-item>
                       <dxi-item name="bulletList"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
-                      <dxi-item
-                        name="header"
-                        [acceptedValues]="[false, 1, 2, 3, 4, 5]"
-                      ></dxi-item>
+                      <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
                       <dxi-item name="color"></dxi-item>
                       <dxi-item name="background"></dxi-item>
@@ -105,19 +75,14 @@
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
-                      <dxi-item
-                        name="size"
-                        [acceptedValues]="['8pt','10pt',
+                      <dxi-item name="size" [acceptedValues]="['8pt','10pt',
                           '12pt',
                           '14pt',
                           '18pt',
                           '24pt',
                           '36pt'
-                        ]"
-                      ></dxi-item>
-                      <dxi-item
-                        name="font"
-                        [acceptedValues]="[
+                        ]"></dxi-item>
+                      <dxi-item name="font" [acceptedValues]="[
                           'Arial',
                           'Courier New',
                           'Georgia',
@@ -126,44 +91,32 @@
                           'Tahoma',
                           'Times New Roman',
                           'Verdana'
-                        ]"
-                      ></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="bold"></dxi-item>
-                      <dxi-item name="italic"></dxi-item>
-                      <dxi-item name="strike"></dxi-item>
-                      <dxi-item name="underline"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="alignLeft"></dxi-item>
-                      <dxi-item name="alignCenter"></dxi-item>
-                      <dxi-item name="alignRight"></dxi-item>
-                      <dxi-item name="alignJustify"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="orderedList"></dxi-item>
-                      <dxi-item name="bulletList"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item
-                        name="header"
-                        [acceptedValues]="[false, 1, 2, 3, 4, 5]"
-                      ></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="color"></dxi-item>
-                      <dxi-item name="background"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="link"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="clear"></dxi-item>
-                      <dxi-item name="codeBlock"></dxi-item>
-                      <dxi-item name="blockquote"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="insertTable"></dxi-item>
-                      <dxi-item name="deleteTable"></dxi-item>
-                      <dxi-item name="insertRowAbove"></dxi-item>
-                      <dxi-item name="insertRowBelow"></dxi-item>
-                      <dxi-item name="deleteRow"></dxi-item>
-                      <dxi-item name="insertColumnLeft"></dxi-item>
-                      <dxi-item name="insertColumnRight"></dxi-item>
-                      <dxi-item name="deleteColumn"></dxi-item>
+                        ]"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="bold"></dxi-item>
+                        <dxi-item name="italic"></dxi-item>
+                        <dxi-item name="strike"></dxi-item>
+                        <dxi-item name="underline"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="alignLeft"></dxi-item>
+                        <dxi-item name="alignCenter"></dxi-item>
+                        <dxi-item name="alignRight"></dxi-item>
+                        <dxi-item name="alignJustify"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="orderedList"></dxi-item>
+                        <dxi-item name="bulletList"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="color"></dxi-item>
+                        <dxi-item name="background"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="link"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="clear"></dxi-item>
+                        <dxi-item name="codeBlock"></dxi-item>
+                        <dxi-item name="blockquote"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
                     </dxo-toolbar>
                   </dx-html-editor>
                 </ng-template>
@@ -176,19 +129,14 @@
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
                       <dxi-item name="separator"></dxi-item>
-                      <dxi-item
-                        name="size"
-                        [acceptedValues]="['8pt','10pt',
+                      <dxi-item name="size" [acceptedValues]="['8pt','10pt',
                           '12pt',
                           '14pt',
                           '18pt',
                           '24pt',
                           '36pt'
-                        ]"
-                      ></dxi-item>
-                      <dxi-item
-                        name="font"
-                        [acceptedValues]="[
+                        ]"></dxi-item>
+                      <dxi-item name="font" [acceptedValues]="[
                           'Arial',
                           'Courier New',
                           'Georgia',
@@ -197,100 +145,59 @@
                           'Tahoma',
                           'Times New Roman',
                           'Verdana'
-                        ]"
-                      ></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="bold"></dxi-item>
-                      <dxi-item name="italic"></dxi-item>
-                      <dxi-item name="strike"></dxi-item>
-                      <dxi-item name="underline"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="alignLeft"></dxi-item>
-                      <dxi-item name="alignCenter"></dxi-item>
-                      <dxi-item name="alignRight"></dxi-item>
-                      <dxi-item name="alignJustify"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="orderedList"></dxi-item>
-                      <dxi-item name="bulletList"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item
-                        name="header"
-                        [acceptedValues]="[false, 1, 2, 3, 4, 5]"
-                      ></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="color"></dxi-item>
-                      <dxi-item name="background"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="link"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="clear"></dxi-item>
-                      <dxi-item name="codeBlock"></dxi-item>
-                      <dxi-item name="blockquote"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="insertTable"></dxi-item>
-                      <dxi-item name="deleteTable"></dxi-item>
-                      <dxi-item name="insertRowAbove"></dxi-item>
-                      <dxi-item name="insertRowBelow"></dxi-item>
-                      <dxi-item name="deleteRow"></dxi-item>
-                      <dxi-item name="insertColumnLeft"></dxi-item>
-                      <dxi-item name="insertColumnRight"></dxi-item>
-                      <dxi-item name="deleteColumn"></dxi-item>
+                        ]"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="bold"></dxi-item>
+                        <dxi-item name="italic"></dxi-item>
+                        <dxi-item name="strike"></dxi-item>
+                        <dxi-item name="underline"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="alignLeft"></dxi-item>
+                        <dxi-item name="alignCenter"></dxi-item>
+                        <dxi-item name="alignRight"></dxi-item>
+                        <dxi-item name="alignJustify"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="orderedList"></dxi-item>
+                        <dxi-item name="bulletList"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="color"></dxi-item>
+                        <dxi-item name="background"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="link"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
+                        <dxi-item name="clear"></dxi-item>
+                        <dxi-item name="codeBlock"></dxi-item>
+                        <dxi-item name="blockquote"></dxi-item>
+                        <dxi-item name="separator"></dxi-item>
                     </dxo-toolbar>
                   </dx-html-editor>
                 </ng-template>
               </mat-tab>
-              <mat-tab  label="Images">
+              <mat-tab label="Images">
                 <ng-container *ngIf="blogImages$ | async as data">
-                <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
-                </app-gallery-lightbox>
-              </ng-container>
+                  <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
+                  </app-gallery-lightbox>
+                </ng-container>
               </mat-tab>
             </mat-tab-group>
           </form>
         </div>
         <div mat-dialog-actions>
-          <button
-            mat-icon-button
-            mat-flat-button
-            (click)="onUpdate(blog)"
-            color="primary"
-            aria-label="Add"
-          >
+          <button mat-icon-button (click)="onUpdate(blog)" color="primary" aria-label="Add">
             <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="onCreate(blog)"
-            mat-flat-button
-            color="primary"
-            [disabled]="!blogGroup.valid"
-          >
+          <button (click)="onCreate(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
             <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="onDelete(blog)"
-            mat-flat-button
-            color="primary"
-            [disabled]="!blogGroup.valid"
-          >
-          <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+          <button (click)="onDelete(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
+            <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="onImages()"
-            mat-flat-button
-            color="primary"
-            [disabled]="!blogGroup.valid"
-          >
+          <button (click)="onImages()" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
             <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
           </button>
-          <button
-            mat-icon-button
-            (click)="closeDialog()"
-            mat-flat-button
-            color="warn"
-          >
+          <button (click)="closeDialog()" mat-icon-button color="warn">
             <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
           </button>
         </div>
@@ -299,42 +206,53 @@
 
     <ng-container *ngIf="allBlogs$ | async as rows">
 
-        <table mat-table [dataSource]="rows" class="mat-elevation-z8">
+      <table mat-table [dataSource]="rows" class="mat-elevation-z8">
 
-          <ng-container matColumnDef="title">
-            <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell *matHeaderCellDef> Title </th>
-            <td  mat-cell *matCellDef="let element" class="w-50"> <p> {{element.title}} </p> </td>
-          </ng-container>
+        <ng-container matColumnDef="title">
+          <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell
+            *matHeaderCellDef> Title </th>
+          <td mat-cell *matCellDef="let element" class="w-50">
+            <p> {{element.title}} </p>
+          </td>
+        </ng-container>
 
 
-          <ng-container matColumnDef="paragraph">
-            <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell *matHeaderCellDef> Introduction </th>
-            <td  mat-cell *matCellDef="let element" class="w-50 align-top"> <p [innerHTML]="element.paragraph | safe:'html'"></p> </td>
-          </ng-container>
+        <ng-container matColumnDef="paragraph">
+          <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell
+            *matHeaderCellDef> Introduction </th>
+          <td mat-cell *matCellDef="let element" class="w-50 align-top">
+            <p [innerHTML]="element.paragraph | safe:'html'"></p>
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="body">
-            <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell *matHeaderCellDef> Body </th>
-            <td mat-cell *matCellDef="let element" class="w-250 align-text-top" [innerHTML]="element.body | safe:'html'"> </td>
-          </ng-container>
+        <ng-container matColumnDef="body">
+          <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell
+            *matHeaderCellDef> Body </th>
+          <td mat-cell *matCellDef="let element" class="w-250 align-text-top" [innerHTML]="element.body | safe:'html'">
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="conclusion">
-            <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell *matHeaderCellDef> Conclusion </th>
-            <td mat-cell *matCellDef="let element" class="align-text-top" [innerHTML]="element.conclusion  | safe:'html'"> </td>
-          </ng-container>
+        <ng-container matColumnDef="conclusion">
+          <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell
+            *matHeaderCellDef> Conclusion </th>
+          <td mat-cell *matCellDef="let element" class="align-text-top" [innerHTML]="element.conclusion  | safe:'html'">
+          </td>
+        </ng-container>
 
-          <ng-container matColumnDef="actions">
-            <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell *matHeaderCellDef>Edit</th>
-              <td mat-cell *matCellDef="let element">
-                <button mat-icon-button (click)="onCellDoublClicked(element)" mat-flat-button color="primary">
-                  <mat-icon [svgIcon]="'mat_outline:open_in_new'"></mat-icon>
-                </button>
-              </td>
-            </ng-container>
+        <ng-container matColumnDef="actions">
+          <th class="text-align-center m-1 border-white text-base font-bold text-gray-100 bg-gray-500" mat-header-cell
+            *matHeaderCellDef>Edit</th>
+          <td mat-cell *matCellDef="let element">
+            <button (click)="onCellDoublClicked(element)" mat-icon-button color="primary">
+              <mat-icon [svgIcon]="'mat_outline:open_in_new'"></mat-icon>
+            </button>
+          </td>
+        </ng-container>
 
-          <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr class="hover:bg-gray-100 m-1" mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+        <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr class="hover:bg-gray-100 m-1" mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
 
-        </table>
+      </table>
     </ng-container>
   </mat-drawer-container>
 </div>

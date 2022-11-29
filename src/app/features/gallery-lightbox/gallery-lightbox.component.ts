@@ -18,6 +18,7 @@ interface Item {
   selector: 'app-gallery-lightbox',
   templateUrl: './gallery-lightbox.component.html',
   styleUrls: ['./gallery-lightbox.component.css'],
+
   animations: [
     trigger('animation', [
       transition('void => visible', [
@@ -79,6 +80,7 @@ export class GalleryLightboxComponent implements OnInit {
   }
 
   next(): void {
+    console.log('next Image Gallery item');
     this.currentIndex = this.currentIndex + 1;
     if(this.currentIndex > this.galleryData.length - 1) {
       this.currentIndex = 0;
