@@ -1,4 +1,6 @@
-/* You can add global styles to this file, and also import other style files */::-webkit-scrollbar {
+/* You can add global styles to this file, and also import other style files */
+
+::-webkit-scrollbar {
   width: 2px;
   height: 2px;
   overflow-y: scroll;
