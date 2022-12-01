@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { Subscription } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageListService } from 'app/services/image-list.service';
 import { imageItem } from 'app/models/imageItem';
-import { rawImageItem } from 'app/models/rawImagesList';
 
 import {
   CdkDragDrop,

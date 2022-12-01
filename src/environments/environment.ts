@@ -4,14 +4,13 @@
 
 export const environment = {
   firebase: {
-    projectId: 'made-to-cassie',
-    appId: '1:819679326368:web:8bf0a91436ec18a06019c5',
-    storageBucket: 'made-to-cassie.appspot.com',
-    locationId: 'asia-east2',
-    apiKey: 'AIzaSyB0kkt0xQJbdFwd9Fnh1F7x6taE30F76ME',
-    authDomain: 'made-to-cassie.firebaseapp.com',
-    messagingSenderId: '819679326368',
-    measurementId: 'G-WGMMJK9NR3',
+    apiKey: "AIzaSyDOsLZGkSerzhIwpnrAL8TzFZGOt0_SDps",
+    authDomain: "tokyo-films-blog.firebaseapp.com",
+    projectId: "tokyo-films-blog",
+    storageBucket: "tokyo-films-blog.appspot.com",
+    messagingSenderId: "157632924274",
+    appId: "1:157632924274:web:54da554a0cbb3a171750eb",
+    measurementId: "G-P9L186QNN4"
   },
   production: false
   ,

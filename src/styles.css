@@ -52,14 +52,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 }
 
 #hero {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/IMG_0841_polarr.JPEG?alt=media&token=4d2f8207-d93f-4b45-b7b7-24fe2b18dacc');
+  background-image: url('assets/films.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @media (max-width: 576px) {
   #hero {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/IMG_0841_polarr.JPEG?alt=media&token=4d2f8207-d93f-4b45-b7b7-24fe2b18dacc');
+    background-image: url('assets/films.jpg');
     background-position: center;
   }
 }
@@ -123,7 +123,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
   background-size: 80% auto;
   background-position: 5px center;
   background-repeat: no-repeat;
-  background-image: url('./assets/made-to-logo-white.svg');
+  background-image: url('./assets/logo.svg');
 }
 
 

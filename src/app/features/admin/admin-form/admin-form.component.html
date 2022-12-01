@@ -1,44 +1,52 @@
-<mat-card class="m-4 max-w-3/8  filter-article filter-interactive text-gray-700">
+<mat-card class="m-4 text-gray-700 max-w-3/8 filter-article filter-interactive">
   <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
     {{ sTitle }}
   </div>
   <div mat-dialog-content>
     <form  [formGroup]="mainpageGroup"  (ngSubmit)="onUpdate(mainpageGroup.value)" class="form"
     >
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-        <input matInput placeholder="Landing Page Hero" formControlName="hero_title" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
+        <mat-label>Landing Page Hero Commentary</mat-label>
+        <input matInput formControlName="hero_title" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-        <input matInput placeholder="Features Header" formControlName="features_header" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
+        <mat-label>Features Header</mat-label>
+        <input matInput formControlName="features_header" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-        <input matInput placeholder="Sub Header" formControlName="features_subheader" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
+        <mat-label>Features Sub Header</mat-label>
+        <input matInput  formControlName="features_subheader" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '49%' }">
-        <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }">
+        <mat-label>Right Call to Action</mat-label>
+        <input matInput  formControlName="cta_left" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '50%' }">
-        <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '50%' }">
+        <mat-label>Left Call to Action</mat-label>
+        <input matInput  formControlName="cta_right" />
       </mat-form-field>
 
       <section>
         <div mat-dialog-title class="font-bold">
           Contact Information
         </div>
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '32%' }">
-        <input matInput placeholder="Contact Email" formControlName="contact_email" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }">
+        <mat-label>eMail</mat-label>
+        <input matInput formControlName="contact_email" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '32%' }">
-        <input matInput placeholder="Telephone" formControlName="contact_telephone" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }">
+        <mat-label>Telephone Number</mat-label>
+        <input matInput formControlName="contact_telephone" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '33%' }">
-        <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }">
+        <mat-label>Shipping Locations</mat-label>
+        <input matInput formControlName="contact_shipping" />
       </mat-form-field>
       </section>
 

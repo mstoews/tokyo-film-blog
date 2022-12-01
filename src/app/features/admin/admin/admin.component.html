@@ -1,4 +1,4 @@
-<mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
+<mat-tab-group mat-stretch-tabs="false"  #tabGroup (selectedTabChange)="onTabClick()">
   <mat-tab label="Company Setup">
     <ng-template matTabContent>
       <div class="container">
@@ -15,13 +15,13 @@
     </ng-template>
   </mat-tab>
 
-  <mat-tab label="Inventory">
+  <!-- <mat-tab label="Inventory">
     <ng-template matTabContent>
       <div class="container">
         <inventory-list></inventory-list>
       </div>
     </ng-template>
-  </mat-tab>
+  </mat-tab> -->
 
   <!-- <mat-tab label="Orders">
     <ng-template matTabContent>
@@ -31,13 +31,13 @@
     </ng-template>
   </mat-tab> -->
 
-  <mat-tab label="Category">
+  <!-- <mat-tab label="Category">
     <ng-template matTabContent>
       <div class="container">
         <category-list></category-list>
       </div>
     </ng-template>
-  </mat-tab>
+  </mat-tab> -->
 
   <mat-tab label="Image Maintenance">
     <ng-template matTabContent>

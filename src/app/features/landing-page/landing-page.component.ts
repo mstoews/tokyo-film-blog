@@ -46,12 +46,12 @@ export class LandingPageComponent implements OnInit {
   featuredList$: Observable<imageItem[]>;
   mainPageDoc: Mainpage;
   titleMessage = '';
-  features_image = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_800x800.JPG?alt=media&token=b5401a57-c7cb-415d-b185-35d59b30a0c7"
+  features_image = "https://firebasestorage.googleapis.com/v0/b/tokyo-films-blog.appspot.com/o/uploaded%2F400%2FMarilyn_400x400.jpg?alt=media&token=5ed4f4fa-5669-4037-92fc-9fd8915cc1b8"
   services_one   = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicestailoring_400x400.JPG?alt=media&token=f5fcb885-70b8-4dfe-97ba-1db54699d7c1";
   services_two   = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservices_400x400.JPG?alt=media&token=78f54e83-17d4-4f8c-8eeb-1def74080f74";
   services_three = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicesmending_400x400.JPG?alt=media&token=20779c32-8bc3-4bc0-a9dd-86093ad5c061";
   services_four  = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Freadytowearcrop_400x400.JPEG?alt=media&token=ee82d3fa-82ed-402f-b364-17ec0024e3d8";
-  about_us       = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F213E0BF3-EF7F-4C0F-AF24-86EA01398C81_800x800.jpeg?alt=media&token=120537a4-229d-4594-a787-41ff5ec4b42b";
+  about_us       = "https://firebasestorage.googleapis.com/v0/b/tokyo-films-blog.appspot.com/o/uploaded%2F400%2FMarilyn_400x400.jpg?alt=media&token=5ed4f4fa-5669-4037-92fc-9fd8915cc1b8";
 
   constructor(
     private contactService: ContactService,
