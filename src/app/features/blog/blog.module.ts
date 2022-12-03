@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { BlogComponent } from './blog.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FashionComponent } from './fashion/fashion.component';
@@ -36,7 +36,8 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
-    DxHtmlEditorModule
+    DxHtmlEditorModule,
+    NgOptimizedImage
   ]
 })
 export class BlogModule { }

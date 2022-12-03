@@ -124,11 +124,11 @@ export class DndComponent {
     }, 10);
   }
 
-  async startUpload(file: File) {
-    const path = `uploaded/${file.name}`;
+  async startUpload (file: File) {
 
+    const location = 'inventory'
+    const path = `${location}/${file.name}`;
     console.log(`File path: ${path}`);
-
     const fileRef = this.storage.ref(path);
 
     const task = this.storage.upload(path, file, {

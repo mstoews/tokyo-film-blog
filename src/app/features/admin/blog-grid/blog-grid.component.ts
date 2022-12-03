@@ -80,10 +80,14 @@ export class BlogGridComponent implements OnInit {
 
   onImages() {
     console.log('onImages');
+
     const parentId = this.blogGroup.getRawValue();
+
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
-      data: parentId.id,
+      data: {
+        parent: parentId.id,
+        location: 'blog' },
     });
 
     dialogRef.afterClosed().subscribe((result: any) => {

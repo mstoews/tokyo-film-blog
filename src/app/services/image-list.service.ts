@@ -81,11 +81,11 @@ export class ImageListService {
   // }
 
   createRawImage(image: rawImageItem) {
-    this.findRawImageByUrl(image.caption).subscribe((img) => {
-      if (img?.caption == undefined) {
+    // this.findRawImageByUrl(image.caption).subscribe((img) => {
+    //   if (img?.caption == undefined) {
         this.RawImagesCollection.add(image);
-      }
-    });
+    //   }
+    // });
   }
 
   async insertImageList(image: imageItem) {
@@ -120,7 +120,8 @@ export class ImageListService {
             type: img.type,
             ranking: count,
           };
-          this.insertImageList(item);
+          console.log('missing images', JSON.stringify(item));
+          // this.insertImageList(item);
         }
       });
     });
@@ -184,14 +185,16 @@ export class ImageListService {
   createRawImagesList() {
     var ranking = 0;
       this.storage
-      .ref('/800')
+      .ref('/400')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {
-          ranking++;
+
           imageRef.getDownloadURL().then((downloadURL) => {
+            ranking++;
             const imageUrl = downloadURL;
             const imageData: any = {
+              parentID: '',
               caption: imageRef.fullPath,
               type: 'IN_NOT_USED',
               imageSrc: imageUrl,

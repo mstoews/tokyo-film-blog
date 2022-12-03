@@ -1,12 +1,16 @@
 <div class="h-screen">
   <mat-drawer-container>
-    <mat-drawer #drawer [opened]="false" mode="side" [position]="'end'" [disableClose]="false">
-      <mat-card>
-        <div mat-card-title class="card-title" [ngStyle]="{ 'border-left': '10px solid' + cRAG }" >
-          {{ sTitle }}
-        </div>
-        <div mat-card-content>
-          <form [formGroup]="imageGroup" (ngSubmit)="onUpdate(imageGroup.value)" class="form"> </form>
+    <mat-drawer class="w-3/8 lg:w-3/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'" [disableClose]="false">
+    <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
+      <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }">
+        {{ sTitle }}
+      </div>
+      <div mat-dialog-content>
+          <form [formGroup]="imageGroup" (ngSubmit)="onUpdate(imageGroup.value)" class="form">
+            <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
+              <input matInput placeholder="Caption" formControlName="caption" />
+            </mat-form-field>
+          </form>
         </div>
       </mat-card>
     </mat-drawer>
@@ -14,7 +18,7 @@
       <div cdkDropListGroup class="grid grid-cols-5 gap-4">
         <!-- NOT_USED -->
         <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
-          <div class="image_title sticky top-0 z-50">Unused Images</div>
+          <div class="sticky top-0 z-50 image_title">Unused Images</div>
           <div cdkDropList
             #notused="cdkDropList"
             [id]="IN_NOT_USED"
@@ -22,13 +26,13 @@
             class="list"
             (cdkDropListDropped)="drop($event)" >
             <div *ngFor="let item of not_usedImages" cdkDrag>
-              <app-image-card [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
+              <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
             </div>
           </div>
         </div>
         <!-- FEATURED -->
         <div class="item--2 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="image_title sticky top-0 z-50">FEATURED</div>
+          <div class="sticky top-0 z-50 image_title">FEATURED</div>
             <div
             cdkDropList #featured="cdkDropList"
             [id]="IN_FEATURED"
@@ -42,7 +46,7 @@
         </div>
         <!-- CREATIONS -->
         <div class="item--3 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="image_title sticky top-0 z-50">CREATIONS</div>
+          <div class="sticky top-0 z-50 image_title">CREATIONS</div>
             <div cdkDropList #creations="cdkDropList" [id]="IN_CREATION" [cdkDropListData]="creationsImages" class="list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of creationsImages" cdkDrag>
               <app-image-card [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
@@ -51,7 +55,7 @@
         </div>
         <!-- COLLECTIONS -->
         <div class="item--4 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="image_title sticky top-0 z-50 uppercase lg-rounded">collections</div>
+          <div class="sticky top-0 z-50 uppercase image_title lg-rounded">collections</div>
           <div cdkDropList #collections="cdkDropList" [id]="IN_COLLECTION" [cdkDropListData]="collectionsImages"  class="list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of collectionsImages" cdkDrag>
               <app-image-card [url]="item.imageSrc"  [file_name]="item.caption"></app-image-card>
@@ -60,7 +64,7 @@
         </div>
         <!-- GALLERY -->
         <div class="item--5 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="image_title sticky top-0 z-50 uppercase lg-rounded">gallery</div>
+          <div class="sticky top-0 z-50 uppercase image_title lg-rounded">gallery</div>
           <div
              cdkDropList #gallerys="cdkDropList"
              [cdkDropListData]="galleryImages"

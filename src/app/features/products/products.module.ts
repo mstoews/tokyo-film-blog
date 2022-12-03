@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HighlightComponent } from '../landing-page/highlight/highlight.component';
@@ -28,6 +28,7 @@ const routes: Routes = [
     MaterialModule,
     FuseCardModule,
     SharedModule,
+    NgOptimizedImage
   ],
 })
 export class ProductsModule { }

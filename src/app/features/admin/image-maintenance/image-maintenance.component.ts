@@ -1,18 +1,16 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageListService } from 'app/services/image-list.service';
 import { imageItem } from 'app/models/imageItem';
-import { rawImageItem } from 'app/models/rawImagesList';
+
 
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { TitleStrategy } from '@angular/router';
 
 @Component({
   selector: 'image-maintenance',
@@ -26,6 +24,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   onUpdate: any;
   cRAG: any;
   sTitle: any;
+  currentImage: imageItem;
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_FEATURED = 'IN_FEATURED';
@@ -46,7 +45,8 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   galleryImages: imageItem[] = [];
 
   constructor(
-    public imageListService: ImageListService ) {
+    public imageListService: ImageListService,
+    private fb: FormBuilder ) {
 
   }
 
@@ -63,6 +63,18 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     this.printImageList('Gallery',this.galleryImages);
   }
 
+  createEmptyForm() {
+    this.imageGroup = this.fb.group({
+      parentId: [''],
+      caption: [''],
+      imageAlt: [''],
+      imageSrc: [''],
+      ranking: [''],
+      type: [''],
+    });
+  }
+
+
   printImageList(title: string, images: imageItem[])
   {
     images.forEach(img => {
@@ -71,9 +83,15 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.imageListService.createRawImagesList();
+    // this.imageListService.createRawImagesList();
     this.imageListService.createImageList();
+    this.createEmptyForm()
     this.Refresh();
+  }
+
+  onOpenDrawer($event: any) {
+    console.log('onOpenDrawer', $event);
+    this.toggleDrawer();
   }
 
   Clone() {
