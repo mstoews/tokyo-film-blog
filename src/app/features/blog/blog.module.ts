@@ -7,6 +7,7 @@ import { DetailComponent } from './detail/detail.component';
 import { MaterialModule } from 'app/material.module';
 import { BlogResolver} from 'app/services/blog.resolver';
 import { DxHtmlEditorModule } from 'devextreme-angular';
+import { SafePipe } from './safe.pipe';
 
 const routes: Routes = [
   {
@@ -21,7 +22,8 @@ const routes: Routes = [
     component: DetailComponent,
     resolve: {
       blog: BlogResolver
-    }
+    },
+    data: { animation: 'detailComponent' }
   },
 ];
 
@@ -31,13 +33,16 @@ const routes: Routes = [
     BlogComponent,
     FashionComponent,
     DetailComponent,
+    SafePipe
+
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     MaterialModule,
     DxHtmlEditorModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+
   ]
 })
 export class BlogModule { }

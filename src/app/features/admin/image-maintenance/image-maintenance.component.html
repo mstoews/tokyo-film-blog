@@ -23,10 +23,11 @@
             #notused="cdkDropList"
             [id]="IN_NOT_USED"
             [cdkDropListData]="not_usedImages"
-            class="list"
+            class="list drag-drop-list"
             (cdkDropListDropped)="drop($event)" >
             <div *ngFor="let item of not_usedImages" cdkDrag>
-              <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
+              <div class="drop-placeholder" *cdkDragPlaceholder></div>
+              <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption"></app-image-card>
             </div>
           </div>
         </div>

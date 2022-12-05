@@ -1,27 +1,33 @@
-<mat-card class="m-4 max-w-3/8  filter-article filter-interactive text-gray-700">
+<mat-card class="m-4 text-gray-700 max-w-3/8 filter-article filter-interactive">
   <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
     {{ sTitle }}
   </div>
+
+  
   <div mat-dialog-content>
-    <form  [formGroup]="mainpageGroup"  (ngSubmit)="onUpdate(mainpageGroup.value)" class="form"
-    >
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-        <input matInput placeholder="Landing Page Hero" formControlName="hero_title" />
+    <form [formGroup]="mainpageGroup" (ngSubmit)="onUpdate(mainpageGroup.value)" class="form">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
+        <mat-label>Landing Page Title</mat-label>
+        <input matInput placeholder="Landing Page" formControlName="hero_title" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-        <input matInput placeholder="Features Header" formControlName="features_header" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
+        <mat-label>Features Title</mat-label>
+        <input matInput placeholder="Feature" formControlName="features_header" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-        <input matInput placeholder="Sub Header" formControlName="features_subheader" />
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
+        <mat-label>Features Description</mat-label>
+        <input matInput placeholder="Description " formControlName="features_subheader" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '49%' }">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }" appearance="outline">
+        <mat-label>Left CTA</mat-label>
         <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
       </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '50%' }">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '50%' }" appearance="outline">
+        <mat-label>Right CTA</mat-label>
         <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
       </mat-form-field>
 
@@ -29,17 +35,20 @@
         <div mat-dialog-title class="font-bold">
           Contact Information
         </div>
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '32%' }">
-        <input matInput placeholder="Contact Email" formControlName="contact_email" />
-      </mat-form-field>
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" appearance="outline">
+          <mat-label>eMail</mat-label>
+          <input matInput placeholder="Contact Email" formControlName="contact_email" />
+        </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '32%' }">
-        <input matInput placeholder="Telephone" formControlName="contact_telephone" />
-      </mat-form-field>
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" appearance="outline">
+          <mat-label>Telephone</mat-label>
+          <input matInput placeholder="Telephone" formControlName="contact_telephone" />
+        </mat-form-field>
 
-      <mat-form-field class="form-element m-1" [ngStyle]="{ width: '33%' }">
-        <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
-      </mat-form-field>
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" appearance="outline">
+          <mat-label>Shipping</mat-label>
+          <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
+        </mat-form-field>
       </section>
 
       <!-- <mat-radio-group>
@@ -50,7 +59,7 @@
     </form>
   </div>
   <div mat-dialog-actions class="mt-10">
-    <button class="m-1"  mat-flat-button (click)="onUpdate(mainPage)"   color="primary" aria-label="Add" >
+    <button class="m-1" mat-flat-button (click)="onUpdate(mainPage)" color="primary" aria-label="Add">
       <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
       Update
     </button>
@@ -65,4 +74,3 @@
     </button> -->
   </div>
 </mat-card>
-

@@ -9,6 +9,10 @@ import { NavService } from './shell/static-sidebar/nav-list-item/nav-service';
 import { SharedModule } from './features/shared-module/shared.module';
 import { ScrollService } from './services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
+import { ProductResolver } from './services/product.resolver';
+import { BlogResolver } from './services/blog.resolver';
+import { SocialModule } from './features/social/social.module';
+
 
 // Firebase services + environment module
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -16,8 +20,6 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore'
 import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { ProductResolver } from './services/product.resolver';
-import { BlogResolver } from './services/blog.resolver';
 
 @NgModule({
   declarations: [
@@ -30,11 +32,13 @@ import { BlogResolver } from './services/blog.resolver';
     CommonModule,
     SharedModule,
     SwiperModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    SocialModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase),
+
   ],
   providers: [
     ScrollService,

@@ -23,6 +23,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private activateRoute: ActivatedRoute,
+    private route: Router,
     private blogService: BlogService) { }
 
   ngOnInit(): void {
@@ -41,4 +42,10 @@ export class DetailComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
+
+  backToHome() {
+    this.route.navigate(['blog']);
+  }
+
+
 }

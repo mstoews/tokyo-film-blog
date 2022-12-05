@@ -12,23 +12,18 @@ import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.mo
 import { DxDataGridModule, DxBulletModule,  DxTemplateModule, DxPopupModule} from 'devextreme-angular';
 import { FuseCardModule } from '@fuse/components/card';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
-import { ImagesGridComponent } from './images/images.component';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 import { ImageCardComponent } from './image-card/image-card.component';
 import { CollectionCardComponent } from './collection-card/collection-card.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { ScreenCardComponent } from './screen-card/screen-card.component';
 import { InventoryComponent } from './inventory-grid/inventory-grid.component'
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { DxHtmlEditorModule  } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
-import { ExampleGridComponent } from './example-grid/example-grid.component';
 import { SafePipe } from './safe.pipe';
 import { InventoryContentComponent } from './inventory-content/inventory-content.component';
 import { SwiperModule } from 'swiper/angular';
-
-
 
 const routes: Routes = [
   {
@@ -56,18 +51,15 @@ const routes: Routes = [
     BlogGridComponent,
     GridMenubarComponent,
     CategoryGridComponent,
-    ImagesGridComponent,
     ImageMaintenanceComponent,
     ImageCardComponent,
     CollectionCardComponent,
     ProductCardComponent,
-    ScreenCardComponent,
-
     InventoryComponent,
     AdminFormComponent,
     GalleryComponent,
     ServicesComponent,
-    ExampleGridComponent,
+
     SafePipe,
     InventoryContentComponent,
 

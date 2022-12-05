@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../../../services/products.service';
 import { Product } from 'app/models/products';
@@ -19,8 +19,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 export class InventoryComponent implements OnInit  {
 
-
     @ViewChild('drawer') drawer: MatDrawer;
+    @Input() rich_description: string;
     drawOpen: 'open' | 'close' = 'open';
     prdGroup: FormGroup;
     action: string;
@@ -149,6 +149,8 @@ export class InventoryComponent implements OnInit  {
         this.imageArray = [];
         this.inventoryImages$ = this.productService.getProductImage(event.id)
         this.current_Url = event.image;
+        this.rich_description = event.rich_description;
+        this.updated_category = event.category;
 
         this.inventoryImages$.subscribe(image => {
           image.forEach(img =>{
@@ -203,6 +205,7 @@ export class InventoryComponent implements OnInit  {
     onUpdate(data: Product) {
       data = this.prdGroup.getRawValue();
       data.category = this.updated_category;
+      data.rich_description = this.rich_description;
       console.log(`onUpdate:  ${JSON.stringify(data)}`);
       this.productService.update(data);
     }

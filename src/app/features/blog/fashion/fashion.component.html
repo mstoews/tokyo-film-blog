@@ -1,16 +1,16 @@
 
     <mat-card>
-    <div (click)="onOpenBlog(blog.id)" class="flex justify-center items-start flex-col space-y-6 bg-gray-100 rounded-lg">
+    <div (click)="onOpenBlog(blog.id)" class="flex flex-col items-start justify-center space-y-6 bg-gray-100 rounded-lg">
         <div class="w-full" *ngIf="blogImages$ | async as blogImages">
             <img class="w-full rounded-lg" [src]="blogImages[0].url" alt="blog image" />
         </div>
-        <div class="absolute bottom-2 md:bottom-8 inset-x-8 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur flex flex-col justify-start items-start text-left p-6 md:p-8">
+        <div class="absolute flex flex-col items-start justify-start p-6 text-left bottom-2 md:bottom-8 inset-x-8 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur md:p-8">
             <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">{{ blog.title }}</p>
 
-            <div class="flex justify-start items-start text-left m-2">
-                <p class="text-base leading-6 text-gray-600" [innerHTML]="blog.paragraph"></p>
+            <div class="flex items-start justify-start m-2 text-left">
+                <p class="text-base leading-6 text-gray-600" [innerHTML]="blog.paragraph| safe: 'html'"></p>
             </div>
-            <div class="flex justify-start items-start text-left flex-col space-y-3 m-2">
+            <div class="flex flex-col items-start justify-start m-2 space-y-3 text-left">
               <p class="text-sm leading-none text-gray-600">{{blog.date_updated}}</p>
           </div>
         </div>

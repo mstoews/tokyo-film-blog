@@ -66,20 +66,6 @@ export class ImageListService {
       );
   }
 
-
-  // async findImageByUrl(caption: string): Promise<boolean> {
-  //   var isFound: boolean = false;
-  //   this.afs
-  //     .collection('imageslist', (ref) => ref.where('caption', '==', caption))
-  //     .get()
-  //     .subscribe(snaps => {
-  //       snaps.forEach(snap => {
-  //           isFound = true;
-  //         });
-  //       });
-  //     return isFound;
-  // }
-
   createRawImage(image: rawImageItem) {
     // this.findRawImageByUrl(image.caption).subscribe((img) => {
     //   if (img?.caption == undefined) {

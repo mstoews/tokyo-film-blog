@@ -15,7 +15,7 @@
               <mat-tab label="Introduction">
                 <ng-template matTabContent>
                   <!-- <text-editor [valueContent]="para" ></text-editor> -->
-                  <dx-html-editor height="400px" [(value)]="para">
+                  <dx-html-editor height="600px" [(value)]="para">
                     <dxo-toolbar>
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
@@ -74,7 +74,7 @@
               <mat-tab label="Main">
                 <ng-template matTabContent>
                   <!-- <text-editor [valueContent]="body"></text-editor> -->
-                  <dx-html-editor height="400px" [(value)]="body">
+                  <dx-html-editor height="600px" [(value)]="body">
                     <dxo-toolbar>
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
@@ -137,7 +137,7 @@
               <mat-tab label="Conclusion">
                 <ng-template matTabContent>
                   <!-- <text-editor [valueContent]="conclusion"></text-editor> -->
-                  <dx-html-editor height="400px" [(value)]="conclusion">
+                  <dx-html-editor height="600px" [(value)]="conclusion">
                     <dxo-toolbar>
                       <dxi-item name="undo"></dxi-item>
                       <dxi-item name="redo"></dxi-item>
@@ -222,7 +222,7 @@
     <ng-container *ngIf="allBlogs$ | async as rows">
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">
         <ng-container matColumnDef="title">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
+          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 text-align-center" mat-header-cell
             *matHeaderCellDef>
             Title
           </th>

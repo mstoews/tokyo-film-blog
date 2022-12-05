@@ -11,6 +11,7 @@ import { ShoppingCartComponent } from './cart/cart.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductDetailsFiveComponent } from './product-details-five/product-details-five.component';
 import { ProductResolver } from 'app/services/product.resolver';
+import { SafePipe } from './safe.pipe';
 
 
 const routes: Routes = [
@@ -44,7 +45,8 @@ const routes: Routes = [
     ShoppingCartComponent,
     ShopCardComponent,
     ProductDetailsComponent,
-    ProductDetailsFiveComponent
+    ProductDetailsFiveComponent,
+    SafePipe,
   ],
   imports: [
     CommonModule,
@@ -52,6 +54,7 @@ const routes: Routes = [
     MaterialModule,
     FuseCardModule,
     SharedModule,
+
     RouterModule.forChild(routes),
   ]
 })

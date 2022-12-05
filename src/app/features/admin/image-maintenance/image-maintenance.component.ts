@@ -83,7 +83,6 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.imageListService.createRawImagesList();
     this.imageListService.createImageList();
     this.createEmptyForm()
     this.Refresh();
@@ -173,16 +172,12 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     newData: any,
     newContainerId: string
   ) {
-
-    this.updateRanking(previousData);
-
     const cnt = newData.length;
     if (cnt > 0) {
       let i = 1;
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        console.log('Updating ', image.imageSrc);
         this.imageListService.update(image, image.id);
         i++;
       });

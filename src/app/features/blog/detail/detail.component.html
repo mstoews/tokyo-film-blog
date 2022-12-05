@@ -1,9 +1,11 @@
+<button  mat-icon-button  (click)="backToHome()"
+      class="absolute mb-20 text-3xl font-semibold text-gray-700 align-middle rounded-lg top-12 items-left right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
+        <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+</button>
 <div class="px-4 py-12" *ngIf="blogImages$ | async as blogImages">
   <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white py-12 lg:px-10 md-px-6 px-4">
 
-    <div class="text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4">
-      {{blog.title}}
-    </div>
+    <div class="text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4">  {{blog.title}} </div>
 
     <div class="gap-4 mt-6 top-48 lg:mt-12 md:mt-8 justify-evenly">
       <p class="max-w-lg text-base text-center text-gray-700 md:text-left" [innerHTML]="blog.paragraph"></p>

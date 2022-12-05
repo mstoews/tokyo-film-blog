@@ -1,64 +1,64 @@
+<div class="flex items-center justify-center w-full" *ngIf="productItem$ | async as product">
+  <div
+    class="flex flex-col items-start justify-start px-4 py-16 md:w-10/12 lg:w-8/12 xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
+    <div class="flex flex-col items-start space-y-3 jusitfy-start">
+      <p class="text-4xl font-semibold leading-9 text-gray-800 font-garamond">{{product.description}} </p>
+      <button mat-icon-button (click)="onContinueShopping()"
+        class="absolute mb-20 text-3xl font-semibold text-gray-700 align-middle rounded-lg top-12 items-left right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700">
+        <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+      </button>
+    </div>
+    <span>
 
-<div class="flex justify-center items-center w-full" *ngIf="productItem$ | async as product">
-  <div class="md:w-10/12 lg:w-8/12 xl:w-full flex justify-start flex-col items-start py-16 px-4 md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
-      <div class="flex jusitfy-start items-start flex-col space-y-3">
-          <p class="text-4xl font-garamond font-semibold leading-9 text-gray-800">{{product.description}} </p>
+    </span>
+    <div
+      class="flex flex-col items-start mt-5 space-y-8 jusitfy-start xl:items-center xl:flex-row xl:space-y-0 xl:space-x-8">
+      <div
+        class="flex flex-col flex-col-reverse items-stretch w-full mt-5 jusitfy-start xl:flex-row gap-y-4 xl:gap-y-0 xl:space-x-8">
+        <div class="flex flex-row items-start justify-start">
+          <div
+            class="grid grid-cols-2 gap-y-2 md:gap-y-0 md:grid-cols-3 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-12">
+            <img class="rounded-lg w-30" [ngSrc]="product.image" width="200" height="200" alt="product-1" />
+            <img class="rounded-lg w-30" [ngSrc]="product.image" width="200" height="200" alt="product-2" />
+            <img class="rounded-lg w-30" [ngSrc]="product.image" width="200" height="200" alt="product-3" />
+          </div>
+        </div>
+        <div>
+          <img class="hidden rounded-lg w-[600px] w-full xl:block" [ngSrc]="product.image" width="400" height="400" alt="headphones-1" priority />
+          <img class="w-full xl:hidden" [ngSrc]="product.image" width="800" height="800" alt="headphones-2" priority />
+        </div>
+      </div>
+      <div class="flex flex-col items-start justify-start w-full xl:w-7/12">
+        <p class="text-xl font-semibold leading-5 text-gray-800 lg:text-3xl xl:leading-6">{{product.category}}</p>
+        <p class="mt-5 text-base leading-normal text-gray-600" [innerHTML]="product.rich_description | safe: 'html'"></p>
+        <p class="mt-3 text-lg font-medium leading-5 text-gray-600 md:text-xl">${{product.price}}</p>
+        <div class="flex items-start w-full mt-10 space-x-4 xl:w-auto jusitfy-start">
+
           <button
-          mat-icon-button
-          (click)="onContinueShopping()"
-          class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
-          <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-        </button>
+            class="w-full py-5 text-base font-medium leading-4 text-center text-white bg-gray-800 border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black md:px-8"
+            (click)="onAddToShoppingCart()">
+            Add to Cart
+          </button>
+
+          <button
+            class="w-full py-5 text-base font-medium leading-4 text-center text-gray-800 bg-white border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 md:px-8"
+            (click)="onAddToWishList()">
+            Wish List
+          </button>
+
+          <button
+            class="w-full py-5 text-base font-medium leading-4 text-center text-gray-800 bg-white border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 md:px-8"
+            (click)="onContinueShopping()">
+            Shopping
+          </button>
+
+          <button
+            class="w-full py-5 text-base font-medium leading-4 text-center text-gray-800 bg-white border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 md:px-8"
+            (click)="onGoShoppingCart()">
+            Cart
+          </button>
+        </div>
       </div>
-      <span>
-
-      </span>
-      <div class="mt-5 flex jusitfy-start items-start xl:items-center flex-col xl:flex-row space-y-8 xl:space-y-0 xl:space-x-8">
-          <div class="w-full mt-5 flex jusitfy-start items-stretch flex-col flex-col-reverse xl:flex-row gap-y-4 xl:gap-y-0 xl:space-x-8">
-              <div class="flex justify-start items-start flex-row">
-                  <div class="grid grid-cols-2 gap-y-2 md:gap-y-0 md:grid-cols-3 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-12">
-                      <img class="w-30" [src]="product.image" alt="headphones-1" />
-
-                      <img class="w-30" [src]="product.image" alt="headphones-2" />
-
-                      <img class="w-30" [src]="product.image" alt="headphones-3" />
-                  </div>
-              </div>
-              <div>
-                  <img class="hidden xl:block w-full" [src]="product.image" alt="headphones-1" />
-                  <img class="xl:hidden w-full" [src]="product.image" alt="headphones-2" />
-              </div>
-          </div>
-          <div class="w-full xl:w-7/12 flex justify-start items-start flex-col">
-              <p class="text-xl lg:text-2xl font-semibold leading-5 xl:leading-6 text-gray-800">{{product.category}}</p>
-              <p class="text-base leading-normal text-gray-600 mt-5">{{product.rich_description}}</p>
-              <p class="text-lg md:text-xl font-medium leading-5 text-gray-600 mt-3">${{product.price}}</p>
-
-
-              <div class="mt-10 w-full xl:w-auto flex jusitfy-start items-start space-x-4">
-
-                  <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black text-base font-medium leading-4 md:px-8 bg-gray-800 text-center text-white border border-gray-800"
-                  (click)="onAddToShoppingCart()">
-                  Purchase
-                </button>
-
-                  <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 text-base font-medium leading-4 bg-white border border-gray-800 md:px-8 text-center text-gray-800"
-                  (click)="onAddToWishList()" >
-                  Wish List
-                </button>
-
-                  <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 text-base font-medium leading-4 bg-white border border-gray-800 md:px-8 text-center text-gray-800"
-                  (click)="onContinueShopping()">
-                   Shopping
-                  </button>
-
-                   <button class="py-5 w-full xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-300 text-base font-medium leading-4 bg-white border border-gray-800 md:px-8 text-center text-gray-800"
-                  (click)="onGoShoppingCart()"
-                  >Cart
-                </button>
-              </div>
-          </div>
-      </div>
+    </div>
   </div>
 </div>
-
