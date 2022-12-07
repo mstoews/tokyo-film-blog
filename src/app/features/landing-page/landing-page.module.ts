@@ -13,6 +13,7 @@ import { ReadyToWearComponent } from './ready-to-wear/ready-to-wear.component';
 import { KnittingComponent } from './knitting/knitting.component';
 import { RepairsComponent } from './repairs/repairs.component';
 import { HighlightComponent } from './highlight/highlight.component';
+import { SocialModule } from '../social/social.module';
 
 const routes: Routes = [
   {
@@ -51,7 +52,15 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [LandingPageComponent, BannerComponent, GalleryComponent, TailoringComponent, ReadyToWearComponent, KnittingComponent, RepairsComponent, HighlightComponent],
+  declarations: [
+    LandingPageComponent,
+    BannerComponent,
+    GalleryComponent,
+    TailoringComponent,
+    ReadyToWearComponent,
+    KnittingComponent,
+    RepairsComponent,
+    HighlightComponent],
   imports: [
     CommonModule,
     GalleryCardComponent,
@@ -59,10 +68,11 @@ const routes: Routes = [
     MadeToServicesModule,
     LightboxModule,
     RouterModule.forChild(routes),
-    NgOptimizedImage
+    NgOptimizedImage,
+    SocialModule
   ]
 })
 
 export class LandingPageModule {
-
+  
 }

@@ -1,0 +1,47 @@
+<div class="h-screen">
+  <mat-drawer-container>
+    <mat-drawer #drawer [opened]="false" mode="side" [position]="'end'" [disableClose]="false">
+      <mat-card>
+        <div mat-card-title class="card-title" [ngStyle]="{ 'border-left': '10px solid' + cRAG }" >
+          {{ sTitle }}
+        </div>
+        <div mat-card-content>
+          <form [formGroup]="imageGroup" (ngSubmit)="onUpdate(imageGroup.value)" class="form"> </form>
+        </div>
+      </mat-card>
+    </mat-drawer>
+    <mat-drawer-content>
+      <div cdkDropListGroup class="grid grid-cols-5 gap-4">
+        <!-- NOT_USED -->
+        <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
+          <div class="image_title sticky top-0 z-50">Unused Images</div>
+          <div cdkDropList
+            #notused="cdkDropList"
+            [id]="IN_NOT_USED"
+            [cdkDropListData]="not_usedImages"
+            class="list"
+            (cdkDropListDropped)="drop($event)" >
+            <div *ngFor="let item of not_usedImages" cdkDrag>
+              <app-image-card [url]="item.imageSrc" [file_name]="item.caption" ></app-image-card>
+            </div>
+          </div>
+        </div>
+        <!-- IN_USE -->
+        <div class="item--2 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
+          <div class="image_title sticky top-0 z-50">FEATURED</div>
+            <div
+            cdkDropList
+            #featured="cdkDropList"
+            [id]="IN_USE"
+            [cdkDropListData]="usedImages"
+            class="list"
+            (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of usedImages" cdkDrag>
+              <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

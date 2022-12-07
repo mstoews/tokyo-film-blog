@@ -1,32 +1,32 @@
 <mat-card class="m-4 text-gray-700 max-w-3/8 filter-article filter-interactive">
-  <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
+  <div mat-dialog-title class="text-3xl mb-3" [ngStyle]="{ 'border-left': '10px solid' }">
     {{ sTitle }}
   </div>
 
-  
+
   <div mat-dialog-content>
-    <form [formGroup]="mainpageGroup" (ngSubmit)="onUpdate(mainpageGroup.value)" class="form">
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
+    <form [formGroup]="mainpageGroup" (ngSubmit)="onUpdate(mainpageGroup.value)">
+      <mat-form-field class="m-1 flex-start" [ngStyle]="{ width: '99%' }" appearance="fill">
         <mat-label>Landing Page Title</mat-label>
         <input matInput placeholder="Landing Page" formControlName="hero_title" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '99%' }" appearance="fill">
         <mat-label>Features Title</mat-label>
         <input matInput placeholder="Feature" formControlName="features_header" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '99%' }" appearance="fill">
         <mat-label>Features Description</mat-label>
         <input matInput placeholder="Description " formControlName="features_subheader" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }" appearance="outline">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }" appearance="fill">
         <mat-label>Left CTA</mat-label>
         <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '50%' }" appearance="outline">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49.5%' }" appearance="fill">
         <mat-label>Right CTA</mat-label>
         <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
       </mat-form-field>
@@ -35,17 +35,17 @@
         <div mat-dialog-title class="font-bold">
           Contact Information
         </div>
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" appearance="outline">
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" appearance="fill">
           <mat-label>eMail</mat-label>
           <input matInput placeholder="Contact Email" formControlName="contact_email" />
         </mat-form-field>
 
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" appearance="outline">
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" appearance="fill">
           <mat-label>Telephone</mat-label>
           <input matInput placeholder="Telephone" formControlName="contact_telephone" />
         </mat-form-field>
 
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" appearance="outline">
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" appearance="fill">
           <mat-label>Shipping</mat-label>
           <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
         </mat-form-field>
@@ -59,18 +59,18 @@
     </form>
   </div>
   <div mat-dialog-actions class="mt-10">
-    <button class="m-1" mat-flat-button (click)="onUpdate(mainPage)" color="primary" aria-label="Add">
-      <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+    <button class="m-1" mat-flat-button (click)="onUpdate(mainPage)" color="primary">
+      <mat-icon [svgIcon]="'mat_fill:update'"></mat-icon>
       Update
     </button>
     <!-- <button class="m-1" mat-icon-button mat-flat-button (click)="onCreate()" color="primary"  [disabled]="!adminGroup.valid"       >
-      <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+      <mat-icon [svgIcon]="'mat_fill:add'"></mat-icon>
     </button>
     <button class="m-1" mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!adminGroup.valid"        >
-      <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+      <mat-icon [svgIcon]="'mat_fill:delete'"></mat-icon>
     </button> -->
     <!-- <button class="m-1"  mat-icon-button mat-flat-button (click)="onImages()" color="primary" [disabled]="!adminGroup.valid"  >
-      <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+      <mat-icon [svgIcon]="'mat_fill:design_services'"></mat-icon>
     </button> -->
   </div>
 </mat-card>

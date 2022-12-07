@@ -12,6 +12,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
 import { ProductDetailsFiveComponent } from './product-details-five/product-details-five.component';
 import { ProductResolver } from 'app/services/product.resolver';
 import { SafePipe } from './safe.pipe';
+import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
+
 
 
 const routes: Routes = [
@@ -19,7 +21,7 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     title: 'Shopping',
-    component: MainShopComponent,
+    component: MainShopComponent
   },
   {
     path: 'cart/:id',
@@ -28,13 +30,22 @@ const routes: Routes = [
     component: ProductDetailsFiveComponent,
     resolve: {
       product: ProductResolver
-    }
+    },
+    data: { state: 'cart/:id' }
   },
   {
     path: 'payment',
     pathMatch: 'full',
     title: 'Shopping Cart',
     component: ShoppingCartComponent,
+    data: { state: 'payment' }
+  },
+  {
+    path: 'stripe-checkout',
+    pathMatch: 'full',
+    title: 'Stripe Checkout',
+    component: StripeCheckoutComponent,
+    data: { state: 'stripe-checkout' }
   },
 ];
 
@@ -46,6 +57,7 @@ const routes: Routes = [
     ShopCardComponent,
     ProductDetailsComponent,
     ProductDetailsFiveComponent,
+    StripeCheckoutComponent,
     SafePipe,
   ],
   imports: [
@@ -54,7 +66,6 @@ const routes: Routes = [
     MaterialModule,
     FuseCardModule,
     SharedModule,
-
     RouterModule.forChild(routes),
   ]
 })

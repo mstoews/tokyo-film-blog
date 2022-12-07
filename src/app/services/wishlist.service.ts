@@ -18,7 +18,10 @@ export class WishListService {
   isLoggedIn: boolean;
   userId: string;
 
-  constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {
+  constructor(
+    private afs: AngularFirestore,
+    private auth: AngularFireAuth)
+    {
     this.auth.authState
       .pipe(map((user) => !!user))
       .subscribe((isLoggedIn) => (this.isLoggedIn = isLoggedIn));

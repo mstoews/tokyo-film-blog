@@ -14,55 +14,42 @@ export async function stripeWebhooks(req: Request, res:Response) {
         const event = stripe.webhooks.constructEvent(
             req.body, signature, process.env.STRIPE_WEBHOOK_SECRET);
 
+
+        console.log('stripe-webhooks *', event.type);
+
         if (event.type == "checkout.session.completed") {
             const session = event.data.object;
             await onCheckoutSessionCompleted(session);
 
         }
 
-        res.json({received:true});
+        return res.json({received:true});
 
     }
-    catch(err) {
+    catch(err: any) {
         console.log('Error processing webhook event, reason: ', err);
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 }
 
 
-async function onCheckoutSessionCompleted(session) {
+async function onCheckoutSessionCompleted(session: any) {
+
+    console.log('Checkout session completing  ....')
 
     const purchaseSessionId = session.client_reference_id;
 
-    const {userId, courseId, pricingPlanId} =
-        await getDocData(`purchaseSessions/${purchaseSessionId}`);
+    const { userId, productId } = await getDocData(`purchaseSessions/${purchaseSessionId}`);
 
-    if (courseId) {
-        await fulfillCoursePurchase(userId, courseId, purchaseSessionId, session.customer);
+    if (productId) {
+        console.log('update Firebase database :', userId )
+        await fulfillProductPurchase(userId, productId, purchaseSessionId, session.customer);
     }
-    else if (pricingPlanId) {
-        await fulfillSubscriptionPurchase(purchaseSessionId, userId,
-            session.customer, pricingPlanId);
-    }
+
 }
 
-async function fulfillSubscriptionPurchase(purchaseSessionId:string, userId:string,
-                                           stripeCustomerId:string, pricingPlanId:string) {
-
-    const batch = db.batch();
-
-    const purchaseSessionRef = db.doc(`purchaseSessions/${purchaseSessionId}`);
-
-    batch.update(purchaseSessionRef, {status: "completed"});
-
-    const userRef = db.doc(`users/${userId}`);
-
-    batch.set(userRef, {pricingPlanId, stripeCustomerId}, {merge: true} );
-
-    return batch.commit();
-}
-
-async function fulfillCoursePurchase(userId:string, courseId:string,
+async function fulfillProductPurchase(userId:string,
+                                     productId: string,
                                      purchaseSessionId:string,
                                      stripeCustomerId:string) {
 
@@ -72,7 +59,7 @@ async function fulfillCoursePurchase(userId:string, courseId:string,
 
     batch.update(purchaseSessionRef, {status: "completed"});
 
-    const userCoursesOwnedRef = db.doc(`users/${userId}/coursesOwned/${courseId}`);
+    const userCoursesOwnedRef = db.doc(`users/${userId}/productsPurchased/${productId}`);
 
     batch.create(userCoursesOwnedRef, {});
 

@@ -13,34 +13,39 @@ const routes: Route[] = [
    },
    { path: 'home',
       loadChildren: () => import('./features/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
+      data: { state: 'home' }
    },
    {
     path: 'authentication',
     loadChildren: () => import('./features/pages/authentication/authentication.module').then((mod) => mod.AuthenticationModule),
+    data: { state: 'authenication' }
    },
    {
     path: 'shop',
     loadChildren: () => import('./features/shop/shop.module').then( (mod) => mod.ShopModule),
+    data: { state: 'shop' }
    },
    {
     path: 'blog',
     loadChildren: () => import('./features/blog/blog.module').then( (mod) => mod.BlogModule),
+    data: { state: 'blog' }
    },
    {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.module').then( (mod) => mod.AdminModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
+    data: { authGuardPipe: redirectLoggedInToHome, state: 'admin'  }
    },
    {
     path: 'collections',
     loadChildren: () => import('./features/products/products.module').then( (mod) => mod.ProductsModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome }
+    data: { authGuardPipe: redirectLoggedInToHome, state: 'collections'  }
    },
    {
     path: 'stripe-checkout',
     loadChildren: () => import('./features/stripe/stripe.module').then( (mod) => mod.StripeModule),
+    data: { state: 'strip-checkout' }
    },
    {
     path: '**',

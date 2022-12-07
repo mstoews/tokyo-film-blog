@@ -7,8 +7,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 interface RequestInfo {
     productId: string;
     callbackUrl: string;
-    userId:string;
-    pricingPlanId:string;
+    userId: string;
+    pricingPlanId: string;
 }
 
 export async function createCheckoutSession(req: Request, res: Response) {
@@ -23,7 +23,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
         };
 
         if (!info.userId) {
-            const message = 'User must be authenticated.';
+            const message = 'User must be authenticated to complete a purchase.';
             console.log(message);
             res.status(403).json({message});
             return;
@@ -53,13 +53,8 @@ export async function createCheckoutSession(req: Request, res: Response) {
 
         if (info.productId) {
             const prd = await getDocData(`inventory/${info.productId}`);
-            sessionConfig = setupPurchaseCourseSession(info, prd,
-                purchaseSession.id, stripeCustomerId);
+            sessionConfig = setupPurchaseCourseSession(info, prd, purchaseSession.id, stripeCustomerId);
         }
-        // else if (info.pricingPlanId) {
-        //     sessionConfig = setupSubscriptionSession(info, purchaseSession.id,
-        //         stripeCustomerId, info.pricingPlanId);
-        // }
 
         console.log(sessionConfig);
 
@@ -80,11 +75,14 @@ export async function createCheckoutSession(req: Request, res: Response) {
 function setupPurchaseCourseSession(info: RequestInfo, product: any, sessionId: string, stripeCustomerId:string) {
     const config = setupBaseSessionConfig(info, sessionId, stripeCustomerId);
 
+    console.log('config :', config);
+
+    let rich_description = product.rich_description.replace(/(<([^>]+)>)/gi, "");
 
     config.line_items = [
         {
-            name: product.title,
-            description: product.description,
+            name: product.description,
+            description: rich_description,
             amount: product.price * 100,
             currency: 'usd',
             quantity: 1
@@ -94,8 +92,7 @@ function setupPurchaseCourseSession(info: RequestInfo, product: any, sessionId: 
 }
 
 
-function setupBaseSessionConfig(info: RequestInfo, sessionId: string,
-                                stripeCustomerId:string) {
+function setupBaseSessionConfig(info: RequestInfo, sessionId: string, stripeCustomerId: string) {
     const config: any = {
         payment_method_types: ['card'],
         success_url: `${info.callbackUrl}/?purchaseResult=success&ongoingPurchaseSessionId=${sessionId}`,

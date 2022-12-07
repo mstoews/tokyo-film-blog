@@ -7,13 +7,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 async function createCheckoutSession(req, res) {
     try {
         const info = {
-            courseId: req.body.courseId,
+            productId: req.body.productId,
             pricingPlanId: req.body.pricingPlanId,
             callbackUrl: req.body.callbackUrl,
             userId: req["uid"]
         };
         if (!info.userId) {
-            const message = 'User must be authenticated.';
+            const message = 'User must be authenticated to complete a purchase.';
             console.log(message);
             res.status(403).json({ message });
             return;
@@ -24,21 +24,15 @@ async function createCheckoutSession(req, res) {
             created: firestore_1.Timestamp.now(),
             userId: info.userId
         };
-        if (info.courseId) {
-            checkoutSessionData.courseId = info.courseId;
-        }
-        else {
-            checkoutSessionData.pricingPlanId = info.pricingPlanId;
+        if (info.productId) {
+            checkoutSessionData.productId = info.productId;
         }
         await purchaseSession.set(checkoutSessionData);
-        const user = await database_1.getDocData(`users/${info.userId}`);
+        const user = await (0, database_1.getDocData)(`users/${info.userId}`);
         let sessionConfig, stripeCustomerId = user ? user.stripeCustomerId : undefined;
-        if (info.courseId) {
-            const course = await database_1.getDocData(`courses/${info.courseId}`);
-            sessionConfig = setupPurchaseCourseSession(info, course, purchaseSession.id, stripeCustomerId);
-        }
-        else if (info.pricingPlanId) {
-            sessionConfig = setupSubscriptionSession(info, purchaseSession.id, stripeCustomerId, info.pricingPlanId);
+        if (info.productId) {
+            const prd = await (0, database_1.getDocData)(`inventory/${info.productId}`);
+            sessionConfig = setupPurchaseCourseSession(info, prd, purchaseSession.id, stripeCustomerId);
         }
         console.log(sessionConfig);
         const session = await stripe.checkout.sessions.create(sessionConfig);
@@ -53,20 +47,15 @@ async function createCheckoutSession(req, res) {
     }
 }
 exports.createCheckoutSession = createCheckoutSession;
-function setupSubscriptionSession(info, sessionId, stripeCustomerId, pricingPlanId) {
+function setupPurchaseCourseSession(info, product, sessionId, stripeCustomerId) {
     const config = setupBaseSessionConfig(info, sessionId, stripeCustomerId);
-    config.subscription_data = {
-        items: [{ plan: pricingPlanId }]
-    };
-    return config;
-}
-function setupPurchaseCourseSession(info, course, sessionId, stripeCustomerId) {
-    const config = setupBaseSessionConfig(info, sessionId, stripeCustomerId);
+    console.log('config :', config);
+    let rich_description = product.rich_description.replace(/(<([^>]+)>)/gi, "");
     config.line_items = [
         {
-            name: course.titles.description,
-            description: course.titles.longDescription,
-            amount: course.price * 100,
+            name: product.description,
+            description: rich_description,
+            amount: product.price * 100,
             currency: 'usd',
             quantity: 1
         }

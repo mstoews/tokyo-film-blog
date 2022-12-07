@@ -19,17 +19,17 @@ export class CheckoutService {
     constructor(private http:HttpClient,
                 private afAuth: AngularFireAuth,
                 private afs: AngularFirestore) {
-
+        console.log('Base Api: ', environment.api.baseUrl);
         afAuth.idToken.subscribe(jwt => this.jwtAuth = jwt);
 
     }
 
-    startCourseCheckoutSession(courseId:string): Observable<CheckoutSession> {
+    startProductCheckoutSession(productId: string ): Observable<CheckoutSession> {
 
         const headers = new HttpHeaders().set("Authorization", this.jwtAuth as string);
 
         return this.http.post<CheckoutSession>(environment.api.baseUrl +  "/api/checkout", {
-            courseId,
+            productId,
             callbackUrl: this.buildCallbackUrl()
         }, {headers})
     }
@@ -56,7 +56,7 @@ export class CheckoutService {
             callBackUrl += ":" + port;
         }
 
-        callBackUrl+= "/stripe-checkout";
+        callBackUrl+= "/shop/stripe-checkout";
 
         return callBackUrl;
     }

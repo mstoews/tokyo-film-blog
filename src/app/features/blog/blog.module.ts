@@ -23,7 +23,7 @@ const routes: Routes = [
     resolve: {
       blog: BlogResolver
     },
-    data: { animation: 'detailComponent' }
+    data: { state: 'detail/:id' }
   },
 ];
 
