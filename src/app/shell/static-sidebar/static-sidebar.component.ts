@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { NavItem } from '../static-sidebar/nav-list-item/nav-item';
-import { NavService } from '../static-sidebar/nav-list-item/nav-service';
+import { Component, OnInit, ViewChild } from '@angular/core'
+import { NavItem } from '../static-sidebar/nav-list-item/nav-item'
+import { NavService } from '../static-sidebar/nav-list-item/nav-service'
 
 import {
   animation,
@@ -11,8 +11,8 @@ import {
   animate,
   keyframes,
   group,
-} from '@angular/animations';
-import { MatDrawer } from '@angular/material/sidenav';
+} from '@angular/animations'
+import { MatDrawer } from '@angular/material/sidenav'
 @Component({
   selector: 'app-static-sidebar',
   templateUrl: './static-sidebar.component.html',
@@ -39,8 +39,8 @@ import { MatDrawer } from '@angular/material/sidenav';
   ],
 })
 export class StaticSidebarComponent implements OnInit {
-  state = 'normal';
-  highlighted = 'highlighted';
+  state = 'normal'
+  highlighted = 'highlighted'
   constructor(public navService: NavService) {}
 
   navItems: NavItem[] = [
@@ -184,18 +184,18 @@ export class StaticSidebarComponent implements OnInit {
       parent: false,
       children: [],
     },
-  ];
+  ]
 
-  @ViewChild('drawer', { static: true }) public drawer!: MatDrawer;
+  @ViewChild('drawer', { static: true }) public drawer!: MatDrawer
 
   onToggleMenu() {
-    this.drawer.toggle();
+    this.drawer.toggle()
   }
   onAnimate() {
-    //  console.log ('OnAnimate');
+    //  // console.log ('OnAnimate');
     this.state === 'normal'
       ? (this.state = 'highlighted')
-      : (this.state = 'normal');
+      : (this.state = 'normal')
   }
 
   ngOnInit(): void {}

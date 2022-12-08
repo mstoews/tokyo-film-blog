@@ -10,11 +10,10 @@ async function createCheckoutSession(req, res) {
             productId: req.body.productId,
             pricingPlanId: req.body.pricingPlanId,
             callbackUrl: req.body.callbackUrl,
-            userId: req["uid"]
+            userId: req['uid'],
         };
         if (!info.userId) {
             const message = 'User must be authenticated to complete a purchase.';
-            console.log(message);
             res.status(403).json({ message });
             return;
         }
@@ -22,7 +21,7 @@ async function createCheckoutSession(req, res) {
         const checkoutSessionData = {
             status: 'ongoing',
             created: firestore_1.Timestamp.now(),
-            userId: info.userId
+            userId: info.userId,
         };
         if (info.productId) {
             checkoutSessionData.productId = info.productId;
@@ -34,31 +33,30 @@ async function createCheckoutSession(req, res) {
             const prd = await (0, database_1.getDocData)(`inventory/${info.productId}`);
             sessionConfig = setupPurchaseCourseSession(info, prd, purchaseSession.id, stripeCustomerId);
         }
-        console.log(sessionConfig);
         const session = await stripe.checkout.sessions.create(sessionConfig);
         res.status(200).json({
             stripeCheckoutSessionId: session.id,
-            stripePublicKey: process.env.STRIPE_PUBLIC_KEY
+            stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
         });
     }
     catch (error) {
-        console.log('Unexpected error occurred while purchasing course: ', error);
-        res.status(500).json({ error: 'Could not initiate Stripe checkout session' });
+        res
+            .status(500)
+            .json({ error: 'Could not initiate Stripe checkout session' });
     }
 }
 exports.createCheckoutSession = createCheckoutSession;
 function setupPurchaseCourseSession(info, product, sessionId, stripeCustomerId) {
     const config = setupBaseSessionConfig(info, sessionId, stripeCustomerId);
-    console.log('config :', config);
-    let rich_description = product.rich_description.replace(/(<([^>]+)>)/gi, "");
+    let rich_description = product.rich_description.replace(/(<([^>]+)>)/gi, '');
     config.line_items = [
         {
             name: product.description,
             description: rich_description,
             amount: product.price * 100,
             currency: 'usd',
-            quantity: 1
-        }
+            quantity: 1,
+        },
     ];
     return config;
 }
@@ -67,7 +65,7 @@ function setupBaseSessionConfig(info, sessionId, stripeCustomerId) {
         payment_method_types: ['card'],
         success_url: `${info.callbackUrl}/?purchaseResult=success&ongoingPurchaseSessionId=${sessionId}`,
         cancel_url: `${info.callbackUrl}/?purchaseResult=failed`,
-        client_reference_id: sessionId
+        client_reference_id: sessionId,
     };
     if (stripeCustomerId) {
         config.customer = stripeCustomerId;

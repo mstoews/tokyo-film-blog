@@ -1,22 +1,18 @@
-import {
-  Component,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core'
 
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { DndComponent } from '../../components/loaddnd/dnd.component';
-import { ScrollService } from 'app/services/scroll.service';
-import { animate, style, transition, trigger } from '@angular/animations';
-import { Observable } from 'rxjs';
-import { ContactService } from 'app/services/contact.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Contact } from 'app/models/contact';
-import { MainPageService } from 'app/services/main-page.service';
-import { Mainpage } from 'app/models/mainpage';
-import { ImageListService } from 'app/services/image-list.service';
-import { imageItem } from 'app/models/imageItem';
+import { MatDialog } from '@angular/material/dialog'
+import { Router } from '@angular/router'
+import { DndComponent } from '../../components/loaddnd/dnd.component'
+import { ScrollService } from 'app/services/scroll.service'
+import { animate, style, transition, trigger } from '@angular/animations'
+import { Observable } from 'rxjs'
+import { ContactService } from 'app/services/contact.service'
+import { FormBuilder, FormGroup } from '@angular/forms'
+import { Contact } from 'app/models/contact'
+import { MainPageService } from 'app/services/main-page.service'
+import { Mainpage } from 'app/models/mainpage'
+import { ImageListService } from 'app/services/image-list.service'
+import { imageItem } from 'app/models/imageItem'
 
 @Component({
   selector: 'app-landing-page',
@@ -35,23 +31,27 @@ import { imageItem } from 'app/models/imageItem';
     ]),
   ],
 })
-
 export class LandingPageComponent implements OnInit {
+  @Output() public topCollection: imageItem[] = []
+  @Output() public bottomCollection: imageItem[] = []
 
-  @Output() public topCollection: imageItem[] = [];
-  @Output() public bottomCollection: imageItem[] = [];
-
-  contactGroup: FormGroup;
-  mainPage$: Observable<Mainpage[]>;
-  featuredList$: Observable<imageItem[]>;
-  mainPageDoc: Mainpage;
-  titleMessage = '';
-  features_image = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_800x800.JPG?alt=media&token=b5401a57-c7cb-415d-b185-35d59b30a0c7"
-  services_one   = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicestailoring_400x400.JPG?alt=media&token=f5fcb885-70b8-4dfe-97ba-1db54699d7c1";
-  services_two   = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservices_400x400.JPG?alt=media&token=78f54e83-17d4-4f8c-8eeb-1def74080f74";
-  services_three = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicesmending_400x400.JPG?alt=media&token=20779c32-8bc3-4bc0-a9dd-86093ad5c061";
-  services_four  = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Freadytowearcrop_400x400.JPEG?alt=media&token=ee82d3fa-82ed-402f-b364-17ec0024e3d8";
-  about_us       = "https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F213E0BF3-EF7F-4C0F-AF24-86EA01398C81_800x800.jpeg?alt=media&token=120537a4-229d-4594-a787-41ff5ec4b42b";
+  contactGroup: FormGroup
+  mainPage$: Observable<Mainpage[]>
+  featuredList$: Observable<imageItem[]>
+  mainPageDoc: Mainpage
+  titleMessage = ''
+  features_image =
+    'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_800x800.JPG?alt=media&token=b5401a57-c7cb-415d-b185-35d59b30a0c7'
+  services_one =
+    'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicestailoring_400x400.JPG?alt=media&token=f5fcb885-70b8-4dfe-97ba-1db54699d7c1'
+  services_two =
+    'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservices_400x400.JPG?alt=media&token=78f54e83-17d4-4f8c-8eeb-1def74080f74'
+  services_three =
+    'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicesmending_400x400.JPG?alt=media&token=20779c32-8bc3-4bc0-a9dd-86093ad5c061'
+  services_four =
+    'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Freadytowearcrop_400x400.JPEG?alt=media&token=ee82d3fa-82ed-402f-b364-17ec0024e3d8'
+  about_us =
+    'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F213E0BF3-EF7F-4C0F-AF24-86EA01398C81_800x800.jpeg?alt=media&token=120537a4-229d-4594-a787-41ff5ec4b42b'
 
   constructor(
     private contactService: ContactService,
@@ -61,30 +61,30 @@ export class LandingPageComponent implements OnInit {
     private matDialog: MatDialog,
     private scrollTo: ScrollService,
     private fb: FormBuilder
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.mainPage$ = this.mainPage.getAll();
-    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
-    this.mainPage$.subscribe(doc => {
-      if (doc.length > 0 ){
-        this.mainPageDoc = doc[0];
-        this.titleMessage = this.mainPageDoc.hero_title;
+    this.mainPage$ = this.mainPage.getAll()
+    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY')
+    this.mainPage$.subscribe((doc) => {
+      if (doc.length > 0) {
+        this.mainPageDoc = doc[0]
+        this.titleMessage = this.mainPageDoc.hero_title
       }
-    });
-    this.createEmptyForm();
-    this.populateImageList();
+    })
+    this.createEmptyForm()
+    this.populateImageList()
   }
 
   onServices(service: string) {
-      console.log(service);
-      this.router.navigate([service]);
+    // console.log(service);
+    this.router.navigate([service])
   }
 
   onUpdate(contact: Contact) {
-    contact = this.contactGroup.getRawValue();
-    this.contactService.create(contact);
-    this.createEmptyForm();
+    contact = this.contactGroup.getRawValue()
+    this.contactService.create(contact)
+    this.createEmptyForm()
   }
 
   createEmptyForm() {
@@ -94,64 +94,62 @@ export class LandingPageComponent implements OnInit {
       email: [''],
       phone: [''],
       message: [''],
-    });
+    })
   }
 
-  onClickAboutUs(){
-    console.log('navigate to about us');
-    this.router.navigate(['home/about_us']);
+  onClickAboutUs() {
+    // console.log('navigate to about us');
+    this.router.navigate(['home/about_us'])
   }
 
-  onContactUs(){
-    console.log('Products');
-    this.router.navigate(['home/contacts']);
+  onContactUs() {
+    // console.log('Products');
+    this.router.navigate(['home/contacts'])
   }
 
   onProducts() {
-    console.log('Products');
-    this.router.navigate(['products']);
+    // console.log('Products');
+    this.router.navigate(['products'])
   }
 
   scrollToId(id: string) {
-    console.log('element id : ', id);
-    this.scrollTo.scrollToElementById(id);
+    // console.log('element id : ', id);
+    this.scrollTo.scrollToElementById(id)
   }
 
   onEvent() {
-    console.log('Event');
+    // console.log('Event');
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
-    });
+    })
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === undefined) {
-        result = { event: 'Cancel' };
+        result = { event: 'Cancel' }
       }
       switch (result.event) {
         case 'Create':
           // private matDialog: MatDialog,this.create(result.data);
-          break;
+          break
         case 'Cancel':
-          break;
+          break
       }
-    });
+    })
   }
 
   populateImageList() {
-    var imageCount = 0;
-    const featuredList = this.imageListService.getImagesByType('IN_GALLERY');
+    var imageCount = 0
+    const featuredList = this.imageListService.getImagesByType('IN_GALLERY')
     featuredList.subscribe((img) => {
-        img.forEach((image) => {
-          if (imageCount < 3) {
-            this.topCollection.push(image)
-
-          }
-          else {
-            this.bottomCollection.push(image)
-          }
-          imageCount++;
-        });
-    });
+      img.forEach((image) => {
+        if (imageCount < 3) {
+          this.topCollection.push(image)
+        } else {
+          this.bottomCollection.push(image)
+        }
+        imageCount++
+      })
+    })
   }
 }
 

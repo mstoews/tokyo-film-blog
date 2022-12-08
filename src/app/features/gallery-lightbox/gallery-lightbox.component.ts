@@ -3,15 +3,15 @@ import {
   style,
   transition,
   trigger,
-  AnimationEvent
-} from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { IImageStorage } from 'app/models/maintenance';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+  AnimationEvent,
+} from '@angular/animations'
+import { Component, Input, OnInit } from '@angular/core'
+import { IImageStorage } from 'app/models/maintenance'
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop'
 
 interface Item {
-  imageSrc: string;
-  imageAlt: string;
+  imageSrc: string
+  imageAlt: string
 }
 
 @Component({
@@ -22,77 +22,75 @@ interface Item {
   animations: [
     trigger('animation', [
       transition('void => visible', [
-        style({transform: 'scale(0.5)'}),
-        animate('150ms', style({transform: 'scale(1)'}))
+        style({ transform: 'scale(0.5)' }),
+        animate('150ms', style({ transform: 'scale(1)' })),
       ]),
       transition('visible => void', [
-        style({transform: 'scale(1)'}),
-        animate('150ms', style({transform: 'scale(0.5)'}))
+        style({ transform: 'scale(1)' }),
+        animate('150ms', style({ transform: 'scale(0.5)' })),
       ]),
     ]),
     trigger('animation2', [
       transition(':leave', [
-        style({opacity: 1}),
-        animate('50ms', style({opacity: 0.8}))
-      ])
-    ])
-  ]
+        style({ opacity: 1 }),
+        animate('50ms', style({ opacity: 0.8 })),
+      ]),
+    ]),
+  ],
 })
 export class GalleryLightboxComponent implements OnInit {
-
-
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.galleryData, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.galleryData, event.previousIndex, event.currentIndex)
   }
 
-  @Input() galleryData: IImageStorage[] = [];
-  @Input() showCount = false;
+  @Input() galleryData: IImageStorage[] = []
+  @Input() showCount = false
 
-  previewImage = false;
-  showMask = false;
-  currentLightboxImage: IImageStorage = this.galleryData[0];
-  currentIndex = 0;
-  controls = true;
-  totalImageCount = 0;
+  previewImage = false
+  showMask = false
+  currentLightboxImage: IImageStorage = this.galleryData[0]
+  currentIndex = 0
+  controls = true
+  totalImageCount = 0
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
-    this.totalImageCount = this.galleryData.length;
+    this.totalImageCount = this.galleryData.length
   }
 
   onPreviewImage(index: number): void {
-    this.totalImageCount = this.galleryData.length;
-    this.showMask = true;
-    this.previewImage = true;
-    this.currentIndex = index;
-    this.currentLightboxImage = this.galleryData[index];
+    this.totalImageCount = this.galleryData.length
+    this.showMask = true
+    this.previewImage = true
+    this.currentIndex = index
+    this.currentLightboxImage = this.galleryData[index]
   }
 
   onAnimationEnd(event: AnimationEvent) {
-    if(event.toState === 'void') {
-      this.showMask = false;
+    if (event.toState === 'void') {
+      this.showMask = false
     }
   }
 
   onClosePreview() {
-    this.previewImage = false;
+    this.previewImage = false
   }
 
   next(): void {
-    console.log('next Image Gallery item');
-    this.currentIndex = this.currentIndex + 1;
-    if(this.currentIndex > this.galleryData.length - 1) {
-      this.currentIndex = 0;
+    // console.log('next Image Gallery item');
+    this.currentIndex = this.currentIndex + 1
+    if (this.currentIndex > this.galleryData.length - 1) {
+      this.currentIndex = 0
     }
-    this.currentLightboxImage = this.galleryData[this.currentIndex];
+    this.currentLightboxImage = this.galleryData[this.currentIndex]
   }
 
   prev(): void {
-    this.currentIndex = this.currentIndex - 1;
-    if(this.currentIndex < 0) {
-      this.currentIndex = this.galleryData.length - 1;
+    this.currentIndex = this.currentIndex - 1
+    if (this.currentIndex < 0) {
+      this.currentIndex = this.galleryData.length - 1
     }
-    this.currentLightboxImage = this.galleryData[this.currentIndex];
+    this.currentLightboxImage = this.galleryData[this.currentIndex]
   }
 }

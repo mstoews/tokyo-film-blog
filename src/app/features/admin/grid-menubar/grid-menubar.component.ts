@@ -1,12 +1,12 @@
-import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Product } from 'app/models/products';
-import { Observable } from 'rxjs';
+import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core'
+import { FormGroup } from '@angular/forms'
+import { Product } from 'app/models/products'
+import { Observable } from 'rxjs'
 
 interface IValue {
-  value: string;
-  viewValue: string;
-  menuDesc: string;
+  value: string
+  viewValue: string
+  menuDesc: string
 }
 
 @Component({
@@ -15,45 +15,43 @@ interface IValue {
   styleUrls: ['./grid-menubar.component.scss'],
 })
 export class GridMenubarComponent implements OnInit {
-  @Output() notifyParentAdd: EventEmitter<any> = new EventEmitter();
-  @Output() notifyParentRefresh: EventEmitter<any> = new EventEmitter();
-  @Output() notifyParentDelete: EventEmitter<any> = new EventEmitter();
-  @Output() notifyParentClone: EventEmitter<any> = new EventEmitter();
-  @Output() notifyMenuItemChanged: EventEmitter<any> = new EventEmitter();
+  @Output() notifyParentAdd: EventEmitter<any> = new EventEmitter()
+  @Output() notifyParentRefresh: EventEmitter<any> = new EventEmitter()
+  @Output() notifyParentDelete: EventEmitter<any> = new EventEmitter()
+  @Output() notifyParentClone: EventEmitter<any> = new EventEmitter()
+  @Output() notifyMenuItemChanged: EventEmitter<any> = new EventEmitter()
 
-  @Input() public inTitle: string;
-  @Input() public selected: string;
-  public menuItems: IValue[];
+  @Input() public inTitle: string
+  @Input() public selected: string
+  public menuItems: IValue[]
 
   constructor() {
-    this.inTitle="Image Maintenance";
+    this.inTitle = 'Image Maintenance'
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onRefresh(): void {
-    this.notifyParentRefresh.emit();
+    this.notifyParentRefresh.emit()
   }
 
   onClickAdd(): void {
-    console.log('Menu bar nofication emit');
-    this.notifyParentAdd.emit();
+    // console.log('Menu bar nofication emit');
+    this.notifyParentAdd.emit()
   }
 
   onClickDelete(): void {
-    console.log('Menu bar nofication emit');
-    this.notifyParentDelete.emit();
+    // console.log('Menu bar nofication emit');
+    this.notifyParentDelete.emit()
   }
 
   onClickClone(): void {
-    console.log('Menu bar nofication emit');
-    this.notifyParentClone.emit();
+    // console.log('Menu bar nofication emit');
+    this.notifyParentClone.emit()
   }
 
   onClickRefresh(): void {
-    console.log('Menu bar nofication emit');
-    this.onRefresh();
+    // console.log('Menu bar nofication emit');
+    this.onRefresh()
   }
 }

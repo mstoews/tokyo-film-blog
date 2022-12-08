@@ -41,7 +41,7 @@ export class SignInClassicComponent implements OnInit {
 
   async signInEmail() {
     const { email, password } = this.signInForm.value
-    console.log(`email ${email} , ${password}`)
+    // console.log(`email ${email} , ${password}`)
     try {
       const loggedIn = await this.authService.signIn(email, password)
       this.router.navigate(this.redirect)

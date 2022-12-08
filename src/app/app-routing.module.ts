@@ -39,8 +39,6 @@ const routes: Route[] = [
    {
     path: 'collections',
     loadChildren: () => import('./features/products/products.module').then( (mod) => mod.ProductsModule),
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome, state: 'collections'  }
    },
    {
     path: 'stripe-checkout',

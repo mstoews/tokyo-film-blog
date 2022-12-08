@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const dotenv = require("dotenv");
+const dotenv = require('dotenv');
 const result = dotenv.config();
 if (result.error) {
     throw result.error;

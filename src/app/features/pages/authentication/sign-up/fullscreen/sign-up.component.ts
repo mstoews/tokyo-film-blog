@@ -1,65 +1,64 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/services/auth/auth.service';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core'
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms'
+import { fuseAnimations } from '@fuse/animations'
+import { FuseAlertType } from '@fuse/components/alert'
+import { AuthService } from 'app/services/auth/auth.service'
 
 @Component({
-    selector     : 'sign-up-fullscreen',
-    templateUrl  : './sign-up.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+  selector: 'sign-up-fullscreen',
+  templateUrl: './sign-up.component.html',
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations,
 })
-export class SignUpFullscreenComponent implements OnInit
-{
-    @ViewChild('signUpNgForm') signUpNgForm!: NgForm;
+export class SignUpFullscreenComponent implements OnInit {
+  @ViewChild('signUpNgForm') signUpNgForm!: NgForm
 
-    alert: { type: FuseAlertType; message: string } = {
-        type   : 'success',
-        message: ''
-    };
-    signUpForm!: UntypedFormGroup;
-    showAlert: boolean = false;
+  alert: { type: FuseAlertType; message: string } = {
+    type: 'success',
+    message: '',
+  }
+  signUpForm!: UntypedFormGroup
+  showAlert: boolean = false
 
-    /**
-     * Constructor
-     */
-    constructor(
-        private _authService: AuthService,
-        private _formBuilder: UntypedFormBuilder
-    )
-    {
-    }
+  /**
+   * Constructor
+   */
+  constructor(
+    private _authService: AuthService,
+    private _formBuilder: UntypedFormBuilder
+  ) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Create the form
-        this.signUpForm = this._formBuilder.group({
-                name      : ['', Validators.required],
-                email     : ['', [Validators.required, Validators.email]],
-                password  : ['', Validators.required],
-                company   : [''],
-                agreements: ['', Validators.requiredTrue]
-            }
-        );
-    }
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    // Create the form
+    this.signUpForm = this._formBuilder.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      company: [''],
+      agreements: ['', Validators.requiredTrue],
+    })
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Sign in
-     */
-    signUp(): void
-    { 
-        console.log(this.signUpForm.value);
-    }
+  /**
+   * Sign in
+   */
+  signUp(): void {
+    // console.log(this.signUpForm.value);
+  }
 }

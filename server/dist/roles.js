@@ -7,18 +7,20 @@ const additionalClaims = {
 };
 function createRoles() {
     let uid = 'Ttxdl5aFWedoNAgGJ0MRFDaRv6M2';
-    auth_1.auth.createCustomToken(uid, additionalClaims).then((customToken) => {
+    auth_1.auth
+        .createCustomToken(uid, additionalClaims)
+        .then((customToken) => {
         return customToken;
     })
         .catch((error) => {
-        console.log('Error creating custom token:', error);
     });
     uid = 'cW5vCsElpETTpUJgT6UEDRSxadq2';
-    auth_1.auth.createCustomToken(uid, additionalClaims).then((customToken) => {
+    auth_1.auth
+        .createCustomToken(uid, additionalClaims)
+        .then((customToken) => {
         return customToken;
     })
         .catch((error) => {
-        console.log('Error creating custom token:', error);
     });
 }
 exports.createRoles = createRoles;
