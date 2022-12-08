@@ -9,108 +9,78 @@
   </button>
 </div>
 
-    <div class="px-4 py-12">
-      <div
-        class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white py-12 lg:px-10 md:px-6 px-4"
-      >
-        <div class="lg:flex gap-8 justify-center">
-          <div class="relative">
-            <div class="">
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/sofaaaa.png"
-                alt="sofaaa"
-                class="lg:block md:hidden hidden w-full"
-              />
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/blurr.png"
-                alt="blurr"
-                class="lg:hidden md:block hidden w-full"
-              />
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/smmmmm.png"
-                alt="smmm"
-                class="lg:hidden md:hidden block w-full"
-              />
-            </div>
-            <div
-              class="absolute xl:bottom-16 lg:bottom-12 md:bottom-6 bottom-8 xl:top-16 lg:top-12 md:top-10 top-4 md:left-6 left-2 right-2"
-            >
-              <p
-                class="lg:text-4xl md:text-3xl text-3xl font-semibold text-white"
-              >
-                Don’t miss out!
-              </p>
-              <p
-                class="text-base max-w-[400px] w-full text-white xl:mt-4 lg:mt-2 md:mt-4 mt-4"
-              >
-                Subscribe to your newsletter to stay in the loop. Our newsletter
-                is sent once in a week on every friday so subscribe to get
-                latest news and updates.
-              </p>
-              <div class="md:flex gap-4 items-center ">
-                <div
-                  class="border border-white py-2 xl:mt-8 lg:mt-3 md:mt-4 mt-4 px-3 relative"
-                >
-                  <input
-                    type="email"
-                    class="text-white focus:outline-none xl:max-w-[296px] lg:max-w-[250px] md:w-[452px] bg-inherit w-full py-1 pl-7 placeholder:text-white"
-                    placeholder="Enter your email"
-                  />
-                  <div>
-                    <svg
-                      class="absolute bottom-4"
-                      width="17"
-                      height="16"
-                      viewBox="0 0 17 16"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M14.0781 3H2.92188C2.18837 3 1.59375 3.55964 1.59375 4.25V11.75C1.59375 12.4404 2.18837 13 2.92188 13H14.0781C14.8116 13 15.4062 12.4404 15.4062 11.75V4.25C15.4062 3.55964 14.8116 3 14.0781 3Z"
-                        stroke="white"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                      <path
-                        d="M3.71875 5L8.5 8.5L13.2812 5"
-                        stroke="white"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div></div>
-                </div>
+<!--
+  This example requires some changes to your config:
 
-                <button
-                  class="bg-white lg:w-[126px] md:w-[132px] w-full py-3 xl:mt-8 lg:mt-4 md:mt-4 mt-4 text-base font-medium"
-                >
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="lg:mt-0 md:mt-6 mt-4">
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Rectangle%2027%20%281%29.png"
-                alt="s0faaa"
-                class="lg:block md:hidden hidden"
-              />
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Rectangle%2027.png"
-                alt=""
-                class="lg:hidden md:block hidden"
-              />
-              <img
-                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/ggg.png"
-                alt=""
-                class="md:hidden block"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/typography'),
+    ],
+  }
+  ```
+-->
+<div class="relative overflow-hidden bg-white py-16">
+  <div class="hidden lg:absolute lg:inset-y-0 lg:block lg:h-full lg:w-full lg:[overflow-anchor:none]">
+    <div class="relative mx-auto h-full max-w-prose text-lg" aria-hidden="true">
+      <svg class="absolute top-12 left-full translate-x-32 transform" width="404" height="384" fill="none" viewBox="0 0 404 384">
+        <defs>
+          <pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)" />
+      </svg>
+      <svg class="absolute top-1/2 right-full -translate-y-1/2 -translate-x-32 transform" width="404" height="384" fill="none" viewBox="0 0 404 384">
+        <defs>
+          <pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)" />
+      </svg>
+      <svg class="absolute bottom-12 left-full translate-x-32 transform" width="404" height="384" fill="none" viewBox="0 0 404 384">
+        <defs>
+          <pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="4" height="4" class="text-gray-200" fill="currentColor" />
+          </pattern>
+        </defs>
+        <rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)" />
+      </svg>
     </div>
-
-    <highlight></highlight>
+  </div>
+  <div class="relative px-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-prose text-lg">
+      <h1>
+        <span class="block text-center text-lg font-semibold text-indigo-600">Introducing</span>
+        <span class="mt-2 block text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">JavaScript for Beginners</span>
+      </h1>
+      <p class="mt-8 text-xl leading-8 text-gray-500">Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas ac. Diam nulla orci at in viverra scelerisque eget. Eleifend egestas fringilla sapien.</p>
+    </div>
+    <div class="prose prose-lg prose-indigo mx-auto mt-6 text-gray-500">
+      <p>Faucibus commodo massa rhoncus, volutpat. <strong>Dignissim</strong> sed <strong>eget risus enim</strong>. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit. Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. <a href="#">Mattis mauris semper</a> sed amet vitae sed turpis id.</p>
+      <ul role="list">
+        <li>Quis elit egestas venenatis mattis dignissim.</li>
+        <li>Cras cras lobortis vitae vivamus ultricies facilisis tempus.</li>
+        <li>Orci in sit morbi dignissim metus diam arcu pretium.</li>
+      </ul>
+      <p>Quis semper vulputate aliquam venenatis egestas sagittis quisque orci. Donec commodo sit viverra aliquam porttitor ultrices gravida eu. Tincidunt leo, elementum mattis elementum ut nisl, justo, amet, mattis. Nunc purus, diam commodo tincidunt turpis. Amet, duis sed elit interdum dignissim.</p>
+      <h2>From beginner to expert in 30 days</h2>
+      <p>Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. Convallis arcu ipsum urna nibh. Pharetra, euismod vitae interdum mauris enim, consequat vulputate nibh. Maecenas pellentesque id sed tellus mauris, ultrices mauris. Tincidunt enim cursus ridiculus mi. Pellentesque nam sed nullam sed diam turpis ipsum eu a sed convallis diam.</p>
+      <blockquote>
+        <p>Sagittis scelerisque nulla cursus in enim consectetur quam. Dictum urna sed consectetur neque tristique pellentesque. Blandit amet, sed aenean erat arcu morbi.</p>
+      </blockquote>
+      <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.</p>
+      <figure>
+        <img class="w-full rounded-lg" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=facearea&w=1310&h=873&q=80&facepad=3" alt="" width="1310" height="873">
+        <figcaption>Sagittis scelerisque nulla cursus in enim consectetur quam.</figcaption>
+      </figure>
+      <h2>Everything you need to get up and running</h2>
+      <p>Purus morbi dignissim senectus mattis <a href="#">adipiscing</a>. Amet, massa quam varius orci dapibus volutpat cras. In amet eu ridiculus leo sodales cursus tristique. Tincidunt sed tempus ut viverra ridiculus non molestie. Gravida quis fringilla amet eget dui tempor dignissim. Facilisis auctor venenatis varius nunc, congue erat ac. Cras fermentum convallis quam.</p>
+      <p>Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id. Id dolor praesent donec est. Odio penatibus risus viverra tellus varius sit neque erat velit.</p>
+    </div>
+  </div>
+</div>

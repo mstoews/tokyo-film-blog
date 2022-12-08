@@ -24,6 +24,7 @@ import { ServicesComponent } from './services/services.component';
 import { SafePipe } from './safe.pipe';
 import { InventoryContentComponent } from './inventory-content/inventory-content.component';
 import { SwiperModule } from 'swiper/angular';
+import { IconsModule } from 'app/icons.module';
 
 const routes: Routes = [
   {
@@ -77,7 +78,8 @@ const routes: Routes = [
     DxPopupModule,
     DxHtmlEditorModule,
     SwiperModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    IconsModule
   ],
   exports: [
     AdminComponent,

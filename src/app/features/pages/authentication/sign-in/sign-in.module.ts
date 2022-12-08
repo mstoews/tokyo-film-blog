@@ -15,6 +15,7 @@ import { SignInFullscreenComponent } from './fullscreen/sign-in.component';
 import { SignInFullscreenReversedComponent } from './fullscreen-reversed/sign-in.component';
 import { SignInSplitScreenComponent } from './split-screen/sign-in.component';
 import { SignInSplitScreenReversedComponent } from './split-screen-reversed/sign-in.component';
+import { FuseCardModule } from '@fuse/components/card';
 
 const routes: Routes = [
     {
@@ -71,7 +72,8 @@ const routes: Routes = [
         MatInputModule,
         MatProgressSpinnerModule,
         FuseAlertModule,
-        SharedModule
+        SharedModule,
+        FuseCardModule
     ]
 })
 export class SignInModule

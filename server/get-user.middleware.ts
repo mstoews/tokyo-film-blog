@@ -2,7 +2,6 @@
 import {Request, Response, NextFunction} from 'express';
 import {auth} from './auth';
 
-
 export function getUserMiddleware(req: Request, res: Response, next: NextFunction) {
 
     const jwt = req.headers.authorization;
@@ -23,3 +22,4 @@ export function getUserMiddleware(req: Request, res: Response, next: NextFunctio
         next();
     }
 }
+

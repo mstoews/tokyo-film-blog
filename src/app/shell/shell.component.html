@@ -34,21 +34,25 @@
           <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
         </a>
       </div>
-      <div class="visible">
-        <a routerLink="shop/payment" matTooltip="Shopping Cart"
-          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-          <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-        </a>
-      </div>
 
       <div *ngIf="isLoggedIn">
-        <a routerLink="/authentication/sign-in/split-screen" matTooltip="Log In"
+        <div class="invisible xl:visible md:visible lg:visible">
+          <a routerLink="shop/payment" matTooltip="Shopping Cart"
+            class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+            <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+          </a>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoggedIn">
+        <!-- <a routerLink="/authentication/sign-in/split-screen" matTooltip="Log In" -->
+        <a routerLink="/authentication/sign-in/classic" matTooltip="Log In"
           class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
         </a>
       </div>
 
-      <div *ngIf="!isLoggedIn">
+      <div *ngIf="isLoggedIn">
         <a routerLink="/authentication/sign-out/fullscreen" matTooltip="Log Out"
           class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'mat_outline:logout'"></mat-icon>

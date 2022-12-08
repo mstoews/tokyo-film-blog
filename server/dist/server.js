@@ -13,6 +13,9 @@ function initServer() {
     app.route("/").get((req, res) => {
         res.status(200).send("<h1>API is up and running!</h1>");
     });
+    app.route("/roles").get((req, res) => {
+        res.status(200).send("<h1>Updated roles for admin user.</h1>");
+    });
     app.route("/api/checkout").post(bodyParser.json(), get_user_middleware_1.getUserMiddleware, checkout_route_1.createCheckoutSession);
     app.route("/stripe-webhooks").post(bodyParser.raw({ type: 'application/json' }), stripe_webhooks_route_1.stripeWebhooks);
     const PORT = process.env.PORT || 9000;

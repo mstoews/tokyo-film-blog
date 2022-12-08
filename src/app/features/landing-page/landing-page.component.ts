@@ -97,6 +97,11 @@ export class LandingPageComponent implements OnInit {
     });
   }
 
+  onClickAboutUs(){
+    console.log('navigate to about us');
+    this.router.navigate(['home/about_us']);
+  }
+
   onProducts() {
     console.log('Products');
     this.router.navigate(['products']);

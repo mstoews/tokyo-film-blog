@@ -8,7 +8,8 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
+import { UserRoles } from 'app/models/user-roles';
 
 @Injectable({
   providedIn: 'root',
@@ -16,17 +17,25 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
   userData: any;
 
+  isLoggedIn$: Observable<boolean>;
+  isLoggedOut$: Observable<boolean>;
+  pictureUrl$: Observable<string | null>;
+  roles$ : Observable<UserRoles | any>;
+
   // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
   private userCollection: AngularFirestoreCollection<User>;
   private userItems: Observable<User[]>;
-
-  isLoggedOut$: Observable<User>;
 
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
     public router: Router
   ) {
+    this.isLoggedIn$ = this.afAuth.authState.pipe(map((user: any) => !!user));
+    this.isLoggedOut$ = this.afAuth.authState.pipe(map((loggedIn: any) => !!loggedIn));
+    this.pictureUrl$ = this.afAuth.authState.pipe(map(user => user? user.photoURL: null));
+    this.roles$ = this.afAuth.idTokenResult.pipe(map(token  => token?.claims ?? {admin:false}));
+
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -40,15 +49,7 @@ export class AuthService {
   }
 
   getAuth(): Observable<boolean> {
-    let loggedIn: boolean = false;
-    this.afAuth.authState.subscribe((res) => {
-      if (res && res.uid) {
-        loggedIn = true;
-      } else {
-        loggedIn = false;
-      }
-    });
-    return of(loggedIn);
+    return this.isLoggedIn$;
   }
 
   async signIn(email: string, password: string) {
@@ -66,6 +67,9 @@ export class AuthService {
   async signOut() {
     try {
       this.afAuth.signOut();
+      localStorage.setItem('user', 'null');
+      JSON.parse(localStorage.getItem('user')!);
+      this.router.navigateByUrl('/login');
     } catch (e) {
       console.error(e);
       return;
@@ -83,13 +87,6 @@ export class AuthService {
         throw new Error("User can't be found");
       }
 
-      // await this.userCollection.doc(credentials.user.uid).update({
-      //   name: user.displayName,
-      //   email: user.email,
-      //   age: user.age,
-      //   phoneNumber: user.phoneNumber,
-      //   uid: credentials.user.uid
-      // });
     } catch (e) {
       console.error(e);
       return;

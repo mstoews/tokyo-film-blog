@@ -7,27 +7,27 @@
         <img src="assets/made-to-logo-white.svg" class="h-40 w-100" />
         <!-- Menu -->
         <div class="hidden h-10 text-2xl md:flex md:space-x-8">
-          <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase font-garamond" (click)="scrollToId('feature')"> Features </button>
+          <div class="text-white font-bold uppercase text-1xl group font-garamond">
+            <button class="uppercase " (click)="scrollToId('feature')"> About Us </button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
-          <div class="text-gray-100 uppercase text-1xl group">
+          <div class="text-white font-bold uppercase text-1xl group">
             <button class="uppercase font-garamond" (click)="scrollToId('services')"> Services </button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
-          <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase font-garamond" (click)="scrollToId('gallery')"> Gallery </button>
+          <div class="text-white font-bold uppercase text-1xl group">
+            <button class="uppercase font-garamond" (click)="scrollToId('gallery')"> Follow Us </button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
-          <div class="text-gray-100 uppercase text-1xl group">
-            <button class="uppercase font-garamond" (click)="scrollToId('contact')"> Contact </button>
+          <div class="text-white font-bold uppercase text-1xl group">
+            <button class="uppercase font-garamond" routerLink="/home/contacts"> Contact </button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
-          <div class="text-gray-100 uppercase text-1xl group">
+          <div class="text-white font-bold uppercase text-1xl group">
             <button class="uppercase font-garamond" routerLink="/blog">Thoughts</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
-          <div class="text-gray-100 uppercase text-1xl group">
+          <div class="text-white font-bold uppercase text-1xl group">
             <button class="uppercase font-garamond" routerLink="/shop">shop</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
@@ -70,14 +70,13 @@
 
     </div>
   </section>
-  <!-- Feature Section -->
+  <!-- About Us Section -->
   <section id="feature" class="scroll-mt-20">
-    <!-- Feature Container -->
     <div class="container max-w-7xl px-6 mx-auto my-32 text-gray-900 md:px-0">
 
       <div class="relative justify-center my-32 mb-20 md:justify-between">
         <p class="text-4xl text-center uppercase font-garamond md:text-left md:text-5xl">
-          Features
+          About Us
         </p>
 
         <div class="hidden md:block sm:block">
@@ -93,7 +92,7 @@
         </div>
       </div>
 
-      <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0">
+      <div class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0 cursor-pointer" (click)="onClickAboutUs()">
         <!-- Image -->
 
         <img [ngSrc]="about_us" width="800" height="800" alt="features"
@@ -203,7 +202,7 @@
       <!-- Creations Header -->
       <div class="relative justify-center my-1 mb-20 md:justify-between">
         <p class="text-4xl text-center uppercase font-garamond md:text-left md:text-5xl">
-          Gallery
+          Follow Us
         </p>
 
         <button mat-icon-button class="uppercase" (click)="scrollToId('contact')"
@@ -220,7 +219,7 @@
       <div class="py-1 2xl:contianer 2xl:mx-auto lg:px-20 md:px-4 px-4 flex justify-center items-center">
         <div class="md:w-auto flex lg:flex-row flex-col lg:justify-center items-start lg:items-center space-y-10 lg:space-x-32">
           <div class="flex flex-col justify-start items-start space-y-4">
-            <h1 class="text-xl md:text-2xl lg:text-4xl font-bold leading-5 md:leading-6 lg:leading-9 text-gray-800">Follow us on Social Media</h1>
+            <h1 class="text-xl md:text-2xl lg:text-4xl font-bold leading-5 md:leading-6 lg:leading-9 text-gray-800">Social Media</h1>
             <p class="text-base leading-6 text-gray-600">Follow us on instagram/Facebook and tag us to get featured on our timeline</p>
             <a href="javascript:void(0)" class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600">@Followus.com</a>
           </div>
@@ -234,10 +233,12 @@
   </section>
 
   <!-- Contacts Section -->
-  <section id="contact" class="scroll-mt-20">
-    <!-- Creations Container -->
+
+
+  <!-- <section id="contact" class="scroll-mt-20">
+
     <div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
-      <!-- Creations Header -->
+
       <div class="relative justify-center my-32 mb-20 md:justify-between">
         <p class="text-4xl text-center uppercase font-garamond md:text-left md:text-5xl">
           Contact
@@ -259,7 +260,7 @@
               <p class="text-base leading-none text-gray-600">Email us</p>
             </div>
             <p class="mt-5 text-base font-medium leading-none text-gray-800">
-              <!-- cassandra@tokyo-made-to.com -->
+
               {{mainPageDoc.contact_email}}
             </p>
           </div>
@@ -368,6 +369,6 @@
         </div>
       </form>
     </div>
-  </section>
+  </section> -->
 
 </ng-container>

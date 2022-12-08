@@ -31,13 +31,17 @@
             <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
           </a>
         </li>
-        <li *ngIf="!isLoggedIn">
-          <a routerLink="admin" (click)="onClose()"
-            class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
-          </a>
-        </li>
+
+          <ng-container *ngIf="loggedIn">
+            <li >
+              <a routerLink="admin" (click)="onClose()"
+                class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
+              </a>
+            </li>
+          </ng-container>
+
       </ul>
     </div>
   </aside>

@@ -14,7 +14,10 @@ export class KnittingComponent implements OnInit {
     this.router.navigate(['/home'])
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void { }
+
+  onContacts() {
+    this.router.navigate(['/home/contacts'])
   }
 
 }

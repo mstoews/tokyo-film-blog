@@ -16,12 +16,12 @@
     </div>
 
     <div class="gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly ">
-      <p class="max-w-lg p-1 text-base text-center text-gray-700 bg-transparent -mt-100 top-48 md:text-left bg-blur"
+      <p class="max-w-[600px] p-1 text-base text-center text-gray-700 bg-transparent -mt-100 top-48 md:text-left bg-blur"
         [innerHTML]="blog.body"></p>
     </div>
 
     <div *ngIf="blogImages?.length > 0">
-      <img [ngSrc]="blogImages[1].url" width="400" height="600" alt="caps" class="rounded-lg " />
+      <img [ngSrc]="blogImages[1].url" width="400" height="400" alt="caps" class="rounded-lg "/>
     </div>
 
 

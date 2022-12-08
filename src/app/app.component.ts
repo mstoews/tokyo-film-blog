@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {
   trigger,
   transition,
@@ -10,21 +10,27 @@ import {
 import { map, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  // animations:  [ trigger('rotateCubeToLeft',  [ transition('home <=> *', useAnimation(moveFromRight))])
+  //   ]
   animations: [
     trigger('routerTransition', [
       transition('* <=> *', [
-        query(':enter, :leave', style({ position: 'fixed', width:'100%' })),
+        query(':enter, :leave', style({ position: 'fixed', width:'100%' }), { optional: true }),
         group([
           query(':enter', [
-            style({ transform: 'translateX(100%)' }),
+            style({ transform: 'translateX(100%)' }) ,
             animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
-          ]),
-          query(':leave', [
+          ], { optional: true } ),
+          query(':leave',
+          [
             style({ transform: 'translateX(0%)' }),
-            animate('0.5s ease-in-out', style({ transform: 'translateX(-100%)' }))]),
+            animate('0.5s ease-in-out', style({ transform: 'translateX(-100%)' })),
+
+          ], { optional: true }),
         ])
       ])
     ])
@@ -40,7 +46,7 @@ export class AppComponent  implements OnInit {
     private afAuth : AngularFireAuth
   )
   {
-   
+
   }
 
   ngOnInit(): void {
@@ -52,7 +58,6 @@ export class AppComponent  implements OnInit {
   logout() {
     this.afAuth.signOut();
   }
-
 
   title = 'Made-To';
   getState(outlet: any) {

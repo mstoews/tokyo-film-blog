@@ -4,10 +4,10 @@
         <div class="w-full" *ngIf="blogImages$ | async as blogImages">
             <img class="w-full rounded-lg" [src]="blogImages[0].url" alt="blog image" />
         </div>
-        <div class="absolute flex flex-col items-start justify-start p-6 text-left bottom-2 md:bottom-8 inset-x-8 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur md:p-8">
+        <div class="absolute justify-start p-6 text-left bottom-2 md:bottom-8 inset-x-8 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur md:p-8">
             <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">{{ blog.title }}</p>
 
-            <div class="flex items-start justify-start m-2 text-left">
+            <div class="hidden lg:flex items-start justify-start m-2 text-left">
                 <p class="text-base leading-6 text-gray-600" [innerHTML]="blog.paragraph| safe: 'html'"></p>
             </div>
             <div class="flex flex-col items-start justify-start m-2 space-y-3 text-left">
@@ -16,12 +16,6 @@
         </div>
     </div>
   </mat-card>
-  <style>
-      .bg-blur {
-          background: linear-gradient(91.25deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 99.82%);
-          backdrop-filter: blur(25px);
-      }
-  </style>
 
 
 

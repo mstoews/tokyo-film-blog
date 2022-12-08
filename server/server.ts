@@ -1,10 +1,12 @@
 
 import * as express from 'express';
 import {Application} from "express";
-import {createCheckoutSession} from './checkout.route';
+import {createCheckoutSession } from './checkout.route';
 import {getUserMiddleware} from './get-user.middleware';
 import {stripeWebhooks} from './stripe-webhooks.route';
-import * as cors from "cors";
+// import { createRoles } from './roles'
+
+import * as cors from 'cors';
 
 export function initServer() {
 
@@ -16,6 +18,11 @@ export function initServer() {
 
     app.route("/").get((req, res) => {
         res.status(200).send("<h1>API is up and running!</h1>");
+    });
+
+    app.route("/roles").get((req,res ) => {
+       // createRoles();
+       res.status(200).send("<h1>Updated roles for admin user.</h1>");
     });
 
     app.route("/api/checkout").post(

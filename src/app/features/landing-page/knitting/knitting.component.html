@@ -9,50 +9,39 @@
     </button>
 </div>
 
-  <div class="2xl:mx-auto 2xl:container mx-4 py-16">
-    <div class="w-full relative flex items-center justify-center">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2FKNITTING_400x400.JPG?alt=media&token=cf00b285-19ea-43d3-9d3d-1f0c6c56748e"
-        alt="knitting"
-        class="w-full h-full absolute z-0 hidden xl:block"
-      />
-      <img
-      src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/KNITTING.JPG?alt=media&token=11e599c2-e544-44e0-bbbf-bd9d6e1938df"
+  <!--
+  This example requires some changes to your config:
 
-        alt="knitting"
-        class="w-full h-full absolute z-0 hidden sm:block xl:hidden"
-      />
-      <img
-      src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/KNITTING.JPG?alt=media&token=11e599c2-e544-44e0-bbbf-bd9d6e1938df"
-
-        alt="knitting"
-        class="w-full h-full absolute z-0 sm:hidden"
-      />
-      <div
-        class="bg-gray-800 bg-opacity-80 md:my-16 lg:py-16 py-10 w-full md:mx-24 md:px-12 px-4 flex flex-col items-center justify-center relative z-40"
-      >
-        <h1 class="text-4xl font-semibold leading-9 text-white text-center">
-          Bespoke Knitting
-        </h1>
-        <p class="text-base leading-normal text-center text-white mt-6">
-          We create beautiful bespoke knitted wear to meet your exact requirements. <br />
-
-        </p>
-        <div
-          class="sm:border border-white flex-col sm:flex-row flex items-center lg:w-5/12 w-full mt-12 space-y-4 sm:space-y-0"
-        >
-          <input
-            class="border border-white sm:border-transparent text-base w-full font-medium leading-none text-white p-4 focus:outline-none bg-transparent placeholder-white"
-            placeholder="Email Address"
-          />
-          <button
-            class="focus:outline-none text-gray-800 focus:ring-offset-2 focus:ring border border-white sm:border-transparent w-full sm:w-auto bg-white py-4 px-6 hover:bg-opacity-75"
-          >
-            Contact
-          </button>
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/typography'),
+    ],
+  }
+  ```
+-->
+<div class="relative bg-white">
+  <div class="lg:absolute lg:inset-0 rounded">
+    <div class="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 lg-rounded">
+      <img class="w-full object-cover lg:h-full" ngSrc="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2F800%2F29420545-7353-424F-AF69-47166EE90914_800x800.JPG?alt=media&token=92df0c55-d61d-443c-9244-552364bd7f41" width="800" height="800" alt="">
+    </div>
+  </div>
+  <div class="relative px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8">
+    <div class="lg:col-start-2 lg:pl-8">
+      <div class="mx-auto max-w-prose text-base lg:ml-auto lg:mr-0 lg:max-w-lg">
+        <h3 class="font-garamond mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">Our Process</h3>
+        <p class="mt-8 text-lg text-gray-500"></p>
+        <div class="font-garamond mt-5 text-gray-500">
+          <p>Cassandra Harada has been knitting and making garments with natural fibers for over 22 years.</p>
+          <p>She has been designing for publications like “Keitodama” and contributing to seasonal collections for yarn companies like Jamieson’s of Shetland for 15 years.   While designing patterns for original knitwear is a joy, Cassandra really prefers to work with singular customers who are in need of something specific to suit their needs.</p>
+          <p>Contact Cassandra @ <a> <button (click)="onContacts()"><strong>Contacts</strong></button></a>
+            or at cassandra@tokyo-made-to.com to discuss your needs and schedule a fitting.</p>
+          <p>Garments can also be made from measurements or sending a well loved item that fits, in order to achieve a specific shape and silhouette.</p>
         </div>
       </div>
     </div>
+  </div>
 </div>
-
-<highlight></highlight>

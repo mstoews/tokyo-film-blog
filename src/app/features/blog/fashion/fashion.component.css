@@ -1,0 +1,6 @@
+
+.bg-blur {
+    background: linear-gradient(91.25deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 99.82%);
+    backdrop-filter: blur(25px);
+}
+

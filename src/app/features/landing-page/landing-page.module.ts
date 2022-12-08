@@ -14,34 +14,55 @@ import { KnittingComponent } from './knitting/knitting.component';
 import { RepairsComponent } from './repairs/repairs.component';
 import { HighlightComponent } from './highlight/highlight.component';
 import { SocialModule } from '../social/social.module';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { MaterialModule } from 'app/material.module';
+import { IconsModule } from 'app/icons.module';
 
 const routes: Routes = [
   {
     path: 'home',
     pathMatch: 'full',
     component: LandingPageComponent,
+     data: { state: 'home' },
   },
 
+  {
+    path: 'contacts',
+    pathMatch: 'full',
+    component: ContactsComponent,
+     data: { state: 'contacts' },
+  },
   {
     path: 'tailoring',
     pathMatch: 'full',
     title: 'Services Tailoring',
     component: TailoringComponent,
+    data: { state: 'tailoring' },
   },
   {
     path: 'ready-to-wear',
     pathMatch: 'full',
     component: ReadyToWearComponent,
+    data: { state: 'read-to-wear' },
   },
   {
     path: 'knitting',
     pathMatch: 'full',
     component: KnittingComponent,
+    data: { state: 'knitting' },
   },
   {
     path: 'repairs',
     pathMatch: 'full',
     component: RepairsComponent,
+    data: { state: 'repairs' },
+  },
+  {
+    path: 'about_us',
+    pathMatch: 'full',
+    component: AboutUsComponent,
+    data: { state: 'about_us' },
   },
   {
     path: '**',
@@ -60,7 +81,9 @@ const routes: Routes = [
     ReadyToWearComponent,
     KnittingComponent,
     RepairsComponent,
-    HighlightComponent],
+    HighlightComponent,
+    AboutUsComponent,
+    ContactsComponent],
   imports: [
     CommonModule,
     GalleryCardComponent,
@@ -69,10 +92,12 @@ const routes: Routes = [
     LightboxModule,
     RouterModule.forChild(routes),
     NgOptimizedImage,
-    SocialModule
+    SocialModule,
+    MaterialModule,
+    IconsModule
   ]
 })
 
 export class LandingPageModule {
-  
+
 }
