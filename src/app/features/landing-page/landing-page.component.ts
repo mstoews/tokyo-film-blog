@@ -102,6 +102,11 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate(['home/about_us']);
   }
 
+  onContactUs(){
+    console.log('Products');
+    this.router.navigate(['home/contacts']);
+  }
+
   onProducts() {
     console.log('Products');
     this.router.navigate(['products']);
