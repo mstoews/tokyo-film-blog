@@ -1,18 +1,6 @@
 <div class="h-screen">
   <mat-drawer-container>
     <mat-drawer class="w-3/8 lg:w-3/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'" [disableClose]="false">
-    <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
-      <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }">
-        {{ sTitle }}
-      </div>
-      <div mat-dialog-content>
-          <form [formGroup]="imageGroup" (ngSubmit)="onUpdate(imageGroup.value)" class="form">
-            <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
-              <input matInput placeholder="Caption" formControlName="caption" />
-            </mat-form-field>
-          </form>
-        </div>
-      </mat-card>
     </mat-drawer>
     <mat-drawer-content>
       <div cdkDropListGroup class="grid grid-cols-5 gap-4">
@@ -26,8 +14,14 @@
             class="list drag-drop-list"
             (cdkDropListDropped)="drop($event)" >
             <div *ngFor="let item of not_usedImages" cdkDrag>
-              <div class="drop-placeholder" *cdkDragPlaceholder></div>
-              <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption"></app-image-card>
+              <div class="drop-placeholder" *cdkDragPlaceholder> </div>
+              <div class="text-gray-700">{{item.imageSrc}}
+                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                </div>
+              </div>
+              <!-- <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption"></app-image-card> -->
             </div>
           </div>
         </div>
@@ -41,7 +35,13 @@
             class="list"
             (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of featuredImages" cdkDrag>
-              <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
+              <div class="text-gray-700">{{item.imageSrc}}
+                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                </div>
+              </div>
+              <!-- <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card> -->
             </div>
           </div>
         </div>
@@ -50,7 +50,13 @@
           <div class="sticky top-0 z-50 image_title">CREATIONS</div>
             <div cdkDropList #creations="cdkDropList" [id]="IN_CREATION" [cdkDropListData]="creationsImages" class="list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of creationsImages" cdkDrag>
-              <app-image-card [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card>
+              <!-- <app-image-card [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card> -->
+              <div class="text-gray-700">{{item.imageSrc}}
+                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -59,7 +65,13 @@
           <div class="sticky top-0 z-50 uppercase image_title lg-rounded">collections</div>
           <div cdkDropList #collections="cdkDropList" [id]="IN_COLLECTION" [cdkDropListData]="collectionsImages"  class="list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of collectionsImages" cdkDrag>
-              <app-image-card [url]="item.imageSrc"  [file_name]="item.caption"></app-image-card>
+              <!-- <app-image-card [url]="item.imageSrc"  [file_name]="item.caption"></app-image-card> -->
+              <div class="text-gray-700">{{item.imageSrc}}
+                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -73,7 +85,13 @@
              class="list"
              (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of galleryImages" cdkDrag>
-              <app-image-card [url]="item.imageSrc" [file_name]="item.caption"></app-image-card>
+              <!-- <app-image-card [url]="item.imageSrc" [file_name]="item.caption"></app-image-card> -->
+              <div class="text-gray-700">{{item.imageSrc}}
+                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                </div>
+              </div>
             </div>
           </div>
         </div>

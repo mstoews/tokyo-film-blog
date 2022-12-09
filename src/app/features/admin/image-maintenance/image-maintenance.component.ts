@@ -75,10 +75,10 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
         this.galleryImages = item
       })
 
-    this.printImageList('Featured', this.featuredImages)
-    this.printImageList('Collections', this.collectionsImages)
-    this.printImageList('Creations', this.creationsImages)
-    this.printImageList('Gallery', this.galleryImages)
+    // this.printImageList('Featured', this.featuredImages)
+    // this.printImageList('Collections', this.collectionsImages)
+    // this.printImageList('Creations', this.creationsImages)
+    // this.printImageList('Gallery', this.galleryImages)
   }
 
   createEmptyForm() {
@@ -92,14 +92,14 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     })
   }
 
-  printImageList(title: string, images: imageItem[]) {
-    images.forEach((img) => {
-      // console.log(`${title} caption: ${img.caption} ranking: ${img.ranking} ${img.imageSrc}`);
-    })
-  }
+  // printImageList(title: string, images: imageItem[]) {
+  //   images.forEach((img) => {
+  //     // console.log(`${title} caption: ${img.caption} ranking: ${img.ranking} ${img.imageSrc}`);
+  //   })
+  // }
 
   ngOnInit() {
-    this.imageListService.createImageList()
+    // this.imageListService.createImageList()
     this.createEmptyForm()
     this.Refresh()
   }

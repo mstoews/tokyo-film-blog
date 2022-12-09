@@ -20,7 +20,17 @@ export class ContactService {
   }
 
   create(contact: Contact) {
-    this.contactCollection.add(contact);
+    console.log(JSON.stringify(contact));
+
+    const contact_update = {
+      id: '',
+      name: contact.name,
+      phone: contact.phone,
+      email: contact.email,
+      message: contact.message
+    }
+
+    this.contactCollection.add(contact_update);
   }
 
   update(contact: Contact) {
