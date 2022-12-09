@@ -18,6 +18,8 @@ export class ContactsComponent implements OnInit {
   mainPage$: Observable<Mainpage[]>;
   mainPageDoc: Mainpage;
 
+  contact: Contact;
+
   constructor(
       private router: Router,
       private fb: FormBuilder,
@@ -38,7 +40,7 @@ export class ContactsComponent implements OnInit {
   }
 
   onUpdate(contact: Contact) {
-    contact = this.contactGroup.getRawValue();
+    // contact = this.contactGroup.getRawValue();
     this.contactService.create(contact);
     this.createEmptyForm();
   }
@@ -60,6 +62,16 @@ export class ContactsComponent implements OnInit {
       email: [''],
       phone: [''],
       message: [''],
+    });
+  }
+
+  createForm() {
+    this.contactGroup = this.fb.group({
+      id: [this.contact.id],
+      name: [this.contact.name],
+      email: [this.contact.email],
+      phone: [this.contact.phone],
+      message: [this.contact.message],
     });
   }
 }
