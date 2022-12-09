@@ -40,7 +40,6 @@ export class ContactsComponent implements OnInit {
   }
 
   onUpdate(contact: Contact) {
-    // contact = this.contactGroup.getRawValue();
     this.contactService.create(contact);
     this.createEmptyForm();
   }
@@ -57,7 +56,6 @@ export class ContactsComponent implements OnInit {
 
   createEmptyForm() {
     this.contactGroup = this.fb.group({
-      id: [''],
       name: [''],
       email: [''],
       phone: [''],
@@ -67,7 +65,6 @@ export class ContactsComponent implements OnInit {
 
   createForm() {
     this.contactGroup = this.fb.group({
-      id: [this.contact.id],
       name: [this.contact.name],
       email: [this.contact.email],
       phone: [this.contact.phone],
