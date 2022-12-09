@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-knitting',
@@ -8,10 +10,11 @@ import { Router } from '@angular/router';
 })
 export class KnittingComponent implements OnInit {
 
-  constructor (private router: Router ) { }
+  constructor (private router: Router, private _location: Location ) { }
 
   onBackToLanding() {
-    this.router.navigate(['/home'])
+    this._location.back()
+    // this.router.navigate(['/home'])
   }
 
   ngOnInit(): void { }

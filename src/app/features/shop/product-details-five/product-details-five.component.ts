@@ -39,19 +39,21 @@ export class ProductDetailsFiveComponent implements OnInit {
   }
 
   onAddToWishList() {
-    this.productItem$.subscribe((product) => {
-      if (product) {
-        // console.log('Add to wish list ...', product.id);
-      }
-    })
+    this.route.navigate(['/shop/coming-soon'])
+    // this.productItem$.subscribe((product) => {
+    //   if (product) {
+    //     // console.log('Add to wish list ...', product.id);
+    //   }
+    // })
   }
 
   onAddToShoppingCart() {
-    this.productItem$.subscribe((product) => {
-      if (product) {
-        // console.log('Add to shopping cart ...', product.id);
-      }
-    })
+    this.route.navigate(['/shop/coming-soon'])
+    // this.productItem$.subscribe((product) => {
+    //   if (product) {
+    //     // console.log('Add to shopping cart ...', product.id);
+    //   }
+    // })
   }
 
   onContinueShopping() {
@@ -59,19 +61,19 @@ export class ProductDetailsFiveComponent implements OnInit {
   }
 
   onGoShoppingCart() {
-    // this.route.navigate(['/shop/payment']);
+    this.route.navigate(['/shop/coming-soon']);
 
-    this.purchaseStarted = true
+    // this.purchaseStarted = true
 
-    this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
-      (session) => {
-        this.checkoutService.redirectToCheckout(session)
-      },
-      (err) => {
-        // console.log('Error creating checkout session', err);
-        this.purchaseStarted = false
-      }
-    )
+    // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
+    //   (session) => {
+    //     this.checkoutService.redirectToCheckout(session)
+    //   },
+    //   (err) => {
+    //     // console.log('Error creating checkout session', err);
+    //     this.purchaseStarted = false
+    //   }
+    // )
   }
 
   ngOnDestroy() {

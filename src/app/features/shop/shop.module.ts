@@ -13,6 +13,7 @@ import { ProductDetailsFiveComponent } from './product-details-five/product-deta
 import { ProductResolver } from 'app/services/product.resolver';
 import { SafePipe } from './safe.pipe';
 import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
+import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 
 
 
@@ -47,6 +48,13 @@ const routes: Routes = [
     component: StripeCheckoutComponent,
     data: { state: 'stripe-checkout' }
   },
+  {
+    path: 'coming-soon',
+    pathMatch: 'full',
+    title: 'Coming in January',
+    component: ComingSoonComponent,
+    data: { state: 'coming-soon' }
+  },
 ];
 
 @NgModule({
@@ -59,6 +67,7 @@ const routes: Routes = [
     ProductDetailsFiveComponent,
     StripeCheckoutComponent,
     SafePipe,
+    ComingSoonComponent,
   ],
   imports: [
     CommonModule,

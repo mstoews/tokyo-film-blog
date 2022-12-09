@@ -13,26 +13,26 @@
 
     <div class="text-4xl text-gray-900 lg:max-w-[624px] w-full lg:mt-8 md:mt-6 mt-4">  {{blog.title}} </div>
 
-    <div class="gap-4 mt-6 top-48 lg:mt-12 md:mt-8 justify-evenly">
+    <div class="gap-4 mt-6 lg:mt-12 md:mt-8 justify-evenly">
       <p class="max-w-lg text-base text-center text-gray-700 md:text-left" [innerHTML]="blog.paragraph"></p>
     </div>
 
-    <div *ngIf="blogImages?.length > 0">
+    <div class="sm:invisible md:visible" *ngIf="blogImages?.length > 0">
       <img [ngSrc]="blogImages[0].url" width="400" height="600" alt="caps" class="rounded-lg " />
     </div>
 
-    <div class="gap-4 mt-6 lg:flex lg:mt-12 md:mt-8 justify-evenly ">
+    <div class="gap-4 mt-6 lg:flex lg:mt-12 justify-evenly ">
       <p class="max-w-[600px] p-1 text-base text-center text-gray-700 bg-transparent -mt-100 top-48 md:text-left bg-blur"
         [innerHTML]="blog.body"></p>
     </div>
 
-    <div *ngIf="blogImages?.length > 0">
+    <div class="sm:invisible md:visible" *ngIf="blogImages?.length > 0">
       <img [ngSrc]="blogImages[1].url" width="400" height="400" alt="caps" class="rounded-lg "/>
     </div>
 
 
-    <div class="gap-4 mt-6 top-48 lg:flex lg:mt-12 md:mt-8 justify-evenly">
-      <p class="max-w-lg p-1 text-base text-center text-gray-700 bg-transparent -mt-50 md:text-left bg-blur"
+    <div class="gap-4 mt-6 top-48 lg:flex justify-evenly">
+      <p class="max-w-lg p-1 text-base text-center text-gray-700 bg-transparent md:text-left bg-blur"
         [innerHTML]="blog.conclusion"></p>
     </div>
   </div>
@@ -43,3 +43,6 @@
       backdrop-filter: blur(25px);
     }
   </style>
+
+
+
