@@ -12,7 +12,7 @@ export class KnittingComponent implements OnInit {
 
   constructor (private router: Router, private _location: Location ) { }
 
-  onBackToLanding() {
+  onBack() {
     this._location.back()
     // this.router.navigate(['/home'])
   }

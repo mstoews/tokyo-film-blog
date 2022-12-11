@@ -8,14 +8,9 @@ import { Router } from '@angular/router'
 })
 export class TailoringComponent implements OnInit {
   constructor(private router: Router) {}
-
+  header_title = "Bespoke Tailoring"
   onContacts() {
     this.router.navigate(['/home/contacts'])
   }
-
   ngOnInit(): void {}
-
-  onBackToLanding() {
-    this.router.navigate(['/home'])
-  }
 }

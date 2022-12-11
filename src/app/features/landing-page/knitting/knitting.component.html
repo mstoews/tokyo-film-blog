@@ -1,4 +1,4 @@
-<div class="flex justify-start items-start py-10 px-4 md:px-6 ">
+<!-- <div class="flex justify-start items-start py-10 px-4 md:px-6 ">
     <p class="text-4xl font-garamond font-semibold leading-9 text-gray-800"> Bespoke Knitting </p>
     <button
       mat-icon-button
@@ -7,26 +7,14 @@
     >
       <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
     </button>
-</div>
+</div> -->
 
-  <!--
-  This example requires some changes to your config:
+<app-header [title]="'Bespoke Knitting'" ></app-header>
 
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/typography'),
-    ],
-  }
-  ```
--->
 <div class="relative bg-white">
   <div class="lg:absolute lg:inset-0 rounded">
-    <div class="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 lg-rounded">
-      <img class="w-full object-cover lg:h-full" ngSrc="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2F800%2F29420545-7353-424F-AF69-47166EE90914_800x800.JPG?alt=media&token=92df0c55-d61d-443c-9244-552364bd7f41" width="800" height="800" alt="">
+    <div class="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 lg-rounded w-auto h-auto">
+      <img class="w-full max-w-fit object-cover lg:h-full" ngSrc="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/uploaded%2F800%2F29420545-7353-424F-AF69-47166EE90914_800x800.JPG?alt=media&token=92df0c55-d61d-443c-9244-552364bd7f41" width="800" height="800" alt="" >
     </div>
   </div>
   <div class="relative px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8">

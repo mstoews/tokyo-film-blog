@@ -6,8 +6,10 @@ import { Observable } from 'rxjs';
 import { MainPageService } from 'app/services/main-page.service';
 import { Contact } from 'app/models/contact';
 import { ContactService } from 'app/services/contact.service';
-
-
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'environments/environment';
+import {catchError} from 'rxjs/operators';
+import {throwError} from 'rxjs';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -24,7 +26,8 @@ export class ContactsComponent implements OnInit {
       private router: Router,
       private fb: FormBuilder,
       private contactService: ContactService,
-      private mainPageService: MainPageService
+      private mainPageService: MainPageService,
+      private http: HttpClient
       )
   {
     this.createEmptyForm();
@@ -40,16 +43,24 @@ export class ContactsComponent implements OnInit {
   }
 
   onUpdate(contact: Contact) {
-    this.contactService.create(contact);
-    this.createEmptyForm();
+    //this.contactService.create(contact);
+    console.log(JSON.stringify(contact));
+    this.http.post(environment.emulator.createMessage, {
+      contact
+    })
+      .pipe(
+          catchError(err => {
+              console.log(err);
+              alert('Could not create message');
+              return throwError(err);
+          })
+      ).subscribe(() => {
+          alert("User created successfully!");
+          this.contactGroup.reset();
+      });
   }
 
-  onSend(contact: Contact) {
-    contact = this.contactGroup.getRawValue();
-    this.contactService.create(contact);
-    this.createEmptyForm();
-  }
-
+  
   scrollToId() {
     this.router.navigate(['home']);
   }

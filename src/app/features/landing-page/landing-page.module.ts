@@ -18,6 +18,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { MaterialModule } from 'app/material.module';
 import { IconsModule } from 'app/icons.module';
+import { HeaderComponent } from 'app/components/header/header.component';
 
 const routes: Routes = [
   {
@@ -94,7 +95,8 @@ const routes: Routes = [
     NgOptimizedImage,
     SocialModule,
     MaterialModule,
-    IconsModule
+    IconsModule,
+    HeaderComponent
   ]
 })
 

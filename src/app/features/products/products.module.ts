@@ -11,6 +11,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
+import { SafePipe } from './safe.pipe';
 
 
 const routes: Routes = [
@@ -21,14 +22,15 @@ const routes: Routes = [
 ]
 
 @NgModule({
-  declarations: [ProductsComponent, BannerComponent, OrderSummaryComponent, GridComponent, CarouselComponent, ProductCardComponent],
+  declarations: [SafePipe, ProductsComponent, BannerComponent, OrderSummaryComponent, GridComponent, CarouselComponent, ProductCardComponent],
   imports: [
     RouterModule.forChild(routes),
     CommonModule,
     MaterialModule,
     FuseCardModule,
     SharedModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+
   ],
 })
 export class ProductsModule { }

@@ -16,8 +16,13 @@ export const environment = {
   production: false
   ,
   api: {
-    baseUrl: "http://localhost:9000"
+    baseUrl: "http://localhost:9000",
+  },
+  emulator: {
+    createMessage: "http://localhost:5001/made-to-cassie.firebaseapp.com/createMessage",
+    createUser: "http://localhost:5001/createUser"
   }
+
 };
 
 /*

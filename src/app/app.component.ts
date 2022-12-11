@@ -9,6 +9,7 @@ import {
 } from '@angular/animations';
 import { map, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthTokenService } from './services/auth/auth-token.service';
 
 
 @Component({
@@ -43,7 +44,8 @@ export class AppComponent  implements OnInit {
   pictureUrl$: Observable<string | null>;
 
   constructor(
-    private afAuth : AngularFireAuth
+    private afAuth : AngularFireAuth,
+    private jwt: AuthTokenService
   )
   {
 

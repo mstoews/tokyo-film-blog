@@ -10,6 +10,6 @@ export const environment = {
   },
   production: true,
   api: {
-    baseUrl: "https://tokyo-made-to.appspot.com"
+    createUser: "https://tokyo-made-to.appspot.com"
   }
 };
