@@ -19,6 +19,8 @@ import { ContactsComponent } from './contacts/contacts.component';
 import { MaterialModule } from 'app/material.module';
 import { IconsModule } from 'app/icons.module';
 import { HeaderComponent } from 'app/components/header/header.component';
+import { ImageSwipeComponent } from './image-swipe/image-swipe-content.component';
+import { SwiperModule } from 'swiper/angular';
 
 const routes: Routes = [
   {
@@ -84,7 +86,8 @@ const routes: Routes = [
     RepairsComponent,
     HighlightComponent,
     AboutUsComponent,
-    ContactsComponent],
+    ContactsComponent,
+    ImageSwipeComponent],
   imports: [
     CommonModule,
     GalleryCardComponent,
@@ -96,7 +99,8 @@ const routes: Routes = [
     SocialModule,
     MaterialModule,
     IconsModule,
-    HeaderComponent
+    HeaderComponent,
+    SwiperModule,
   ]
 })
 
