@@ -1,14 +1,21 @@
-<div class="flex justify-start items-start py-10 px-4 md:px-6 ">
-
-  <div class="mb-12 xl:w-full w-11/12 mx-auto">
+<div class="flex justify-start items-start py-5 px-4 md:px-6 ">
+  <div class="mb-4 xl:w-full w-11/12 mx-auto">
     <h1 class="xl:text-5xl text-3xl pt-4 xl:pt-0 text-gray-800 xl:text-left font-extrabold mb-4">{{title}}</h1>
     <p class="text-xl text-gray-600 xl:w-7/12 mx-auto xl:mx-0">{{sub_title}}</p>
   </div>
+  <div class="hidden sm:block md:block">
+    <button mat-icon-button (click)="onBack()"
+      class="sm:visible border-transparent absolute text-gray-700 w-10 pl-5 top-9 mb-20 items-left text-3xl font-semibold align-middle rounded-lg sm:right-30 btn hover:text-white hover:bg-gray-400 dark:hover:bg-gray-400">
+      <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+    </button>
+  </div>
 
-  <button
-    mat-icon-button
-    (click)="onBack()"
-    class="sm:visible border-transparent absolute text-gray-700 w-10 pl-5 top-9 mb-20 items-left text-3xl font-semibold align-middle rounded-lg sm:right-30 btn hover:text-white hover:bg-gray-400 dark:hover:bg-gray-400">
-    <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-  </button>
+  <div class="hidden sm:block md:block">
+    <div *nfIf="back==true">
+      <button mat-icon-button (click)="onBack()"
+        class="sm:visible border-transparent absolute text-gray-700 w-10 pl-5 top-9 mb-20 items-left text-3xl font-semibold align-middle rounded-lg sm:right-30 btn hover:text-white hover:bg-gray-400 dark:hover:bg-gray-400">
+        <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+      </button>
+  </div>
+  </div>
 </div>
