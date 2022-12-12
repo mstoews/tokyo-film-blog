@@ -1,38 +1,27 @@
 <div *ngIf="Products$ | async as products">
-<div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9">
+  <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9">
     <div class="flex flex-col items-start justify-start">
-        <div class="flex items-end justify-between w-full mt-4">
-            <div class="flex flex-col sm:flex-row sm:space-x-4">
-                <div>
-                    <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">Shopping</p>
-                </div>
-            </div>
-            <button
-            mat-icon-button
-            (click)="backToHome()"
-            class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
+      <div class="flex items-end justify-between w-full mt-4">
+        <div class="flex flex-col sm:flex-row sm:space-x-4">
+          <div>
+            <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">Shopping </p>
+          </div>
+        </div>
+        <div class="hidden sm:block md:block">
+          <button mat-icon-button (click)="backToHome()"
+            class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
           </button>
-            <!--
-              <button class="relative flex py-3 pr-12 rounded-sm hover:opacity-75 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 jusitfy-center item-center">
-                <p class="text-base font-normal leading-3 text-gray-600">Filters</p>
-                <div class="absolute top-0.5 right-2 flex jusitfy-center items-center">
-                  <mat-select placeholder="Category" formControlName="category" (selectionChange)="changeCategory($event.value)">
-                    <mat-option *ngFor="let p of categories" [value]="p.name">  {{ p.name }}  </mat-option>
-                 </mat-select>
-                </div>
-             </button>
-            -->
         </div>
+      </div>
     </div>
     <div class="flex items-center justify-center">
-        <!-- <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-3 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap"> -->
-          <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            <li *ngFor="let product of products ">
-              <shop-card [product]="product"></shop-card>
-            </li>
-        </div>
+      <!-- <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-3 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap"> -->
+      <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <li *ngFor="let product of products ">
+          <shop-card [product]="product"></shop-card>
+        </li>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-

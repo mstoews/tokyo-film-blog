@@ -13,16 +13,13 @@ export const environment = {
     messagingSenderId: '819679326368',
     measurementId: 'G-WGMMJK9NR3',
   },
-  production: false
-  ,
+  production: false,
+  useEmulators: true,
   api: {
     baseUrl: "http://localhost:9000",
-  },
-  emulator: {
     createMessage: "http://localhost:5001/made-to-cassie.firebaseapp.com/createMessage",
     createUser: "http://localhost:5001/createUser"
-  }
-
+  },
 };
 
 /*
