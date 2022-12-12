@@ -1,21 +1,5 @@
+<app-header [title]="'Made-To Collections'"></app-header>
 <div *ngIf="Products$ | async as products">
-  <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9">
-      <div class="flex flex-col items-start justify-start">
-          <div class="flex items-end justify-between w-full mt-4">
-              <div class="flex flex-col sm:flex-row sm:space-x-4">
-                  <div>
-                      <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">
-                        Made To Collections
-                      </p>
-                  </div>
-              </div>
-              <button mat-icon-button (click)="backToHome()"
-                class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
-                <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-              </button>
-          </div>
-      </div>
-
       <div class="flex items-center justify-center">
           <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-2 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap">
               <div *ngFor="let product of products ">
@@ -23,6 +7,5 @@
               </div>
           </div>
       </div>
-  </div>
   </div>
 

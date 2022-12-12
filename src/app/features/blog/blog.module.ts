@@ -8,6 +8,10 @@ import { MaterialModule } from 'app/material.module';
 import { BlogResolver} from 'app/services/blog.resolver';
 import { DxHtmlEditorModule } from 'devextreme-angular';
 import { SafePipe } from './safe.pipe';
+import { HeaderComponent } from 'app/components/header/header.component';
+import { FuseCardModule } from '@fuse/components/card';
+import { IconsModule } from 'app/icons.module';
+import { BlogCardComponent } from './blog-card/blog-card.component';
 
 const routes: Routes = [
   {
@@ -33,7 +37,8 @@ const routes: Routes = [
     BlogComponent,
     FashionComponent,
     DetailComponent,
-    SafePipe
+    SafePipe,
+    BlogCardComponent
 
   ],
   imports: [
@@ -42,7 +47,9 @@ const routes: Routes = [
     MaterialModule,
     DxHtmlEditorModule,
     NgOptimizedImage,
-
+    HeaderComponent,
+    FuseCardModule,
+    IconsModule
   ]
 })
 export class BlogModule { }

@@ -43,24 +43,27 @@ export class ContactsComponent implements OnInit {
   }
 
   onUpdate(contact: Contact) {
-    //this.contactService.create(contact);
-    console.log(JSON.stringify(contact));
-    this.http.post(environment.emulator.createMessage, {
-      contact
-    })
-      .pipe(
-          catchError(err => {
-              console.log(err);
-              alert('Could not create message');
-              return throwError(err);
-          })
-      ).subscribe(() => {
-          alert("User created successfully!");
-          this.contactGroup.reset();
-      });
+    this.contactService.create(contact);
+    // console.log(JSON.stringify(contact));
+    // this.http.post(environment.emulator.createMessage(contact) {
+
+    // }.createMessage, {
+    //   contact
+    // })
+    //   .pipe(
+    //       catchError(err => {
+    //           console.log(err);
+    //           alert('Could not create message');
+    //           return throwError(err);
+    //       })
+    //   ).subscribe(() => {
+    //       alert("User created successfully!");
+    //       this.contactGroup.reset();
+    //   });
+    this.contactGroup.reset();
   }
 
-  
+
   scrollToId() {
     this.router.navigate(['home']);
   }

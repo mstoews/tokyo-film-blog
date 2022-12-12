@@ -12,6 +12,7 @@ import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 import { SafePipe } from './safe.pipe';
+import { HeaderComponent } from 'app/components/header/header.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,7 @@ const routes: Routes = [
     FuseCardModule,
     SharedModule,
     NgOptimizedImage,
-
+    HeaderComponent
   ],
 })
 export class ProductsModule { }

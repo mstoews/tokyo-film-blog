@@ -17,6 +17,7 @@ export class HeaderComponent {
   }
 
   @Input() title : string;
+  @Input() sub_title : string;
 
   public onBack(){
     this._location.back()

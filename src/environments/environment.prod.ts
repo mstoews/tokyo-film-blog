@@ -10,6 +10,12 @@ export const environment = {
   },
   production: true,
   api: {
-    createUser: "https://tokyo-made-to.appspot.com"
+    baseUrl: "http://localhost:9000",
+    createMessage: "http://localhost:5001/made-to-cassie.firebaseapp.com/createMessage",
+    createUser: "http://localhost:5001/createUser",
+  },
+  emulator: {
+    createMessage: "http://localhost:5001/made-to-cassie.firebaseapp.com/createMessage",
+    createUser: "http://localhost:5001/createUser",
   }
 };

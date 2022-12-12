@@ -1,21 +1,14 @@
-
-    <mat-card>
-    <div (click)="onOpenBlog(blog.id)" class="flex flex-col items-start justify-center space-y-6 bg-gray-100 rounded-lg">
-        <div class="w-full" *ngIf="blogImages$ | async as blogImages">
-            <img class="w-full rounded-lg" [src]="blogImages[0].url" alt="blog image" />
-        </div>
-        <div class="absolute justify-start p-6 text-left bottom-2 md:bottom-8 inset-x-8 md:inset-x-8 xl:left-8 xl:right-1/2 bg-blur md:p-8">
-            <p class="mt-2 text-2xl font-semibold leading-6 text-gray-800">{{ blog.title }}</p>
-
-            <div class="hidden lg:flex items-start justify-start m-2 text-left">
-                <p class="text-base leading-6 text-gray-600" [innerHTML]="blog.paragraph| safe: 'html'"></p>
-            </div>
-            <div class="flex flex-col items-start justify-start m-2 space-y-3 text-left">
-              <p class="text-sm leading-none text-gray-600">{{blog.date_updated}}</p>
+    <div (click)="onOpenBlog(blog.id)" *ngIf="blogImages$ | async as images"
+      class="relative bg-center bg-cover bg-no-repeat mb-40 w-11/12 mx-auto xl:w-full h-120">
+      <img [src]="images[0].url" alt="" class="h-full w-full object-cover overflow-hidden absolute rounded" />
+      <div
+        class="absolute bottom-0 w-11/12 ml-2 xl:mx-0 lg:mx-0 xl:w-6/12 lg:w-6/12 xl:ml-12 lg:ml-12 rounded-md lg:-mb-56 sm:-mb-48 -mb-64 xl:-mb-24">
+        <div class="w-full py-5 px-6 bg-white shadow rounded">
+          <p class="text-xl text-gray-800 font-bold pb-2">{{blog.title}}</p>
+          <p class="text-base text-gray-600" [innerHTML]="blog.paragraph | safe: 'html'"></p>
+          <div class="pt-4 flex justify-between">
+            <p class="text-sm text-gray-600"> {{blog.date_updated}}  </p>
           </div>
         </div>
+      </div>
     </div>
-  </mat-card>
-
-
-
