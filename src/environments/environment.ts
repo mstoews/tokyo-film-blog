@@ -14,11 +14,11 @@ export const environment = {
     measurementId: 'G-WGMMJK9NR3',
   },
   production: false,
-  useEmulators: true,
+  useEmulators: false,
   api: {
     baseUrl: "http://localhost:9000",
-    createMessage: "http://localhost:5001/made-to-cassie.firebaseapp.com/createMessage",
-    createUser: "http://localhost:5001/createUser"
+    createMessage: "https://us-central1-made-to-cassie.cloudfunctions.net/createMessage",
+    createUser: "https://us-central1-made-to-cassie.cloudfunctions.net/createUser",
   },
 };
 

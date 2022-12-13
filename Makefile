@@ -10,6 +10,12 @@ deploy:
 	firebase deploy --only hosting
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose
+functions:
+	@echo "Deploy functions"
+	firebase deploy --only functions
+
+
+## up_build: stops docker-compose (if running), builds all projects and starts docker compose
 start:
 	@echo "start web app"
 	pnpm run start

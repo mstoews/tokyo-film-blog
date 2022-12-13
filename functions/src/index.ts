@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import {createUserApp} from "./create-user";
+import {createMessageApp} from "./create-message";
 
 //
 // Start writing Firebase Functions
@@ -7,12 +8,4 @@ import {createUserApp} from "./create-user";
 //
 
 export const createUser = functions.https.onRequest(createUserApp);
-
-export const onAddInventoryUpdateImages =
-functions.firestore
-    .document("inventory/{inventoryId}")
-    .onCreate(async (snap, context)=> {
-      functions.logger.debug(`running add
-      course trigger for productId ${context.params.inventoryId}`);
-    });
-
+export const createMessage = functions.https.onRequest(createMessageApp);
