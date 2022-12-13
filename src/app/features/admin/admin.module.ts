@@ -23,6 +23,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
 import { SafePipe } from './safe.pipe';
 import { InventoryContentComponent } from './inventory-content/inventory-content.component';
+import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
 
@@ -60,7 +61,7 @@ const routes: Routes = [
     AdminFormComponent,
     GalleryComponent,
     ServicesComponent,
-
+    ContactGridComponent,
     SafePipe,
     InventoryContentComponent,
 

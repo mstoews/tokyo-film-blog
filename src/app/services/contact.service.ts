@@ -11,7 +11,7 @@ export class ContactService {
   private contactItems: Observable<Contact[]>;
 
   constructor(public afs: AngularFirestore) {
-    this.contactCollection = afs.collection<Contact>('contact')
+    this.contactCollection = afs.collection<Contact>('contacts')
     this.contactItems = this.contactCollection.valueChanges({idField: 'id'});
   }
 
