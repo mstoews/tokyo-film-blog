@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core'
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore'
-import { first, map, Observable } from 'rxjs'
-import { WishList } from 'app/models/wishlist'
+import { AngularFirestore, AngularFirestoreCollection }  from '@angular/fire/compat/firestore'
+import { first, map, Observable } from 'rxjs';
+import { WishList } from 'app/models/wishlist';
+import { Cart } from 'app/models/cart';
+
 import { convertSnaps } from './db-utils'
-import { IImageStorage } from 'app/models/maintenance'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
+import { Product } from 'app/models/products'
+import { MatSnackBar } from '@angular/material/snack-bar'
+import firebase from 'firebase/compat/app';
+import Timestamp = firebase.firestore.Timestamp;
 
 @Injectable({
   providedIn: 'root',
@@ -15,40 +17,69 @@ import { AngularFireAuth } from '@angular/fire/compat/auth'
 export class WishListService {
   private wishListCollection: AngularFirestoreCollection<WishList>
   private wishListItems: Observable<WishList[]>
-  isLoggedIn: boolean
-  userId: string
+  private isLoggedIn: boolean
+  private userId: string
 
-  constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {
+  constructor(
+    private afs: AngularFirestore,
+    private snack : MatSnackBar,
+    private auth: AngularFireAuth) {
+    auth.authState.subscribe((user) => {
+      this.userId = user?.uid;
+    })
+
     this.auth.authState
       .pipe(map((user) => !!user))
-      .subscribe((isLoggedIn) => (this.isLoggedIn = isLoggedIn))
+      .subscribe((isLoggedIn) => {
+        this.isLoggedIn = isLoggedIn
+      });
 
     if (this.isLoggedIn) {
-      const user = auth.currentUser
-      this.wishListCollection = afs.collection<WishList>(
-        `user/${user}/wishlist`
-      )
-      this.wishListItems = this.wishListCollection.valueChanges({
-        idField: 'id',
-      })
+      this.wishListItems = this.wishListCollection.valueChanges({ idField: 'id', })
     }
   }
 
   getAll() {
-    // console.log(`wishList ${this.wishListItems}`);
     return this.wishListItems
   }
 
-  get(id: string) {
+  get( id: string ) {
     return this.wishListCollection.doc(id).get()
   }
 
-  findWishListByUrl(id: string): Observable<WishList | undefined> {
-    return this.afs
-      .collection(`users/${this.userId}/wishlist`, (ref) =>
+  createWishList(productId: string){
+    let prod = this.findProductById(productId);
+    if(prod){
+      prod.subscribe(result => {
+          const wish: WishList = {
+            ...result,
+            product_id: result.id
+          }
+          this.create(wish);
+      });
+    }
+  }
+
+  createCart(productId: string){
+    let prod = this.findProductById(productId);
+    if(prod){
+      prod.subscribe(result => {
+          const wish: WishList = {
+            ...result,
+            product_id: result.id
+          }
+          this.create(wish);
+      });
+    }
+  }
+
+
+
+
+  findWishListById(id: string): Observable<WishList | undefined> {
+    return this.afs.collection(`users/${this.userId}/wishlist`, (ref) =>
         ref.where('id', '==', id)
-      )
-      .snapshotChanges()
+      ).snapshotChanges()
       .pipe(
         map((snaps) => {
           const product = convertSnaps<WishList>(snaps)
@@ -58,9 +89,62 @@ export class WishListService {
       )
   }
 
-  create(mtProduct: WishList) {
-    this.wishListCollection.add(mtProduct)
+  findProductById(id: string): Observable<Product | undefined> {
+    return this.afs
+      .collection('inventory', (ref) => ref.where('id', '==', id))
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          const product = convertSnaps<Product>(snaps)
+          return product.length == 1 ? product[0] : undefined
+        }),
+        first()
+      )
   }
+
+  findWishListItemById(id: string): Observable<WishList | undefined> {
+    return this.afs
+      .collection(`users/${this.userId}/wishlist/`, (ref) => ref.where('id', '==', id))
+      .valueChanges()
+      .pipe(
+        map((snaps) => {
+          const wishlist = convertSnaps<WishList>(snaps)
+          return wishlist.length == 1 ? wishlist[0] : undefined
+        }),
+        first()
+      )
+  }
+
+  create(mtProduct: WishList) {
+    console.log('product id:', mtProduct.id);
+    if (this.findWishListItemById(mtProduct.id)) {
+      const collectionRef = this.afs.collection(`users/${this.userId}/wishlist/`);
+      collectionRef.add(mtProduct);
+      this.snack.open('Wish list has been added ...', 'Ok');
+    }
+  }
+
+  addToCart(productId: string)  {
+    let prod = this.findProductById(productId);
+    if(prod){
+      prod.subscribe(result => {
+          const cart: Cart = {
+            ...result,
+            product_id:  productId,
+            is_completed: false,
+            user_purchased: this.userId,
+            date_sold: Timestamp.now(),
+            date_updated: Timestamp.now()
+          }
+          const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
+          collectionRef.add(cart);
+        });
+        this.snack.open('Wish list has been added ...', 'Ok');
+      }
+
+    }
+
+
 
   update(mtProduct: WishList) {
     this.wishListCollection.doc(mtProduct.id.toString()).update(mtProduct)

@@ -1,11 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core'
 import { Product } from 'app/models/products'
-import { WishList } from 'app/models/wishlist'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ProductsService } from 'app/services/products.service'
 import { Observable, Subscription } from 'rxjs'
 import { WishListService } from 'app/services/wishlist.service'
 import { CheckoutService } from 'app/services/checkout.service'
+import { CartService } from 'app/services/cart.service'
+
 
 @Component({
   selector: 'app-product-details-five',
@@ -13,47 +14,43 @@ import { CheckoutService } from 'app/services/checkout.service'
   styleUrls: ['./product-details-five.component.css'],
 })
 export class ProductDetailsFiveComponent implements OnInit {
-  productId: string
+
   purchaseStarted: boolean
   productItem$: Observable<Product | undefined>
-  sub: Subscription
+  productId: string
   Products$: Observable<Product[]>
+  sub: Subscription
 
   constructor(
+    private route: Router,
     private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
-    private route: Router,
     private wishList: WishListService,
-    // private userCart: UserCartService,
-    private productService: ProductsService
+    private productService: ProductsService,
+    private cartService: CartService
   ) {}
 
   ngOnInit(): void {
     this.sub = this.activateRoute.params.subscribe((params) => {
       const prd = this.productService.findProductByUrl(params['id'])
       if (prd) {
-        this.productItem$ = prd
-        this.productId = params['id']
+        this.productItem$ = prd;
+        this.productId = params['id'];
       }
     })
   }
 
   onAddToWishList() {
-    this.route.navigate(['/shop/coming-soon'])
-    // this.productItem$.subscribe((product) => {
-    //   if (product) {
-    //     // console.log('Add to wish list ...', product.id);
-    //   }
-    // })
+    if (this.productId){
+      this.wishList.createWishList(this.productId);
+    }
   }
 
   onAddToShoppingCart() {
-    this.route.navigate(['/shop/coming-soon'])
-    // this.productItem$.subscribe((product) => {
-    //   if (product) {
-    //     // console.log('Add to shopping cart ...', product.id);
-    //   }
-    // })
+    if (this.productId){
+      this.wishList.addToCart(this.productId);
+    }
+    // this.route.navigate(['/cart:userid'])
   }
 
   onContinueShopping() {
@@ -61,19 +58,19 @@ export class ProductDetailsFiveComponent implements OnInit {
   }
 
   onGoShoppingCart() {
-    this.route.navigate(['/shop/coming-soon']);
+    // this.route.navigate(['/shop/coming-soon']);
 
-    // this.purchaseStarted = true
+    this.purchaseStarted = true
 
-    // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
-    //   (session) => {
-    //     this.checkoutService.redirectToCheckout(session)
-    //   },
-    //   (err) => {
-    //     // console.log('Error creating checkout session', err);
-    //     this.purchaseStarted = false
-    //   }
-    // )
+    this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
+      (session) => {
+        this.checkoutService.redirectToCheckout(session)
+      },
+      (err) => {
+        // console.log('Error creating checkout session', err);
+        this.purchaseStarted = false
+      }
+    )
   }
 
   ngOnDestroy() {

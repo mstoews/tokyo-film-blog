@@ -10,8 +10,7 @@ export class ShoppingCartComponent implements OnInit {
 
   constructor(private route: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   backToShopping(){
     this.route.navigate(['shop']);

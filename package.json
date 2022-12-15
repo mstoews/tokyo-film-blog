@@ -38,6 +38,7 @@
     "moment": "^2.29.4",
     "ng-image-slider": "^6.1.0",
     "ngx-filesaver": "^14.0.0",
+    "ngx-image-compress": "^13.1.13",
     "ngx-image-cropper": "^6.2.2",
     "ngx-lightbox": "^2.6.2",
     "ngx-useful-swiper": "^10.0.1",

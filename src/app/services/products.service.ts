@@ -17,9 +17,7 @@ export class ProductsService {
 
   constructor(public afs: AngularFirestore) {
     this.productsCollection = afs.collection<Product>('inventory')
-    this.inventoryItems = this.productsCollection.valueChanges({
-      idField: 'id',
-    })
+    this.inventoryItems = this.productsCollection.valueChanges({ idField: 'id',  })
   }
 
   getAll() {

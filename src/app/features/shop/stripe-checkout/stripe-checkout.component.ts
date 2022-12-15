@@ -34,14 +34,14 @@ export class StripeCheckoutComponent implements OnInit {
                   () => {
                       this.waiting = false;
                       this.message = "Purchase SUCCESSFUL, redirecting...";
-                      setTimeout(() => this.router.navigateByUrl("/courses"), 3000);
+                      setTimeout(() => this.router.navigateByUrl("/shop"), 5000);
                   })
            }
       }
       else {
           this.waiting = false;
           this.message =  "Purchase CANCELED or FAILED, redirecting...";
-          setTimeout(() => this.router.navigateByUrl("/courses"), 3000);
+          setTimeout(() => this.router.navigateByUrl("/shop"), 2000);
       }
   }
 

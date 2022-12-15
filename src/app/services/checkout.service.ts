@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs'
 import { CheckoutSession } from 'app/models/checkout'
 import { filter, first } from 'rxjs/operators'
-import { environment } from '../../environments/environment'
+import { environment } from '../../environments/environment.prod'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 
@@ -19,12 +19,13 @@ export class CheckoutService {
     private http: HttpClient,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore
-  ) {
-    // console.log('Base Api: ', environment.api.baseUrl);
+  )
+  {
     afAuth.idToken.subscribe((jwt) => (this.jwtAuth = jwt))
   }
 
   startProductCheckoutSession(productId: string): Observable<CheckoutSession> {
+    console.log(`Start checkout service: ${environment.api.baseUrl} + /api/checkout`);
     const headers = new HttpHeaders().set(
       'Authorization',
       this.jwtAuth as string
@@ -34,24 +35,6 @@ export class CheckoutService {
       environment.api.baseUrl + '/api/checkout',
       {
         productId,
-        callbackUrl: this.buildCallbackUrl(),
-      },
-      { headers }
-    )
-  }
-
-  startSubscriptionCheckoutSession(
-    pricingPlanId: string
-  ): Observable<CheckoutSession> {
-    const headers = new HttpHeaders().set(
-      'Authorization',
-      this.jwtAuth as string
-    )
-
-    return this.http.post<CheckoutSession>(
-      environment.api.baseUrl + '/api/checkout',
-      {
-        pricingPlanId,
         callbackUrl: this.buildCallbackUrl(),
       },
       { headers }

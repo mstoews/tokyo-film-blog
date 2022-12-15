@@ -8,14 +8,11 @@ import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 import { ShoppingCartComponent } from './cart/cart.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductDetailsFiveComponent } from './product-details-five/product-details-five.component';
 import { ProductResolver } from 'app/services/product.resolver';
 import { SafePipe } from './safe.pipe';
 import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
-
-
 
 const routes: Routes = [
   {
@@ -63,7 +60,6 @@ const routes: Routes = [
     MainShopComponent,
     ShoppingCartComponent,
     ShopCardComponent,
-    ProductDetailsComponent,
     ProductDetailsFiveComponent,
     StripeCheckoutComponent,
     SafePipe,

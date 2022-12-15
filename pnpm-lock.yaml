@@ -41,6 +41,7 @@ specifiers:
   moment: ^2.29.4
   ng-image-slider: ^6.1.0
   ngx-filesaver: ^14.0.0
+  ngx-image-compress: ^13.1.13
   ngx-image-cropper: ^6.2.2
   ngx-lightbox: ^2.6.2
   ngx-useful-swiper: ^10.0.1
@@ -85,6 +86,7 @@ dependencies:
   moment: 2.29.4
   ng-image-slider: 6.1.0_y624v2yhuyklvxtsesndgvm6nu
   ngx-filesaver: 14.0.0_wjbx3jsmwztujm3ulvhxwpytxe
+  ngx-image-compress: 13.1.13_y624v2yhuyklvxtsesndgvm6nu
   ngx-image-cropper: 6.3.1_y624v2yhuyklvxtsesndgvm6nu
   ngx-lightbox: 2.6.2_@types+file-saver@2.0.5
   ngx-useful-swiper: 10.0.1_5qmrgcvonfvsjs5aqysvfh7s2m
@@ -6950,6 +6952,17 @@ packages:
       '@types/file-saver': 2.0.5
       file-saver: 2.0.5
       tslib: 1.14.1
+    dev: false
+
+  /ngx-image-compress/13.1.13_y624v2yhuyklvxtsesndgvm6nu:
+    resolution: {integrity: sha512-swSuG7lsMmMDdj7muD/RS5hgNjLG5/I28B44z2qe79sF0Mi3FFYz6WlGMWhyk4K6DCqfxvLuJsegTT5/6lGFmQ==}
+    peerDependencies:
+      '@angular/common': '>= 9'
+      '@angular/core': '>= 9'
+    dependencies:
+      '@angular/common': 15.0.2_pi3oxxive2l5ujgk2dhb7uff6u
+      '@angular/core': 15.0.2_rxjs@7.5.7+zone.js@0.11.8
+      tslib: 2.4.1
     dev: false
 
   /ngx-image-cropper/6.3.1_y624v2yhuyklvxtsesndgvm6nu:

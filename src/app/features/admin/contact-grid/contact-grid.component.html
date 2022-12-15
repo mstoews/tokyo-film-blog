@@ -58,9 +58,16 @@
     </mat-drawer>
 
     <ng-container *ngIf="allContacts$ | async as rows">
-      <dx-data-grid flex id="contactGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
-        [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true"
-        (onFocusedRowChanged)="onFocusedRowChanged($event)" keyExpr="id">
+      <dx-data-grid
+        flex id="contactGrid"
+        [dataSource]="rows"
+        [showBorders]="true"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        (onCellDblClick)="onCellDoublClicked($event)"
+        [repaintChangesOnly]="true"
+        (onFocusedRowChanged)="onFocusedRowChanged($event)"
+        keyExpr="id">
         <dxi-column width="200px" dataField="name"> </dxi-column>
         <dxi-column width="200px" dataField="email"> </dxi-column>
         <dxi-column width="500px" dataField="message"> </dxi-column>

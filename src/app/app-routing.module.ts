@@ -8,8 +8,8 @@ const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
 const routes: Route[] = [
    {
     path: '',
-    pathMatch: 'full',
-    redirectTo: 'home'
+    redirectTo: '/home',
+    pathMatch: 'full'
    },
    { path: 'home',
       loadChildren: () => import('./features/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
@@ -48,6 +48,7 @@ const routes: Route[] = [
    {
     path: '**',
     redirectTo: '/home'
+    // Maybe create a page not found component page instead of just going to the 'home'
    },
 
 ];

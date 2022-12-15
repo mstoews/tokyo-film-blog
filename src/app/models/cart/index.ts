@@ -1,6 +1,6 @@
 import { FieldValue } from "firebase/firestore";
 
-export interface ShoppingCart {
+export interface Cart {
   id: string;
   product_id:   string;
   description:   string;

@@ -1,34 +1,50 @@
 import { Injectable } from '@angular/core'
+import firebase from 'firebase/compat/app';
+import Timestamp = firebase.firestore.Timestamp;
+
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore'
+import { AngularFireAuth } from '@angular/fire/compat/auth'
+
 import { first, map, Observable } from 'rxjs'
-import { Product } from 'app/models/products'
+import { Cart } from 'app/models/cart'
+import { Product } from 'app/models/products';
 import { convertSnaps } from './db-utils'
 import { IImageStorage } from 'app/models/maintenance'
-import { AngularFireAuth } from '@angular/fire/compat/auth/auth'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService {
-  private cartCollection: AngularFirestoreCollection<Product>
-  private cartItems: Observable<Product[]>
+export class CartService {
+  private cartCollection: AngularFirestoreCollection<Cart>
+  private cartItems: Observable<Cart[]>
   isLoggedIn: boolean
   userId: string
 
-  constructor(public afs: AngularFirestore, private auth: AngularFireAuth) {
-    this.auth.authState
-      .pipe(map((user) => !!user))
-      .subscribe((isLoggedIn) => (this.isLoggedIn = isLoggedIn))
+  constructor(
+    public afs: AngularFirestore,
+    public auth: AngularFireAuth,
+    private snack: MatSnackBar) {
 
-    this.cartCollection = afs.collection<Product>('inventory')
-    this.cartItems = this.cartCollection.valueChanges({ idField: 'id' })
+    auth.authState.subscribe((user) => {
+        this.userId = user?.uid;
+    })
+
+    this.auth.authState
+        .pipe(map((user) => !!user))
+        .subscribe((isLoggedIn) => {
+          this.isLoggedIn = isLoggedIn
+        });
+
+    if (this.isLoggedIn) {
+       this.cartItems = this.cartCollection.valueChanges({ idField: 'id', })
+    }
   }
 
   getAll() {
-    // console.log(`Inventory ${this.cartItems}`);
     return this.cartItems
   }
 
@@ -36,7 +52,7 @@ export class ProductsService {
     return this.cartCollection.doc(id).get()
   }
 
-  getProductImage(userId: string, parentId: string): any {
+  getCartImage(userId: string, parentId: string): any {
     var cartImages: Observable<IImageStorage[]>
     var cartImagesCollection: AngularFirestoreCollection<IImageStorage>
     cartImagesCollection = this.afs.collection<IImageStorage>(
@@ -46,7 +62,27 @@ export class ProductsService {
     return cartImages
   }
 
-  findProductByUrl(id: string): Observable<Product | undefined> {
+  findCartByUrl(id: string): Observable<Cart | undefined> {
+    return this.afs
+      .collection('cart', (ref) => ref.where('id', '==', id))
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          const Cart = convertSnaps<Cart>(snaps)
+          return Cart.length == 1 ? Cart[0] : undefined
+        }),
+        first()
+      )
+  }
+
+  create(mtCart: Cart) {
+    console.log('product id:', mtCart.id);
+    const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
+    collectionRef.add(mtCart);
+    this.snack.open('Selection has been added to your cart ...', 'Ok');
+  }
+
+  findProductById(id: string): Observable<Product | undefined> {
     return this.afs
       .collection('inventory', (ref) => ref.where('id', '==', id))
       .snapshotChanges()
@@ -59,12 +95,27 @@ export class ProductsService {
       )
   }
 
-  create(mtProduct: Product) {
-    this.cartCollection.add(mtProduct)
+  addToCart(productId: string){
+    let userId = this.userId;
+    let prod = this.findProductById(productId);
+    if(prod){
+      prod.subscribe(result => {
+          const cart: Cart = {
+            ...result,
+            product_id:  productId,
+            is_completed: false,
+            user_purchased: userId,
+            date_sold: Timestamp.now(),
+            date_updated: Timestamp.now()
+          }
+          this.create(cart);
+      });
+    }
   }
 
-  update(mtProduct: Product) {
-    this.cartCollection.doc(mtProduct.id.toString()).update(mtProduct)
+
+  update(mtCart: Cart) {
+    this.cartCollection.doc(mtCart.id.toString()).update(mtCart)
   }
 
   delete(id: string) {

@@ -11,6 +11,7 @@ export const environment = {
   production: true,
   useEmulators: false,
   api: {
+    prdUrl: "https://made-to-server.an.r.appspot.com",
     baseUrl: "http://localhost:9000",
     createMessage: "https://us-central1-made-to-cassie.cloudfunctions.net/createMessage",
     createUser: "https://us-central1-made-to-cassie.cloudfunctions.net/createUser",
