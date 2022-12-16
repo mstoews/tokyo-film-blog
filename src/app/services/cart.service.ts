@@ -45,17 +45,23 @@ export class CartService {
   }
 
   getAll() {
-    return this.cartItems
+    var cartItems: Observable<Cart[]>
+    var cartItemsCollection: AngularFirestoreCollection<Cart>
+    cartItemsCollection = this.afs.collection<Cart>(`user/${this.userId}/cart`)
+    cartItems = cartItemsCollection.valueChanges({ idField: 'id' })
+    return cartItems
   }
 
   get(id: string) {
     return this.cartCollection.doc(id).get()
   }
 
-  findCartByUserId(userId: string): any{
+  cartByUserId(userId: string): any{
     var cartItems: Observable<Cart[]>
     var cartItemsCollection: AngularFirestoreCollection<Cart>
-    cartItemsCollection = this.afs.collection<Cart>(`user/${userId}/cart`)
+    cartItemsCollection = this.afs.collection<Cart>(
+      `users/${userId}/cart`
+    )
     cartItems = cartItemsCollection.valueChanges({ idField: 'id' })
     return cartItems
   }
@@ -82,6 +88,7 @@ export class CartService {
         first()
       )
   }
+
 
   create(mtCart: Cart) {
     console.log('product id:', mtCart.id);
@@ -124,9 +131,16 @@ export class CartService {
 
   update(mtCart: Cart) {
     this.cartCollection.doc(mtCart.id.toString()).update(mtCart)
+    this.snack.open('Item ahs been updated ... ');
   }
 
-  delete(id: string) {
-    this.cartCollection.doc(id).delete()
+  async delete(id: string) {
+    var cartItems: Observable<Cart[]>;
+    var cartItemsCollection: AngularFirestoreCollection<Cart>;
+    cartItemsCollection = this.afs.collection<Cart>(`users/${this.userId}/cart`);
+    cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
+    cartItemsCollection.doc(id).delete();
+    this.snack.open('Item ahs been removed ... ', 'Deleted');
+
   }
 }

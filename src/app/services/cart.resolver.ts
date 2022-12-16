@@ -16,6 +16,6 @@ export class CartResolver implements Resolve<Cart | undefined> {
     state: RouterStateSnapshot
   ): Observable<Cart | undefined> {
     const id = route.paramMap.get('userId') as string
-    return this.cartService.findCartByUserId(id)
+    return this.cartService.cartByUserId(id)
   }
 }
