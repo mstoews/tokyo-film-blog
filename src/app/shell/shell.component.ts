@@ -81,4 +81,8 @@ export class ShellComponent implements OnInit {
   login() {
     // this.router.navigate(["authenication/sign-in/classic"]);
   }
+  openShoppingCart() {
+    console.log('shopping cart .. user ID:', this.authService.userData.uid);
+    this.router.navigate(['shop/cart', this.authService.userData.uid]);
+  }
 }

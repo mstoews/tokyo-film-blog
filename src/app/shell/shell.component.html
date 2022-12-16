@@ -16,12 +16,6 @@
           <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
         </a>
       </div>
-      <div class="sm:visible xl:visible md:visible lg:visible">
-        <a routerLink="shop" matTooltip="Shopping"
-          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
-          <mat-icon [svgIcon]="'mat_outline:shopping_basket'"></mat-icon>
-        </a>
-      </div>
       <div class="sm:visible  xl:visible md:visible lg:visible">
         <a routerLink="blog" matTooltip="Thoughts"
           class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
@@ -35,9 +29,17 @@
         </a>
       </div>
 
+
+      <div class="sm:visible xl:visible md:visible lg:visible">
+        <a routerLink="shop" matTooltip="Shop"
+          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+          <mat-icon [svgIcon]="'mat_outline:shopping_basket'"></mat-icon>
+        </a>
+      </div>
+
       <div *ngIf="isLoggedIn">
         <div class="sm:visible  xl:visible md:visible lg:visible">
-          <a routerLink="shop/payment" matTooltip="Shopping Cart"
+          <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
           </a>
@@ -51,6 +53,7 @@
           <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
         </a>
       </div>
+
 
       <div *ngIf="isLoggedIn">
         <a routerLink="/authentication/sign-out/fullscreen" matTooltip="Log Out"

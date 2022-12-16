@@ -52,6 +52,14 @@ export class CartService {
     return this.cartCollection.doc(id).get()
   }
 
+  findCartByUserId(userId: string): any{
+    var cartItems: Observable<Cart[]>
+    var cartItemsCollection: AngularFirestoreCollection<Cart>
+    cartItemsCollection = this.afs.collection<Cart>(`user/${userId}/cart`)
+    cartItems = cartItemsCollection.valueChanges({ idField: 'id' })
+    return cartItems
+  }
+
   getCartImage(userId: string, parentId: string): any {
     var cartImages: Observable<IImageStorage[]>
     var cartImagesCollection: AngularFirestoreCollection<IImageStorage>

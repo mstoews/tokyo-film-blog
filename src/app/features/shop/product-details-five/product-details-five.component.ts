@@ -13,7 +13,7 @@ import { CartService } from 'app/services/cart.service'
   templateUrl: './product-details-five.component.html',
   styleUrls: ['./product-details-five.component.css'],
 })
-export class ProductDetailsFiveComponent implements OnInit {
+export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   purchaseStarted: boolean
   productItem$: Observable<Product | undefined>
@@ -27,7 +27,6 @@ export class ProductDetailsFiveComponent implements OnInit {
     private checkoutService: CheckoutService,
     private wishList: WishListService,
     private productService: ProductsService,
-    private cartService: CartService
   ) {}
 
   ngOnInit(): void {

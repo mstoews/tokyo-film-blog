@@ -139,7 +139,7 @@ export class WishListService {
           const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
           collectionRef.add(cart);
         });
-        this.snack.open('Wish list has been added ...', 'Ok');
+        this.snack.open('Item is added to the cart ...', 'Ok');
       }
 
     }

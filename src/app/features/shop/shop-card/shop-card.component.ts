@@ -16,6 +16,6 @@ export class ShopCardComponent implements OnInit {
 
   openCart() {
     // console.log('Open cart');
-    this.router.navigate(['shop/cart', this.product.id])
+    this.router.navigate(['shop/product', this.product.id])
   }
 }

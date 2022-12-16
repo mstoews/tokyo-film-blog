@@ -16,7 +16,6 @@ export class ProductResolver implements Resolve<Product | undefined> {
     state: RouterStateSnapshot
   ): Observable<Product | undefined> {
     const id = route.paramMap.get('id') as string
-    // console.log('ProductResolver: ', id);
     return this.productsService.findProductByUrl(id)
   }
 }
