@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs'
 import { WishListService } from 'app/services/wishlist.service'
 import { CheckoutService } from 'app/services/checkout.service'
 import { CartService } from 'app/services/cart.service'
+import { AuthService } from 'app/services/auth/auth.service'
 
 
 @Component({
@@ -24,6 +25,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   constructor(
     private route: Router,
     private activateRoute: ActivatedRoute,
+    private authService: AuthService,
     private checkoutService: CheckoutService,
     private wishList: WishListService,
     private productService: ProductsService,
@@ -57,7 +59,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-    this.route.navigate(['/shop/coming-soon']);
+
+    this.route.navigate(['shop/cart', this.authService.userData.uid]);
 
     // this.purchaseStarted = true
 

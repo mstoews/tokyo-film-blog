@@ -39,6 +39,22 @@ export class CartComponent implements OnInit, OnDestroy {
     this.calculateTotals();
   }
 
+  onCheckOut(){
+    this.route.navigate(['/shop/coming-soon']);
+
+    // this.purchaseStarted = true
+
+    // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
+    //   (session) => {
+    //     this.checkoutService.redirectToCheckout(session)
+    //   },
+    //   (err) => {
+    //     // console.log('Error creating checkout session', err);
+    //     this.purchaseStarted = false
+    //   }
+    // )
+  }
+
   calculateTotals(){
     this.grand_total = 0.0;
     this.total = 0.0;
@@ -82,6 +98,8 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cartService.delete(item);
     this.calculateTotals();
   }
+
+
 
 }
 8
