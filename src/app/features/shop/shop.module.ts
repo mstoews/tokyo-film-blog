@@ -13,6 +13,9 @@ import { ProductResolver } from 'app/services/product.resolver';
 import { SafePipe } from './safe.pipe';
 import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { WishListComponent } from './wishlist/wishlist.component';
+import { CartResolver } from 'app/services/cart.resolver';
+import { WishListResolver } from 'app/services/wishlist.resolver';
 
 const routes: Routes = [
   {
@@ -36,8 +39,22 @@ const routes: Routes = [
     pathMatch: 'full',
     title: 'Shopping Cart',
     component: CartComponent,
+    resolve: {
+      cart: CartResolver
+    },
     data: { state: 'cart/:id' }
   },
+  {
+    path: 'wishlist/:id',
+    pathMatch: 'full',
+    title: 'Wish List',
+    component: WishListComponent,
+    resolve: {
+      wishlist: WishListResolver
+    },
+    data: { state: 'wishlist/:id' }
+  },
+
   {
     path: 'stripe-checkout',
     pathMatch: 'full',
@@ -64,6 +81,7 @@ const routes: Routes = [
     StripeCheckoutComponent,
     SafePipe,
     ComingSoonComponent,
+    WishListComponent,
   ],
   imports: [
     CommonModule,

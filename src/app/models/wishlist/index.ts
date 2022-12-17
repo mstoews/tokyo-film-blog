@@ -4,6 +4,7 @@ export interface WishList {
   product_id: string;
   description:   string;
   rich_description: string;
+  image:        string;
   brand:        string;
   price:        number;
   category:     string;

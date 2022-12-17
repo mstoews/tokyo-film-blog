@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core'
+import { Router } from '@angular/router'
 import { AuthService } from 'app/services/auth/auth.service'
 import { map, Observable } from 'rxjs'
 @Component({
@@ -9,11 +10,21 @@ export class SideNavComponent {
   public isLoggedIn$: Observable<boolean>
   public isLoggedOut$: Observable<boolean>
   loggedIn = false
+  private userId: string;
   pictureUrl$: Observable<string | null>
 
   @Output() notifyParentCloseDrawer: EventEmitter<any> = new EventEmitter()
 
-  constructor(private authService: AuthService) {
+  constructor(
+    private authService: AuthService,
+    private route: Router
+
+    ) {
+
+    this.authService.afAuth.authState.subscribe((user) => {
+          this.userId = user?.uid;
+    })
+
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(
       map((user) => !!user)
     )
@@ -26,6 +37,15 @@ export class SideNavComponent {
     this.pictureUrl$ = this.authService.afAuth.authState.pipe(
       map((user) => (user ? user.photoURL : null))
     )
+  }
+
+  public getUserId() {
+    return this.userId
+  }
+
+  onWishList(){
+    this.route.navigate(['/shop/wishlist/', this.userId])
+    this.notifyParentCloseDrawer.emit()
   }
 
   onClose() {

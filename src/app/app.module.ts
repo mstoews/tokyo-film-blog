@@ -24,6 +24,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { NgxImageCompressService} from 'ngx-image-compress';
+import { CartResolver } from './services/cart.resolver';
+import { WishListResolver } from './services/wishlist.resolver';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { NgxImageCompressService} from 'ngx-image-compress';
     NgxImageCompressService,
     NavService,
     ProductResolver,
+    CartResolver,
+    WishListResolver,
     BlogResolver,
     {
       provide: HTTP_INTERCEPTORS,

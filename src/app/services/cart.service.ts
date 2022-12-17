@@ -134,13 +134,13 @@ export class CartService {
     this.snack.open('Item ahs been updated ... ');
   }
 
-  async delete(id: string) {
+  delete(id: string) {
     var cartItems: Observable<Cart[]>;
     var cartItemsCollection: AngularFirestoreCollection<Cart>;
     cartItemsCollection = this.afs.collection<Cart>(`users/${this.userId}/cart`);
     cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
     cartItemsCollection.doc(id).delete();
-    this.snack.open('Item ahs been removed ... ', 'Deleted');
+    this.snack.open('Item has been removed ... ', 'Deleted');
 
   }
 }

@@ -57,19 +57,19 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-    // this.route.navigate(['/shop/coming-soon']);
+    this.route.navigate(['/shop/coming-soon']);
 
-    this.purchaseStarted = true
+    // this.purchaseStarted = true
 
-    this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
-      (session) => {
-        this.checkoutService.redirectToCheckout(session)
-      },
-      (err) => {
-        // console.log('Error creating checkout session', err);
-        this.purchaseStarted = false
-      }
-    )
+    // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
+    //   (session) => {
+    //     this.checkoutService.redirectToCheckout(session)
+    //   },
+    //   (err) => {
+    //     // console.log('Error creating checkout session', err);
+    //     this.purchaseStarted = false
+    //   }
+    // )
   }
 
   ngOnDestroy() {
