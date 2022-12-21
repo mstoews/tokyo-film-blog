@@ -28,9 +28,7 @@ export class BlogCardComponent implements OnInit {
 
   onOpenBlog(id: string) {
       this.route.navigate(['blog/detail', id]);
-      // this.toggleDrawer();
-
-   }
+  }
 
 
 }

@@ -26,6 +26,7 @@ import { InventoryContentComponent } from './inventory-content/inventory-content
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
+import { InventoryImageSelectionComponent } from './inventory-image-selection/inventory-image-selection.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,12 @@ const routes: Routes = [
     pathMatch: 'full',
     component: AdminComponent,
   },
+  {
+    path: 'inventory-selection',
+    pathMatch: 'full',
+    component: InventoryImageSelectionComponent,
+  },
+
   {
     path: '**',
     pathMatch: 'full',
@@ -64,6 +71,8 @@ const routes: Routes = [
     ContactGridComponent,
     SafePipe,
     InventoryContentComponent,
+    InventoryImageSelectionComponent,
+    InventoryComponent,
 
   ],
   imports: [

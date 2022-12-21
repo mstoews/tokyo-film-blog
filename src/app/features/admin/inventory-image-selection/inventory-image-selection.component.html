@@ -1,0 +1,58 @@
+<grid-menubar></grid-menubar>
+<div class="h-screen">
+  <mat-drawer-container>
+    <mat-drawer class="w-3/8 lg:w-3/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'" [disableClose]="false">
+    </mat-drawer>
+    <mat-drawer-content>
+      <div cdkDropListGroup class="grid grid-cols-3 gap-1">
+        <!-- NOT_USED -->
+        <div class="item--1 lg-rounded w-[340px]" cdkScrollable>
+          <div class="sticky top-0 z-50 image_title">Gallery</div>
+          <div cdkDropList
+            #notused="cdkDropList"
+            [id]="IN_NOT_USED"
+            [cdkDropListData]="not_usedImages"
+            class="list drag-drop-list"
+            (cdkDropListDropped)="drop($event)" >
+            <div *ngFor="let item of not_usedImages" cdkDrag>
+              <div class="drop-placeholder" *cdkDragPlaceholder> </div>
+              <div class="text-gray-700">{{item.imageSrc}}
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="OPEN" class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- FEATURED -->
+        <div class="item--2 lg-rounded w-[600px]" cdkScrollable>
+          <div class="sticky top-0 z-50 image_title">Main</div>
+            <div
+            cdkDropList #featured="cdkDropList"
+            [id]="IN_FEATURED"
+            [cdkDropListData]="featuredImages"
+            class="list"
+            (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of featuredImages" cdkDrag>
+                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="Main" class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="500" height="500">
+                </div>
+            </div>
+          </div>
+        </div>
+        <!-- COLLECTIONS -->
+        <div class="item--3 lg-rounded w-[300px] h-[200px]" cdkScrollable>
+          <div class="sticky top-0 z-50 uppercase image_title lg-rounded">Thumbnail</div>
+          <div cdkDropList #collections="cdkDropList" [id]="IN_COLLECTION" [cdkDropListData]="collectionsImages"  class="list" (cdkDropListDropped)="drop($event)">
+            <div *ngFor="let item of collectionsImages" cdkDrag>
+                <div class="mb-2 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="thumbnail" class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="200" height="200">
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>

@@ -21,7 +21,6 @@ const routes: Routes = [
   },
   {
     path: 'detail/:id',
-    pathMatch: 'full',
     title: 'Thoughts',
     component: DetailComponent,
     resolve: {

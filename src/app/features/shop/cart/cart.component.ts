@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { CartService } from 'app/services/cart.service';
 import { CheckoutService } from 'app/services/checkout.service';
 import { Observable, Subscription } from 'rxjs';
@@ -13,12 +13,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CartComponent implements OnInit, OnDestroy {
   sub: Subscription;
-  cart$: Observable<Cart[]>
+  cart$: Observable<Cart []| undefined>
   userId: string;
   total: number;
   tax: number;
   shipping: number;
   grand_total: number;
+  cartData: any;
 
   constructor(
     private route: Router,
@@ -29,13 +30,8 @@ export class CartComponent implements OnInit, OnDestroy {
     ) { }
 
   ngOnInit(): void {
-    this.sub = this.activateRoute.params.subscribe((params) => {
-      const cartItems = this.cartService.cartByUserId(params.id)
-      if (cartItems) {
-        this.cart$ = cartItems;
-        this.userId = params['id'];
-      }
-    })
+    this.userId = this.activateRoute.snapshot.params.id
+    this.cart$ = this.cartService.cartByUserId(this.userId);
     this.calculateTotals();
   }
 
@@ -68,8 +64,8 @@ export class CartComponent implements OnInit, OnDestroy {
       })
       let grand_total = 0;
       this.total = total;
-      this.tax = this.total * .10
-      this.shipping = this.total * .05;
+      this.tax = Math.trunc(this.total * .10)
+      this.shipping = Math.trunc(this.total * .05);
       this.grand_total = this.round(this.total + this.tax + this.shipping, 2);
       console.log(`Tax : ${this.tax} ${this.total} ${this.shipping} ${grand_total}`)
     })
@@ -91,7 +87,7 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+
   }
 
   onRemoveItem(item: string){

@@ -39,6 +39,10 @@ export class SignInClassicComponent implements OnInit {
     })
   }
 
+  signUpEmail(){
+    this.router.navigate(['/authentication/sign-up/modern']);
+  }
+
   async signInEmail() {
     const { email, password } = this.signInForm.value
     // console.log(`email ${email} , ${password}`)

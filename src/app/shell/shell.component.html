@@ -29,12 +29,13 @@
         </a>
       </div>
 
-
-      <div class="sm:visible xl:visible md:visible lg:visible">
-        <a routerLink="shop" matTooltip="Shop"
-          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
-          <mat-icon [svgIcon]="'mat_outline:shopping_basket'"></mat-icon>
-        </a>
+      <div *ngIf="isLoggedIn">
+        <div class="sm:visible xl:visible md:visible lg:visible">
+          <a routerLink="shop" matTooltip="Shop"
+            class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+            <mat-icon [svgIcon]="'mat_outline:shopping_basket'"></mat-icon>
+          </a>
+        </div>
       </div>
 
       <div *ngIf="isLoggedIn">
@@ -46,22 +47,55 @@
         </div>
       </div>
 
-      <div *ngIf="!isLoggedIn">
-        <!-- <a routerLink="/authentication/sign-in/split-screen" matTooltip="Log In" -->
+      <!-- <div *ngIf="!isLoggedIn">
         <a routerLink="/authentication/sign-in/classic" matTooltip="Log In"
           class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
         </a>
       </div>
+      -->
 
-
-      <div *ngIf="isLoggedIn">
-        <a routerLink="/authentication/sign-out/fullscreen" matTooltip="Log Out"
-          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-          <mat-icon [svgIcon]="'mat_outline:logout'"></mat-icon>
+      <div>
+        <a [matMenuTriggerFor]="menu" matTooltip="Profile"
+          class="flex focus:ring items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+          <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
         </a>
       </div>
 
+      <mat-menu class="drop-menu bg-gray-500 border-spacing-1" #menu="matMenu">
+
+        <div *ngIf="isLoggedIn">
+          <a mat-menu-item routerLink="/authentication/sign-out/fullscreen"
+            class="bg-gray-500  text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700">
+            <mat-icon [svgIcon]="'heroicons_outline:logout'" class="text-gray-300"></mat-icon>
+            <span class="text-gray-300">Log Out</span>
+          </a>
+        </div>
+
+        <div *ngIf="!isLoggedIn">
+          <a mat-menu-item routerLink="/authentication/sign-in/modern"
+          class="bg-gray-500 font-normal  text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
+            <mat-icon [svgIcon]="'heroicons_outline:login'" class="text-gray-300"> </mat-icon>
+            <span class="text-gray-300">Log In</span>
+          </a>
+        </div>
+
+        <div *ngIf="!isLoggedIn">
+          <a mat-menu-item routerLink="/authentication/sign-up/modern"
+          class="bg-gray-500 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200"         >
+            <mat-icon class="text-gray-300" [svgIcon]="'heroicons_outline:user-add'"> </mat-icon>
+            <span class="text-gray-300">Register</span>
+          </a>
+        </div>
+
+        <div *ngIf="isLoggedIn">
+          <a mat-menu-item routerLink="profile"
+          class="bg-gray-500 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200" >
+            <mat-icon [svgIcon]="'heroicons_outline:user-circle'" class="text-gray-300"> </mat-icon>
+            <span class="text-gray-300">Profile</span>
+          </a>
+        </div>
+      </mat-menu>
     </mat-toolbar>
   </header>
   <mat-sidenav-container class="flex-1">

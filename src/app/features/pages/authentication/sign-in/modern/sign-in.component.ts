@@ -2,7 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
-import { AuthService } from 'app/services/auth/auth.service';
+import { AuthService } from 'app/services/auth/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
     selector     : 'sign-in-modern',
@@ -19,10 +20,14 @@ export class SignInModernComponent implements OnInit
     signInForm!: UntypedFormGroup;
     showAlert: boolean = false;
 
+    redirect = ['/home']
+
+
     /**
      * Constructor
      */
     constructor(
+        private router: Router,
         private _authService: AuthService,
         private _formBuilder: UntypedFormBuilder
     )
@@ -55,5 +60,12 @@ export class SignInModernComponent implements OnInit
      */
     signIn(): void
     {
+      const { email, password } = this.signInForm.value
+    try {
+      const loggedIn = this._authService.signIn(email, password)
+      this.router.navigate(this.redirect)
+    } catch (e) {
+      console.error(e)
+    }
     }
 }

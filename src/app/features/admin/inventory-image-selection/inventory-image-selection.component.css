@@ -1,6 +1,6 @@
 .image_title {
   height: 4rem;
-  padding: 2rem;
+  padding: 1.5rem;
   border-left: solid 10px #00578e;
   color: white;
   background-color: #b4b7b8;
@@ -63,7 +63,6 @@ drop_container .item--5 {
   background: #f5f6fa;
   font-size: 12px;
   overflow: hidden;
-  min-height: 100vh;
   display: block;
   margin: 5px;
   align-items: left;

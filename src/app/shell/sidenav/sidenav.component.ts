@@ -44,9 +44,23 @@ export class SideNavComponent {
   }
 
   onWishList(){
+    if (this.userId == undefined )
+    {
+      this.route.navigate(['/authentication/sign-in/classic']);
+    }
+    this.route.navigate(['/shop/', this.userId])
+    this.notifyParentCloseDrawer.emit()
+  }
+
+  onShop(){
+    if (this.userId == undefined )
+    {
+      this.route.navigate(['/authentication/sign-in/classic']);
+    }
     this.route.navigate(['/shop/wishlist/', this.userId])
     this.notifyParentCloseDrawer.emit()
   }
+
 
   onClose() {
     // console.log('Sidenav emit close');

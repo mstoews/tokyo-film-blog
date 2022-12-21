@@ -92,11 +92,6 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     })
   }
 
-  // printImageList(title: string, images: imageItem[]) {
-  //   images.forEach((img) => {
-  //     // console.log(`${title} caption: ${img.caption} ranking: ${img.ranking} ${img.imageSrc}`);
-  //   })
-  // }
 
   ngOnInit() {
     // this.imageListService.createImageList()

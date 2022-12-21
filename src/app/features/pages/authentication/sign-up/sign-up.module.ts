@@ -26,7 +26,8 @@ const routes: Routes = [
             },
             {
                 path     : 'modern',
-                component: SignUpModernComponent
+                component: SignUpModernComponent,
+                data: { state: 'modern' }
             },
             {
                 path     : 'modern-reversed',

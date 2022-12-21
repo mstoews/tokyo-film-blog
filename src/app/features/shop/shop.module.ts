@@ -26,7 +26,6 @@ const routes: Routes = [
   },
   {
     path: 'product/:id',
-    pathMatch: 'full',
     title: 'Shopping Items',
     component: ProductDetailsFiveComponent,
     resolve: {
@@ -36,12 +35,9 @@ const routes: Routes = [
   },
   {
     path: 'cart/:id',
-    pathMatch: 'full',
     title: 'Shopping Cart',
     component: CartComponent,
-    resolve: {
-      cart: CartResolver
-    },
+    resolve: { cart: CartResolver },
     data: { state: 'cart/:id' }
   },
   {

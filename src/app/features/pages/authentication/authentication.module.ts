@@ -18,7 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         UnlockSessionModule,
         ReactiveFormsModule,
         FormsModule,
-        ConfirmationRequiredModule
+        ConfirmationRequiredModule,
+
     ],
     exports: [
         SignInModule,

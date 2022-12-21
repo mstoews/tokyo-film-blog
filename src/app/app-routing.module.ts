@@ -46,6 +46,11 @@ const routes: Route[] = [
     data: { state: 'strip-checkout' }
    },
    {
+    path: 'profile',
+    loadChildren: () => import('./features/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
+    data: { state: 'profile' }
+   },
+   {
     path: '**',
     redirectTo: '/home'
     // Maybe create a page not found component page instead of just going to the 'home'

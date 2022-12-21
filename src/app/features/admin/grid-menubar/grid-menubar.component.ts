@@ -12,7 +12,7 @@ interface IValue {
 @Component({
   selector: 'grid-menubar',
   templateUrl: './grid-menubar.component.html',
-  styleUrls: ['./grid-menubar.component.scss'],
+  styleUrls: ['./grid-menubar.component.css'],
 })
 export class GridMenubarComponent implements OnInit {
   @Output() notifyParentAdd: EventEmitter<any> = new EventEmitter()

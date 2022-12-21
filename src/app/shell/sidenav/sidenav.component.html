@@ -10,13 +10,15 @@
             <span class="flex-1 ml-3 whitespace-nowrap">Home</span>
           </a>
         </li>
+
         <li>
-          <a routerLink="shop" (click)="onClose()"
+          <a (click)="onShop()"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
             <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
             <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
           </a>
         </li>
+
         <li>
           <a (click)="onWishList()"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
@@ -46,6 +48,16 @@
                 class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
                 <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
+              </a>
+            </li>
+          </ng-container>
+
+          <ng-container *ngIf="loggedIn">
+            <li >
+              <a routerLink="admin/inventory-selection" (click)="onClose()"
+                class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                <mat-icon [svgIcon]="'heroicons_outline:chart-square-bar'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Images</span>
               </a>
             </li>
           </ng-container>

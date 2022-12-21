@@ -19,8 +19,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   blogImages$: Observable<IImageStorage[]> ;
 
   blog!: Blog;
-  sub: Subscription;
-
+  
   constructor(
     private activateRoute: ActivatedRoute,
     private route: Router,
@@ -28,19 +27,12 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
       var id: string;
-      this.sub = this.activateRoute.params.subscribe(params => {
-           id = params['id'];
-           const prd = this.blogService.findBlogByUrl(params['id']);
-           prd.subscribe((bg) => {
-              this.blog = bg as Blog;
-              if (id != undefined) {
-                this.blogImages$ = this.blogService.getBlogImage(id)
-                }
-           })
-      });
+      this.blog = this.activateRoute.snapshot.data["blog"];
+      this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
+
   }
   ngOnDestroy() {
-    this.sub.unsubscribe();
+
   }
 
   backToHome() {

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector       : 'profile',
@@ -8,10 +9,18 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 })
 export class ProfileComponent
 {
+
+
+  backToHome() {
+    this.router.navigate(['home'])
+  }
     /**
      * Constructor
      */
-    constructor()
+    constructor(private router: Router)
     {
+
     }
+
+
 }

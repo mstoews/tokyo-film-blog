@@ -1,6 +1,7 @@
-<div class="h-screen flex flex-col flex-auto items-center sm:justify-center min-w-0 bg-gray-100" >
-  <div class="w-full sm:w-auto py-8 px-4 sm:p-12 sm:rounded-2xl sm:shadow sm:bg-card ">
-    <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+
+<div class="flex min-h-full m-20">
+  <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+    <div class="mx-auto w-full max-w-sm lg:w-96">
       <!-- Logo -->
       <div class="w-12">
         <img src="/favicon.ico" />
@@ -25,6 +26,8 @@
       <!-- Sign in form -->
       <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
         <!-- Email field -->
+
+
         <mat-form-field class="w-full">
           <mat-label>Email address</mat-label>
           <input id="email" matInput [formControlName]="'email'" />
@@ -37,17 +40,17 @@
         </mat-form-field>
 
         <!-- Password field -->
-        <mat-form-field class="w-full">
+        <mat-form-field class="w-full bg-gray-100">
           <mat-label>Password</mat-label>
-          <input id="password" matInput type="password" [formControlName]="'password'" #passwordField />
+          <input  id="password" matInput type="password" [formControlName]="'password'" #passwordField />
           <button mat-icon-button type="button" (click)="
               passwordField.type === 'password'
                 ? (passwordField.type = 'text')
                 : (passwordField.type = 'password')
             " matSuffix>
-            <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'password'" [svgIcon]="'heroicons_solid:eye'">
+            <mat-icon class="icon-size-4 text-gray-700" *ngIf="passwordField.type === 'password'" [svgIcon]="'heroicons_solid:eye'">
             </mat-icon>
-            <mat-icon class="icon-size-5" *ngIf="passwordField.type === 'text'" [svgIcon]="'heroicons_solid:eye-off'">
+            <mat-icon class="icon-size-4" *ngIf="passwordField.type === 'text'" [svgIcon]="'heroicons_solid:eye-off'">
             </mat-icon>
           </button>
           <mat-error> Password is required </mat-error>
@@ -72,11 +75,20 @@
         </button>
 
         <!-- Separator -->
-        <!-- <div class="flex items-center mt-8">
+        <div class="flex items-center mt-8">
           <div class="flex-auto mt-px border-t"></div>
-          <div class="mx-2 text-secondary">Or continue with</div>
+          <div class="mx-2 text-gray-600">Or continue with :</div>
           <div class="flex-auto mt-px border-t"></div>
-        </div> -->
+        </div>
+
+        <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
+
+        [disabled]="signInForm.disabled" (click)="signUpEmail()">
+        <span *ngIf="!signInForm.disabled"> Registration </span>
+        <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24" [mode]="'indeterminate'">
+        </mat-progress-spinner>
+      </button>
+
 
         <!-- Single sign-on buttons -->
         <!-- <div class="flex items-center mt-8 space-x-4">
@@ -93,4 +105,33 @@
       </form>
     </div>
   </div>
+  <!-- <div class="relative items-center justify-center flex-1 hidden w-0 h-full p-16 overflow-hidden bg-gray-800 md:flex lg:px-28 dark:border-l">
+    <svg class="absolute h-full w-full inset-0 pointer-events-none" viewBox="0 0 960 540" width="100%" height="100%"
+      preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <g class="text-gray-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+        <circle r="234" cx="196" cy="23"></circle>
+        <circle r="234" cx="790" cy="491"></circle>
+      </g>
+    </svg>
+
+    <svg class="absolute text-gray-700 -top-16 -right-16" viewBox="0 0 220 192" width="220" height="192" fill="none">
+      <defs>
+        <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20"
+          patternUnits="userSpaceOnUse">
+          <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
+        </pattern>
+      </defs>
+      <rect width="220" height="192" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
+    </svg>
+
+    <div class="font-bold leading-none text-gray-100 text-7xl">
+      <div>Welcome to</div>
+      <div>Made-To</div>
+    </div>
+  </div> -->
+  <div class="relative hidden w-0 flex-1 lg:block">
+    <img class="absolute inset-0 h-full w-full object-cover" src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_400x400.JPG?alt=media&token=b9992447-1ad8-4007-98ec-1dac81d25f2c" alt="Login">
+  </div>
+
 </div>
+
