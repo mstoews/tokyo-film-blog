@@ -268,8 +268,8 @@ export class InventoryComponent implements OnInit {
 
   columnsToDisplay: string[] = [
     'actions',
-    'description',
     'image',
+    'description',
     'rich_description',
     'price',
   ]

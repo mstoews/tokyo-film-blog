@@ -42,7 +42,7 @@
         <div class="sm:visible  xl:visible md:visible lg:visible">
           <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+            <mat-icon matBadge={{cartCount}} [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
           </a>
         </div>
       </div>
@@ -73,7 +73,7 @@
         </div>
 
         <div *ngIf="!isLoggedIn">
-          <a mat-menu-item routerLink="/authentication/sign-in/modern"
+          <a mat-menu-item routerLink="/authentication/sign-in/classic"
           class="bg-gray-500 font-normal  text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
             <mat-icon [svgIcon]="'heroicons_outline:login'" class="text-gray-300"> </mat-icon>
             <span class="text-gray-300">Log In</span>

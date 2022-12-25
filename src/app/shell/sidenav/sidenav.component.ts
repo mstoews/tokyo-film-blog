@@ -28,12 +28,15 @@ export class SideNavComponent {
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(
       map((user) => !!user)
     )
+
     this.isLoggedIn$.subscribe((user) => {
       this.loggedIn = user
     })
+
     this.isLoggedOut$ = this.authService.afAuth.authState.pipe(
       map((loggedIn) => !!loggedIn)
     )
+
     this.pictureUrl$ = this.authService.afAuth.authState.pipe(
       map((user) => (user ? user.photoURL : null))
     )
@@ -43,27 +46,27 @@ export class SideNavComponent {
     return this.userId
   }
 
-  onWishList(){
-    if (this.userId == undefined )
-    {
+  onShop(){
+    if (this.userId == undefined || this.isLoggedOut$) {
       this.route.navigate(['/authentication/sign-in/classic']);
+      this.onClose();
+      return;
     }
-    this.route.navigate(['/shop/', this.userId])
+    this.route.navigate(['shop'])
     this.notifyParentCloseDrawer.emit()
   }
 
-  onShop(){
-    if (this.userId == undefined )
-    {
+  onWishList(){
+    if (this.userId == undefined ) {
       this.route.navigate(['/authentication/sign-in/classic']);
+      this.onClose();
+      return;
     }
     this.route.navigate(['/shop/wishlist/', this.userId])
     this.notifyParentCloseDrawer.emit()
   }
 
-
   onClose() {
-    // console.log('Sidenav emit close');
     this.notifyParentCloseDrawer.emit()
   }
 }

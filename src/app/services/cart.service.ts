@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import { first, map, Observable } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, Subject } from 'rxjs';
 import { Cart } from 'app/models/cart';
 import { Product } from 'app/models/products';
 import { convertSnaps } from './db-utils';
@@ -20,9 +20,10 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class CartService {
   private cartCollection: AngularFirestoreCollection<Cart>;
-  private cartItems: Observable<Cart[]>;
+  private cartItems$: Observable<Cart[]>;
   isLoggedIn: boolean;
   userId: string;
+  cart$: Observable<Cart[]>;
 
   constructor(
     public afs: AngularFirestore,
@@ -38,16 +39,28 @@ export class CartService {
     });
 
     if (this.isLoggedIn) {
-      this.cartItems = this.cartCollection.valueChanges({ idField: 'id' });
+      this.cartItems$ = this.cartCollection.valueChanges({ idField: 'id' });
     }
   }
 
+  getCartCount(userId: string): Observable<Cart[] | undefined>  {
+      return this.afs
+        .collection('cart', (ref) => ref.where('userId', '==', userId))
+        .snapshotChanges()
+        .pipe(
+          map((snaps) => {
+            return convertSnaps<Cart>(snaps);
+          })
+        );
+    }
+
+  cartItems: Observable<Cart[]>;
+
   getAll() {
-    var cartItems: Observable<Cart[]>;
     var cartItemsCollection: AngularFirestoreCollection<Cart>;
     cartItemsCollection = this.afs.collection<Cart>(`user/${this.userId}/cart`);
-    cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
-    return cartItems;
+    this.cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
+    return this.cartItems;
   }
 
   get(id: string) {

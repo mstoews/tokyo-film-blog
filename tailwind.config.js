@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 const path = require('path');
 const colors = require('tailwindcss/colors');
-const defaultTheme = require('tailwindcss/defaultTheme');
 const generatePalette = require(path.resolve(__dirname, ('src/@fuse/tailwind/utils/generate-palette')));
 
 /**
@@ -66,7 +65,7 @@ const themes = {
  */
 const config = {
     darkMode   : 'class',
-    content    : ['./src/**/*.{html,scss,ts}'],
+    content    : ['./src/**/*.{html,css,ts}'],
     important  : true,
 
     theme      : {

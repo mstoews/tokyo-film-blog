@@ -6,6 +6,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { onMainContentChange } from './animations';
 import { AuthService } from 'app/services/auth/auth.service'
 import { Router } from '@angular/router';
+import { CartService } from 'app/services/cart.service';
 
 @Component({
   selector: 'shell',
@@ -25,6 +26,14 @@ export class ShellComponent implements OnInit {
   divClicked = false;
   isClicked = false;
   doAnimation = false;
+  private cartCount = 2;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private authService: AuthService,
+    private cartService: CartService,
+    public router: Router) {}
+
 
   ngOnInit() {
        this.authService.getAuth().subscribe( res => {
@@ -36,6 +45,9 @@ export class ShellComponent implements OnInit {
         {
           this.isLoggedIn = false;
         }
+       })
+       this.cartService.cart$.subscribe(cart => {
+          this.cartCount = cart.items.length;
        })
   }
 
@@ -53,10 +65,6 @@ export class ShellComponent implements OnInit {
     }
   }
 
-  constructor(
-    private breakpointObserver: BreakpointObserver,
-    private authService: AuthService,
-    public router: Router) {}
 
 
   onToggleMenu() {
