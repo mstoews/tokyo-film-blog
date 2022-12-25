@@ -98,4 +98,3 @@ export class CartComponent implements OnInit, OnDestroy {
 
 
 }
-8

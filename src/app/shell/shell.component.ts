@@ -47,7 +47,7 @@ export class ShellComponent implements OnInit {
         }
        })
        this.cartService.cart$.subscribe(cart => {
-          this.cartCount = cart.items.length;
+          this.cartCount = 3;
        })
   }
 
