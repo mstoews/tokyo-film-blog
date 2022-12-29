@@ -46,3 +46,12 @@ export class StripeCheckoutComponent implements OnInit {
   }
 
 }
+
+// pk_test_51JogSuCGT3ceZF7pYLMW9IZjEOaMGFqz5YOoBaNGTgT8dl72ThRvLgfx1DEFlQPteFpFlwgfpJLPnuJ1X60UCc8m00yEl0F8ra
+
+// sk_test_51JogSuCGT3ceZF7pKc2zOGVPFlOkLZHjHijotazVyTVcf4bNkH7dkvwvlctuoOS9m62bf9G6TCJ76HHX46jLHkb800atj0ZUq7
+
+// https://made-to-server.an.r.appspot.com/stripe-webhooks
+
+// 
+

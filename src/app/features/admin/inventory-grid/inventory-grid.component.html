@@ -6,7 +6,7 @@
         <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
           {{ sTitle }}
         </div>
-        <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()">
+        <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()"  mat-stretch-tabs="false">
           <mat-tab label="Inventory Details">
             <ng-template matTabContent>
               <div mat-dialog-content>

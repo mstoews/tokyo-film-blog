@@ -26,7 +26,10 @@ export class SideNavComponent {
     })
 
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(
-      map((user) => !!user)
+      map((user) => { !!user;
+        this.userId = user.uid;
+        return true;
+      })
     )
 
     this.isLoggedIn$.subscribe((user) => {
@@ -47,21 +50,21 @@ export class SideNavComponent {
   }
 
   onShop(){
-    if (this.userId == undefined || this.isLoggedOut$) {
-      this.route.navigate(['/authentication/sign-in/classic']);
-      this.onClose();
-      return;
-    }
+    // if (this.userId == undefined || this.isLoggedOut$) {
+    //   this.route.navigate(['/authentication/sign-in/classic']);
+    //   this.onClose();
+    //   return;
+    // }
     this.route.navigate(['shop'])
     this.notifyParentCloseDrawer.emit()
   }
 
   onWishList(){
-    if (this.userId == undefined ) {
-      this.route.navigate(['/authentication/sign-in/classic']);
-      this.onClose();
-      return;
-    }
+    // if (this.userId == undefined ) {
+    //   this.route.navigate(['/authentication/sign-in/classic']);
+    //   this.onClose();
+    //   return;
+    // }
     this.route.navigate(['/shop/wishlist/', this.userId])
     this.notifyParentCloseDrawer.emit()
   }
