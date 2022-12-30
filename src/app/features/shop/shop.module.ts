@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
-import { ShopComponent } from './shop.component';
+import { ShopComponent } from './main.component';
 import { Routes, RouterModule } from '@angular/router';
-import { MainShopComponent } from './main-shop/main-shop.component';
+import { MainShopComponent } from './main-shop/shop.component';
 import { ShopCardComponent } from './shop-card/shop-card.component';
 import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';

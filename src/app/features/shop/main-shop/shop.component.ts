@@ -6,9 +6,9 @@ import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'main-shop',
-  templateUrl:'./main-shop.component.html',
-  styleUrls: ['./main-shop.component.css']
+  selector: 'shop',
+  templateUrl:'./shop.component.html',
+  styleUrls: ['./shop.component.css']
 })
 export class MainShopComponent implements OnInit {
 

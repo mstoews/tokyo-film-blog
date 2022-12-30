@@ -10,8 +10,7 @@ import {
 
 @Component({
   selector: 'app-shop',
-  templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css'],
+  templateUrl: './main.component.html',
   animations: [
     trigger('routerTransition', [
       transition('* <=> *', [
