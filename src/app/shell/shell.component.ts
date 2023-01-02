@@ -7,6 +7,7 @@ import { onMainContentChange } from './animations';
 import { AuthService } from 'app/services/auth/auth.service'
 import { Router } from '@angular/router';
 import { CartService } from 'app/services/cart.service';
+import { WishListService } from 'app/services/wishlist.service';
 
 @Component({
   selector: 'shell',
@@ -26,12 +27,14 @@ export class ShellComponent implements OnInit {
   divClicked = false;
   isClicked = false;
   doAnimation = false;
-  private cartCount = 2;
+  private cartCount = 0;
+  private wishCount = 0;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private cartService: CartService,
+    private wishListService: WishListService,
     public router: Router) {}
 
 
@@ -40,14 +43,20 @@ export class ShellComponent implements OnInit {
         if (res === true)
         {
           this.isLoggedIn = true;
+          console.log(this.authService.userData.uid);
+          this.cartService.cartByUserId(this.authService.userData.uid).subscribe(cart => {
+            this.cartCount = cart.length;
+          })
+
+          this.wishListService.wishListByUserId(this.authService.userData.uid).subscribe(wishlist => {
+            this.wishCount = wishlist.length;
+          })
+
         }
         else
         {
           this.isLoggedIn = false;
         }
-       })
-       this.cartService.cart$.subscribe(cart => {
-          this.cartCount = 3;
        })
   }
 
@@ -90,7 +99,11 @@ export class ShellComponent implements OnInit {
     // this.router.navigate(["authenication/sign-in/classic"]);
   }
   openShoppingCart() {
-    console.log('shopping cart .. user ID:', this.authService.userData.uid);
+
     this.router.navigate(['shop/cart', this.authService.userData.uid]);
+  }
+
+  openWishList() {
+    this.router.navigate(['shop/wishlist', this.authService.userData.uid]);
   }
 }

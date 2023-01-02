@@ -38,11 +38,21 @@
         </div>
       </div>
 
+
+      <div *ngIf="isLoggedIn">
+        <div class="sm:visible  xl:visible md:visible lg:visible">
+          <a (click)="openWishList()" matTooltip="Wish List"
+            class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+             <mat-icon [matBadge]=wishCount [matBadgeHidden]="wishCount===0" [svgIcon]="'heroicons_outline:gift'"></mat-icon>
+          </a>
+        </div>
+      </div>
+
       <div *ngIf="isLoggedIn">
         <div class="sm:visible  xl:visible md:visible lg:visible">
           <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon matBadge={{cartCount}} [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+             <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0" [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
           </a>
         </div>
       </div>

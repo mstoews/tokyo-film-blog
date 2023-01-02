@@ -37,9 +37,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckOut(){
     this.route.navigate(['/shop/coming-soon']);
-
     // this.purchaseStarted = true
-
     // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
     //   (session) => {
     //     this.checkoutService.redirectToCheckout(session)
@@ -67,7 +65,7 @@ export class CartComponent implements OnInit, OnDestroy {
       this.tax = Math.trunc(this.total * .10)
       this.shipping = Math.trunc(this.total * .05);
       this.grand_total = this.round(this.total + this.tax + this.shipping, 2);
-      console.log(`Tax : ${this.tax} ${this.total} ${this.shipping} ${grand_total}`)
+      // console.log(`Tax : ${this.tax} ${this.total} ${this.shipping} ${grand_total}`)
     })
   }
 

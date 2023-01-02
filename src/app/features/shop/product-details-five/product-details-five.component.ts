@@ -21,6 +21,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   productId: string
   Products$: Observable<Product[]>
   sub: Subscription
+  cartCount = 0;
 
   constructor(
     private route: Router,
@@ -29,6 +30,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private checkoutService: CheckoutService,
     private wishList: WishListService,
     private productService: ProductsService,
+    private cartService : CartService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,9 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         this.productItem$ = prd;
         this.productId = params['id'];
       }
+    })
+    this.cartService.cartByUserId(this.authService.userData.uid).subscribe(cart => {
+      this.cartCount = cart.length;
     })
   }
 
@@ -59,9 +64,10 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-
-    this.route.navigate(['shop/cart', this.authService.userData.uid]);
-
+    if (this.cartCount > 0) {
+      this.route.navigate(['shop/cart', this.authService.userData.uid]);
+    }
+    
     // this.purchaseStarted = true
 
     // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(

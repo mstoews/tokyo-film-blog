@@ -6,27 +6,27 @@
 
   <div mat-dialog-content>
     <form [formGroup]="mainpageGroup" (ngSubmit)="onUpdate(mainpageGroup.value)">
-      <mat-form-field class="m-1 flex-start" [ngStyle]="{ width: '99%' }" appearance="fill">
+      <mat-form-field class="m-1 flex-start" [ngStyle]="{ width: '99%' }">
         <mat-label>Landing Page Title</mat-label>
         <input matInput placeholder="Landing Page" formControlName="hero_title" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '99%' }" appearance="fill">
+      <mat-form-field class="m-1" [ngStyle]="{ width: '99%' }">
         <mat-label>Features Title</mat-label>
         <input matInput placeholder="Feature" formControlName="features_header" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '99%' }" appearance="fill">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '99%' }" >
         <mat-label>Features Description</mat-label>
         <input matInput placeholder="Description " formControlName="features_subheader" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }" appearance="fill">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }" >
         <mat-label>Left CTA</mat-label>
         <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
       </mat-form-field>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49.5%' }" appearance="fill">
+      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49.5%' }" >
         <mat-label>Right CTA</mat-label>
         <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
       </mat-form-field>
@@ -35,17 +35,17 @@
         <div mat-dialog-title class="font-bold">
           Contact Information
         </div>
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" appearance="fill">
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" >
           <mat-label>eMail</mat-label>
           <input matInput placeholder="Contact Email" formControlName="contact_email" />
         </mat-form-field>
 
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" appearance="fill">
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" >
           <mat-label>Telephone</mat-label>
           <input matInput placeholder="Telephone" formControlName="contact_telephone" />
         </mat-form-field>
 
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" appearance="fill">
+        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" >
           <mat-label>Shipping</mat-label>
           <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
         </mat-form-field>

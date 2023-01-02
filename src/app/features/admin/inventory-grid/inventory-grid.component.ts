@@ -10,6 +10,7 @@ import { DndComponent } from 'app/components/loaddnd/dnd.component'
 import { MatDialog } from '@angular/material/dialog'
 import { IImageStorage } from 'app/models/maintenance'
 import { AngularFirestore } from '@angular/fire/compat/firestore'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'inventory-list',
@@ -43,6 +44,7 @@ export class InventoryComponent implements OnInit {
 
   constructor(
     private matDialog: MatDialog,
+    private route: Router,
     private afs: AngularFirestore,
     private readonly categoryService: CategoryService,
     private readonly productService: ProductsService,
@@ -56,9 +58,6 @@ export class InventoryComponent implements OnInit {
     this.allProducts$ = this.productService.getAll()
   }
 
-  onTabClick() {
-    // console.log('onTabClick');
-  }
 
   valueChangedEvent($event: Event) {
     // console.log('valueChangedEvent');
@@ -143,28 +142,29 @@ export class InventoryComponent implements OnInit {
 
   onOpenButtonClicked(event: any) {
     // console.log(JSON.stringify(event));
-    var counter = 0
-    this.imageArray = []
-    this.inventoryImages$ = this.productService.getProductImage(event.id)
-    this.current_Url = event.image
-    this.rich_description = event.rich_description
-    this.updated_category = event.category
+    this.route.navigate(['product/id', event.id]);
+    // var counter = 0
+    // this.imageArray = []
+    // this.inventoryImages$ = this.productService.getProductImage(event.id)
+    // this.current_Url = event.image
+    // this.rich_description = event.rich_description
+    // this.updated_category = event.category
 
-    this.inventoryImages$.subscribe((image) => {
-      image.forEach((img) => {
-        counter++
-        const Image: IImageStorage = {
-          url: img.url,
-          name: img.name,
-          parentId: img.parentId,
-          version_no: counter,
-        }
-        this.imageArray.push(Image)
-      })
-    })
+    // this.inventoryImages$.subscribe((image) => {
+    //   image.forEach((img) => {
+    //     counter++
+    //     const Image: IImageStorage = {
+    //       url: img.url,
+    //       name: img.name,
+    //       parentId: img.parentId,
+    //       version_no: counter,
+    //     }
+    //     this.imageArray.push(Image)
+    //   })
+    // })
 
-    this.prdGroup.setValue(event)
-    this.openDrawer()
+    // this.prdGroup.setValue(event)
+    // this.openDrawer()
   }
 
   onFocusedRowChanged(e: any) {

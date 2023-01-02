@@ -27,12 +27,24 @@ import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
 import { InventoryImageSelectionComponent } from './inventory-image-selection/inventory-image-selection.component';
+import { BlogbarComponent } from './blog-grid/blogbar/blogbar.component';
+import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
+import { ProductResolver } from 'app/services/product.resolver';
 
 const routes: Routes = [
   {
     path: 'admin',
     pathMatch: 'full',
     component: AdminComponent,
+  },
+  {
+    path: 'product/:id',
+    title: 'Product Edit',
+    component: ProductEditComponent,
+    resolve: {
+      product: ProductResolver
+    },
+    data: { state: 'product/:id' }
   },
   {
     path: 'inventory-selection',
@@ -73,6 +85,8 @@ const routes: Routes = [
     InventoryContentComponent,
     InventoryImageSelectionComponent,
     InventoryComponent,
+    BlogbarComponent,
+    ProductEditComponent
 
   ],
   imports: [

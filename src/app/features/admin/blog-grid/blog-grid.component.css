@@ -5,6 +5,17 @@
     margin: 5px;
   }
 
+  .fab-container {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+
 .mat-flat-button {
     margin: 5px;
   }

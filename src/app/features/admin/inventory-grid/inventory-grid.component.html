@@ -3,37 +3,28 @@
     <mat-drawer class="lg:w-5/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'"
       [disableClose]="false">
       <mat-card>
-        <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' }">
-          {{ sTitle }}
-        </div>
-        <mat-tab-group #tabGroup (selectedTabChange)="onTabClick()"  mat-stretch-tabs="false">
+        <div mat-dialog-title class="h-10 m-2">  {{ sTitle }} </div>
+        <mat-tab-group #tabGroup  mat-stretch-tabs="false">
           <mat-tab label="Inventory Details">
             <ng-template matTabContent>
               <div mat-dialog-content>
                 <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form" >
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }" appearance="outline">
-                    <mat-label>Description</mat-label>
-                    <input matInput placeholder="Description" formControlName="description" />
 
+                  <mat-form-field [ngStyle]="{ width: '100%' }" >
+                    <input matInput placeholder="Description" formControlName="description" />
                   </mat-form-field>
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" appearance="outline">
+
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" >
                     <mat-label>Brand</mat-label>
                     <input matInput placeholder="Brand" formControlName="brand" />
                   </mat-form-field>
 
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }"appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
                     <mat-label>Price</mat-label>
                     <input matInput placeholder="Price" formControlName="price" />
                   </mat-form-field>
 
-
-                  <!-- <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }"appearance="outline">
-                    <mat-label>Rich Description</mat-label>
-                    <textarea matInput formControlName="rich_description">
-                    </textarea>
-                  </mat-form-field> -->
-
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }"appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
                     <mat-label>Category</mat-label>
                     <mat-select placeholder="Category" formControlName="category"
                       (selectionChange)="changeCategory($event.value)">
@@ -43,28 +34,28 @@
                     </mat-select>
                   </mat-form-field>
 
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" >
                     <mat-label>Rating</mat-label>
                     <input matInput placeholder="Rating" formControlName="rating" />
                   </mat-form-field>
 
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" >
                     <mat-label>Collection</mat-label>
                     <input matInput placeholder="Featured" formControlName="is_featured" />
                   </mat-form-field>
 
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" >
                     <mat-label>User</mat-label>
                     <input matInput placeholder="User" formControlName="user_updated" />
                   </mat-form-field>
 
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" >
                     <mat-label>Date Added</mat-label>
                     <input matInput placeholder="Created Date" type="date" id="date_created"
                       formControlName="date_created" />
                   </mat-form-field>
 
-                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" appearance="outline">
+                  <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }" >
                     <mat-label>Date Updated</mat-label>
                     <input matInput placeholder="Updated Date" type="date" id="date_updated"
                       formControlName="date_updated" />
@@ -175,7 +166,7 @@
       </mat-card>
     </mat-drawer>
     <ng-container *ngIf="allProducts$ | async as rows">
-      <table mat-table [dataSource]="rows" class="mat-elevation-z8">
+      <table mat-table [dataSource]="rows" class="mat-elevation-z7">
         <ng-container matColumnDef="image">
           <th class="text-base font-bold text-gray-100 m-2" mat-header-cell *matHeaderCellDef>
             Image
