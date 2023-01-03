@@ -53,8 +53,9 @@ export class WishListComponent implements OnInit, OnDestroy {
 
   }
 
-  addToCart(item: string){
-    this.wishListService.addToCart(item)
+  addToCart(productId: string, itemId: string) {
+    this.wishListService.delete(itemId);
+    this.wishListService.addToCart(productId);
   }
 }
 

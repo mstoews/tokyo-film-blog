@@ -31,7 +31,7 @@
                       <path d="M11.25 8.75V5C11.25 4.66848 11.3817 4.35054 11.6161 4.11612C11.8505 3.8817 12.1685 3.75 12.5 3.75H17.5C17.8315 3.75 18.1495 3.8817 18.3839 4.11612C18.6183 4.35054 18.75 4.66848 18.75 5V8.75" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" />
                   </svg>
               </button>
-              <button (click)="addToCart(item.product_id)" class="opacity-0 hover:text-black z-10 group-hover:opacity-100 transition duration-200 absolute bg-white flex justify-center items-center text-center py-3 text-base font-medium leading-4 bottom-8 w-5/6 text-gray-800">Add to cart</button>
+              <button (click)="addToCart(item.product_id, item.id)" class="opacity-0 hover:text-black z-10 group-hover:opacity-100 transition duration-200 absolute bg-white flex justify-center items-center text-center py-3 text-base font-medium leading-4 bottom-8 w-5/6 text-gray-800">Add to cart</button>
               <div class="w-full h-full opacity-0 group-hover:opacity-25 transition duration-200 bg-gradient-to-t z-0 from-gray-800 to-opacity-0 absolute bottom-0"></div>
           </div>
           <div class="text-left">
