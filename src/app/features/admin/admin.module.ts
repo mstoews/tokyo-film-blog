@@ -56,12 +56,12 @@ const routes: Routes = [
   },
   {
     path: 'blog/:id',
-    title: 'Blog Edit',
+    title: 'Thoughts Edit',
     component: BlogEditComponent,
     resolve: {
       product: BlogResolver,
     },
-    data: { state: 'inventory/:id' },
+    data: { state: 'blog/:id' },
   },
   {
     path: 'admin',

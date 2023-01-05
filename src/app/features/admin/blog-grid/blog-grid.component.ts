@@ -18,6 +18,7 @@ import { Item } from 'app/models/item';
 import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SelectionModel } from '@angular/cdk/collections';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'blog-list',
@@ -48,7 +49,7 @@ export class BlogGridComponent implements OnInit {
   allBlogs$: Observable<Blog[]>;
   blogImages$: Observable<IImageStorage[]>;
   columnsToDisplay: string[] = [
-    'selection',
+    //'selection',
     'title',
     'paragraph',
     // 'body',
@@ -75,8 +76,14 @@ export class BlogGridComponent implements OnInit {
     private auth: AngularFireAuth,
     private blogService: BlogService,
     private fb: FormBuilder,
+    private route: Router,
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string
   ) {}
+
+
+  onOpenRow(row: any){
+    this.route.navigate(['admin/blog', row.id]);
+  }
 
   ngOnInit() {
     this.Refresh();
