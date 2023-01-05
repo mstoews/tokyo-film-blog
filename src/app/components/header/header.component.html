@@ -1,15 +1,7 @@
-<div class="flex justify-start items-start py-5 px-4">
-  <div class="hidden sm:block md:block">
-    <div *ngIf="back === true">
-      <button mat-mini-fab (click)="onBack()"
-        class="absolute text-gray-700 bg-slate-500 align-middle sm:right-30 hover:text-white hover:bg-gray-400 dark:hover:bg-gray-400">
-        <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-      </button>
-    </div>
-  </div>
+
 
   <div class="flex flex-col sm:flex-row sm:space-x-4">
-    <mat-toolbar class="w-full text-4xl font-bold" color="alert">
+    <mat-toolbar class="w-full text-4xl font-bold">
       <mat-toolbar-row>
         <span class="font-garamond">{{ title }}</span>
         <span class="flex-auto"></span>
@@ -26,4 +18,4 @@
       </mat-toolbar-row>
     </mat-toolbar>
   </div>
-</div>
+
