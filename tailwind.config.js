@@ -69,7 +69,9 @@ const config = {
     important  : true,
 
     theme      : {
-
+        fontFamily: {
+            garamond: ['"Cormorant Garamond"', 'serif']
+            },
         screens : {
             sm: '600px',
             md: '960px',

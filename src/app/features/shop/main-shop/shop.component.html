@@ -1,27 +1,41 @@
 <div *ngIf="Products$ | async as products">
   <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9">
-    <div class="flex flex-col items-start justify-start">
-      <div class="flex items-end justify-between w-full mt-4">
         <div class="flex flex-col sm:flex-row sm:space-x-4">
-          <div>
-            <p class="text-3xl font-semibold leading-7 tracking-tight text-gray-800 lg:text-4xl lg:leading-9">Shopping </p>
-          </div>
-        </div>
-        <div class="hidden sm:block md:block">
-          <button mat-icon-button (click)="backToHome()"
-            class="absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-          </button>
-        </div>
+          <mat-toolbar class="w-full text-4xl font-bold" color="alert">
+            <mat-toolbar-row>
+              <span class="font-garamond">Shop</span>
+              <span class="flex-auto"></span>
+              <button mat-icon-button class="hover:bg-gray-500" (click)="backToHome()">
+                <mat-icon class="mb-2" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+              </button>
+
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+              <button [matMenuTriggerFor]="menu" mat-icon-button matTooltip="Select Category" aria-label="menu">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+              </button>
+              <span class="font-garamond pt-2 text-xl">{{currentCategory}}</span>
+
+              <!-- menu selected -->
+              <mat-menu class="side-nav" #menu="matMenu">
+                <ul *ngIf="this.Category$| async as party">
+                  <ui class="side-nave__item" *ngFor="let item of party">
+                    <button mat-menu-item (click)="onRefreshName(item.name)" xPosition="after">
+                        {{item.name}}
+                    </button>
+                  </ui>
+                </ul>
+              </mat-menu>
+            </mat-toolbar-row>
+          </mat-toolbar>
       </div>
-    </div>
-    <div class="flex items-center justify-center">
-      <!-- <div class="grid justify-between grid-cols-1 mt-12 sm:grid-cols-1 lg:grid-cols-3 gap-y-12 lg:gap-x-8  lg:gap-y-8  md:grid-cols-3 md:gap-x-4 md:gap-y-10 2xl:flex 2xl:flex-wrap"> -->
+
+  <div class="flex items-center justify-center">
       <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         <li *ngFor="let product of products ">
           <shop-card [product]="product"></shop-card>
         </li>
-      </div>
-    </div>
   </div>
 </div>
+
+

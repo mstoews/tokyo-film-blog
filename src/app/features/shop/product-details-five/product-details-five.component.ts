@@ -7,6 +7,8 @@ import { WishListService } from 'app/services/wishlist.service'
 import { CheckoutService } from 'app/services/checkout.service'
 import { CartService } from 'app/services/cart.service'
 import { AuthService } from 'app/services/auth/auth.service'
+import { CategoryService } from 'app/services/category.service'
+import { Category } from 'app/models/category'
 
 
 @Component({
@@ -20,6 +22,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   productItem$: Observable<Product | undefined>
   productId: string
   Products$: Observable<Product[]>
+  Categories$: Observable<Category[]>
   sub: Subscription
   cartCount = 0;
 
@@ -30,20 +33,22 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private checkoutService: CheckoutService,
     private wishList: WishListService,
     private productService: ProductsService,
-    private cartService : CartService
+    private cartService : CartService,
+    private categories: CategoryService
   ) {}
 
   ngOnInit(): void {
+    this.Categories$ = this.categories.getAll();
     this.sub = this.activateRoute.params.subscribe((params) => {
       const prd = this.productService.findProductByUrl(params['id'])
       if (prd) {
         this.productItem$ = prd;
         this.productId = params['id'];
       }
-    })
+    });
     this.cartService.cartByUserId(this.authService.userData.uid).subscribe(cart => {
       this.cartCount = cart.length;
-    })
+    });
   }
 
   onAddToWishList() {
@@ -67,7 +72,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     if (this.cartCount > 0) {
       this.route.navigate(['shop/cart', this.authService.userData.uid]);
     }
-    
+
     // this.purchaseStarted = true
 
     // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(

@@ -111,7 +111,10 @@
   <mat-sidenav-container class="flex-1">
     <mat-sidenav class="ml-1 bg-gray-700 rounded-lg " #drawer mode="over" closed
       [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
-      <app-sidenav (notifyParentCloseDrawer)="closeDrawer()"></app-sidenav>
+      <app-sidenav
+      (notifyParentCloseDrawer)="closeDrawer()"
+      (notifyParentDrawerOpen)="openDrawer()"
+      ></app-sidenav>
     </mat-sidenav>
     <main class="ml-2 mr-1 text-gray-800 bg-gray-100 rounded-lg flex-main">
       <article class="flex-article">

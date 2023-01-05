@@ -74,8 +74,6 @@ export class ShellComponent implements OnInit {
     }
   }
 
-
-
   onToggleMenu() {
     if (this.isClicked === false) {
       this.isClicked = true;
@@ -87,6 +85,12 @@ export class ShellComponent implements OnInit {
 
   closeDrawer() {
     this.drawer.close();
+    this.drawer.mode = "over";
+  }
+
+  openDrawer() {
+    this.drawer.open();
+    this.drawer.mode = "side";
   }
 
   logout() {

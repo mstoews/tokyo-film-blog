@@ -3,11 +3,13 @@ import { CommonModule, Location } from '@angular/common';
 import { IconsModule } from 'app/icons.module';
 import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, IconsModule, MatIconModule ],
+  imports: [CommonModule, IconsModule, MatIconModule, MatToolbarModule, MatMenuModule ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
@@ -22,7 +24,7 @@ export class HeaderComponent {
 
   @Input() title : string;
   @Input() sub_title : string;
-  @Input() back: boolean;
+  @Input() back = true;
   @Input() home: boolean;
 
   public onBack(){

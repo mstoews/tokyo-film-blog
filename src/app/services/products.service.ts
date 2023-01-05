@@ -21,12 +21,17 @@ export class ProductsService {
   }
 
   getAll() {
-    // console.log(`Inventory ${this.inventoryItems}`);
     return this.inventoryItems
   }
 
   get(id: string) {
     return this.productsCollection.doc(id).get()
+  }
+
+  getFilteredInventory(category: string){
+      return this.inventoryItems.pipe(
+        map((images) => images.filter((product) => product.category === category))
+      )
   }
 
   getProductImage(parentId: string): any {

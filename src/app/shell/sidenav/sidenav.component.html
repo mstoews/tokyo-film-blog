@@ -3,68 +3,132 @@
   <aside aria-label="Sidebar">
     <div class="px-3 py-10 text-white bg-gray-700 rounded w-50 dark:bg-gray-800">
       <ul class="space-y-2">
-        <li>
-          <a routerLink="home" (click)="onClose()"
-            class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Home</span>
-          </a>
-        </li>
-
-        <li>
-          <a (click)="onShop()"
-            class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
-          </a>
-        </li>
-
-        <li>
-          <a (click)="onWishList()"
-            class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
-          </a>
-        </li>
-
-        <li>
-          <a routerLink="blog" (click)="onClose()"
-            class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
-          </a>
-        </li>
-        <li>
-          <a routerLink="collections" (click)="onClose()"
-            class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-            <mat-icon  [svgIcon]="'mat_outline:shop_2'"></mat-icon>
-            <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
-          </a>
-        </li>
-
-          <ng-container *ngIf="loggedIn">
-            <li >
-              <a routerLink="admin" (click)="onClose()"
+        <ng-container *ngIf="admin === false">
+            <li>
+              <a routerLink="home" (click)="onClose()"
                 class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-                <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-                <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
+                <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Home</span>
               </a>
             </li>
-          </ng-container>
 
-          <ng-container *ngIf="loggedIn">
-            <li >
-              <a routerLink="admin/inventory-selection" (click)="onClose()"
-                class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-                <mat-icon [svgIcon]="'heroicons_outline:chart-square-bar'"></mat-icon>
-                <span class="flex-1 ml-3 whitespace-nowrap">Images</span>
+            <li>
+              <a (click)="onShop()"
+                class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
               </a>
             </li>
-          </ng-container>
 
+            <li>
+              <a (click)="onWishList()"
+                class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
+              </a>
+            </li>
+
+            <li>
+              <a routerLink="blog" (click)="onClose()"
+                class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="collections" (click)="onClose()"
+                class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
+                <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
+              </a>
+            </li>
+
+            <ng-container *ngIf="loggedIn === true">
+              <li>
+                <a routerLink="admin" (click)="onAdmin()"
+                  class="flex items-center p-2 pr-5 font-normal text-gray-300
+                  rounded-lg text-1xl grow hover:bg-gray-800
+                  dark:hover:bg-gray-700">
+                  <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+                  <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
+                </a>
+              </li>
+            </ng-container>
+        </ng-container>
+
+
+        <ng-container *ngIf="admin === true">
+          <li>
+            <a routerLink="admin" (click)="onAdmin()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300
+              rounded-lg text-1xl grow hover:bg-gray-800
+              dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Main Menu</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="admin/company"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Company</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="admin/blog"
+              class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="admin/inventory"
+              class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Inventory</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="admin/category"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Category</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="admin/images"
+              class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Swipe Images</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="admin/collections" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="admin/inventory-selection"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'heroicons_outline:chart-square-bar'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Images</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="admin/gallery" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'heroicons_outline:chart-square-bar'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Gallery</span>
+            </a>
+          </li>
+        </ng-container>
       </ul>
     </div>
   </aside>
 </div>
-
-

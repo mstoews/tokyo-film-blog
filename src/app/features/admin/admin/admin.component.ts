@@ -7,16 +7,33 @@ import { MatTabGroup } from '@angular/material/tabs';
   styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent implements OnInit {
-  @ViewChild('tabGroup', { static: true }) tabGroup: MatTabGroup;
+onClose() {
+throw new Error('Method not implemented.');
+}
+onShop() {
+throw new Error('Method not implemented.');
+}
+onWishList() {
+throw new Error('Method not implemented.');
+}
+onToggleMenu() {
+throw new Error('Method not implemented.');
+}
+doAnimate() {
+throw new Error('Method not implemented.');
+}
+  closeDrawer() {
+  throw new Error('Method not implemented.');
+}
+
+  isClicked: any;
+  doAnimation: any;
+  isLoggedIn: any;
+  onSideNavChange: any;
+  side = "open"
   constructor() {}
 
   ngOnInit(): void {}
 
-  onTabClick() {
-    let index = this.tabGroup.selectedIndex;
-    if (index === null) {
-      index = 0;
-    }
 
-    }
   }

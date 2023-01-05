@@ -140,9 +140,13 @@ export class InventoryComponent implements OnInit {
     }
   }
 
+  onOpenRow(row: any){
+    this.route.navigate(['admin/inventory', row.id]);
+  }
+
   onOpenButtonClicked(event: any) {
     // console.log(JSON.stringify(event));
-    this.route.navigate(['product/id', event.id]);
+    this.route.navigate(['admin/inventory', event.id]);
     // var counter = 0
     // this.imageArray = []
     // this.inventoryImages$ = this.productService.getProductImage(event.id)
@@ -267,7 +271,7 @@ export class InventoryComponent implements OnInit {
   }
 
   columnsToDisplay: string[] = [
-    'actions',
+    // 'actions',
     'image',
     'description',
     'rich_description',

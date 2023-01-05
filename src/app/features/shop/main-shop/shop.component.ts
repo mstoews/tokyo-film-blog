@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Product } from 'app/models/products';
 import { CategoryService } from 'app/services/category.service';
+import { Category } from 'app/models/category';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
@@ -11,21 +12,22 @@ import { Observable } from 'rxjs';
   styleUrls: ['./shop.component.css']
 })
 export class MainShopComponent implements OnInit {
-
-  categories: any;
-  dropdown: boolean = false
-  filters: boolean = false
-
+  categories: Category[];
+  Category$: Observable<Category[]>;
   Products$: Observable<Product[]>;
+  dropdown: boolean = false;
+  filters: boolean = false;
+  currentCategory: string;
+
   prd: any;
-  sTitle = 'Inventory';
+  sTitle: string;
 
   constructor (
     private route: Router,
     private readonly productService: ProductsService,
     private readonly categoryService: CategoryService ) {
-    this.categories = categoryService.getAll();
-    this.sTitle = 'Product Inventory'
+    this.Category$ = categoryService.getAll();
+    this.sTitle = 'Shop'
 
   }
 
@@ -33,21 +35,24 @@ export class MainShopComponent implements OnInit {
     this.route.navigate(['home']);
    }
 
+  onRefreshName(category: string)
+  {
+    this.currentCategory = category;
+    this.Products$ = this.productService.getFilteredInventory(category);
+  }
 
-  changeCategory(arg0: any) {
-    throw new Error('Method not implemented.');
+  changeCategory(category: string) {
+
   }
 
   ngOnInit(): void {
-    this.Products$ = this.productService.getAll();
-  }
-
-  showDropdown(){
-    this.dropdown =! this.dropdown
-  }
-
-  filtershow(){
-    this.filters =! this.filters
+    this.Category$ = this.categoryService.getAll();
+    this.Category$.subscribe((result) => {
+       this.categories = result
+       console.log(JSON.stringify(this.categories));
+       this.currentCategory = this.categories[0].name;
+       this.Products$ = this.productService.getFilteredInventory(this.categories[0].name);
+    })
   }
 
 }

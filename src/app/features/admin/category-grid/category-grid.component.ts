@@ -181,6 +181,11 @@ export class CategoryGridComponent implements OnInit {
     name: '',
   }
 
+  onAdd(){
+    this.createEmptyForm();
+    this.openDrawer();
+  }
+
   createEmptyForm() {
     this.categoryGroup = this.fb.group({
       id: [''],
