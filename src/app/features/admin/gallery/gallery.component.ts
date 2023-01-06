@@ -26,7 +26,7 @@ export class GalleryComponent implements OnInit {
   ImagesList() {
     var imageCount = 0;
     this.storage
-      .ref('/400')
+      .ref('/800')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {

@@ -16,12 +16,19 @@
       <div
         class="flex flex-col items-stretch w-full mt-5 jusitfy-start xl:flex-row gap-y-4 xl:gap-y-0 xl:space-x-8">
         <div class="flex flex-row items-start justify-start">
-          <div
-            class="grid grid-cols-2 gap-y-2 md:gap-y-0 md:grid-cols-3 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-12">
-            <img class="rounded-lg w-30" [ngSrc]="product.image" width="200" height="200" alt="product-1" />
-            <img class="rounded-lg w-30" [ngSrc]="product.image" width="200" height="200" alt="product-2" />
-            <img class="rounded-lg w-30" [ngSrc]="product.image" width="200" height="200" alt="product-3" />
+          <ng-container *ngIf="inventoryImages$ | async as images">
+          <div class="grid grid-cols-2 gap-y-2 md:gap-y-0 md:grid-cols-3 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-12">
+            <ng-container *ngIf="image2">
+              <img class="rounded-lg w-30" [ngSrc]="image2" width="200" height="200" alt="product-1" />
+            </ng-container>
+            <ng-container *ngIf="image3">
+            <img class="rounded-lg w-30" [ngSrc]="image3" width="200" height="200" alt="product-2" />
+            </ng-container>
+            <ng-container *ngIf="image4">
+            <img class="rounded-lg w-30" [ngSrc]="image4" width="200" height="200" alt="product-3" />
+            </ng-container>
           </div>
+          </ng-container>
         </div>
         <div>
           <img class="hidden rounded-lg w-[600px] xl:block" [ngSrc]="product.image" width="400" height="400" alt="headphones-1" priority />

@@ -29,9 +29,15 @@ export class ProductsService {
   }
 
   getFilteredInventory(category: string){
+      if ( category === 'All Categories')
+      {
+        return this.inventoryItems;
+      }
+      else
+      {
       return this.inventoryItems.pipe(
-        map((images) => images.filter((product) => product.category === category))
-      )
+        map((images) => images.filter((product) => product.category === category)));
+      }
   }
 
   getProductImage(parentId: string): any {

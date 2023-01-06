@@ -49,10 +49,10 @@ export class MainShopComponent implements OnInit {
     this.Category$ = this.categoryService.getAll();
     this.Category$.subscribe((result) => {
        this.categories = result
-       console.log(JSON.stringify(this.categories));
-       this.currentCategory = this.categories[0].name;
-       this.Products$ = this.productService.getFilteredInventory(this.categories[0].name);
+       this.currentCategory = 'All Categories'
+       this.Products$ = this.productService.getFilteredInventory(this.currentCategory);
     })
+
   }
 
 }

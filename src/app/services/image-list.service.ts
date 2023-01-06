@@ -186,7 +186,7 @@ export class ImageListService {
   createRawImagesList() {
     var ranking = 0
     this.storage
-      .ref('/400')
+      .ref('/800')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {

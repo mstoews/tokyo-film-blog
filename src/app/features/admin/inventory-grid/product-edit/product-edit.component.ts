@@ -11,36 +11,36 @@ import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 
-
 @Component({
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
-  styleUrls: ['./product-edit.component.css']
+  styleUrls: ['./product-edit.component.css'],
 })
-export class ProductEditComponent implements OnInit{
+export class ProductEditComponent implements OnInit {
   sTitle: any;
-  rich_description: string
-  prdGroup: FormGroup
-  action: string
-  party: string
-  cPriority: string
-  cRAG: string
-  cType: string
-  currentDate: Date
-  product: Product
-  productId: string
-  current_Url: string
-  updated_category: string
-  selectedItemKeys: string
-  categories: Category[]
-  imageArray: IImageStorage[] = []
-  inventoryImages$: Observable<IImageStorage[]>
+  rich_description: string;
+  prdGroup: FormGroup;
+  action: string;
+  party: string;
+  cPriority: string;
+  cRAG: string;
+  cType: string;
+  currentDate: Date;
+  product: Product;
+  productId: string;
+  current_Url: string;
+  updated_category: string;
+  selectedItemKeys: string;
+  categories: Category[];
+  imageArray: IImageStorage[] = [];
+  inventoryImages$: Observable<IImageStorage[]>;
 
-  allProducts$: Observable<Product>
-  category$: Observable<Category[]>
-  prd: any
+  allProducts$: Observable<Product>;
+  category$: Observable<Category[]>;
+  prd: any;
   sub: any;
   productItem$: Observable<Product>;
+  
 
   constructor(
     private matDialog: MatDialog,
@@ -51,126 +51,138 @@ export class ProductEditComponent implements OnInit{
     private readonly productService: ProductsService,
     private fb: FormBuilder
   ) {
-    this.prd = this.productType
-    this.createEmptyForm()
+    this.prd = this.productType;
+    this.createEmptyForm();
   }
 
-
-ngOnInit() {
-    this.sTitle = 'Product Inventory and Images'
+  ngOnInit() {
+    var counter = 0;
+    this.sTitle = 'Product Inventory and Images';
     this.sub = this.activateRoute.params.subscribe((params) => {
-      const prd = this.productService.findProductByUrl(params['id'])
+      const prd = this.productService.findProductByUrl(params['id']);
       if (prd) {
         this.productItem$ = prd;
         this.productId = params['id'];
-        this.productItem$.subscribe( prd => {
-          this.rich_description = prd.rich_description
+        this.productItem$.subscribe((prd) => {
+          this.rich_description = prd.rich_description;
+          this.inventoryImages$ = this.productService.getProductImage(prd.id);
           this.createForm(prd);
-        })
+        });
       }
     });
 
-    this.category$ = this.categoryService.getAll()
+    this.category$ = this.categoryService.getAll();
     this.category$.subscribe((result) => {
-      this.categories = result
-    })
+      this.categories = result;
+    });
+
+    this.inventoryImages$.subscribe((image) => {
+      image.forEach((img) => {
+        counter++;
+        const Image: IImageStorage = {
+          url: img.url,
+          name: img.name,
+          parentId: img.parentId,
+          version_no: counter,
+        };
+        this.imageArray.push(Image);
+      });
+    });
   }
 
-createProduct(results: any) {
-  const newProduct = { ...this.prdGroup.value } as Product
-  newProduct.image = results.data.url
-  this.productService.update(newProduct)
-  this.prdGroup.setValue(newProduct)
-  this.afs
-    .collection('inventory')
-    .doc(newProduct.id)
-    .collection('images')
-    .add(results.data)
-}
+  createProduct(results: any) {
+    const newProduct = { ...this.prdGroup.value } as Product;
+    newProduct.image = results.data.url;
+    this.productService.update(newProduct);
+    this.prdGroup.setValue(newProduct);
+    this.afs
+      .collection('inventory')
+      .doc(newProduct.id)
+      .collection('images')
+      .add(results.data);
+  }
 
-changeCategory(category: any) {
-  this.updated_category = category
-}
+  changeCategory(category: any) {
+    this.updated_category = category;
+  }
 
-createEmptyForm() {
-  this.prdGroup = this.fb.group({
-    id: [''],
-    description: [''],
-    rich_description: [''],
-    image: [''],
-    images: [''],
-    brand: [''],
-    price: [''],
-    category: [''],
-    rating: [''],
-    is_featured: [''],
-    user_updated: [''],
-    date_created: [''],
-    date_updated: [''],
-  })
-}
+  createEmptyForm() {
+    this.prdGroup = this.fb.group({
+      id: [''],
+      description: [''],
+      rich_description: [''],
+      image: [''],
+      images: [''],
+      brand: [''],
+      price: [''],
+      category: [''],
+      rating: [''],
+      is_featured: [''],
+      user_updated: [''],
+      date_created: [''],
+      date_updated: [''],
+    });
+  }
 
-createForm(prd: Product) {
-  this.sTitle = 'Inventory - ' + prd.description
+  createForm(prd: Product) {
+    this.sTitle = 'Inventory - ' + prd.description;
 
-  this.prdGroup = this.fb.group({
-    id: [prd.id],
-    description: [prd.description],
-    rich_description: [prd.rich_description],
-    image: [prd.image],
-    brand: [prd.brand],
-    price: [prd.price],
-    category: [prd.category],
-    rating: [prd.rating],
-    is_featured: [prd.is_featured],
-    user_updated: [prd.user_updated],
-    date_created: [prd.date_created],
-    date_updated: [prd.date_updated],
-  })
-}
+    this.prdGroup = this.fb.group({
+      id: [prd.id],
+      description: [prd.description],
+      rich_description: [prd.rich_description],
+      image: [prd.image],
+      brand: [prd.brand],
+      price: [prd.price],
+      category: [prd.category],
+      rating: [prd.rating],
+      is_featured: [prd.is_featured],
+      user_updated: [prd.user_updated],
+      date_created: [prd.date_created],
+      date_updated: [prd.date_updated],
+    });
+  }
 
-onBackToInventory(){
-  this._location.back();
-}
+  onBackToInventory() {
+    this._location.back();
+  }
 
+  onOpenButtonClicked(event: any) {
+    var counter = 0;
+    this.imageArray = [];
+    this.inventoryImages$ = this.productService.getProductImage(event.id);
+    this.current_Url = event.image;
+    this.rich_description = event.rich_description;
+    this.updated_category = event.category;
 
-onOpenButtonClicked(event: any) {
-  var counter = 0
-  this.imageArray = []
-  this.inventoryImages$ = this.productService.getProductImage(event.id)
-  this.current_Url = event.image
-  this.rich_description = event.rich_description
-  this.updated_category = event.category
+    this.inventoryImages$.subscribe((image) => {
+      image.forEach((img) => {
+        counter++;
+        const Image: IImageStorage = {
+          url: img.url,
+          name: img.name,
+          parentId: img.parentId,
+          version_no: counter,
+        };
+        this.imageArray.push(Image);
+      });
+    });
+    this.prdGroup.setValue(event);
+  }
 
-  this.inventoryImages$.subscribe((image) => {
-    image.forEach((img) => {
-      counter++
-      const Image: IImageStorage = {
-        url: img.url,
-        name: img.name,
-        parentId: img.parentId,
-        version_no: counter,
-      }
-      this.imageArray.push(Image)
-    })
-  })
-
-  this.prdGroup.setValue(event)
-}
-public productType = {
-  id: '',
-  description: '',
-  rich_description: '',
-  image: '',
-  images: '',
-  brand: '',
-  price: '',
-  category: '',
-  rating: '',
-  is_featured: '',
-  user_updated: '',
-  date_created: '',
-  date_updated: '',
-}
-
+  public productType = {
+    id: '',
+    description: '',
+    rich_description: '',
+    image: '',
+    images: '',
+    brand: '',
+    price: '',
+    category: '',
+    rating: '',
+    is_featured: '',
+    user_updated: '',
+    date_created: '',
+    date_updated: '',
+  };
 }
