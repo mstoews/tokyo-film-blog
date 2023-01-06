@@ -103,15 +103,11 @@ export class BlogGridComponent implements OnInit {
   };
 
   selectionChanged(data: any) {
-    // console.log(`selectionChanged ${data}`);
     this.selectedItemKeys = data.selectedRowKeys;
   }
 
   onImages() {
-    // console.log('onImages');
-
     const parentId = this.blogGroup.getRawValue();
-
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
       data: {
@@ -149,8 +145,7 @@ export class BlogGridComponent implements OnInit {
     data.paragraph = this.para;
     data.body = this.body;
     data.conclusion = this.conclusion;
-    data.date_updated = updateDate;
-    // console.log(`onUpdate: ${JSON.stringify(data)}`);
+    data.date_updated = updateDate; 
     this.blogService.update(data);
   }
 

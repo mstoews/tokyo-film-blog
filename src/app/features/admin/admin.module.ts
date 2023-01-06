@@ -48,6 +48,13 @@ const routes: Routes = [
     component: AdminShellComponent,
   },
   {
+    path: 'admin',
+    pathMatch: 'full',
+    title: 'Administration',
+    component: AdminFormComponent,
+    data: { state: 'admin' },
+  },
+  {
     path: 'blog',
     pathMatch: 'full',
     title: 'Thoughts',
@@ -64,23 +71,10 @@ const routes: Routes = [
     data: { state: 'blog/:id' },
   },
   {
-    path: 'admin',
-    pathMatch: 'full',
-    title: 'Administration',
-    component: AdminFormComponent,
-    data: { state: 'admin' },
-  },
-  {
     path: 'inventory',
-    title: 'Inventory Maintenance',
+    title: 'Product Maintenance',
     component: InventoryComponent,
     data: { state: 'inventory' },
-  },
-  {
-    path: 'category',
-    title: 'Category Maintenance',
-    component: CategoryGridComponent,
-    data: { state: 'category' },
   },
   {
     path: 'inventory/:id',
@@ -91,6 +85,13 @@ const routes: Routes = [
     },
     data: { state: 'inventory/:id' },
   },
+  {
+    path: 'category',
+    title: 'Category Maintenance',
+    component: CategoryGridComponent,
+    data: { state: 'category' },
+  },
+
   {
     path: 'inventory-selection',
     pathMatch: 'full',
