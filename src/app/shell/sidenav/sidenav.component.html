@@ -20,13 +20,6 @@
               </a>
             </li>
 
-            <li>
-              <a (click)="onWishList()"
-                class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
-                <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
-                <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
-              </a>
-            </li>
 
             <li>
               <a routerLink="blog" (click)="onClose()"
@@ -44,6 +37,14 @@
             </li>
 
             <ng-container *ngIf="loggedIn === true">
+              <li>
+                <a (click)="onWishList()"
+                  class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+                  <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
+                  <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
+                </a>
+              </li>
+
               <li>
                 <a routerLink="admin" (click)="onAdmin()"
                   class="flex items-center p-2 pr-5 font-normal text-gray-300
