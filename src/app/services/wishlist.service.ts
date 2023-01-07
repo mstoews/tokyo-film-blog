@@ -13,6 +13,8 @@ import { Product } from 'app/models/products';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
+import { collection } from 'firebase/firestore';
+import { FuseAlertService } from '@fuse/components/alert';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +58,9 @@ export class WishListService {
   }
 
   createWishList(productId: string) {
+    if (this.isProductInCart(productId) === false)
+    if (this.isProductInWishList(productId) === false)
+    {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -66,6 +71,7 @@ export class WishListService {
         this.create(wish);
       });
     }
+  }
   }
 
   createCart(productId: string) {
@@ -124,18 +130,64 @@ export class WishListService {
       );
   }
 
-  create(mtProduct: WishList) {
+  findCartItemByProductId(productId: string): Observable<Cart | undefined> {
+    return this.afs.collection(`users/${this.userId}/cart/`, (ref) =>
+      ref.where('product_id', '==', productId)
+    )
+    .valueChanges()
+    .pipe(
+      map((snaps) => {
+        const cart = convertSnaps<Cart>(snaps);
+        return cart.length == 1 ? cart[0] : undefined;
+      }),
+      first()
+    );
+  }
+
+  create(mtProduct: WishList): void {
     console.log('product id:', mtProduct.id);
     if (this.findWishListItemById(mtProduct.id)) {
       const collectionRef = this.afs.collection(
         `users/${this.userId}/wishlist/`
       );
       collectionRef.add(mtProduct);
-      this.snack.open('Wish list has been added ...', 'Ok');
+      this.snack.open('Wish list has been added ...', 'Close');
     }
   }
 
+  isProductInCart(productId: string): boolean{
+    var productName: string;
+    const prd = this.findCartItemByProductId(productId);
+    prd.subscribe(cart => {
+      productName = cart.description;
+    })
+    if (prd === undefined)
+    {
+      return false
+    }
+    else
+    {
+      this.snack.open('Item is already in your cart... ', 'Close');
+      return true;
+    }
+  }
+
+  isProductInWishList(productId: string): boolean{
+    const collectionRef = this.afs.collection(`users/${this.userId}/wishlist/${productId}/id`);
+    const wishlistId = collectionRef.get()
+    if (wishlistId){
+      this.snack.open('Item is already in your wishlist... ', 'Close');
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
   addToCart(productId: string) {
+    if(this.isProductInCart(productId) === false) {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -149,9 +201,11 @@ export class WishListService {
         };
         const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
         collectionRef.add(cart);
+        this.snack.open('Added to your cart... ', 'Close');
       });
     }
-    this.delete(productId);
+      this.delete(productId);
+    }
   }
 
   wishListByUserId(userId: string): any {

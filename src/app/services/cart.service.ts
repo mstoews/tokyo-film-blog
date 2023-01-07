@@ -73,16 +73,7 @@ export class CartService {
     return cartItemsCollection.valueChanges({ idField: 'id' });
   }
 
-  // getCartImage(userId: string, parentId: string): any {
-  //   var cartImages: Observable<IImageStorage[]>;
-  //   var cartImagesCollection: AngularFirestoreCollection<IImageStorage>;
-  //   cartImagesCollection = this.afs.collection<IImageStorage>(
-  //     `user/${userId}/cart/${parentId}/images`
-  //   );
-  //   cartImages = cartImagesCollection.valueChanges({ idField: 'id' });
-  //   return cartImages;
-  // }
-
+  
   findCartByUrl(id: string): Observable<Cart | undefined> {
     return this.afs
       .collection('cart', (ref) => ref.where('id', '==', id))

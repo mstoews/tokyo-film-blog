@@ -65,7 +65,7 @@ export class LandingPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.mainPage$ = this.mainPage.getAll()
-    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY')
+    this.featuredList$ = this.imageListService.getImagesByType('IN_INVENTORY')
     this.mainPage$.subscribe((doc) => {
       if (doc.length > 0) {
         this.mainPageDoc = doc[0]

@@ -98,6 +98,7 @@ const routes: Routes = [
         IconsModule,
         HeaderComponent,
         SwiperModule,
+        
     ]
 })
 export class LandingPageModule {

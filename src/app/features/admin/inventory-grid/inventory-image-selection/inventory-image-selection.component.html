@@ -35,7 +35,7 @@
 
         <div class="item--3 lg-rounded" cdkScrollable>
           <div class="sticky top-0 z-50 uppercase image_title lg-rounded">Landing Page/Blog </div>
-          <div cdkDropList #featured="cdkDropList" [id]="IN_FEATURED" [cdkDropListData]="collectionsImages"
+          <div cdkDropList #featured="cdkDropList" [id]="IN_FEATURED" [cdkDropListData]="featuredImages"
             class="list" (cdkDropListDropped)="drop($event)">
             <div class="flex flex-wrap">
               <div *ngFor="let item of featuredImages" cdkDrag>

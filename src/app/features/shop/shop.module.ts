@@ -16,6 +16,7 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { WishListComponent } from './wishlist/wishlist.component';
 import { CartResolver } from 'app/services/cart.resolver';
 import { WishListResolver } from 'app/services/wishlist.resolver';
+import { HeaderComponent } from 'app/components/header/header.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,7 @@ const routes: Routes = [
     FuseCardModule,
     SharedModule,
     RouterModule.forChild(routes),
+    HeaderComponent
   ]
 })
 export class ShopModule { }

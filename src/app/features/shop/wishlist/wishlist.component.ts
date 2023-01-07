@@ -15,6 +15,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   sub: Subscription;
   wishList$: Observable<WishList[]>
   userId: string;
+  header_title = "Wishlist";
 
   constructor(
     private route: Router,

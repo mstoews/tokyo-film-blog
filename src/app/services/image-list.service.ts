@@ -44,17 +44,13 @@ export class ImageListService {
       idField: 'id',
     });
 
-    this.ImageItemsCollection = afs.collection<imageItem>('imagelist', (ref) =>
-      ref.orderBy('ranking')
-    );
+    this.ImageItemsCollection = afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking') );
     this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
   }
 
   getImagesList(): Observable<imageItem[]> {
     const imagesRef = collection(this.afs.firestore, 'imagelist');
-    return collectionData(imagesRef, { idField: 'id' }) as Observable<
-      imageItem[]
-    >;
+    return collectionData(imagesRef, { idField: 'id' }) as Observable<imageItem[]>;
   }
 
   getAllRawImages() {
