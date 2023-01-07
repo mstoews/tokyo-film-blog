@@ -6,3 +6,4 @@ export interface imageItem {
   type: string;
   ranking?: number;
 }
+

@@ -10,6 +10,7 @@ import { CategoryService } from 'app/services/category.service';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
+import { imageItem } from 'app/models/imageItem';
 
 @Component({
   selector: 'app-product-edit',
@@ -32,7 +33,7 @@ export class ProductEditComponent implements OnInit {
   updated_category: string;
   selectedItemKeys: string;
   categories: Category[];
-  imageArray: IImageStorage[] = [];
+  imageArray: imageItem[] = [];
   inventoryImages$: Observable<IImageStorage[]>;
 
   allProducts$: Observable<Product>;
@@ -40,7 +41,8 @@ export class ProductEditComponent implements OnInit {
   prd: any;
   sub: any;
   productItem$: Observable<Product>;
-  
+  IN_FEATURED = 'IN_INVENTORY';
+
 
   constructor(
     private matDialog: MatDialog,
@@ -51,7 +53,7 @@ export class ProductEditComponent implements OnInit {
     private readonly productService: ProductsService,
     private fb: FormBuilder
   ) {
-    this.prd = this.productType;
+    // this.prd = this.productType;
     this.createEmptyForm();
   }
 
@@ -65,36 +67,44 @@ export class ProductEditComponent implements OnInit {
         this.productId = params['id'];
         this.productItem$.subscribe((prd) => {
           this.rich_description = prd.rich_description;
-          this.inventoryImages$ = this.productService.getProductImage(prd.id);
           this.createForm(prd);
         });
       }
     });
+
 
     this.category$ = this.categoryService.getAll();
     this.category$.subscribe((result) => {
       this.categories = result;
     });
 
+    if (this.inventoryImages$){
     this.inventoryImages$.subscribe((image) => {
       image.forEach((img) => {
         counter++;
-        const Image: IImageStorage = {
-          url: img.url,
-          name: img.name,
-          parentId: img.parentId,
-          version_no: counter,
+        const image: imageItem = {
+          parentId: this.productId,
+          imageSrc: img.url,
+          caption: img.name,
+          type: this.IN_FEATURED,
+          imageAlt: 'Inventory Image',
+          ranking: counter,
+
         };
-        this.imageArray.push(Image);
+        this.imageArray.push(image);
       });
-    });
+     });
+    }
   }
+
 
   createProduct(results: any) {
     const newProduct = { ...this.prdGroup.value } as Product;
     newProduct.image = results.data.url;
+    // Update the data for the product
     this.productService.update(newProduct);
     this.prdGroup.setValue(newProduct);
+    // update the images for the product
     this.afs
       .collection('inventory')
       .doc(newProduct.id)
@@ -147,28 +157,28 @@ export class ProductEditComponent implements OnInit {
     this._location.back();
   }
 
-  onOpenButtonClicked(event: any) {
-    var counter = 0;
-    this.imageArray = [];
-    this.inventoryImages$ = this.productService.getProductImage(event.id);
-    this.current_Url = event.image;
-    this.rich_description = event.rich_description;
-    this.updated_category = event.category;
+  // onOpenButtonClicked(event: any) {
+  //   var counter = 0;
+  //   this.imageArray = [];
+  //   this.inventoryImages$ = this.productService.getProductImage(event.id);
+  //   this.current_Url = event.image;
+  //   this.rich_description = event.rich_description;
+  //   this.updated_category = event.category;
 
-    this.inventoryImages$.subscribe((image) => {
-      image.forEach((img) => {
-        counter++;
-        const Image: IImageStorage = {
-          url: img.url,
-          name: img.name,
-          parentId: img.parentId,
-          version_no: counter,
-        };
-        this.imageArray.push(Image);
-      });
-    });
-    this.prdGroup.setValue(event);
-  }
+  //   this.inventoryImages$.subscribe((image) => {
+  //     image.forEach((img) => {
+  //       counter++;
+  //       const Image: IImageStorage = {
+  //         url: img.url,
+  //         name: img.name,
+  //         parentId: img.parentId,
+  //         version_no: counter,
+  //       };
+  //       this.imageArray.push(Image);
+  //     });
+  //   });
+  //   this.prdGroup.setValue(event);
+  // }
 
   public productType = {
     id: '',

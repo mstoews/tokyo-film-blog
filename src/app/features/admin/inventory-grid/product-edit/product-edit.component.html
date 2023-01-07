@@ -148,12 +148,12 @@
         </mat-tab>
         <mat-tab label="Inventory Images">
           <ng-template matTabContent>
-            <app-gallery-lightbox [galleryData]="imageArray" [showCount]="true">
-            </app-gallery-lightbox>
+            <!-- <app-gallery-lightbox [galleryData]="imageArray" [showCount]="true">
+            </app-gallery-lightbox> -->
 
-            <image-selection></image-selection>
+            <image-selection [images]="imageArray" [productId]="productId" ></image-selection>
 
-            <div mat-dialog-actions class="mt-10">
+            <!-- <div mat-dialog-actions class="mt-10">
               <button class="m-1" (click)="onImages()" mat-flat-button color="primary" aria-label="Add">
                 <mat-icon [svgIcon]="'mat_outline:upload'"></mat-icon>
                 Upload Images
@@ -168,7 +168,7 @@
             <p>
               Each image should have four 400x400 picture of the item.
               Importing an image will create a 400px imagine automatically.
-            </p>
+            </p> -->
           </ng-template>
         </mat-tab>
       </mat-tab-group>

@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core'
+import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore'
-import { imageItem } from 'app/models/imageItem'
-import { rawImageItem } from 'app/models/rawImagesList'
-import { convertSnaps } from './db-utils'
-import { Observable, BehaviorSubject, map, first, of } from 'rxjs'
-import { AngularFireStorage } from '@angular/fire/compat/storage'
+} from '@angular/fire/compat/firestore';
+import { imageItem } from 'app/models/imageItem';
+import { rawImageItem } from 'app/models/rawImagesList';
+import { convertSnaps } from './db-utils';
+import { Observable, BehaviorSubject, map, first, of } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   Firestore,
   addDoc,
@@ -18,133 +18,128 @@ import {
   deleteDoc,
   updateDoc,
   setDoc,
-} from '@angular/fire/firestore'
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageListService {
-  private ImageItemsCollection: AngularFirestoreCollection<imageItem>
-  private RawImagesCollection: AngularFirestoreCollection<rawImageItem>
-  private rawImageItems: Observable<rawImageItem[]>
-  private imageItems: Observable<imageItem[]>
-  items$: Observable<imageItem[]>
-  typeFilter$: BehaviorSubject<string | null>
-  rawImagesArray: imageItem[] = []
+  private ImageItemsCollection: AngularFirestoreCollection<imageItem>;
+  private LoadItemsCollection: AngularFirestoreCollection<imageItem>;
+  private RawImagesCollection: AngularFirestoreCollection<rawImageItem>;
+  private rawImageItems: Observable<rawImageItem[]>;
+  private loadImageItems: Observable<imageItem[]>;
+  private imageItems: Observable<imageItem[]>;
+  items$: Observable<imageItem[]>;
+  typeFilter$: BehaviorSubject<string | null>;
+  rawImagesArray: imageItem[] = [];
 
   constructor(
     public afs: AngularFirestore,
 
     private storage: AngularFireStorage
   ) {
-    this.RawImagesCollection = afs.collection<rawImageItem>('rawimagelist')
-    this.rawImageItems = this.RawImagesCollection.valueChanges({
+    this.LoadItemsCollection = afs.collection<imageItem>('imagelist');
+    this.loadImageItems = this.LoadItemsCollection.valueChanges({
       idField: 'id',
-    })
+    });
 
-    this.ImageItemsCollection = afs.collection<imageItem>('imageslist', (ref) =>
+    this.ImageItemsCollection = afs.collection<imageItem>('imagelist', (ref) =>
       ref.orderBy('ranking')
-    )
-    this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' })
+    );
+    this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
   }
 
   getImagesList(): Observable<imageItem[]> {
-    const imagesRef = collection(this.afs.firestore, 'imageslist')
+    const imagesRef = collection(this.afs.firestore, 'imagelist');
     return collectionData(imagesRef, { idField: 'id' }) as Observable<
       imageItem[]
-    >
+    >;
   }
 
   getAllRawImages() {
-    return this.rawImageItems
+    return this.rawImageItems;
   }
 
   getImages() {
-    return this.imageItems
+    return this.imageItems;
   }
 
   getImagesByType(imageType: string) {
     return this.imageItems.pipe(
       map((images) => images.filter((type) => type.type === imageType))
-    )
+    );
   }
 
-  findRawImageByUrl(caption: string): Observable<rawImageItem | undefined> {
+  findRawImageByUrl(caption: string): Observable<imageItem | undefined> {
     return this.afs
-      .collection('rawimagelist', (ref) => ref.where('caption', '==', caption))
+      .collection('imageList', (ref) => ref.where('caption', '==', caption))
       .snapshotChanges()
       .pipe(
         map((snaps) => {
-          const caption = convertSnaps<rawImageItem>(snaps)
-          return caption.length == 1 ? caption[0] : undefined
+          const caption = convertSnaps<imageItem>(snaps);
+          return caption.length == 1 ? caption[0] : undefined;
         }),
         first()
-      )
+      );
   }
 
-  createRawImage(image: rawImageItem) {
-    // this.findRawImageByUrl(image.caption).subscribe((img) => {
-    //   if (img?.caption == undefined) {
-    this.RawImagesCollection.add(image)
-    //   }
-    // });
+  createRawImage(image: imageItem) {
+    this.LoadItemsCollection.add(image);
   }
 
   async insertImageList(image: imageItem) {
-    // console.log('insertImageList :' ,JSON.stringify(image));
-    var isFound: boolean = false
-    const ref = this.afs.collection('imageslist', (ref) =>
+    var isFound: boolean = false;
+    const ref = this.afs.collection('imagelist', (ref) =>
       ref.where('parentId', '==', image.parentId)
-    )
+    );
     ref.get().subscribe((snaps) => {
       snaps.forEach((snap) => {
-        // console.log('Found', snap.id);
-        isFound = true
-      })
+        isFound = true;
+      });
       if (!isFound) {
-        // console.log('insert : ', image.parentId);
-        this.ImageItemsCollection.add(image)
+        this.ImageItemsCollection.add(image);
       }
-    })
+    });
   }
 
   createImageList() {
-    const rawImage = this.getAllRawImages()
-    var count = 0
+    const rawImage = this.getAllRawImages();
+    var count = 0;
     rawImage.subscribe((image) => {
       image.forEach((img) => {
-        count++
+        count++;
         if (img.id != undefined) {
           const item = {
+            id: '',
             parentId: img.id as string,
             caption: img.caption,
             imageSrc: img.imageSrc,
             imageAlt: img.imageAlt,
             type: img.type,
             ranking: count,
-          }
-          // console.log('missing images', JSON.stringify(item));
-          // this.insertImageList(item);
+          };
+          this.createItem(item);
         }
-      })
-    })
+      });
+    });
   }
 
   getAll() {
-    return this.imageItems
+    return this.imageItems;
   }
 
   getNotUsed() {
-    return this.imageItems
+    return this.imageItems;
   }
 
   get(id: string) {
-    this.ImageItemsCollection.doc(id).get()
+    this.ImageItemsCollection.doc(id).get();
   }
 
   getItemsByType(type: string) {
     return this.afs
-      .collection<imageItem>('imageslist', (ref) =>
+      .collection<imageItem>('imagelist', (ref) =>
         ref.where('type', '==', type)
       )
       .get()
@@ -154,56 +149,106 @@ export class ImageListService {
             return {
               id: snap.id,
               ...(<any>snap.data()),
-            }
-          })
+            };
+          });
         })
-      )
+      );
   }
 
-  create(image: imageItem) {
-    this.ImageItemsCollection.add(image)
+  createItem(image: imageItem) {
+    this.ImageItemsCollection.add(image);
   }
 
   addList(images: imageItem[]) {
     images.forEach((item) => {
-      this.ImageItemsCollection.add(item)
-    })
+      this.ImageItemsCollection.add(item);
+    });
   }
 
   update(item: any, id: string) {
     // console.log(JSON.stringify(item));
-    this.ImageItemsCollection.doc(id).update(item)
+    this.ImageItemsCollection.doc(id).update(item);
+  }
+
+  updateInventory(item: imageItem, productId: string) {
+    const imageCollectionRef = this.afs.collection(`inventory/${productId}/images`);
+    imageCollectionRef.add(item);
   }
 
   updateImageList(item: imageItem) {
-    this.ImageItemsCollection.doc(item.parentId).update(item)
+    this.ImageItemsCollection.doc(item.parentId).update(item);
   }
 
   delete(id: string) {
-    this.ImageItemsCollection.doc(id).delete()
+    this.ImageItemsCollection.doc(id).delete();
   }
 
   createRawImagesList() {
-    var ranking = 0
+    var ranking = 0;
+    this.storage
+      .ref('/inventory/800')
+      .listAll()
+      .subscribe((files) => {
+        files.items.forEach((imageRef) => {
+          imageRef.getDownloadURL().then((downloadURL) => {
+            ranking++;
+            const imageUrl = downloadURL;
+            const imageData: any = {
+              parentId: '',
+              caption: imageRef.fullPath,
+              type: 'IN_NOT_USED',
+              imageSrc: imageUrl,
+              imageAlt: imageRef.name,
+              ranking: ranking,
+              id: '',
+            };
+            this.createRawImage(imageData);
+          });
+        });
+      });
+
     this.storage
       .ref('/800')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {
           imageRef.getDownloadURL().then((downloadURL) => {
-            ranking++
-            const imageUrl = downloadURL
+            ranking++;
+            const imageUrl = downloadURL;
             const imageData: any = {
-              parentID: '',
+              parentId: '',
               caption: imageRef.fullPath,
               type: 'IN_NOT_USED',
               imageSrc: imageUrl,
               imageAlt: imageRef.name,
               ranking: ranking,
-            }
-            this.createRawImage(imageData)
-          })
-        })
-      })
+              id: '',
+            };
+            this.createRawImage(imageData);
+          });
+        });
+      });
+
+    this.storage
+      .ref('/uploaded/800')
+      .listAll()
+      .subscribe((files) => {
+        files.items.forEach((imageRef) => {
+          imageRef.getDownloadURL().then((downloadURL) => {
+            ranking++;
+            const imageUrl = downloadURL;
+            const imageData: any = {
+              parentId: '',
+              caption: imageRef.fullPath,
+              type: 'IN_NOT_USED',
+              imageSrc: imageUrl,
+              imageAlt: imageRef.name,
+              ranking: ranking,
+              id: '',
+            };
+            this.createRawImage(imageData);
+          });
+        });
+      });
   }
 }
