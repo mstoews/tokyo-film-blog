@@ -13,7 +13,7 @@ import { Product } from 'app/models/products';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
-import { collection } from 'firebase/firestore';
+import { collection, OrderByDirection } from 'firebase/firestore';
 import { FuseAlertService } from '@fuse/components/alert';
 
 @Injectable({
@@ -58,9 +58,9 @@ export class WishListService {
   }
 
   createWishList(productId: string) {
-    if (this.isProductInCart(productId) === false)
-    if (this.isProductInWishList(productId) === false)
-    {
+    // if (this.isProductInCart(productId) === false)
+    // if (this.isProductInWishList(productId) === false)
+    // {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -71,7 +71,7 @@ export class WishListService {
         this.create(wish);
       });
     }
-  }
+    //}
   }
 
   createCart(productId: string) {
@@ -103,8 +103,7 @@ export class WishListService {
   }
 
   findProductById(id: string): Observable<Product | undefined> {
-    return this.afs
-.collection('inventory', (ref) => ref.where('id', '==', id))
+     return this.afs.collection('inventory', (ref) => ref.where('id', '==', id))
       .snapshotChanges()
       .pipe(
         map((snaps) => {
@@ -179,27 +178,39 @@ export class WishListService {
 
 
   getProductInCart(productId: string, userId: string): any {
+
+    var found = false;
     var product: Observable<Cart[]>
     var productCollection: AngularFirestoreCollection<Cart>
-    productCollection = this.afs.collection<Cart>(
-      `users/${userId}/cart`
-    )
+    productCollection = this.afs.collection<Cart>( `users/${userId}/cart` )
     product = productCollection.valueChanges({ idField: 'id' })
-    product.
-    return product;
+    product.pipe(map((cart) => cart.filter((product) => {
+        product.product_id === productId }
+    )));
   }
 
+  findCart(productId:string, userId: string,  sortOrder: OrderByDirection = 'asc',
+      pageNumber = 0, pageSize = 3): Observable<Cart[]> {
+      return this.afs.collection(`users/${userId}/cart`,
+          ref => ref.orderBy("description", sortOrder)
+          .limit(pageSize)
+          .startAfter(pageNumber * pageSize))
+          .get()
+          .pipe(  map(results => convertSnaps<Cart>(results)));
+  }
+
+
   addToCart(productId: string) {
-    var found = false;
-    const cart = this.getProductInCart(productId, this.userId);
-    cart.subscribe(cart => {
-      cart.forEach(item => {
-        console.log(item.product_id);
-        if (productId === item.product_id)
-         found = true;
-      })
-    });
-    if(found === false) {
+    // var found = false;
+    // const cart = this.getProductInCart(productId, this.userId);
+    // cart.subscribe(cart => {
+    //   cart.forEach(item => {
+    //     console.log(item.product_id);
+    //     if (productId === item.product_id)
+    //      found = true;
+    //   })
+    // });
+    // if(found === false) {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -216,11 +227,8 @@ export class WishListService {
         this.snack.open('Added to your cart... ', 'Close');
       });
     }
-      this.delete(productId);
-    }
-    else {
-      this.snack.open('Item already in your cart ... ','Close')
-    }
+    // delete from wishlist if existing
+    this.delete(productId);
   }
 
   wishListByUserId(userId: string): any {

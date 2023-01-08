@@ -18,6 +18,7 @@ import {
   deleteDoc,
   updateDoc,
   setDoc,
+  OrderByDirection,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -52,6 +53,7 @@ export class ImageListService {
     const imagesRef = collection(this.afs.firestore, 'imagelist');
     return collectionData(imagesRef, { idField: 'id' }) as Observable<imageItem[]>;
   }
+
 
   getAllRawImages() {
     return this.rawImageItems;

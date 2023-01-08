@@ -14,6 +14,7 @@ import { Product } from 'app/models/products';
 import { convertSnaps } from './db-utils';
 import { IImageStorage } from 'app/models/maintenance';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from './auth/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,10 +25,12 @@ export class CartService {
   isLoggedIn: boolean;
   userId: string;
   cart$: Observable<Cart[]>;
+  cartItems: Observable<Cart[]>;
 
   constructor(
     public afs: AngularFirestore,
     public auth: AngularFireAuth,
+    public authService: AuthService,
     private snack: MatSnackBar
   ) {
     auth.authState.subscribe((user) => {
@@ -41,20 +44,39 @@ export class CartService {
     if (this.isLoggedIn) {
       this.cartItems$ = this.cartCollection.valueChanges({ idField: 'id' });
     }
+
+    // this.cartByUserId(this.userId).subscribe((cart) => {
+    //   cart.forEach((item) => {
+    //     this.productIds.push(item.product_id);
+    //   });
+    //   console.log('Number of items in the cart: ', this.productIds.length);
+    // });
+
   }
 
-  getCartCount(userId: string): Observable<Cart[] | undefined>  {
-      return this.afs
-        .collection('cart', (ref) => ref.where('userId', '==', userId))
-        .snapshotChanges()
-        .pipe(
-          map((snaps) => {
-            return convertSnaps<Cart>(snaps);
-          })
-        );
-    }
+  getCartCount(userId: string): Observable<Cart[] | undefined> {
+    return this.afs
+      .collection(`users/${userId}/cart`)
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          return convertSnaps<Cart>(snaps);
+        })
+      );
+  }
 
-  cartItems: Observable<Cart[]>;
+  getCartItem(userId: string, productId: string): Observable<Cart[]> {
+    return this.afs
+      .collection(`users/${userId}/cart`, (ref) =>
+        ref.where('product_id', '==', productId)
+      )
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          return convertSnaps<Cart>(snaps);
+        })
+      );
+  }
 
   getAll() {
     var cartItemsCollection: AngularFirestoreCollection<Cart>;
@@ -73,7 +95,6 @@ export class CartService {
     return cartItemsCollection.valueChanges({ idField: 'id' });
   }
 
-  
   findCartByUrl(id: string): Observable<Cart | undefined> {
     return this.afs
       .collection('cart', (ref) => ref.where('id', '==', id))

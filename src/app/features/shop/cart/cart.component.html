@@ -1,13 +1,10 @@
 <ng-container  class="bg-white" *ngIf="cart$ | async as cartItems">
   <app-header [title]="'Shopping Cart'"></app-header>
-  <div class="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
-    <form class="mt-12 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
-
-
+  <div class="mx-auto max-w-2xl px-4 pt-6 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
+    <form class="mt-6 lg:grid lg:grid-cols-12 lg:items-start lg:gap-x-12 xl:gap-x-16">
       <section aria-labelledby="cart-heading" class="lg:col-span-7">
         <div *ngFor="let item of cartItems">
           <h2 id="cart-heading" class="sr-only">Items in your shopping cart</h2>
-
           <ul role="list" class="divide-y divide-gray-300 border-t border-b border-gray-200">
             <li class="flex py-6 sm:py-10">
               <div class="flex-shrink-0">
@@ -76,12 +73,12 @@
               <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
                 <span class="sr-only">Learn more about how shipping is calculated</span>
                 <!-- Heroicon name: mini/question-mark-circle -->
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                <!-- <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                   aria-hidden="true">
                   <path fill-rule="evenodd"
                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"
                     clip-rule="evenodd" />
-                </svg>
+                </svg> -->
               </a>
             </dt>
             <dd class="text-sm font-medium text-gray-900" >${{shipping}}</dd>
@@ -92,12 +89,12 @@
               <a href="#" class="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500">
                 <span class="sr-only">Learn more about how tax is calculated</span>
                 <!-- Heroicon name: mini/question-mark-circle -->
-                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+                <!-- <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
                   aria-hidden="true">
                   <path fill-rule="evenodd"
                     d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"
                     clip-rule="evenodd" />
-                </svg>
+                </svg> -->
               </a>
             </dt>
             <dd class="text-sm font-medium text-gray-900">${{tax}}</dd>
