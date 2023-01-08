@@ -104,7 +104,7 @@ export class WishListService {
 
   findProductById(id: string): Observable<Product | undefined> {
     return this.afs
-      .collection('inventory', (ref) => ref.where('id', '==', id))
+.collection('inventory', (ref) => ref.where('id', '==', id))
       .snapshotChanges()
       .pipe(
         map((snaps) => {
@@ -130,18 +130,23 @@ export class WishListService {
       );
   }
 
-  findCartItemByProductId(productId: string): Observable<Cart | undefined> {
-    return this.afs.collection(`users/${this.userId}/cart/`, (ref) =>
+
+
+
+  findCartItemByProductId(productId: string): any {
+    this.afs.collection(`users/${this.userId}/cart/`, ref =>
       ref.where('product_id', '==', productId)
     )
-    .valueChanges()
+    .get()
     .pipe(
       map((snaps) => {
-        const cart = convertSnaps<Cart>(snaps);
-        return cart.length == 1 ? cart[0] : undefined;
+        snaps.forEach(cart => {
+          console.log('Found the item in the cart: ', cart.ref.id);
+          return true;
+        })
       }),
-      first()
     );
+    return false;
   }
 
   create(mtProduct: WishList): void {
@@ -156,20 +161,7 @@ export class WishListService {
   }
 
   isProductInCart(productId: string): boolean{
-    var productName: string;
-    const prd = this.findCartItemByProductId(productId);
-    prd.subscribe(cart => {
-      productName = cart.description;
-    })
-    if (prd === undefined)
-    {
-      return false
-    }
-    else
-    {
-      this.snack.open('Item is already in your cart... ', 'Close');
-      return true;
-    }
+      return this.findCartItemByProductId(productId);
   }
 
   isProductInWishList(productId: string): boolean{
@@ -186,8 +178,28 @@ export class WishListService {
   }
 
 
+  getProductInCart(productId: string, userId: string): any {
+    var product: Observable<Cart[]>
+    var productCollection: AngularFirestoreCollection<Cart>
+    productCollection = this.afs.collection<Cart>(
+      `users/${userId}/cart`
+    )
+    product = productCollection.valueChanges({ idField: 'id' })
+    product.
+    return product;
+  }
+
   addToCart(productId: string) {
-    if(this.isProductInCart(productId) === false) {
+    var found = false;
+    const cart = this.getProductInCart(productId, this.userId);
+    cart.subscribe(cart => {
+      cart.forEach(item => {
+        console.log(item.product_id);
+        if (productId === item.product_id)
+         found = true;
+      })
+    });
+    if(found === false) {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -205,6 +217,9 @@ export class WishListService {
       });
     }
       this.delete(productId);
+    }
+    else {
+      this.snack.open('Item already in your cart ... ','Close')
     }
   }
 
