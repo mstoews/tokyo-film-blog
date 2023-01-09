@@ -19,7 +19,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   blogImages$: Observable<IImageStorage[]> ;
 
   blog!: Blog;
-  
+
   constructor(
     private activateRoute: ActivatedRoute,
     private route: Router,

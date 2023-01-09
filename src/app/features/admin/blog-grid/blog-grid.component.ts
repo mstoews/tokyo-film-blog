@@ -91,7 +91,6 @@ export class BlogGridComponent implements OnInit {
   }
 
   onAdd() {
-    this.createEmptyForm();
     this.openDrawer();
   }
 
@@ -138,17 +137,7 @@ export class BlogGridComponent implements OnInit {
     this.afs.collection('blog').doc(rawData.id).collection('images').add(data);
   }
 
-  onUpdate(data: Blog) {
-    const dDate = new Date();
-    const updateDate = dDate.toISOString().split('T')[0];
-    data = this.blogGroup.getRawValue();
-    data.paragraph = this.para;
-    data.body = this.body;
-    data.conclusion = this.conclusion;
-    data.date_updated = updateDate; 
-    this.blogService.update(data);
-  }
-
+  
   onCellDoublClicked(e: any) {
     this.data = [];
     var counter = 0;
@@ -204,7 +193,6 @@ export class BlogGridComponent implements OnInit {
   Refresh() {
     this.sTitle = 'Blog Lists';
     // this.blogId = this.afs.createId();
-    this.createEmptyForm();
     this.allBlogs$ = this.blogService.getAll();
   }
 
@@ -228,11 +216,6 @@ export class BlogGridComponent implements OnInit {
     }
   }
 
-  dateFormatter(params: any) {
-    const dateAsString = params.value;
-    const dateParts = dateAsString.split('-');
-    return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
-  }
 
   onDelete(data: Blog) {
     data = this.blogGroup.getRawValue();
@@ -259,18 +242,6 @@ export class BlogGridComponent implements OnInit {
     // console.log(`blog grid value changed ${e}`)
   }
 
-  createEmptyForm() {
-    this.blogGroup = this.fb.group({
-      id: [''],
-      title: [''],
-      paragraph: [''],
-      body: [''],
-      conclusion: [''],
-      user_updated: [''],
-      date_created: [''],
-      date_updated: [''],
-    });
-  }
 
   createForm(blog: Blog) {
     this.sTitle = 'Blog - ' + blog.title;

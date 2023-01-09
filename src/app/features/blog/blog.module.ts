@@ -12,23 +12,8 @@ import { HeaderComponent } from 'app/components/header/header.component';
 import { FuseCardModule } from '@fuse/components/card';
 import { IconsModule } from 'app/icons.module';
 import { BlogCardComponent } from './blog-card/blog-card.component';
+import { BlogRoutingModule } from './blog-routing/blog-routing.module';
 
-const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    component: BlogComponent,
-  },
-  {
-    path: 'detail/:id',
-    title: 'Thoughts',
-    component: DetailComponent,
-    resolve: {
-      blog: BlogResolver
-    },
-    data: { state: 'detail/:id' }
-  },
-];
 
 
 @NgModule({
@@ -38,17 +23,19 @@ const routes: Routes = [
     DetailComponent,
     SafePipe,
     BlogCardComponent
-
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
     MaterialModule,
     DxHtmlEditorModule,
     NgOptimizedImage,
     HeaderComponent,
     FuseCardModule,
-    IconsModule
+    IconsModule,
+    BlogRoutingModule
+  ],
+  providers: [
+    BlogResolver
   ]
 })
 export class BlogModule { }

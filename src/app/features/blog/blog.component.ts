@@ -3,7 +3,7 @@ import { BlogService } from 'app/services/blog.service';
 import { Blog } from 'app/models/blog'
 import { Observable } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
