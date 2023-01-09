@@ -6,8 +6,6 @@ import { ProductResolver } from 'app/services/product.resolver';
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { AdminComponent } from './admin/admin.component';
-import { BlogEditComponent } from './blog-grid/blog-edit/blog-edit.component';
-import { BlogGridComponent } from './blog-grid/blog-grid.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { InventoryComponent } from './inventory-grid/inventory-grid.component';
@@ -27,22 +25,6 @@ const routes: Routes = [
     title: 'Administration',
     component: AdminFormComponent,
     data: { state: 'admin' },
-  },
-  {
-    path: 'blog',
-    pathMatch: 'full',
-    title: 'Thoughts',
-    component: BlogGridComponent,
-    data: { state: 'blog' },
-  },
-  {
-    path: 'blog/:id',
-    title: 'Thoughts Edit',
-    component: BlogEditComponent,
-    resolve: {
-       blog: BlogResolver,
-    },
-    data: { state: 'blog/:id' },
   },
   {
     path: 'inventory',
@@ -85,18 +67,10 @@ const routes: Routes = [
   },
 ];
 
-
 @NgModule({
   declarations: [],
-  imports: [
-    RouterModule.forChild(routes)
-  ],
-  exports:[
-    RouterModule
-  ],
-  providers:
-  [
-    AdminRouteModule
-  ]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
+  providers: [AdminRouteModule],
 })
-export class AdminRouteModule { }
+export class AdminRouteModule {}

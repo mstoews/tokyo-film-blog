@@ -3,9 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { AdminComponent } from './admin/admin.component';
 import { CreationsGridComponent } from './products-grid/products-grid.component';
 import { OrdersGridComponent } from './orders-grid/orders-grid.component';
-import { RouterModule, Routes } from '@angular/router';
 import { MaterialModule } from 'app/material.module';
-import { BlogGridComponent } from './blog-grid/blog-grid.component';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { GridMenubarComponent } from './grid-menubar/grid-menubar.component';
 import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.module';
@@ -32,22 +30,19 @@ import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
 import { InventoryImageSelectionComponent } from './inventory-grid/inventory-image-selection/inventory-image-selection.component';
-import { BlogbarComponent } from './blog-grid/blogbar/blogbar.component';
 import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
 import { HeaderComponent } from 'app/components/header/header.component';
 import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { BlogResolver } from 'app/services/blog.resolver';
-import { BlogEditComponent } from './blog-grid/blog-edit/blog-edit.component';
+
 import { AdminRouteModule } from './admin-route.module';
 import { ProductResolver } from 'app/services/product.resolver';
-
 
 @NgModule({
   declarations: [
     AdminComponent,
     OrdersGridComponent,
     CreationsGridComponent,
-    BlogGridComponent,
     GridMenubarComponent,
     CategoryGridComponent,
     ImageMaintenanceComponent,
@@ -63,10 +58,10 @@ import { ProductResolver } from 'app/services/product.resolver';
     InventoryContentComponent,
     InventoryImageSelectionComponent,
     InventoryComponent,
-    BlogbarComponent,
+
     ProductEditComponent,
     AdminShellComponent,
-    BlogEditComponent,
+
   ],
   imports: [
     AdminRouteModule,
@@ -87,8 +82,6 @@ import { ProductResolver } from 'app/services/product.resolver';
     HeaderComponent,
   ],
   exports: [AdminComponent, OrdersGridComponent],
-  providers: [BlogResolver, ProductResolver
-  ]
-
+  providers: [BlogResolver, ProductResolver],
 })
 export class AdminModule {}

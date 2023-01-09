@@ -1,5 +1,5 @@
 <div class="h-screen">
-  <mat-drawer-container class="flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
+  <div class="flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
 
     <ng-container *ngIf="allBlogs$ | async as rows">
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">
@@ -67,5 +67,5 @@
       </button>
 
     </ng-container>
-  </mat-drawer-container>
+  </div>
 </div>

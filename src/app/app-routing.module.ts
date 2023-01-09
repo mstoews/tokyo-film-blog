@@ -31,6 +31,12 @@ const routes: Route[] = [
     data: { state: 'blog' }
    },
    {
+    path: 'blog-admin',
+    loadChildren: () => import('./features/blog-admin/blog-admin.module').then( (mod) => mod.BlogAdminModule),
+    data: { state: 'blog-admin' }
+   },
+
+   {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.module').then( (mod) => mod.AdminModule),
     canActivate: [AngularFireAuthGuard],

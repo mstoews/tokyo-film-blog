@@ -7,13 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { BlogService } from '../../../services/blog.service';
+import { BlogService } from 'app/services/blog.service';
 import { Blog } from 'app/models/blog';
-import { MatDrawer } from '@angular/material/sidenav';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+
 import { Item } from 'app/models/item';
 import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -25,10 +24,7 @@ import { Router } from '@angular/router';
   templateUrl: './blog-grid.component.html',
   styleUrls: ['./blog-grid.component.css'],
 })
-export class BlogGridComponent implements OnInit {
-  @ViewChild('drawer') drawer: MatDrawer;
-
-  drawOpen: 'open' | 'close' = 'open';
+export class BlogAdminComponent implements OnInit {
   blogGroup: FormGroup;
   sTitle: string;
   cRAG: string;
@@ -63,35 +59,31 @@ export class BlogGridComponent implements OnInit {
   selection = new SelectionModel<Blog>();
 
   onBlogToggle(blog: Blog){
-
     this.selection.toggle(blog);
     console.log(this.selection.selected);
 
   }
 
-
   constructor(
-    private matDialog: MatDialog,
-    private afs: AngularFirestore,
-    private auth: AngularFireAuth,
     private blogService: BlogService,
     private fb: FormBuilder,
     private route: Router,
-    @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string
+
   ) {}
 
 
   onOpenRow(row: any){
-    this.route.navigate(['admin/blog', row.id]);
+    this.route.navigate(['blog-admin/blog-admin', row.id]);
+  }
+
+  onAdd(){
+    console.log('add new blog entry');
+    // this.route.navigate(['blog-admin/blog-admin', row.id]);
   }
 
   ngOnInit() {
     this.Refresh();
     this.cRAG = '#238823';
-  }
-
-  onAdd() {
-    this.openDrawer();
   }
 
   contentReady = (e: any) => {
@@ -105,39 +97,8 @@ export class BlogGridComponent implements OnInit {
     this.selectedItemKeys = data.selectedRowKeys;
   }
 
-  onImages() {
-    const parentId = this.blogGroup.getRawValue();
-    const dialogRef = this.matDialog.open(DndComponent, {
-      width: '500px',
-      data: {
-        parent: parentId.id,
-        location: 'blog',
-      },
-    });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result === undefined) {
-        result = { event: 'Cancel' };
-      }
-      switch (result.event) {
-        case 'Create':
-          // console.log(`create Images to save: ${JSON.stringify(result.data)}`);
-          this.create(result.data);
-          break;
-        case 'Cancel':
-          // console.log(`Image transfer cancelled`);
-          break;
-      }
-    });
-  }
 
-  create(data: any) {
-    const rawData = this.blogGroup.getRawValue();
-    this.blogService.update(rawData);
-    this.afs.collection('blog').doc(rawData.id).collection('images').add(data);
-  }
-
-  
   onCellDoublClicked(e: any) {
     this.data = [];
     var counter = 0;
@@ -148,51 +109,16 @@ export class BlogGridComponent implements OnInit {
 
     this.blogImages$ = this.blogService.getBlogImage(parentId);
     this.blogGroup.setValue(e);
-    this.openDrawer();
+
   }
 
   onNotify(event: any) {
     this.blogGroup.setValue(event.data);
-    //this.current_Url = event.data.images;
-    this.toggleDrawer();
-  }
 
-  openDrawer() {
-    const opened = this.drawer.opened;
-    if (opened !== true) {
-      this.drawer.toggle();
-    } else {
-      return;
-    }
-  }
-
-  closeDrawer() {
-    const opened = this.drawer.opened;
-    if (opened === true) {
-      this.drawer.toggle();
-    } else {
-      return;
-    }
-  }
-
-  Add() {
-    // console.log('open drawer to add ... ');
-    this.openDrawer();
-  }
-
-  Delete() {
-    // console.log('open drawer to delete ... ');
-    this.openDrawer();
-  }
-
-  Clone() {
-    // console.log('open drawer to clone ... ');
-    this.openDrawer();
   }
 
   Refresh() {
     this.sTitle = 'Blog Lists';
-    // this.blogId = this.afs.createId();
     this.allBlogs$ = this.blogService.getAll();
   }
 
@@ -205,27 +131,12 @@ export class BlogGridComponent implements OnInit {
     this.blogService.create(newBlog);
   }
 
-  toggleDrawer() {
-    const opened = this.drawer.opened;
-    if (opened !== true) {
-      this.drawer.toggle();
-    } else {
-      if (this.drawOpen === 'close') {
-        this.drawer.toggle();
-      }
-    }
-  }
-
-
   onDelete(data: Blog) {
     data = this.blogGroup.getRawValue();
     // console.log(`onDelete: ${data}`);
     this.blogService.delete(data.id.toString());
   }
 
-  closeDialog() {
-    this.drawer.toggle();
-  }
 
   public blogType = {
     id: '',

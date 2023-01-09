@@ -1,20 +1,14 @@
-<div class="flex items-center justify-center w-full" *ngIf="blogItem | async as blog">
-  <div
-    class="flex flex-col items-start justify-start px-4 py-16 md:w-10/12 lg:w-8/12 xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
-    <div class="flex flex-col items-start space-y-3 jusitfy-start">
-      <p class="text-4xl font-semibold leading-9 text-gray-800 font-garamond">{{blog.title}} </p>
-      <button mat-icon-button (click)="onBackToBlog()"
-        class="absolute mb-20 text-3xl font-semibold text-gray-700 align-middle rounded-lg top-12 items-left right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700">
-        <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
+<div class="flex items-center justify-center w-full">
+  <div class="flex-1 items-start justify-start px-4 py-16 md:w-10/12 lg:w-8/12 xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
+    <div class="flex items-start jusitfy-start justify-center pb-4">
+      <p class="text-4xl font-semibold leading-9 text-gray-800 font-garamond">Thoughts - Editing</p>
+      <span class="flex-auto"></span>
+      <button mat-icon-button  class="bg-gray-300 hover:bg-gray-500 hover:text-gray-100" (click)="onBackToBlog()">
+        <mat-icon class="mb-2" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
       </button>
     </div>
-    <span>
-
-    </span>
-<mat-drawer class="lg:w-5/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'"
-[disableClose]="false">
+  <span></span>
 <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
-  <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }"> {{ sTitle }} </div>
   <div mat-dialog-content>
     <form #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)" class="form">
       <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
@@ -24,30 +18,13 @@
         <mat-tab label="Introduction">
           <ng-template matTabContent>
             <!-- <text-editor [valueContent]="para" ></text-editor> -->
-            <dx-html-editor height="600px" [(value)]="para">
+            <dx-html-editor height="400px" [(value)]="para">
               <dxo-toolbar>
                 <dxi-item name="undo"></dxi-item>
                 <dxi-item name="redo"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
-                <dxi-item name="size" [acceptedValues]="[
-                    '8pt',
-                    '10pt',
-                    '12pt',
-                    '14pt',
-                    '18pt',
-                    '24pt',
-                    '36pt'
-                  ]"></dxi-item>
-                <dxi-item name="font" [acceptedValues]="[
-                    'Arial',
-                    'Courier New',
-                    'Georgia',
-                    'Impact',
-                    'Lucida Console',
-                    'Tahoma',
-                    'Times New Roman',
-                    'Verdana'
-                  ]"></dxi-item>
+                <dxi-item name="size" [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
+                <dxi-item name="font" [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="bold"></dxi-item>
                 <dxi-item name="italic"></dxi-item>
@@ -69,13 +46,8 @@
                 <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="color"></dxi-item>
-                <dxi-item name="background"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
-                <dxi-item name="link"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
-                <dxi-item name="clear"></dxi-item>
-                <dxi-item name="codeBlock"></dxi-item>
                 <dxi-item name="blockquote"></dxi-item>
+                <dxi-item name="clear"></dxi-item>
               </dxo-toolbar>
             </dx-html-editor>
           </ng-template>
@@ -83,31 +55,13 @@
         <mat-tab label="Main">
           <ng-template matTabContent>
             <!-- <text-editor [valueContent]="body"></text-editor> -->
-            <dx-html-editor height="600px" [(value)]="body">
+            <dx-html-editor height="400px" [(value)]="body">
               <dxo-toolbar>
                 <dxi-item name="undo"></dxi-item>
                 <dxi-item name="redo"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
-                <dxi-item name="size" [acceptedValues]="[
-                    '8pt',
-                    '10pt',
-                    '12pt',
-                    '14pt',
-                    '18pt',
-                    '24pt',
-                    '36pt'
-                  ]"></dxi-item>
-                <dxi-item name="font" [acceptedValues]="[
-                    'Arial',
-                    'Garamond',
-                    'Courier New',
-                    'Georgia',
-                    'Impact',
-                    'Lucida Console',
-                    'Tahoma',
-                    'Times New Roman',
-                    'Verdana'
-                  ]"></dxi-item>
+                <dxi-item name="size" [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
+                <dxi-item name="font" [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="bold"></dxi-item>
                 <dxi-item name="italic"></dxi-item>
@@ -116,11 +70,12 @@
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="alignLeft"></dxi-item>
                 <dxi-item name="alignCenter"></dxi-item>
-                <dxi-item name="alignRight"></dxi-item>
-                <dxi-item name="alignJustify"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="link"></dxi-item>
                 <dxi-item name="image"></dxi-item>
+                <dxi-item name="separator"></dxi-item>
+                <dxi-item name="alignRight"></dxi-item>
+                <dxi-item name="alignJustify"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="orderedList"></dxi-item>
                 <dxi-item name="bulletList"></dxi-item>
@@ -128,14 +83,8 @@
                 <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="color"></dxi-item>
-                <dxi-item name="background"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
-                <dxi-item name="link"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
-                <dxi-item name="clear"></dxi-item>
-                <dxi-item name="codeBlock"></dxi-item>
                 <dxi-item name="blockquote"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
+                <dxi-item name="clear"></dxi-item>
               </dxo-toolbar>
               <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
               <dxo-image-upload [tabs]="currentTab" fileUploadMode="base64">
@@ -145,31 +94,14 @@
         </mat-tab>
         <mat-tab label="Conclusion">
           <ng-template matTabContent>
-            <!-- <text-editor [valueContent]="conclusion"></text-editor> -->
-            <dx-html-editor height="600px" [(value)]="conclusion">
+
+            <dx-html-editor height="400px" [(value)]="conclusion">
               <dxo-toolbar>
                 <dxi-item name="undo"></dxi-item>
                 <dxi-item name="redo"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
-                <dxi-item name="size" [acceptedValues]="[
-                    '8pt',
-                    '10pt',
-                    '12pt',
-                    '14pt',
-                    '18pt',
-                    '24pt',
-                    '36pt'
-                  ]"></dxi-item>
-                <dxi-item name="font" [acceptedValues]="[
-                    'Arial',
-                    'Courier New',
-                    'Georgia',
-                    'Impact',
-                    'Lucida Console',
-                    'Tahoma',
-                    'Times New Roman',
-                    'Verdana'
-                  ]"></dxi-item>
+                <dxi-item name="size" [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
+                <dxi-item name="font" [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="bold"></dxi-item>
                 <dxi-item name="italic"></dxi-item>
@@ -178,6 +110,10 @@
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="alignLeft"></dxi-item>
                 <dxi-item name="alignCenter"></dxi-item>
+                <dxi-item name="separator"></dxi-item>
+                <dxi-item name="link"></dxi-item>
+                <dxi-item name="image"></dxi-item>
+                <dxi-item name="separator"></dxi-item>
                 <dxi-item name="alignRight"></dxi-item>
                 <dxi-item name="alignJustify"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
@@ -187,14 +123,8 @@
                 <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
                 <dxi-item name="separator"></dxi-item>
                 <dxi-item name="color"></dxi-item>
-                <dxi-item name="background"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
-                <dxi-item name="link"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
-                <dxi-item name="clear"></dxi-item>
-                <dxi-item name="codeBlock"></dxi-item>
                 <dxi-item name="blockquote"></dxi-item>
-                <dxi-item name="separator"></dxi-item>
+                <dxi-item name="clear"></dxi-item>
               </dxo-toolbar>
             </dx-html-editor>
           </ng-template>
@@ -221,11 +151,7 @@
     <button (click)="onImages()" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
       <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
     </button>
-    <button (click)="closeDialog()" mat-icon-button color="warn">
-      <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
-    </button>
   </div>
 </mat-card>
-</mat-drawer>
-  </div>
-  </div>
+</div>
+</div>
