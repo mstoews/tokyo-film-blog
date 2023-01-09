@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogResolver } from 'app/services/blog.resolver';
 import { BlogComponent } from '../blog.component';

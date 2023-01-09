@@ -34,82 +34,13 @@ import { IconsModule } from 'app/icons.module';
 import { InventoryImageSelectionComponent } from './inventory-grid/inventory-image-selection/inventory-image-selection.component';
 import { BlogbarComponent } from './blog-grid/blogbar/blogbar.component';
 import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
-import { ProductResolver } from 'app/services/product.resolver';
 import { HeaderComponent } from 'app/components/header/header.component';
 import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { BlogResolver } from 'app/services/blog.resolver';
 import { BlogEditComponent } from './blog-grid/blog-edit/blog-edit.component';
+import { AdminRouteModule } from './admin-route.module';
+import { ProductResolver } from 'app/services/product.resolver';
 
-const routes: Routes = [
-  {
-    path: '',
-    pathMatch: 'full',
-    title: 'Administration',
-    component: AdminShellComponent,
-  },
-  {
-    path: 'admin',
-    pathMatch: 'full',
-    title: 'Administration',
-    component: AdminFormComponent,
-    data: { state: 'admin' },
-  },
-  {
-    path: 'blog',
-    pathMatch: 'full',
-    title: 'Thoughts',
-    component: BlogGridComponent,
-    data: { state: 'blog' },
-  },
-  {
-    path: 'blog/:id',
-    title: 'Thoughts Edit',
-    component: BlogEditComponent,
-    resolve: {
-      product: BlogResolver,
-    },
-    data: { state: 'blog/:id' },
-  },
-  {
-    path: 'inventory',
-    title: 'Product Maintenance',
-    component: InventoryComponent,
-    data: { state: 'inventory' },
-  },
-  {
-    path: 'inventory/:id',
-    title: 'Product Edit',
-    component: ProductEditComponent,
-    resolve: {
-      product: ProductResolver,
-    },
-    data: { state: 'inventory/:id' },
-  },
-  {
-    path: 'category',
-    title: 'Category Maintenance',
-    component: CategoryGridComponent,
-    data: { state: 'category' },
-  },
-
-  {
-    path: 'inventory-selection',
-    pathMatch: 'full',
-    component: InventoryImageSelectionComponent,
-    data: { state: 'inventory-selection' },
-  },
-  {
-    path: 'gallery',
-    pathMatch: 'full',
-    component: GalleryComponent,
-    data: { state: 'gallery' },
-  },
-  {
-    path: '**',
-    pathMatch: 'full',
-    component: AdminComponent,
-  },
-];
 
 @NgModule({
   declarations: [
@@ -138,13 +69,14 @@ const routes: Routes = [
     BlogEditComponent,
   ],
   imports: [
+    AdminRouteModule,
     CommonModule,
     MaterialModule,
     DxDataGridModule,
     DxBulletModule,
     DxTemplateModule,
     NgImageSliderModule,
-    RouterModule.forChild(routes),
+    AdminRouteModule,
     FuseCardModule,
     GalleryLightboxModule,
     DxPopupModule,
@@ -155,5 +87,8 @@ const routes: Routes = [
     HeaderComponent,
   ],
   exports: [AdminComponent, OrdersGridComponent],
+  providers: [BlogResolver, ProductResolver
+  ]
+
 })
 export class AdminModule {}

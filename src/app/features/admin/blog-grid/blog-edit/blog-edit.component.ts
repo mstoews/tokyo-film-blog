@@ -3,7 +3,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from 'app/models/blog';
-import { CategoryService } from 'app/services/category.service';
 import { BlogService } from 'app/services/blog.service';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
@@ -18,42 +17,41 @@ export class BlogEditComponent implements OnInit{
   sTitle: any;
   blogGroup: any;
   blogImages$: any;
-  blog: any;
-  blogItem$: Observable<Blog>;
+
   sub: any;
   blogId: string;
-  @Input() para: string;
-  @Input() body: string;
-  @Input() conclusion: string;
+  para: string;
+  body: string;
+  conclusion: string;
+
+  blogItem: Observable<Blog>;
+  allBlogs$: Observable<Blog[]>;
+
+
+  blog!: Blog;
 
 
   constructor(
     private activateRoute: ActivatedRoute,
     private _location: Location,
-    private afs: AngularFirestore,
-    private readonly categoryService: CategoryService,
-    private readonly blogService:  BlogService,
+    private blogService:  BlogService,
     private fb: FormBuilder)
   {
-    this.createEmptyForm();
   }
 
-  ngOnInit() {
-    this.sTitle = 'Product Inventory and Images';
-    this.blog = this.activateRoute.snapshot.data["blog"];
-    this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
+  ngOnInit(): void {
+      var id: string;
+      this.blog = this.activateRoute.snapshot.data["blog"];
+      this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
 
-      // this.sub = this.activateRoute.params.subscribe((params) => {
-      // const blog = this.blogService.findBlogByUrl(params['id']);
       if (this.blog) {
-        this.blogItem$ = this.blog;
         this.blogId = this.blog.id
         this.para = this.blog.paragraph;
         this.body = this.blog.body;
         this.conclusion = this.blog.conclusion;
         this.createForm(this.blog);
         }
-    }
+  }
 
   onUpdate(data: Blog) {
     const dDate = new Date();

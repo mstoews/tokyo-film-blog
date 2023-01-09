@@ -16,6 +16,7 @@ export class BlogResolver implements Resolve<Blog | undefined> {
     state: RouterStateSnapshot
   ): Observable<Blog | undefined> {
     const id = route.paramMap.get('id') as string
-    return this.blogService.findBlogByUrl(id)
+    const blog = this.blogService.findBlogByUrl(id)
+    return blog;
   }
 }

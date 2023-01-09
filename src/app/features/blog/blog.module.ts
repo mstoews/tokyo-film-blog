@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { BlogComponent } from './blog.component';
-import { Routes, RouterModule } from '@angular/router';
 import { FashionComponent } from './fashion/fashion.component';
 import { DetailComponent } from './detail/detail.component';
 import { MaterialModule } from 'app/material.module';
