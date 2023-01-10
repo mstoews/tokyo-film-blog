@@ -37,6 +37,7 @@ import { BlogResolver } from 'app/services/blog.resolver';
 
 import { AdminRouteModule } from './admin-route.module';
 import { ProductResolver } from 'app/services/product.resolver';
+import { AddComponentDialog } from './inventory-grid/add/add.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { ProductResolver } from 'app/services/product.resolver';
 
     ProductEditComponent,
     AdminShellComponent,
+    AddComponentDialog,
 
   ],
   imports: [
@@ -80,6 +82,7 @@ import { ProductResolver } from 'app/services/product.resolver';
     NgOptimizedImage,
     IconsModule,
     HeaderComponent,
+
   ],
   exports: [AdminComponent, OrdersGridComponent],
   providers: [BlogResolver, ProductResolver],

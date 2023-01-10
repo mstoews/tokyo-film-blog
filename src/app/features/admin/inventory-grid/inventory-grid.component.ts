@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core'
-import { Observable } from 'rxjs'
+import { filter, Observable } from 'rxjs'
 import { ProductsService } from '../../../services/products.service'
 import { Product } from 'app/models/products'
 import { MatDrawer } from '@angular/material/sidenav'
@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog'
 import { IImageStorage } from 'app/models/maintenance'
 import { AngularFirestore } from '@angular/fire/compat/firestore'
 import { Router } from '@angular/router'
+import { BreakpointObserver } from '@angular/cdk/layout'
+import { AddComponentDialog, openAddComponentDialog } from './add/add.component'
 
 @Component({
   selector: 'inventory-list',
@@ -48,6 +50,8 @@ export class InventoryComponent implements OnInit {
     private afs: AngularFirestore,
     private readonly categoryService: CategoryService,
     private readonly productService: ProductsService,
+    private dialog: MatDialog,
+    private responsive: BreakpointObserver,
     private fb: FormBuilder
   ) {
     this.prd = this.productType
@@ -144,6 +148,10 @@ export class InventoryComponent implements OnInit {
     this.route.navigate(['admin/inventory', row.id]);
   }
 
+  rowHeight = '500px';
+
+  handsetPortrait = false;
+
   onOpenButtonClicked(event: any) {
     // console.log(JSON.stringify(event));
     this.route.navigate(['admin/inventory', event.id]);
@@ -194,8 +202,14 @@ export class InventoryComponent implements OnInit {
   }
 
   onAdd() {
-    // console.log('open drawer to add ... ');
-    this.openDrawer()
+    openAddComponentDialog(this.dialog, this.product)
+    .pipe(
+        filter(val => !!val)
+    )
+    .subscribe(
+        val => console.log('new course value:', val)
+    );
+
   }
 
   onCreate() {
