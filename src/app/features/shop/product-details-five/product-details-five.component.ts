@@ -9,8 +9,9 @@ import { CartService } from 'app/services/cart.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { CategoryService } from 'app/services/category.service';
 import { Category } from 'app/models/category';
-import { IImageStorage } from 'app/models/maintenance';
+// import { IImageStorage } from 'app/models/maintenance';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { imageItem } from 'app/models/imageItem';
 import { Cart } from 'app/models/cart';
 import {
   AngularFirestore,
@@ -30,7 +31,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   Categories$: Observable<Category[]>;
   sub: Subscription;
   cartCount = 0;
-  inventoryImages$: Observable<IImageStorage[]>;
+  // inventoryImages$: Observable<IImageStorage[]>;
+  inventoryImages$: Observable<imageItem[]>;
   imagesList: string[];
   cart: Observable<Cart[]>;
 
@@ -91,26 +93,26 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     this.inventoryImages$ = this.productService.getProductImage(this.productId);
 
-    this.inventoryImages$.subscribe((images) => {
-      if (images.length === 0) {
-        this.productItem$.subscribe((prdItem) => {
-          this.image1 = prdItem.image;
-        });
-      } else {
-        if (images.length > 0) {
-          this.image1 = images[0].url;
-        }
-        if (images.length > 1) {
-          this.image2 = images[1].url;
-        }
-        if (images.length > 2) {
-          this.image3 = images[2].url;
-        }
-        if (images.length > 3) {
-          this.image4 = images[3].url;
-        }
-      }
-    });
+    // this.inventoryImages$.subscribe((images) => {
+    //   if (images.length === 0) {
+    //     this.productItem$.subscribe((prdItem) => {
+    //       this.image1 = prdItem.image;
+    //     });
+    //   } else {
+    //     if (images.length > 0) {
+    //       this.image1 = images[0].imageSrc;
+    //     }
+    //     if (images.length > 1) {
+    //       this.image2 = images[1].imageSrc;
+    //     }
+    //     if (images.length > 2) {
+    //       this.image3 = images[2].imageSrc;
+    //     }
+    //     if (images.length > 3) {
+    //       this.image4 = images[3].imageSrc;
+    //     }
+    //   }
+    // });
   }
 
   onAddToWishList() {

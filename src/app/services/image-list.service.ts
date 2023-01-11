@@ -69,6 +69,27 @@ export class ImageListService {
     );
   }
 
+  getImagesByProductId(productId: string) {
+    return this.imageItems.pipe(
+      map((images) => images.filter((imageList) => imageList.parentId === productId))
+    );
+  }
+
+  findImagesByProductId(productId: string): Observable<imageItem | undefined> {
+    return this.afs
+      .collection('imageList', (ref) => ref.where('parentId', '==', productId))
+      .snapshotChanges()
+      .pipe(
+        map((snaps) => {
+          const caption = convertSnaps<imageItem>(snaps);
+          return caption.length == 1 ? caption[0] : undefined;
+        }),
+        first()
+      );
+  }
+
+
+
   findRawImageByUrl(caption: string): Observable<imageItem | undefined> {
     return this.afs
       .collection('imageList', (ref) => ref.where('caption', '==', caption))
@@ -163,12 +184,14 @@ export class ImageListService {
     });
   }
 
-  update(item: any, id: string) {
+  update(item: imageItem, id: string, productId: string) {
     // console.log(JSON.stringify(item));
+    item.parentId = id;
     this.ImageItemsCollection.doc(id).update(item);
   }
 
   updateInventory(item: imageItem, productId: string) {
+    item.parentId = productId;
     const imageCollectionRef = this.afs.collection(`inventory/${productId}/images`);
     imageCollectionRef.add(item);
   }

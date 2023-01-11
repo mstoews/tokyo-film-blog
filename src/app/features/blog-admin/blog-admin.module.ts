@@ -10,11 +10,13 @@ import { BlogEditRoutingModule } from './blog-routing.module';
 import { BlogAdminComponent } from './blog-grid.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { SafePipe } from './safe.pipe';
+import { BlogAddDialog } from './add/blog-add.component';
 
 @NgModule({
   declarations: [
     BlogEditComponent,
     BlogAdminComponent,
+    BlogAddDialog,
     SafePipe,],
   imports: [
     CommonModule,

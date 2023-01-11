@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { environment } from '../environments/environment.prod';
 import { CommonModule } from '@angular/common';
-import { NavService } from './shell/static-sidebar/nav-list-item/nav-service';
+import { NavService } from './main/static-sidebar/nav-list-item/nav-service';
 import { SharedModule } from './features/shared-module/shared.module';
 import { ScrollService } from './services/scroll.service';
 import { SwiperModule } from 'swiper/angular';

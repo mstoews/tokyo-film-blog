@@ -11,6 +11,7 @@ import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { imageItem } from 'app/models/imageItem';
+import { ImageListService } from 'app/services/image-list.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -43,7 +44,6 @@ export class ProductEditComponent implements OnInit {
   productItem$: Observable<Product>;
   IN_FEATURED = 'IN_INVENTORY';
 
-
   constructor(
     private matDialog: MatDialog,
     private activateRoute: ActivatedRoute,
@@ -51,6 +51,7 @@ export class ProductEditComponent implements OnInit {
     private afs: AngularFirestore,
     private readonly categoryService: CategoryService,
     private readonly productService: ProductsService,
+    private readonly imageListService: ImageListService,
     private fb: FormBuilder
   ) {
     // this.prd = this.productType;
@@ -72,39 +73,47 @@ export class ProductEditComponent implements OnInit {
       }
     });
 
-
     this.category$ = this.categoryService.getAll();
     this.category$.subscribe((result) => {
       this.categories = result;
     });
 
-    if (this.inventoryImages$){
-    this.inventoryImages$.subscribe((image) => {
-      image.forEach((img) => {
-        counter++;
-        const image: imageItem = {
-          parentId: this.productId,
-          imageSrc: img.url,
-          caption: img.name,
-          type: this.IN_FEATURED,
-          imageAlt: 'Inventory Image',
-          ranking: counter,
-
-        };
-        this.imageArray.push(image);
+    if (this.inventoryImages$) {
+      this.inventoryImages$.subscribe((image) => {
+        image.forEach((img) => {
+          counter++;
+          const image: imageItem = {
+            parentId: this.productId,
+            imageSrc: img.url,
+            caption: img.name,
+            type: this.IN_FEATURED,
+            imageAlt: 'Inventory Image',
+            ranking: counter,
+          };
+          this.imageArray.push(image);
+        });
       });
-     });
     }
   }
 
+  //  this.imageListService.getImagesByProductId(this.productId).subscribe((image: imageItem[])  => {
+  //    next:
+
+  //   });
+
+  onUpdate() {
+    const product = { ...this.prdGroup.value } as Product;
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
+    //data.date_updated = updateDate as FieldValue;
+    this.productService.update(product);
+  }
 
   createProduct(results: any) {
     const newProduct = { ...this.prdGroup.value } as Product;
     newProduct.image = results.data.url;
-    // Update the data for the product
     this.productService.update(newProduct);
     this.prdGroup.setValue(newProduct);
-    // update the images for the product
     this.afs
       .collection('inventory')
       .doc(newProduct.id)

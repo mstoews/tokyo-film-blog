@@ -7,6 +7,7 @@ import { first, map, Observable } from 'rxjs'
 import { Product } from 'app/models/products'
 import { convertSnaps } from './db-utils'
 import { IImageStorage } from 'app/models/maintenance'
+import { imageItem } from 'app/models/imageItem'
 
 @Injectable({
   providedIn: 'root',
@@ -41,9 +42,9 @@ export class ProductsService {
   }
 
   getProductImage(parentId: string): any {
-    var productImages: Observable<IImageStorage[]>
-    var productImagesCollection: AngularFirestoreCollection<IImageStorage>
-    productImagesCollection = this.afs.collection<IImageStorage>(
+    var productImages: Observable<imageItem[]>
+    var productImagesCollection: AngularFirestoreCollection<imageItem>
+    productImagesCollection = this.afs.collection<imageItem>(
       `inventory/${parentId}/images`
     )
     productImages = productImagesCollection.valueChanges({ idField: 'id' })

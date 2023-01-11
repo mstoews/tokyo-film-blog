@@ -38,6 +38,7 @@ import { BlogResolver } from 'app/services/blog.resolver';
 import { AdminRouteModule } from './admin-route.module';
 import { ProductResolver } from 'app/services/product.resolver';
 import { AddComponentDialog } from './inventory-grid/add/add.component';
+import { InventoryPreviewComponent } from './inventory-grid/inventory-preview/inventory-preview.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { AddComponentDialog } from './inventory-grid/add/add.component';
     ProductEditComponent,
     AdminShellComponent,
     AddComponentDialog,
+    InventoryPreviewComponent
 
   ],
   imports: [

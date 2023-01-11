@@ -170,7 +170,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
       let i = 1
       previousData.forEach((image) => {
         image.ranking = i
-        this.imageListService.update(image, image.id)
+        this.imageListService.update(image, image.id, '')
         i++
       })
     }
@@ -187,7 +187,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
       newData.forEach((image: any) => {
         image.ranking = i
         image.type = newContainerId
-        this.imageListService.update(image, image.id)
+        this.imageListService.update(image, image.id, '')
         i++
       })
     }

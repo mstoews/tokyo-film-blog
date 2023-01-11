@@ -1,0 +1,34 @@
+<mat-card>
+
+  <div class="edit-course-form">
+
+    <h2 mat-dialog-title>Add A New Thought</h2>
+
+    <mat-dialog-content [formGroup]="form">
+
+      <mat-form-field>
+        <input matInput placeholder="Thought Title" formControlName="title">
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="myDatepicker" formControlName="releasedAt">
+        <mat-datepicker-toggle matSuffix [for]="myDatepicker">
+        </mat-datepicker-toggle>
+        <mat-datepicker #myDatepicker></mat-datepicker>
+      </mat-form-field>
+
+    </mat-dialog-content>
+
+    <div mat-dialog-actions>
+      <button mat-icon-button (click)="save()" class="bg-gray-200 hover:text-white hover:bg-green-600" aria-label="Add"
+        [disabled]="!form.valid">
+        <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="close()" color="acsent" class="bg-gray-200 hover:text-white hover:bg-red-500">
+        <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+      </button>
+    </div>
+
+  </div>
+</mat-card>

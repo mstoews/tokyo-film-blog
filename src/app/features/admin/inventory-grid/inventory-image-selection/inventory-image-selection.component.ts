@@ -39,7 +39,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   featuredImages: imageItem[] = [];
   collectionsImages: imageItem[] = [];
   mainImages:     imageItem[] = [];
-  inventoryImages$: Observable<IImageStorage[]>;
+  inventoryImages$: Observable<imageItem[]>;
 
   constructor(
     public imageListService: ImageListService,
@@ -89,21 +89,6 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     this.Refresh();
   }
 
-  Clone() {
-    throw new Error('Method not implemented.');
-  }
-
-  Add() {}
-
-  Delete() {
-    throw new Error('Method not implemented.');
-  }
-
-  backToShop() {}
-
-  closeDrawer() {
-    throw new Error('Method not implemented.');
-  }
 
   onDelete(arg0: any) {
     throw new Error('Method not implemented.');
@@ -142,7 +127,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageListService.update(image, image.id);
+        this.imageListService.update(image, image.id, '');
         i++;
       });
     }
@@ -160,7 +145,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        this.imageListService.update(image, image.id);
+        this.imageListService.update(image, image.id, this.productId);
         if (image.type  === this.IN_COLLECTION)
         {
          if(currentIndex === i){

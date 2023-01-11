@@ -6,7 +6,7 @@ import {
   Optional,
   ViewChild,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { filter, Observable, Subscription } from 'rxjs';
 import { BlogService } from 'app/services/blog.service';
 import { Blog } from 'app/models/blog';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -18,6 +18,9 @@ import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
+import { openAddComponentDialog } from '../admin/inventory-grid/add/add.component';
+import { openBlogAddDialog } from './add/blog-add.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'blog-list',
@@ -68,6 +71,8 @@ export class BlogAdminComponent implements OnInit {
     private blogService: BlogService,
     private fb: FormBuilder,
     private route: Router,
+    private dialog: MatDialog,
+    private responsive: BreakpointObserver,
 
   ) {}
 
@@ -77,9 +82,11 @@ export class BlogAdminComponent implements OnInit {
   }
 
   onAdd(){
-    console.log('add new blog entry');
-    // this.route.navigate(['blog-admin/blog-admin', row.id]);
-  }
+      openBlogAddDialog(this.dialog, this.blog)
+        .pipe(filter((val) => !!val))
+        .subscribe((val) => console.log('new course value:', val));
+    }
+
 
   ngOnInit() {
     this.Refresh();
