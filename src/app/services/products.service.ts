@@ -48,7 +48,8 @@ export class ProductsService {
       `inventory/${parentId}/images`
     )
     productImages = productImagesCollection.valueChanges({ idField: 'id' })
-    return productImages
+    return productImages.pipe(
+      map((images) => images.filter((product) => product.parentId === parentId)));
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {
