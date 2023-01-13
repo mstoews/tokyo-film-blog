@@ -65,7 +65,7 @@ export class ImageListService {
   }
 
   getImagesByType(imageType: string) {
-    return this.imageItems.pipe(
+    return this.getImagesList().pipe(
       map((images) => images.filter((type) => type.type === imageType))
     );
   }
@@ -192,7 +192,7 @@ export class ImageListService {
     });
   }
 
- 
+
   update(item: imageItem, productId: string) {
     // console.log(JSON.stringify(item));
     item.parentId = productId;

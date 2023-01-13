@@ -20,7 +20,7 @@ export class InventoryPreviewComponent implements OnInit {
   ngOnInit() {
     console.log(this.product);
     if(this.product.id){
-      this.inventoryImages$ = this.productService.getProductImage(this.product.id);
+      this.inventoryImages$ = this.productService.getImageListByProduct(this.product.id);
     }
 
     if(this.inventoryImages$){

@@ -55,7 +55,7 @@ export class ProductsService {
   }
 
   getImageListByProduct(productId: string ){
-    return this.imageListService.getImagesByProductId(productId);
+    return this.imageListService.getImagesByType(productId)
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {

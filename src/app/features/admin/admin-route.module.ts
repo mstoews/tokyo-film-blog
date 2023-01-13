@@ -11,6 +11,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { InventoryComponent } from './inventory-grid/inventory-grid.component';
 import { InventoryImageSelectionComponent } from './inventory-grid/inventory-image-selection/inventory-image-selection.component';
 import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
+import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 
 const routes: Routes = [
   {
@@ -57,7 +58,7 @@ const routes: Routes = [
   {
     path: 'gallery',
     pathMatch: 'full',
-    component: GalleryComponent,
+    component: ImageMaintenanceComponent,
     data: { state: 'gallery' },
   },
   {
