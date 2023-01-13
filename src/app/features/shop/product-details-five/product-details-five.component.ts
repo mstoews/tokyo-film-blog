@@ -93,7 +93,9 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         );
       });
 
-    this.inventoryImages$ = this.productService.getProductImage(this.productId);
+    // this.inventoryImages$ = this.productService.getProductImage(this.productId);
+    this.inventoryImages$ = this.productService.getImageListByProduct(this.productId);
+
 
   }
 

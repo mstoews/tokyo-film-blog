@@ -192,11 +192,12 @@ export class ImageListService {
     });
   }
 
+ 
   update(item: imageItem, productId: string) {
     // console.log(JSON.stringify(item));
     item.parentId = productId;
     this.ImageItemsCollection.doc(productId).update(item);
-    this.updateInventory(item, productId)
+    //this.updateInventory(item, productId)
   }
 
   updateInventory(item: imageItem, productId: string) {

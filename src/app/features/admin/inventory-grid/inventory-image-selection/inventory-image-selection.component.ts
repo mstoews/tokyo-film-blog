@@ -61,25 +61,19 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
         this.not_usedImages = item;
       });
 
-      // this.subFeatured = this.imageListService
-      // .getImagesByType(this.IN_FEATURED)
-      // .subscribe((item) => {
-      //   this.featuredImages = item;
-      // });
+    this.subFeatured = this.imageListService
+      .getImagesByType(this.productId)
+      .subscribe((item) => {
+        this.featuredImages = item;
+      });
 
       // this.subFeatured = this.productService.getProductImage(this.productId).subscribe
 
-      // this list should be from the images of the products
-      this.subCollections = this.productService.getProductImage(this.productId).subscribe((item) => {
+      this.subCollections = this.imageListService
+      .getImagesByType(this.productId)
+      .subscribe((item) => {
         this.collectionsImages = item
       })
-
-      // this.subCollections = this.imageListService
-      // //.getImagesByTypeAndProductId(this.IN_COLLECTION, this.productId)
-      // .getImagesByType(this.IN_COLLECTION)
-      // .subscribe((item) => {
-      //   this.collectionsImages = item
-      // })
     // this.verifyArray()
   }
 
@@ -147,11 +141,12 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   ) {
     const cnt = newData.length;
     if (cnt > 0) {
-      let i = 0;
+      let i = 1;
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        this.imageListService.update(image, this.productId);
+        this.imageListService.updateImageList(image);
+        i++;
       });
 
     }

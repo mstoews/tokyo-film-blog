@@ -8,6 +8,7 @@ import { Product } from 'app/models/products'
 import { convertSnaps } from './db-utils'
 import { IImageStorage } from 'app/models/maintenance'
 import { imageItem } from 'app/models/imageItem'
+import { ImageListService } from './image-list.service'
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,8 @@ export class ProductsService {
   private productsCollection: AngularFirestoreCollection<Product>
   private inventoryItems: Observable<Product[]>
 
-  constructor(public afs: AngularFirestore) {
+  constructor(public afs: AngularFirestore,
+    private imageListService: ImageListService) {
     this.productsCollection = afs.collection<Product>('inventory')
     this.inventoryItems = this.productsCollection.valueChanges({ idField: 'id',  })
   }
@@ -50,6 +52,10 @@ export class ProductsService {
     productImages = productImagesCollection.valueChanges({ idField: 'id' })
     return productImages.pipe(
       map((images) => images.filter((product) => product.parentId === parentId)));
+  }
+
+  getImageListByProduct(productId: string ){
+    return this.imageListService.getImagesByProductId(productId);
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {
