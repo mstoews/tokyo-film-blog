@@ -17,6 +17,7 @@ import { WishListComponent } from './wishlist/wishlist.component';
 import { CartResolver } from 'app/services/cart.resolver';
 import { WishListResolver } from 'app/services/wishlist.resolver';
 import { HeaderComponent } from 'app/components/header/header.component';
+import { NotificationComponent } from 'app/components/notification/notification.component';
 
 const routes: Routes = [
   {
@@ -86,6 +87,7 @@ const routes: Routes = [
     MaterialModule,
     FuseCardModule,
     SharedModule,
+    NotificationComponent,
     RouterModule.forChild(routes),
     HeaderComponent
   ]

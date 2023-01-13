@@ -20,6 +20,7 @@ import {
   setDoc,
   OrderByDirection,
 } from '@angular/fire/firestore';
+import { TitleStrategy } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -67,6 +68,13 @@ export class ImageListService {
     return this.imageItems.pipe(
       map((images) => images.filter((type) => type.type === imageType))
     );
+  }
+
+  getImagesByTypeAndProductId(imageType: string, productId: string) {
+    console.log('Product id for filtering images', productId)
+    return this.imageItems.pipe(
+      map((images) => images.filter((type) => type.type === imageType).filter((prod) => prod.parentId === productId)
+    ));
   }
 
   getImagesByProductId(productId: string) {
@@ -184,10 +192,11 @@ export class ImageListService {
     });
   }
 
-  update(item: imageItem, id: string, productId: string) {
+  update(item: imageItem, productId: string) {
     // console.log(JSON.stringify(item));
-    item.parentId = id;
-    this.ImageItemsCollection.doc(id).update(item);
+    item.parentId = productId;
+    this.ImageItemsCollection.doc(productId).update(item);
+    this.updateInventory(item, productId)
   }
 
   updateInventory(item: imageItem, productId: string) {

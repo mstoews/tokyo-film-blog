@@ -9,14 +9,10 @@ import { CartService } from 'app/services/cart.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { CategoryService } from 'app/services/category.service';
 import { Category } from 'app/models/category';
-// import { IImageStorage } from 'app/models/maintenance';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { imageItem } from 'app/models/imageItem';
 import { Cart } from 'app/models/cart';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-product-details-five',
@@ -31,7 +27,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   Categories$: Observable<Category[]>;
   sub: Subscription;
   cartCount = 0;
-  // inventoryImages$: Observable<IImageStorage[]>;
+
   inventoryImages$: Observable<imageItem[]>;
   imagesList: string[];
   cart: Observable<Cart[]>;
@@ -49,17 +45,17 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private afs: AngularFirestore
   ) {}
 
-  image1: string;
-  image2: string;
-  image3: string;
-  image4: string;
+  mainImage: string;
   productIds: string[] = [];
   wishListIds: string[] = [];
 
   ngOnInit(): void {
+
     this.wishListIds = [];
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
+
+
 
     this.sub = this.activateRoute.params.subscribe((params) => {
       const prd = this.productService.findProductByUrl(params['id']);
@@ -68,6 +64,12 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         this.productId = params['id'];
       }
     });
+
+
+    this.productItem$.subscribe(productItem => {
+      this.mainImage = productItem.image;
+    })
+
     this.cartService
       .cartByUserId(this.authService.userData.uid)
       .subscribe((cart) => {
@@ -93,26 +95,10 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     this.inventoryImages$ = this.productService.getProductImage(this.productId);
 
-    // this.inventoryImages$.subscribe((images) => {
-    //   if (images.length === 0) {
-    //     this.productItem$.subscribe((prdItem) => {
-    //       this.image1 = prdItem.image;
-    //     });
-    //   } else {
-    //     if (images.length > 0) {
-    //       this.image1 = images[0].imageSrc;
-    //     }
-    //     if (images.length > 1) {
-    //       this.image2 = images[1].imageSrc;
-    //     }
-    //     if (images.length > 2) {
-    //       this.image3 = images[2].imageSrc;
-    //     }
-    //     if (images.length > 3) {
-    //       this.image4 = images[3].imageSrc;
-    //     }
-    //   }
-    // });
+  }
+
+  setImage(e: string) {
+    this.mainImage = e;
   }
 
   onAddToWishList() {
@@ -151,18 +137,6 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     if (this.cartCount > 0) {
       this.route.navigate(['shop/cart', this.authService.userData.uid]);
     }
-
-    // this.purchaseStarted = true
-
-    // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
-    //   (session) => {
-    //     this.checkoutService.redirectToCheckout(session)
-    //   },
-    //   (err) => {
-    //     // console.log('Error creating checkout session', err);
-    //     this.purchaseStarted = false
-    //   }
-    // )
   }
 
   ngOnDestroy() {

@@ -61,19 +61,25 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
         this.not_usedImages = item;
       });
 
-      this.subFeatured = this.imageListService
-      .getImagesByType(this.IN_FEATURED)
-      .subscribe((item) => {
-        this.featuredImages = item;
-      });
+      // this.subFeatured = this.imageListService
+      // .getImagesByType(this.IN_FEATURED)
+      // .subscribe((item) => {
+      //   this.featuredImages = item;
+      // });
 
       // this.subFeatured = this.productService.getProductImage(this.productId).subscribe
 
-      this.subCollections = this.imageListService
-      .getImagesByType(this.IN_COLLECTION)
-      .subscribe((item) => {
+      // this list should be from the images of the products
+      this.subCollections = this.productService.getProductImage(this.productId).subscribe((item) => {
         this.collectionsImages = item
       })
+
+      // this.subCollections = this.imageListService
+      // //.getImagesByTypeAndProductId(this.IN_COLLECTION, this.productId)
+      // .getImagesByType(this.IN_COLLECTION)
+      // .subscribe((item) => {
+      //   this.collectionsImages = item
+      // })
     // this.verifyArray()
   }
 
@@ -127,7 +133,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageListService.update(image, image.id, '');
+        this.imageListService.update(image, image.id);
         i++;
       });
     }
@@ -145,15 +151,9 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        this.imageListService.update(image, image.id, this.productId);
-        if (image.type  === this.IN_COLLECTION)
-        {
-         if(currentIndex === i){
-          this.imageListService.updateInventory(image, this.productId)
-        }
-       }
-        i++;
+        this.imageListService.update(image, this.productId);
       });
+
     }
   }
 

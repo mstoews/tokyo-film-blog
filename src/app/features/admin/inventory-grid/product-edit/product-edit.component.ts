@@ -96,11 +96,6 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
-  //  this.imageListService.getImagesByProductId(this.productId).subscribe((image: imageItem[])  => {
-  //    next:
-
-  //   });
-
   onUpdate() {
     const product = { ...this.prdGroup.value } as Product;
     const dDate = new Date();
@@ -165,29 +160,6 @@ export class ProductEditComponent implements OnInit {
   onBackToInventory() {
     this._location.back();
   }
-
-  // onOpenButtonClicked(event: any) {
-  //   var counter = 0;
-  //   this.imageArray = [];
-  //   this.inventoryImages$ = this.productService.getProductImage(event.id);
-  //   this.current_Url = event.image;
-  //   this.rich_description = event.rich_description;
-  //   this.updated_category = event.category;
-
-  //   this.inventoryImages$.subscribe((image) => {
-  //     image.forEach((img) => {
-  //       counter++;
-  //       const Image: IImageStorage = {
-  //         url: img.url,
-  //         name: img.name,
-  //         parentId: img.parentId,
-  //         version_no: counter,
-  //       };
-  //       this.imageArray.push(Image);
-  //     });
-  //   });
-  //   this.prdGroup.setValue(event);
-  // }
 
   public productType = {
     id: '',

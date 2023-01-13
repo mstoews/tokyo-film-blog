@@ -12,10 +12,7 @@ import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {
-  AddComponentDialog,
-  openAddComponentDialog,
-} from './add/add.component';
+import { openAddComponentDialog } from './add/add.component';
 
 @Component({
   selector: 'inventory-list',
@@ -40,9 +37,7 @@ export class InventoryComponent implements OnInit {
   updated_category: string;
   selectedItemKeys: string;
   categories: Category[];
-  imageArray: IImageStorage[] = [];
   inventoryImages$: Observable<IImageStorage[]>;
-
   allProducts$: Observable<Product[]>;
   category$: Observable<Category[]>;
   prd: any;
@@ -113,7 +108,6 @@ export class InventoryComponent implements OnInit {
 
   changeCategory(category: any) {
     this.updated_category = category;
-    // console.log(`update category ${this.updated_category}`);
   }
 
   ngOnInit() {
@@ -122,7 +116,6 @@ export class InventoryComponent implements OnInit {
     this.category$ = this.categoryService.getAll();
     this.category$.subscribe((result) => {
       this.categories = result;
-      // console.log(this.categories);
     });
   }
 

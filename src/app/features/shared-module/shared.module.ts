@@ -1,4 +1,3 @@
-import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -10,6 +9,7 @@ import { MenubarComponent } from 'app/components/menubar/menubar.component';
 import { SideNavComponent } from 'app/main/sidenav/sidenav.component';
 import { ShellComponent } from 'app/main/shell.component';
 import { NavItemComponent } from 'app/main/static-sidebar/nav-list-item/nav-item.component';
+import { NotificationComponent } from 'app/components/notification/notification.component';
 
 const components = [
   StaticSidebarComponent,
@@ -26,6 +26,7 @@ const modules = [
   RouterModule,
   MaterialModule,
   IconsModule,
+  NotificationComponent
 ];
 
 @NgModule({
