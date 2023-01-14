@@ -117,6 +117,7 @@ export class InventoryComponent implements OnInit {
     this.category$.subscribe((result) => {
       this.categories = result;
     });
+
   }
 
   onOpenRow(row: any) {
@@ -160,11 +161,7 @@ export class InventoryComponent implements OnInit {
     this.productService.update(data);
   }
 
-  onDelete(data: Product) {
-    data = this.prdGroup.getRawValue();
-    this.productService.delete(data.id.toString());
-  }
-
+  
   public productType = {
     id: '',
     description: '',

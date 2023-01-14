@@ -1,9 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { Category } from 'app/models/category';
 import { Product } from 'app/models/products';
 import { CategoryService } from 'app/services/category.service';
+import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
 
@@ -19,34 +21,50 @@ export class AddComponentDialog {
   categories: Category[];
   updated_category: string;
   category$: Observable<Category[]>;
-
-  form = this.fb.group({
-     description: [this.course.description, Validators.required],
-     category: [this.course.category,  Validators.required],
-     releasedAt: [new Date(), Validators.required],
-     longDescription: [this.course.rich_description, Validators.required]
-  });
+  form: FormGroup;
 
   constructor(private fb: FormBuilder,
-              @Inject(MAT_DIALOG_DATA) private course: Product ,
+              @Inject(MAT_DIALOG_DATA) private product: Product ,
+              private readonly productService : ProductsService,
               private readonly categoryService: CategoryService,
-              private dialogRef: MatDialogRef<AddComponentDialog>) {
+              private dialogRef: MatDialogRef<AddComponentDialog>,
+              private route: Router) {
 
-      this.description = course.description;
-
+              this.description = product.description;
+              this.createForm(product);
   }
 
   ngOnInit() {
-
     this.category$ = this.categoryService.getAll();
     this.category$.subscribe((result) => {
       this.categories = result;
     });
-
   }
 
-  save() {
+  createForm(prd: Product) {
 
+    this.form = this.fb.group({
+      id: [prd.id],
+      category: [prd.category,  Validators.required],
+      description: [prd.description, Validators.required],
+      date_created: [new Date(), Validators.required],
+      rich_description: [prd.rich_description, Validators.required],
+      image: [prd.image],
+      brand: [prd.brand],
+      price: [prd.price],
+      rating: [prd.rating],
+      is_featured: [prd.is_featured],
+      user_updated: [prd.user_updated],
+      date_updated: [prd.date_updated],
+    });
+  }
+
+  update(results: any) {
+    const newProduct = { ...this.form.value } as Product;
+    newProduct.image = '';
+    this.productService.create(newProduct);
+    this.form.setValue(newProduct);
+    this.close();
   }
 
   changeCategory(category: any) {

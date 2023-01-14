@@ -13,5 +13,5 @@ export interface Product {
   user_updated: string;
   date_created: FieldValue;
   date_updated: FieldValue;
-  imageUrls: imageItem[];
+  // imageUrls: imageItem[];
 }

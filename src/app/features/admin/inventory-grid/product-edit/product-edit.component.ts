@@ -67,8 +67,10 @@ export class ProductEditComponent implements OnInit {
         this.productItem$ = prd;
         this.productId = params['id'];
         this.productItem$.subscribe((prd) => {
-          this.rich_description = prd.rich_description;
-          this.createForm(prd);
+          if (prd !== undefined) {
+            this.rich_description = prd.rich_description;
+            this.createForm(prd);
+          }
         });
       }
     });
@@ -96,11 +98,17 @@ export class ProductEditComponent implements OnInit {
     }
   }
 
+  onDelete(data: Product) {
+    data = this.prdGroup.getRawValue();
+    this.productService.delete(data.id.toString());
+  }
+  
   onUpdate() {
     const product = { ...this.prdGroup.value } as Product;
     const dDate = new Date();
+    product.rich_description = this.rich_description;
     const updateDate = dDate.toISOString().split('T')[0];
-    //data.date_updated = updateDate as FieldValue;
+    // data.date_updated = updateDate as FieldValue;
     this.productService.update(product);
   }
 
