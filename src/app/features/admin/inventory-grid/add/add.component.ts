@@ -5,13 +5,9 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angu
 import { Router } from '@angular/router';
 import { Category } from 'app/models/category';
 import { ProductPartial } from 'app/models/products';
-import { AuthService } from 'app/services/auth/auth.service';
 import { CategoryService } from 'app/services/category.service';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
-
-
-
 
 @Component({
   selector: 'app-add',
@@ -31,34 +27,39 @@ export class AddComponentDialog {
               private readonly productService : ProductsService,
               private readonly categoryService: CategoryService,
               private dialogRef: MatDialogRef<AddComponentDialog>,
-              private afs: AngularFirestore,
-              private auth: AuthService,
               private route: Router) {
               this.description = product.description;
-              this.createForm(product);
+              this.createForm();
   }
 
   ngOnInit() {
-    this.productId = this.afs.createId();
     this.category$ = this.categoryService.getAll();
     this.category$.subscribe((result) => {
       this.categories = result;
     });
   }
 
-  createForm(prd: ProductPartial) {
+  createForm() {
     this.form = this.fb.group({
-      id: this.productId,
-      category: [prd.category,  Validators.required],
-      description: [prd.description, Validators.required],
-      date_created: [new Date(), Validators.required]
+      id: [''],
+      category: ['',  Validators.required],
+      description: ['', Validators.required],
+      rich_description:  ['', Validators.required],
+      date_created: ['', Validators.required]
     });
   }
 
+
+
   update(results: any) {
-    const rawData = this.form.getRawValue()
-    this.productService.updatePartial(rawData)
-    this.route.navigate(['admin/inventory', this.productId]);
+    const newProductPartial = { ...this.form.value } as ProductPartial
+    this.productService.createPartial(newProductPartial).then ( product => {
+      this.productId = product.id;
+      newProductPartial.id = this.productId;
+      this.productService.updatePartial (newProductPartial);
+      this.route.navigate(['admin/inventory', this.productId]);
+    })
+
     this.close();
   }
 
@@ -67,9 +68,7 @@ export class AddComponentDialog {
   }
 
   close() {
-
-      this.dialogRef.close();
-
+    this.dialogRef.close();
   }
 
 }

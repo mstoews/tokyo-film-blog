@@ -25,12 +25,15 @@ export class ProductsService {
     private imageListService: ImageListService
   ) {
     this.productsCollection = afs.collection<Product>('inventory');
-    this.inventoryItems = this.productsCollection.valueChanges({
-      idField: 'id',
-    });
+    this.inventoryItems = this.productsCollection.valueChanges({ idField: 'id'});
     this.productPartialCollection = afs.collection<ProductPartial>('inventory');
-    this.inventoryPartialItems = this.productPartialCollection.valueChanges({ idField: 'id',});
+    this.inventoryPartialItems = this.productPartialCollection.valueChanges({ idField: 'id'});
   }
+
+  createPartial(productPartial: ProductPartial){
+    return this.productPartialCollection.add(productPartial);
+  }
+
 
   getAll() {
     return this.inventoryItems;
@@ -107,6 +110,7 @@ export class ProductsService {
   update(mtProduct: Product) {
     this.productsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
+
 
   updatePartial(product: ProductPartial) {
     this.productPartialCollection.doc(product.id.toString()).update(product);

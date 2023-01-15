@@ -18,8 +18,9 @@ export interface Product {
 
 
 export interface ProductPartial {
-  id:   string;
+  id: string;
   description:   string;
+  rich_description: string;
   category:     string;
   date_created: string;
 }

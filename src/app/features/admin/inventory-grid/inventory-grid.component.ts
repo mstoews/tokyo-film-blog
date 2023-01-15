@@ -144,7 +144,8 @@ export class InventoryComponent implements OnInit {
   onAdd() {
     openAddComponentDialog(this.dialog, this.product)
       .pipe(filter((val) => !!val))
-      .subscribe((val) => console.log('new course value:', val));
+      .subscribe((val) => console.log('new inventory item', val));
+    
   }
 
   onCreate() {
@@ -161,7 +162,7 @@ export class InventoryComponent implements OnInit {
     this.productService.update(data);
   }
 
-  
+
   public productType = {
     id: '',
     description: '',
