@@ -30,7 +30,9 @@ export class InventoryPreviewComponent implements OnInit {
   ngOnInit() {
 
     if(this.product.id){
-
+      this.productService.findProductByUrl(this.product.id).subscribe(prd => {
+        this.product = prd;
+      })
     }
 
     if(this.product.id){

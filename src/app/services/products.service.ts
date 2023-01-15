@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { first, map, Observable } from 'rxjs';
+import { first, from, map, Observable } from 'rxjs';
 import { Product } from 'app/models/products';
 import { convertSnaps } from './db-utils';
 import { IImageStorage } from 'app/models/maintenance';
@@ -97,6 +97,7 @@ export class ProductsService {
 
   create(mtProduct: Product) {
     return this.productsCollection.add(mtProduct);
+    this.productsCollection.doc(mtProduct.id.toString()).set(mtProduct);
   }
 
   update(mtProduct: Product) {

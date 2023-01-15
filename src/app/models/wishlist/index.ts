@@ -11,6 +11,6 @@ export interface WishList {
   rating:       string;
   is_featured:  string;
   user_updated: string;
-  date_created: FieldValue;
-  date_updated: FieldValue;
+  date_created: string;
+  date_updated: string;
 }

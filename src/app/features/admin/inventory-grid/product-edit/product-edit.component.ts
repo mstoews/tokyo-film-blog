@@ -48,6 +48,7 @@ export class ProductEditComponent implements OnInit {
   constructor(
     private matDialog: MatDialog,
     private activateRoute: ActivatedRoute,
+    private route: Router,
     private _location: Location,
     private afs: AngularFirestore,
     private readonly categoryService: CategoryService,
@@ -102,6 +103,7 @@ export class ProductEditComponent implements OnInit {
   onDelete(data: Product) {
     data = this.prdGroup.getRawValue();
     this.productService.delete(data.id.toString());
+    this.route.navigate(['admin/inventory']);
   }
 
   onUpdate() {
@@ -193,7 +195,6 @@ export class ProductEditComponent implements OnInit {
       }
     });
   }
-
 
   public productType = {
     id: '',
