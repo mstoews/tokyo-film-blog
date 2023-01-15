@@ -4,11 +4,11 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { first, from, map, Observable } from 'rxjs';
-import { Product } from 'app/models/products';
+import { Product, ProductPartial } from 'app/models/products';
 import { convertSnaps } from './db-utils';
-import { IImageStorage } from 'app/models/maintenance';
 import { imageItem } from 'app/models/imageItem';
 import { ImageListService } from './image-list.service';
+import { TitleStrategy } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,9 @@ import { ImageListService } from './image-list.service';
 export class ProductsService {
   private productsCollection: AngularFirestoreCollection<Product>;
   private inventoryItems: Observable<Product[]>;
+
+  private productPartialCollection: AngularFirestoreCollection<ProductPartial>;
+  private inventoryPartialItems: Observable<ProductPartial[]>;
 
   constructor(
     public afs: AngularFirestore,
@@ -25,6 +28,8 @@ export class ProductsService {
     this.inventoryItems = this.productsCollection.valueChanges({
       idField: 'id',
     });
+    this.productPartialCollection = afs.collection<ProductPartial>('inventory');
+    this.inventoryPartialItems = this.productPartialCollection.valueChanges({ idField: 'id',});
   }
 
   getAll() {
@@ -96,13 +101,18 @@ export class ProductsService {
   }
 
   create(mtProduct: Product) {
-    return this.productsCollection.add(mtProduct);
-    this.productsCollection.doc(mtProduct.id.toString()).set(mtProduct);
+    return from(this.productsCollection.add(mtProduct));
   }
 
   update(mtProduct: Product) {
     this.productsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
+
+  updatePartial(product: ProductPartial) {
+    this.productPartialCollection.doc(product.id.toString()).update(product);
+  }
+
+
 
   delete(id: string) {
     this.productsCollection.doc(id).delete();

@@ -15,3 +15,11 @@ export interface Product {
   date_updated: string;
   // imageUrls: imageItem[];
 }
+
+
+export interface ProductPartial {
+  id:   string;
+  description:   string;
+  category:     string;
+  date_created: string;
+}
