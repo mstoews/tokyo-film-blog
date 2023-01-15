@@ -83,6 +83,9 @@
             <button mat-icon-button (click)="onDelete(product)" color="primary" [disabled]="!prdGroup.valid">
               <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
             </button>
+            <button (click)="onImages()" mat-icon-button color="primary">
+              <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
+            </button>
           </div>
         </ng-template>
       </mat-tab>

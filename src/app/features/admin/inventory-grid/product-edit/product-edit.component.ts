@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
 import { imageItem } from 'app/models/imageItem';
 import { ImageListService } from 'app/services/image-list.service';
+import { DndComponent } from 'app/components/loaddnd/dnd.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -102,7 +103,7 @@ export class ProductEditComponent implements OnInit {
     data = this.prdGroup.getRawValue();
     this.productService.delete(data.id.toString());
   }
-  
+
   onUpdate() {
     const product = { ...this.prdGroup.value } as Product;
     const dDate = new Date();
@@ -168,6 +169,31 @@ export class ProductEditComponent implements OnInit {
   onBackToInventory() {
     this._location.back();
   }
+
+  onImages() {
+    const parentId = this.prdGroup.getRawValue();
+    const dialogRef = this.matDialog.open(DndComponent, {
+      width: '500px',
+      data: {
+        parent: parentId.id,
+        location: 'blog',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result: any) => {
+      if (result === undefined) {
+        result = { event: 'Cancel' };
+      }
+      switch (result.event) {
+        case 'Create':
+          //this.create(result.data);
+          break;
+        case 'Cancel':
+          break;
+      }
+    });
+  }
+
 
   public productType = {
     id: '',

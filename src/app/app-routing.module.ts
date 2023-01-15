@@ -14,7 +14,7 @@ const routes: Route[] = [
    { path: 'home',
       loadChildren: () => import('./features/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
       data: { state: 'home' },
-      title: 'Make To',
+      title: 'Made To',
    },
    {
     path: 'authentication',
