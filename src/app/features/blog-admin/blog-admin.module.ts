@@ -11,11 +11,13 @@ import { BlogAdminComponent } from './blog-grid.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { SafePipe } from './safe.pipe';
 import { BlogAddDialog } from './add/blog-add.component';
+import { BlogImageSelectionComponent } from './blog-image-selection/blog-image-selection.component';
 
 @NgModule({
   declarations: [
     BlogEditComponent,
     BlogAdminComponent,
+    BlogImageSelectionComponent,
     BlogAddDialog,
     SafePipe,],
   imports: [

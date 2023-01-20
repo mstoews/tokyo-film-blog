@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Category } from 'app/models/category';
-import { Blog } from 'app/models/blog';
-import { Observable } from 'rxjs';
+import { Blog, BlogPartial } from 'app/models/blog';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { BlogService } from 'app/services/blog.service';
+import { Router } from '@angular/router';
 
 
 
@@ -16,14 +16,15 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 })
 export class BlogAddDialog {
   title: string;
-  form = this.fb.group({
-     title: [this.blog.title, Validators.required],
-     releasedAt: [new Date(), Validators.required],
-  });
+  blogId: string;
+  form: FormGroup;
+
 
   constructor(private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) private blog: Blog ,
+              private blogService: BlogService,
               private afs : AngularFireStorage,
+              private route: Router,
               private dialogRef: MatDialogRef<BlogAddDialog>) {
 
       this.title = blog.title;
@@ -31,12 +32,30 @@ export class BlogAddDialog {
   }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      title: [this.blog.title, Validators.required],
+      date_created: [new Date(), Validators.required],
+      id:  [''],
+   });
 
   }
 
   save() {
 
   }
+
+  update(results: any) {
+    const newBlog = { ...this.form.value } as BlogPartial
+    this.blogService.createPartial(newBlog).then ( blog => {
+      this.blogId = blog.id;
+      newBlog.id = this.blogId;
+      this.blogService.updatePartial (newBlog);
+      this.route.navigate(['blog-admin/blog-admin', this.blogId]);
+    })
+
+    this.close();
+  }
+
 
   close() {
 

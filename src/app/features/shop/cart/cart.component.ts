@@ -20,6 +20,7 @@ export class CartComponent implements OnInit, OnDestroy {
   shipping: number;
   grand_total: number;
   cartData: any;
+  purchaseStarted: boolean;
 
   constructor(
     private route: Router,
@@ -36,17 +37,12 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onCheckOut(){
-    this.route.navigate(['/shop/coming-soon']);
-    // this.purchaseStarted = true
-    // this.checkoutService.startProductCheckoutSession(this.productId).subscribe(
-    //   (session) => {
-    //     this.checkoutService.redirectToCheckout(session)
-    //   },
-    //   (err) => {
-    //     // console.log('Error creating checkout session', err);
-    //     this.purchaseStarted = false
-    //   }
-    // )
+    //this.route.navigate(['/shop/coming-soon']);
+    this.purchaseStarted = true
+    this.checkoutService.startProductCheckoutSession(this.userId).subscribe(checkoutSession =>
+      {
+        this.checkoutService.redirectToCheckout(checkoutSession);
+      })
   }
 
   calculateTotals(){

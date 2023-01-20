@@ -24,7 +24,7 @@ export class CheckoutService {
     afAuth.idToken.subscribe((jwt) => (this.jwtAuth = jwt))
   }
 
-  startProductCheckoutSession(productId: string): Observable<CheckoutSession> {
+  startProductCheckoutSession(userId: string): Observable<CheckoutSession> {
     console.log(`Start checkout service: ${environment.api.baseUrl} + /api/checkout`);
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -34,7 +34,7 @@ export class CheckoutService {
     return this.http.post<CheckoutSession>(
       environment.api.baseUrl + '/api/checkout',
       {
-        productId,
+        userId,
         callbackUrl: this.buildCallbackUrl(),
       },
       { headers }

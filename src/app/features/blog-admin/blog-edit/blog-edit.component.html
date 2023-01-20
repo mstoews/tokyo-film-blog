@@ -131,8 +131,9 @@
         </mat-tab>
         <mat-tab label="Images">
           <ng-container *ngIf="blogImages$ | async as data">
-            <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
-            </app-gallery-lightbox>
+            <!-- <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
+            </app-gallery-lightbox> -->
+            <blog-image-selection></blog-image-selection>
           </ng-container>
         </mat-tab>
       </mat-tab-group>
@@ -148,9 +149,9 @@
     <button (click)="onDelete(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
       <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
     </button>
-    <button (click)="onImages()" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
+    <!-- <button (click)="onImages()" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
       <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-    </button>
+    </button> -->
   </div>
 </mat-card>
 </div>

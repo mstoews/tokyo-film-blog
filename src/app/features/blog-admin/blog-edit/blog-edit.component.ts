@@ -29,7 +29,6 @@ export class BlogEditComponent implements OnInit{
   blogItem: Observable<Blog>;
   allBlogs$: Observable<Blog[]>;
 
-
   blog!: Blog;
 
 
@@ -48,7 +47,7 @@ export class BlogEditComponent implements OnInit{
       this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
 
       if (this.blog) {
-        this.blogId = this.blog.id
+        this.blogId = this. blog.id
         this.para = this.blog.paragraph;
         this.body = this.blog.body;
         this.conclusion = this.blog.conclusion;

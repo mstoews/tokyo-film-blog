@@ -16,6 +16,12 @@ export interface Blog {
   date_updated:     string;
 }
 
+export interface BlogPartial {
+  id: string;
+  title:   string;
+  date_created: string;
+}
+
 
 
 
