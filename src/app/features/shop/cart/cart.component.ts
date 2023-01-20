@@ -37,12 +37,12 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onCheckOut(){
-    //this.route.navigate(['/shop/coming-soon']);
-    this.purchaseStarted = true
-    this.checkoutService.startProductCheckoutSession(this.userId).subscribe(checkoutSession =>
-      {
-        this.checkoutService.redirectToCheckout(checkoutSession);
-      })
+    this.route.navigate(['/shop/coming-soon']);
+    // this.purchaseStarted = true
+    // this.checkoutService.startProductCheckoutSession(this.userId).subscribe(checkoutSession =>
+    //   {
+    //     this.checkoutService.redirectToCheckout(checkoutSession);
+    //   })
   }
 
   calculateTotals(){
