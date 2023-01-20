@@ -25,7 +25,7 @@ export class CheckoutService {
   }
 
   startProductCheckoutSession(userId: string): Observable<CheckoutSession> {
-    console.log(`Start checkout service: ${environment.api.baseUrl} + /api/checkout`);
+    //console.log(`Start checkout service: ${environment.api.baseUrl} + /api/checkout`);
     const headers = new HttpHeaders().set(
       'Authorization',
       this.jwtAuth as string

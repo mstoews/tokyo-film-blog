@@ -40,7 +40,7 @@ export class MenubarComponent implements OnInit {
   ngOnInit() {}
 
   formPartyRefChanged(partyRef: string) {
-    //  // console.log ('From MenuBarcomponent: ', partyRef);
+    // console.log ('From MenuBarcomponent: ', partyRef);
   }
 
   onDelete() {

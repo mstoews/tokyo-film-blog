@@ -25,7 +25,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   sTitle: any;
   currentImage: imageItem;
 
-  IN_NOT_USED = 'IN_NOT_USED';
+  IN_NOT_USED = 'IN_FEATURED';
   IN_FEATURED = 'IN_INVENTORY';
   IN_MAIN = 'IN_MAIN';
   IN_COLLECTION = 'IN_COLLECTION';
@@ -79,9 +79,9 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
   verifyArray()
   {
-    console.log(`Not used images: ${this.not_usedImages.length}`)
-    console.log(`Featured images: ${this.featuredImages.length}`)
-    console.log(`Main images: ${this.collectionsImages.length}`)
+    //console.log(`Not used images: ${this.not_usedImages.length}`)
+    //console.log(`Featured images: ${this.featuredImages.length}`)
+    //console.log(`Main images: ${this.collectionsImages.length}`)
   }
 
   ngOnInit() {

@@ -79,9 +79,9 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
 
   verifyArray()
   {
-    console.log(`Not used images: ${this.not_usedImages.length}`)
-    console.log(`Featured images: ${this.featuredImages.length}`)
-    console.log(`Main images: ${this.collectionsImages.length}`)
+    //console.log(`Not used images: ${this.not_usedImages.length}`)
+    //console.log(`Featured images: ${this.featuredImages.length}`)
+    //console.log(`Main images: ${this.collectionsImages.length}`)
   }
 
   ngOnInit() {

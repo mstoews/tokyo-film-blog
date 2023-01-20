@@ -29,8 +29,11 @@ export class SideNavComponent {
 
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(
       map((user) => { !!user;
+        if(user){
         this.userId = user.uid;
         return true;
+        } else
+        return false;
       })
     )
 

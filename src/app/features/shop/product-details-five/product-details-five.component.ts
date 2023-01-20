@@ -27,6 +27,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   Categories$: Observable<Category[]>;
   sub: Subscription;
   cartCount = 0;
+  product: Product;
 
   inventoryImages$: Observable<imageItem[]>;
   imagesList: string[];
@@ -55,21 +56,24 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
 
+    this.product = this.activateRoute.snapshot.data["product"];
+    this.productId = this.product.id;
+    this.mainImage = this.product.image;
+
+    // this.sub = this.activateRoute.params.subscribe((params) => {
+    //   const prd = this.productService.findProductByUrl(params['id']);
+    //   if (prd) {
+    //     this.productItem$ = prd;
+    //     this.productId = params['id'];
+    //   }
+    // });
 
 
-    this.sub = this.activateRoute.params.subscribe((params) => {
-      const prd = this.productService.findProductByUrl(params['id']);
-      if (prd) {
-        this.productItem$ = prd;
-        this.productId = params['id'];
-      }
-    });
+    // this.productItem$.subscribe(productItem => {
+    //   this.mainImage = productItem.image;
+    // })
 
-
-    this.productItem$.subscribe(productItem => {
-      this.mainImage = productItem.image;
-    })
-
+    if (this.authService.userData){
     this.cartService
       .cartByUserId(this.authService.userData.uid)
       .subscribe((cart) => {
@@ -77,7 +81,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         cart.forEach((item) => {
           this.productIds.push(item.product_id);
         });
-        console.log('Number of items in the cart: ', this.productIds.length);
+        //console.log('Number of items in the cart: ', this.productIds.length);
       });
 
     this.wishlistService
@@ -87,16 +91,15 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         wishlist.forEach((item) => {
           this.wishListIds.push(item.product_id);
         });
-        console.log(
-          'Number of items in the wishlist: ',
-          this.wishListIds.length
-        );
+        //console.log(
+        //  'Number of items in the wishlist: ',
+        //  this.wishListIds.length
+        //);
       });
+    }
 
     // this.inventoryImages$ = this.productService.getProductImage(this.productId);
     this.inventoryImages$ = this.productService.getImageListByProduct(this.productId);
-
-
   }
 
   setImage(e: string) {
@@ -142,6 +145,6 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.sub.unsubscribe();
+    //this.sub.unsubscribe();
   }
 }

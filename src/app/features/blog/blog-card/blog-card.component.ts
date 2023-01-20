@@ -20,9 +20,9 @@ export class BlogCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.blogImages$ = this.blogService.getBlogImage(this.blog.id)
-    console.log('on initialize...', this.blog.id);
+    //console.log('on initialize...', this.blog.id);
     this.blogImages$.subscribe(images => {
-      console.log(JSON.stringify(images));
+      //console.log(JSON.stringify(images));
     })
   }
 

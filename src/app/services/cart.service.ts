@@ -109,7 +109,7 @@ export class CartService {
   }
 
   create(mtCart: Cart) {
-    console.log('product id:', mtCart.id);
+    // console.log('product id:', mtCart.id);
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
     collectionRef.add(mtCart);
     this.snack.open('Selection has been added to your cart ...', 'Ok');

@@ -1,7 +1,7 @@
 ## up: starts all containers in the background without forcing build
 build:
 	@echo "Building site..."
-	ng build
+	ng build --prod
 	@echo "Finished started!"
 
 ## up_build: stops docker-compose (if running), builds all projects and starts docker compose

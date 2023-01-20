@@ -43,7 +43,7 @@ export class ShellComponent implements OnInit {
         if (res === true)
         {
           this.isLoggedIn = true;
-          console.log(this.authService.userData.uid);
+          //console.log(this.authService.userData.uid);
           this.cartService.cartByUserId(this.authService.userData.uid).subscribe(cart => {
             this.cartCount = cart.length;
           })

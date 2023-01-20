@@ -63,7 +63,7 @@ export class BlogAdminComponent implements OnInit {
 
   onBlogToggle(blog: Blog){
     this.selection.toggle(blog);
-    console.log(this.selection.selected);
+   // console.log(this.selection.selected);
 
   }
 

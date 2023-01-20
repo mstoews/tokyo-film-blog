@@ -42,7 +42,7 @@ export class ContactsComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(JSON.stringify(this.contactGroup.value));
+    // console.log(JSON.stringify(this.contactGroup.value));
     this.onUpdate(this.contactGroup.value)
   }
 
