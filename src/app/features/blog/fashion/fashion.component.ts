@@ -29,7 +29,7 @@ export class FashionComponent implements OnInit {
   ngOnInit(): void {
     this.blogImages$ = this.blogService.getBlogImage(this.blog.id)
     this.blogImages$.subscribe(images => {
-      console.log(JSON.stringify(images));
+      //console.log(JSON.stringify(images));
     })
   }
 

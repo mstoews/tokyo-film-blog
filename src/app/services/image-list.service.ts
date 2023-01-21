@@ -71,7 +71,7 @@ export class ImageListService {
   }
 
   getImagesByTypeAndProductId(imageType: string, productId: string) {
-    console.log('Product id for filtering images', productId)
+    //console.log('Product id for filtering images', productId)
     return this.imageItems.pipe(
       map((images) => images.filter((type) => type.type === imageType).filter((prod) => prod.parentId === productId)
     ));

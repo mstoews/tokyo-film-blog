@@ -20,7 +20,7 @@ export class ContactService {
   }
 
   create(contact: Contact) {
-    console.log(JSON.stringify(contact));
+   // console.log(JSON.stringify(contact));
 
     const contact_update = {
       id: '',
