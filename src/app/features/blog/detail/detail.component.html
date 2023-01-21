@@ -21,9 +21,9 @@
       </div>
 
 
-        <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 0">
+        <!-- <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 0">
           <img [ngSrc]="blogImages[0].imageSrc" width="400" height="600" alt="caps" class="rounded-lg " />
-        </div>
+        </div> -->
 
 
       <div class="gap-4 mt-6 lg:flex lg:mt-12 justify-evenly ">
@@ -31,7 +31,7 @@
           [innerHTML]="blog.body | safe: 'html'"></p>
       </div>
 
-        <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 0">
+        <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 1">
           <img [ngSrc]="blogImages[1].imageSrc" width="400" height="400" alt="caps" class="rounded-lg " />
         </div>
 

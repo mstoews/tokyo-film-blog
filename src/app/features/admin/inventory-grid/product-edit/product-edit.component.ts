@@ -101,6 +101,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onDelete(data: Product) {
+    
     data = this.prdGroup.getRawValue();
     this.productService.delete(data.id.toString());
     this.route.navigate(['admin/inventory']);

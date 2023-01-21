@@ -219,28 +219,6 @@ export class ImageListService {
   createRawImagesList() {
     var ranking = 0;
     this.storage
-      .ref('/inventory/800')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          imageRef.getDownloadURL().then((downloadURL) => {
-            ranking++;
-            const imageUrl = downloadURL;
-            const imageData: any = {
-              parentId: '',
-              caption: imageRef.fullPath,
-              type: 'IN_NOT_USED',
-              imageSrc: imageUrl,
-              imageAlt: imageRef.name,
-              ranking: ranking,
-              id: '',
-            };
-            this.createRawImage(imageData);
-          });
-        });
-      });
-
-    this.storage
       .ref('/800')
       .listAll()
       .subscribe((files) => {
@@ -261,27 +239,5 @@ export class ImageListService {
           });
         });
       });
-
-    this.storage
-      .ref('/uploaded/800')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          imageRef.getDownloadURL().then((downloadURL) => {
-            ranking++;
-            const imageUrl = downloadURL;
-            const imageData: any = {
-              parentId: '',
-              caption: imageRef.fullPath,
-              type: 'IN_NOT_USED',
-              imageSrc: imageUrl,
-              imageAlt: imageRef.name,
-              ranking: ranking,
-              id: '',
-            };
-            this.createRawImage(imageData);
-          });
-        });
-      });
-  }
+    }
 }
