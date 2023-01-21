@@ -22,7 +22,7 @@
 
 
         <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 0">
-          <img [ngSrc]="blogImages[0].url" width="400" height="600" alt="caps" class="rounded-lg " />
+          <img [ngSrc]="blogImages[0].imageSrc" width="400" height="600" alt="caps" class="rounded-lg " />
         </div>
 
 
@@ -31,9 +31,8 @@
           [innerHTML]="blog.body | safe: 'html'"></p>
       </div>
 
-
         <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 0">
-          <img [ngSrc]="blogImages[1].url" width="400" height="400" alt="caps" class="rounded-lg " />
+          <img [ngSrc]="blogImages[1].imageSrc" width="400" height="400" alt="caps" class="rounded-lg " />
         </div>
 
       <div class="gap-4 mt-6 lg:flex lg:mt-12 justify-evenly ">

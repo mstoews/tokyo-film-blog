@@ -130,10 +130,10 @@
           </ng-template>
         </mat-tab>
         <mat-tab label="Images">
-          <ng-container *ngIf="blogImages$ | async as data">
+          <ng-container>
             <!-- <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
             </app-gallery-lightbox> -->
-            <blog-image-selection></blog-image-selection>
+            <blog-image-selection [blogId]="blogId"></blog-image-selection>
           </ng-container>
         </mat-tab>
       </mat-tab-group>
@@ -143,9 +143,9 @@
     <button mat-icon-button (click)="onUpdate(blog)" color="primary" aria-label="Add">
       <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
     </button>
-    <button (click)="onCreate(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
+    <!-- <button (click)="onCreate(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
       <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
-    </button>
+    </button> -->
     <button (click)="onDelete(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
       <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
     </button>

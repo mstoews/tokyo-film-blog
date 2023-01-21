@@ -50,6 +50,8 @@ export class ImageListService {
     this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
   }
 
+
+
   getImagesList(): Observable<imageItem[]> {
     const imagesRef = collection(this.afs.firestore, 'imagelist');
     return collectionData(imagesRef, { idField: 'id' }) as Observable<imageItem[]>;
@@ -65,7 +67,7 @@ export class ImageListService {
   }
 
   getImagesByType(imageType: string) {
-    return this.getImagesList().pipe(
+    return this.imageItems.pipe(
       map((images) => images.filter((type) => type.type === imageType))
     );
   }

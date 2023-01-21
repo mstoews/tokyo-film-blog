@@ -1,6 +1,6 @@
     <div (click)="onOpenBlog(blog.id)" *ngIf="blogImages$ | async as images"
       class="relative bg-center bg-cover bg-no-repeat mb-40 w-11/12 mx-auto xl:w-full h-120">
-      <img [src]="images[0].url" alt="" class="h-full w-full object-cover overflow-hidden absolute rounded" />
+      <img [src]="images[0].imageSrc" alt="" class="h-full w-full object-cover overflow-hidden absolute rounded" />
       <div
         class="absolute bottom-0 w-11/12 ml-2 xl:mx-0 lg:mx-0 xl:w-6/12 lg:w-6/12 xl:ml-12 lg:ml-12 rounded-md lg:-mb-56 sm:-mb-48 -mb-64 xl:-mb-24">
         <div class="w-full py-5 px-6 bg-white shadow rounded">

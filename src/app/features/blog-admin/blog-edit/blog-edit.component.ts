@@ -18,7 +18,7 @@ export class BlogEditComponent implements OnInit{
   cRAG: any;
   sTitle: any;
   blogGroup: any;
-  blogImages$: any;
+  //blogImages$: any;
 
   sub: any;
   blogId: string;
@@ -44,7 +44,7 @@ export class BlogEditComponent implements OnInit{
   ngOnInit(): void {
       var id: string;
       this.blog = this.activateRoute.snapshot.data["blog"];
-      this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
+      //this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
 
       if (this.blog) {
         this.blogId = this. blog.id

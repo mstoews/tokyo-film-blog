@@ -7,6 +7,7 @@ import { first, map, Observable } from 'rxjs';
 import { Blog, BlogPartial } from 'app/models/blog';
 import { convertSnaps } from './db-utils';
 import { IImageStorage } from 'app/models/maintenance';
+import { ImageListService } from './image-list.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,11 @@ export class BlogService {
   private blogPartialItems: Observable<BlogPartial[]>
   private blogItems: Observable<Blog[]>;
 
-  constructor(public afs: AngularFirestore) {
+  constructor(
+    private afs: AngularFirestore,
+    private imageListService: ImageListService
+    ) {
+
     this.blogCollection = afs.collection<Blog>('blog');
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
@@ -25,11 +30,12 @@ export class BlogService {
   }
 
   getBlogImage(parentId: string): any {
-    var blogImages: Observable<IImageStorage[]>;
-    var blogImagesCollection: AngularFirestoreCollection<IImageStorage>;
-    blogImagesCollection = this.afs.collection<IImageStorage>(`blog/${parentId}/images`);
-    blogImages = blogImagesCollection.valueChanges({ idField: 'id' });
-    return blogImages;
+    return this.imageListService.getImagesByProductId(parentId);
+    // var blogImages: Observable<IImageStorage[]>;
+    // var blogImagesCollection: AngularFirestoreCollection<IImageStorage>;
+    // blogImagesCollection = this.afs.collection<IImageStorage>(`blog/${parentId}/images`);
+    // blogImages = blogImagesCollection.valueChanges({ idField: 'id' });
+    // return blogImages;
   }
 
   getAll() {

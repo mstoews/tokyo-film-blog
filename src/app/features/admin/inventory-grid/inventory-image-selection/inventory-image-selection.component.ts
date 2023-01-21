@@ -127,7 +127,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageListService.update(image, image.id);
+        this.imageListService.updateImageList(image);
         i++;
       });
     }

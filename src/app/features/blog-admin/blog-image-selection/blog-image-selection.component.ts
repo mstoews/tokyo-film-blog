@@ -19,7 +19,7 @@ import { ProductsService } from 'app/services/products.service';
   styleUrls: ['./blog-image-selection.component.css'],
 })
 export class BlogImageSelectionComponent implements OnInit, OnDestroy {
-  @Input() productId: string;
+  @Input() blogId: string;
   onUpdate: any;
   cRAG: any;
   sTitle: any;
@@ -51,8 +51,8 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
     // this.imageListService.createRawImagesList();
 
-    if(this.productId){
-      this.inventoryImages$ = this.productService.getProductImage(this.productId);
+    if(this.blogId){
+      this.inventoryImages$ = this.productService.getProductImage(this.blogId);
     }
 
     this.subNotUsed = this.imageListService
@@ -62,7 +62,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       });
 
     this.subFeatured = this.imageListService
-      .getImagesByType(this.productId)
+      .getImagesByType(this.blogId)
       .subscribe((item) => {
         this.featuredImages = item;
       });
@@ -70,7 +70,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       // this.subFeatured = this.productService.getProductImage(this.productId).subscribe
 
       this.subCollections = this.imageListService
-      .getImagesByType(this.productId)
+      .getImagesByType(this.blogId)
       .subscribe((item) => {
         this.collectionsImages = item
       })
@@ -127,7 +127,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageListService.update(image, image.id);
+        this.imageListService.updateImageList(image);
         i++;
       });
     }
