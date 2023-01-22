@@ -1,8 +1,9 @@
 <!-- <ng-container *ngIf="productItem$ | async as product"> -->
   <app-header  [title]="product.description"></app-header>
-  <div class="flex items-center justify-center w-full">
+  <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white px-4 py-12">
+    <div class="lg:flex justify-center gap-8">
     <div
-      class="flex flex-col items-start justify-start px-4 py-0 md:w-10/12 lg:w-8/12 xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
+      class="flex flex-col items-start justify-start px-4 py-0  xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
       <span> </span>
       <div
         class="flex flex-col items-start mt-5 space-y-8 jusitfy-start xl:items-center xl:flex-row xl:space-y-0 xl:space-x-8">
@@ -12,7 +13,7 @@
               <div
                 class="grid grid-cols-4 gap-y-2 md:gap-y-0 md:grid-cols-6 xl:grid-cols-1 justify-items-start gap-x-2 xl:gap-x-0 xl:gap-y-12">
                 <ng-container *ngFor="let p of inventory">
-                  <img (click)="setImage(p.imageSrc)" class="rounded-lg w-40" [ngSrc]="p.imageSrc" width="300" height="300" alt="p.description" />
+                  <img (click)="setImage(p.imageSrc)" class="rounded-lg w-40" [src]="p.imageSrc" width="300" height="300" alt="p.description" />
                 </ng-container>
               </div>
             </ng-container>
@@ -34,21 +35,21 @@
             <p class="mt-3 text-lg font-medium leading-5 text-gray-600 md:text-xl">
               ${{ product.price }}
             </p>
-            <div class="flex items-start w-full mt-10 space-x-4 jusitfy-start">
+            <div class="lg:flex items-start w-full mt-10">
               <button mat-raised-button
-                class="py-5 w-[30] text-base font-medium leading-4 text-center text-gray-800 bg-white border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black hover:text-white px-8"
+                class="py-7 w-full p-1 m-2 text-base font-medium text-center text-gray-800 bg-white border border-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black hover:text-white"
                 (click)="onAddToShoppingCart()">
                 Add to Cart
               </button>
 
               <button mat-raised-button
-                class="w-[30] py-5 text-base font-medium leading-4 text-center text-gray-800 bg-white border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black hover:text-white px-8"
+              class="py-7 w-full p-1 m-2 text-base font-medium text-center text-gray-800 bg-white border border-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black hover:text-white"
                 (click)="onAddToWishList()">
                 Wish List
               </button>
 
               <button mat-raised-button
-                class="w-auto py-5 text-base font-medium leading-4 text-center text-gray-800 bg-white border border-gray-800 xl:w-auto focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black hover:text-white px-8"
+              class="py-7 w-full p-1 m-2 text-base font-medium  text-center text-gray-800 bg-white border border-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-black hover:text-white"
                 (click)="onGoShoppingCart()">
                 Cart
               </button>
@@ -58,4 +59,5 @@
       </div>
     </div>
   </div>
+</div>
 <!-- </ng-container> -->

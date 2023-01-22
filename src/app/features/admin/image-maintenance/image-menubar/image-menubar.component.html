@@ -1,0 +1,29 @@
+<mat-toolbar class="text-white bg-gray-500 mb-1 text-2xl">
+  <button
+    class="m-2 text-1xl p-2"
+    mat-icon-button
+    matTooltip="Toggle"
+    aria-label="menu">
+    Image Maintenance 
+  </button>
+
+  <!-- menu selected -->
+  <mat-menu class="side-nav" #menu="matMenu">
+  </mat-menu>
+
+    <span class="flex-1"></span>
+    <button (click)="onClickRefresh()" mat-icon-button  matTooltip="Refresh Grid"  aria-label="refresh">
+      <mat-icon class="side-nav__icon" [svgIcon]="'heroicons_outline:refresh'" ></mat-icon>
+    </button>
+    <button (click)="onClickClone()" mat-icon-button matTooltip="Clone" aria-label="Clone">
+      <mat-icon [svgIcon]="'mat_outline:content_copy'" ></mat-icon>
+    </button>
+    <button (click)="onClickAdd()" mat-icon-button matTooltip="Add" aria-label="Add">
+      <mat-icon class="side-nav__icon" [svgIcon]="'mat_outline:note_add'" ></mat-icon>
+    </button>
+    <button (click)="onClickDelete()" mat-icon-button matTooltip="Delete" aria-label="Delete">
+      <mat-icon class="side-nav__icon" [svgIcon]="'heroicons_outline:trash'" ></mat-icon>
+    </button>
+
+</mat-toolbar>
+

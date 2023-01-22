@@ -14,7 +14,7 @@ export class SignUpModernComponent implements OnInit {
   @ViewChild('signUpNgForm') signUpNgForm!: NgForm;
 
   alert: {type: FuseAlertType;
-          message: string} = {type: 'success', message: ''};
+          message: string} = {type: 'success', message: 'Registration is successful'};
   signUpForm!: UntypedFormGroup;
   showAlert: boolean = false;
 

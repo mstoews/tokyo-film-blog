@@ -97,11 +97,11 @@
         (click)="onClickAboutUs()">
         <!-- Image -->
 
-        <img [ngSrc]="about_us" width="800" height="800" alt="features"
+        <img [src]="about_us" width="800" height="800" alt="features"
           class="hidden duration-200 w-400 md:block group-hover:scale-110" />
         <!-- Mobile Image -->
 
-        <img [ngSrc]="about_us" width="400" height="400" alt="features" class="w-full md:hidden" />
+        <img [src]="about_us" width="400" height="400" alt="features" class="w-full md:hidden" />
 
         <!-- Text Container -->
         <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20">
@@ -146,7 +146,7 @@
         <!-- Item 1 -->
         <div class="group item" (click)="onServices('home/tailoring')">
           <!-- Desktop Image -->
-          <img [ngSrc]="services_one" width="300" height="400" alt=""
+          <img [src]="services_one" width="300" height="400" alt=""
             class="hidden duration-200 h-120 md:block group-hover:scale-110" />
           <!-- Mobile Image -->
           <img [src]="services_one" alt="services" class="w-full md:hidden" />
@@ -159,7 +159,7 @@
         <!-- Item 2 -->
         <div class="group item" (click)="onServices('home/knitting')">
           <!-- Desktop Image -->
-          <img [ngSrc]="services_two" width="300" height="400" alt=""
+          <img [src]="services_two" width="300" height="400" alt=""
             class="hidden duration-200 h-120 md:block group-hover:scale-110" />
           <!-- Mobile Image -->
           <img [src]="services_two" alt="" class="w-full md:hidden" />
@@ -172,7 +172,7 @@
         <!-- Item 3 -->
         <div class="group item" (click)="onServices('home/repairs')">
           <!-- Desktop Image -->
-          <img [ngSrc]="services_three" width="300" height="400" alt=""
+          <img [src]="services_three" width="300" height="400" alt=""
             class="hidden duration-200 h-120 md:block group-hover:scale-110" />
           <!-- Mobile Image -->
           <img [src]="services_three" alt="" class="w-full md:hidden" />
@@ -185,7 +185,7 @@
         <!-- Item 4 -->
         <div class="group item" (click)="onServices('home/ready-to-wear')">
           <!-- Desktop Image -->
-          <img [ngSrc]="services_four" width="300" height="400" alt=""
+          <img [src]="services_four" width="300" height="400" alt=""
             class="hidden duration-200 h-120 md:block group-hover:scale-110" />
           <!-- Mobile Image -->
           <img [src]="services_four" alt="" class="w-full md:hidden" />
@@ -246,7 +246,7 @@
 
   <!-- <section id="swipe" class="scroll-mt-20">
     <div class="container max-w-7xl px-6 mx-auto my-16 text-gray-900 md:px-0">
-      Creations Header 
+      Creations Header
       <div class="relative justify-center my-1 mb-20 md:justify-between">
         <p class="text-4xl text-center uppercase font-garamond md:text-left md:text-5xl">
           Images

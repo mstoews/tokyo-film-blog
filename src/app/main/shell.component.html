@@ -89,13 +89,13 @@
           </a>
         </div>
 
-        <div *ngIf="!isLoggedIn">
+        <!-- <div *ngIf="!isLoggedIn">
           <a mat-menu-item routerLink="/authentication/sign-up/modern"
           class="bg-gray-500 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200"         >
             <mat-icon class="text-gray-300" [svgIcon]="'heroicons_outline:user-add'"> </mat-icon>
             <span class="text-gray-300">Register</span>
           </a>
-        </div>
+        </div> -->
 
         <div *ngIf="isLoggedIn">
           <a mat-menu-item routerLink="profile"

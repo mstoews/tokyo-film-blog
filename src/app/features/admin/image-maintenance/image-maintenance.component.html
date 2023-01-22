@@ -1,10 +1,11 @@
 
 <div class="h-screen">
-  
+
   <mat-drawer-container>
     <mat-drawer class="w-3/8 lg:w-3/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'" [disableClose]="false">
     </mat-drawer>
     <mat-drawer-content>
+      <app-image-menubar></app-image-menubar>
       <div cdkDropListGroup class="grid grid-cols-5 gap-4">
         <!-- NOT_USED -->
         <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>

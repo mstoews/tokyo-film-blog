@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ɵconvertToBitFlags,
+} from '@angular/core';
 import { Product } from 'app/models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/services/products.service';
@@ -28,6 +33,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   sub: Subscription;
   cartCount = 0;
   product: Product;
+  isLoggedIn$: Observable<boolean>;
 
   inventoryImages$: Observable<imageItem[]>;
   imagesList: string[];
@@ -49,57 +55,42 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   mainImage: string;
   productIds: string[] = [];
   wishListIds: string[] = [];
+  loggedIn: boolean = false;
 
   ngOnInit(): void {
-
     this.wishListIds = [];
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
+    this.authService.getAuth().subscribe((access) => {
+      this.loggedIn = access;
+    });
 
-    this.product = this.activateRoute.snapshot.data["product"];
+    this.product = this.activateRoute.snapshot.data['product'];
     this.productId = this.product.id;
     this.mainImage = this.product.image;
 
-    // this.sub = this.activateRoute.params.subscribe((params) => {
-    //   const prd = this.productService.findProductByUrl(params['id']);
-    //   if (prd) {
-    //     this.productItem$ = prd;
-    //     this.productId = params['id'];
-    //   }
-    // });
-
-
-    // this.productItem$.subscribe(productItem => {
-    //   this.mainImage = productItem.image;
-    // })
-
-    if (this.authService.userData){
-    this.cartService
-      .cartByUserId(this.authService.userData.uid)
-      .subscribe((cart) => {
-        this.cartCount = cart.length;
-        cart.forEach((item) => {
-          this.productIds.push(item.product_id);
+    if (this.authService.userData) {
+      this.cartService
+        .cartByUserId(this.authService.userData.uid)
+        .subscribe((cart) => {
+          this.cartCount = cart.length;
+          cart.forEach((item) => {
+            this.productIds.push(item.product_id);
+          });
         });
-        //console.log('Number of items in the cart: ', this.productIds.length);
-      });
 
-    this.wishlistService
-      .wishListByUserId(this.authService.userData.uid)
-      .subscribe((wishlist) => {
-        this.cartCount = wishlist.length;
-        wishlist.forEach((item) => {
-          this.wishListIds.push(item.product_id);
+      this.wishlistService
+        .wishListByUserId(this.authService.userData.uid)
+        .subscribe((wishlist) => {
+          this.cartCount = wishlist.length;
+          wishlist.forEach((item) => {
+            this.wishListIds.push(item.product_id);
+          });
         });
-        //console.log(
-        //  'Number of items in the wishlist: ',
-        //  this.wishListIds.length
-        //);
-      });
     }
-
-    // this.inventoryImages$ = this.productService.getProductImage(this.productId);
-    this.inventoryImages$ = this.productService.getImageListByProduct(this.productId);
+    this.inventoryImages$ = this.productService.getImageListByProduct(
+      this.productId
+    );
   }
 
   setImage(e: string) {
@@ -107,30 +98,42 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onAddToWishList() {
-    const found = this.wishListIds.find((item) => {
-      return item === this.productId;
-    });
-    if (found) {
-      this.snackBar.open(
-        'The item already exists in your wishlist ... ',
-        'Close'
-      );
-      return;
-    } else {
-      this.wishlistService.createWishList(this.productId);
-      this.wishListIds.push(this.productId);
+    if (this.loggedIn === true) {
+      const found = this.wishListIds.find((item) => {
+        return item === this.productId;
+      });
+      if (found) {
+        this.snackBar.open(
+          'The item already exists in your wishlist ... ',
+          'Close'
+        );
+        return;
+      } else {
+        this.wishlistService.createWishList(this.productId);
+        this.wishListIds.push(this.productId);
+      }
+    }
+    else {
+      this.route.navigate(['shop/coming-soon']);
     }
   }
 
   onAddToShoppingCart() {
-    const found = this.productIds.find((item) => {
-      return item === this.productId;
-    });
-    if (found) {
-      this.snackBar.open('The item already exists in your cart ... ', 'Close');
-      return;
+    if (this.loggedIn === true) {
+      const found = this.productIds.find((item) => {
+        return item === this.productId;
+      });
+      if (found) {
+        this.snackBar.open(
+          'The item already exists in your cart ... ',
+          'Close'
+        );
+        return;
+      } else {
+        this.wishlistService.addToCart(this.productId);
+      }
     } else {
-      this.wishlistService.addToCart(this.productId);
+      this.route.navigate(['shop/coming-soon']);
     }
   }
 
@@ -139,8 +142,12 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-    if (this.cartCount > 0) {
-      this.route.navigate(['shop/cart', this.authService.userData.uid]);
+    if (this.loggedIn === true) {
+      if (this.cartCount > 0) {
+        this.route.navigate(['shop/cart', this.authService.userData.uid]);
+      }
+    } else {
+      this.route.navigate(['/shop']);
     }
   }
 

@@ -54,6 +54,7 @@ export class ProductEditComponent implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly productService: ProductsService,
     private readonly imageListService: ImageListService,
+    public dialog: MatDialog,
     private fb: FormBuilder
   ) {
     // this.prd = this.productType;
@@ -101,7 +102,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onDelete(data: Product) {
-    
+
     data = this.prdGroup.getRawValue();
     this.productService.delete(data.id.toString());
     this.route.navigate(['admin/inventory']);
