@@ -98,11 +98,6 @@
           <input matInput type="email" formControlName="email" required />
         </mat-form-field>
 
-        <mat-form-field class="p-2 flex-col w-full" appearance="fill">
-          <mat-label>Phone</mat-label>
-          <input matInput type="phone" formControlName="phone" />
-        </mat-form-field>
-
         <mat-form-field hintLabel="Min 15 characters: " class="p-2 flex-col w-full" appearance="fill">
           <mat-label>Message</mat-label>
           <input matInput #input maxlength="100" formControlName="message" required />
@@ -110,7 +105,7 @@
         </mat-form-field>
 
         <button class="-mr-10 p-6 w-full" type="submit" [disabled]="!contactGroup.valid" mat-raised-button color="primary">
-          Send
+          Send your message
           <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
         </button>
       </form>
