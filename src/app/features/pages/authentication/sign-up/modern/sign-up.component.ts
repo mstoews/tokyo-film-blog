@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {NgForm, UntypedFormBuilder, UntypedFormGroup, Validators} from '@angular/forms';
+import { Router } from '@angular/router';
 import {fuseAnimations} from '@fuse/animations';
 import {FuseAlertType} from '@fuse/components/alert';
 
@@ -22,7 +23,8 @@ export class SignUpModernComponent implements OnInit {
    * Constructor
    */
   constructor(
-      private _formBuilder: UntypedFormBuilder) {}
+      private _formBuilder: UntypedFormBuilder,
+      private _router: Router) {}
 
   // -----------------------------------------------------------------------------------------------------
   // @ Lifecycle hooks
@@ -49,5 +51,7 @@ export class SignUpModernComponent implements OnInit {
   /**
    * Sign in
    */
-  signUp(): void {}
+  signUp(): void {
+    this._router.navigate(['/shop/coming-soon']);
+  }
 }

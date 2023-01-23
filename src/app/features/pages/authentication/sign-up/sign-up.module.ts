@@ -48,7 +48,11 @@ const routes: Routes = [
             {
                 path     : 'fullscreen-reversed',
                 component: SignUpFullscreenReversedComponent
-            }
+            },
+            {
+              path     : '**',
+              redirectTo: '/home'
+          }
         ]
     }
 ];
