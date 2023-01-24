@@ -117,11 +117,6 @@ export class CategoryGridComponent implements OnInit {
     }
   }
 
-  Add() {
-    // console.log('open drawer to add ... ');
-    this.openDrawer()
-  }
-
   Delete() {
     // console.log('open drawer to delete ... ');
     this.openDrawer()

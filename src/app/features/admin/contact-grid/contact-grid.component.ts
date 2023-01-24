@@ -195,7 +195,6 @@ export class ContactGridComponent implements OnInit {
       name: [contact.name],
       email: [contact.email],
       message: [contact.message],
-      phone: [contact.phone],
     })
   }
 }

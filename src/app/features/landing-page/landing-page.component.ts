@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core'
 
 import { MatDialog } from '@angular/material/dialog'
-import { Router } from '@angular/router'
+import { Router, TitleStrategy } from '@angular/router'
 import { DndComponent } from '../../components/loaddnd/dnd.component'
 import { ScrollService } from 'app/services/scroll.service'
 import { animate, style, transition, trigger } from '@angular/animations'
@@ -70,6 +70,23 @@ export class LandingPageComponent implements OnInit {
       if (doc.length > 0) {
         this.mainPageDoc = doc[0]
         this.titleMessage = this.mainPageDoc.hero_title
+      }
+      else {
+
+        var document = {
+          id: 1,
+          hero_title: 'There should be something at the tope of the HERO',
+          features_header: 'Header',
+          features_subheader: 'Sub Title',
+          cta_left: 'Left',
+          cta_right:  'Right',
+          contact_email: 'Joey',
+          contact_telephone: '555-1212',
+          contact_shipping: 'Shipping',
+          active: true,
+        }
+        this.mainPageDoc = document;
+        this.titleMessage = document.hero_title;
       }
     })
     this.createEmptyForm()

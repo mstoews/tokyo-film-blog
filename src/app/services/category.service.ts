@@ -20,7 +20,7 @@ export class CategoryService {
   }
 
   create(category: Category) {
-    this.categoryCollection.add(category);
+    return this.categoryCollection.add(category);
   }
 
   update(category: Category) {

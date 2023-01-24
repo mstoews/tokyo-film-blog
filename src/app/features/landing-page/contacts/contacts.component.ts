@@ -8,6 +8,8 @@ import { Contact } from 'app/models/contact';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { sendEmailVerification } from 'firebase/auth';
+import { ContactService } from 'app/services/contact.service';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
@@ -26,7 +28,8 @@ export class ContactsComponent implements OnInit {
       private fb: FormBuilder,
       private mainPageService: MainPageService,
       private _snackBar: MatSnackBar,
-      private http: HttpClient
+      private http: HttpClient,
+      private contactService: ContactService
       )
   {
     this.createForm();
@@ -48,18 +51,24 @@ export class ContactsComponent implements OnInit {
 
   onUpdate(contact: Contact) {
 
-    //this.contactService.create(contact);
-    this.http.post<any>(environment.api.createMessage, {
-      name: contact.name,
-      email: contact.email,
-      message : contact.message,
-      phone: contact.phone
-    }).subscribe((response: any) => {
-          this._snackBar.open(response.message, 'OK', {
-            duration: 2000
-          });
-          this.contactGroup.reset();
-    });
+    this.contactService.create(contact);
+    this.contactGroup.reset();
+    this._snackBar.open('Connect message has been received, thank you', 'OK', {
+              duration: 2000
+            });
+
+
+    // this.http.post<any>(environment.api.createMessage, {
+    //   name: contact.name,
+    //   email: contact.email,
+    //   message : contact.message,
+
+    // }).subscribe((response: any) => {
+    //       this._snackBar.open(response.message, 'OK', {
+    //         duration: 2000
+    //       });
+    //       this.contactGroup.reset();
+    // });
   }
 
   scrollToId() {
@@ -76,7 +85,6 @@ export class ContactsComponent implements OnInit {
         [Validators.required,
         Validators.email]
       ],
-      phone: [''],
       message: ['',
         [Validators.required,
           Validators.minLength(15),

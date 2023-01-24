@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { environment } from '../environments/environment.prod';
+import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
 import { NavService } from './main/static-sidebar/nav-list-item/nav-service';
 import { SharedModule } from './features/shared-module/shared.module';

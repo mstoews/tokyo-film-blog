@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "made-to-cassie",
+  "private_key_id": "1371bcd0987e0180e3e913862edca749e80bc105",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDUkEJ5D9nwIi1K\nYB/ZGUoAYoEpzncLx0We0Nn1GEZBVDfz7A4uC3r1G7i+U4u1E01oJP0M66TQVrrk\nzKjywvJhY3pXSew5CNccofv7kat4tp2tsDS8BWqbXuNcLEloK/JLNn0Qbq5GBjru\n7jGYX4qjdQYngZxP7tm4ZhhdheIc56u1c0zf4RSK9XQfce5FOPIyykEGNrcPFrak\nRqAVZaCsi6ZSAbp/vFFs7l9Wh1HMECbNJmYIABtKoSjkqBx7JVYH+ywg/bd3/0E1\nOjM0UXFlV67jFR/mEOcFixLk3/LGyorY7Hu8amd72JpNsEg6m1vKBnczZ7KIjnwv\nj2PVqNZNAgMBAAECggEAB34GOcorPmGWAxccSESx7Q2Ly/NxEsM1WwG1jQQMBeV4\nC2r4nPrenKEbg+nh9MH3aoJTQQ9VQdqsv7/O/K+OZ4xgFY+PefsryeCTxyw9RQX6\nzNJ3KWFvfoZ7sRYGiFt0MN58zgV4sxMpJJ7UtLA5bMWFMANLhS3AEtXWagV8ENSx\nIFkCEEnOZcomVSURQCHGhNjnFYBwny97ZCwbIYM18SZruxQsvi/OGAWBilsqZUFJ\n0UuQ4GbQCDKEMt+1eU9d1jVHY1z1oCSIvYDNy5kzVEb/6+5r6JCn6awYUXY5e3K2\nH2RQrWuSWG6koDRngwUrGIzQu3l7Ni9wA5wrrM86KQKBgQD+3zpXKGysN4nuCL5t\na4i471k7+eRAO1ClwlODflwnDtc3y1izrFZiSItPS8d1pIPaO4130dUYLC0S8THm\nMwPvpYqfhp7IL1WP5FGLgQsL/NSIX49F9dsF2Dc/RfPRb/XiNfKCpE9JIwyjCQXK\nQvV0RA/cT9zu6x0kGGtKq9rNDwKBgQDVgRiN19RNxfMoMHp/KnmgeyNzmqvF/vuj\n3x+9Uyz/q9mSC2+j7pmL3UiDiMmHcIEZFRnorI+XSZ0L0qsli6OZobTcUvZuKg7i\n9dz8Uvh+9I417Pzkd8tv4U1mZh8BA+n79rWy3K1uI34NHfxPfFaK6Clw9z6p8O5U\nbY/log7e4wKBgCNG5H1R1BDWMxomTa05eBgY0OITSXt2ekgnKIYHxFuHm1RWqfVc\ngixiXB3ioD3xQmq/WWpfOb55xtdbWQvCveW6pQBFks6kdpRPBtZnSw8itIwXpe4K\nBIG/lo4EcaXoeEESNHnOoka+Oi6KvilrsSuhjAxzZWIQWt03IAqa1NMTAoGBAI1Q\nv2HTQ3Ce3wzw2YOmJ47zMknoTF3nIcQbgTSdAyHPK1khPKmy2erbco2tUkbVTn29\nm8KHxRsL3Gjg7esR/B1KDR3vw7CzIdtThQt2F4hgcmh7DgBi0kKhS8vFOCxB3POr\nHiTfL+PAlkQ0XrZ1xAp5FETzQYTWNcmoIyCJHXKlAoGBANTkluClBwODvuQSY4le\n3OYBmqr4qgjsGmH/BFolreJYO96EuEuuLXdCIuULmAOwcfnGHF2yS1uFzpQ16bUo\nk6NendVqiFWevUlA+DOjrgw9v+DgOIv8IYiKWmIjBspSU0uvQLJoO2EC3FsVjqrd\nH8Fdrdn0deYy6gEbAzfULaU3\n-----END PRIVATE KEY-----\n",
+  "client_email": "admin-made-to@made-to-cassie.iam.gserviceaccount.com",
+  "client_id": "111028140834018558325",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/admin-made-to%40made-to-cassie.iam.gserviceaccount.com"
+}

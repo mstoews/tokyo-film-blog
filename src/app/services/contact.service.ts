@@ -25,12 +25,11 @@ export class ContactService {
     const contact_update = {
       id: '',
       name: contact.name,
-      phone: contact.phone,
       email: contact.email,
       message: contact.message
     }
 
-    this.contactCollection.add(contact_update);
+    this. contactCollection.add(contact_update);
   }
 
   update(contact: Contact) {

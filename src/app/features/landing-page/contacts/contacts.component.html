@@ -104,7 +104,7 @@
           <mat-hint align="end"> {{ input.value.length }}/100</mat-hint>
         </mat-form-field>
 
-        <button class="-mr-10 p-6 w-full" type="submit" [disabled]="!contactGroup.valid" mat-raised-button color="primary">
+        <button #send class="-mr-10 p-6 w-full" type="submit" [disabled]="!contactGroup.valid" mat-raised-button color="primary">
           Send your message
           <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
         </button>

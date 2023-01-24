@@ -24,6 +24,7 @@ export class MainPageService {
   }
 
   update(mainpage: Mainpage) {
+    mainpage.active = true;
     this.mainpageCollection.doc(mainpage.id.toString()).update(mainpage);
   }
 
