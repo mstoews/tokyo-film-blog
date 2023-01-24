@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class KnittingComponent implements OnInit {
 
   constructor (private router: Router, private _location: Location ) { }
+  knitting_image = './assets/images/flamyarn_800x800.jpg';
 
   onBack() {
     this._location.back()

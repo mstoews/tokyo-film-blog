@@ -9,6 +9,7 @@ import { Router } from '@angular/router'
 export class TailoringComponent implements OnInit {
   constructor(private router: Router) {}
   header_title = "Bespoke Tailoring"
+  tailoring_image= './assets/images/tailoring_image.jpg';
   onContacts() {
     this.router.navigate(['/home/contacts'])
   }

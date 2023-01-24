@@ -52,14 +52,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 }
 
 #hero {
-  background-image: url('https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2FIMG_0841_polarr_800x800.JPEG?alt=media&token=1d237ae5-b7c3-44bb-aba5-f76a38bc842f');
+  background-image: url('assets/images/hero_image.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @media (max-width: 576px) {
   #hero {
-    background-image: url('https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2FIMG_0841_polarr_800x800.JPEG?alt=media&token=1d237ae5-b7c3-44bb-aba5-f76a38bc842f');
+    background-image: url('assets/images/hero_image.jpg');
     background-position: center;
   }
 }
