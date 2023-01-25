@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { MainPageService } from 'app/services/main-page.service';
 import { Contact } from 'app/models/contact';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/environment';
+import { environment } from 'environments/dev';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { sendEmailVerification } from 'firebase/auth';
 import { ContactService } from 'app/services/contact.service';
@@ -51,24 +51,23 @@ export class ContactsComponent implements OnInit {
 
   onUpdate(contact: Contact) {
 
-    this.contactService.create(contact);
-    this.contactGroup.reset();
-    this._snackBar.open('Connect message has been received, thank you', 'OK', {
-              duration: 2000
-            });
+    // this.contactService.create(contact);
+    // this.contactGroup.reset();
+    // this._snackBar.open('Connect message has been received, thank you', 'OK', {
+    //           duration: 2000
+    //         });
 
+    this.http.post<any>(environment.api.createMessage, {
+      name: contact.name,
+      email: contact.email,
+      message : contact.message,
 
-    // this.http.post<any>(environment.api.createMessage, {
-    //   name: contact.name,
-    //   email: contact.email,
-    //   message : contact.message,
-
-    // }).subscribe((response: any) => {
-    //       this._snackBar.open(response.message, 'OK', {
-    //         duration: 2000
-    //       });
-    //       this.contactGroup.reset();
-    // });
+    }).subscribe((response: any) => {
+          this._snackBar.open(response.message, 'OK', {
+            duration: 2000
+          });
+          this.contactGroup.reset();
+    });
   }
 
   scrollToId() {

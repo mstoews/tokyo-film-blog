@@ -93,6 +93,14 @@
           </li>
 
           <li>
+            <a routerLink="admin/contact-grid"
+              class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Contacts</span>
+            </a>
+          </li>
+
+          <li>
             <a routerLink="admin/category"
               class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
               <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>

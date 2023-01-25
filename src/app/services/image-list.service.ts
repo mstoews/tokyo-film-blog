@@ -48,6 +48,7 @@ export class ImageListService {
 
     this.ImageItemsCollection = afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking') );
     this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
+
   }
 
 
@@ -100,22 +101,7 @@ export class ImageListService {
 
 
 
-  findRawImageByUrl(caption: string): Observable<imageItem | undefined> {
-    return this.afs
-      .collection('imageList', (ref) => ref.where('caption', '==', caption))
-      .snapshotChanges()
-      .pipe(
-        map((snaps) => {
-          const caption = convertSnaps<imageItem>(snaps);
-          return caption.length == 1 ? caption[0] : undefined;
-        }),
-        first()
-      );
-  }
 
-  createRawImage(image: imageItem) {
-    this.LoadItemsCollection.add(image);
-  }
 
   async insertImageList(image: imageItem) {
     var isFound: boolean = false;
@@ -216,10 +202,18 @@ export class ImageListService {
     this.ImageItemsCollection.doc(id).delete();
   }
 
+  updateRawImageList() {
+    this.getAll().subscribe(imageList => {
+      this.rawImagesArray = imageList;
+    })
+  }
+
+
   createRawImagesList() {
+    this.updateRawImageList();
     var ranking = 0;
     this.storage
-      .ref('/800')
+      .ref('inventory/400')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {
@@ -235,9 +229,65 @@ export class ImageListService {
               ranking: ranking,
               id: '',
             };
-            this.createRawImage(imageData);
+            // let obj = this.rawImagesArray.find(o => { o.imageAlt === imageData.imageAlt});
+            var found = false;
+            this.rawImagesArray.forEach(img => {
+              if (img.imageAlt === imageData.imageAlt){
+                found = true;
+              }
+            })
+            if (!found){
+                this.createRawImage(imageData);
+            }
           });
         });
       });
     }
+
+
+    findRawImageByUrl(imageAlt: string): Observable<imageItem | undefined> {
+      return this.afs
+        .collection('imageList', (ref) => ref.where('imageAlt', '==', imageAlt))
+        .valueChanges()
+        .pipe(
+          map((snaps) => {
+            const caption = convertSnaps<imageItem>(snaps);
+            return caption.length == 1 ? caption[0] : undefined;
+          }),
+          first()
+        );
+    }
+
+    createRawImage(image: imageItem) {
+      var not_usedImage: imageItem[];
+      var found = false;
+      this.getImageByFileName(image.imageAlt).subscribe(image => {
+        not_usedImage = image;
+        found = true;
+      })
+      if (found === false) {
+        this.ImageItemsCollection.add(image);
+      }
+
+    }
+
+    getImageByFileName(name: string) {
+      return this.afs
+        .collection<imageItem>('imagelist', (ref) =>
+          ref.where('imageAlt', '==', name)
+        )
+        .get()
+        .pipe(
+          map((result) => {
+            return result.docs.map((snap) => {
+              return {
+                id: snap.id,
+                ...(<any>snap.data()),
+              };
+            });
+          })
+        );
+    }
+
+
 }

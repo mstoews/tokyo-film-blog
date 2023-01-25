@@ -53,50 +53,10 @@ export class ContactGridComponent implements OnInit {
     this.selectedItemKeys = data.selectedRowKeys
   }
 
-  onImages() {
-    // console.log('onImages');
-    const parent = this.contactGroup.getRawValue()
-    const dialogRef = this.matDialog.open(DndComponent, {
-      width: '500px',
-      data: parent.id,
-    })
-
-    dialogRef.afterClosed().subscribe((result: any) => {
-      if (result === undefined) {
-        result = { event: 'Cancel' }
-      }
-      switch (result.event) {
-        case 'Create':
-          // console.log(`create Images to save: ${JSON.stringify(result.data)}`);
-          this.create(result)
-          break
-        case 'Cancel':
-          // console.log(`Image transfer cancelled`);
-          break
-      }
-    })
-  }
-
-  create(data: any) {
-    const rawData = this.contactGroup.getRawValue()
-    this.contactService.update(rawData)
-  }
-
-  onCellDoublClicked(e: any) {
-    this.contactGroup.setValue(e.data)
-    this.openDrawer()
-  }
-
-  onNotify(event: any) {
-    this.contactGroup.setValue(event.data)
-    this.toggleDrawer()
-  }
 
   onFocusedRowChanged(e: any) {
     const rowData = e.row && e.row.data
-    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`);
-    this.contactGroup.setValue(rowData)
-    this.openDrawer()
+  
   }
 
   openDrawer() {
@@ -108,14 +68,7 @@ export class ContactGridComponent implements OnInit {
     }
   }
 
-  closeDrawer() {
-    const opened = this.drawer.opened
-    if (opened === true) {
-      this.drawer.toggle()
-    } else {
-      return
-    }
-  }
+
 
   Add() {
     // console.log('open drawer to add ... ');
@@ -134,7 +87,7 @@ export class ContactGridComponent implements OnInit {
 
   Refresh() {
     this.sTitle = 'Contact Lists'
-    this.createEmptyForm()
+
     this.allContacts$ = this.contactService.getAll()
   }
 
@@ -181,12 +134,7 @@ export class ContactGridComponent implements OnInit {
     name: '',
   }
 
-  createEmptyForm() {
-    this.contactGroup = this.fb.group({
-      id: [''],
-      name: [''],
-    })
-  }
+
   createForm(contact: Contact) {
     this.sTitle = 'Contact'
 

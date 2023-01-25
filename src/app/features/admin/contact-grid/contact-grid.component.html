@@ -1,62 +1,4 @@
 <div class="h-screen">
-  <grid-menubar [inTitle]="sTitle" (notifyParentRefresh)="Refresh()" (notifyParentDelete)="Delete()"
-    (notifyParentAdd)="Add()" (notifyParentClone)="Clone()">
-  </grid-menubar>
-  <mat-drawer-container class="flex-col h-full">
-    <mat-drawer class="lg:w-1/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
-      [disableClose]="false">
-      <fuse-card class="flex flex-col w-full max-w-120 filter-article filter-interactive text-gray-700 m-2">
-        <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }">
-          {{ sTitle }}
-        </div>
-        <div mat-dialog-content>
-          <form [formGroup]="contactGroup" (ngSubmit)="onUpdate(contactGroup.value)" class="form">
-            <mat-form-field class="p-2 flex-col w-full" appearance="fill">
-              <mat-label>Name</mat-label>
-              <input matInput formControlName="name" required />
-            </mat-form-field>
-
-            <mat-form-field class="p-2 flex-col w-full" appearance="fill">
-              <mat-label>eMail</mat-label>
-              <input matInput type="email" formControlName="email" required />
-            </mat-form-field>
-
-            <mat-form-field class="p-2 flex-col w-full" appearance="fill">
-              <mat-label>Phone</mat-label>
-              <input matInput type="phone" formControlName="phone" />
-            </mat-form-field>
-
-            <mat-form-field hintLabel="Min 15 characters: " class="p-2 flex-col w-full" appearance="fill">
-              <mat-label>Message</mat-label>
-              <input matInput #input maxlength="100" formControlName="message" required />
-              <mat-hint align="end"> {{ input.value.length }}/100</mat-hint>
-            </mat-form-field>
-
-          </form>
-        </div>
-        <div mat-dialog-actions>
-          <button mat-icon-button (click)="onUpdate(Contact)" color="primary" aria-label="Add">
-            <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="onCreate()"  color="primary"
-            [disabled]="!contactGroup.valid">
-            <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="onDelete(Contact)" color="primary"
-            [disabled]="!contactGroup.valid">
-            <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="onImages()" color="primary"
-            [disabled]="!contactGroup.valid">
-            <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="closeDialog()" color="warn">
-            <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
-          </button>
-        </div>
-      </fuse-card>
-    </mat-drawer>
-
     <ng-container *ngIf="allContacts$ | async as rows">
       <dx-data-grid
         flex id="contactGrid"
@@ -70,10 +12,8 @@
         keyExpr="id">
         <dxi-column width="200px" dataField="name"> </dxi-column>
         <dxi-column width="200px" dataField="email"> </dxi-column>
-        <dxi-column width="500px" dataField="message"> </dxi-column>
-        <dxi-column width="200px" dataField="phone"> </dxi-column>
-
+        <dxi-column dataField="message"> </dxi-column>
       </dx-data-grid>
     </ng-container>
-  </mat-drawer-container>
+
 </div>

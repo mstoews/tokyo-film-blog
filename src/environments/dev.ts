@@ -18,8 +18,8 @@ export const environment = {
   useEmulators: false,
   api: {
     baseUrl: "http://localhost:9000",
-    createMessage: "https://us-central1-made-to-cassie.cloudfunctions.net/createMessage",
-    createUser: "https://us-central1-made-to-cassie.cloudfunctions.net/createUser",
+    createMessage: "https://us-central1-made-to-dev.cloudfunctions.net/createMessage",
+    createUser: "https://us-central1-made-to-dev.cloudfunctions.net/createUser",
   },
 };
 

@@ -46,7 +46,9 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   constructor(
     public imageListService: ImageListService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.imageListService.createRawImagesList();
+  }
 
   Refresh() {
     this.subNotUsed = this.imageListService
