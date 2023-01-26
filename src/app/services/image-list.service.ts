@@ -26,8 +26,8 @@ import { TitleStrategy } from '@angular/router';
   providedIn: 'root',
 })
 export class ImageListService {
-  private ImageItemsCollection: AngularFirestoreCollection<imageItem>;
-  private LoadItemsCollection: AngularFirestoreCollection<imageItem>;
+  private imageItemCollections: AngularFirestoreCollection<imageItem>;
+  private updateItemsCollection: AngularFirestoreCollection<imageItem>;
   private RawImagesCollection: AngularFirestoreCollection<rawImageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private loadImageItems: Observable<imageItem[]>;
@@ -41,13 +41,13 @@ export class ImageListService {
 
     private storage: AngularFireStorage
   ) {
-    this.LoadItemsCollection = afs.collection<imageItem>('imagelist');
-    this.loadImageItems = this.LoadItemsCollection.valueChanges({
+    this.updateItemsCollection = afs.collection<imageItem>('imagelist');
+    this.loadImageItems = this.updateItemsCollection.valueChanges({
       idField: 'id',
     });
 
-    this.ImageItemsCollection = afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking') );
-    this.imageItems = this.ImageItemsCollection.valueChanges({ idField: 'id' });
+    this.imageItemCollections = afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking') );
+    this.imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
 
   }
 
@@ -99,10 +99,6 @@ export class ImageListService {
       );
   }
 
-
-
-
-
   async insertImageList(image: imageItem) {
     var isFound: boolean = false;
     const ref = this.afs.collection('imagelist', (ref) =>
@@ -113,7 +109,7 @@ export class ImageListService {
         isFound = true;
       });
       if (!isFound) {
-        this.ImageItemsCollection.add(image);
+        this.imageItemCollections.add(image);
       }
     });
   }
@@ -149,7 +145,7 @@ export class ImageListService {
   }
 
   get(id: string) {
-    this.ImageItemsCollection.doc(id).get();
+    this.imageItemCollections.doc(id).get();
   }
 
   getItemsByType(type: string) {
@@ -171,12 +167,9 @@ export class ImageListService {
   }
 
   createItem(image: imageItem) {
-    this.ImageItemsCollection.add(image);
-  }
-
-  addList(images: imageItem[]) {
-    images.forEach((item) => {
-      this.ImageItemsCollection.add(item);
+    this.imageItemCollections.add(image).then(imgItem => {
+      image.id = imgItem.id;
+      this.imageItemCollections.doc(imgItem.id).update(image);
     });
   }
 
@@ -184,22 +177,17 @@ export class ImageListService {
   update(item: imageItem, productId: string) {
     // console.log(JSON.stringify(item));
     item.parentId = productId;
-    this.ImageItemsCollection.doc(productId).update(item);
+    this.imageItemCollections.doc(productId).update(item);
     //this.updateInventory(item, productId)
   }
 
-  updateInventory(item: imageItem, productId: string) {
-    item.parentId = productId;
-    const imageCollectionRef = this.afs.collection(`inventory/${productId}/images`);
-    imageCollectionRef.add(item);
-  }
 
   updateImageList(item: imageItem) {
-    this.ImageItemsCollection.doc(item.parentId).update(item);
+    this.imageItemCollections.doc(item.id).update(item);
   }
 
   delete(id: string) {
-    this.ImageItemsCollection.doc(id).delete();
+    this.imageItemCollections.doc(id).delete();
   }
 
   updateRawImageList() {
@@ -220,73 +208,27 @@ export class ImageListService {
           imageRef.getDownloadURL().then((downloadURL) => {
             ranking++;
             const imageUrl = downloadURL;
-            const imageData: any = {
-              parentId: '',
-              caption: imageRef.fullPath,
-              type: 'IN_NOT_USED',
-              imageSrc: imageUrl,
-              imageAlt: imageRef.name,
-              ranking: ranking,
-              id: '',
+            const imageData: imageItem = {
+              "parentId": '',
+              "caption": imageRef.fullPath,
+              "type": 'IN_NOT_USED',
+              "imageSrc": imageUrl,
+              "imageAlt": imageRef.name,
+              "ranking": ranking,
+              "id": '',
             };
-            // let obj = this.rawImagesArray.find(o => { o.imageAlt === imageData.imageAlt});
-            var found = false;
+            let found = false;
             this.rawImagesArray.forEach(img => {
               if (img.imageAlt === imageData.imageAlt){
                 found = true;
               }
             })
             if (!found){
-                this.createRawImage(imageData);
+               this.createItem(imageData);
             }
           });
         });
       });
-    }
-
-
-    findRawImageByUrl(imageAlt: string): Observable<imageItem | undefined> {
-      return this.afs
-        .collection('imageList', (ref) => ref.where('imageAlt', '==', imageAlt))
-        .valueChanges()
-        .pipe(
-          map((snaps) => {
-            const caption = convertSnaps<imageItem>(snaps);
-            return caption.length == 1 ? caption[0] : undefined;
-          }),
-          first()
-        );
-    }
-
-    createRawImage(image: imageItem) {
-      var not_usedImage: imageItem[];
-      var found = false;
-      this.getImageByFileName(image.imageAlt).subscribe(image => {
-        not_usedImage = image;
-        found = true;
-      })
-      if (found === false) {
-        this.ImageItemsCollection.add(image);
-      }
-
-    }
-
-    getImageByFileName(name: string) {
-      return this.afs
-        .collection<imageItem>('imagelist', (ref) =>
-          ref.where('imageAlt', '==', name)
-        )
-        .get()
-        .pipe(
-          map((result) => {
-            return result.docs.map((snap) => {
-              return {
-                id: snap.id,
-                ...(<any>snap.data()),
-              };
-            });
-          })
-        );
     }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
+  import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { ImageListService } from 'app/services/image-list.service';
@@ -20,9 +20,7 @@ import { ProductsService } from 'app/services/products.service';
 })
 export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   @Input() productId: string;
-  onUpdate: any;
-  cRAG: any;
-  sTitle: any;
+
   currentImage: imageItem;
 
   IN_NOT_USED = 'IN_NOT_USED';
@@ -49,7 +47,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
 
   Refresh() {
 
-    // this.imageListService.createRawImagesList();
+    this.imageListService.createRawImagesList();
 
     if(this.productId){
       this.inventoryImages$ = this.productService.getProductImage(this.productId);
@@ -89,14 +87,6 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     this.Refresh();
   }
 
-
-  onDelete(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
-  onCreate(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
-
   drop(event: CdkDragDrop<imageItem[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -127,6 +117,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
+        image.parentIdma = this.productId
         this.imageListService.updateImageList(image);
         i++;
       });
@@ -139,11 +130,13 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string,
     currentIndex: number
   ) {
+    console.log('Updatedate Image Type', JSON.stringify(newData));
     const cnt = newData.length;
     if (cnt > 0) {
       let i = 1;
-      newData.forEach((image: any) => {
+      newData.forEach((image: imageItem) => {
         image.ranking = i;
+        image.parentId = this.productId;
         image.type = newContainerId;
         this.imageListService.updateImageList(image);
         i++;

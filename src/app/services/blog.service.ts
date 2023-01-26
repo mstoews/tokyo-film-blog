@@ -72,7 +72,7 @@ export class BlogService {
     return this.blogItems;
   }
 
-  create(blog: Blog) {
+  createBlog(blog: Blog) {
     return this.blogCollection.add(blog);
   }
 

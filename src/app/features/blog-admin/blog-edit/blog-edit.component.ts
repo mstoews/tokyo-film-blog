@@ -73,7 +73,7 @@ export class BlogEditComponent implements OnInit{
     const newBlog = { ...this.blogGroup.value } as Blog;
     newBlog.date_updated = updateDate;
     newBlog.date_created = updateDate;
-    this.blogService.create(newBlog);
+    this.blogService.createBlog(newBlog);
   }
 
   dateFormatter(params: any) {

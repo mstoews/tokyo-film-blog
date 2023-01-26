@@ -20,40 +20,28 @@ import { ProductsService } from 'app/services/products.service';
 })
 export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   @Input() blogId: string;
-  onUpdate: any;
-  cRAG: any;
-  sTitle: any;
-  currentImage: imageItem;
+
 
   IN_NOT_USED = 'IN_FEATURED';
   IN_FEATURED = 'IN_INVENTORY';
-  IN_MAIN = 'IN_MAIN';
-  IN_COLLECTION = 'IN_COLLECTION';
+
 
   subNotUsed: Subscription;
   subFeatured: Subscription;
-  subMain: Subscription;
   subCollections: Subscription
 
   not_usedImages: imageItem[] = [];
   featuredImages: imageItem[] = [];
   collectionsImages: imageItem[] = [];
-  mainImages:     imageItem[] = [];
-  inventoryImages$: Observable<imageItem[]>;
+
+
 
   constructor(
     public imageListService: ImageListService,
-    public productService: ProductsService,
     private fb: FormBuilder
   ) {}
 
   Refresh() {
-
-    // this.imageListService.createRawImagesList();
-
-    if(this.blogId){
-      this.inventoryImages$ = this.productService.getProductImage(this.blogId);
-    }
 
     this.subNotUsed = this.imageListService
       .getImagesByType(this.IN_NOT_USED)
@@ -66,8 +54,6 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       .subscribe((item) => {
         this.featuredImages = item;
       });
-
-      // this.subFeatured = this.productService.getProductImage(this.productId).subscribe
 
       this.subCollections = this.imageListService
       .getImagesByType(this.blogId)

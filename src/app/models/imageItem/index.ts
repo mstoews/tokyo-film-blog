@@ -1,4 +1,5 @@
 export interface imageItem {
+  id: string;
   parentId: string;
   imageSrc: string;
   imageAlt: string;

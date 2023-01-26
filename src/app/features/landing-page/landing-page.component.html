@@ -4,23 +4,23 @@
       <!-- Menu/Logo Container -->
       <nav class="flex items-center justify-between text-2xl text-white">
         <!-- Logo -->
-        <img src="assets/made-to-logo-white.svg" class="h-40 w-100" />
+        <img class="h-40 w-100" src="assets/made-to-logo-white.svg" />
         <!-- Menu -->
         <div class="hidden h-10 text-2xl md:flex md:space-x-8">
           <div class="text-white font-bold uppercase text-1xl group font-garamond">
-            <button class="uppercase " (click)="scrollToId('feature')"> About Us </button>
+            <button (click)="scrollToId('feature')" class="uppercase "> About Us</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
-            <button class="uppercase font-garamond" (click)="scrollToId('services')"> Services </button>
+            <button (click)="scrollToId('services')" class="uppercase font-garamond"> Services</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
-            <button class="uppercase font-garamond" (click)="scrollToId('gallery')"> Follow Us </button>
+            <button (click)="scrollToId('gallery')" class="uppercase font-garamond"> Follow Us</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
-            <button class="uppercase font-garamond" routerLink="/home/contacts"> Contact </button>
+            <button class="uppercase font-garamond" routerLink="/home/contacts"> Contact</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
@@ -46,7 +46,7 @@
           <div class="flex justify-center mt-4">
             <div class="hidden rounded-md shadow md:block sm:inline-flex">
               <button (click)="scrollToId('services')"
-                class="items-center justify-center hidden px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md md:block font-garamond hover:bg-gray-700 hover:text-gray-100">
+                      class="items-center justify-center hidden px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md md:block font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Made To Services
               </button>
             </div>
@@ -59,7 +59,7 @@
           <div class="flex justify-center mt-4">
             <div class="inline-flex ml-3">
               <button (click)="onContactUs()"
-                class="items-center justify-center hidden px-5 py-3 text-base font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md sm:inline-flex font-garamond hover:bg-gray-700 hover:text-gray-100">
+                      class="items-center justify-center hidden px-5 py-3 text-base font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md sm:inline-flex font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Contact Made To
               </button>
             </div>
@@ -71,7 +71,7 @@
     </div>
   </section>
   <!-- About Us Section -->
-  <section id="feature" class="scroll-mt-20">
+  <section class="scroll-mt-20" id="feature">
     <div class="container max-w-7xl px-6 mx-auto my-32 text-gray-900 md:px-0">
 
       <div class="relative justify-center my-20 mb-20 md:justify-between">
@@ -80,28 +80,28 @@
         </p>
 
         <div class="hidden md:block sm:block">
-          <button mat-icon-button class="uppercase" (click)="scrollToId('services')"
-            class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button (click)="scrollToId('services')" class="uppercase" class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
+                  mat-icon-button>
             <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
           </button>
 
-          <button mat-icon-button class="uppercase" (click)="scrollToId('hero')"
-            class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button (click)="scrollToId('hero')" class="uppercase" class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
+                  mat-icon-button>
             <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
           </button>
         </div>
       </div>
 
       <div
-        class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0 cursor-pointer"
-        (click)="onClickAboutUs()">
+        (click)="onClickAboutUs()"
+        class="container relative flex flex-col max-w-6xl px-6 mx-auto my-32 text-gray-900 md:flex-row md:px-0 cursor-pointer">
         <!-- Image -->
 
-        <img [src]="about_us" width="800" height="800" alt="features"
-          class="hidden duration-200 w-400 md:block group-hover:scale-110" />
+        <img [src]="about_us" alt="features" class="hidden duration-200 w-400 md:block group-hover:scale-110" height="800"
+             width="800" />
         <!-- Mobile Image -->
 
-        <img [src]="about_us" width="400" height="400" alt="features" class="w-full md:hidden" />
+        <img [src]="about_us" alt="features" class="w-full md:hidden" height="400" width="400" />
 
         <!-- Text Container -->
         <div class="pr-0 bg-white top-48 md:absolute md:right-0 md:py-20 md:pl-20">
@@ -119,7 +119,7 @@
 
   </section>
 
-  <section id="services" class="scroll-mt-20">
+  <section class="scroll-mt-20" id="services">
     <!-- Services -->
     <div class="container max-w-7xl px-6 mx-auto my-32 text-gray-900 md:px-0">
       <!-- Creations Header -->
@@ -129,13 +129,13 @@
         </p>
 
         <div class="hidden md:block sm:block">
-          <button mat-icon-button class="uppercase" (click)="scrollToId('gallery')"
-            class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button (click)="scrollToId('gallery')" class="uppercase" class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
+                  mat-icon-button>
             <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
           </button>
 
-          <button mat-icon-button class="uppercase" (click)="scrollToId('hero')"
-            class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button (click)="scrollToId('hero')" class="uppercase" class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
+                  mat-icon-button>
             <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
           </button>
         </div>
@@ -144,10 +144,10 @@
       <!-- Items Container -->
       <div class="item-container">
         <!-- Item 1 -->
-        <div class="group item" (click)="onServices('home/tailoring')">
+        <div (click)="onServices('home/tailoring')" class="group item">
           <!-- Desktop Image -->
-          <img [src]="services_one" width="300" height="400" alt=""
-            class="hidden duration-200 h-120 md:block group-hover:scale-110" />
+          <img [src]="services_one" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+               width="300" />
           <!-- Mobile Image -->
           <img [src]="services_one" alt="services" class="w-full md:hidden" />
           <!-- Item Gradient -->
@@ -157,10 +157,10 @@
         </div>
 
         <!-- Item 2 -->
-        <div class="group item" (click)="onServices('home/knitting')">
+        <div (click)="onServices('home/knitting')" class="group item">
           <!-- Desktop Image -->
-          <img [src]="services_two" width="300" height="400" alt=""
-            class="hidden duration-200 h-120 md:block group-hover:scale-110" />
+          <img [src]="services_two" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+               width="300" />
           <!-- Mobile Image -->
           <img [src]="services_two" alt="" class="w-full md:hidden" />
           <!-- Item Gradient -->
@@ -170,10 +170,10 @@
         </div>
 
         <!-- Item 3 -->
-        <div class="group item" (click)="onServices('home/repairs')">
+        <div (click)="onServices('home/repairs')" class="group item">
           <!-- Desktop Image -->
-          <img [src]="services_three" width="300" height="400" alt=""
-            class="hidden duration-200 h-120 md:block group-hover:scale-110" />
+          <img [src]="services_three" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+               width="300" />
           <!-- Mobile Image -->
           <img [src]="services_three" alt="" class="w-full md:hidden" />
           <!-- Item Gradient -->
@@ -183,10 +183,10 @@
         </div>
 
         <!-- Item 4 -->
-        <div class="group item" (click)="onServices('home/ready-to-wear')">
+        <div (click)="onServices('home/ready-to-wear')" class="group item">
           <!-- Desktop Image -->
-          <img [src]="services_four" width="300" height="400" alt=""
-            class="hidden duration-200 h-120 md:block group-hover:scale-110" />
+          <img [src]="services_four" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+               width="300" />
           <!-- Mobile Image -->
           <img [src]="services_four" alt="" class="w-full md:hidden" />
           <!-- Item Gradient -->
@@ -199,7 +199,7 @@
   </section>
 
   <!-- Gallery Section -->
-  <section id="gallery" class="scroll-mt-20">
+  <section class="scroll-mt-20" id="gallery">
     <!-- Creations Container -->
     <div class="container max-w-7xl px-6 mx-auto my-16 text-gray-900 md:px-0">
       <!-- Creations Header -->
@@ -209,13 +209,13 @@
         </p>
 
         <div class="hidden md:block sm:block">
-          <button mat-icon-button class="uppercase" (click)="scrollToId('swipe')"
-            class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button (click)="scrollToId('swipe')" class="uppercase" class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-10 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
+                  mat-icon-button>
             <mat-icon [svgIcon]="'heroicons_solid:arrow-down'"></mat-icon>
           </button>
 
-          <button mat-icon-button class="uppercase" (click)="scrollToId('hero')"
-            class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700">
+          <button (click)="scrollToId('hero')" class="uppercase" class="absolute top-0 items-center text-2xl font-normal text-gray-700 align-middle rounded-lg right-1 btn hover:text-white hover:bg-gray-700 dark:hover:bg-gray-700"
+                  mat-icon-button>
             <mat-icon [svgIcon]="'heroicons_solid:arrow-up'"></mat-icon>
           </button>
         </div>
@@ -229,12 +229,12 @@
             <h1 class="text-xl md:text-2xl lg:text-4xl font-bold leading-5 md:leading-6 lg:leading-9 text-gray-800">
               Social Media</h1>
             <p class="text-base leading-6 text-gray-600">Follow us on instagram/Facebook</p>
-            <a href="https://www.facebook.com/profile.php?id=100083068317439"
-              class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600">@Facebook</a>
-            <a href="https://www.instagram.com/made.to.atelier/"
-              class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600">@made.to.atelier</a>
-            <a href="https://www.instagram.com/cassandra_harada/"
-              class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600">@cassandra_harada</a>
+            <a class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600"
+               href="https://www.facebook.com/profile.php?id=100083068317439">@Facebook</a>
+            <a class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600"
+               href="https://www.instagram.com/made.to.atelier/">@made.to.atelier</a>
+            <a class="text-lg leading-6 pb-px border-b border-transparent hover:border-gray-500 text-gray-600"
+               href="https://www.instagram.com/cassandra_harada/">@cassandra_harada</a>
           </div>
           <div class="flex justify-center items-center">
             <app-gallery [imageCollection]="galleryList"></app-gallery>

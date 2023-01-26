@@ -150,12 +150,12 @@
         </mat-tab>
         <mat-tab label="Images">
           <ng-template matTabContent>
-            <image-selection [images]="imageArray" [productId]="productId"></image-selection>
+            <image-selection [productId]="productId"></image-selection>
           </ng-template>
         </mat-tab>
         <mat-tab label="Preview">
           <ng-template matTabContent>
-            <inventory-preview [inventoryImages]="imageArray" [product]="product"></inventory-preview>
+            <inventory-preview [product]="product"></inventory-preview>
           </ng-template>
         </mat-tab>
       </mat-tab-group>

@@ -83,22 +83,23 @@ export class ProductEditComponent implements OnInit {
       this.categories = result;
     });
 
-    if (this.inventoryImages$) {
-      this.inventoryImages$.subscribe((image) => {
-        image.forEach((img) => {
-          counter++;
-          const image: imageItem = {
-            parentId: this.productId,
-            imageSrc: img.url,
-            caption: img.name,
-            type: this.IN_FEATURED,
-            imageAlt: 'Inventory Image',
-            ranking: counter,
-          };
-          this.imageArray.push(image);
-        });
-      });
-    }
+    // if (this.inventoryImages$) {
+    //   this.inventoryImages$.subscribe((image) => {
+    //     image.forEach((img) => {
+    //       counter++;
+    //       const image: imageItem = {
+    //         id: this.productId,
+    //         parentId: this.productId,
+    //         imageSrc: img.url,
+    //         caption: img.name,
+    //         type: this.IN_FEATURED,
+    //         imageAlt: 'Inventory Image',
+    //         ranking: counter,
+    //       };
+    //       this.imageArray.push(image);
+    //     });
+    //   });
+    // }
   }
 
   onDelete(data: Product) {
