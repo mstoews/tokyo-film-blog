@@ -11,7 +11,7 @@ import { ScrollService } from './services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
 import { ProductResolver } from './services/product.resolver';
 import { BlogResolver } from './services/blog.resolver';
-import { SocialModule } from './features/social/social.module';
+//import { SocialModule } from './features/social/social.module';
 
 
 // Firebase services + environment module
@@ -42,7 +42,7 @@ import { environment } from '../environments/environment';
     CommonModule,
     SharedModule,
     SwiperModule,
-    SocialModule,
+    // SocialModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

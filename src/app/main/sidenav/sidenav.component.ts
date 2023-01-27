@@ -11,6 +11,7 @@ export class SideNavComponent {
   public isLoggedOut$: Observable<boolean>
   loggedIn = false
   admin = false;
+  admin_login = false;
   private userId: string;
   pictureUrl$: Observable<string | null>
 
@@ -25,6 +26,9 @@ export class SideNavComponent {
     ) {
     this.authService.afAuth.authState.subscribe((user) => {
           this.userId = user?.uid;
+          if (this.userId === 'cW5vCsElpETTpUJgT6UEDRSxadq2' || this.userId === 'Ttxdl5aFWedoNAgGJ0MRFDaRv6M2' ) {
+            this.admin_login = true;
+          } 
     })
 
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(
@@ -86,6 +90,16 @@ export class SideNavComponent {
     //   return;
     // }
     this.route.navigate(['/shop/wishlist/', this.userId])
+    this.notifyParentCloseDrawer.emit()
+  }
+
+  onCart(){
+    // if (this.userId == undefined ) {
+    //   this.route.navigate(['/authentication/sign-in/classic']);
+    //   this.onClose();
+    //   return;
+    // }
+    this.route.navigate(['/shop/cart/', this.userId])
     this.notifyParentCloseDrawer.emit()
   }
 

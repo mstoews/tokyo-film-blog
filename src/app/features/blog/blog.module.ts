@@ -26,7 +26,7 @@ import { BlogRoutingModule } from './blog-routing/blog-routing.module';
   imports: [
     CommonModule,
     MaterialModule,
-    DxHtmlEditorModule,
+    //DxHtmlEditorModule,
     NgOptimizedImage,
     HeaderComponent,
     FuseCardModule,
