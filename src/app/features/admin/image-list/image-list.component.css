@@ -47,18 +47,6 @@ drop_container .item--2 {
   background: #f5f6fa;
 }
 
-drop_container .item--3 {
-  background: #f5f6fa;
-}
-
-drop_container .item--4 {
-  background: #f5f6fa;
-}
-
-drop_container .item--5 {
-  background: #f5f6fa;
-}
-
 .list {
   background: #f5f6fa;
   font-size: 12px;
@@ -68,7 +56,6 @@ drop_container .item--5 {
   margin: 5px;
   align-items: left;
 }
-
 .cdk-drag-preview {
   box-sizing: border-box;
   border-radius: 4px;

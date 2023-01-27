@@ -1,98 +1,82 @@
-
 <div class="h-screen">
 
   <mat-drawer-container>
-    <mat-drawer class="w-3/8 lg:w-3/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over" [position]="'end'" [disableClose]="false">
+    <mat-drawer class="w-3/8 lg:w-3/8 md:w-3/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="over"
+      [position]="'end'" [disableClose]="false">
     </mat-drawer>
     <mat-drawer-content>
-      <app-image-menubar></app-image-menubar>
-      <div cdkDropListGroup class="grid grid-cols-5 gap-4">
+      <app-image-menubar (notifyParentRefresh)="RefreshList()"
+        (notifyParentAdd)="createImageOnce()"></app-image-menubar>
+      <div cdkDropListGroup class="grid grid-cols-4 gap-4">
         <!-- NOT_USED -->
         <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
           <div class="sticky top-0 z-50 image_title">Unused Images</div>
-          <div cdkDropList
-            #notused="cdkDropList"
-            [id]="IN_NOT_USED"
-            [cdkDropListData]="not_usedImages"
-            class="list drag-drop-list"
-            (cdkDropListDropped)="drop($event)" >
+          <div cdkDropList #notused="cdkDropList" [id]="IN_NOT_USED" [cdkDropListData]="not_usedImages"
+            class="list drag-drop-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of not_usedImages" cdkDrag>
               <div class="drop-placeholder" *cdkDragPlaceholder> </div>
-              <div class="text-gray-700">{{item.imageSrc}}
+              <div class="text-gray-700">
                 <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
-                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                <div
+                  class="cdk-drag-preview min-h-80  mb-1 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [src]="item.imageSrc" alt="NOT USED"
+                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
                 </div>
               </div>
               <!-- <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption"></app-image-card> -->
             </div>
           </div>
         </div>
-        <!-- FEATURED -->
-        <div class="item--2 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="sticky top-0 z-50 image_title">FEATURED</div>
-            <div
-            cdkDropList #featured="cdkDropList"
-            [id]="IN_FEATURED"
-            [cdkDropListData]="featuredImages"
-            class="list"
-            (cdkDropListDropped)="drop($event)">
+        <!-- THOUGHTS -->
+        <div class="item--2 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
+          <div class="sticky top-0 z-50 image_title">THOUGHTS</div>
+          <div cdkDropList #featured="cdkDropList" [id]="IN_FEATURED" [cdkDropListData]="featuredImages"
+            class="list drag-drop-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of featuredImages" cdkDrag>
-              <div class="text-gray-700">{{item.imageSrc}}
-                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
-                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+              <div class="drop-placeholder" *cdkDragPlaceholder> </div>
+              <div class="text-gray-700">
+                <div
+                  class="cdk-drag-preview min-h-80 mb-1 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [src]="item.imageSrc" alt="THOUGHTS"
+                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
                 </div>
               </div>
               <!-- <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card> -->
             </div>
           </div>
         </div>
-        <!-- CREATIONS -->
-        <div class="item--3 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="sticky top-0 z-50 image_title">CREATIONS</div>
-            <div cdkDropList #creations="cdkDropList" [id]="IN_CREATION" [cdkDropListData]="creationsImages" class="list" (cdkDropListDropped)="drop($event)">
+        <!-- INVENTORY -->
+        <div class="item--3 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
+          <div class="sticky top-0 z-50 image_title">PRODUCTS</div>
+          <div cdkDropList #creations="cdkDropList" [id]="IN_CREATION" [cdkDropListData]="creationsImages"
+            class="list drag-drop-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of creationsImages" cdkDrag>
               <!-- <app-image-card [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card> -->
-              <div class="text-gray-700">{{item.imageSrc}}
+              <div class="drop-placeholder" *cdkDragPlaceholder> </div>
+              <div class="text-gray-700">
                 <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
-                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                <div
+                  class="cdk-drag-preview min-h-80 mb-1 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [src]="item.imageSrc" alt="INVENTORY"
+                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- COLLECTIONS -->
-        <div class="item--4 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
-          <div class="sticky top-0 z-50 uppercase image_title lg-rounded">collections</div>
-          <div cdkDropList #collections="cdkDropList" [id]="IN_COLLECTION" [cdkDropListData]="collectionsImages"  class="list" (cdkDropListDropped)="drop($event)">
-            <div *ngFor="let item of collectionsImages" cdkDrag>
-              <!-- <app-image-card [url]="item.imageSrc"  [file_name]="item.caption"></app-image-card> -->
-              <div class="text-gray-700">{{item.imageSrc}}
-                <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
-                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- GALLERY -->
-        <div class="item--5 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable >
+        <!--    GALLERY -->
+        <div class="item--5 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>
           <div class="sticky top-0 z-50 uppercase image_title lg-rounded">gallery</div>
-          <div
-             cdkDropList #gallerys="cdkDropList"
-             [cdkDropListData]="galleryImages"
-             [id]="IN_GALLERY"
-             class="list"
-             (cdkDropListDropped)="drop($event)">
+          <div cdkDropList #gallerys="cdkDropList" [cdkDropListData]="galleryImages" [id]="IN_GALLERY"
+            class="list drag-drop-list" (cdkDropListDropped)="drop($event)">
             <div *ngFor="let item of galleryImages" cdkDrag>
               <!-- <app-image-card [url]="item.imageSrc" [file_name]="item.caption"></app-image-card> -->
-              <div class="text-gray-700">{{item.imageSrc}}
+              <div class="text-gray-700">
                 <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="m-1 p-1"> -->
-                <div class="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
-                  <img [ngSrc]="item.imageSrc" alt="Front of men&#039;s Basic Tee in black." class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
+                <div
+                  class="cdk-drag-preview min-h-80 mb-1 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                  <img [ngSrc]="item.imageSrc" alt="GALLERY"
+                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="400" height="400">
                 </div>
               </div>
             </div>

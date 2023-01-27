@@ -6,9 +6,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { BlogService } from 'app/services/blog.service';
 import { Router } from '@angular/router';
 
-
-
-
 @Component({
   selector: 'blog-add',
   templateUrl: './blog-add.component.html',
@@ -49,6 +46,7 @@ export class BlogAddDialog {
     this.blogService.createPartial(newBlog).then ( blog => {
       this.blogId = blog.id;
       newBlog.id = this.blogId;
+      newBlog.published = false;
       this.blogService.updatePartial (newBlog);
       this.route.navigate(['blog-admin/blog-admin', this.blogId]);
     })

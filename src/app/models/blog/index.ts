@@ -3,6 +3,7 @@ export interface BlogImages {
   thumbImage: string;
   alt: string;
   title: string;
+
 }
 
 export interface Blog {
@@ -14,12 +15,14 @@ export interface Blog {
   user_updated:     string;
   date_created:     string;
   date_updated:     string;
+  published: boolean;
 }
 
 export interface BlogPartial {
   id: string;
   title:   string;
   date_created: string;
+  published: boolean;
 }
 
 

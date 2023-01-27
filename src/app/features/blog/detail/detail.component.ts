@@ -30,9 +30,9 @@ export class DetailComponent implements OnInit, OnDestroy {
      { }
 
   ngOnInit(): void {
-      var id: string;
+      let id: string;
       this.blog = this.activateRoute.snapshot.data["blog"];
-      if (this.blog.id) { 
+      if (this.blog.id) {
          this.blogImages$ = this.imageListService.getImagesByType(this.blog.id);
       }
   }

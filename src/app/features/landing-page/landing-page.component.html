@@ -6,9 +6,9 @@
         <!-- Logo -->
         <img class="h-40 w-100" src="assets/made-to-logo-white.svg" />
         <!-- Menu -->
-        <div class="hidden h-10 text-2xl md:flex md:space-x-8">
+        <div class="hidden h-10 text-2xl lg:flex md:space-x-8">
           <div class="text-white font-bold uppercase text-1xl group font-garamond">
-            <button (click)="scrollToId('feature')" class="uppercase "> About Us</button>
+            <button (click)="scrollToId('feature')" class="uppercase "> About</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
@@ -16,7 +16,7 @@
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
-            <button (click)="scrollToId('gallery')" class="uppercase font-garamond"> Follow Us</button>
+            <button (click)="scrollToId('gallery')" class="uppercase font-garamond"> Follow</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
           <div class="text-white font-bold uppercase text-1xl group">
@@ -41,10 +41,10 @@
       <div class="container flex px-2 pb-12 mx-auto">
         <div class="hidden px-4 py-6 mx-auto text-center md:block max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
-            <span class="hidden sm:block font-garamond">{{mainPageDoc.cta_left}}</span>
+            <span class="sm:block font-garamond">{{mainPageDoc.cta_left}}</span>
           </h2>
           <div class="flex justify-center mt-4">
-            <div class="hidden rounded-md shadow md:block sm:inline-flex">
+            <div class="rounded-md shadow md:block sm:inline-flex">
               <button (click)="scrollToId('services')"
                       class="items-center justify-center hidden px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md md:block font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Made To Services
@@ -54,12 +54,12 @@
         </div>
         <div class="px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
-            <span class="hidden sm:block font-garamond">{{mainPageDoc.cta_right}}</span>
+            <span class="sm:block font-garamond">{{mainPageDoc.cta_right}}</span>
           </h2>
           <div class="flex justify-center mt-4">
             <div class="inline-flex ml-3">
               <button (click)="onContactUs()"
-                      class="items-center justify-center hidden px-5 py-3 text-base font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md sm:inline-flex font-garamond hover:bg-gray-700 hover:text-gray-100">
+                      class="items-center justify-center px-5 py-3 text-base font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md sm:inline-flex font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Contact Made To
               </button>
             </div>

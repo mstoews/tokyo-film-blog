@@ -27,8 +27,8 @@ import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { CartResolver } from './services/cart.resolver';
 import { WishListResolver } from './services/wishlist.resolver';
 
-import { environment } from '../environments/dev';
-// import { environment } from '../environments/environment';
+//import { environment } from '../environments/dev';
+import { environment } from '../environments/environment';
 
 
 @NgModule({

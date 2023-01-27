@@ -4,6 +4,8 @@ import { Blog } from 'app/models/blog';
 import { IImageStorage } from 'app/models/maintenance';
 import { BlogService } from 'app/services/blog.service';
 import { Observable } from 'rxjs';
+import { imageItem } from "../../../models/imageItem";
+import { ImageListService } from "../../../services/image-list.service";
 
 @Component({
   selector: 'app-blog-card',
@@ -12,17 +14,18 @@ import { Observable } from 'rxjs';
 export class BlogCardComponent implements OnInit {
 
   @Input() blog: Blog;
-  blogImages$: Observable<IImageStorage[]> ;
+  blogImages$: Observable<imageItem[]> ;
 
   constructor(
     private route: Router,
-    private blogService: BlogService) { }
+    private imageListService: ImageListService,
+    ) { }
 
   ngOnInit(): void {
-    this.blogImages$ = this.blogService.getBlogImage(this.blog.id)
-    //console.log('on initialize...', this.blog.id);
+    this.blogImages$ = this.imageListService.getImagesByType(this.blog.id)
+    console.log('on initialize...', this.blog.id);
     this.blogImages$.subscribe(images => {
-      //console.log(JSON.stringify(images));
+      console.log(JSON.stringify(images));
     })
   }
 

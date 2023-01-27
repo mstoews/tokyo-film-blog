@@ -32,26 +32,26 @@ import { imageItem } from 'app/models/imageItem'
   ],
 })
 export class LandingPageComponent implements OnInit {
-  @Output() public topCollection: imageItem[] = []
-  @Output() public bottomCollection: imageItem[] = []
+  public topCollection: imageItem[] = [];
+  public bottomCollection: imageItem[] = [];
 
-  contactGroup: FormGroup
-  mainPage$: Observable<Mainpage[]>
-  featuredList$: Observable<imageItem[]>
-  mainPageDoc: Mainpage
-  titleMessage = ''
+  contactGroup: FormGroup;
+  mainPage$: Observable<Mainpage[]>;
+  featuredList$: Observable<imageItem[]>;
+  mainPageDoc: Mainpage;
+  titleMessage = '';
   features_image = './assets/images/tailoring.jpg';
-    // 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_800x800.JPG?alt=media&token=b5401a57-c7cb-415d-b185-35d59b30a0c7'
+  // 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_800x800.JPG?alt=media&token=b5401a57-c7cb-415d-b185-35d59b30a0c7'
   services_one = './assets/images/tailoring.jpg';
-    // 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicestailoring_400x400.JPG?alt=media&token=f5fcb885-70b8-4dfe-97ba-1db54699d7c1'
-  services_two ='./assets/images/knitting.jpg';
-    //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservices_400x400.JPG?alt=media&token=78f54e83-17d4-4f8c-8eeb-1def74080f74'
-  services_three ='./assets/images/repairs.jpg';
-    //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicesmending_400x400.JPG?alt=media&token=20779c32-8bc3-4bc0-a9dd-86093ad5c061'
-  services_four ='./assets/images/bespoke_knitting.jpg';
-    //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Freadytowearcrop_400x400.JPEG?alt=media&token=ee82d3fa-82ed-402f-b364-17ec0024e3d8'
+  // 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicestailoring_400x400.JPG?alt=media&token=f5fcb885-70b8-4dfe-97ba-1db54699d7c1'
+  services_two = './assets/images/knitting.jpg';
+  //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservices_400x400.JPG?alt=media&token=78f54e83-17d4-4f8c-8eeb-1def74080f74'
+  services_three = './assets/images/repairs.jpg';
+  //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicesmending_400x400.JPG?alt=media&token=20779c32-8bc3-4bc0-a9dd-86093ad5c061'
+  services_four = './assets/images/bespoke_knitting.jpg';
+  //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Freadytowearcrop_400x400.JPEG?alt=media&token=ee82d3fa-82ed-402f-b364-17ec0024e3d8'
   about_us = './assets/images/about.jpg';
-   //  'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F213E0BF3-EF7F-4C0F-AF24-86EA01398C81_800x800.jpeg?alt=media&token=120537a4-229d-4594-a787-41ff5ec4b42b'
+  //  'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F213E0BF3-EF7F-4C0F-AF24-86EA01398C81_800x800.jpeg?alt=media&token=120537a4-229d-4594-a787-41ff5ec4b42b'
 
   constructor(
     private contactService: ContactService,
@@ -64,44 +64,42 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.mainPage$ = this.mainPage.getAll()
-    this.featuredList$ = this.imageListService.getImagesByType('IN_INVENTORY')
+    this.mainPage$ = this.mainPage.getAll();
+    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
     this.mainPage$.subscribe((doc) => {
       if (doc.length > 0) {
-        this.mainPageDoc = doc[0]
-        this.titleMessage = this.mainPageDoc.hero_title
-      }
-      else {
-
-        var document = {
+        this.mainPageDoc = doc[0];
+        this.titleMessage = this.mainPageDoc.hero_title;
+      } else {
+        let document = {
           id: 1,
           hero_title: 'There should be something at the tope of the HERO',
           features_header: 'Header',
           features_subheader: 'Sub Title',
           cta_left: 'Left',
-          cta_right:  'Right',
+          cta_right: 'Right',
           contact_email: 'Joey',
           contact_telephone: '555-1212',
           contact_shipping: 'Shipping',
           active: true,
-        }
+        };
         this.mainPageDoc = document;
         this.titleMessage = document.hero_title;
       }
-    })
-    this.createEmptyForm()
-    this.populateImageList()
+    });
+    this.createEmptyForm();
+    this.populateImageList();
   }
 
   onServices(service: string) {
     // console.log(service);
-    this.router.navigate([service])
+    this.router.navigate([service]);
   }
 
   onUpdate(contact: Contact) {
-    contact = this.contactGroup.getRawValue()
-    this.contactService.create(contact)
-    this.createEmptyForm()
+    contact = this.contactGroup.getRawValue();
+    this.contactService.create(contact);
+    this.createEmptyForm();
   }
 
   createEmptyForm() {
@@ -111,68 +109,40 @@ export class LandingPageComponent implements OnInit {
       email: [''],
       phone: [''],
       message: [''],
-    })
+    });
   }
 
   onClickAboutUs() {
     // console.log('navigate to about us');
-    this.router.navigate(['home/about_us'])
+    this.router.navigate(['home/about_us']);
   }
 
   onContactUs() {
     // console.log('Products');
-    this.router.navigate(['home/contacts'])
-  }
-
-  onProducts() {
-    // console.log('Products');
-    this.router.navigate(['products'])
+    this.router.navigate(['home/contacts']);
   }
 
   scrollToId(id: string) {
     // console.log('element id : ', id);
-    this.scrollTo.scrollToElementById(id)
+    this.scrollTo.scrollToElementById(id);
   }
 
-  onEvent() {
-    // console.log('Event');
-    const dialogRef = this.matDialog.open(DndComponent, {
-      width: '500px',
-    })
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === undefined) {
-        result = { event: 'Cancel' }
-      }
-      switch (result.event) {
-        case 'Create':
-          // private matDialog: MatDialog,this.create(result.data);
-          break
-        case 'Cancel':
-          break
-      }
-    })
-  }
 
   populateImageList() {
-    var imageCount = 0
-    const featuredList = this.imageListService.getImagesByType('IN_GALLERY')
-    featuredList.subscribe((img) => {
-      img.forEach((image) => {
-        if (imageCount < 3) {
-          this.topCollection.push(image)
-        } else {
-          this.bottomCollection.push(image)
-        }
-        imageCount++
-      })
-    })
+    let imageCount = 0;
+    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
+    // featuredList.subscribe((img) => {
+    //   img.forEach((image) => {
+    //     if (imageCount < 3) {
+    //       this.topCollection.push(image);
+    //     } else {
+    //       this.bottomCollection.push(image);
+    //     }
+    //     imageCount++;
+    //   });
+    // });
   }
 }
 
-/*
-LEADER IN HAND MADE KNITTED PRODUCTS
-Founded in 2018, Made-to has been producing world-class hand knitted products for over a decade.
-Latest images and our narrative concerning the latest in world of knitting.
-Contact Made-To directly for one of a kind patterns.
-*/
+

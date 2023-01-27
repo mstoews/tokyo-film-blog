@@ -47,7 +47,23 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     public imageListService: ImageListService,
     private fb: FormBuilder
   ) {
+
+  }
+
+  RefreshList() {
     this.imageListService.createRawImagesList();
+  }
+
+  createImageOnce() {
+    const data: imageItem = {
+      id: '',
+      parentId: '',
+      imageSrc: 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2Fmunchdeathblog1_800x800.jpg?alt=media&token=9a754e17-5309-494d-9f56-7ab492bd7c85',     imageAlt: '800/munchdeathblog1_800x800.jpg',
+      caption: 'munchdeathblog1_800x800.jpg',
+      type: 'IN_NOT_USED',
+      ranking: 1
+    }
+    this.imageListService.createItem(data);
   }
 
   Refresh() {

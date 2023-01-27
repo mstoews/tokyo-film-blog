@@ -40,6 +40,7 @@ import { ProductResolver } from 'app/services/product.resolver';
 import { AddComponentDialog } from './inventory-grid/add/add.component';
 import { InventoryPreviewComponent } from './inventory-grid/inventory-preview/inventory-preview.component';
 import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-menubar.component';
+import { ImageListComponent } from "./image-list/image-list.component";
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-m
     AdminShellComponent,
     AddComponentDialog,
     InventoryPreviewComponent,
-    ImageMenubarComponent
+    ImageMenubarComponent,
+    ImageListComponent
 
   ],
   imports: [

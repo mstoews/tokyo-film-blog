@@ -61,10 +61,9 @@ export class BlogAdminComponent implements OnInit {
 
   selection = new SelectionModel<Blog>();
 
-  onBlogToggle(blog: Blog){
+  onBlogToggle(blog: Blog) {
     this.selection.toggle(blog);
-   // console.log(this.selection.selected);
-
+    // console.log(this.selection.selected);
   }
 
   constructor(
@@ -72,21 +71,18 @@ export class BlogAdminComponent implements OnInit {
     private fb: FormBuilder,
     private route: Router,
     private dialog: MatDialog,
-    private responsive: BreakpointObserver,
-
+    private responsive: BreakpointObserver
   ) {}
 
-
-  onOpenRow(row: any){
+  onOpenRow(row: any) {
     this.route.navigate(['blog-admin/blog-admin', row.id]);
   }
 
-  onAdd(){
-      openBlogAddDialog(this.dialog, this.blog)
-        .pipe(filter((val) => !!val))
-        .subscribe((val) => console.log('new course value:', val));
-    }
-
+  onAdd() {
+    openBlogAddDialog(this.dialog, this.blog)
+      .pipe(filter((val) => !!val))
+      .subscribe((val) => console.log('new course value:', val));
+  }
 
   ngOnInit() {
     this.Refresh();
@@ -104,8 +100,6 @@ export class BlogAdminComponent implements OnInit {
     this.selectedItemKeys = data.selectedRowKeys;
   }
 
-
-
   onCellDoublClicked(e: any) {
     this.data = [];
     var counter = 0;
@@ -116,12 +110,10 @@ export class BlogAdminComponent implements OnInit {
 
     this.blogImages$ = this.blogService.getBlogImage(parentId);
     this.blogGroup.setValue(e);
-
   }
 
   onNotify(event: any) {
     this.blogGroup.setValue(event.data);
-
   }
 
   Refresh() {
@@ -144,7 +136,6 @@ export class BlogAdminComponent implements OnInit {
     this.blogService.delete(data.id.toString());
   }
 
-
   public blogType = {
     id: '',
     title: '',
@@ -159,7 +150,6 @@ export class BlogAdminComponent implements OnInit {
   valueChangedEvent(e: any) {
     // console.log(`blog grid value changed ${e}`)
   }
-
 
   createForm(blog: Blog) {
     this.sTitle = 'Blog - ' + blog.title;
