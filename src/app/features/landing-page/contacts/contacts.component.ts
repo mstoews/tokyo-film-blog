@@ -51,23 +51,23 @@ export class ContactsComponent implements OnInit {
 
   onUpdate(contact: Contact) {
 
-    // this.contactService.create(contact);
-    // this.contactGroup.reset();
-    // this._snackBar.open('Connect message has been received, thank you', 'OK', {
-    //           duration: 2000
-    //         });
+    this.contactService.create(contact);
+    this.contactGroup.reset();
+    this._snackBar.open('Connect message has been received, thank you', 'OK', {
+              duration: 2000
+            });
 
-    this.http.post<any>(environment.api.createMessage, {
-      name: contact.name,
-      email: contact.email,
-      message : contact.message,
+    // this.http.post<any>(environment.api.createMessage, {
+    //   name: contact.name,
+    //   email: contact.email,
+    //   message : contact.message,
 
-    }).subscribe((response: any) => {
-          this._snackBar.open(response.message, 'OK', {
-            duration: 2000
-          });
-          this.contactGroup.reset();
-    });
+    // }).subscribe((response: any) => {
+    //       this._snackBar.open(response.message, 'OK', {
+    //         duration: 2000
+    //       });
+    //       this.contactGroup.reset();
+    // });
   }
 
   scrollToId() {

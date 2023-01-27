@@ -1,4 +1,8 @@
 {
+  "projects": {
+    "default": "made-to-dev",
+    "production": "made-to-cassie"
+  },
   "targets": {
     "made-to-cassie": {
       "hosting": {
@@ -8,7 +12,5 @@
       }
     }
   },
-  "projects": {
-    "default": "made-to-dev"
-  }
+  "etags": {}
 }
