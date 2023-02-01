@@ -24,17 +24,17 @@ export class CheckoutService {
     afAuth.idToken.subscribe((jwt) => (this.jwtAuth = jwt))
   }
 
-  startProductCheckoutSession(userId: string): Observable<CheckoutSession> {
-    //console.log(`Start checkout service: ${environment.api.baseUrl} + /api/checkout`);
+  startProductCheckoutSession(cartId: any): Observable<CheckoutSession> {
     const headers = new HttpHeaders().set(
       'Authorization',
       this.jwtAuth as string
     )
 
     return this.http.post<CheckoutSession>(
+      // environment.api.stripeUrl + '/api/checkout',
       environment.api.baseUrl + '/api/checkout',
       {
-        userId,
+        cartId,
         callbackUrl: this.buildCallbackUrl(),
       },
       { headers }
@@ -52,14 +52,13 @@ export class CheckoutService {
       callBackUrl += ':' + port
     }
 
-    callBackUrl += '/shop/stripe-checkout'
+    callBackUrl += '/shop'
 
     return callBackUrl
   }
 
   redirectToCheckout(session: CheckoutSession) {
     const stripe = Stripe(session.stripePublicKey)
-
     stripe.redirectToCheckout({
       sessionId: session.stripeCheckoutSessionId,
     })

@@ -45,29 +45,28 @@ export class ContactsComponent implements OnInit {
   }
 
   onSubmit() {
-    // console.log(JSON.stringify(this.contactGroup.value));
     this.onUpdate(this.contactGroup.value)
   }
 
   onUpdate(contact: Contact) {
 
-    this.contactService.create(contact);
-    this.contactGroup.reset();
-    this._snackBar.open('Connect message has been received, thank you', 'OK', {
-              duration: 2000
-            });
+    // this.contactService.create(contact);
+    // this.contactGroup.reset();
+    // this._snackBar.open('Connect message has been received, thank you', 'OK', {
+    //           duration: 2000
+    //         });
 
-    // this.http.post<any>(environment.api.createMessage, {
-    //   name: contact.name,
-    //   email: contact.email,
-    //   message : contact.message,
+    this.http.post<any>(environment.api.createMessage, {
+      name: contact.name,
+      email: contact.email,
+      message : contact.message
 
-    // }).subscribe((response: any) => {
-    //       this._snackBar.open(response.message, 'OK', {
-    //         duration: 2000
-    //       });
-    //       this.contactGroup.reset();
-    // });
+    }).subscribe((response: any) => {
+          this._snackBar.open(response.message, 'OK', {
+            duration: 2000
+          });
+          this.contactGroup.reset();
+    });
   }
 
   scrollToId() {
@@ -78,18 +77,15 @@ export class ContactsComponent implements OnInit {
     this.contactGroup = this.fb.group({
       name: ['',
         [Validators.required,
-        Validators.minLength(4)]
-      ],
+        Validators.minLength(4)]],
       email: ['',
         [Validators.required,
-        Validators.email]
-      ],
-      message: ['',
-        [Validators.required,
-          Validators.minLength(15),
-          Validators.maxLength(100) ]
-      ],
-    });
+        Validators.email]],
+      message: ['', 
+       [Validators.required,
+       Validators.minLength(15),
+       Validators.maxLength(100)]]}
+    );
   }
 
 }

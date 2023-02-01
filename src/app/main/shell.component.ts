@@ -43,8 +43,8 @@ export class ShellComponent implements OnInit {
         if (res === true)
         {
           this.isLoggedIn = true;
-          //console.log(this.authService.userData.uid);
-          this.cartService.cartByUserId(this.authService.userData.uid).subscribe(cart => {
+
+          this.cartService.cartByStatus(this.authService.userData.uid ,'open').subscribe(cart => {
             this.cartCount = cart.length;
           })
 
@@ -103,7 +103,6 @@ export class ShellComponent implements OnInit {
     // this.router.navigate(["authenication/sign-in/classic"]);
   }
   openShoppingCart() {
-
     this.router.navigate(['shop/cart', this.authService.userData.uid]);
   }
 

@@ -199,7 +199,7 @@ export class ImageListService {
 
   createRawImagesList() {
     this.updateRawImageList();
-    var ranking = 0;
+    let ranking = 0;
     this.storage
       .ref('inventory/400')
       .listAll()

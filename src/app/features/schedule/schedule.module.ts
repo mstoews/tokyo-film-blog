@@ -6,11 +6,11 @@ import { GalleryComponent } from '../../components/gallery/gallery.component'
 @NgModule({
   declarations: [
     ScheduleComponent,
-
+    GalleryComponent
   ],
   imports: [
     CommonModule,
-    GalleryComponent
+    
   ]
 })
 export class ScheduleModule { }

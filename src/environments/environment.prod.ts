@@ -11,9 +11,11 @@ export const environment = {
   },
   production: true,
   useEmulators: false,
+  gtm_id: "G-WGMMJK9NR3",
   api: {
-    prdUrl: "https://made-to-server.an.r.appspot.com",
-    baseUrl: "https://made-to-server.an.r.appspot.com",
+    prdUrl: "https://made-to-cassie.df.r.appspot.com",
+    baseUrl: "https://made-to-cassie.df.r.appspot.com/",
+    stripeDevUrl: "https://made-to-dev.df.r.appspot.com",
     createMessage: "https://us-central1-made-to-cassie.cloudfunctions.net/createMessage",
     createUser: "https://us-central1-made-to-cassie.cloudfunctions.net/createUser",
   }

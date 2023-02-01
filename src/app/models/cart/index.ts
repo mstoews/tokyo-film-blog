@@ -12,4 +12,5 @@ export interface Cart {
   user_purchased: string;
   date_sold: FieldValue;
   date_updated: FieldValue;
+  status: string;
 }

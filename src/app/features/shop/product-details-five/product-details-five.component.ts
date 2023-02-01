@@ -147,7 +147,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         this.route.navigate(['shop/cart', this.authService.userData.uid]);
       }
     } else {
-      this.route.navigate(['/shop']);
+      this.route.navigate(['shop/coming-soon']);
     }
   }
 

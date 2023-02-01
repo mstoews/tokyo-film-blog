@@ -51,7 +51,6 @@ export class CartService {
     //   });
     //   console.log('Number of items in the cart: ', this.productIds.length);
     // });
-
   }
 
   getCartCount(userId: string): Observable<Cart[] | undefined> {
@@ -90,9 +89,22 @@ export class CartService {
   }
 
   cartByUserId(userId: string): Observable<Cart[] | undefined> {
-    var cartItemsCollection: AngularFirestoreCollection<Cart>;
+    let cartItemsCollection: AngularFirestoreCollection<Cart>;
     cartItemsCollection = this.afs.collection<Cart>(`users/${userId}/cart`);
     return cartItemsCollection.valueChanges({ idField: 'id' });
+  }
+
+  cartByStatus(userId: string, cartStatus: string) {
+    let cartItemsCollection: AngularFirestoreCollection<Cart>;
+    cartItemsCollection = this.afs.collection<Cart>(`users/${userId}/cart`);
+    let cart = cartItemsCollection.valueChanges({ idField: 'id' });
+    return cart.pipe(
+      map((cart) => {
+        return cart.filter((cart) => {
+          return cart.status === cartStatus;
+        });
+      })
+    );
   }
 
   findCartByUrl(id: string): Observable<Cart | undefined> {

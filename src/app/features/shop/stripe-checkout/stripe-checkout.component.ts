@@ -5,7 +5,7 @@ import {CheckoutService} from 'app/services/checkout.service';
 @Component({
   selector: 'stripe-checkout',
   templateUrl: './stripe-checkout.component.html',
-  styleUrls: ['./stripe-checkout.component.scss']
+  styleUrls: ['./stripe-checkout.component.css']
 })
 export class StripeCheckoutComponent implements OnInit {
 
@@ -21,6 +21,8 @@ export class StripeCheckoutComponent implements OnInit {
   }
 
   ngOnInit() {
+
+      this.waiting = false;
 
       const result = this.route.snapshot.queryParamMap.get("purchaseResult");
 
@@ -53,5 +55,5 @@ export class StripeCheckoutComponent implements OnInit {
 
 // https://made-to-server.an.r.appspot.com/stripe-webhooks
 
-// 
+//
 

@@ -26,7 +26,8 @@ export class SideNavComponent {
     ) {
     this.authService.afAuth.authState.subscribe((user) => {
           this.userId = user?.uid;
-          if (this.userId === 'cW5vCsElpETTpUJgT6UEDRSxadq2' || this.userId === 'Ttxdl5aFWedoNAgGJ0MRFDaRv6M2' ) {
+          const userEmail = user?.email 
+          if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com' ) {
             this.admin_login = true;
           } 
     })

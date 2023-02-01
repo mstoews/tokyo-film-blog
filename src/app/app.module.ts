@@ -11,7 +11,7 @@ import { ScrollService } from './services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
 import { ProductResolver } from './services/product.resolver';
 import { BlogResolver } from './services/blog.resolver';
-//import { SocialModule } from './features/social/social.module';
+
 
 
 // Firebase services + environment module
@@ -23,12 +23,13 @@ import { AngularFireModule} from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
-// import { NgxImageCompressService} from 'ngx-image-compress';
 import { CartResolver } from './services/cart.resolver';
 import { WishListResolver } from './services/wishlist.resolver';
 
-//import { environment } from '../environments/dev';
-import { environment } from '../environments/environment';
+// import { environment } from '../environments/dev';
+
+import { environment} from '../environments/environment.prod';
+
 
 
 @NgModule({
@@ -42,18 +43,15 @@ import { environment } from '../environments/environment';
     CommonModule,
     SharedModule,
     SwiperModule,
-    // SocialModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
     AngularFireModule.initializeApp(environment.firebase),
-
   ],
   providers: [
     ScrollService,
-    //NgxImageCompressService,
     NavService,
     ProductResolver,
     CartResolver,
@@ -64,6 +62,7 @@ import { environment } from '../environments/environment';
       useClass: AuthInterceptor,
       multi: true
     },
+    {provide: 'googleTagManagerId', useValue: environment.gtm_id}
   ],
   bootstrap: [AppComponent]
 })

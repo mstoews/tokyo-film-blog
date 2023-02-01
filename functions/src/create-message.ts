@@ -19,14 +19,13 @@ createMessageApp.post("/", async (req, res) => {
     const contactMessage = {
       email: req.body.email,
       name: req.body.name,
-      phone: req.body.phone,
       message: req.body.message,
     };
-    db.doc("contacts/").set({contactMessage});
+    db.collection("contacts").add({contactMessage});
     res.status(200).json({message: "Contact message created successfully."});
   } catch (err) {
-    functions.logger.error("Could not create user.", err);
-    res.status(500).json({message: "Could not create user."});
+    functions.logger.error("Could not create message.", err);
+    res.status(500).json({message: "Could not create contact message."});
   }
 });
 

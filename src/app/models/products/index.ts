@@ -13,6 +13,7 @@ export interface Product {
   user_updated: string;
   date_created: string;
   date_updated: string;
+  status: string;
   // imageUrls: imageItem[];
 }
 

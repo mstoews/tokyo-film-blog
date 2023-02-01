@@ -69,10 +69,8 @@
     </div>
     <div class="hidden lg:hidden md:block">
       <div class="w-full">
-        <iframe
-          src="https://goo.gl/maps/k5eJyM4sfMK3Gwd87"
-          width="400px" height="400" style="border: 0" allowfullscreen="" loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe src="https://goo.gl/maps/k5eJyM4sfMK3Gwd87" width="400px" height="400" style="border: 0"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
@@ -80,34 +78,57 @@
   <div class="flex flex-col gap-8 mt-8 lg:flex-row md:flex-col">
     <div class="w-full lg:block md:hidden">
       <div style="width: 100%">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.609088275006!2d139.4876018157517!3d35.68662628019317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018e5aaf8923d53%3A0x3b951401720729bb!2z44CSMTgzLTAwNTIgVG9reW8sIEZ1Y2h1LCBTaGlubWFjaGksIDEtY2jFjW1l4oiS77yW77yV4oiSMjE!5e0!3m2!1sen!2sjp!4v1673189399266!5m2!1sen!2sjp"
-        width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.609088275006!2d139.4876018157517!3d35.68662628019317!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018e5aaf8923d53%3A0x3b951401720729bb!2z44CSMTgzLTAwNTIgVG9reW8sIEZ1Y2h1LCBTaGlubWFjaGksIDEtY2jFjW1l4oiS77yW77yV4oiSMjE!5e0!3m2!1sen!2sjp!4v1673189399266!5m2!1sen!2sjp"
+          width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
     <mat-card class="flex flex-col-1 text-gray-700">
       <h1 class="p-2">Leave a Message</h1>
 
       <form [formGroup]="contactGroup" (ngSubmit)="onSubmit()">
-        <mat-form-field class="p-2 flex-col w-full" appearance="fill">
+        <!-- <mat-form-field class="p-2 flex-col w-full" appearance="fill">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" required />
-        </mat-form-field>
+        </mat-form-field> -->
 
-        <mat-form-field class="p-2 flex-col w-full" appearance="fill">
-          <mat-label>eMail</mat-label>
-          <input matInput type="email" formControlName="email" required />
-        </mat-form-field>
+        <div class="m-2">
+          <div class="mt-2">
+            <p class="text-base text-gray-800">Name</p>
+            <input matInput type="text" formControlName="name" placeholder="Enter your name"
+              class="placeholder:text-sm placeholdertext-gray-500 focus:outline-none border border-gray-300 lg:min-w-[540px] w-full py-3 px-3 rounded " />
+          </div>
+        </div>
 
-        <mat-form-field hintLabel="Min 15 characters: " class="p-2 flex-col w-full" appearance="fill">
-          <mat-label>Message</mat-label>
-          <input matInput #input maxlength="100" formControlName="message" required />
-          <mat-hint align="end"> {{ input.value.length }}/100</mat-hint>
-        </mat-form-field>
+        <div class="m-2">
+          <div class="mt-2">
+            <p class="text-base text-gray-800">eMail</p>
+            <input matInput type="emaik" formControlName="email" required placeholder="Enter an email address"
+              class="placeholder:text-sm placeholdertext-gray-500 focus:outline-none border border-gray-300 lg:min-w-[540px] w-full py-3 px-3 rounded " />
+          </div>
+        </div>
 
-        <button #send class="-mr-10 p-6 w-full" type="submit" [disabled]="!contactGroup.valid" mat-raised-button color="primary">
-          Send your message
-          <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
-        </button>
+
+        <div class="m-2">
+          <div class="mt-2" hintLabel="Min 15 characters: ">
+            <p class="text-base text-gray-800">Message</p>
+            <textarea matInput #input maxlength="100" formControlName="message" type="text" placeholder="Enter a message"
+              class="placeholder:text-sm placeholdertext-gray-500 focus:outline-none border border-gray-300 lg:min-w-[540px] w-full py-3 px-3 rounded " ></textarea>
+            <mat-hint class="text-sm" align="end"> {{ input.value.length }}/100</mat-hint>
+          </div>
+        </div>
+        <div class="m-2">
+          <div class="mt-10">
+            <button #send type="submit" [disabled]="!contactGroup.valid"
+              class="focus:ring-2 h-14 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none  border rounded hover:bg-indigo-600 py-4 w-full"
+              type="submit" [disabled]="!contactGroup.valid" mat-raised-button color="primary">
+              Send your message
+              <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+            </button>
+          </div>
+        </div>
+
       </form>
     </mat-card>
   </div>

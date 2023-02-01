@@ -179,9 +179,9 @@ export class WishListService {
 
   getProductInCart(productId: string, userId: string): any {
 
-    var found = false;
-    var product: Observable<Cart[]>
-    var productCollection: AngularFirestoreCollection<Cart>
+    let found = false;
+    let product: Observable<Cart[]>
+    let productCollection: AngularFirestoreCollection<Cart>
     productCollection = this.afs.collection<Cart>( `users/${userId}/cart` )
     product = productCollection.valueChanges({ idField: 'id' })
     product.pipe(map((cart) => cart.filter((product) => {
@@ -201,16 +201,6 @@ export class WishListService {
 
 
   addToCart(productId: string) {
-    // var found = false;
-    // const cart = this.getProductInCart(productId, this.userId);
-    // cart.subscribe(cart => {
-    //   cart.forEach(item => {
-    //     console.log(item.product_id);
-    //     if (productId === item.product_id)
-    //      found = true;
-    //   })
-    // });
-    // if(found === false) {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -221,6 +211,7 @@ export class WishListService {
           user_purchased: this.userId,
           date_sold: Timestamp.now(),
           date_updated: Timestamp.now(),
+          status: 'open'
         };
         const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
         collectionRef.add(cart);
@@ -232,8 +223,8 @@ export class WishListService {
   }
 
   wishListByUserId(userId: string): any {
-    var wishListItems: Observable<WishList[]>;
-    var wishListItemsCollection: AngularFirestoreCollection<WishList>;
+    let wishListItems: Observable<WishList[]>;
+    let wishListItemsCollection: AngularFirestoreCollection<WishList>;
     wishListItemsCollection = this.afs.collection<WishList>(
       `users/${userId}/wishlist`
     );
@@ -246,8 +237,8 @@ export class WishListService {
   }
 
   delete(id: string) {
-    var wishlistItems: Observable<WishList[]>;
-    var wishlistCollection: AngularFirestoreCollection<WishList>;
+    let wishlistItems: Observable<WishList[]>;
+    let wishlistCollection: AngularFirestoreCollection<WishList>;
     wishlistCollection = this.afs.collection<WishList>(
       `users/${this.userId}/wishlist`
     );

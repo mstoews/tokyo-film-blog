@@ -7,7 +7,8 @@ import { Component, EventEmitter, Output } from "@angular/core";
 export class ImageMenubarComponent {
   @Output() notifyParentRefresh: EventEmitter<any> = new EventEmitter()
   @Output() notifyParentAdd: EventEmitter<any> = new EventEmitter()
-onClickRefresh() {
+
+  onClickRefresh() {
   this.notifyParentRefresh.emit()
 }
 onClickClone() {

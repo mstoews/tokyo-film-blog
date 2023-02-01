@@ -46,6 +46,7 @@ const routes: Route[] = [
    {
     path: 'collections',
     loadChildren: () => import('./features/products/products.module').then( (mod) => mod.ProductsModule),
+    data: { state: 'collections' }
    },
    {
     path: 'stripe-checkout',
@@ -59,10 +60,10 @@ const routes: Route[] = [
    },
    {
     path: '**',
-    redirectTo: '/home'
+    redirectTo: '/home',
+    data: { state: 'home' }
     // Maybe create a page not found component page instead of just going to the 'home'
    },
-
 ];
 
 @NgModule({
