@@ -18,6 +18,7 @@ import { CartResolver } from 'app/services/cart.resolver';
 import { WishListResolver } from 'app/services/wishlist.resolver';
 import { HeaderComponent } from 'app/components/header/header.component';
 import { NotificationComponent } from 'app/components/notification/notification.component';
+import { PurchaseThankdComponent } from './thanks/purchase-thanks';
 
 const routes: Routes = [
   {
@@ -67,6 +68,13 @@ const routes: Routes = [
     component: ComingSoonComponent,
     data: { state: 'coming-soon' }
   },
+  {
+    path: 'purchase-thanks',
+    pathMatch: 'full',
+    title: 'Purchases',
+    component: ComingSoonComponent,
+    data: { state: 'purchase-thanks' }
+  },
 ];
 
 @NgModule({
@@ -80,6 +88,7 @@ const routes: Routes = [
     SafePipe,
     ComingSoonComponent,
     WishListComponent,
+    PurchaseThankdComponent,
   ],
   imports: [
     CommonModule,
