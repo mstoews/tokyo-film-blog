@@ -124,7 +124,7 @@ export class CartService {
     // console.log('product id:', mtCart.id);
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
     collectionRef.add(mtCart);
-    this.snack.open('Selection has been added to your cart ...', 'Ok');
+    this.snack.open('Selection has been added to your cart ...', 'OK', { duration: 3000 });
   }
 
   findProductById(id: string): Observable<Product | undefined> {
@@ -160,7 +160,7 @@ export class CartService {
 
   update(mtCart: Cart) {
     this.cartCollection.doc(mtCart.id.toString()).update(mtCart);
-    this.snack.open('Item ahs been updated ... ');
+    this.snack.open('Item ahs been updated ... ', 'OK',  { duration: 3000 });
   }
 
   delete(id: string) {
@@ -171,6 +171,6 @@ export class CartService {
     );
     cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
     cartItemsCollection.doc(id).delete();
-    this.snack.open('Item has been removed ... ', 'Deleted');
+    this.snack.open('Item has been removed ... ', 'OK', { duration: 3000 });
   }
 }

@@ -63,7 +63,7 @@ export class ContactsComponent implements OnInit {
 
     }).subscribe((response: any) => {
           this._snackBar.open(response.message, 'OK', {
-            duration: 2000
+            duration: 3000
           });
           this.contactGroup.reset();
     });

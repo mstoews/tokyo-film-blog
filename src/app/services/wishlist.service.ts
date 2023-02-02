@@ -155,7 +155,7 @@ export class WishListService {
         `users/${this.userId}/wishlist/`
       );
       collectionRef.add(mtProduct);
-      this.snack.open('Wish list has been added ...', 'Close');
+      this.snack.open('Wish list has been added ...', 'OK', {duration: 3000 });
     }
   }
 
@@ -167,7 +167,7 @@ export class WishListService {
     const collectionRef = this.afs.collection(`users/${this.userId}/wishlist/${productId}/id`);
     const wishlistId = collectionRef.get()
     if (wishlistId){
-      this.snack.open('Item is already in your wishlist... ', 'Close');
+      this.snack.open('Item is already in your wishlist... ', '', {duration: 3000});
       return true;
     }
     else
@@ -215,7 +215,7 @@ export class WishListService {
         };
         const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
         collectionRef.add(cart);
-        this.snack.open('Added to your cart... ', 'Close');
+        this.snack.open('Added to your cart... ', 'OK', {duration: 3000 });
       });
     }
     // delete from wishlist if existing

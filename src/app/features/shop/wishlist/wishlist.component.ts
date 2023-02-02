@@ -22,7 +22,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
     private wishListService: WishListService,
-    private snack: MatSnackBar
+  
     ) { }
 
   ngOnInit(): void {

@@ -10,7 +10,7 @@ export class SnackService {
   constructor(private snackBar: MatSnackBar, private router: Router) {}
 
   httpMessageSent(partyRef: string) {
-    this.snackBar.open('Message Sent to GLOSS: ' + partyRef, '', {
+    this.snackBar.open('Message Sent to GLOSS: ' + partyRef, 'OK', {
       duration: 3000,
     });
 
@@ -29,7 +29,7 @@ export class SnackService {
   }
 
   showMessage(message: string) {
-    this.snackBar.open(message, '', {
+    this.snackBar.open(message, 'OK', {
       duration: 3000,
     });
   }

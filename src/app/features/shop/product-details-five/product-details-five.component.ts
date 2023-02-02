@@ -105,7 +105,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       if (found) {
         this.snackBar.open(
           'The item already exists in your wishlist ... ',
-          'Close'
+          'OK', { duration: 3000 }
         );
         return;
       } else {
@@ -125,8 +125,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       });
       if (found) {
         this.snackBar.open(
-          'The item already exists in your cart ... ',
-          'Close'
+          'The item already exists in your cart ... ', 
+          'OK', {duration: 3000 } 
         );
         return;
       } else {
