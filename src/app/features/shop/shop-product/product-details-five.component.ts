@@ -7,7 +7,7 @@ import {
 import { Product } from 'app/models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/services/products.service';
-import { first, map, Observable, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { WishListService } from 'app/services/wishlist.service';
 import { CheckoutService } from 'app/services/checkout.service';
 import { CartService } from 'app/services/cart.service';
@@ -32,6 +32,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   Categories$: Observable<Category[]>;
   sub: Subscription;
   cartCount = 0;
+  wishListCount = 0; 
   product: Product;
   isLoggedIn$: Observable<boolean>;
 
@@ -82,7 +83,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       this.wishlistService
         .wishListByUserId(this.authService.userData.uid)
         .subscribe((wishlist) => {
-          this.cartCount = wishlist.length;
+          this.wishListCount = wishlist.length;
           wishlist.forEach((item) => {
             this.wishListIds.push(item.product_id);
           });
@@ -142,13 +143,23 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-    if (this.loggedIn === true) {
+    if (this.authService.userData.uid  !== undefined) {
       if (this.cartCount > 0) {
         this.route.navigate(['shop/cart', this.authService.userData.uid]);
       }
+      else {
+        this.snackBar.open('There are no items in your cart', 'OK', {
+          duration: 3000,
+        });
+        return;
+      }
     } else {
-      this.route.navigate(['shop/coming-soon']);
+      this.snackBar.open('You must be logged in access the cart', 'OK', {
+        duration: 3000,
+      });
+       this.snackBar._openedSnackBarRef!.onAction().subscribe();
     }
+    this.route.navigate(['shop/coming-soon']);
   }
 
   ngOnDestroy() {

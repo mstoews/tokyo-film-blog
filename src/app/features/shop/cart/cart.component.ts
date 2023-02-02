@@ -55,19 +55,20 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onCheckOut() {
+    this.route.navigate(['/shop/checkout']);
     // if (this.admin_login === true) {
-      if (this.cartId !== undefined) {
-        this.purchaseStarted = true;
-        this.checkoutService
-          .startProductCheckoutSession(this.cartId)
-          .subscribe((checkoutSession) => {
-            this.checkoutService.redirectToCheckout(checkoutSession);
-          });
-        this.purchaseStarted = false;
-      } else {
-        alert('Try again in one moment or refresh the screen');
-        this.purchaseStarted = false;
-      }
+      // if (this.cartId !== undefined) {
+      //   this.purchaseStarted = true;
+      //   this.checkoutService
+      //     .startProductCheckoutSession(this.cartId)
+      //     .subscribe((checkoutSession) => {
+      //       this.checkoutService.redirectToCheckout(checkoutSession);
+      //     });
+      //   this.purchaseStarted = false;
+      // } else {
+      //   alert('Try again in one moment or refresh the screen');
+      //   this.purchaseStarted = false;
+      // }
     // } else {
     //   this.route.navigate(['/shop/coming-soon']);
     // }

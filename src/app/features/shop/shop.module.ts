@@ -8,7 +8,7 @@ import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 import { CartComponent } from './cart/cart.component';
-import { ProductDetailsFiveComponent } from './product-details-five/product-details-five.component';
+import { ProductDetailsFiveComponent } from './shop-product/product-details-five.component';
 import { ProductResolver } from 'app/services/product.resolver';
 import { SafePipe } from './safe.pipe';
 import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
@@ -18,7 +18,8 @@ import { CartResolver } from 'app/services/cart.resolver';
 import { WishListResolver } from 'app/services/wishlist.resolver';
 import { HeaderComponent } from 'app/components/header/header.component';
 import { NotificationComponent } from 'app/components/notification/notification.component';
-import { PurchaseThankdComponent } from './thanks/purchase-thanks';
+import { PurchaseThanksComponent } from './thanks/purchase-thanks';
+import { CheckoutComponent } from './checkout.component';
 
 const routes: Routes = [
   {
@@ -72,9 +73,17 @@ const routes: Routes = [
     path: 'purchase-thanks',
     pathMatch: 'full',
     title: 'Purchases',
-    component: ComingSoonComponent,
+    component: PurchaseThanksComponent,
     data: { state: 'purchase-thanks' }
   },
+  {
+    path: 'checkout',
+    pathMatch: 'full',
+    title: 'Checkouit',
+    component: PurchaseThanksComponent,
+    data: { state: 'checkout' }
+  },
+
 ];
 
 @NgModule({
@@ -88,7 +97,8 @@ const routes: Routes = [
     SafePipe,
     ComingSoonComponent,
     WishListComponent,
-    PurchaseThankdComponent,
+    PurchaseThanksComponent,
+    CheckoutComponent,
   ],
   imports: [
     CommonModule,

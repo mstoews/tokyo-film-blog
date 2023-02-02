@@ -26,10 +26,10 @@ export class SideNavComponent {
     ) {
     this.authService.afAuth.authState.subscribe((user) => {
           this.userId = user?.uid;
-          const userEmail = user?.email 
-          if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com' ) {
+          const userEmail = user?.email
+          if (userEmail === 'mstoews@hotmail.com' || userEmail === 'cassandraaprilharada@gmail.com' ) {
             this.admin_login = true;
-          } 
+          }
     })
 
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(

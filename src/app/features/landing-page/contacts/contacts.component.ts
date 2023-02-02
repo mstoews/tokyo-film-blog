@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { MainPageService } from 'app/services/main-page.service';
 import { Contact } from 'app/models/contact';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'environments/dev';
+import { environment } from 'environments/environment.prod';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { sendEmailVerification } from 'firebase/auth';
 import { ContactService } from 'app/services/contact.service';

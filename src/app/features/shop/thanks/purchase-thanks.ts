@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router'
   templateUrl: './purchase-thanks.html',
   styleUrls: ['./purchase-thanks.css']
 })
-export class PurchaseThankdComponent {
+export class PurchaseThanksComponent {
 
   constructor(private route: Router, private _location: Location ) {
 
