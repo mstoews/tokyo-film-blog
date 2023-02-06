@@ -20,6 +20,7 @@ import { HeaderComponent } from 'app/components/header/header.component';
 import { NotificationComponent } from 'app/components/notification/notification.component';
 import { PurchaseThanksComponent } from './thanks/purchase-thanks';
 import { CheckoutComponent } from './checkout.component';
+import { AddressComponent } from '../pages/profile/address/address.component';
 
 const routes: Routes = [
   {
@@ -79,8 +80,8 @@ const routes: Routes = [
   {
     path: 'checkout',
     pathMatch: 'full',
-    title: 'Checkouit',
-    component: PurchaseThanksComponent,
+    title: 'Checkout',
+    component: CheckoutComponent,
     data: { state: 'checkout' }
   },
 
@@ -99,6 +100,7 @@ const routes: Routes = [
     WishListComponent,
     PurchaseThanksComponent,
     CheckoutComponent,
+    
   ],
   imports: [
     CommonModule,
@@ -108,7 +110,8 @@ const routes: Routes = [
     SharedModule,
     NotificationComponent,
     RouterModule.forChild(routes),
-    HeaderComponent
+    HeaderComponent,
+    AddressComponent
   ]
 })
 export class ShopModule { }

@@ -7,6 +7,18 @@ import { Cart } from 'app/models/cart';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from "../../../services/auth/auth.service";
 
+interface profile {
+  email: string;
+  firstName: string;
+  lastName: string;
+  address: string;
+  address2: string;
+  postal_code: string;
+  country: string;
+  town: string;
+  phone: string;
+}
+
 @Component({
   selector: 'cart',
   templateUrl: './cart.component.html',
@@ -23,8 +35,8 @@ export class CartComponent implements OnInit, OnDestroy {
   grand_total: number;
   cartData: any;
   purchaseStarted: boolean;
-
   admin_login = false;
+  cartItemsAvailable: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -37,8 +49,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
       const userEmail = user?.email
-      if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com')
-      {
+      if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
         this.admin_login = true;
       }
     });
@@ -55,43 +66,52 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onCheckOut() {
-    this.route.navigate(['/shop/checkout']);
-    // if (this.admin_login === true) {
-      // if (this.cartId !== undefined) {
-      //   this.purchaseStarted = true;
-      //   this.checkoutService
-      //     .startProductCheckoutSession(this.cartId)
-      //     .subscribe((checkoutSession) => {
-      //       this.checkoutService.redirectToCheckout(checkoutSession);
-      //     });
-      //   this.purchaseStarted = false;
-      // } else {
-      //   alert('Try again in one moment or refresh the screen');
-      //   this.purchaseStarted = false;
-      // }
-    // } else {
-    //   this.route.navigate(['/shop/coming-soon']);
-    // }
+    //this.route.navigate(['/shop/checkout']);
+    if (this.admin_login === true) {
+      if (this.cartId !== undefined) {
+        this.purchaseStarted = true;
+        this.checkoutService
+          .startProductCheckoutSession(this.cartId)
+          .subscribe((checkoutSession) => {
+            this.checkoutService.redirectToCheckout(checkoutSession);
+          });
+        this.purchaseStarted = false;
+      } else {
+        alert('Try again in one moment or refresh the screen');
+        this.purchaseStarted = false;
+      }
+    } else {
+      this.route.navigate(['/shop/coming-soon']);
+    }
   }
 
   calculateTotals() {
+    this.cartItemsAvailable = false;
     this.grand_total = 0.0;
     this.total = 0.0;
     let total = 0.0;
     let tax = 0.0;
     this.cart$.subscribe((result) => {
       result.forEach((item) => {
-        var pricestring = item.price;
-        var price: number = +pricestring;
+        let pricestring = item.price;
+        let price: number = +pricestring;
         total = price + total;
         this.cartId = item.id;
       });
-      let grand_total = 0;
+      let grand_total = 0.0;
       this.total = total;
       this.tax = Math.trunc(this.total * 0);
-      this.shipping = Math.trunc(4000);
+      this.shipping = Math.trunc(20);
+      if (this.total > 500) {
+        this.shipping = Math.trunc(40)
+      }
+      if (this.total === 0) {
+        this.shipping = Math.trunc(0)
+      }
       this.grand_total = this.round(this.total + this.tax + this.shipping, 2);
-      // console.log(`Tax : ${this.tax} ${this.total} ${this.shipping} ${grand_total}`)
+      if (this.grand_total > 0 ) {
+        this.cartItemsAvailable = true;
+      }
     });
   }
 
@@ -111,7 +131,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.route.navigate(['shop']);
   }
 
-  ngOnDestroy(): void {}
+  
+
+  ngOnDestroy(): void { }
 
   onRemoveItem(item: string) {
     this.cartService.delete(item);

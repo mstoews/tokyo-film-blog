@@ -16,7 +16,8 @@ export const environment = {
     prdUrl: "https://made-to-cassie.df.r.appspot.com",
     baseUrl: "https://made-to-cassie.df.r.appspot.com/",
     stripeDevUrl: "https://made-to-dev.df.r.appspot.com",
-    createMessage: "https://us-central1-made-to-cassie.cloudfunctions.net/createMessage",
-    createUser: "https://us-central1-made-to-cassie.cloudfunctions.net/createUser",
+    createMessage: "https://made-to-cassie.df.r.appspot.com/api/createMessage",
+    createUser: "https://made-to-cassie.df.r.appspot.com/api/createUser",
+
   }
 };

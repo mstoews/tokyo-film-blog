@@ -21,11 +21,12 @@ createMessageApp.post("/", async (req, res) => {
       name: req.body.name,
       message: req.body.message,
     };
-    db.collection("contacts").add({contactMessage});
+    await db.collection("contacts").add({contactMessage});
     res.status(200).json({message: "Contact message created successfully."});
   } catch (err) {
     functions.logger.error("Could not create message.", err);
     res.status(500).json({message: "Could not create contact message."});
   }
+
 });
 

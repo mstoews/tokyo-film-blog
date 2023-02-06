@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contact } from 'app/models/contact';
 import { Observable } from 'rxjs';
@@ -16,7 +16,8 @@ export class ContactsService {
       name: contact.name,
       email: contact.email,
       message : contact.message,
-      phone: contact.phone
     }).pipe(res => res);
   }
+
+  
 }

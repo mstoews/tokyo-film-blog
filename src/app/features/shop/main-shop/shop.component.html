@@ -1,7 +1,7 @@
 <div *ngIf="Products$ | async as products">
-  <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9">
-        <div class="flex flex-col sm:flex-row sm:space-x-4">
-          <mat-toolbar class="w-full text-4xl font-bold">
+  <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9 bg-gray-50">
+        <div class="flex flex-col sm:flex-row sm:space-x-4 bg-gray-50">
+          <mat-toolbar class="w-full text-4xl font-bold bg-gray-50">
             <mat-toolbar-row>
               <span class="font-garamond">Shop</span>
               <span class="flex-auto"></span>
@@ -10,7 +10,7 @@
               </button>
             </mat-toolbar-row>
             <mat-toolbar-row>
-              <button class="font-garamond bg-gray-100" [matMenuTriggerFor]="menu" mat-flat-button matTooltip="Select Category" aria-label="menu">
+              <button class="font-garamond bg-gray-50" [matMenuTriggerFor]="menu" mat-flat-button matTooltip="Select Category" aria-label="menu">
                   <span class="font-garamond text-2xl font-bold">Filter</span>
                   <mat-icon [svgIcon]="'heroicons_outline:filter'"></mat-icon>
               </button>

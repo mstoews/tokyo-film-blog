@@ -1,420 +1,75 @@
-<div class="container mx-auto">
-    <div class="w-full mx-auto">
-        <div class="w-full py-12 md:py-8 px-4 sm:px-0 md:px-6">
-            <p class="lg:text-4xl md:text-2xl text-2xl font-semibold leading-9 text-gray-800 sm:mb-8 mb-8 md:mb-8">
+<app-header title="Check out"></app-header>
+<div class="container mx-auto font-garamond">
+    <div class="lg:max-w-[1200px] md:max-w-[744px] max-w-[375px] mx-auto bg-white px-4 py-12">
+        <div class="lg:flex justify-center gap-8">
+
+            <div class="w-full py-12 md:py-8 px-4 sm:px-0 md:px-6">
+                <!-- <p class="lg:text-4xl md:text-2xl text-2xl font-semibold leading-9 text-gray-800 sm:mb-8 mb-8 md:mb-8">
                 Check out
-            </p>
-            <p class="lg:text-xl md:text-xl text-lg font-medium leading-tight text-gray-800 mb-6">
+            </p> -->
+            <p class="text-xl font-semibold leading-tight text-gray-800">
                 Contact Information
             </p>
-            <input type="email" name="email" id=""
-                class="pb-4 rounded border-b border-gray-200 w-full placeholder-gray-600 focus:outline-0"
-                placeholder="Email" />
-            <div class="flex mt-6">
-                <input type="checkbox" name="" id="" class="w-5 h-5 accent-gray-800 lg:mt-2 cursor-pointer" />
-                <p class="text-sm leading-none text-gray-600 pl-2 lg:mt-3 md:mt-1 mt-1">
-                    Email me with news and offers.
-                </p>
-            </div>
-        </div>
-        <div class="col-span-5"></div>
-    </div>
 
-    <div class="w-full">
-        <div class="w-full px-4 sm:px-0 md:px-6">
-            <p class="text-xl font-semibold leading-tight text-gray-800">
-                Shipping Details
-            </p>
-            <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
-                <input type="text" name="firstName" id=""
+                <input type="email" name="email" id=""
+                    class="pb-4 rounded border-b border-gray-200 w-full placeholder-gray-600 focus:outline-0"
+                    placeholder="Email" />
+            </div>
+            <div class="col-span-5"></div>
+        </div>
+
+        <div class="w-full">
+            <div class="w-full px-4 sm:px-0 md:px-6">
+                <p class="text-xl font-semibold leading-tight text-gray-800">
+                    Shipping Details
+                </p>
+                <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
+                    <input type="text" name="firstName" id=""
+                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+                        placeholder="First Name" />
+
+                    <input type="text" name="lastName" id=""
+                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
+                        placeholder="Last Name" />
+                </div>
+                <input type="text" name="address" id=""
                     class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
-                    placeholder="First Name" />
+                    placeholder="Address" />
+                <input type="text" name="address2" id=""
+                    class="pb-4 rounded-b border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+                    placeholder="Address (Line 02)" />
+
+                <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
+                    <input type="text" name="firstName" id=""
+                    class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+                    placeholder="Town/City" />
 
                 <input type="text" name="lastName" id=""
                     class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
-                    placeholder="Last Name" />
-            </div>
-            <input type="text" name="address" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
-                placeholder="Address" />
-            <input type="text" name="address2" id=""
-                class="pb-4 rounded-b border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
-                placeholder="Address (Line 02)" />
-            <div class="flex md:flex-row flex-col relative">
-                <div class="mx-auto mt-6 w-full">
-                    <div class="relative w-full">
-                        <p id="button1"
-                            class="px-2 border-b dark:text-gray-400 border-gray-200 text-left leading-4 text-base text-gray-600 py-4 w-full">
-                            Town/City
-                        </p>
-                        <button onclick="showMenu1(true)"
-                            class="text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-gray-500 rounded-full cursor-pointer absolute bottom-4 right-0">
-                            <img id="close" class="dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="open" class="hidden transform rotate-180 dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="close" class="hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                            <img id="open" class="hidden transform rotate-180 hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                        </button>
-                        <div id="menu" class="shadow absolute z-10 bg-white top-10 w-full mt-3 hidden">
-                            <div class="flex flex-col w-full">
-                                <p tabindex="0" onclick="changeButton1('Islamabad')"
-                                    class="focus:outline-none dark:bg-gray-800 dark:text-white cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    Islamabad
-                                </p>
-                                <p tabindex="0" onclick="changeButton1('Karachi')"
-                                    class="focus:outline-none dark:bg-gray-800 dark:text-white cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    Karachi
-                                </p>
-                                <p tabindex="0" onclick="changeButton1('Multan')"
-                                    class="focus:outline-none dark:bg-gray-800 dark:text-white cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    Multan
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+                    placeholder="Phone Number" />
                 </div>
-                <div class="mx-auto mt-6 w-full md:ml-8">
-                    <div class="relative w-full">
-                        <p id="button2"
-                            class="px-2 border-b dark:text-gray-400 border-gray-200 text-left leading-4 text-base text-gray-600 py-4 w-full">
-                            Region
-                            <span class="text-gray-400"> (optional)</span>
-                        </p>
-                        <button onclick="showMenu2(true)"
-                            class="text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-gray-500 rounded-full cursor-pointer absolute bottom-4 right-0">
-                            <img id="close2" class="dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="open2" class="hidden transform rotate-180 dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="close2" class="hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                            <img id="open2" class="hidden transform rotate-180 hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                        </button>
-                        <div id="menu2" class="absolute z-10 bg-white top-10 shadow w-full mt-3 hidden">
-                            <div class="flex flex-col w-full">
-                                <p tabindex="0" onclick="changeButton2('South')"
-                                    class="dark:bg-gray-800 dark:text-white focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    South
-                                </p>
-                                <p tabindex="0" onclick="changeButton2('East')"
-                                    class="dark:bg-gray-800 dark:text-white focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    East
-                                </p>
-                                <p tabindex="0" onclick="changeButton2('West')"
-                                    class="dark:bg-gray-800 dark:text-white focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    West
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+
+
+                <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
+                    <input type="text" name="firstName" id=""
+                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+                        placeholder="Postal Code" />
+
+                    <input type="text" name="lastName" id=""
+                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
+                        placeholder="Country" />
                 </div>
-            </div>
-            <div class="flex md:flex-row flex-col">
-                <div class="mx-auto mt-6 w-full">
-                    <div class="relative w-full">
-                        <p id="button3"
-                            class="px-2 border-b dark:text-gray-400 border-gray-200 text-left leading-4 text-base text-gray-600 py-4 w-full">
-                            Zip Code
-                        </p>
-                        <button onclick="showMenu3(true)"
-                            class="text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-gray-500 rounded-full cursor-pointer absolute bottom-4 right-0">
-                            <img id="close3" class="dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="open3" class="hidden transform rotate-180 dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="close3" class="hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                            <img id="open3" class="hidden transform rotate-180 hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                        </button>
-                        <div id="menu3" class="absolute z-10 bg-white top-10 shadow w-full mt-3 hidden">
-                            <div class="flex flex-col w-full">
-                                <p tabindex="0 " onclick="changeButton3('16000')"
-                                    class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    16000
-                                </p>
-                                <p tabindex="0 " onclick="changeButton3('23000')"
-                                    class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    23000
-                                </p>
-                                <p tabindex="0 " onclick="changeButton3('67000')"
-                                    class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    67000
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mx-auto mt-6 w-full md:ml-8">
-                    <div class="relative w-full">
-                        <p id="button4"
-                            class="px-2 border-b dark:text-gray-400 border-gray-200 text-left leading-4 text-base text-gray-600 py-4 w-full">
-                            Country
-                        </p>
-                        <button onclick="showMenu4(true)"
-                            class="text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-gray-500 rounded-full cursor-pointer absolute bottom-4 right-0">
-                            <img id="close4" class="dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="open4" class="hidden transform rotate-180 dark:hidden"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                alt="Dropdown" />
-                            <img id="close4" class="hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                            <img id="open4" class="hidden transform rotate-180 hidden dark:block"
-                                src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                alt="Dropdown" />
-                        </button>
-                        <div id="menu4" class="absolute z-10 bg-white top-10 shadow w-full mt-3 hidden">
-                            <div class="flex flex-col w-full">
-                                <p tabindex="0 " onclick="changeButton4('USA')"
-                                    class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    USA
-                                </p>
-                                <p tabindex="0 " onclick="changeButton4('UK')"
-                                    class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    UK
-                                </p>
-                                <p tabindex="0 " onclick="changeButton4('Russia')"
-                                    class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                    Russia
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <input type="tel" name="address" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
-                placeholder="Phone Number" />
-            <div class="flex mt-4">
-                <input type="checkbox" name="" id="" class="w-5 h-5 accent-gray-800 lg:mt-5 cursor-pointer" />
-                <p class="text-sm leading-none text-gray-600 pl-2 lg:mt-6 md:mt-1 mt-1">
-                    Save this information for next time.
-                </p>
+
+
             </div>
         </div>
-    </div>
 
-    <div class="relative md:pb-20 pb-9 px-4 sm:px-0 md:px-6">
-        <div class="grid grid-cols-12">
-            <div class="lg:col-start-1 md:col-start-0 lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
-                <div class="lg:mt-12 md:mt-8 mt-8 lg:ml-0 md:ml-0 ml-0 col-span-10">
-                    <p class="text-xl font-semibold leading-tight text-gray-800">
-                        Order Summary
-                    </p>
-                    <div class="product-container">
-                        <div class="sm:flex items-start mt-10">
-                            <div class="sm:w-48 w-full">
-                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Rectangle%20193.png"
-                                    class="w-full" alt="" />
-                            </div>
-                            <div class="flex items-start justify-between w-full">
-                                <div class="sm:ml-8">
-                                    <p class="text-lg font-medium leading-none text-gray-800 mt-6 sm:mt-0">
-                                        Sweat Shirt
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        White
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Small
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Quantity: 1
-                                    </p>
-                                </div>
-                                <p class="text-lg font-semibold leading-none text-gray-800 mt-6 sm:mt-0">
-                                    $20
-                                </p>
-                            </div>
-                        </div>
-                        <div class="sm:flex items-start mt-10">
-                            <div class="sm:w-48 w-full">
-                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Rectangle%20194.png"
-                                    class="w-full" alt="" />
-                            </div>
-                            <div class="flex items-start justify-between w-full">
-                                <div class="sm:ml-8">
-                                    <p class="text-lg font-medium leading-none text-gray-800 mt-6 sm:mt-0">
-                                        Air Jordens
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Black and Orange
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Size:41
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Quantity: 2
-                                    </p>
-                                </div>
-                                <p class="text-lg font-semibold leading-none text-gray-800 mt-6 sm:mt-0">
-                                    $40
-                                </p>
-                            </div>
-                        </div>
-                        <div class="sm:flex items-start mt-10">
-                            <div class="sm:w-48 w-full">
-                                <img src="https://tuk-cdn.s3.amazonaws.com/can-uploader/Rectangle%20195.png"
-                                    class="w-full" alt="" />
-                            </div>
-                            <div class="flex items-start justify-between w-full">
-                                <div class="sm:ml-8">
-                                    <p class="text-lg font-medium leading-none text-gray-800 mt-6 sm:mt-0">
-                                        Pack of 3 Denim Jeans
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Blue, Gray, Black
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Size:41
-                                    </p>
-                                    <p class="text-base leading-none text-gray-600 mt-4">
-                                        Quantity: 1
-                                    </p>
-                                </div>
-                                <p class="text-lg font-semibold leading-none text-gray-800 mt-6 sm:mt-0">
-                                    $70
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="div flex justify-between lg:mt-12 md:mt-12 mt-8">
-                            <div class="title">
-                                <p class="text-lg leading-none text-gray-600">
-                                    Total items
-                                </p>
-                            </div>
-                            <div class="price">
-                                <p class="text-lg font-semibold leading-none text-gray-600">
-                                    07
-                                </p>
-                            </div>
-                        </div>
-                        <div class="div flex justify-between mt-6">
-                            <div class="title">
-                                <p class="text-lg leading-none text-gray-600">
-                                    Total Charges
-                                </p>
-                            </div>
-                            <div class="price">
-                                <p class="text-lg font-semibold leading-none text-gray-600">
-                                    $80
-                                </p>
-                            </div>
-                        </div>
-                        <div class="div flex justify-between mt-6">
-                            <div class="title">
-                                <p class="text-lg leading-none text-gray-600">
-                                    Shipping charges
-                                </p>
-                            </div>
-                            <div class="price">
-                                <p class="text-lg font-semibold leading-none text-gray-600">
-                                    $90
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="w-full bg-gray-200 border mt-6 h-[1px]" />
-                        <div class="div flex justify-between mt-6">
-                            <div class="title">
-                                <p class="text-2xl font-semibold leading-normal text-gray-800">
-                                    Total
-                                </p>
-                            </div>
-
-                            <div class="price">
-                                <p class="text-2xl font-semibold leading-normal text-gray-800">
-                                    $170
-                                </p>
-                            </div>
-                        </div>
-                        <hr class="w-full bg-gray-200 border mt-6 h-[1px]" />
-
-                        <div class="grid grid-cols-12 lg:mt-16 md:mt-16 mt-8">
-                            <div
-                                class="sm:col-start-1 col-start-1 sm:col-span-10 col-span-12 md:col-span-12 lg:px-0 sm:px-0 md:px-0">
-                                <p class="text-xl font-semibold leading-tight text-gray-800">
-                                    Payment Method
-                                </p>
-                                <div class="flex md:flex-row flex-col">
-                                    <input type="text" name="firstName" id=""
-                                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
-                                        placeholder="Name of Card" />
-
-                                    <input type="text" name="lastName" id=""
-                                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 md:ml-8 focus:outline-0"
-                                        placeholder="Card Number" />
-                                </div>
-
-                                <div class="flex flex-col sm:flex-row md:flex-col lg:flex-row relative">
-                                    <div class="mx-auto mt-6 w-full">
-                                        <div class="relative w-full">
-                                            <p id="button5"
-                                                class="px-2 border-b dark:text-gray-400 border-gray-200 text-left leading-4 text-base text-gray-600 py-4 w-full">
-                                                Expiry Date
-                                            </p>
-                                            <button onclick="showMenu5(true)"
-                                                class="text-gray-600 dark:text-gray-400 focus:outline-none focus:ring-2 focus:ring-2 focus:ring-gray-500 rounded-full cursor-pointer absolute bottom-4 right-0">
-                                                <img id="close5" class="dark:hidden"
-                                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                                    alt="Dropdown" />
-                                                <img id="open5" class="hidden transform rotate-180 dark:hidden"
-                                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1.svg"
-                                                    alt="Dropdown" />
-                                                <img id="close5" class="hidden dark:block"
-                                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                                    alt="Dropdown" />
-                                                <img id="open5" class="hidden transform rotate-180 hidden dark:block"
-                                                    src="https://tuk-cdn.s3.amazonaws.com/can-uploader/checkout-5-part-2-svg1dark.svg"
-                                                    alt="Dropdown" />
-                                            </button>
-                                            <div id="menu5"
-                                                class="absolute z-10 bg-white top-10 shadow w-full mt-3 hidden">
-                                                <div class="flex flex-col w-full">
-                                                    <p tabindex="0 " onclick="changeButton5('  1/2/2022')"
-                                                        class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                                        1/2/2022
-                                                    </p>
-                                                    <p tabindex="0 " onclick="changeButton5(' 1/2/2023')"
-                                                        class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                                        1/2/2023
-                                                    </p>
-                                                    <p tabindex="0 " onclick="changeButton5(' 1/2/2024')"
-                                                        class="dark:text-white dark:bg-gray-800 focus:outline-none cursor-pointer px-3 hover:text-white hover:bg-gray-800 focus:bg-gray-800 focus:text-white text-left text-base text-gray-600 py-2 w-full">
-                                                        1/2/2024
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <input type="text" name="lastName" id=""
-                                        class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
-                                        placeholder="CVC" />
-                                </div>
-                            </div>
-                        </div>
+        <div class="relative md:pb-20 pb-9 px-4 sm:px-0 md:px-6">
+            <div class="grid grid-cols-12">
+                <div class="lg:col-start-1 md:col-start-0 lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
+                    <div class="lg:mt-12 md:mt-8 mt-8 lg:ml-0 md:ml-0 ml-0 col-span-10">
                         <div class="div flex w-full md:pt-12 pt-8">
-                            <button
+                            <button (click)="onCheckOut()"
                                 class="text-base font-medium leading-none text-white bg-gray-800 py-4 w-full hover:bg-gray-700 transform duration-300 ease-in-out">
                                 Complete Purchase
                             </button>
@@ -424,4 +79,5 @@
             </div>
         </div>
     </div>
+    
 </div>

@@ -10,10 +10,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { FuseCardModule } from '@fuse/components/card';
 import { ProfileComponent } from './profile.component';
 import { profileRoutes } from './profile.routing';
+import { HeaderComponent } from 'app/components/header/header.component';
+import { MatCardModule } from '@angular/material/card';
+import { AddressComponent } from './address/address.component';
 
 @NgModule({
     declarations: [
-        ProfileComponent
+        ProfileComponent,
     ],
     imports     : [
         RouterModule.forChild(profileRoutes),
@@ -25,6 +28,9 @@ import { profileRoutes } from './profile.routing';
         MatMenuModule,
         MatTooltipModule,
         FuseCardModule,
+        MatCardModule,
+        HeaderComponent,
+        AddressComponent
     ],
     exports: [
       ProfileComponent

@@ -10,17 +10,12 @@ import { Router } from '@angular/router';
 export class ProfileComponent
 {
 
-
   backToHome() {
     this.router.navigate(['home'])
   }
-    /**
-     * Constructor
-     */
+ 
     constructor(private router: Router)
     {
 
     }
-
-
 }

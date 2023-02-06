@@ -1,36 +1,3 @@
-<div class="py-12 px-4">
-  <div class="text-center">
-    <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Made-To Online Shopping User Profile</h2>
-    <!-- <p class="mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">Some of our thought and images from in and around Tokyo</p> -->
-  </div>
-  <button  mat-icon-button (click)="backToHome()" class="sm-hidden lg:visible md:visible absolute top-12 mb-20 items-left text-3xl font-semibold text-gray-700 align-middle rounded-lg right-30 btn hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700" >
-      <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-  </button>
-
-  <div
-    class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white relative lg:px-10 md:px-6 px-4 py-7"
-  >
-    <div
-      class="lg:max-w-[1280px] md:max-w-[696px] max-w-[343px] mx-auto bg-gray-200"
-    >
-      <div class="lg:flex md:flex block justify-between items-center">
-        <div class="md:p-10 p-4">
-          <p class="text-3xl font-semibold leading-9 text-gray-800 py-4">
-            Our Online shop will open in January.
-          </p>
-          <p class="text-base leading-normal text-gray-600">
-            Please contact us directly for more information or we can send you a reminder when we are up and running.
-          </p>
-        </div>
-        <div class="md:p-10 p-4">
-          <img
-            src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F73E845C7-9390-48D5-BFA5-D38BE3510D28_800x800.jpeg?alt=media&token=395dbdaf-fd01-48d8-af10-4dbe6efa1dbc"
-            class="w-full h-full"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
+<app-header [title]="'User Profile'"></app-header>
+<app-address></app-address>
 

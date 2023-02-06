@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Mainpage } from 'app/models/mainpage';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { MainPageService } from 'app/services/main-page.service';
 import { Contact } from 'app/models/contact';
 import { HttpClient } from '@angular/common/http';
@@ -50,19 +50,20 @@ export class ContactsComponent implements OnInit {
 
   onUpdate(contact: Contact) {
 
-    // this.contactService.create(contact);
-    // this.contactGroup.reset();
-    // this._snackBar.open('Connect message has been received, thank you', 'OK', {
-    //           duration: 2000
-    //         });
-
     this.http.post<any>(environment.api.createMessage, {
       name: contact.name,
       email: contact.email,
       message : contact.message
 
-    }).subscribe((response: any) => {
-          this._snackBar.open(response.message, 'OK', {
+    }).pipe( catchError( err => {
+      console.log('Error ', err);
+      this._snackBar.open(JSON.stringify(err), 'Not Sent', {
+        duration: 3000
+      });
+      return throwError(err);
+    }))
+    .subscribe((response: any) => {
+          this._snackBar.open(JSON.stringify(response.message), 'OK', {
             duration: 3000
           });
           this.contactGroup.reset();
