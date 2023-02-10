@@ -36,7 +36,7 @@
               </a>
             </li>
 
-            <ng-container *ngIf="loggedIn === true">
+<!--            <ng-container *ngIf="loggedIn === true">-->
               <li>
                 <a (click)="onWishList()"
                   class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
@@ -44,9 +44,9 @@
                   <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
                 </a>
               </li>
-            </ng-container>
+<!--            </ng-container>-->
 
-            <ng-container *ngIf="loggedIn === true">
+<!--            <ng-container *ngIf="loggedIn === true">-->
               <li>
                 <a (click)="onCart()"
                   class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl pr- grow hover:bg-gray-800 dark:hover:bg-gray-700">
@@ -54,8 +54,8 @@
                   <span class="flex-1 ml-3 whitespace-nowrap">Shopping Cart</span>
                 </a>
               </li>
-            </ng-container>
-            
+<!--            </ng-container>-->
+
             <ng-container *ngIf="admin_login === true">
             <li>
                 <a routerLink="admin" (click)="onAdmin()"
@@ -67,7 +67,6 @@
                 </a>
               </li>
             </ng-container>
-            
         </ng-container>
 
 

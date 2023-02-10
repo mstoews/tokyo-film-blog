@@ -24,6 +24,7 @@ interface profile {
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
 })
+
 export class CartComponent implements OnInit, OnDestroy {
   sub: Subscription;
   cart$: Observable<Cart[] | undefined>;
@@ -49,9 +50,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
       const userEmail = user?.email
-      if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
-        this.admin_login = true;
-      }
+      // if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
+      //   this.admin_login = true;
+      // }
     });
   }
 
@@ -65,10 +66,10 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
+
   onCheckOut() {
-    //this.route.navigate(['/shop/checkout']);
-    if (this.admin_login === true) {
-      if (this.cartId !== undefined) {
+    // this.calculateTotals();
+    if (this.userId === undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
           .startProductCheckoutSession(this.cartId)
@@ -76,29 +77,28 @@ export class CartComponent implements OnInit, OnDestroy {
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
         this.purchaseStarted = false;
+        this.grand_total = 0.0;
+        this.total = 0.0
       } else {
         alert('Try again in one moment or refresh the screen');
         this.purchaseStarted = false;
       }
-    } else {
-      this.route.navigate(['/shop/coming-soon']);
-    }
   }
 
   calculateTotals() {
     this.cartItemsAvailable = false;
     this.grand_total = 0.0;
     this.total = 0.0;
-    let total = 0.0;
-    let tax = 0.0;
     this.cart$.subscribe((result) => {
+      let total = 0.0;
       result.forEach((item) => {
         let pricestring = item.price;
         let price: number = +pricestring;
         total = price + total;
         this.cartId = item.id;
-      });
-      let grand_total = 0.0;
+      }
+      );
+
       this.total = total;
       this.tax = Math.trunc(this.total * 0);
       this.shipping = Math.trunc(20);
@@ -112,7 +112,7 @@ export class CartComponent implements OnInit, OnDestroy {
       if (this.grand_total > 0 ) {
         this.cartItemsAvailable = true;
       }
-    });
+    })
   }
 
   round(number: number, precision: number) {
@@ -131,9 +131,11 @@ export class CartComponent implements OnInit, OnDestroy {
     this.route.navigate(['shop']);
   }
 
-  
 
-  ngOnDestroy(): void { }
+
+  ngOnDestroy(): void {
+
+   }
 
   onRemoveItem(item: string) {
     this.cartService.delete(item);

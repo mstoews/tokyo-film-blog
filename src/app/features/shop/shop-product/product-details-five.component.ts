@@ -32,7 +32,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   Categories$: Observable<Category[]>;
   sub: Subscription;
   cartCount = 0;
-  wishListCount = 0; 
+  wishListCount = 0;
   product: Product;
   isLoggedIn$: Observable<boolean>;
 
@@ -43,7 +43,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   constructor(
     private route: Router,
     private activateRoute: ActivatedRoute,
-    private authService: AuthService,
+    public authService: AuthService,
     private checkoutService: CheckoutService,
     private wishlistService: WishListService,
     private productService: ProductsService,
@@ -58,7 +58,12 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   wishListIds: string[] = [];
   loggedIn: boolean = false;
 
+  userData: any;
+
+  userId: String;
+
   ngOnInit(): void {
+    this.userData = this.authService.userData;
     this.wishListIds = [];
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
@@ -106,15 +111,15 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       if (found) {
         this.snackBar.open(
           'The item already exists in your wishlist ... ',
-          'OK', { duration: 3000 }
+          'OK',
+          { duration: 3000 }
         );
         return;
       } else {
         this.wishlistService.createWishList(this.productId);
         this.wishListIds.push(this.productId);
       }
-    }
-    else {
+    } else {
       this.route.navigate(['shop/coming-soon']);
     }
   }
@@ -125,10 +130,9 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
         return item === this.productId;
       });
       if (found) {
-        this.snackBar.open(
-          'The item already exists in your cart ... ', 
-          'OK', {duration: 3000 } 
-        );
+        this.snackBar.open('The item already exists in your cart ... ', 'OK', {
+          duration: 3000,
+        });
         return;
       } else {
         this.wishlistService.addToCart(this.productId);
@@ -143,11 +147,10 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-    if (this.authService.userData.uid  !== undefined) {
+    if (this.authService.userData.uid !== undefined) {
       if (this.cartCount > 0) {
-        this.route.navigate(['shop/cart', this.authService.userData.uid]);
-      }
-      else {
+        this.route.navigate(['shop/cart', this.userId]);
+      } else {
         this.snackBar.open('There are no items in your cart', 'OK', {
           duration: 3000,
         });
@@ -157,7 +160,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       this.snackBar.open('You must be logged in access the cart', 'OK', {
         duration: 3000,
       });
-       this.snackBar._openedSnackBarRef!.onAction().subscribe();
+      this.snackBar._openedSnackBarRef!.onAction().subscribe();
     }
     this.route.navigate(['shop/coming-soon']);
   }

@@ -28,7 +28,6 @@ import { BlogImageSelectionComponent } from './blog-image-selection/blog-image-s
     HeaderComponent,
     FuseCardModule,
     IconsModule,
-    MaterialModule,
     BlogEditRoutingModule,
   ],
   providers: [BlogResolver],

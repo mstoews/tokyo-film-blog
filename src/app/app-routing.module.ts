@@ -19,44 +19,53 @@ const routes: Route[] = [
    {
     path: 'authentication',
     loadChildren: () => import('./features/pages/authentication/authentication.module').then((mod) => mod.AuthenticationModule),
-    data: { state: 'authenication' }
+    data: { state: 'authenication' },
+    title: 'Login'
    },
    {
     path: 'shop',
     loadChildren: () => import('./features/shop/shop.module').then( (mod) => mod.ShopModule),
-    data: { state: 'shop' }
+    data: { state: 'shop' },
+    title: 'Shop'
    },
    {
     path: 'blog',
     loadChildren: () => import('./features/blog/blog.module').then( (mod) => mod.BlogModule),
-    data: { state: 'blog' }
+    data: { state: 'blog' },
+    title: 'Thoughts'
+
    },
    {
     path: 'blog-admin',
     loadChildren: () => import('./features/blog-admin/blog-admin.module').then( (mod) => mod.BlogAdminModule),
-    data: { state: 'blog-admin' }
+    data: { state: 'blog-admin' },
+    title: 'Blog Admin'
    },
 
    {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.module').then( (mod) => mod.AdminModule),
     canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome, state: 'admin'  }
+    data: { authGuardPipe: redirectLoggedInToHome, state: 'admin'  },
+    title: 'Maintenance'
    },
    {
     path: 'collections',
     loadChildren: () => import('./features/products/products.module').then( (mod) => mod.ProductsModule),
-    data: { state: 'collections' }
+    data: { state: 'collections' },
+    title: 'Collection'
    },
    {
     path: 'stripe-checkout',
     loadChildren: () => import('./features/stripe/stripe.module').then( (mod) => mod.StripeModule),
-    data: { state: 'strip-checkout' }
+    data: { state: 'strip-checkout' },
+    title: 'Checkout'
    },
    {
     path: 'profile',
     loadChildren: () => import('./features/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
-    data: { state: 'profile' }
+    data: { state: 'profile' },
+    title: 'Profile'
    },
    {
     path: '**',

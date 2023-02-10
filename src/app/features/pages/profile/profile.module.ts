@@ -1,18 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { FuseCardModule } from '@fuse/components/card';
 import { ProfileComponent } from './profile.component';
 import { profileRoutes } from './profile.routing';
 import { HeaderComponent } from 'app/components/header/header.component';
-import { MatCardModule } from '@angular/material/card';
 import { AddressComponent } from './address/address.component';
+import { MaterialModule } from "../../../material.module";
 
 @NgModule({
     declarations: [
@@ -20,15 +13,8 @@ import { AddressComponent } from './address/address.component';
     ],
     imports     : [
         RouterModule.forChild(profileRoutes),
-        MatButtonModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatMenuModule,
-        MatTooltipModule,
+        MaterialModule,
         FuseCardModule,
-        MatCardModule,
         HeaderComponent,
         AddressComponent
     ],

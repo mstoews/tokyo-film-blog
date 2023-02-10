@@ -39,6 +39,7 @@ export class AuthService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
+        console.log('UserID : ',JSON.stringify(user));
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
@@ -50,6 +51,27 @@ export class AuthService {
 
   getAuth(): Observable<boolean> {
     return this.isLoggedIn$;
+  }
+
+  async loginAnonymously(){
+    this.afAuth.signInAnonymously().then((result) => {
+      //this.SendVerificationMail();
+      this.SetUserData(result.user);
+    })
+    .catch((error) => {
+      window.alert(error.message);
+    });
+    //.catch(function(error) {
+    //   // Handle Errors here.
+    //   let errorCode = error.code;
+    //   let errorMessage = error.message;
+
+    //   if (errorCode === 'auth/operation-not-allowed') {
+    //     alert('You must enable Anonymous auth in the Firebase Console.');
+    //   } else {
+    //     console.error(error);
+    //   }
+    // });
   }
 
   async signIn(email: string, password: string) {
@@ -74,6 +96,12 @@ export class AuthService {
       console.error(e);
       return;
     }
+  }
+  async SignOut() {
+    return this.afAuth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.router.navigate(['sign-in']);
+    });
   }
 
   async registerUser(user: IUser, password: string) {
@@ -149,10 +177,5 @@ export class AuthService {
     });
   }
   // Sign out
-  async SignOut() {
-    return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
-    });
-  }
+
 }

@@ -190,18 +190,19 @@ export class ImageListService {
     this.imageItemCollections.doc(id).delete();
   }
 
+  // creates a list of all images currently names in the imae
   updateRawImageList() {
+    this.rawImagesArray = [];
     this.getAll().subscribe(imageList => {
       this.rawImagesArray = imageList;
     })
   }
 
-
   createRawImagesList() {
     this.updateRawImageList();
     let ranking = 0;
     this.storage
-      .ref('inventory/400')
+      .ref('/800')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {
@@ -230,6 +231,4 @@ export class ImageListService {
         });
       });
     }
-
-
 }

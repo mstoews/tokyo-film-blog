@@ -27,8 +27,8 @@ export class ShellComponent implements OnInit {
   divClicked = false;
   isClicked = false;
   doAnimation = false;
-  private cartCount = 0;
-  private wishCount = 0;
+  public cartCount = 0;
+  public wishCount = 0;
 
   constructor(
     private breakpointObserver: BreakpointObserver,
@@ -93,9 +93,9 @@ export class ShellComponent implements OnInit {
     this.drawer.mode = "side";
   }
 
-  logout() {
+  async logout() {
     this.loading = true;
-    this.authService.SignOut();
+    await this.authService.signOut();
     this.loading = false;
   }
 

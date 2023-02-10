@@ -1,4 +1,4 @@
-<div class="flex-container">
+<div class="h-screen flex-container">
   <header class="m-1 bg-gray-700 flex-header">
     <mat-toolbar class="text-white bg-gray-700 rounded-lg">
       <button class="transition hover:rotate-180" [ngClass]="{ clicked: isClicked }" type="button"
@@ -37,32 +37,21 @@
         </div>
 
 
-
-      <div *ngIf="isLoggedIn">
         <div class="sm:visible  xl:visible md:visible lg:visible">
           <a (click)="openWishList()" matTooltip="Wish List"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
              <mat-icon [matBadge]=wishCount [matBadgeHidden]="wishCount===0" [svgIcon]="'heroicons_outline:gift'"></mat-icon>
           </a>
         </div>
-      </div>
 
-      <div *ngIf="isLoggedIn">
+
+
         <div class="sm:visible  xl:visible md:visible lg:visible">
           <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
             class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
              <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0" [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
           </a>
         </div>
-      </div>
-
-      <!-- <div *ngIf="!isLoggedIn">
-        <a routerLink="/authentication/sign-in/classic" matTooltip="Log In"
-          class="flex items-center p-2 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
-          <mat-icon [svgIcon]="'mat_outline:login'"></mat-icon>
-        </a>
-      </div>
-      -->
 
       <div>
         <a [matMenuTriggerFor]="menu" matTooltip="Profile"
@@ -107,7 +96,7 @@
       </mat-menu>
     </mat-toolbar>
   </header>
-  <mat-sidenav-container class="flex-1">
+  <mat-sidenav-container class="flex-1 bg-white">
     <mat-sidenav class="ml-1 bg-gray-700 rounded-lg " #drawer mode="over" closed
       [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
       <app-sidenav
@@ -115,16 +104,16 @@
       (notifyParentDrawerOpen)="openDrawer()"
       ></app-sidenav>
     </mat-sidenav>
-    <main class="ml-2 mr-1 text-gray-800 bg-gray-100 rounded-lg flex-main">
-      <article class="flex-article bg-gray-50">
+    <main class="ml-2 mr-1 text-gray-800 bg-white rounded-lg flex-main">
+      <article class="flex-article bg-white">
         <ng-content>
 
         </ng-content>
       </article>
     </main>
   </mat-sidenav-container>
-  
-
+ 
 </div>
 <app-footer></app-footer>
+
 

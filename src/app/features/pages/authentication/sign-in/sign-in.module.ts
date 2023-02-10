@@ -23,7 +23,9 @@ const routes: Routes = [
         children: [
             {
                 path     : 'classic',
-                component: SignInClassicComponent
+                component: SignInClassicComponent,
+                data: { state: 'classic' }
+
             },
             {
                 path     : 'modern',
@@ -32,11 +34,13 @@ const routes: Routes = [
             },
             {
                 path     : 'modern-reversed',
-                component: SignInModernReversedComponent
+                component: SignInModernReversedComponent,
+                data: { state: 'modern-reversed' }
             },
             {
                 path     : 'split-screen',
-                component: SignInSplitScreenComponent
+                component: SignInSplitScreenComponent,
+                data: { state: 'split-screen' }
             },
             {
                 path     : 'split-screen-reversed',

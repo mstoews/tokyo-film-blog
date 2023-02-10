@@ -154,6 +154,8 @@ export class WishListService {
       const collectionRef = this.afs.collection(
         `users/${this.userId}/wishlist/`
       );
+      // create an api call to the server to create the wish list on the userId
+      // if the users is not logged in create a user id from an anonymous login.
       collectionRef.add(mtProduct);
       this.snack.open('Wish list has been added ...', 'OK', {duration: 3000 });
     }
