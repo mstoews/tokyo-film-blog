@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { profile} from "../../../../models/profile";
+import { IProfile } from "../../../../models/profile";
 import { Observable } from "rxjs";
 import { MaterialModule } from "../../../../material.module";
+import { profileService } from "app/services/profile.service";
+import { IpcNetConnectOpts } from "net";
 
 @Component({
   standalone: true,
@@ -10,26 +12,53 @@ import { MaterialModule } from "../../../../material.module";
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.css'],
   imports: [
-   MaterialModule,]
+    MaterialModule,]
 })
-export class AddressComponent implements  OnInit {
+export class AddressComponent implements OnInit {
+onUpdate(arg0: any) {
+throw new Error('Method not implemented.');
+}
 
+  profile: IProfile;
+  profile$: Observable<IProfile>;
+  formGroup: FormGroup;
 
-  constructor (private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    profileService: profileService,
+    ) {
 
+      this.profile$ = profileService.getUserProfile();
+
+      const address : IProfile = {
+        email: '',
+        first_name: '',
+        last_name:'',
+        middle_name:'',
+        address_line1:'',
+        address_line2: '',
+        city: '',
+        provence_state: '',
+        postal_code: '',
+        phone_number: ''
+      }
+
+      this.createForm(address);
   }
   ngOnInit() {
 
+
   }
 
-  addressForm: FormGroup
-onUpdateProfile() {
+  onUpdateProfile() {
+    let data = this.formGroup.getRawValue();
+    
+  }
 
-}
-  profile: profile;
-  profile$: Observable<profile>;
-  createForm(profile: profile) {
-    this.addressForm = this.fb.group({
+
+
+  createForm(profile: IProfile) {
+    this.formGroup = this.fb.group({
       email: [profile.email],
       first_name: [profile.first_name],
       last_name: [profile.last_name],

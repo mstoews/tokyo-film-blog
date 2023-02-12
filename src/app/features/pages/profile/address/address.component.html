@@ -1,8 +1,9 @@
 <!-- <ng-container *ngIf="productItem$ | async as product"> -->
 <mat-card>
-  <form [formGroup]="addressForm">
+  <form [formGroup]="formGroup" (ngSubmit)="onUpdate(formGroup.value)" class="form">
     <div class="py-12 px-4">
-      <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white relative lg:px-10 md:px-6 px-4 py-7">
+      <div
+        class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white relative lg:px-10 md:px-6 px-4 py-7">
         <div class="lg:flex justify-center gap-8">
 
           <div class="w-full py-12 md:py-8 px-4 sm:px-0 md:px-6">
@@ -12,18 +13,22 @@
             <p class="text-xl font-semibold leading-tight text-gray-800">
               Contact Information
             </p>
-            <input type="email" name="email" id=""
-            class="pb-4 rounded border-b border-gray-200 w-full placeholder-gray-600 focus:outline-0"
-            placeholder="Email" />
+
+            <input type="email"
+              class="text-gray-700 pb-4  border-b border-gray-200 w-full placeholder-gray-600 focus:outline-0"
+              placeholder="Email" formControlName="email" />
+
             <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
 
-              <input type="text" name="firstName" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
-                placeholder="First Name" />
 
-              <input type="text" name="lastName" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
-                placeholder="Last Name" />
+              <input type="text"
+                class="text-gray-700 pb-4  border-b  border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+                formControlName="first_name" placeholder="First Name" />
+
+
+              <input type="text"
+                class="text-gray-700 pb-4  border-b  border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
+                placeholder="Last Name" formControlName="last_name" />
             </div>
 
 
@@ -37,37 +42,50 @@
               Shipping Details
             </p>
 
-            <input type="text" name="address" id=""
-              class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+            <input name="address1" formControlName="address_line1"
+              class="text-gray-700 pb-4  border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
               placeholder="Address" />
-            <input type="text" name="address2" id=""
-              class="pb-4 rounded-b border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+
+            <input type="text" name="address2" formControlName="address_line2"
+              class="text-gray-700 pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
               placeholder="Address (Line 02)" />
 
             <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
-              <input type="text" name="firstName" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+
+              <input type="text" formControlName="city"
+                class="text-gray-700 pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
                 placeholder="Town/City" />
 
-              <input type="text" name="lastName" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
-                placeholder="Phone Number" />
+            
+                <input type="text" formControlName="province_state"
+                class="text-gray-700 pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
+                placeholder="State/Province" />
+
+            </div>
+             
+            
+
+            <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
+              <input type="text" formControlName="country"
+              class="text-gray-700 pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 focus:outline-0"
+              placeholder="Country" />
             </div>
 
 
             <div class="flex sm:flex-row md:flex-col flex-col lg:flex-row">
-              <input type="text" name="firstName" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
+              <input type="phone" formControlName="postal_code"
+                class="text-gray-700 pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 focus:outline-0"
                 placeholder="Postal Code" />
 
-              <input type="text" name="lastName" id=""
-                class="pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
-                placeholder="Country" />
+              <input type="text" formControlName="phone_number"
+                class="text-gray-700 pb-4 rounded border-b border-gray-200 block w-full placeholder-gray-600 mt-6 sm:ml-8 md:ml-0 lg:ml-8 focus:outline-0"
+                placeholder="Phone Number" />
             </div>
-
+          </div>
 
           </div>
-        </div>
+
+   
 
         <div class="relative md:pb-20 pb-9 px-4 sm:px-0 md:px-6">
           <div class="grid grid-cols-12">
@@ -89,4 +107,4 @@
     </div>
   </form>
 </mat-card>
-  <!-- </ng-container> -->
+<!-- </ng-container> -->

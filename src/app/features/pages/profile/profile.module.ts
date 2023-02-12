@@ -6,21 +6,28 @@ import { profileRoutes } from './profile.routing';
 import { HeaderComponent } from 'app/components/header/header.component';
 import { AddressComponent } from './address/address.component';
 import { MaterialModule } from "../../../material.module";
+import { SignOutModule } from '../authentication/sign-out/sign-out.module';
+import { TestFormComponent } from './test-form/test-form.component';
+
 
 @NgModule({
     declarations: [
         ProfileComponent,
+        TestFormComponent,
     ],
     imports     : [
         RouterModule.forChild(profileRoutes),
         MaterialModule,
         FuseCardModule,
         HeaderComponent,
-        AddressComponent
+        AddressComponent,
+        SignOutModule
+
     ],
     exports: [
       ProfileComponent
-    ]
+    ],
+    entryComponents: [TestFormComponent]
 })
 export class ProfileModule
 {

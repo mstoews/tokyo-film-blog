@@ -99,9 +99,7 @@ export class ShellComponent implements OnInit {
     this.loading = false;
   }
 
-  login() {
-    // this.router.navigate(["authenication/sign-in/classic"]);
-  }
+ 
   openShoppingCart() {
     this.router.navigate(['shop/cart', this.authService.userData.uid]);
   }

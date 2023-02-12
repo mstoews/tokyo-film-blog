@@ -1,4 +1,4 @@
-export interface profile {
+export interface IProfile {
   id?: string;
   email: string;
   first_name: string;
@@ -8,7 +8,6 @@ export interface profile {
   address_line2: string;
   city: string;
   provence_state: string;
-
   postal_code: string;
   phone_number?: string;
 }

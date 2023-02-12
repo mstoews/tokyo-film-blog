@@ -9,7 +9,9 @@ import {
 } from '@angular/animations';
 import { map, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService} from "./services/auth/auth.service";
 import { AuthTokenService } from './services/auth/auth-token.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -45,45 +47,31 @@ export class AppComponent  implements OnInit {
 
   constructor(
     private afAuth : AngularFireAuth,
-    private jwt: AuthTokenService
+    public authService: AuthService,
+    private snackBar: MatSnackBar
   )
   {
 
   }
 
   ngOnInit(): void {
-      this.isLoggedIn$ = this.afAuth.authState.pipe(map(user => !!user));
+      this.isLoggedIn$ = this.authService.isLoggedIn$.pipe(map(user => !!user));
+      //this.isLoggedIn$ = this.afAuth.authState.pipe(map(user => !!user));
       this.isLoggedOut$ = this.afAuth.authState.pipe(map(loggedIn => !loggedIn));
       this.pictureUrl$ = this.afAuth.authState.pipe(map(user => user ? user.photoURL: null));
-    //   this.isLoggedOut$.subscribe((loggedOut) =>{
-    //     if (loggedOut === true) {
-    //       this.afAuth.signInAnonymously().then(login => {
-    //         loggedOut = true;
-    //       })
-    //         .catch((error) => {
-    //           let errorCode = error.code;
-    //           let errorMessage = error.message;
-    //
-    //         });
-    //     }
-    //   });
-    //
-    // this.afAuth.onAuthStateChanged((user) => {
-    //   if (user) {
-    //     // User is signed in, see docs for a list of available properties
-    //     // https://firebase.google.com/docs/reference/js/firebase.User
-    //     let uid = user.uid;
-    //     // ...
-    //   } else {
-    //     // User is signed out
-    //     // ...
-    //   }
-    // })
-
-  }
-
-  logout() {
-    this.afAuth.signOut();
+      this.isLoggedOut$.subscribe((loggedOut) =>{
+      if (loggedOut === true) {
+          this.authService.loginAnonymously().then(login => {
+            loggedOut = false;
+          })
+            .catch((error) => {
+              let errorCode = error.code;
+              let errorMessage = error.message;
+              this.snackBar.open(`Failed to login anonymously: ${errorMessage}`,'Error', {duration: 3000} );
+            });
+        }
+      });
+    
   }
 
   title = 'Made-To';

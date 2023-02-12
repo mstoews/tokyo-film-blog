@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
 import { map, Observable, of } from 'rxjs';
 import { UserRoles } from 'app/models/user-roles';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -29,7 +30,8 @@ export class AuthService {
   constructor(
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
-    public router: Router
+    public router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.isLoggedIn$ = this.afAuth.authState.pipe(map((user: any) => !!user));
     this.isLoggedOut$ = this.afAuth.authState.pipe(map((loggedIn: any) => !!loggedIn));
@@ -43,11 +45,27 @@ export class AuthService {
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
-        localStorage.setItem('user', 'null');
-        JSON.parse(localStorage.getItem('user')!);
+        //localStorage.setItem('user', 'null');
+        //JSON.parse(localStorage.getItem('user')!);
+        this.loginAnonymously();
       }
     });
+   
+    this.afAuth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        console.log('Auth state changed : ',  JSON.stringify(user));
+        let uid = user.uid;
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    })
   }
+
+  
 
   getAuth(): Observable<boolean> {
     return this.isLoggedIn$;
@@ -59,19 +77,8 @@ export class AuthService {
       this.SetUserData(result.user);
     })
     .catch((error) => {
-      window.alert(error.message);
+      this.snackBar.open(error, 'Error', {duration: 3000 });
     });
-    //.catch(function(error) {
-    //   // Handle Errors here.
-    //   let errorCode = error.code;
-    //   let errorMessage = error.message;
-
-    //   if (errorCode === 'auth/operation-not-allowed') {
-    //     alert('You must enable Anonymous auth in the Firebase Console.');
-    //   } else {
-    //     console.error(error);
-    //   }
-    // });
   }
 
   async signIn(email: string, password: string) {
@@ -97,12 +104,12 @@ export class AuthService {
       return;
     }
   }
-  async SignOut() {
-    return this.afAuth.signOut().then(() => {
-      localStorage.removeItem('user');
-      this.router.navigate(['sign-in']);
-    });
-  }
+  // async SignOut() {
+  //   return this.afAuth.signOut().then(() => {
+  //     localStorage.removeItem('user');
+  //     this.router.navigate(['sign-in']);
+  //   });
+  // }
 
   async registerUser(user: IUser, password: string) {
     try {
@@ -138,6 +145,10 @@ export class AuthService {
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user')!);
     return user !== null && user.emailVerified !== false ? true : false;
+  }
+
+  async getUserId() { 
+   return (await this.afAuth.currentUser).uid    ;
   }
 
   async SendVerificationMail() {
