@@ -1,4 +1,4 @@
-<div class="h-screen flex-container">
+ <div class="h-screen flex-container">
   <header class="m-1 bg-gray-700 flex-header">
     <mat-toolbar class="text-white bg-gray-700 rounded-lg">
       <button class="transition hover:rotate-180" [ngClass]="{ clicked: isClicked }" type="button"
@@ -63,20 +63,20 @@
       <mat-menu class="drop-menu bg-gray-500 border-spacing-1" #menu="matMenu">
 
        
-          <!-- <a mat-menu-item routerLink="/authentication/sign-out/fullscreen"
+           <a mat-menu-item routerLink="/authentication/sign-out/fullscreen"
             class="bg-gray-500  text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700">
             <mat-icon [svgIcon]="'heroicons_outline:logout'" class="text-gray-300"></mat-icon>
             <span class="text-gray-300">Register</span>
-          </a> -->
+          </a> 
         
 
-        <!-- <div *ngIf="isLoggedIn">
+        <div *ngIf="isLoggedIn">
           <a mat-menu-item routerLink="/authentication/sign-in/classic"
           class="bg-gray-500 font-normal  text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
             <mat-icon [svgIcon]="'heroicons_outline:login'" class="text-gray-300"> </mat-icon>
             <span class="text-gray-300">Profile</span>
           </a>
-        </div> -->
+        </div>
         
           <a mat-menu-item routerLink="/authentication/sign-up/modern"
           class="bg-gray-500 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200"         >
@@ -91,6 +91,15 @@
             <span class="text-gray-300">Profile</span>
           </a>
         </div>
+
+        <div *ngIf="isLoggedIn">
+          <a mat-menu-item routerLink="/authentication/sign-in/modern"
+          class="bg-gray-500 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200" >
+            <mat-icon [svgIcon]="'heroicons_outline:user-circle'" class="text-gray-300"> </mat-icon>
+            <span class="text-gray-300">Sign In</span>
+          </a>
+        </div>
+
       </mat-menu>
     </mat-toolbar>
   </header>
@@ -102,7 +111,7 @@
       (notifyParentDrawerOpen)="openDrawer()"
       ></app-sidenav>
     </mat-sidenav>
-    <main class="ml-2 mr-1 text-gray-800 bg-white rounded-lg flex-main">
+    <main class="max-h-content ml-2 mr-1 text-gray-800 bg-white rounded-lg flex-main">
       <article class="flex-article bg-white">
         <ng-content>
 
@@ -111,7 +120,11 @@
     </main>
   </mat-sidenav-container>
  
-</div>
-<app-footer></app-footer>
+</div> 
+<footer class="bg-gray-100 mt-auto">
+  <app-footer class="m-1"></app-footer> 
+</footer>
+
+
 
 

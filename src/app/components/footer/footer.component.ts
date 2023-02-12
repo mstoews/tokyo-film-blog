@@ -7,7 +7,7 @@ import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-footer',
-  templateUrl: './footer.component.html',
+  templateUrl: './footer-4.html',
 })
 export class FooterComponent implements OnInit {
 
