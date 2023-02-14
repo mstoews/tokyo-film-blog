@@ -97,7 +97,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.inventoryImages$ = this.productService.getImageListByProduct(
       this.productId
     );
-    this.menuToggleService.setCartListCount(this.wishListCount);
+    this.menuToggleService.setCartListCount(this.productIds.length);
+    this.menuToggleService.setWishListCount(this.wishListIds.length);
   }
 
   setImage(e: string) {

@@ -1,19 +1,15 @@
 
-<nav class="relattive flex-auto p-2 sm:p-6">
-  <div class="items-center justify-between sm:space-x-10 sm:my-6">
-    <div class="flex flex-col sm:flex-row sm:space-x-4 sm:mr-20 sm:mt-10 sm:ml-2 bg-white">
+<nav class="relattive flex-auto">
+  
+    <div class="flex flex-col sm:flex-row sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
+        
       <div class="block md:hidden">
         <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" matTooltip="Toggle Navigation" 
-          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
-          <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
-        </a>
+        class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+        <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
+      </a>
       </div>
-      
 
-      <h1
-        class="flex-col inline-block align-middle sm:ml-4 sm:w-auto font-garamond focus:outline-none font-bold text-3xl lg:text-4xl  text-gray-800 dark:text-white">
-        {{ title }}
-      </h1>
       <span class="flex-auto"></span>
       
       <div class="hidden md:block">
@@ -32,21 +28,21 @@
 
       <div class="hidden md:block">
         <a routerLink="/collections" matTooltip="Special Collections"
-          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl  hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-700">
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
         </a>
       </div>
 
       <div class="hidden md:block">
         <a routerLink="/shop" matTooltip="Shop"
-          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl  grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'mat_outline:shopping_basket'"></mat-icon>
         </a>
       </div>
 
       <div class="hidden md:block">
         <a (click)="openWishList()" matTooltip="Wish List"
-          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl growhover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
           <mat-icon [matBadge]=wishCount [matBadgeHidden]="wishCount===0"
             [svgIcon]="'heroicons_outline:gift'"></mat-icon>
         </a>
@@ -92,18 +88,6 @@
         </div>
       </mat-menu>
       </div>
-
-      <div class="flex flex-col ml-5 sm:flex-row md:ml-10 mr-20 mt-1 sm:ml-10 bg-white">
-        <ng-container *ngIf="sub_title != undefined">
-          <h1
-        class="flex-col inline-block align-middle sm:w-auto font-garamond focus:outline-none font-bold text-1xl sm:text-2xl text-gray-500 dark:text-white">
-        {{ sub_title }}
-      </h1>
-          <span class="flex-auto"></span>
-          
-        </ng-container>
-      </div>
-    </div>
 </nav>
 
 

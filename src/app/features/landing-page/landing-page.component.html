@@ -1,34 +1,7 @@
 <ng-container *ngIf="featuredList$ | async as galleryList">
   <section id="hero">
     <div class="container h-screen px-6 py-4 max-w-8xl">
-      <div class="flex flex-col sm:flex-row sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
-        <button class="mat-icon-button text-gray-100 transition  hover:bg-gray-500 hover:text-gray-100"
-          [ngClass]="{ clicked: isClicked }" type="button" (click)="onToggleSideNav()" mat-icon-button
-          matTooltip="Toggle Side Nav" aria-label="Toggle">
-          <mat-icon class="mb-1" id="icon" (click)="doAnimate()" [ngClass]="{ animate: doAnimation }"
-            [svgIcon]="'heroicons_outline:menu'">
-          </mat-icon>
-        </button>
-
-        <span class="flex-auto"></span>
-
-        <div class="hidden md:block">
-          <a (click)="openWishList()" matTooltip="Wish List"
-            class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
-            <mat-icon [matBadge]=wishCount [matBadgeHidden]="wishCount===0"
-              [svgIcon]="'heroicons_outline:gift'"></mat-icon>
-          </a>
-        </div>
-
-        <div class="hidden md:block">
-          <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
-            class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
-            <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0"
-              [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-          </a>
-        </div>
-      </div>
-
+      <land-header></land-header>
       <!-- Menu/Logo Container -->
       <nav class="flex items-center justify-between text-2xl text-white">
         <!-- Logo -->
@@ -66,15 +39,15 @@
         {{ titleMessage }}
       </div>
       <!-- CTA Section -->
-      <div class="container flex px-2 pb-12 mx-auto">
-        <div class="hidden px-4 py-6 mx-auto text-center md:block max-w-7xl sm:px-6 lg:py-16 lg:px-8">
+      <div class="container flex-col px-2 pb-12 mx-auto">
+        <div class="px-4 py-6 mx-auto text-center md:block max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
             <span class="sm:block font-garamond">{{mainPageDoc.cta_left}}</span>
           </h2>
           <div class="flex justify-center mt-4">
             <div class="rounded-md shadow md:block sm:inline-flex">
               <button (click)="scrollToId('services')"
-                class="items-center justify-center hidden px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md md:block font-garamond hover:bg-gray-700 hover:text-gray-100">
+                class="items-center justify-center px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md md:block font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Made To Services
               </button>
             </div>

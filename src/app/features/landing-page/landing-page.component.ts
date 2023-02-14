@@ -5,7 +5,7 @@ import { Router, TitleStrategy, UrlHandlingStrategy } from '@angular/router'
 import { DndComponent } from '../../components/loaddnd/dnd.component'
 import { ScrollService } from 'app/services/scroll.service'
 import { animate, style, transition, trigger } from '@angular/animations'
-import { Observable } from 'rxjs'
+import { Observable, of } from 'rxjs'
 import { ContactService } from 'app/services/contact.service'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Contact } from 'app/models/contact'
@@ -13,6 +13,9 @@ import { MainPageService } from 'app/services/main-page.service'
 import { Mainpage } from 'app/models/mainpage'
 import { ImageListService } from 'app/services/image-list.service'
 import { imageItem } from 'app/models/imageItem'
+import { CartService } from 'app/services/cart.service'
+import { WishListService } from 'app/services/wishlist.service'
+import { AuthService } from 'app/services/auth/auth.service'
 
 @Component({
   selector: 'app-landing-page',
@@ -58,9 +61,11 @@ export class LandingPageComponent implements OnInit {
     private imageListService: ImageListService,
     private mainPage: MainPageService,
     private router: Router,
-    private matDialog: MatDialog,
     private scrollTo: ScrollService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private cartService: CartService,
+    private wishListService: WishListService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -87,8 +92,14 @@ export class LandingPageComponent implements OnInit {
         this.titleMessage = document.hero_title;
       }
     });
+    const UserId = of(this.authService.afAuth.currentUser);
+    UserId.subscribe(user => {
+      console.log (JSON.stringify(user));
+    })
+    
     this.createEmptyForm();
     this.populateImageList();
+    //this.cartService.cartByUserId()
   }
 
   onServices(service: string) {
