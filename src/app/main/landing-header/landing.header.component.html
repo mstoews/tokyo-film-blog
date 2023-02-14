@@ -1,18 +1,24 @@
-
 <nav class="relattive flex-auto">
-  
-    <div class="flex flex-col sm:flex-row sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
-        
-      <div class="block md:hidden">
-        <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" matTooltip="Toggle Navigation" 
-        class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+
+  <div class="flex flex-col sm:flex-row sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
+
+    <div class="block md:hidden">
+      <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" matTooltip="Toggle Navigation"
+        class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
         <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
       </a>
-      </div>
+    </div>
+<!-- 
+    <span class="flex-auto"></span>
 
-      <span class="flex-auto"></span>
-      
-      <div class="hidden md:block">
+    <div class="hidden md:block">
+      <a (click)="onProfile()" matTooltip="Toggle Navigation" matTooltip="Toggle Navigation"
+        class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+        <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
+      </a>
+    </div> -->
+
+    <!-- <div class="hidden md:block">
         <a routerLink="/home" matTooltip="Home" 
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
           <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
@@ -54,7 +60,7 @@
           <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0"
             [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
         </a>
-      </div>
+      </div> 
 
       <div class="hidden md:block">
         <a [matMenuTriggerFor]="menu" matTooltip="Profile"
@@ -87,7 +93,8 @@
           </a>
         </div>
       </mat-menu>
-      </div>
+    -->
+  </div>
 </nav>
 
 

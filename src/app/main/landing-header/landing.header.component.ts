@@ -27,7 +27,6 @@ export class LandingHeaderComponent implements OnInit{
     private _router: Router,
     private menuToggle: MenuToggleService,
   
-    private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private cartService: CartService,
     private wishListService: WishListService,
@@ -90,9 +89,9 @@ export class LandingHeaderComponent implements OnInit{
   doAnimate() {
   
   }
-
-  onToggleMenu() {
   
+  onProfile() {
+    this._router.navigate(['/profile']);  
   }
 
   openShoppingCart() {

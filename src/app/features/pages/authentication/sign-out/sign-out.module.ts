@@ -43,21 +43,23 @@ const routes: Routes = [
     }
 ];
 
-@NgModule({
-    declarations: [
-        SignOutClassicComponent,
-        SignOutModernComponent,
-        SignOutFullscreenComponent,
-        SignOutFullscreenReversedComponent,
-        SignOutSplitScreenComponent,
+const components = [
+    SignOutClassicComponent,
+    SignOutModernComponent,
+    SignOutFullscreenComponent,
+    SignOutFullscreenReversedComponent,
+    SignOutSplitScreenComponent,
+]
 
-    ],
+@NgModule({
+    declarations: [ ...components ],
     imports     : [
         RouterModule.forChild(routes),
         MatFormFieldModule,
         MatInputModule,
         SharedModule
-    ]
+    ],
+    exports : [ ...components]
 })
 export class SignOutModule
 {

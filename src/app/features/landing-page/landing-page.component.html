@@ -32,46 +32,49 @@
             <button class="uppercase font-garamond" routerLink="/shop">shop</button>
             <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
           </div>
+          <div class="text-white font-bold uppercase text-1xl group">
+            <button class="uppercase font-garamond" routerLink="/profile">profile</button>
+            <div class="mx-2 group-hover:border-b group-hover:border-blue-50"></div>
+          </div>
 
         </div>
       </nav>
       <div class="max-w-3xl text-white uppercase border-2 font-garamond md:p-10 md:m-16 md:mx-0 md:text-4xl">
         {{ titleMessage }}
       </div>
-      <!-- CTA Section -->
-      <div class="container flex-col px-2 pb-12 mx-auto">
-        <div class="px-4 py-6 mx-auto text-center md:block max-w-7xl sm:px-6 lg:py-16 lg:px-8">
+      <!-- CTA START -->
+      <div class="container flex flex-col sm:flex-row pt-5 sm:pt-40 px-2 pb-12 mx-auto">
+        <div class="block px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
             <span class="sm:block font-garamond">{{mainPageDoc.cta_left}}</span>
           </h2>
           <div class="flex justify-center mt-4">
             <div class="rounded-md shadow md:block sm:inline-flex">
               <button (click)="scrollToId('services')"
-                class="items-center justify-center px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md md:block font-garamond hover:bg-gray-700 hover:text-gray-100">
+                      class="block items-center justify-center px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md  font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Made To Services
               </button>
             </div>
           </div>
         </div>
-        <div class="px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-16 lg:px-8">
+        <div class="block px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
             <span class="sm:block font-garamond">{{mainPageDoc.cta_right}}</span>
           </h2>
           <div class="flex justify-center mt-4">
             <div class="inline-flex ml-3">
               <button (click)="onContactUs()"
-                class="items-center justify-center px-5 py-3 text-base font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md sm:inline-flex font-garamond hover:bg-gray-700 hover:text-gray-100">
+                      class="items-center justify-center px-5 py-3 text-base font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md sm:inline-flex font-garamond hover:bg-gray-700 hover:text-gray-100">
                 Contact Made To
               </button>
             </div>
           </div>
         </div>
       </div>
-      <!-- End CTA -->
-
     </div>
+    <!-- CTA END -->
   </section>
-  <!-- About Us Section -->
+  
   <section class="scroll-mt-20" id="feature">
     <div class="container max-w-7xl px-6 mx-auto my-32 text-gray-900 md:px-0">
 

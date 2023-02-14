@@ -57,15 +57,18 @@ const routes: Routes = [
     }
 ];
 
+const components = [
+    SignUpClassicComponent,
+    SignUpModernComponent,
+    SignUpModernReversedComponent,
+    SignUpFullscreenComponent,
+    SignUpFullscreenReversedComponent,
+    SignUpSplitScreenComponent,
+    SignUpSplitScreenReversedComponent];
+
 @NgModule({
     declarations: [
-        SignUpClassicComponent,
-        SignUpModernComponent,
-        SignUpModernReversedComponent,
-        SignUpFullscreenComponent,
-        SignUpFullscreenReversedComponent,
-        SignUpSplitScreenComponent,
-        SignUpSplitScreenReversedComponent
+       ...components
     ],
     imports     : [
         RouterModule.forChild(routes),
@@ -77,7 +80,8 @@ const routes: Routes = [
         MatProgressSpinnerModule,
         FuseAlertModule,
         SharedModule
-    ]
+    ],
+    exports : [...components]
 })
 export class SignUpModule
 {

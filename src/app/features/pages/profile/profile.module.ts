@@ -3,18 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { FuseCardModule } from '@fuse/components/card';
 import { ProfileComponent } from './profile.component';
 import { profileRoutes } from './profile.routing';
-import { HeaderComponent } from 'app/main/header/header.component';
+import { HeadingModule } from 'app/main/heading-module/heading.module';
 import { AddressComponent } from './address/address.component';
 import { MaterialModule } from "../../../material.module";
 import { SignOutModule } from '../authentication/sign-out/sign-out.module';
-import { TestFormComponent } from './test-form/test-form.component';
 import { SharedModule } from 'app/features/shared-module/shared.module';
+import { SignInModule } from '../authentication/sign-in/sign-in.module';
+import { SignUpModule } from '../authentication/sign-up/sign-up.module';
 
 
 @NgModule({
     declarations: [
         ProfileComponent,
-        TestFormComponent,
+ 
     ],
     imports     : [
         RouterModule.forChild(profileRoutes),
@@ -22,13 +23,16 @@ import { SharedModule } from 'app/features/shared-module/shared.module';
         FuseCardModule,
         SharedModule,
         AddressComponent,
+        SignOutModule,
+        HeadingModule,
+        SignInModule,
+        SignUpModule,
         SignOutModule
 
     ],
     exports: [
       ProfileComponent
     ],
-    entryComponents: [TestFormComponent]
 })
 export class ProfileModule
 {

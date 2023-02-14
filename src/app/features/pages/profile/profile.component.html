@@ -1,75 +1,39 @@
+<div class="absolute inset-0 -px-20 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
+  <app-header [title]="'User Profile'"></app-header>
 
-<div
-    class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto"  cdkScrollable>
-    <app-header [title]="'User Profile'"></app-header>
+  <!-- Main -->
+  <div class="flex-auto p-6 sm:p-10">
 
-    <!-- Main -->
-    <div class="flex-auto p-6 sm:p-10">
+    <div class="h-auto   border-gray-300 rounded-2xl">
+      <mat-card>
+        <mat-tab-group #tabGroup mat-stretch-tabs="false">
+          <mat-tab label="Sign In">
+            <ng-template matTabContent>
+              <sign-in-classic></sign-in-classic>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Register">
+            <ng-template matTabContent>
+              <!-- <sign-up-modern></sign-up-modern> -->
+              <sign-up-split-screen></sign-up-split-screen>
+            </ng-template>
+          </mat-tab>
 
-        <div class="h-auto   border-gray-300 rounded-2xl">
-            <mat-card>
-                <mat-tab-group #tabGroup mat-stretch-tabs="false">
-                    <mat-tab label="Profile Details">
-                      <ng-template matTabContent>
-                        <app-address></app-address>
-                      </ng-template>
-                    </mat-tab>
-                    <mat-tab label="Log Out">
-                        <ng-template matTabContent>
-                            <div class="flex  m-20 ">
-                                <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-                                  <div class="mx-auto w-full max-w-sm lg:w-96">
-                                    <!-- Logo -->
-                                    <div class="w-12">
-                                      <img src="/favicon.ico" />
-                                    </div>
-    
-                              
-                                    <!-- Alert -->
-                                    <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
-                                      [@shake]="alert.type === 'error'">
-                                      {{ alert.message }}
-                                    </fuse-alert>
-                              
-                                    <!-- Sign in form -->
-                                    <form class="mt-8" [formGroup]="signInForm" #signInNgForm="ngForm">
-                                      <!-- Email field -->
-                                      <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight text-gray-400">
-                                        Sign Out
-                                      </div>
-                              
-                              
-                                      <p><br></p>
-                                      <h2 class="text-gray-400">Signing out will take you back to the home page. </h2>
-                                       <!-- Submit button -->
-                                      <button class="fuse-mat-button-large w-full mt-6  bg-gray-800 text-gray-100 hover:text-gray-800 hover:bg-gray-100 hover:border-gray-800" mat-flat-button
-                                        [disabled]="signInForm.disabled" (click)="signOut()">
-                                        <span *ngIf="!signInForm.disabled"> Complete Sign Out </span>
-                                        <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24" [mode]="'indeterminate'">
-                                        </mat-progress-spinner>
-                                      </button>
-                                    </form>
-                                  </div>
-                                </div>
-                         
-                                <div class="relative hidden w-0 flex-1 lg:block">
-                                  <img class="absolute inset-0 h-full w-full object-cover" src="../../../../assets/images/log-out.jpg" alt="Login">
-                                </div>
-                              
-                              </div>
-                              
-                        </ng-template>
-                      </mat-tab>
-                    
-                </mat-tab-group>
-                </mat-card>
-        </div>
+          <mat-tab label="Profile Details">
+            <ng-template matTabContent>
+              <app-address></app-address>
+            </ng-template>
+          </mat-tab>
+          <mat-tab label="Log Out">
+            <ng-template matTabContent>
+              <sign-out-fullscreen></sign-out-fullscreen>
+            </ng-template>
+          </mat-tab>
 
+        </mat-tab-group>
+      </mat-card>
     </div>
 
+  </div>
+
 </div>
-
-
-
-
-

@@ -16,43 +16,39 @@ import { WishListService } from 'app/services/wishlist.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   animations: [onMainContentChange],
- 
+
 })
-export class HeaderComponent implements OnInit{
-  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter()
+export class HeaderComponent implements OnInit {
 
-
-  constructor (
+  constructor(
     private _location: Location,
     private _router: Router,
     private menuToggle: MenuToggleService,
-  
-    private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private cartService: CartService,
     private wishListService: WishListService,
-    ) {
+  ) {
     this.title = "Add Title as Parameter in the Template";
     menuToggle.setDrawerState(false);
   }
-  
-  @Input() title : string;
-  @Input() sub_title : string;
+
+  @Input() title: string;
+  @Input() sub_title: string;
   @Input() back = true;
   @Input() home: boolean;
   isClicked = false;
-  doAnimation = false;
+
   isLoggedIn = true;
   wishCount = 0;
   cartCount = 0;
- 
-  ngOnInit(){
-    this.authService.getAuth().subscribe( res => {
-      if (res === true)
-      {
+  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter()
+
+  ngOnInit() {
+    this.authService.getAuth().subscribe(res => {
+      if (res === true) {
         this.isLoggedIn = true;
 
-        this.cartService.cartByStatus(this.authService.userData.uid ,'open').subscribe(cart => {
+        this.cartService.cartByStatus(this.authService.userData.uid, 'open').subscribe(cart => {
           this.cartCount = cart.length;
         })
 
@@ -61,27 +57,42 @@ export class HeaderComponent implements OnInit{
         })
 
       }
-      else
-      {
+      else {
         this.isLoggedIn = false;
       }
-     })
+    })
   }
-
 
   public onToggleSideNav() {
-    console.log('notifyNavBarToggleMenu');
     this.menuToggle.setDrawerState(true);
     this.notifyNavBarToggleMenu.emit();
-    
+
   }
 
-  public onBack(){
+  onLogout() {
+    this._router.navigate(['/authentication/signout/modern']);
+  }
+  onLogin() {
+    this._router.navigate(['/authentication/signin/modern']); 
+  }
+
+  onProfile() {
+    this._router.navigate(['/profile']); 
+  }
+
+  onThoughts() {
+    this._router.navigate(['/blog']);
+  }
+  onCollections() {
+    this._router.navigate(['/collections']);
+  }
+
+  onBack() {
     this._location.back()
   }
 
-  public onHome(){
-    this._router.navigate(['home']);
+  public onHome() {
+    this._router.navigate(['/home']);
   }
 
   onShop() {
@@ -89,11 +100,7 @@ export class HeaderComponent implements OnInit{
   }
 
   doAnimate() {
-  
-  }
 
-  onToggleMenu() {
-  
   }
 
   openShoppingCart() {

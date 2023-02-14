@@ -30,6 +30,7 @@ import { WishListResolver } from './services/wishlist.resolver';
 // import { environment } from '../environments/dev';
 
 import { environment} from '../environments/environment.prod';
+import { HeadingModule } from './main/heading-module/heading.module';
 
 
 
@@ -44,6 +45,7 @@ import { environment} from '../environments/environment.prod';
     CommonModule,
     SharedModule,
     SwiperModule,
+    HeadingModule,
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireStorageModule,

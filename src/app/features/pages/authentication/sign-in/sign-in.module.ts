@@ -58,18 +58,18 @@ const routes: Routes = [
     }
 ];
 
-@NgModule({
-    declarations: [
-        SignInClassicComponent,
-        SignInModernComponent,
-        SignInModernReversedComponent,
-        SignInFullscreenComponent,
-        SignInFullscreenReversedComponent,
-        SignInSplitScreenComponent,
-        SignInSplitScreenReversedComponent
-    ],
-    imports     : [
-        RouterModule.forChild(routes),
+const components = [
+    SignInClassicComponent,
+    SignInModernComponent,
+    SignInModernReversedComponent,
+    SignInFullscreenComponent,
+    SignInFullscreenReversedComponent,
+    SignInSplitScreenComponent,
+    SignInSplitScreenReversedComponent
+];
+
+const modules = [
+    RouterModule.forChild(routes),
         MatButtonModule,
         MatCheckboxModule,
         MatFormFieldModule,
@@ -79,7 +79,14 @@ const routes: Routes = [
         FuseAlertModule,
         SharedModule,
         FuseCardModule
-    ]
+    ];
+
+@NgModule({
+    declarations: [
+        ...components
+    ],
+    imports : [ ...modules ], 
+    exports :  [...components]
 })
 export class SignInModule
 {

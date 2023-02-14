@@ -1,6 +1,9 @@
 
-<div class="flex min-h-full m-20">
-  <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+<mat-card>
+<div class="flex min-h-full m-10">
+  
+  <div class="flex flex-1 flex-col justify-center py-1 ">
+   
     <div class="mx-auto w-full max-w-sm lg:w-96">
       <!-- Logo -->
       <div class="w-12">
@@ -11,11 +14,6 @@
       <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight text-gray-400">
         Sign in
       </div>
-      <!-- <div class="flex items-baseline mt-0.5 font-medium text-gray-400">
-        <div>Don't have an account?</div>
-        <a class="ml-1 text-gray-500 hover:underline" [routerLink]="['/sign-up']">Sign up
-        </a>
-      </div> -->
 
       <!-- Alert -->
       <fuse-alert class="mt-8 -mb-4" *ngIf="showAlert" [appearance]="'outline'" [showIcon]="false" [type]="alert.type"
@@ -56,82 +54,17 @@
           <mat-error> Password is required </mat-error>
         </mat-form-field>
 
-        <!-- Actions -->
-        <!-- <div class="inline-flex items-end justify-between w-full mt-1.5">
-          <mat-checkbox [color]="'primary'" [formControlName]="'rememberMe'">
-            Remember me
-          </mat-checkbox>
-          <a class="text-md font-medium text-primary-500 hover:underline" [routerLink]="['/forgot-password']">Forgot
-            password?
-          </a>
-        </div> -->
-
         <!-- Submit button -->
-        <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
+        <button class="fuse-mat-button-large w-full mt-6 bg-gray-700 text-gray-100" mat-flat-button
           [disabled]="signInForm.disabled" (click)="signInEmail()">
           <span *ngIf="!signInForm.disabled"> Sign in </span>
           <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24" [mode]="'indeterminate'">
           </mat-progress-spinner>
         </button>
-
-        <!-- Separator -->
-        <div class="flex items-center mt-8">
-          <div class="flex-auto mt-px border-t"></div>
-          <div class="mx-2 text-gray-600">Or continue with :</div>
-          <div class="flex-auto mt-px border-t"></div>
-        </div>
-
-        <button class="fuse-mat-button-large w-full mt-6" mat-flat-button [color]="'primary'"
-
-        [disabled]="signInForm.disabled" (click)="signUpEmail()">
-        <span *ngIf="!signInForm.disabled"> Registration </span>
-        <mat-progress-spinner *ngIf="signInForm.disabled" [diameter]="24" [mode]="'indeterminate'">
-        </mat-progress-spinner>
-      </button>
-
-
-        <!-- Single sign-on buttons -->
-        <!-- <div class="flex items-center mt-8 space-x-4">
-          <button class="flex-auto" type="button" mat-stroked-button>
-            <mat-icon class="icon-size-5" [svgIcon]="'feather:facebook'"></mat-icon>
-          </button>
-          <button class="flex-auto" type="button" mat-stroked-button>
-            <mat-icon class="icon-size-5" [svgIcon]="'feather:twitter'"></mat-icon>
-          </button>
-          <button class="flex-auto" type="button" mat-stroked-button>
-            <mat-icon class="icon-size-5" [svgIcon]="'feather:github'"></mat-icon>
-          </button>
-        </div> -->
       </form>
     </div>
+ 
   </div>
-  <!-- <div class="relative items-center justify-center flex-1 hidden w-0 h-full p-16 overflow-hidden bg-gray-800 md:flex lg:px-28 dark:border-l">
-    <svg class="absolute h-full w-full inset-0 pointer-events-none" viewBox="0 0 960 540" width="100%" height="100%"
-      preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
-      <g class="text-gray-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
-        <circle r="234" cx="196" cy="23"></circle>
-        <circle r="234" cx="790" cy="491"></circle>
-      </g>
-    </svg>
-
-    <svg class="absolute text-gray-700 -top-16 -right-16" viewBox="0 0 220 192" width="220" height="192" fill="none">
-      <defs>
-        <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20"
-          patternUnits="userSpaceOnUse">
-          <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
-        </pattern>
-      </defs>
-      <rect width="220" height="192" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
-    </svg>
-
-    <div class="font-bold leading-none text-gray-100 text-7xl">
-      <div>Welcome to</div>
-      <div>Made-To</div>
-    </div>
-  </div> -->
-  <div class="relative hidden w-0 flex-1 lg:block">
-    <img class="absolute inset-0 h-full w-full object-cover" src="https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2FDFB66B85-B2B3-436E-AA2F-DFA27D8409D8_800x800.jpeg?alt=media&token=20023dfb-0e56-4b23-aa9b-b6127000da13" alt="Login">
-  </div>
-
 </div>
 
+</mat-card>
