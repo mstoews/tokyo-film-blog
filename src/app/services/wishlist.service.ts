@@ -11,6 +11,7 @@ import { convertSnaps } from './db-utils';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Product } from 'app/models/products';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MenuToggleService } from './menu-toggle.service';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
 import { collection, OrderByDirection } from 'firebase/firestore';
@@ -28,7 +29,8 @@ export class WishListService {
   constructor(
     private afs: AngularFirestore,
     private snack: MatSnackBar,
-    private auth: AngularFireAuth
+    private auth: AngularFireAuth,
+    private menuToggleService: MenuToggleService
   ) {
     auth.authState.subscribe((user) => {
       this.userId = user?.uid;
@@ -70,6 +72,7 @@ export class WishListService {
         };
         this.create(wish);
       });
+      
     }
     //}
   }

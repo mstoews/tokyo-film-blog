@@ -10,6 +10,7 @@ import { SideNavComponent } from 'app/main/sidenav/sidenav.component';
 import { ShellComponent } from 'app/main/shell.component';
 import { NavItemComponent } from 'app/main/static-sidebar/nav-list-item/nav-item.component';
 import { NotificationComponent } from 'app/components/notification/notification.component';
+import { HeaderComponent } from 'app/main/header/header.component';
 
 const components = [
   StaticSidebarComponent,
@@ -17,6 +18,7 @@ const components = [
   NavItemComponent,
   FooterComponent,
   SideNavComponent,
+  HeaderComponent,
   ShellComponent,
 
 ];

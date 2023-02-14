@@ -1,6 +1,7 @@
 <app-header class="bg-gray-50"
   [title]="'Thoughts and Images'"
   [sub_title]="'Impressions of our life and work, living in Tokyo'"
+  (notifyNavBarToggleMenu)="onToggleMenu()"
 ></app-header>
 <div class="container mx-auto pt-5">
   <ng-container *ngIf="allBlogs$ | async as blogs">

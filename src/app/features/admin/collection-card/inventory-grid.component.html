@@ -1,6 +1,5 @@
-<app-header [title]="'Maintenance'"> </app-header>
 <div class="h-screen">
-  <mat-drawer-container class="flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
+ 
     
     <ng-container *ngIf="allProducts$ | async as rows">
       <table mat-table [dataSource]="rows" class="mat-elevation-z7">
@@ -59,6 +58,4 @@
             C15.952,9,16,9.447,16,10z" />
     </svg>
   </button>
-
-  </mat-drawer-container>
 </div>

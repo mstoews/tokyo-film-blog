@@ -1,3 +1,5 @@
+
+<app-header [title]="'Maintenance'"> </app-header>
 <div class="h-screen">
     <ng-container *ngIf="allContacts$ | async as rows">
       <dx-data-grid
@@ -12,6 +14,7 @@
         keyExpr="id">
         <dxi-column width="200px" dataField="name"> </dxi-column>
         <dxi-column width="200px" dataField="email"> </dxi-column>
+        <dxi-column width="200px" dataField="created_date"> </dxi-column>
         <dxi-column dataField="message"> </dxi-column>
       </dx-data-grid>
     </ng-container>

@@ -6,11 +6,12 @@ import { DetailComponent } from './detail/detail.component';
 import { MaterialModule } from 'app/material.module';
 import { BlogResolver} from 'app/services/blog.resolver';
 import { SafePipe } from './safe.pipe';
-import { HeaderComponent } from 'app/components/header/header.component';
+import { HeaderComponent } from 'app/main/header/header.component';
 import { FuseCardModule } from '@fuse/components/card';
 import { IconsModule } from 'app/icons.module';
 import { BlogCardComponent } from './blog-card/blog-card.component';
 import { BlogRoutingModule } from './blog-routing/blog-routing.module';
+import { SharedModule } from '../shared-module/shared.module';
 
 
 
@@ -27,7 +28,7 @@ import { BlogRoutingModule } from './blog-routing/blog-routing.module';
     CommonModule,
     MaterialModule,
     NgOptimizedImage,
-    HeaderComponent,
+    SharedModule,
     FuseCardModule,
     IconsModule,
     BlogRoutingModule,

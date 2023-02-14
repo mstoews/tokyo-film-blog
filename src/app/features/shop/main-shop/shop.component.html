@@ -1,40 +1,28 @@
+<app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
 <div *ngIf="Products$ | async as products">
-  <div class="px-4 2xl:mx-auto 2xl:container md:py-12 lg:px-20 md:px-6 py-9 bg-gray-50">
-        <div class="flex flex-col sm:flex-row sm:space-x-4 bg-gray-50">
-          <mat-toolbar class="w-full text-4xl font-bold bg-gray-50">
-            <mat-toolbar-row>
-              <span class="font-garamond">Shop</span>
-              <span class="flex-auto"></span>
-              <button mat-icon-button  class="bg-gray-300 hover:bg-gray-500 hover:text-gray-100" (click)="backToHome()">
-                <mat-icon class="mb-4" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-              </button>
-            </mat-toolbar-row>
-            <mat-toolbar-row>
-              <button class="font-garamond bg-gray-50" [matMenuTriggerFor]="menu" mat-flat-button matTooltip="Select Category" aria-label="menu">
-                  <span class="font-garamond text-2xl font-bold">Filter</span>
-                  <mat-icon [svgIcon]="'heroicons_outline:filter'"></mat-icon>
-              </button>
-              <span class="font-garamond m-2 pb-1 text-2xl">{{currentCategory}}</span>
-              <!-- menu selected -->
-              <mat-menu class="side-nav" #menu="matMenu">
-                <ul *ngIf="this.Category$| async as party">
-                  <ui class="side-nave__item" *ngFor="let item of party">
-                    <button mat-menu-item (click)="onRefreshName(item.name)" xPosition="after">
-                        {{item.name}}
-                    </button>
-                  </ui>
-                </ul>
-              </mat-menu>
-            </mat-toolbar-row>
-          </mat-toolbar>
-      </div>
-
-  <div class="flex items-center justify-center">
-      <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 xl:gap-x-8">
-        <li *ngFor="let product of products ">
-          <shop-card [product]="product"></shop-card>
-        </li>
+  <div class="relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6 ">
+      <button class="font-garamond bg-white" [matMenuTriggerFor]="menu" mat-flat-button matTooltip="Select Category"
+        aria-label="menu">
+        <span class="font-garamond text-2xl font-bold">Filter</span>
+        <mat-icon [svgIcon]="'heroicons_outline:filter'"></mat-icon>
+      </button>
+      <span class="font-garamond m-2 pb-1 text-2xl">{{currentCategory}}</span>
+      <!-- menu selected -->
+      <mat-menu class="side-nav" #menu="matMenu">
+        <ul *ngIf="this.Category$| async as party">
+          <ui class="side-nave__item" *ngFor="let item of party">
+            <button mat-menu-item (click)="onRefreshName(item.name)" xPosition="after">
+              {{item.name}}
+            </button>
+          </ui>
+        </ul>
+      </mat-menu>
+  </div>
+  <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">
+    <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8">
+      <li *ngFor="let product of products ">
+        <shop-card [product]="product"></shop-card>
+      </li>
+    </div>
   </div>
 </div>
-
-

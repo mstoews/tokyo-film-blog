@@ -31,7 +31,7 @@ import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
 import { InventoryImageSelectionComponent } from './inventory-grid/inventory-image-selection/inventory-image-selection.component';
 import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
-import { HeaderComponent } from 'app/components/header/header.component';
+import { HeaderComponent } from 'app/main/header/header.component';
 import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { BlogResolver } from 'app/services/blog.resolver';
 
@@ -41,6 +41,7 @@ import { AddComponentDialog } from './inventory-grid/add/add.component';
 import { InventoryPreviewComponent } from './inventory-grid/inventory-preview/inventory-preview.component';
 import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-menubar.component';
 import { ImageListComponent } from "./image-list/image-list.component";
+import { SharedModule } from '../shared-module/shared.module';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { ImageListComponent } from "./image-list/image-list.component";
     SwiperModule,
     NgOptimizedImage,
     IconsModule,
-    HeaderComponent,
+    SharedModule
+   
 
   ],
   exports: [AdminComponent, OrdersGridComponent],

@@ -18,6 +18,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { imageItem } from 'app/models/imageItem';
 import { Cart } from 'app/models/cart';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { MenuToggleService } from 'app/services/menu-toggle.service';
 
 @Component({
   selector: 'app-product-details-five',
@@ -44,13 +45,12 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private route: Router,
     private activateRoute: ActivatedRoute,
     public authService: AuthService,
-    private checkoutService: CheckoutService,
     private wishlistService: WishListService,
     private productService: ProductsService,
     private cartService: CartService,
     private categories: CategoryService,
-    private snackBar: MatSnackBar,
-    private afs: AngularFirestore
+    private snackBar: MatSnackBar, 
+    private menuToggleService: MenuToggleService
   ) {}
 
   mainImage: string;
@@ -97,6 +97,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.inventoryImages$ = this.productService.getImageListByProduct(
       this.productId
     );
+    this.menuToggleService.setCartListCount(this.wishListCount);
   }
 
   setImage(e: string) {
@@ -140,6 +141,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     } else {
       this.route.navigate(['shop/coming-soon']);
     }
+
   }
 
   onContinueShopping() {

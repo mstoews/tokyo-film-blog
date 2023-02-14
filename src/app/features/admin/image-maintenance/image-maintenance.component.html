@@ -1,3 +1,4 @@
+<app-header [title]="'Maintenance'"> </app-header>
 <div class="h-screen">
 
   <mat-drawer-container>
@@ -5,8 +6,10 @@
       [position]="'end'" [disableClose]="false">
     </mat-drawer>
     <mat-drawer-content>
-      <app-image-menubar (notifyParentRefresh)="RefreshList()"
-        (notifyParentAdd)="createImageOnce()"></app-image-menubar>
+      <app-image-menubar
+        (notifyParentRefresh)="RefreshList()"
+        (notifyParentAdd)="createImageOnce()">
+      </app-image-menubar>
       <div cdkDropListGroup class="grid grid-cols-4 gap-4">
         <!-- NOT_USED -->
         <div class="item--1 lg-rounded" style="height: 900px; overflow-y: auto" cdkScrollable>

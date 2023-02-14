@@ -8,6 +8,7 @@ import { AuthService } from 'app/services/auth/auth.service'
 import { Router } from '@angular/router';
 import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
+import { MenuToggleService } from 'app/services/menu-toggle.service';
 
 @Component({
   selector: 'shell',
@@ -35,7 +36,16 @@ export class ShellComponent implements OnInit {
     private authService: AuthService,
     private cartService: CartService,
     private wishListService: WishListService,
-    public router: Router) {}
+    private menuToggleService: MenuToggleService,
+    public router: Router) 
+    {
+      this.menuToggleService.toggleDrawer.subscribe(drawer => {
+        if (drawer === true)
+        this.openDrawer();
+        else
+        this.closeDrawer();
+      });
+    }
 
 
   ngOnInit() {
@@ -75,6 +85,8 @@ export class ShellComponent implements OnInit {
   }
 
   onToggleMenu() {
+    console.log('shell: onToggleMenu');
+    this.drawer.toggle();
     if (this.isClicked === false) {
       this.isClicked = true;
     } else {
@@ -83,6 +95,9 @@ export class ShellComponent implements OnInit {
     this.drawer.toggle();
   }
 
+
+    
+
   closeDrawer() {
     this.drawer.close();
     this.drawer.mode = "over";
@@ -90,7 +105,7 @@ export class ShellComponent implements OnInit {
 
   openDrawer() {
     this.drawer.open();
-    this.drawer.mode = "side";
+    this.drawer.mode = "over";
   }
 
   async logout() {

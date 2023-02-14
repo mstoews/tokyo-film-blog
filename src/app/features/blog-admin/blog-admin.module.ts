@@ -3,7 +3,7 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MaterialModule } from 'app/material.module';
 import { BlogResolver } from 'app/services/blog.resolver';
 import { DxHtmlEditorModule } from 'devextreme-angular';
-import { HeaderComponent } from 'app/components/header/header.component';
+import { HeaderComponent } from 'app/main/header/header.component';
 import { FuseCardModule } from '@fuse/components/card';
 import { IconsModule } from 'app/icons.module';
 import { BlogEditRoutingModule } from './blog-routing.module';
@@ -12,6 +12,7 @@ import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { SafePipe } from './safe.pipe';
 import { BlogAddDialog } from './add/blog-add.component';
 import { BlogImageSelectionComponent } from './blog-image-selection/blog-image-selection.component';
+import { SharedModule } from '../shared-module/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { BlogImageSelectionComponent } from './blog-image-selection/blog-image-s
     MaterialModule,
     DxHtmlEditorModule,
     NgOptimizedImage,
-    HeaderComponent,
+    SharedModule,
     FuseCardModule,
     IconsModule,
     BlogEditRoutingModule,

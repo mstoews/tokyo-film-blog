@@ -70,6 +70,7 @@ export class SideNavComponent {
 
   }
 
+  
   public getUserId() {
     return this.userId
   }

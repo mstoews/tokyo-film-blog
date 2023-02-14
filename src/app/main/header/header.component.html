@@ -1,0 +1,109 @@
+
+<nav class="relattive flex-auto p-6">
+  <div class="items-center justify-between space-x-10 my-6">
+    <div class="flex flex-col sm:flex-row sm:space-x-4 md:ml-10 mr-20 mt-10 sm:ml-2 bg-white">
+      <button class="mat-icon-button text-gray-800 transition  hover:bg-gray-500 hover:text-gray-100"
+        [ngClass]="{ clicked: isClicked }" type="button" (click)="onToggleSideNav()" mat-icon-button
+        matTooltip="Toggle Side Nav" aria-label="Toggle">
+        <mat-icon class="mb-1" id="icon" (click)="doAnimate()" [ngClass]="{ animate: doAnimation }"
+          [svgIcon]="'heroicons_outline:menu'">
+        </mat-icon>
+      </button>
+
+      <h1
+        class="flex-col inline-block align-middle sm:w-auto font-garamond focus:outline-none font-bold text-3xl lg:text-4xl  text-gray-800 dark:text-white">
+        {{ title }}
+      </h1>
+      <span class="flex-auto"></span>
+      
+      <div class="hidden md:block">
+        <a routerLink="/home" matTooltip="Home" 
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+          <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <a routerLink="/blog" matTooltip="Thoughts"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <a routerLink="/collections" matTooltip="Special Collections"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-700">
+          <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <a routerLink="/shop" matTooltip="Shop"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [svgIcon]="'mat_outline:shopping_basket'"></mat-icon>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <a (click)="openWishList()" matTooltip="Wish List"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl growhover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [matBadge]=wishCount [matBadgeHidden]="wishCount===0"
+            [svgIcon]="'heroicons_outline:gift'"></mat-icon>
+        </a>
+      </div>
+
+       <div class="hidden md:block">
+        <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0"
+            [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+        </a>
+      </div>
+
+      <div class="hidden md:block">
+        <a [matMenuTriggerFor]="menu" matTooltip="Profile"
+          class="flex focus:ring items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
+        </a>
+      </div>
+
+      <mat-menu class="drop-menu bg-gray-100 border-spacing-1" #menu="matMenu">
+        <a mat-menu-item routerLink="/authentication/sign-out/fullscreen"
+          class="bg-gray-100  text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700">
+          <mat-icon [svgIcon]="'heroicons_outline:logout'" class="text-gray-300"></mat-icon>
+          <span class="text-gray-300">Logout</span>
+        </a>
+
+
+        <div *ngIf="isLoggedIn">
+          <a mat-menu-item routerLink="/authentication/sign-in/classic"
+            class="bg-gray-100 font-normal  text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
+            <mat-icon [svgIcon]="'heroicons_outline:login'" class="text-gray-300"> </mat-icon>
+            <span class="text-gray-300">Signin</span>
+          </a>
+        </div>
+
+        <div *ngIf="isLoggedIn">
+          <a mat-menu-item routerLink="/profile"
+            class="bg-gray-100 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
+            <mat-icon [svgIcon]="'heroicons_outline:user-circle'" class="text-gray-300"> </mat-icon>
+            <span class="text-gray-300">Profile</span>
+          </a>
+        </div>
+      </mat-menu>
+      </div>
+
+      <div class="flex flex-col ml-5 sm:flex-row md:ml-10 mr-20 mt-1 sm:ml-10 bg-white">
+        <ng-container *ngIf="sub_title != undefined">
+          <h1
+            class="mx-13 flex-auto sm:w-auto font-garamond p-4 font-bold text-2xl md:text-3xl text-gray-700 dark:text-white">
+            {{ sub_title }}</h1>
+          <span class="flex-auto"></span>
+          
+        </ng-container>
+      </div>
+    </div>
+</nav>
+
+
+<!-- HEADER -->
