@@ -24,14 +24,14 @@
       </div>
 
       <div class="hidden md:block">
-        <a (click)="onThoughts" matTooltip="Thoughts"
+        <a (click)="onThoughts()" matTooltip="Thoughts"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
         </a>
       </div>
 
       <div class="hidden md:block">
-        <a (click)="onCollections" matTooltip="Special Collections"
+        <a (click)="onCollections()" matTooltip="Special Collections"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl  hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-700">
           <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
         </a>

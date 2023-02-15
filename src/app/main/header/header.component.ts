@@ -81,10 +81,10 @@ export class HeaderComponent implements OnInit {
   }
 
   onThoughts() {
-    this._router.navigate(['/blog']);
+    this._router.navigate(['/collections']);
   }
   onCollections() {
-    this._router.navigate(['/collections']);
+    this._router.navigate(['/blog']);
   }
 
   onBack() {

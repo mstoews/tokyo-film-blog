@@ -22,11 +22,16 @@ export class ContactService {
   create(contact: Contact) {
    // console.log(JSON.stringify(contact));
 
+   const currentDate = new Intl.DateTimeFormat('en');
+   const theDate = currentDate.format();
+    
+
     const contact_update = {
       id: '',
       name: contact.name,
       email: contact.email,
-      message: contact.message
+      message: contact.message,
+      created_date: theDate
     }
 
     this. contactCollection.add(contact_update);
