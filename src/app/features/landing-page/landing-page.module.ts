@@ -21,6 +21,7 @@ import { IconsModule } from "app/icons.module";
 import { HeaderComponent } from "app/main/header/header.component";
 import { ImageSwipeComponent } from "./image-swipe/image-swipe-content.component";
 import { SwiperModule } from "swiper/angular";
+
 const routes: Routes = [
     {
         path: "home",
@@ -83,7 +84,7 @@ const routes: Routes = [
         HighlightComponent,
         AboutUsComponent,
         ContactsComponent,
-        ImageSwipeComponent
+        ImageSwipeComponent,
     ],
     imports: [
         CommonModule,

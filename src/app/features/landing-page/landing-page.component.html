@@ -43,16 +43,16 @@
         {{ titleMessage }}
       </div>
       <!-- CTA START -->
-      <div class="container flex flex-col sm:flex-row pt-5 sm:pt-40 px-2 pb-12 mx-auto">
+      <div class="container flex flex-col sm:flex-row pt-5 sm:pt-20 px-2 pb-12 mx-auto">
         <div class="block px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-16 lg:px-8">
           <h2 class="text-3xl font-bold tracking-tight text-gray-100 sm:text-4xl">
             <span class="sm:block font-garamond">{{mainPageDoc.cta_left}}</span>
           </h2>
           <div class="flex justify-center mt-4">
             <div class="rounded-md shadow md:block sm:inline-flex">
-              <button (click)="scrollToId('services')"
+              <button (click)="onFeatured()"
                       class="block items-center justify-center px-5 py-3 font-medium text-gray-600 bg-gray-200 border border-transparent rounded-md  font-garamond hover:bg-gray-700 hover:text-gray-100">
-                Made To Services
+                Collection
               </button>
             </div>
           </div>
@@ -253,9 +253,9 @@
     </div>
   </section>
 
-  <!-- <section id="swipe" class="scroll-mt-20">
+  <section id="swipe" class="scroll-mt-20">
     <div class="container max-w-7xl px-6 mx-auto my-16 text-gray-900 md:px-0">
-      Creations Header
+      Random Images
       <div class="relative justify-center my-1 mb-20 md:justify-between">
         <p class="text-4xl text-center uppercase font-garamond md:text-left md:text-5xl">
           Images
@@ -269,5 +269,9 @@
       </div>
      <app-swiper></app-swiper>
     </div>
-  </section> -->
+  </section>
 </ng-container>
+
+ <!-- https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/thumbnails%2Fmunchdeathblog1_200x200.jpg?alt=media&token=65fb271e-84b6-4ed5-a1df-84aa6ac2fffd -->
+
+ 

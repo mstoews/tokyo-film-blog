@@ -1,16 +1,15 @@
 <div class="py-12 flex lg:flex-row flex-col items-start lg:items-center justify-between bg-gray-100">
   <div class="mx-4 md:w-2/3 lg:w-auto md:mx-6 xl:ml-20  flex flex-col justify-start items-start">
-    <h1 class="text-xl text-gray-400 md:text-2xl xl:text-4xl font-semibold leading-6 xl:leading-10">A sample of the
-      images of our hand made clothing </h1>
+    <h1 class="text-xl text-gray-400 md:text-2xl xl:text-4xl font-semibold leading-6 xl:leading-10">Images from the creative process ... </h1>
 
     <button (click)="onGotoShop()"
       class="mat-button md:w-auto text-center mt-6 bg-gray-500 hover:-translate-y-1 ease-in-out transition duration-300 rounded">
-      <p class="text-base py-4 px-6 font-medium leading-none text-white">Find your favorite clothing</p>
+      <p class="text-base py-4 px-6 font-medium leading-none text-white">Shop for your favourites</p>
     </button>
   </div>
 
   <div class="mainDiv pl-4 md:pl-6 ">
-    <div class="h-5 mt-6 mb-4 md:mt-0 lg:mb-0 flex justify-end items-end space-x-6 ">
+    <div class="h-5 mt-6 mb-4 md:mt-4 lg:mb-4 flex justify-end items-end space-x-6 ">
       <button aria-label="back" onclick="" class=" swiper-button-prev text-gray-800">
         <mat-icon class="fill-gray-800 font-bold" [svgIcon]="'heroicons_solid:arrow-left'"></mat-icon>
       </button>
@@ -19,13 +18,13 @@
       </button>
     </div>
     <swiper [config]="config" class="swiper mySwiper">
-      <ng-template class="swiper-slide shadow-xl mb-10 mt-5  rounded-xl bg-gray-300" swiperSlide
+      <ng-template class="swiper-slide rounded-xl bg-gray-300" swiperSlide
         *ngFor="let image of imagesArray">
-        <div class="flex flex-col  space-y-4">
-          <div class="rounded-t-xl  group cursor-pointer relative flex justify-center items-center">
-            <img class="rounded-t-xl" [src]="image.url" alt="man">
+        <div class="flex flex-col">
+          <div class="rounded-xlgroup cursor-pointer relative flex justify-center items-center">
+            <img class="rounded-xl" [ngSrc]="image.url" alt="man"  width="500" height="500">
           </div>
-          <div class="px-4 py-6 rounded-b-xl w-full flex justify-between  flex-col items-start ">
+          <div class="rounded-xl w-full flex justify-between  flex-col items-start ">
           </div>
         </div>
       </ng-template>

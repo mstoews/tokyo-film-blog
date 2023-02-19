@@ -134,10 +134,12 @@ export class LandingPageComponent implements OnInit {
   }
 
   scrollToId(id: string) {
-    // console.log('element id : ', id);
     this.scrollTo.scrollToElementById(id);
   }
 
+  onFeatured(){
+    this.router.navigate(['collections']);
+  }
 
 
   populateImageList() {

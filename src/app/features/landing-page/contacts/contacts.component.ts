@@ -74,6 +74,10 @@ export class ContactsComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
+  onFeatures(){
+    this.router.navigate(['featured'])
+  }
+
   createForm() {
     this.contactGroup = this.fb.group({
       name: ['',

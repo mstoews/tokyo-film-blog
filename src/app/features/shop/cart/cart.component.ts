@@ -50,9 +50,9 @@ export class CartComponent implements OnInit, OnDestroy {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
       const userEmail = user?.email
-      // if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
-      //   this.admin_login = true;
-      // }
+      if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
+        this.admin_login = true;
+      }
     });
   }
 
@@ -69,7 +69,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckOut() {
     // this.calculateTotals();
-    if (this.userId === undefined && this.cartId !== undefined) {
+    if (this.userId !== undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
           .startProductCheckoutSession(this.cartId)

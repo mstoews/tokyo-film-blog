@@ -1,3 +1,5 @@
+import { Roles } from "app/models/roles";
+
 export interface IUser {
     uid: string;
     email: string;
@@ -6,4 +8,5 @@ export interface IUser {
     emailVerified: boolean;
     phoneNumber: string;
     age: number;
+    role?: Roles;
  }

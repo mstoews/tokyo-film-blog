@@ -29,9 +29,8 @@ export class CheckoutService {
       'Authorization',
       this.jwtAuth as string
     )
-
+    if (environment.production === false ) {
     return this.http.post<CheckoutSession>(
-      // environment.api.stripeUrl + '/api/checkout',
       environment.api.baseUrl + '/api/checkout',
       {
         cartId,
@@ -39,6 +38,18 @@ export class CheckoutService {
       },
       { headers }
     )
+    }
+    else  {
+      return this.http.post<CheckoutSession>(
+        environment.api.prdUrl + '/api/checkout',
+        {
+          cartId,
+          callbackUrl: this.buildCallbackUrl(),
+        },
+        { headers }
+      )
+    }
+   
   }
 
   buildCallbackUrl() {

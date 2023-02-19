@@ -53,7 +53,7 @@ const routes: Route[] = [
     path: 'collections',
     loadChildren: () => import('./features/products/products.module').then( (mod) => mod.ProductsModule),
     data: { state: 'collections' },
-    title: 'Collection'
+    title: 'Featured'
    },
    {
     path: 'stripe-checkout',

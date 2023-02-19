@@ -105,8 +105,9 @@
         <div class="m-2">
           <div class="mt-2" hintLabel="Min 15 characters: ">
             <p class="text-base text-gray-800">Message</p>
-            <textarea matInput #input maxlength="100" formControlName="message" type="text" placeholder="Enter a message"
-              class="placeholder:text-sm placeholdertext-gray-500 focus:outline-none border border-gray-300 lg:min-w-[540px] w-full py-3 px-3 rounded " ></textarea>
+            <textarea matInput #input maxlength="100" formControlName="message" type="text"
+              placeholder="Enter a message"
+              class="placeholder:text-sm placeholdertext-gray-500 focus:outline-none border border-gray-300 lg:min-w-[540px] w-full py-3 px-3 rounded "></textarea>
             <mat-hint class="text-sm" align="end"> {{ input.value.length }}/100</mat-hint>
           </div>
         </div>
@@ -114,11 +115,29 @@
           <div class="mt-10">
             <button #send type="submit" [disabled]="!contactGroup.valid"
               class="focus:ring-2 h-14 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none  border rounded hover:bg-indigo-600 py-4 w-full"
-              type="submit" [disabled]="!contactGroup.valid" mat-raised-button color="primary">
+              type="submit" [disabled]="!contactGroup.valid" mat-raised-button>
               Send your message
               <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+              <span *ngIf="!contactGroup.disabled"></span>
+              <mat-progress-spinner *ngIf="contactGroup.disabled" [diameter]="24"
+                [mode]="'indeterminate'"></mat-progress-spinner>
             </button>
           </div>
+          <!-- <button
+            class="fuse-mat-button-large w-full mt-6"
+            mat-flat-button
+            [color]="'primary'"
+            [disabled]="contactGroup.disabled"
+            (click)="onSubmit()"
+          >
+            <span *ngIf="!contactGroup.disabled"> Send Your Message </span>
+            <mat-progress-spinner
+              *ngIf="contactGroup.disabled"
+              [diameter]="24"
+              [mode]="'indeterminate'"
+            ></mat-progress-spinner>
+          </button> -->
+
         </div>
 
       </form>

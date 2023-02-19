@@ -9,75 +9,58 @@
       <mat-icon class="mb-2" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
     </button>
   </div>
-  <div class="flex flex-col ml-5 sm:flex-row md:ml-20 mr-20 mt-1 sm:ml-10">
-    <ng-container *ngIf="sub_title != undefined">
-      <h1
-        class="flex-auto sm:w-auto font-garamond p-4 font-bold sm:text-2xl text-2xl md:text-2xl lg:text-3xl leading-tight text-gray-800 dark:text-white">
-        {{ product.category }}</h1>
-      <span class="flex-auto"></span>
-      <button mat-icon-button class="visible sm:invisible bg-gray-300 hover:bg-gray-500 hover:text-gray-100"
-        (click)="onBackToInventory()">
-        <mat-icon class="mb-2" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-      </button>
-    </ng-container>
-  </div>
   
 
-  <div class="flex items-center justify-center w-full pl-20 pr-20">
-    <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
-      <mat-tab-group #tabGroup mat-stretch-tabs="false">
+  <div class="flex flex-1 items-center justify-center w-full pl-20 pr-20 w-f[620]">
+    <mat-card class="flex flex-row w-full text-gray-700 filter-article filter-interactive w-[610]">
+      <mat-tab-group #tabGroup mat-stretch-tabs="false" class="mt-10 items-centered w-[600]">
         <mat-tab label="Details">
           <ng-template matTabContent>
             <div mat-dialog-content>
               <form [formGroup]="prdGroup" (ngSubmit)="onUpdate(prdGroup.value)" class="form">
+                <div class="flex flex-col flex-1">
+                  <mat-form-field class="flex">
+                    <input matInput placeholder="Description" formControlName="description" />
+                  </mat-form-field>
+  
+                  <div class="flex-1 flex-row">
+                  <mat-form-field class="m-1 form-element grow" >
+                    <mat-label>Brand</mat-label>
+                    <input matInput placeholder="Brand" formControlName="brand" />
+                  </mat-form-field>
+  
+                  <mat-form-field class="m-1 form-element grow">
+                    <mat-label>Price</mat-label>
+                    <input matInput placeholder="Price" formControlName="price" />
+                  </mat-form-field>
+                  <mat-form-field class="m-1 form-element">
+                    <mat-label>Category</mat-label>
+                    <mat-select placeholder="Category" formControlName="category"
+                      (selectionChange)="changeCategory($event.value)">
+                      <mat-option *ngFor="let p of categories" [value]="p.name"> {{ p.name }} </mat-option>
+                    </mat-select>
+                  </mat-form-field>
 
-                <mat-form-field [ngStyle]="{ width: '97%' }">
-                  <input matInput placeholder="Description" formControlName="description" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Brand</mat-label>
-                  <input matInput placeholder="Brand" formControlName="brand" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Price</mat-label>
-                  <input matInput placeholder="Price" formControlName="price" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Category</mat-label>
-                  <mat-select placeholder="Category" formControlName="category" (selectionChange)="changeCategory($event.value)">
-                    <mat-option *ngFor="let p of categories" [value]="p.name">  {{ p.name }} </mat-option>
-                  </mat-select>
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Rating</mat-label>
-                  <input matInput placeholder="Rating" formControlName="rating" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Collection</mat-label>
-                  <input matInput placeholder="Featured" formControlName="is_featured" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>User</mat-label>
-                  <input matInput placeholder="User" formControlName="user_updated" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Date Added</mat-label>
-                  <input matInput placeholder="Created Date" type="date" id="date_created"
-                    formControlName="date_created" />
-                </mat-form-field>
-
-                <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '48%' }">
-                  <mat-label>Date Updated</mat-label>
-                  <input matInput placeholder="Updated Date" type="date" id="date_updated"
-                    formControlName="date_updated" />
-                </mat-form-field>
+                  <mat-form-field class="m-1 form-element">
+                    <mat-label>Rating</mat-label>
+                    <input matInput placeholder="Rating" formControlName="rating" />
+                  </mat-form-field>
+  
+                </div>
+  
+                  
+  
+                  <mat-form-field class="m-1 form-element">
+                    <mat-label>Collection</mat-label>
+                    <input matInput placeholder="Featured" formControlName="is_featured" />
+                  </mat-form-field>
+  
+                  <mat-form-field class="m-1 form-element" >
+                    <mat-label>User</mat-label>
+                    <input matInput placeholder="User" formControlName="user_updated" />
+                  </mat-form-field>
+                </div>
+               
               </form>
             </div>
             <div mat-dialog-actions>
@@ -165,5 +148,6 @@
       </mat-tab-group>
     </mat-card>
   </div>
+ 
 </ng-container>
 

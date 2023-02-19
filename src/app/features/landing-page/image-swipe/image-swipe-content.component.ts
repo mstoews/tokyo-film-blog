@@ -64,7 +64,7 @@ export class ImageSwipeComponent implements OnInit {
   ImagesList() {
     var imageCount = 0;
     this.storage
-      .ref('/800')
+      .ref('/thumbnails')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {

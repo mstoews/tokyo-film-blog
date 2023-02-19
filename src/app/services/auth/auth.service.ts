@@ -21,7 +21,7 @@ export class AuthService {
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
   pictureUrl$: Observable<string | null>;
-  roles$ : Observable<UserRoles | any>;
+  roles$: Observable<UserRoles | any>;
 
   // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
   private userCollection: AngularFirestoreCollection<User>;
@@ -35,13 +35,13 @@ export class AuthService {
   ) {
     this.isLoggedIn$ = this.afAuth.authState.pipe(map((user: any) => !!user));
     this.isLoggedOut$ = this.afAuth.authState.pipe(map((loggedIn: any) => !!loggedIn));
-    this.pictureUrl$ = this.afAuth.authState.pipe(map(user => user? user.photoURL: null));
-    this.roles$ = this.afAuth.idTokenResult.pipe(map(token  => token?.claims ?? {admin:false}));
+    this.pictureUrl$ = this.afAuth.authState.pipe(map(user => user ? user.photoURL : null));
+    this.roles$ = this.afAuth.idTokenResult.pipe(map(token => token?.claims ?? { admin: false }));
 
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        console.log('UserID : ',JSON.stringify(user));
+        console.log('UserID : ', JSON.stringify(user));
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
@@ -50,12 +50,12 @@ export class AuthService {
         this.loginAnonymously();
       }
     });
-   
+
     this.afAuth.onAuthStateChanged((user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log('Auth state changed : ',  JSON.stringify(user));
+        console.log('Auth state changed : ', JSON.stringify(user));
         let uid = user.uid;
         // ...
       } else {
@@ -65,20 +65,20 @@ export class AuthService {
     })
   }
 
-  
+
 
   getAuth(): Observable<boolean> {
     return this.isLoggedIn$;
   }
 
-  async loginAnonymously(){
+  async loginAnonymously() {
     this.afAuth.signInAnonymously().then((result) => {
       //this.SendVerificationMail();
       this.SetUserData(result.user);
     })
-    .catch((error) => {
-      this.snackBar.open(error, 'Error', {duration: 3000 });
-    });
+      .catch((error) => {
+        this.snackBar.open(error, 'Error', { duration: 3000 });
+      });
   }
 
   async signIn(email: string, password: string) {
@@ -147,8 +147,17 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
-  async getUserId() { 
-   return (await this.afAuth.currentUser).uid    ;
+  async isAdmin() {
+    return (await this.afAuth.currentUser).getIdTokenResult().then((idTokenResult) => {
+      if (idTokenResult.claims.admin) { return true; }
+      else {
+        return false;
+      }
+    });
+  }
+
+  async getUserId() {
+    return (await this.afAuth.currentUser).uid;
   }
 
   async SendVerificationMail() {
@@ -182,6 +191,11 @@ export class AuthService {
       emailVerified: user.emailVerified,
       phoneNumber: user.phoneNumber,
       age: user.age,
+      role: {
+        admin: false,
+        subscriber: true,
+        editor: false
+      }
     };
     return userRef.set(userData, {
       merge: true,

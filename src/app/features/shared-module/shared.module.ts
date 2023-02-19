@@ -10,7 +10,7 @@ import { SideNavComponent } from 'app/main/sidenav/sidenav.component';
 import { ShellComponent } from 'app/main/shell.component';
 import { NavItemComponent } from 'app/main/static-sidebar/nav-list-item/nav-item.component';
 import { NotificationComponent } from 'app/components/notification/notification.component';
-import { HeadingModule } from 'app/main/heading-module/heading.module';
+import { HeadingModule } from 'app/main/header/heading.module';
 
 
 const components = [

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 
 import { Router } from '@angular/router';
 
-import { onMainContentChange } from '../animations';
+import { onMainContentChange } from '../../animations';
 import { Location } from '@angular/common';
 
 import { MenuToggleService } from 'app/services/menu-toggle.service';
@@ -16,7 +16,7 @@ import { WishListService } from 'app/services/wishlist.service';
   selector: 'land-header',
   templateUrl: './landing.header.component.html',
   animations: [onMainContentChange],
- 
+
 })
 export class LandingHeaderComponent implements OnInit{
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter()
@@ -26,7 +26,7 @@ export class LandingHeaderComponent implements OnInit{
     private _location: Location,
     private _router: Router,
     private menuToggle: MenuToggleService,
-  
+
     private authService: AuthService,
     private cartService: CartService,
     private wishListService: WishListService,
@@ -34,7 +34,7 @@ export class LandingHeaderComponent implements OnInit{
     this.title = "Add Title as Parameter in the Template";
     menuToggle.setDrawerState(false);
   }
-  
+
   @Input() title : string;
   @Input() sub_title : string;
   @Input() back = true;
@@ -44,34 +44,36 @@ export class LandingHeaderComponent implements OnInit{
   isLoggedIn = true;
   wishCount = 0;
   cartCount = 0;
- 
-  ngOnInit(){
-    this.authService.getAuth().subscribe( res => {
-      if (res === true)
-      {
-        this.isLoggedIn = true;
+  isAdmin = false;m
 
-        this.cartService.cartByStatus(this.authService.userData.uid ,'open').subscribe(cart => {
+  async ngOnInit(){
+
+    this.authService.getAuth().subscribe( res => {
+      if (res !== true) {
+        this.isLoggedIn = false;
+      } else {
+        this.isLoggedIn = true;
+        this.cartService.cartByStatus(this.authService.userData.uid, "open").subscribe(cart => {
           this.cartCount = cart.length;
-        })
+        });
 
         this.wishListService.wishListByUserId(this.authService.userData.uid).subscribe(wishlist => {
           this.wishCount = wishlist.length;
-        })
-
-      }
-      else
-      {
-        this.isLoggedIn = false;
+        });
       }
      })
+    await this.isAdminUser();
+  }
+
+  async isAdminUser() {
+      this.isAdmin = await this.authService.isAdmin();
   }
 
 
   public onToggleSideNav() {
     this.menuToggle.setDrawerState(true);
     this.notifyNavBarToggleMenu.emit();
-    
+
   }
 
   public onBack(){
@@ -79,7 +81,7 @@ export class LandingHeaderComponent implements OnInit{
   }
 
   public onHome(){
-    this._router.navigate(['home']);
+    this._router.navigate(['/home']);
   }
 
   onShop() {
@@ -87,11 +89,11 @@ export class LandingHeaderComponent implements OnInit{
   }
 
   doAnimate() {
-  
+
   }
-  
+
   onProfile() {
-    this._router.navigate(['/profile']);  
+    this._router.navigate(['/profile']);
   }
 
   openShoppingCart() {
