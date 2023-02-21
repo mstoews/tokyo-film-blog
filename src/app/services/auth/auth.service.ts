@@ -81,6 +81,18 @@ export class AuthService {
       });
   }
 
+  async linkingCredentials(email: string, password: string) {
+    try {
+      const credentials = await this.afAuth.signInWithEmailAndPassword( email,  password );
+      // const user = await this.afAuth.currentUser.linkWithCredential(credential);
+
+    } catch (e) {
+      console.error(e);
+      return;
+    }
+    
+  }
+
   async signIn(email: string, password: string) {
     try {
       const credentials = await this.afAuth.signInWithEmailAndPassword(

@@ -9,7 +9,7 @@ import { IpcNetConnectOpts } from "net";
 @Component({
   standalone: true,
   selector: 'app-address',
-  templateUrl: './address.component.html',
+  templateUrl: './address-2.html',
   styleUrls: ['./address.component.css'],
   imports: [
     MaterialModule,]

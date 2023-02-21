@@ -2,20 +2,20 @@ import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
+import { AuthService } from 'app/services/auth/auth.service';
 
 
 @Component({
-    selector     : 'sign-up-split-screen',
-    templateUrl  : './sign-up.component.html',
+    selector: 'sign-up-split-screen',
+    templateUrl: './sign-up.component.html',
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations: fuseAnimations
 })
-export class SignUpSplitScreenComponent implements OnInit
-{
+export class SignUpSplitScreenComponent implements OnInit {
     @ViewChild('signUpNgForm') signUpNgForm!: NgForm;
 
     alert: { type: FuseAlertType; message: string } = {
-        type   : 'success',
+        type: 'success',
         message: ''
     };
     signUpForm!: UntypedFormGroup;
@@ -25,10 +25,9 @@ export class SignUpSplitScreenComponent implements OnInit
      * Constructor
      */
     constructor(
-
+        private authService: AuthService,
         private _formBuilder: UntypedFormBuilder
-    )
-    {
+    ) {
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -38,16 +37,15 @@ export class SignUpSplitScreenComponent implements OnInit
     /**
      * On init
      */
-    ngOnInit(): void
-    {
+    ngOnInit(): void {
         // Create the form
         this.signUpForm = this._formBuilder.group({
-                name      : ['', Validators.required],
-                email     : ['', [Validators.required, Validators.email]],
-                password  : ['', Validators.required],
-                company   : [''],
-                agreements: ['', Validators.requiredTrue]
-            }
+            first_name: ['', Validators.required],
+            last_name: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', Validators.required],
+            agreements: ['', Validators.requiredTrue]
+        }
         );
     }
 
@@ -58,7 +56,8 @@ export class SignUpSplitScreenComponent implements OnInit
     /**
      * Sign in
      */
-    signUp(): void
-    {
+    async signUp() {
+        let data = this.signUpForm.getRawValue();
     }
+        
 }
