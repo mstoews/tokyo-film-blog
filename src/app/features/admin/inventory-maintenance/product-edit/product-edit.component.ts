@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'app/models/category';
@@ -137,19 +137,20 @@ export class ProductEditComponent implements OnInit {
   createEmptyForm() {
     this.prdGroup = this.fb.group({
       id: [''],
-      description: [''],
-      short_description: [''],
-      rich_description: [''],
+      description: ['', Validators.required],
+      short_description: ['', Validators.required],
+      rich_description: ['', Validators.required],
       image: [''],
       images: [''],
-      brand: [''],
-      price: [''],
-      category: [''],
+      brand: ['', Validators.required],
+      price: ['', Validators.required ],
+      category: ['', Validators.required ],
       rating: [''],
-      is_featured: [''],
-      user_updated: [''],
-      date_created: [''],
-      date_updated: [''],
+      is_featured: ['', Validators.required],
+      user_updated: ['', Validators.required],
+      date_created: [new Date(), Validators.required],
+      date_updated: [new Date(), Validators.required],
+      purchases_allowed: [true, Validators.requiredTrue]
     });
   }
 
@@ -167,6 +168,7 @@ export class ProductEditComponent implements OnInit {
       category: [prd.category],
       rating: [prd.rating],
       is_featured: [prd.is_featured],
+      purchases_allowed: [prd.purchases_allowed],
       user_updated: [prd.user_updated],
       date_created: [prd.date_created],
       date_updated: [prd.date_updated],

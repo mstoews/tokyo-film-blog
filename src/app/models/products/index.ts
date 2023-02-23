@@ -15,6 +15,7 @@ export interface Product {
   date_created: string;
   date_updated: string;
   status: string;
+  purchases_allowed: boolean
   // imageUrls: imageItem[];
 }
 

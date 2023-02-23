@@ -8,6 +8,7 @@ import { Product, ProductPartial } from 'app/models/products';
 import { convertSnaps } from './db-utils';
 import { imageItem } from 'app/models/imageItem';
 import { ImageListService } from './image-list.service';
+import { MatSnackBar } from "@angular/material/snack-bar";
 
 
 @Injectable({
@@ -22,6 +23,7 @@ export class ProductsService {
 
   constructor(
     public afs: AngularFirestore,
+    private snackBar: MatSnackBar,
     private imageListService: ImageListService
   ) {
     this.productsCollection = afs.collection<Product>('inventory');
@@ -45,6 +47,7 @@ export class ProductsService {
       "image" : mainImage
     }
     this.afs.doc(`inventory/${productId}`).update( image );
+    this.snackBar.open('Main image updated', 'OK');
   }
 
   deleteEmptyInventory() {

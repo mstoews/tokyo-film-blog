@@ -74,13 +74,14 @@
                 </div>
 
                 <div class="flex flex-col grow"><mat-label class="ml-2 text-base">User</mat-label>
-
                   <mat-form-field class="m-1 form-element" appearance="outline">
-
                     <input matInput placeholder="User" formControlName="user_updated" />
                   </mat-form-field>
                 </div>
               </div>
+              <mat-checkbox color="primary" formControlName="purchases_allowed">
+                Purchases Allowed
+              </mat-checkbox>
             </form>
           </div>
           <div mat-dialog-actions>
