@@ -138,6 +138,7 @@ export class ProductEditComponent implements OnInit {
     this.prdGroup = this.fb.group({
       id: [''],
       description: [''],
+      short_description: [''],
       rich_description: [''],
       image: [''],
       images: [''],
@@ -158,6 +159,7 @@ export class ProductEditComponent implements OnInit {
     this.prdGroup = this.fb.group({
       id: [prd.id],
       description: [prd.description],
+      short_description: [prd.short_description],
       rich_description: [prd.rich_description],
       image: [prd.image],
       brand: [prd.brand],
@@ -202,6 +204,7 @@ export class ProductEditComponent implements OnInit {
   public productType = {
     id: '',
     description: '',
+    short_description: '',
     rich_description: '',
     image: '',
     images: '',
@@ -214,4 +217,8 @@ export class ProductEditComponent implements OnInit {
     date_created: '',
     date_updated: '',
   };
+
+  onSweep() {
+    this.productService.deleteEmptyInventory();
+  }
 }

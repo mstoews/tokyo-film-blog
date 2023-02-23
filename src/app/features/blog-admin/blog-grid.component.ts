@@ -18,7 +18,7 @@ import { IImageStorage } from 'app/models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { SelectionModel } from '@angular/cdk/collections';
 import { Router } from '@angular/router';
-import { openAddComponentDialog } from '../admin/inventory-grid/add/add.component';
+import { openAddComponentDialog } from '../admin/inventory-maintenance/add/add.component';
 import { openBlogAddDialog } from './add/blog-add.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 

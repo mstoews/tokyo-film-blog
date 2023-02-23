@@ -19,7 +19,7 @@ import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance
 import { ImageCardComponent } from './image-card/image-card.component';
 import { CollectionCardComponent } from './collection-card/collection-card.component';
 import { ProductCardComponent } from './product-card/product-card.component';
-import { InventoryComponent } from './inventory-grid/inventory-grid.component';
+import { InventoryComponent } from './inventory-maintenance/inventory-grid.component';
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { DxHtmlEditorModule } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
@@ -29,16 +29,16 @@ import { InventoryContentComponent } from './inventory-content/inventory-content
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
 import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
-import { InventoryImageSelectionComponent } from './inventory-grid/inventory-image-selection/inventory-image-selection.component';
-import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
+import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
+import { ProductEditComponent } from './inventory-maintenance/product-edit/product-edit.component';
 import { HeaderComponent } from 'app/main/header/header.component';
 import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { BlogResolver } from 'app/services/blog.resolver';
 
 import { AdminRouteModule } from './admin-route.module';
 import { ProductResolver } from 'app/services/product.resolver';
-import { AddComponentDialog } from './inventory-grid/add/add.component';
-import { InventoryPreviewComponent } from './inventory-grid/inventory-preview/inventory-preview.component';
+import { AddComponentDialog } from './inventory-maintenance/add/add.component';
+import { InventoryPreviewComponent } from './inventory-maintenance/inventory-preview/inventory-preview.component';
 import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-menubar.component';
 import { ImageListComponent } from "./image-list/image-list.component";
 import { SharedModule } from '../shared-module/shared.module';
@@ -90,7 +90,7 @@ import { SharedModule } from '../shared-module/shared.module';
     NgOptimizedImage,
     IconsModule,
     SharedModule
-   
+
 
   ],
   exports: [AdminComponent, OrdersGridComponent],

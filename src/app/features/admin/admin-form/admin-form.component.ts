@@ -19,7 +19,7 @@ export class AdminFormComponent implements OnInit {
     private fb: FormBuilder,
     private mainPageService: MainPageService
   ) {
-    this.sTitle = 'Administrative Main Page'
+    this.sTitle = 'Main Page'
   }
 
   ngOnInit(): void {

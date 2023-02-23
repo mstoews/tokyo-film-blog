@@ -86,6 +86,10 @@ export class BlogEditComponent implements OnInit{
     this._location.back();
   }
 
+  onPublish(blog: Blog) {
+    this.blogService.setToPublish(blog);
+  }
+
   onDelete(data: Blog) {
     data = this.blogGroup.getRawValue();
     this.blogService.delete(data.id.toString());

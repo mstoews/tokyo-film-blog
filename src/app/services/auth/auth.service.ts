@@ -41,7 +41,7 @@ export class AuthService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        console.log('UserID : ', JSON.stringify(user));
+        console.log('UserID : ', JSON.stringify(user.email));
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
@@ -90,7 +90,7 @@ export class AuthService {
       console.error(e);
       return;
     }
-    
+
   }
 
   async signIn(email: string, password: string) {

@@ -3,6 +3,7 @@ import { imageItem } from '../imageItem'
 export interface Product {
   id:   string;
   description:   string;
+  short_description: string;
   rich_description: string;
   image:     string;
   brand:        string;

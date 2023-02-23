@@ -149,9 +149,9 @@
     <button (click)="onDelete(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
       <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
     </button>
-    <!-- <button (click)="onImages()" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
-      <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-    </button> -->
+    <button (click)="onPublish(blog)" mat-icon-button color="primary" [disabled]="!blogGroup.valid">
+      <mat-icon [svgIcon]="'mat_outline:briefcase'"></mat-icon>
+    </button>
   </div>
 </mat-card>
 </div>

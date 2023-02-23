@@ -8,9 +8,9 @@ import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { AdminComponent } from './admin/admin.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { GalleryComponent } from './gallery/gallery.component';
-import { InventoryComponent } from './inventory-grid/inventory-grid.component';
-import { InventoryImageSelectionComponent } from './inventory-grid/inventory-image-selection/inventory-image-selection.component';
-import { ProductEditComponent } from './inventory-grid/product-edit/product-edit.component';
+import { InventoryComponent } from './inventory-maintenance/inventory-grid.component';
+import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
+import { ProductEditComponent } from './inventory-maintenance/product-edit/product-edit.component';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 import { ContactGridComponent } from './contact-grid/contact-grid.component';
 

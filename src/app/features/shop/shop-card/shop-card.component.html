@@ -3,14 +3,14 @@
   <div>
     <div class="relative group">
         <div class="flex justify-center items-center opacity-0 bg-gradient-to-t from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-50 absolute top-0 left-0 h-full w-full"></div>
-        <img [src]="product.image" width="400" height="400" alt={{product.description}} class="h-full w-full object-cover object-center group-hover:opacity-75">
+        <img [src]="product.image" width="400" height="400" alt={{product.description}} class="rounded-lg h-full w-full object-cover object-center group-hover:opacity-75">
         <div class="absolute bottom-0 p-8 w-full opacity-0 group-hover:opacity-100">
             <button (click)="addToCart()" class="hover:bg-gray-800 hover:text-gray-100  dark:bg-gray-800 dark:text-gray-300 font-medium text-base leading-4 text-gray-800 bg-white py-3 w-full">Add to cart</button>
-        
+
             <!-- <button (click)="addToWishlist()" class="hover:bg-gray-800 bg-transparent font-medium text-base leading-4 border-2 border-white py-3 w-full mt-2 text-white">Add to Wishlist</button> -->
 
             <button (click)="openCart()" class="hover:bg-gray-800 bg-transparent font-medium text-base leading-4 border-2 border-white py-3 w-full mt-2 text-white">Details</button>
-            
+
         </div>
     </div>
     <h3 class="mt-4 text-sm text-gray-700">{{product.description}}</h3>

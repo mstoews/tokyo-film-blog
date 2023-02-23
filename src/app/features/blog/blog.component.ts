@@ -33,11 +33,9 @@ backToHome() {
 }
 
   allBlogs$: Observable<Blog[]>;
-  blog: Blog;
-
 
   ngOnInit(): void {
-    this.allBlogs$ = this.blogService.getAll();
+    this.allBlogs$ = this.blogService.getAllPublishedBlog();
   }
 
 }

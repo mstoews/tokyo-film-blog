@@ -1,68 +1,136 @@
-
 <app-header [title]="'Maintenance'"> </app-header>
 
 <mat-card class="m-4 text-gray-700 max-w-3/8 filter-article filter-interactive">
-  <div mat-dialog-title class="text-3xl mb-3" [ngStyle]="{ 'border-left': '10px solid' }">
+  <div
+    mat-dialog-title
+    class="text-3xl mb-3 ml-1 pl-2 border-green-600"
+    [ngStyle]="{ 'border-left': '10px solid', 'border-color': 'green' }"
+  >
     {{ sTitle }}
   </div>
 
-
   <div mat-dialog-content>
-    <form [formGroup]="mainpageGroup" (ngSubmit)="onUpdate(mainpageGroup.value)">
-      <mat-form-field class="m-1 flex-start" [ngStyle]="{ width: '99%' }">
-        <mat-label>Landing Page Title</mat-label>
-        <input matInput placeholder="Landing Page" formControlName="hero_title" />
-      </mat-form-field>
+    <form
+      [formGroup]="mainpageGroup"
+      (ngSubmit)="onUpdate(mainpageGroup.value)"
+    >
+      <div class="m-1 flex flex-col">
+        <div class="flex flex-col grow">
+          <mat-label class="ml-2 text-base">Landing Page Hero Title</mat-label>
+          <mat-form-field class="m-1 flex-start" appearance="outline">
+            <input
+              matInput
+              placeholder="Landing Page"
+              formControlName="hero_title"
+            />
+          </mat-form-field>
+        </div>
 
-      <mat-form-field class="m-1" [ngStyle]="{ width: '99%' }">
-        <mat-label>Features Title</mat-label>
-        <input matInput placeholder="Feature" formControlName="features_header" />
-      </mat-form-field>
+        <div class="flex flex-col grow">
+          <mat-label class="ml-2 text-base">Features Title</mat-label>
+          <mat-form-field class="m-1" appearance="outline">
+            <input
+              matInput
+              placeholder="Feature"
+              formControlName="features_header"
+            />
+          </mat-form-field>
+        </div>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '99%' }" >
-        <mat-label>Features Description</mat-label>
-        <input matInput placeholder="Description " formControlName="features_subheader" />
-      </mat-form-field>
+        <div class="flex flex-col grow">
+          <mat-label class="ml-2 text-base">Features Description</mat-label>
+          <mat-form-field class="m-1 form-element" appearance="outline">
+            <input
+              matInput
+              placeholder="Description "
+              formControlName="features_subheader"
+            />
+          </mat-form-field>
+        </div>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49%' }" >
-        <mat-label>Left CTA</mat-label>
-        <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
-      </mat-form-field>
+        <section class="flex flex-col md:flex-row">
+          <div class="flex flex-col grow">
+            <mat-label class="ml-2 text-base">Left CTA</mat-label>
+          <mat-form-field class="m-1 form-element grow" appearance="outline">
+            <input
+              matInput
+              placeholder="Call to Action Left"
+              formControlName="cta_left"
+            />
+          </mat-form-field>
+          </div>
 
-      <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '49.5%' }" >
-        <mat-label>Right CTA</mat-label>
-        <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
-      </mat-form-field>
+          <div class="flex flex-col grow">
+            <mat-label class="ml-2 text-base">Right CTA</mat-label>
+          <mat-form-field class="m-1 form-element grow" appearance="outline">
 
-      <section>
-        <div mat-dialog-title class="font-bold">
+            <input
+              matInput
+              placeholder="Call to Action Right"
+              formControlName="cta_right"
+            />
+          </mat-form-field>
+          </div>
+        </section>
+
+        <div mat-dialog-title class="flex-col font-bold">
           Contact Information
         </div>
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" >
-          <mat-label>eMail</mat-label>
-          <input matInput placeholder="Contact Email" formControlName="contact_email" />
-        </mat-form-field>
+        <section class="flex flex-col md:flex-row">
 
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '32%' }" >
-          <mat-label>Telephone</mat-label>
-          <input matInput placeholder="Telephone" formControlName="contact_telephone" />
-        </mat-form-field>
 
-        <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '33%' }" >
-          <mat-label>Shipping</mat-label>
-          <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
-        </mat-form-field>
-      </section>
+          <div class="flex flex-col grow">
+            <mat-label class="ml-2 text-base">eMail</mat-label>
+          <mat-form-field class="m-1 form-element grow" appearance="outline">
+            <input
+              matInput
+              placeholder="Contact Email"
+              formControlName="contact_email"
+            />
+          </mat-form-field>
+          </div>
 
-      <!-- <mat-radio-group>
+
+          <div class="flex flex-col grow">
+            <mat-label class="ml-2 text-base">Telephone</mat-label>
+          <mat-form-field class="m-1 form-element grow" appearance="outline">
+            <input
+              matInput
+              placeholder="Telephone"
+              formControlName="contact_telephone"
+            />
+          </mat-form-field>
+          </div>
+
+
+
+          <div class="flex flex-col grow">
+            <mat-label class="ml-2 text-base">Shipping</mat-label>
+          <mat-form-field class="m-1 form-element grow" appearance="outline">
+
+            <input
+              matInput
+              placeholder="Shipping Locations"
+              formControlName="contact_shipping"
+            />
+          </mat-form-field>
+          </div>
+        </section>
+
+        <!-- <mat-radio-group>
         <mat-radio-button class="m-1" value="true">Active</mat-radio-button>
         <mat-radio-button class="m-1" value="false">InActive</mat-radio-button>
       </mat-radio-group> -->
-
+      </div>
     </form>
   </div>
   <div mat-dialog-actions class="mt-10">
-    <button class="m-1" mat-flat-button (click)="onUpdate(mainPage)" color="primary">
+    <button
+      class="m-1"
+      mat-flat-button
+      (click)="onUpdate(mainPage)"
+      color="primary"
+    >
       <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
       Update Main Page
     </button>

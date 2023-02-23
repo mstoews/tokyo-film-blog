@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { first, map, Observable } from 'rxjs';
+import { first, map, Observable, tap } from 'rxjs';
 import { Blog, BlogPartial } from 'app/models/blog';
 import { convertSnaps } from './db-utils';
 import { IImageStorage } from 'app/models/maintenance';
@@ -29,6 +29,12 @@ export class BlogService {
     this.blogPartialItems = this.blogPartialCollection.valueChanges({ idField: 'id'});
   }
 
+
+  setToPublish(blog: Blog) {
+    blog.published = true;
+    this.blogCollection.doc(blog.id).update(blog);
+  }
+
   getBlogImage(parentId: string): any {
     return this.imageListService.getImagesByProductId(parentId);
     // var blogImages: Observable<IImageStorage[]>;
@@ -38,9 +44,21 @@ export class BlogService {
     // return blogImages;
   }
 
-  getAll() {
+  //getAllPublishedBlog(): Observable<Blog[]> {
+    getAllPublishedBlog() {
+    return this.blogItems;
+    // const blog$ = this.blogItems;
+    // const publishedBlogs =  blog$.pipe(map((blogs) => {
+    //   tap(() => console.log('published blogs')),
+    //   blogs.filter( blog => blog.published === true);
+    // }));
+    // return publishedBlogs;
+  }
+
+  getAll() : any {
     return this.blogItems;
   }
+
 
   getBlog(id: string) {
     const ref = this.afs
@@ -73,6 +91,7 @@ export class BlogService {
   }
 
   createBlog(blog: Blog) {
+    blog.published = false;
     return this.blogCollection.add(blog);
   }
 

@@ -49,6 +49,8 @@ export class ContactsComponent implements OnInit {
   }
 
   onUpdate(contact: Contact) {
+    const currentDate = new Intl.DateTimeFormat('en');
+    const theDate = currentDate.format();
 
     this.http.post<any>(environment.api.createMessage, {
       name: contact.name,

@@ -8,7 +8,7 @@ import { Product, ProductPartial } from 'app/models/products';
 import { convertSnaps } from './db-utils';
 import { imageItem } from 'app/models/imageItem';
 import { ImageListService } from './image-list.service';
-import { TitleStrategy } from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root',
@@ -48,14 +48,16 @@ export class ProductsService {
   }
 
   deleteEmptyInventory() {
-    var inventory: Observable<Product[]>;
-    this.productsCollection = this.afs.collection('inventory');
-    inventory = this.productsCollection.valueChanges();
-    inventory.forEach((prod) => {
-      console.log(prod.length);
-    })
-
-
+    const allInventory = this.afs.collection<Product>('inventory');
+    const allItems = allInventory.valueChanges();
+    allItems.pipe(map(inventory => {
+      inventory.map( items => {
+          if(items.description === undefined)
+          {
+              console.log(items.id);
+          }
+      })
+    }));
   }
 
   get(id: string) {

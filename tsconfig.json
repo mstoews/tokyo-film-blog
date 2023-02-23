@@ -15,12 +15,12 @@
     "moduleResolution": "node",
     "strictPropertyInitialization": false,
     "importHelpers": true,
-    "target": "es2020",
-    "module": "es2022",
+    "target": "ES2022",
+    "module": "ES2022",
+    "useDefineForClassFields": false,
     "lib": [
-      "es2020",
-      "dom",
-      "esnext.asynciterable"
+      "ES2022",
+      "dom"
     ],
     "allowSyntheticDefaultImports": true ,
     "strict": false,

@@ -145,7 +145,7 @@ export class InventoryComponent implements OnInit {
     openAddComponentDialog(this.dialog, this.product)
       .pipe(filter((val) => !!val))
       .subscribe((val) => console.log('new inventory item', val));
-    
+
   }
 
   onCreate() {
@@ -158,7 +158,7 @@ export class InventoryComponent implements OnInit {
     data = this.prdGroup.getRawValue();
     data.category = this.updated_category;
     data.rich_description = this.rich_description;
-    // console.log(`onUpdate:  ${JSON.stringify(data)}`);
+    console.log(`onUpdate:  ${JSON.stringify(data)}`);
     this.productService.update(data);
   }
 
@@ -166,6 +166,7 @@ export class InventoryComponent implements OnInit {
   public productType = {
     id: '',
     description: '',
+    short_description: '',
     rich_description: '',
     image: '',
     images: '',
@@ -183,6 +184,7 @@ export class InventoryComponent implements OnInit {
     this.prdGroup = this.fb.group({
       id: [''],
       description: [''],
+      short_description: [''],
       rich_description: [''],
       image: [''],
       images: [''],
@@ -203,6 +205,7 @@ export class InventoryComponent implements OnInit {
     this.prdGroup = this.fb.group({
       id: [prd.id],
       description: [prd.description],
+      short_description: [prd.short_description],
       rich_description: [prd.rich_description],
       image: [prd.image],
       brand: [prd.brand],
@@ -220,6 +223,7 @@ export class InventoryComponent implements OnInit {
     // 'actions',
     'image',
     'description',
+    'short_description',
     'rich_description',
     'price',
   ];
