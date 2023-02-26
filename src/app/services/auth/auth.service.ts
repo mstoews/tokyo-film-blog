@@ -17,6 +17,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AuthService {
   userData: any;
+  userId: string;
+  isAnonymous: boolean;
+  email: string
 
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
@@ -41,28 +44,27 @@ export class AuthService {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
-        console.log('UserID : ', JSON.stringify(user.email));
         localStorage.setItem('user', JSON.stringify(this.userData));
         JSON.parse(localStorage.getItem('user')!);
       } else {
-        //localStorage.setItem('user', 'null');
-        //JSON.parse(localStorage.getItem('user')!);
         this.loginAnonymously();
       }
     });
 
     this.afAuth.onAuthStateChanged((user) => {
       if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        console.log('Auth state changed : ', JSON.stringify(user));
-        let uid = user.uid;
-        // ...
+        this.userId = user.uid;
+        this.email = user.email;
+        this.isAnonymous = user.isAnonymous;
+        console.log(`User: ${this.userId} email: ${this.email}`);
+
       } else {
-        // User is signed out
-        // ...
+        this.userId = undefined;
+        this.email = undefined;
       }
     })
+
+
   }
 
 

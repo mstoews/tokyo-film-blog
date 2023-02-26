@@ -77,10 +77,8 @@ export class CartComponent implements OnInit, OnDestroy {
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
         this.purchaseStarted = false;
-        this.grand_total = 0.0;
-        this.total = 0.0
       } else {
-        alert('Try again in one moment or refresh the screen');
+        this.snack.open('Unable to reach the payment server. Please try again in a moment.','Payment Failed');
         this.purchaseStarted = false;
       }
   }

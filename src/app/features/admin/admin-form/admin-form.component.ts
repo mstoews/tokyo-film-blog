@@ -72,7 +72,7 @@ export class AdminFormComponent implements OnInit {
 
   onUpdate(mainPage: Mainpage) {
     mainPage = this.mainpageGroup.getRawValue()
-    // console.log(`onUpdate: ${JSON.stringify(mainPage)}`);
+    console.log(`onUpdate: ${JSON.stringify(mainPage)}`);
     this.mainPageService.update(mainPage);
   }
 

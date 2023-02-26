@@ -1,4 +1,4 @@
-export interface IProfile {
+export interface ProfileModel {
   id?: string;
   email: string;
   first_name: string;
@@ -7,7 +7,10 @@ export interface IProfile {
   address_line1: string;
   address_line2: string;
   city: string;
-  provence_state: string;
+  province_state: string;
   postal_code: string;
-  phone_number?: string;
+  phone_number: string;
+  created_date?: string;
+  country: string;
+  userId?: string;
 }

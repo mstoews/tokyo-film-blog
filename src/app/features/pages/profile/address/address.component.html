@@ -136,8 +136,8 @@
             <div class="lg:col-start-1 md:col-start-0 lg:col-span-12 md:col-span-12 sm:col-span-12 col-span-12">
               <div class="lg:mt-12 md:mt-8 mt-8 lg:ml-0 md:ml-0 ml-0 col-span-10">
                 <div class="div flex w-full md:pt-12 pt-8">
-                  <button (click)="onUpdateProfile()"
-                    class="text-base font-medium leading-none text-white bg-gray-800 py-4 w-full hover:bg-gray-700 transform duration-300 ease-in-out">
+                  <button (click)="onUpdateProfile()" [disabled]="updateBtnState [disabled]="!contactGroup.valid"
+                    class="text-base font-medium disabled:bg-gray-400 leading-none text-white bg-gray-800 py-4 w-full hover:bg-gray-700 transform duration-300 ease-in-out">
                     Update Profile
                   </button>
                 </div>

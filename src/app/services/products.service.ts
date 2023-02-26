@@ -115,13 +115,9 @@ export class ProductsService {
   update(mtProduct: Product) {
     this.productsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
-
-
   updatePartial(product: ProductPartial) {
     this.productPartialCollection.doc(product.id.toString()).update(product);
   }
-
-
 
   delete(id: string) {
     this.productsCollection.doc(id).delete();
