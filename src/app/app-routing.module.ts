@@ -12,58 +12,58 @@ const routes: Route[] = [
     pathMatch: 'full'
    },
    { path: 'home',
-      loadChildren: () => import('./features/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
+      loadChildren: () => import('./modules/landing-page/landing-page.module').then( (mod) => mod.LandingPageModule),
       data: { state: 'home' },
       title: 'Made To',
    },
    {
     path: 'authentication',
-    loadChildren: () => import('./features/pages/authentication/authentication.module').then((mod) => mod.AuthenticationModule),
+    loadChildren: () => import('./modules/pages/authentication/authentication.module').then((mod) => mod.AuthenticationModule),
     data: { state: 'authenication' },
     title: 'Login'
    },
    {
     path: 'shop',
-    loadChildren: () => import('./features/shop/shop.module').then( (mod) => mod.ShopModule),
+    loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
     data: { state: 'shop' },
     title: 'Shop'
    },
    {
     path: 'blog',
-    loadChildren: () => import('./features/blog/blog.module').then( (mod) => mod.BlogModule),
+    loadChildren: () => import('./modules/blog/blog.module').then( (mod) => mod.BlogModule),
     data: { state: 'blog' },
     title: 'Thoughts'
 
    },
    {
     path: 'blog-admin',
-    loadChildren: () => import('./features/blog-admin/blog-admin.module').then( (mod) => mod.BlogAdminModule),
+    loadChildren: () => import('./modules/blog-admin/blog-admin.module').then( (mod) => mod.BlogAdminModule),
     data: { state: 'blog-admin' },
     title: 'Blog Admin'
    },
 
    {
     path: 'admin',
-    loadChildren: () => import('./features/admin/admin.module').then( (mod) => mod.AdminModule),
+    loadChildren: () => import('./modules/admin/admin.module').then( (mod) => mod.AdminModule),
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome, state: 'admin'  },
     title: 'Maintenance'
    },
    {
     path: 'collections',
-    loadChildren: () => import('./features/products/products.module').then( (mod) => mod.ProductsModule),
+    loadChildren: () => import('./modules/products/products.module').then( (mod) => mod.ProductsModule),
     data: { state: 'collections' },
     title: 'Featured'
    },
    {
     path: 'stripe-checkout',
-    loadChildren: () => import('./features/stripe/stripe.module').then( (mod) => mod.StripeModule),
+    loadChildren: () => import('./modules/stripe/stripe.module').then( (mod) => mod.StripeModule),
     data: { state: 'strip-checkout' },
     title: 'Checkout'
    },
    {
     path: 'profile',
-    loadChildren: () => import('./features/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
+    loadChildren: () => import('./modules/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
     data: { state: 'profile' },
     title: 'Profile'
    },

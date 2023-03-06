@@ -41,6 +41,10 @@ export class ProductsService {
     return this.inventoryItems;
   }
 
+  getAvailableInventory() {
+    return this.getAll().pipe( map((inventory) => inventory.filter((available) => available.purchases_allowed === true)));
+  }
+
   updateMainImage(productId: string, mainImage: string)
   {
     const image = {
@@ -69,9 +73,9 @@ export class ProductsService {
 
   getFilteredInventory(category: string) {
     if (category === 'All Categories') {
-      return this.inventoryItems;
+      return this.getAvailableInventory();
     } else {
-      return this.inventoryItems.pipe(
+      return this.getAvailableInventory().pipe(
         map((images) =>
           images.filter((product) => product.category === category)
         )

@@ -56,14 +56,34 @@ export class AuthService {
         this.userId = user.uid;
         this.email = user.email;
         this.isAnonymous = user.isAnonymous;
-        console.log(`User: ${this.userId} email: ${this.email}`);
+        // console.log(`User: ${this.userId} email: ${this.email}`);
+        // var displayName = user.displayName;
+        // var email = user.email;
+        // var emailVerified = user.emailVerified;
+        // var photoURL = user.photoURL;
+        // var uid = user.uid;
+        // var phoneNumber = user.phoneNumber;
+        // var providerData = user.providerData;
+        // user.getIdToken().then(function(accessToken) {
+        //   document.getElementById('sign-in-status').textContent = 'Signed in';
+        //   document.getElementById('sign-in').textContent = 'Sign out';
+        //   document.getElementById('account-details').textContent = JSON.stringify({
+        //     displayName: displayName,
+        //     email: email,
+        //     emailVerified: emailVerified,
+        //     phoneNumber: phoneNumber,
+        //     photoURL: photoURL,
+        //     uid: uid,
+        //     accessToken: accessToken,
+        //     providerData: providerData
+        //   }, null, '  ');
+        // });
 
       } else {
         this.userId = undefined;
         this.email = undefined;
       }
     })
-
 
   }
 

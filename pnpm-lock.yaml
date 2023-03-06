@@ -4,7 +4,7 @@ specifiers:
   '@angular-devkit/build-angular': ^15.0.1
   '@angular/animations': ^15.0.1
   '@angular/cdk': ^15.0.0
-  '@angular/cli': ~15.0.1
+  '@angular/cli': ~15.0.5
   '@angular/common': ^15.0.1
   '@angular/compiler': ^15.0.1
   '@angular/compiler-cli': ^15.0.1
@@ -32,6 +32,7 @@ specifiers:
   fast-xml-parser: ^4.0.10
   file-saver: ^2.0.0
   firebase: ^9.14.0
+  firebaseui-angular: ^6.1.3
   highlight.js: ^11.6.0
   jasmine-core: ~4.1.0
   karma: ~6.3.0
@@ -86,6 +87,7 @@ dependencies:
   fast-xml-parser: 4.0.12
   file-saver: 2.0.5
   firebase: 9.14.0
+  firebaseui-angular: 6.1.3_kkp4rlgnywryladhtip6dvyxvm
   highlight.js: 11.7.0
   lodash: 4.17.21
   moment: 2.29.4
@@ -107,7 +109,7 @@ dependencies:
 
 devDependencies:
   '@angular-devkit/build-angular': 15.0.2_54nzfclamw3lxtq72o4y4bfyrq
-  '@angular/cli': 15.0.2
+  '@angular/cli': 15.0.5
   '@angular/compiler-cli': 15.0.2_nfmjq542a7cmaxn34ttkyemdb4
   '@types/jasmine': 4.0.3
   autoprefixer: 10.4.13_postcss@8.4.19
@@ -132,21 +134,21 @@ packages:
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
 
-  /@angular-devkit/architect/0.1500.2:
-    resolution: {integrity: sha512-gprTEy6vD57yJCd6JqRaFZ/pfmXuEDHlH7mOVBcBdTGuuE1VJkiNJ69E9gw552L7wwVEsF0D6lVYTFHVDkMDmA==}
-    engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-    dependencies:
-      '@angular-devkit/core': 15.0.2
-      rxjs: 6.6.7
-    transitivePeerDependencies:
-      - chokidar
-    dev: true
-
   /@angular-devkit/architect/0.1500.2_chokidar@3.5.3:
     resolution: {integrity: sha512-gprTEy6vD57yJCd6JqRaFZ/pfmXuEDHlH7mOVBcBdTGuuE1VJkiNJ69E9gw552L7wwVEsF0D6lVYTFHVDkMDmA==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     dependencies:
       '@angular-devkit/core': 15.0.2_chokidar@3.5.3
+      rxjs: 6.6.7
+    transitivePeerDependencies:
+      - chokidar
+    dev: true
+
+  /@angular-devkit/architect/0.1500.5:
+    resolution: {integrity: sha512-n1L3Q2d7HoWFRRqihu3BAUB5xZFfz8LqQoHpVNl6HN1ugtmvqDUDoKrpYVH9LCKCqfJW2Cxssy+FERiDsihIJQ==}
+    engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+    dependencies:
+      '@angular-devkit/core': 15.0.5
       rxjs: 6.6.7
     transitivePeerDependencies:
       - chokidar
@@ -302,6 +304,7 @@ packages:
       jsonc-parser: 3.2.0
       rxjs: 6.6.7
       source-map: 0.7.4
+    dev: false
 
   /@angular-devkit/core/15.0.2_chokidar@3.5.3:
     resolution: {integrity: sha512-XkdNKyeYvnCq0zWuEda163muUV38ifNyK6EjrbhI5pQWNg7myxtDmLenjtpXLGLZwjxqsart2l/uoYsk1xQCmQ==}
@@ -315,6 +318,22 @@ packages:
       ajv: 8.11.0
       ajv-formats: 2.1.1
       chokidar: 3.5.3
+      jsonc-parser: 3.2.0
+      rxjs: 6.6.7
+      source-map: 0.7.4
+    dev: true
+
+  /@angular-devkit/core/15.0.5:
+    resolution: {integrity: sha512-SxLvbpqcQfb1qRykZjqRUG/8uC1FYpneyNV9S9YglXg4JhCFhfc9AnKxuu9Bm/O8V7FghOIlGWGglCdPHra0pw==}
+    engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+    peerDependencies:
+      chokidar: ^3.5.2
+    peerDependenciesMeta:
+      chokidar:
+        optional: true
+    dependencies:
+      ajv: 8.11.0
+      ajv-formats: 2.1.1
       jsonc-parser: 3.2.0
       rxjs: 6.6.7
       source-map: 0.7.4
@@ -340,6 +359,20 @@ packages:
       rxjs: 6.6.7
     transitivePeerDependencies:
       - chokidar
+    dev: false
+
+  /@angular-devkit/schematics/15.0.5:
+    resolution: {integrity: sha512-S3YN1Q/iOOXA9ipWbh+bDaTJwc0Wb0uPqSUJov+L/EojNi9xglY80bLwVdL2OHZV2e+62dhkvQ4REM3hZT2/Hg==}
+    engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+    dependencies:
+      '@angular-devkit/core': 15.0.5
+      jsonc-parser: 3.2.0
+      magic-string: 0.26.7
+      ora: 5.4.1
+      rxjs: 6.6.7
+    transitivePeerDependencies:
+      - chokidar
+    dev: true
 
   /@angular/animations/15.0.2_@angular+core@15.0.2:
     resolution: {integrity: sha512-bghNrTPbRaxL1SqiKFFUdDFDClGFzES6AkGbtBj1kE6IOC3tNbTSc2ozsuVAGOi96zqumnonaA000dIIqfvYMw==}
@@ -366,15 +399,15 @@ packages:
       parse5: 7.1.2
     dev: false
 
-  /@angular/cli/15.0.2:
-    resolution: {integrity: sha512-SRPCYiK5A+U0V173EUZNYHtOvFtxefH9hfie2+XcJX9B/7VxqIkyRYXOUUyWtC7yzbxWNJ1+WG5X4S5C2LrTEw==}
+  /@angular/cli/15.0.5:
+    resolution: {integrity: sha512-bg0p29FPlg2g07GPkEEtqphErtNnZgiAy5R+4aTQlPt0Pl0hXIbGnl3HRBFXQkhPSdclKn9W5j69tOcDBNFBdg==}
     engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
     hasBin: true
     dependencies:
-      '@angular-devkit/architect': 0.1500.2
-      '@angular-devkit/core': 15.0.2
-      '@angular-devkit/schematics': 15.0.2
-      '@schematics/angular': 15.0.2
+      '@angular-devkit/architect': 0.1500.5
+      '@angular-devkit/core': 15.0.5
+      '@angular-devkit/schematics': 15.0.5
+      '@schematics/angular': 15.0.5
       '@yarnpkg/lockfile': 1.1.0
       ansi-colors: 4.1.3
       ini: 3.0.1
@@ -1905,7 +1938,7 @@ packages:
       '@firebase/app-compat': 0.1.39
       '@firebase/component': 0.5.21
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -1924,7 +1957,7 @@ packages:
       '@firebase/installations': 0.5.16_@firebase+app@0.8.4
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/app-check-compat/0.2.17_dvqpjc4ehcooegrkfkqbfp67kq:
@@ -1938,7 +1971,7 @@ packages:
       '@firebase/component': 0.5.21
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -1960,7 +1993,7 @@ packages:
       '@firebase/component': 0.5.21
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/app-compat/0.1.39:
@@ -1970,7 +2003,7 @@ packages:
       '@firebase/component': 0.5.21
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/app-types/0.8.1:
@@ -1984,7 +2017,7 @@ packages:
       '@firebase/logger': 0.3.3
       '@firebase/util': 1.6.3
       idb: 7.0.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/app/0.8.4:
@@ -1994,7 +2027,7 @@ packages:
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
       idb: 7.0.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/auth-compat/0.2.24_uougi3e27jpxvoatrekmluf7oy:
@@ -2009,7 +2042,7 @@ packages:
       '@firebase/util': 1.7.3
       node-fetch: 2.6.7
       selenium-webdriver: 4.5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -2049,7 +2082,7 @@ packages:
       '@firebase/util': 1.3.0
       node-fetch: 2.6.1
       selenium-webdriver: 4.0.0-beta.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -2066,7 +2099,7 @@ packages:
       '@firebase/util': 1.7.3
       node-fetch: 2.6.7
       selenium-webdriver: 4.5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - bufferutil
       - encoding
@@ -2077,21 +2110,21 @@ packages:
     resolution: {integrity: sha512-mTM5CBSIlmI+i76qU4+DhuExnWtzcPS3cVgObA3VAjliPPr3GrUlTaaa8KBGfxsD27juQxMsYA0TvCR5X+GQ3Q==}
     dependencies:
       '@firebase/util': 1.6.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/component/0.5.21:
     resolution: {integrity: sha512-12MMQ/ulfygKpEJpseYMR0HunJdlsLrwx2XcEs40M18jocy2+spyzHHEwegN3x/2/BLFBjR5247Etmz0G97Qpg==}
     dependencies:
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/component/0.5.6:
     resolution: {integrity: sha512-GyQJ+2lrhsDqeGgd1VdS7W+Y6gNYyI0B51ovNTxeZVG/W8I7t9MwEiCWsCvfm5wQgfsKp9dkzOcJrL5k8oVO/Q==}
     dependencies:
       '@firebase/util': 1.3.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/database-compat/0.2.10_@firebase+app-types@0.8.1:
@@ -2102,7 +2135,7 @@ packages:
       '@firebase/database-types': 0.9.17
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app-types'
     dev: false
@@ -2122,7 +2155,7 @@ packages:
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
       faye-websocket: 0.11.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app-types'
     dev: false
@@ -2137,7 +2170,7 @@ packages:
       '@firebase/firestore': 3.7.3_@firebase+app@0.8.4
       '@firebase/firestore-types': 2.5.1_ng4u4jtoxpyfdkxsmbmyeoj754
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -2168,7 +2201,7 @@ packages:
       '@grpc/grpc-js': 1.7.3
       '@grpc/proto-loader': 0.6.13
       node-fetch: 2.6.7
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -2187,7 +2220,7 @@ packages:
       '@grpc/grpc-js': 1.7.3
       '@grpc/proto-loader': 0.6.13
       node-fetch: 2.6.7
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -2202,7 +2235,7 @@ packages:
       '@firebase/functions': 0.8.8_kuqwk5rcidsndwsionzwdbqiqi
       '@firebase/functions-types': 0.5.1
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -2225,7 +2258,7 @@ packages:
       '@firebase/messaging-interop-types': 0.1.1
       '@firebase/util': 1.7.3
       node-fetch: 2.6.7
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app-types'
       - encoding
@@ -2241,7 +2274,7 @@ packages:
       '@firebase/installations': 0.5.16_@firebase+app@0.8.4
       '@firebase/installations-types': 0.4.1_@firebase+app-types@0.8.1
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -2264,7 +2297,7 @@ packages:
       '@firebase/component': 0.5.21
       '@firebase/util': 1.7.3
       idb: 7.0.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/logger/0.2.6:
@@ -2274,13 +2307,13 @@ packages:
   /@firebase/logger/0.3.3:
     resolution: {integrity: sha512-POTJl07jOKTOevLXrTvJD/VZ0M6PnJXflbAh5J9VGkmtXPXNG6MdZ9fmRgqYhXKTaDId6AQenQ262uwgpdtO0Q==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/logger/0.3.4:
     resolution: {integrity: sha512-hlFglGRgZEwoyClZcGLx/Wd+zoLfGmbDkFx56mQt/jJ0XMbfPqwId1kiPl0zgdWZX+D8iH+gT6GuLPFsJWgiGw==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/messaging-compat/0.1.21_dvqpjc4ehcooegrkfkqbfp67kq:
@@ -2292,7 +2325,7 @@ packages:
       '@firebase/component': 0.5.21
       '@firebase/messaging': 0.11.0_@firebase+app@0.8.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -2312,7 +2345,7 @@ packages:
       '@firebase/messaging-interop-types': 0.1.1
       '@firebase/util': 1.7.3
       idb: 7.0.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/performance-compat/0.1.17_dvqpjc4ehcooegrkfkqbfp67kq:
@@ -2326,7 +2359,7 @@ packages:
       '@firebase/performance': 0.5.17_@firebase+app@0.8.4
       '@firebase/performance-types': 0.1.1
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -2345,7 +2378,7 @@ packages:
       '@firebase/installations': 0.5.16_@firebase+app@0.8.4
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/remote-config-compat/0.1.16_dvqpjc4ehcooegrkfkqbfp67kq:
@@ -2359,7 +2392,7 @@ packages:
       '@firebase/remote-config': 0.3.15_@firebase+app@0.8.4
       '@firebase/remote-config-types': 0.2.1
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
     dev: false
@@ -2378,7 +2411,7 @@ packages:
       '@firebase/installations': 0.5.16_@firebase+app@0.8.4
       '@firebase/logger': 0.3.4
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/storage-compat/0.1.22_uougi3e27jpxvoatrekmluf7oy:
@@ -2391,7 +2424,7 @@ packages:
       '@firebase/storage': 0.9.14_@firebase+app@0.8.4
       '@firebase/storage-types': 0.6.1_ng4u4jtoxpyfdkxsmbmyeoj754
       '@firebase/util': 1.7.3
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - '@firebase/app'
       - '@firebase/app-types'
@@ -2417,7 +2450,7 @@ packages:
       '@firebase/component': 0.5.21
       '@firebase/util': 1.7.3
       node-fetch: 2.6.7
-      tslib: 2.4.1
+      tslib: 2.5.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -2425,19 +2458,19 @@ packages:
   /@firebase/util/1.3.0:
     resolution: {integrity: sha512-SESvmYwuKOVCZ1ZxLbberbx+9cnbxpCa4CG2FUSQYqN6Ab8KyltegMDIsqMw5KyIBZ4n1phfHoOa22xo5NzAlQ==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/util/1.6.3:
     resolution: {integrity: sha512-FujteO6Zjv6v8A4HS+t7c+PjU0Kaxj+rOnka0BsI/twUaCC9t8EQPmXpWZdk7XfszfahJn2pqsflUWUhtUkRlg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/util/1.7.3:
     resolution: {integrity: sha512-wxNqWbqokF551WrJ9BIFouU/V5SL1oYCGx1oudcirdhadnQRFH5v1sjgGL7cUV/UsekSycygphdrF2lxBxOYKg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@firebase/webchannel-wrapper/0.8.1:
@@ -2546,14 +2579,14 @@ packages:
   /@material/animation/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-nOCOgzp/Vdgloyw/SjFCEtpcxXWtXUjvX+JCVg7o+EEtaGLBQdgjJUj5lt+RQ6e9r0eiMYKJ6l1+1TGGebsIfA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/auto-init/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-JmST/NkQpdJ1+nyAU8qbV1eRXbOwvpaTRy096Y5mOK1CeUsagUyrKkCeLsO56pmvayxnOIkJCOhH/8gzIsmiJA==}
     dependencies:
       '@material/base': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/banner/15.0.0-canary.7971d6ad5.0:
@@ -2570,13 +2603,13 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/base/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-wXgoWl8NG4BZ2U8MCg4BLQLNla3IdyxBJIMSsJ1qvP2YswmG9HXTkS8y9mHTAhzzQEFQtlwDOyp4Ntq2Ep4WZA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/button/15.0.0-canary.7971d6ad5.0:
@@ -2594,7 +2627,7 @@ packages:
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/card/15.0.0-canary.7971d6ad5.0:
@@ -2608,7 +2641,7 @@ packages:
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/checkbox/15.0.0-canary.7971d6ad5.0:
@@ -2623,7 +2656,7 @@ packages:
       '@material/ripple': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/chips/15.0.0-canary.7971d6ad5.0:
@@ -2645,7 +2678,7 @@ packages:
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
       safevalues: 0.3.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/circular-progress/15.0.0-canary.7971d6ad5.0:
@@ -2658,7 +2691,7 @@ packages:
       '@material/progress-indicator': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/data-table/15.0.0-canary.7971d6ad5.0:
@@ -2682,13 +2715,13 @@ packages:
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/density/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-JfRRdyewKuVGDLTxm0Bn/5MFgkPHo5fZ0JU6kCqI+SdOER/ceRti6xJtNfgV/lBPqstftARcKv116nQRy2085Q==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/dialog/15.0.0-canary.7971d6ad5.0:
@@ -2708,7 +2741,7 @@ packages:
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/dom/15.0.0-canary.7971d6ad5.0:
@@ -2716,7 +2749,7 @@ packages:
     dependencies:
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/drawer/15.0.0-canary.7971d6ad5.0:
@@ -2733,7 +2766,7 @@ packages:
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/elevation/15.0.0-canary.7971d6ad5.0:
@@ -2744,7 +2777,7 @@ packages:
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/fab/15.0.0-canary.7971d6ad5.0:
@@ -2762,13 +2795,13 @@ packages:
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/feature-targeting/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-xH8pdvB5oKO6OTY61vEs44eQJQY3GTobpzaxp+CIBH0UMobSl5KFee+j7MxpEbTkRGtMqWkzAA+vviT8hvmH+A==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/floating-label/15.0.0-canary.7971d6ad5.0:
@@ -2781,7 +2814,7 @@ packages:
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/focus-ring/15.0.0-canary.7971d6ad5.0:
@@ -2801,7 +2834,7 @@ packages:
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/icon-button/15.0.0-canary.7971d6ad5.0:
@@ -2817,7 +2850,7 @@ packages:
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/image-list/15.0.0-canary.7971d6ad5.0:
@@ -2827,13 +2860,13 @@ packages:
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/layout-grid/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-H4KEhaGaIuGHd3jKJqaoZkynJjqfyti4QhG6wiTt774Lv4Uri1+ZBxQ8FAFShEvETM2pfBy4mEECi/+M4V2ZTA==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/line-ripple/15.0.0-canary.7971d6ad5.0:
@@ -2843,7 +2876,7 @@ packages:
       '@material/base': 15.0.0-canary.7971d6ad5.0
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/linear-progress/15.0.0-canary.7971d6ad5.0:
@@ -2856,7 +2889,7 @@ packages:
       '@material/progress-indicator': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/list/15.0.0-canary.7971d6ad5.0:
@@ -2872,7 +2905,7 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/menu-surface/15.0.0-canary.7971d6ad5.0:
@@ -2885,7 +2918,7 @@ packages:
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/menu/15.0.0-canary.7971d6ad5.0:
@@ -2902,7 +2935,7 @@ packages:
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/notched-outline/15.0.0-canary.7971d6ad5.0:
@@ -2914,13 +2947,13 @@ packages:
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/progress-indicator/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-CRQAM2C1weVKVr8rQeQTrOISmTupXw+l9sfpdIx8tQ14fOebZFcEbW9LRRvDAMmUNZF6W6pwL74+zk46DYIKBg==}
     dependencies:
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/radio/15.0.0-canary.7971d6ad5.0:
@@ -2935,7 +2968,7 @@ packages:
       '@material/ripple': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/ripple/15.0.0-canary.7971d6ad5.0:
@@ -2947,14 +2980,14 @@ packages:
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/rtl/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-G02MQTQxHPhNlAIoOToCalxSba48VZ+CdrqkWr53eBb/P1I6Do0drMElqNmO5CYS5G/8AEScXmfJ0xSq92ABew==}
     dependencies:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/segmented-button/15.0.0-canary.7971d6ad5.0:
@@ -2967,7 +3000,7 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/touch-target': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/select/15.0.0-canary.7971d6ad5.0:
@@ -2991,7 +3024,7 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/shape/15.0.0-canary.7971d6ad5.0:
@@ -3000,7 +3033,7 @@ packages:
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/slider/15.0.0-canary.7971d6ad5.0:
@@ -3016,7 +3049,7 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/snackbar/15.0.0-canary.7971d6ad5.0:
@@ -3035,7 +3068,7 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/switch/15.0.0-canary.7971d6ad5.0:
@@ -3054,7 +3087,7 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       safevalues: 0.3.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/tab-bar/15.0.0-canary.7971d6ad5.0:
@@ -3070,7 +3103,7 @@ packages:
       '@material/tab-scroller': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/tab-indicator/15.0.0-canary.7971d6ad5.0:
@@ -3080,7 +3113,7 @@ packages:
       '@material/base': 15.0.0-canary.7971d6ad5.0
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/tab-scroller/15.0.0-canary.7971d6ad5.0:
@@ -3091,7 +3124,7 @@ packages:
       '@material/dom': 15.0.0-canary.7971d6ad5.0
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/tab': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/tab/15.0.0-canary.7971d6ad5.0:
@@ -3106,7 +3139,7 @@ packages:
       '@material/tab-indicator': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/textfield/15.0.0-canary.7971d6ad5.0:
@@ -3126,14 +3159,14 @@ packages:
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/theme/15.0.0-canary.7971d6ad5.0:
     resolution: {integrity: sha512-4YUyQo4SOatHHH15/h2LBIyxmVxtefo+QC8bRopF13f/qq5lHpX/stK6chf1OR/z9BUxnNHZWXd2LG5SvJGs9Q==}
     dependencies:
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/tokens/15.0.0-canary.7971d6ad5.0:
@@ -3157,7 +3190,7 @@ packages:
       '@material/tokens': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
       safevalues: 0.3.4
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/top-app-bar/15.0.0-canary.7971d6ad5.0:
@@ -3171,7 +3204,7 @@ packages:
       '@material/shape': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
       '@material/typography': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/touch-target/15.0.0-canary.7971d6ad5.0:
@@ -3180,7 +3213,7 @@ packages:
       '@material/base': 15.0.0-canary.7971d6ad5.0
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/rtl': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@material/typography/15.0.0-canary.7971d6ad5.0:
@@ -3188,7 +3221,7 @@ packages:
     dependencies:
       '@material/feature-targeting': 15.0.0-canary.7971d6ad5.0
       '@material/theme': 15.0.0-canary.7971d6ad5.0
-      tslib: 2.4.1
+      tslib: 2.5.0
     dev: false
 
   /@ngtools/webpack/15.0.2_hj2figuqhilcxwoqxbcqlf6q6y:
@@ -3359,6 +3392,18 @@ packages:
       jsonc-parser: 3.2.0
     transitivePeerDependencies:
       - chokidar
+    dev: false
+
+  /@schematics/angular/15.0.5:
+    resolution: {integrity: sha512-lmns1eJM42RFlv1GPrNwe7TV70hyrIiadyPhuJmeT8qp8cxGPRJ3yHFUdtB7qPv0OkwfI/HVSeZwlnfNXQhiQg==}
+    engines: {node: ^14.20.0 || ^16.13.0 || >=18.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
+    dependencies:
+      '@angular-devkit/core': 15.0.5
+      '@angular-devkit/schematics': 15.0.5
+      jsonc-parser: 3.2.0
+    transitivePeerDependencies:
+      - chokidar
+    dev: true
 
   /@socket.io/component-emitter/3.1.0:
     resolution: {integrity: sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==}
@@ -3730,7 +3775,7 @@ packages:
       ajv:
         optional: true
     dependencies:
-      ajv: 8.11.2
+      ajv: 8.6.2
     dev: false
 
   /ajv-formats/2.1.1:
@@ -3739,7 +3784,7 @@ packages:
       ajv:
         optional: true
     dependencies:
-      ajv: 8.11.2
+      ajv: 8.11.0
 
   /ajv-keywords/3.5.2_ajv@6.12.6:
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
@@ -3748,12 +3793,12 @@ packages:
     dependencies:
       ajv: 6.12.6
 
-  /ajv-keywords/5.1.0_ajv@8.11.2:
+  /ajv-keywords/5.1.0_ajv@8.12.0:
     resolution: {integrity: sha512-YCS/JNFAUyr5vAuhk1DWm1CBxRHW9LbJ2ozWeemrIqpbsqKjHVxYPyi5GC0rjZIT5JxJ3virVTS8wk4i/Z+krw==}
     peerDependencies:
       ajv: ^8.8.2
     dependencies:
-      ajv: 8.11.2
+      ajv: 8.12.0
       fast-deep-equal: 3.1.3
     dev: true
 
@@ -3773,13 +3818,14 @@ packages:
       require-from-string: 2.0.2
       uri-js: 4.4.1
 
-  /ajv/8.11.2:
-    resolution: {integrity: sha512-E4bfmKAhGiSTvMfL1Myyycaub+cUEU2/IvpylXkUu7CHBkBj1f/ikdzbD7YQ6FKUbixDxeYvB/xY4fvyroDlQg==}
+  /ajv/8.12.0:
+    resolution: {integrity: sha512-sRu1kpcO9yLtYxBKvqfTeh9KzZEwO3STyX1HT+4CaDzC6HpTGYhIhPIzj9XuKU7KYDwnaeh5hcOwjy1QuJzBPA==}
     dependencies:
       fast-deep-equal: 3.1.3
       json-schema-traverse: 1.0.0
       require-from-string: 2.0.2
       uri-js: 4.4.1
+    dev: true
 
   /ajv/8.6.2:
     resolution: {integrity: sha512-9807RlWAgT564wT+DjeyU5OFMPjmzxVobvDFmNAhY+5zD6A2ly3jDp6sgnfyDtlIQ+7H97oc/DGCzzfu9rjw9w==}
@@ -3919,8 +3965,8 @@ packages:
     dev: true
     optional: true
 
-  /aws4/1.11.0:
-    resolution: {integrity: sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==}
+  /aws4/1.12.0:
+    resolution: {integrity: sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==}
     dev: true
     optional: true
 
@@ -4708,10 +4754,10 @@ packages:
       import-cwd: 3.0.0
       ip: 1.1.8
       less: 3.9.0
-      minimist: 1.2.7
+      minimist: 1.2.8
       mustache: 3.2.1
       prompts: 2.4.2
-      sass: 1.56.1
+      sass: 1.58.3
       semver: 5.7.1
       strip-bom: 4.0.0
     dev: true
@@ -5466,6 +5512,22 @@ packages:
       - utf-8-validate
     dev: false
 
+  /firebaseui-angular/6.1.3_kkp4rlgnywryladhtip6dvyxvm:
+    resolution: {integrity: sha512-FyqAK+dB+K2tlHt6Utf71fI+PerMd/uRU22IKLPA9Wn9C6DVVZLdaHldeN8zM9EAf+nSZMqHacGBa4UDfELLxA==}
+    peerDependencies:
+      '@angular/common': ^6.1.2 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+      '@angular/core': ^6.1.2 || ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
+      '@angular/fire': ^6.0.0 || ^7.0.0
+      firebase: ^5.3.1 || ^6.0.0 || ^7.0.0 || ^8.0.0 || ^9.0.0
+      firebaseui: ^3.2.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+    dependencies:
+      '@angular/common': 15.0.2_pi3oxxive2l5ujgk2dhb7uff6u
+      '@angular/core': 15.0.2_rxjs@7.5.7+zone.js@0.11.8
+      '@angular/fire': 7.5.0_43djjwihrft6fhjhetyhwxbnue
+      firebase: 9.14.0
+      tslib: 2.4.1
+    dev: false
+
   /flatted/3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
@@ -5917,8 +5979,8 @@ packages:
     resolution: {integrity: sha512-XXOFtyqDjNDAQxVfYxuF7g9Il/IbWmmlQg2MYKOH8ExIT1qg6xc4zyS3HaEEATgs1btfzxq15ciUiY7gjSXRGQ==}
     dev: false
 
-  /immutable/4.1.0:
-    resolution: {integrity: sha512-oNkuqVTA8jqG1Q6c+UglTOD1xhC1BtjKI7XkCXRkZHrN5m18/XsnUp8Q89GkQO/z+0WjonSvl0FLhDYftp46nQ==}
+  /immutable/4.2.4:
+    resolution: {integrity: sha512-WDxL3Hheb1JkRN3sQkyujNlL/xRjAo3rJtaU5xeufUauG66JdMr32bLj4gF+vWl84DIA3Zxw7tiAjneYzRRw+w==}
     dev: true
 
   /import-cwd/3.0.0:
@@ -6551,7 +6613,7 @@ packages:
     dependencies:
       copy-anything: 2.0.6
       parse-node-version: 1.0.1
-      tslib: 2.4.1
+      tslib: 2.5.0
     optionalDependencies:
       errno: 0.1.8
       graceful-fs: 4.2.10
@@ -6696,8 +6758,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /luxon/1.28.0:
-    resolution: {integrity: sha512-TfTiyvZhwBYM/7QdAVDh+7dBTBA29v4ik0Ce9zda3Mnf8on1S5KJI8P2jKFZ8+5C0jhmr0KwJEO/Wdpm0VeWJQ==}
+  /luxon/1.28.1:
+    resolution: {integrity: sha512-gYHAa180mKrNIUJCbwpmD0aTu9kV0dREDrwNnuyFAsO1Wt0EVYSZelPnJlbj9HplzXX/YWXHFTL45kvZ53M0pw==}
     requiresBuild: true
     dev: false
     optional: true
@@ -6870,6 +6932,10 @@ packages:
 
   /minimist/1.2.7:
     resolution: {integrity: sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==}
+
+  /minimist/1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+    dev: true
 
   /minipass-collect/1.0.2:
     resolution: {integrity: sha512-6T6lH0H8OG9kITm/Jm6tdooIbogG9e0tLgpY6mphXSm/A9u8Nq1ryBG+Qspiub9LjWlBPsPS3tWQ/Botq4FdxA==}
@@ -7821,8 +7887,8 @@ packages:
     dev: true
     optional: true
 
-  /punycode/2.1.1:
-    resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
+  /punycode/2.3.0:
+    resolution: {integrity: sha512-rRV+zQD8tVFys26lAGR9WUuS4iUAngJScM+ZRSKtvl5tKeZ2t5bvdNFdNHBW9FWR4guGHlgmsZ1G7BSm2wTbuA==}
     engines: {node: '>=6'}
 
   /qjobs/1.2.0:
@@ -8013,7 +8079,7 @@ packages:
     requiresBuild: true
     dependencies:
       aws-sign2: 0.7.0
-      aws4: 1.11.0
+      aws4: 1.12.0
       caseless: 0.12.0
       combined-stream: 1.0.8
       extend: 3.0.2
@@ -8119,7 +8185,7 @@ packages:
     dependencies:
       tslib: 1.14.1
     optionalDependencies:
-      luxon: 1.28.0
+      luxon: 1.28.1
     dev: false
 
   /run-async/2.4.1:
@@ -8202,7 +8268,17 @@ packages:
     hasBin: true
     dependencies:
       chokidar: 3.5.3
-      immutable: 4.1.0
+      immutable: 4.2.4
+      source-map-js: 1.0.2
+    dev: true
+
+  /sass/1.58.3:
+    resolution: {integrity: sha512-Q7RaEtYf6BflYrQ+buPudKR26/lH+10EmO9bBqbmPh/KeLqv8bjpTNqxe71ocONqXq+jYiCbpPUmQMS+JJPk4A==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.2.4
       source-map-js: 1.0.2
     dev: true
 
@@ -8224,9 +8300,9 @@ packages:
     engines: {node: '>= 12.13.0'}
     dependencies:
       '@types/json-schema': 7.0.11
-      ajv: 8.11.2
+      ajv: 8.12.0
       ajv-formats: 2.1.1
-      ajv-keywords: 5.1.0_ajv@8.11.2
+      ajv-keywords: 5.1.0_ajv@8.12.0
     dev: true
 
   /select-hose/2.0.0:
@@ -8859,7 +8935,7 @@ packages:
     engines: {node: '>=0.8'}
     dependencies:
       psl: 1.9.0
-      punycode: 2.1.1
+      punycode: 2.3.0
     dev: true
     optional: true
 
@@ -8893,6 +8969,9 @@ packages:
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
+
+  /tslib/2.5.0:
+    resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
 
   /tunnel-agent/0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
@@ -9011,7 +9090,7 @@ packages:
   /uri-js/4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
     dependencies:
-      punycode: 2.1.1
+      punycode: 2.3.0
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}

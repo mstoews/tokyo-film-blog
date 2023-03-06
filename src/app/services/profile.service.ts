@@ -40,6 +40,7 @@ export class ProfileService {
 
   getAll() {
     return this.profileItems;
+   // .pipe(map(profile => profile.;
   }
 
   update(profile: ProfileModel) {

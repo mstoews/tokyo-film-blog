@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CommonModule } from '@angular/common';
 import { NavService } from './main/static-sidebar/nav-list-item/nav-service';
-import { SharedModule } from './features/shared-module/shared.module';
+import { SharedModule } from './modules/shared-module/shared.module';
 import { ScrollService } from './services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
 import { ProductResolver } from './services/product.resolver';

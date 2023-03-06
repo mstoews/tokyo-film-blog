@@ -63,7 +63,7 @@ export class CheckoutService {
       callBackUrl += ':' + port
     }
 
-    callBackUrl += '/shop'
+    callBackUrl += '/shop/purchase-thanks'
 
     return callBackUrl
   }
