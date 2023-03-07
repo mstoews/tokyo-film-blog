@@ -57,7 +57,7 @@ export class ImageSwipeComponent implements OnInit {
   }
 
   onGotoShop() {
-    console.log('open the shop');
+    console.debug('open the shop');
     this.route.navigateByUrl('/shop')
   }
 

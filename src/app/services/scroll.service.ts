@@ -14,7 +14,7 @@ export class ScrollService {
     if (id !== 'hero') {
       this.scrollToElement(element)
     } else {
-      // console.log('scroll to top');
+      // console.debug('scroll to top');
       this.viewportScroller.scrollToPosition([1, 1])
       this.scrollTop(element)
     }

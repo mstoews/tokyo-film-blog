@@ -77,9 +77,9 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
 
   verifyArray()
   {
-    //console.log(`Not used images: ${this.not_usedImages.length}`)
-    //console.log(`Featured images: ${this.featuredImages.length}`)
-    //console.log(`Main images: ${this.collectionsImages.length}`)
+    //console.debug(`Not used images: ${this.not_usedImages.length}`)
+    //console.debug(`Featured images: ${this.featuredImages.length}`)
+    //console.debug(`Main images: ${this.collectionsImages.length}`)
   }
 
   ngOnInit() {
@@ -130,7 +130,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string,
     currentIndex: number
   ) {
-    console.log('Updatedate Image Type', JSON.stringify(newData));
+    console.debug('Updatedate Image Type', JSON.stringify(newData));
     const cnt = newData.length;
     if (cnt > 0) {
       let i = 1;

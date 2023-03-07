@@ -49,12 +49,12 @@ export class CategoryGridComponent implements OnInit {
   }
 
   selectionChanged(data: any) {
-    // console.log(`selectionChanged ${data}`);
+    // console.debug(`selectionChanged ${data}`);
     this.selectedItemKeys = data.selectedRowKeys
   }
 
   onImages() {
-    // console.log('onImages');
+    // console.debug('onImages');
     const parentId = this.categoryGroup.getRawValue()
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
@@ -67,11 +67,11 @@ export class CategoryGridComponent implements OnInit {
       }
       switch (result.event) {
         case 'Create':
-          // console.log(`create Images to save: ${JSON.stringify(result.data)}`);
+          // console.debug(`create Images to save: ${JSON.stringify(result.data)}`);
           this.create(result)
           break
         case 'Cancel':
-          // console.log(`Image transfer cancelled`);
+          // console.debug(`Image transfer cancelled`);
           break
       }
     })
@@ -94,7 +94,7 @@ export class CategoryGridComponent implements OnInit {
 
   onFocusedRowChanged(e: any) {
     const rowData = e.row && e.row.data
-    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`);
+    // console.debug(`onFocusRowChanged ${JSON.stringify(rowData)}`);
     this.categoryGroup.setValue(rowData)
     this.openDrawer()
   }
@@ -118,12 +118,12 @@ export class CategoryGridComponent implements OnInit {
   }
 
   Delete() {
-    // console.log('open drawer to delete ... ');
+    // console.debug('open drawer to delete ... ');
     this.openDrawer()
   }
 
   Clone() {
-    // console.log('open drawer to clone ... ');
+    // console.debug('open drawer to clone ... ');
     this.openDrawer()
   }
 
@@ -158,13 +158,13 @@ export class CategoryGridComponent implements OnInit {
   onUpdate(data: Category) {
     data = this.categoryGroup.getRawValue()
 
-    // console.log(`onUpdate: ${JSON.stringify(data)}`);
+    // console.debug(`onUpdate: ${JSON.stringify(data)}`);
     this.categoryService.update(data)
   }
 
   onDelete(data: Category) {
     data = this.categoryGroup.getRawValue()
-    // console.log(`onDelete: ${data}`);
+    // console.debug(`onDelete: ${data}`);
     this.categoryService.delete(data.id)
   }
 

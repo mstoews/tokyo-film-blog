@@ -192,7 +192,7 @@ export class StaticSidebarComponent implements OnInit {
     this.drawer.toggle()
   }
   onAnimate() {
-    //  // console.log ('OnAnimate');
+    //  // console.debug ('OnAnimate');
     this.state === 'normal'
       ? (this.state = 'highlighted')
       : (this.state = 'normal')

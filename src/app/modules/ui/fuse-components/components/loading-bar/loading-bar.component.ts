@@ -72,7 +72,7 @@ export class LoadingBarComponent {
         })
       )
       .subscribe((response) => {
-        // console.log(response);
+        // console.debug(response);
       })
   }
 

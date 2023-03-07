@@ -36,22 +36,22 @@ export class ImagesMenubarComponent implements OnInit {
   }
 
   onClickAdd(): void {
-    // console.log('Menu bar nofication emit');
+    // console.debug('Menu bar nofication emit');
     this.notifyParentAdd.emit()
   }
 
   onClickDelete(): void {
-    // console.log('Menu bar nofication emit');
+    // console.debug('Menu bar nofication emit');
     this.notifyParentDelete.emit()
   }
 
   onClickClone(): void {
-    // console.log('Menu bar nofication emit');
+    // console.debug('Menu bar nofication emit');
     this.notifyParentClone.emit()
   }
 
   onClickRefresh(): void {
-    // console.log('Menu bar nofication emit');
+    // console.debug('Menu bar nofication emit');
     this.onRefresh()
   }
 }

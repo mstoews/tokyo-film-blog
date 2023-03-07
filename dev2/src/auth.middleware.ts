@@ -20,7 +20,7 @@ export function getUserCredentialsMiddleware(req, res, next) {
           next();
         })
         .catch((err) => {
-          console.log("Error ocurred while validating JWT", err);
+          console.debug("Error ocurred while validating JWT", err);
           next();
         });
   } else {

@@ -63,7 +63,7 @@ export class BlogAdminComponent implements OnInit {
 
   onBlogToggle(blog: Blog) {
     this.selection.toggle(blog);
-    // console.log(this.selection.selected);
+    // console.debug(this.selection.selected);
   }
 
   constructor(
@@ -81,7 +81,7 @@ export class BlogAdminComponent implements OnInit {
   onAdd() {
     openBlogAddDialog(this.dialog, this.blog)
       .pipe(filter((val) => !!val))
-      .subscribe((val) => console.log('new course value:', val));
+      .subscribe((val) => console.debug('new course value:', val));
   }
 
   ngOnInit() {
@@ -132,7 +132,7 @@ export class BlogAdminComponent implements OnInit {
 
   onDelete(data: Blog) {
     data = this.blogGroup.getRawValue();
-    // console.log(`onDelete: ${data}`);
+    // console.debug(`onDelete: ${data}`);
     this.blogService.delete(data.id.toString());
   }
 
@@ -148,7 +148,7 @@ export class BlogAdminComponent implements OnInit {
   };
 
   valueChangedEvent(e: any) {
-    // console.log(`blog grid value changed ${e}`)
+    // console.debug(`blog grid value changed ${e}`)
   }
 
   createForm(blog: Blog) {

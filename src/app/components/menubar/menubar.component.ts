@@ -40,41 +40,41 @@ export class MenubarComponent implements OnInit {
   ngOnInit() {}
 
   formPartyRefChanged(partyRef: string) {
-    // console.log ('From MenuBarcomponent: ', partyRef);
+    // console.debug ('From MenuBarcomponent: ', partyRef);
   }
 
   onDelete() {
-    //  // console.log ('Delete emitter is sent:', this.inPartyRef);
+    //  // console.debug ('Delete emitter is sent:', this.inPartyRef);
     this.notifyParentDelete.emit()
   }
 
   onRefresh() {
-    //  // console.log ('Refresh emitter is sent');
+    //  // console.debug ('Refresh emitter is sent');
     this.notifyParentRefresh.emit()
   }
 
   onClickClone() {
-    //  // console.log ('Clone emitter is sent');
+    //  // console.debug ('Clone emitter is sent');
     this.notifyParentClone.emit()
   }
 
   onSend() {
-    //  // console.log ('Send emitter is sent');
+    //  // console.debug ('Send emitter is sent');
     this.notifyParentSend.emit()
   }
 
   onBackUp() {
-    //  // console.log ('Back Up emitter is sent');
+    //  // console.debug ('Back Up emitter is sent');
     this.notifyParentBackUp.emit()
   }
 
   onRestore() {
-    //  // console.log ('Restore emitter is sent');
+    //  // console.debug ('Restore emitter is sent');
     this.notifyParentRestore.emit()
   }
 
   onClickAdd() {
-    //  // console.log ('Add emitter is sent');
+    //  // console.debug ('Add emitter is sent');
     this.notifyParentAdd.emit()
   }
 

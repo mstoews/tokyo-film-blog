@@ -66,7 +66,7 @@ export class DndComponent {
   }
 
   onFileDropped($event: any) {
-    // console.log($event);
+    // console.debug($event);
     this.prepareFilesList($event)
   }
 
@@ -76,7 +76,7 @@ export class DndComponent {
 
   prepareFilesList(files: any) {
     for (const item of files) {
-      // console.log(`file list: ${item.name}`);
+      // console.debug(`file list: ${item.name}`);
       this.upLoadFiles.push(item)
       this.files.push(item)
     }
@@ -85,7 +85,7 @@ export class DndComponent {
 
   deleteFile(index: number) {
     if (this.files[index].progress < 100) {
-      // console.log('delete files ');
+      // console.debug('delete files ');
       return
     }
     this.files.splice(index, 1)
@@ -127,7 +127,7 @@ export class DndComponent {
   async startUpload(file: File) {
     const location = '/'
     const path = `${location}/${file.name}`
-    // console.log(`File path: ${path}`);
+    // console.debug(`File path: ${path}`);
     const fileRef = this.storage.ref(path)
 
     const task = this.storage.upload(path, file, {

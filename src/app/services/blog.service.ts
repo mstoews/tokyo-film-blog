@@ -49,7 +49,7 @@ export class BlogService {
     return this.blogItems;
     // const blog$ = this.blogItems;
     // const publishedBlogs =  blog$.pipe(map((blogs) => {
-    //   tap(() => console.log('published blogs')),
+    //   tap(() => console.debug('published blogs')),
     //   blogs.filter( blog => blog.published === true);
     // }));
     // return publishedBlogs;
@@ -67,7 +67,7 @@ export class BlogService {
       .pipe(
         map((blog) =>
           blog.map((a) => {
-            // console.log(a.payload.doc.id);
+            // console.debug(a.payload.doc.id);
           })
         )
       );

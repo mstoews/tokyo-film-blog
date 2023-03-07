@@ -1,17 +1,11 @@
-<app-header class="bg-white"
-  [title]="'Thoughts and Images'"
+<app-header class="bg-white" [title]="'Thoughts and Images'"
   [sub_title]="'Impressions of our life and work, living in Tokyo'"
-  (notifyNavBarToggleMenu)="onToggleMenu()"
-></app-header>
+  (notifyNavBarToggleMenu)="onToggleMenu()"></app-header>
 <div class="container mx-auto pt-5 bg-white">
   <ng-container *ngIf="allBlogs$ | async as blogs">
-    <div
-      class="relative bg-gray-50 px-4 pt-1 pb-5 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28"
-    >
+    <div class="relative bg-gray-50 px-4 pt-1 pb-5 sm:px-6 lg:px-8 lg:pt-24 lg:pb-28">
       <div class="relative mx-auto max-w-7xl">
-        <div
-          class="mx-auto mt-4 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-2 m-3"
-        >
+        <div class="mx-auto mt-4 grid max-w-lg gap-5 lg:max-w-none lg:grid-cols-2 m-3">
           <div *ngFor="let blog of blogs">
             <div *ngIf="blog.published === true">
               <blog-card [blog]="blog"></blog-card>

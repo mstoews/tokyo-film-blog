@@ -63,7 +63,7 @@ export class NavItemComponent implements OnInit {
       this.isClicked = false
     }
 
-    // console.log('on selected ..');
+    // console.debug('on selected ..');
     if (item.parent) {
       this.expanded = !this.expanded
     } else {

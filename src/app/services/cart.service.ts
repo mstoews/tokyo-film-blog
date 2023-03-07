@@ -49,7 +49,7 @@ export class CartService {
     //   cart.forEach((item) => {
     //     this.productIds.push(item.product_id);
     //   });
-    //   console.log('Number of items in the cart: ', this.productIds.length);
+    //   console.debug('Number of items in the cart: ', this.productIds.length);
     // });
   }
 
@@ -121,7 +121,7 @@ export class CartService {
   }
 
   create(mtCart: Cart) {
-    // console.log('product id:', mtCart.id);
+    // console.debug('product id:', mtCart.id);
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
     collectionRef.add(mtCart);
     this.snack.open('Selection has been added to your cart ...', 'OK', { duration: 3000 });

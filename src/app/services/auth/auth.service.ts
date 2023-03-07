@@ -56,7 +56,7 @@ export class AuthService {
         this.userId = user.uid;
         this.email = user.email;
         this.isAnonymous = user.isAnonymous;
-        // console.log(`User: ${this.userId} email: ${this.email}`);
+        // console.debug(`User: ${this.userId} email: ${this.email}`);
         // var displayName = user.displayName;
         // var email = user.email;
         // var emailVerified = user.emailVerified;

@@ -67,7 +67,7 @@ export class ServicesComponent implements OnInit {
 
   onUpdate(servicesPage: Services) {
     servicesPage = this.ServicesGroup.getRawValue()
-    // console.log(`onUpdate: ${JSON.stringify(servicesPage)}`);
+    // console.debug(`onUpdate: ${JSON.stringify(servicesPage)}`);
     this.servicesService.update(servicesPage)
   }
 

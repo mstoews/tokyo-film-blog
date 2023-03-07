@@ -148,7 +148,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   onOpenDrawer($event: any) {
-    // console.log('onOpenDrawer', $event);
+    // console.debug('onOpenDrawer', $event);
     this.toggleDrawer()
   }
 
@@ -157,7 +157,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   Add() {
-    // console.log('toggle drawer');
+    // console.debug('toggle drawer');
     this.toggleDrawer()
   }
 

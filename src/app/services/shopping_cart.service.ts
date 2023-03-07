@@ -21,7 +21,7 @@ export class ShoppingCartService {
   }
 
   getAll() {
-    // console.log(`Inventory ${this.cartItems}`);
+    // console.debug(`Inventory ${this.cartItems}`);
     return this.cartItems
   }
 

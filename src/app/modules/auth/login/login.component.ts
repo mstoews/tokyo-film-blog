@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   successCallback(data: FirebaseUISignInSuccessWithAuthResult) {
-    console.log('successCallback', data);
+    console.debug('successCallback', data);
     this.router.navigate(['/']);
   }
 
@@ -23,6 +23,6 @@ export class LoginComponent implements OnInit {
   }
 
   uiShownCallback() {
-    console.log('UI shown');
+    console.debug('UI shown');
   }
 }

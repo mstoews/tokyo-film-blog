@@ -49,7 +49,7 @@ export class ContactGridComponent implements OnInit {
   }
 
   selectionChanged(data: any) {
-    // console.log(`selectionChanged ${data}`);
+    // console.debug(`selectionChanged ${data}`);
     this.selectedItemKeys = data.selectedRowKeys
   }
 
@@ -71,17 +71,17 @@ export class ContactGridComponent implements OnInit {
 
 
   Add() {
-    // console.log('open drawer to add ... ');
+    // console.debug('open drawer to add ... ');
     this.openDrawer()
   }
 
   Delete() {
-    // console.log('open drawer to delete ... ');
+    // console.debug('open drawer to delete ... ');
     this.openDrawer()
   }
 
   Clone() {
-    // console.log('open drawer to clone ... ');
+    // console.debug('open drawer to clone ... ');
     this.openDrawer()
   }
 
@@ -116,13 +116,13 @@ export class ContactGridComponent implements OnInit {
   onUpdate(data: Contact) {
     data = this.contactGroup.getRawValue()
 
-    // console.log(`onUpdate: ${JSON.stringify(data)}`);
+    // console.debug(`onUpdate: ${JSON.stringify(data)}`);
     this.contactService.update(data)
   }
 
   onDelete(data: Contact) {
     data = this.contactGroup.getRawValue()
-    // console.log(`onDelete: ${data}`);
+    // console.debug(`onDelete: ${data}`);
     this.contactService.delete(data.id)
   }
 

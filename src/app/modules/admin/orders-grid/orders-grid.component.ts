@@ -43,7 +43,7 @@ export class OrdersGridComponent implements OnInit {
   }
 
   onImages() {
-    // console.log('onImages');
+    // console.debug('onImages');
     const parentId = this.prdGroup.getRawValue()
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
@@ -56,11 +56,11 @@ export class OrdersGridComponent implements OnInit {
       }
       switch (result.event) {
         case 'Create':
-          // console.log(`create Images to save: ${JSON.stringify(result.data)}`);
+          // console.debug(`create Images to save: ${JSON.stringify(result.data)}`);
           this.create(result)
           break
         case 'Cancel':
-          // console.log(`Image transfer cancelled`);
+          // console.debug(`Image transfer cancelled`);
           break
       }
     })
@@ -68,7 +68,7 @@ export class OrdersGridComponent implements OnInit {
 
   changeCategory(category: any) {
     this.updated_category = category
-    // console.log(`update category ${this.updated_category}`);
+    // console.debug(`update category ${this.updated_category}`);
   }
 
   constructor(
@@ -87,12 +87,12 @@ export class OrdersGridComponent implements OnInit {
     this.category$ = this.categoryService.getAll()
     this.category$.subscribe((result) => {
       this.categories = result
-      // console.log(this.categories);
+      // console.debug(this.categories);
     })
   }
 
   onNotify(event: any) {
-    // console.log(event);
+    // console.debug(event);
     this.prd = event
     this.createForm(this.prd)
     this.toggleDrawer()
@@ -119,14 +119,14 @@ export class OrdersGridComponent implements OnInit {
   }
 
   onCellDoublClicked(e: any) {
-    // console.log(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
+    // console.debug(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
     this.current_Url = e.data.images
     this.prdGroup.setValue(e.data)
     this.openDrawer()
   }
 
   onCellClicked(e: any) {
-    // console.log(`onCellClicked: ${JSON.stringify(e.data)}`);
+    // console.debug(`onCellClicked: ${JSON.stringify(e.data)}`);
     this.current_Url = e.data.images
     this.prdGroup.setValue(e.data)
     this.openDrawer()
@@ -134,7 +134,7 @@ export class OrdersGridComponent implements OnInit {
 
   onFocusedRowChanged(e: any) {
     const rowData = e.row && e.row.data
-    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`)
+    // console.debug(`onFocusRowChanged ${JSON.stringify(rowData)}`)
     this.current_Url = rowData.images
     this.prdGroup.setValue(rowData)
   }
@@ -149,7 +149,7 @@ export class OrdersGridComponent implements OnInit {
   }
 
   selectionChanged(data: any) {
-    // console.log(`selectionChanged ${data}`);
+    // console.debug(`selectionChanged ${data}`);
     this.selectedItemKeys = data.selectedRowKeys
   }
 
@@ -160,30 +160,30 @@ export class OrdersGridComponent implements OnInit {
   }
 
   Add() {
-    // console.log('open drawer to add ... ');
+    // console.debug('open drawer to add ... ');
     this.openDrawer()
   }
 
   Delete() {
-    // console.log('open drawer to delete ... ');
+    // console.debug('open drawer to delete ... ');
     this.openDrawer()
   }
 
   Clone() {
-    // console.log('open drawer to clone ... ');
+    // console.debug('open drawer to clone ... ');
     this.openDrawer()
   }
 
   onCreate() {
     const newProduct = { ...this.prdGroup.value } as Product
-    // console.log(`onCreate ${newProduct}`);
+    // console.debug(`onCreate ${newProduct}`);
     this.productService.create(newProduct)
   }
 
   onUpdate(data: Product) {
     data = this.prdGroup.getRawValue()
     data.category = this.updated_category
-    // console.log(`onUpdate:  ${JSON.stringify(data)}`);
+    // console.debug(`onUpdate:  ${JSON.stringify(data)}`);
     this.productService.update(data)
   }
 

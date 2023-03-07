@@ -65,9 +65,9 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
   verifyArray()
   {
-    //console.log(`Not used images: ${this.not_usedImages.length}`)
-    //console.log(`Featured images: ${this.featuredImages.length}`)
-    //console.log(`Main images: ${this.collectionsImages.length}`)
+    //console.debug(`Not used images: ${this.not_usedImages.length}`)
+    //console.debug(`Featured images: ${this.featuredImages.length}`)
+    //console.debug(`Main images: ${this.collectionsImages.length}`)
   }
 
   ngOnInit() {

@@ -39,7 +39,7 @@ export class DndDirective {
         // If dropped items aren't files, reject them
         if (event.dataTransfer.items[i].kind === 'file') {
           const file = event.dataTransfer.items[i].getAsFile()
-          // console.log('... file[' + i + '].name = ' + file.name);
+          // console.debug('... file[' + i + '].name = ' + file.name);
         }
       }
     }
@@ -56,7 +56,7 @@ export class DndDirective {
       const type = file.type ? file.type : 'NOT SUPPORTED'
       // Unknown cross-browser support.
       const size = file.size ? file.size : 'NOT SUPPORTED'
-      // console.log({file, name, type, size});
+      // console.debug({file, name, type, size});
     }
   }
 }

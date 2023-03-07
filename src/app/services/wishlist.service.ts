@@ -143,7 +143,7 @@ export class WishListService {
     .pipe(
       map((snaps) => {
         snaps.forEach(cart => {
-          // console.log('Found the item in the cart: ', cart.ref.id);
+          // console.debug('Found the item in the cart: ', cart.ref.id);
           return true;
         })
       }),
@@ -152,7 +152,7 @@ export class WishListService {
   }
 
   create(mtProduct: WishList): void {
-   // console.log('product id:', mtProduct.id);
+   // console.debug('product id:', mtProduct.id);
     if (this.findWishListItemById(mtProduct.id)) {
       const collectionRef = this.afs.collection(
         `users/${this.userId}/wishlist/`

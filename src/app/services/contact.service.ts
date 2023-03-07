@@ -20,7 +20,7 @@ export class ContactService {
   }
 
   create(contact: Contact) {
-   // console.log(JSON.stringify(contact));
+   // console.debug(JSON.stringify(contact));
 
    const currentDate = new Intl.DateTimeFormat('en');
    const theDate = currentDate.format();

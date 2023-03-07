@@ -94,7 +94,7 @@ export class LandingPageComponent implements OnInit {
     });
     const UserId = of(this.authService.afAuth.currentUser);
     UserId.subscribe(user => {
-      console.log (JSON.stringify(user));
+      console.debug (JSON.stringify(user));
     })
     
     this.createEmptyForm();
@@ -103,7 +103,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   onServices(service: string) {
-    // console.log(service);
+    // console.debug(service);
     this.router.navigate([service]);
   }
 
@@ -124,12 +124,12 @@ export class LandingPageComponent implements OnInit {
   }
 
   onClickAboutUs() {
-    // console.log('navigate to about us');
+    // console.debug('navigate to about us');
     this.router.navigate(['home/about_us']);
   }
 
   onContactUs() {
-    // console.log('Products');
+    // console.debug('Products');
     this.router.navigate(['home/contacts']);
   }
 

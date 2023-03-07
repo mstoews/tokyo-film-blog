@@ -17,7 +17,7 @@ export class ImageCardComponent implements OnInit {
   ngOnInit(): void {}
 
   onClickCard(data: any) {
-    // console.log ('OnClickCard from ImageCardComponent');
+    // console.debug ('OnClickCard from ImageCardComponent');
     this.notifyOpenImageCard.emit(data)
   }
 }

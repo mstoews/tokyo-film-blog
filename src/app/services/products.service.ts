@@ -61,7 +61,7 @@ export class ProductsService {
       inventory.map( items => {
           if(items.description === undefined)
           {
-              console.log(items.id);
+              console.debug(items.id);
           }
       })
     }));

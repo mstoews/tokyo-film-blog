@@ -16,7 +16,7 @@ export class BlogComponent implements OnInit {
 
 
   onToggleMenu() {
-      console.log('blog - notifiy side menu');
+      console.debug('blog - notifiy side menu');
      
   }
 

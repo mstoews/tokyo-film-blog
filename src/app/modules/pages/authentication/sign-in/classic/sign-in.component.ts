@@ -1,13 +1,20 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core'
+import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core'
 import {
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms'
-import { Router } from '@angular/router'
+
 import { fuseAnimations } from '@fuse/animations'
 import { FuseAlertType } from '@fuse/components/alert'
 import { AuthService } from 'app/services/auth/auth.service'
+import * as firebaseui from 'firebaseui';
+
+import {Router} from '@angular/router';
+import firebase from 'firebase/app';
+import { EmailAuthCredential, EmailAuthProvider, GithubAuthProvider, GoogleAuthProvider, TwitterAuthProvider } from 'firebase/auth'
+
+
 
 @Component({
   selector: 'sign-in-classic',
@@ -15,26 +22,7 @@ import { AuthService } from 'app/services/auth/auth.service'
   encapsulation: ViewEncapsulation.None,
   animations: fuseAnimations,
 })
-export class SignInClassicComponent implements OnInit {
-resetPassword() {
-  const newPassword = '....';
-  const actionCode = '';
-  this.authService.afAuth.confirmPasswordReset(actionCode, newPassword).then((resp) => {
-    // Password reset has been confirmed and new password updated.
-
-    // TODO: Display a link back to the app, or sign-in the user directly
-    // if the page belongs to the same domain as the app:
-    // auth.signInWithEmailAndPassword(accountEmail, newPassword);
-
-    // TODO: If a continue URL is available, display a button which on
-    // click redirects the user back to the app via continueUrl with
-    // additional state determined from that URL's parameters.
-  }).catch((error) => {
-    // Error occurred during confirmation. The code might have expired or the
-    // password is too weak.
-  });
-
-}
+export class SignInClassicComponent implements OnInit, OnDestroy {
   alert: { type: FuseAlertType; message: string } = {
     type: 'success',
     message: '',
@@ -42,6 +30,7 @@ resetPassword() {
   signInForm!: UntypedFormGroup
   showAlert: boolean = false
   redirect = ['/home']
+  ui: firebaseui.auth.AuthUI;
 
   constructor(
     private _formBuilder: UntypedFormBuilder,
@@ -51,11 +40,29 @@ resetPassword() {
 
   ngOnInit(): void {
     // Create the form
-    this.signInForm = this._formBuilder.group({
-      email: [''],
-      password: [''],
-      rememberMe: [''],
-    })
+
+    this.authService.afAuth.app.then( app => {
+        const uiConfig = {
+            signInOptions: [
+                EmailAuthProvider.PROVIDER_ID,
+                GoogleAuthProvider.PROVIDER_ID,
+              
+            ],
+            callbacks: {
+                signInSuccessWithAuthResult: this.onLoginSuccess.bind(this)
+            }
+        };
+
+        this.ui = new firebaseui.auth.AuthUI(app.auth());
+
+        this.ui.start("#firebaseui-auth-container", uiConfig);
+
+        //this.ui.disableAutoSignIn();
+    });
+  }
+
+  onLoginSuccess(result) {
+    this.router.navigate(['/home']);
   }
 
   signUpEmail(){
@@ -64,7 +71,7 @@ resetPassword() {
 
   async signInEmail() {
     const { email, password } = this.signInForm.value
-    // console.log(`email ${email} , ${password}`)
+    // console.debug(`email ${email} , ${password}`)
     try {
       const loggedIn = await this.authService.signIn(email, password)
       this.router.navigate(this.redirect)
@@ -72,4 +79,9 @@ resetPassword() {
       console.error(e)
     }
   }
+
+  ngOnDestroy() {
+    this.ui.delete();
+  }
+
 }

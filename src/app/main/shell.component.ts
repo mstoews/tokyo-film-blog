@@ -85,7 +85,7 @@ export class ShellComponent implements OnInit {
   }
 
   onToggleMenu() {
-    console.log('shell: onToggleMenu');
+    console.debug('shell: onToggleMenu');
     this.drawer.toggle();
     if (this.isClicked === false) {
       this.isClicked = true;

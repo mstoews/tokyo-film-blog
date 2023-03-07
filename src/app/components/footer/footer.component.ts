@@ -19,16 +19,15 @@ export class FooterComponent implements OnInit {
 
    
     let email = loginForm.value.email;
-    console.log(email);
+    console.debug(email);
     
-
     this.http.post<any>(environment.api.createMessage, {
       name: 'from Footer',
       email: email,
       message: 'reply with information and updates'
 
     }).pipe(catchError(err => {
-      console.log('Error ', err);
+      console.debug('Error ', err);
       this._snackBar.open(JSON.stringify(err), 'Not Sent', {
         duration: 3000
       });

@@ -78,7 +78,7 @@ export class GalleryLightboxComponent implements OnInit {
   }
 
   next(): void {
-    // console.log('next Image Gallery item');
+    // console.debug('next Image Gallery item');
     this.currentIndex = this.currentIndex + 1
     if (this.currentIndex > this.galleryData.length - 1) {
       this.currentIndex = 0

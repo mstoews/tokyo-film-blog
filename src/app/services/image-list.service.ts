@@ -74,7 +74,7 @@ export class ImageListService {
   }
 
   getImagesByTypeAndProductId(imageType: string, productId: string) {
-    //console.log('Product id for filtering images', productId)
+    //console.debug('Product id for filtering images', productId)
     return this.imageItems.pipe(
       map((images) => images.filter((type) => type.type === imageType).filter((prod) => prod.parentId === productId)
     ));
@@ -175,7 +175,7 @@ export class ImageListService {
 
 
   update(item: imageItem, productId: string) {
-    // console.log(JSON.stringify(item));
+    // console.debug(JSON.stringify(item));
     item.parentId = productId;
     this.imageItemCollections.doc(productId).update(item);
     //this.updateInventory(item, productId)

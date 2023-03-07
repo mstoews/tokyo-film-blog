@@ -25,7 +25,7 @@ export class ImageMaintenanceService {
   }
 
   getAll() {
-    // console.log(`Images ${this.inventoryItems}`);
+    // console.debug(`Images ${this.inventoryItems}`);
     return this.inventoryItems
   }
 
@@ -38,7 +38,7 @@ export class ImageMaintenanceService {
   }
 
   createImageFirebaseInput(mtImageStorage: IImageStorage) {
-    // console.log(mtImageStorage);
+    // console.debug(mtImageStorage);
     this.mtImageStorageCollection.add(mtImageStorage)
   }
 

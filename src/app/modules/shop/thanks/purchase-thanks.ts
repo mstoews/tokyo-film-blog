@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'purchase-thanks',
@@ -8,12 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router'
   styleUrls: ['./purchase-thanks.css']
 })
 export class PurchaseThanksComponent {
-
-  constructor(private route: Router, private _location: Location ) {
-
+  constructor(
+    private route: Router ) {
   }
 
   backToShop() {
-    this._location.back()
+    this.route.navigate(['shop']);
   }
 }

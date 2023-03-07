@@ -61,7 +61,7 @@ export class InventoryComponent implements OnInit {
   }
 
   valueChangedEvent($event: Event) {
-    // console.log('valueChangedEvent');
+    // console.debug('valueChangedEvent');
   }
 
   /**
@@ -71,7 +71,7 @@ export class InventoryComponent implements OnInit {
    */
 
   onImages(): void {
-    // console.log('onImages');
+    // console.debug('onImages');
     const parentId = this.prdGroup.getRawValue();
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
@@ -84,11 +84,11 @@ export class InventoryComponent implements OnInit {
       }
       switch (result.event) {
         case 'Create':
-          // console.log(`create Images to save: ${JSON.stringify(result.data)}`);
+          // console.debug(`create Images to save: ${JSON.stringify(result.data)}`);
           this.createProduct(result);
           break;
         case 'Cancel':
-          // console.log(`Image transfer cancelled`);
+          // console.debug(`Image transfer cancelled`);
           break;
       }
     });
@@ -130,7 +130,7 @@ export class InventoryComponent implements OnInit {
 
   onFocusedRowChanged(e: any) {
     const rowData = e.row && e.row.data;
-    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`)
+    // console.debug(`onFocusRowChanged ${JSON.stringify(rowData)}`)
     this.current_Url = rowData.images;
     this.prdGroup.setValue(rowData);
   }
@@ -144,13 +144,13 @@ export class InventoryComponent implements OnInit {
   onAdd() {
     openAddComponentDialog(this.dialog, this.product)
       .pipe(filter((val) => !!val))
-      .subscribe((val) => console.log('new inventory item', val));
+      .subscribe((val) => console.debug('new inventory item', val));
     
   }
 
   onCreate() {
     const newProduct = { ...this.prdGroup.value } as Product;
-    // console.log(`onCreate ${newProduct}`);
+    // console.debug(`onCreate ${newProduct}`);
     this.productService.create(newProduct);
   }
 
@@ -158,7 +158,7 @@ export class InventoryComponent implements OnInit {
     data = this.prdGroup.getRawValue();
     data.category = this.updated_category;
     data.rich_description = this.rich_description;
-    // console.log(`onUpdate:  ${JSON.stringify(data)}`);
+    // console.debug(`onUpdate:  ${JSON.stringify(data)}`);
     this.productService.update(data);
   }
 

@@ -111,7 +111,7 @@ export class ProductEditComponent implements OnInit {
 
   onUpdate() {
     const product = { ...this.prdGroup.value } as Product;
-    console.log('Product can be sold ...: ', product.purchases_allowed);
+    console.debug('Product can be sold ...: ', product.purchases_allowed);
     const dDate = new Date();
     product.rich_description = this.rich_description;
     const updateDate = dDate.toISOString().split('T')[0];

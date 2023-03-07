@@ -50,7 +50,7 @@ export class MenuToggleService {
  *  private kanbanPartyRefService: KanbanPartyRefService
   ) {
      this.kanbanPartyRefService.partyRefUpdated.subscribe(val => {
-        console.log(val);
+        console.debug(val);
         this.partyRef = val;
         this.refreshData(this.partyRef);
      });

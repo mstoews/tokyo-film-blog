@@ -19,10 +19,10 @@ export class ProductsComponent implements OnInit {
     // this.user = user;
     // if (this.user) {
     //   // this.profileUrl = this.storage.ref(`profile/${this.user.uid}`).getDownloadURL();
-    //   // console.log(`${this.user.uid} user name : ${this.user.displayName}`);
+    //   // console.debug(`${this.user.uid} user name : ${this.user.displayName}`);
     //   this.profileUrl = this.storage.ref('cassie_tie.jpg').getDownloadURL();
     //   this.profileUrl.subscribe(url => {
-    //     // console.log('URL for : ', url);
+    //     // console.debug('URL for : ', url);
     //     this.url = url;
     //   });
     // }

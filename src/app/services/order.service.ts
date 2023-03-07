@@ -23,7 +23,7 @@ export class OrdersService {
   }
 
   getAll() {
-    // console.log(`Inventory ${this.inventoryItems}`);
+    // console.debug(`Inventory ${this.inventoryItems}`);
     return this.inventoryItems
   }
 

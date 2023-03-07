@@ -58,7 +58,7 @@ export class ContactsComponent implements OnInit {
       message : contact.message
 
     }).pipe( catchError( err => {
-      console.log('Error ', err);
+      console.debug('Error ', err);
       this._snackBar.open(JSON.stringify(err), 'Not Sent', {
         duration: 3000
       });

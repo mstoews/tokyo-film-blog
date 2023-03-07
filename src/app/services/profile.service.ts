@@ -25,14 +25,14 @@ export class ProfileService {
   ) {
       this.auth.authState.subscribe((user) => {
       this.userId = user?.uid;
-      console.log('User ID from subscribe : ', this.userId);
+      console.debug('User ID from subscribe : ', this.userId);
     });
       this.profileCollection = afs.collection<ProfileModel>(`users/${this.userId}/profile`);
       this.profileItems = this.profileCollection.valueChanges({idField: 'id'});
 
-     this.authService.getUserId().then((user) => {
+      this.authService.getUserId().then((user) => {
         this.userId = user;
-        console.log('User ID from promise', this.userId);
+        console.debug('User ID from promise', this.userId);
      }).catch((e) => {
       console.error(e.message); // error caught ... 
     });
@@ -43,10 +43,14 @@ export class ProfileService {
    // .pipe(map(profile => profile.;
   }
 
-  update(profile: ProfileModel) {
-      const collectionRef = this.afs.collection(`users/${this.userId}/profile/`);
-      collectionRef.doc(profile.id).update(profile);
-      this.snack.open('Shipping address has been updated to your profile ...', 'Completed', { duration: 3000 });
+  update(userId: string, profile: ProfileModel) {
+      //console.debug(`This profile id:  ${profile.id} user id : ${userId}`);
+      const profileCollection = this.afs.collection<ProfileModel>(`users/${userId}/profile`);
+      profileCollection.doc(profile.id).update(profile).then(profile => {
+        this.snack.open('Profile address has been updated to your profile ...', 'Completed', { duration: 3000 });
+      }).catch(error => {
+        this.snack.open('Profile address was NOT updated to your profile ...', error, { duration: 3000 });
+      }).finally();
   }
 
   add(profile: ProfileModel) {

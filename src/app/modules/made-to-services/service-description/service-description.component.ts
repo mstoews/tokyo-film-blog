@@ -15,7 +15,7 @@ export class ServiceDescriptionComponent implements OnInit {
   ngOnInit(): void {}
 
   scrollToId(id: string) {
-    // console.log('element id : ', id);
+    // console.debug('element id : ', id);
     this.scrollTo.scrollToElementById(id)
   }
 }

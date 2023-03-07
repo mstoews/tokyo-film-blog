@@ -48,7 +48,7 @@ export class SignupFormComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    console.log('signupForm', this.signupForm.value);
+    console.debug('signupForm', this.signupForm.value);
 
     this.httpClient
       .post(
@@ -57,7 +57,7 @@ export class SignupFormComponent implements OnInit {
       )
       .subscribe(
         (response) => {
-          console.log('response', response);
+          console.debug('response', response);
           this.signupForm.reset();
 
           this.snackBar.open('Account Created!', 'Ok', {

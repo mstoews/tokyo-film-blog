@@ -64,7 +64,7 @@ export class ImagesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // console.log('Starting Image Maintenance');
+    // console.debug('Starting Image Maintenance');
     this.sTitle = 'Image Maintenance'
   }
 
@@ -76,14 +76,14 @@ export class ImagesComponent implements OnInit {
   }
 
   onCellDoublClicked(e: any) {
-    // console.log(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
+    // console.debug(`onCellDoubleClicked: ${JSON.stringify(e.data)}`);
     this.current_Url = e.data.image_url
     this.imageForm.setValue(e.data)
     this.openDrawer()
   }
 
   onCellClicked(e: any) {
-    // console.log(`onCellClicked: ${JSON.stringify(e.data)}`);
+    // console.debug(`onCellClicked: ${JSON.stringify(e.data)}`);
     //this.current_Url = e.data.image_url;
     this.imageForm.setValue(e.data)
     this.openDrawer()
@@ -97,7 +97,7 @@ export class ImagesComponent implements OnInit {
 
   onFocusedRowChanged(e: any) {
     const rowData = e.row && e.row.data
-    // console.log(`onFocusRowChanged ${JSON.stringify(rowData)}`)
+    // console.debug(`onFocusRowChanged ${JSON.stringify(rowData)}`)
     this.current_Url = rowData.image_url
     this.imageForm.setValue(rowData)
   }
@@ -117,22 +117,22 @@ export class ImagesComponent implements OnInit {
   }
 
   selectionChanged(data: any) {
-    // console.log(`selectionChanged ${data}`);
+    // console.debug(`selectionChanged ${data}`);
     this.selectedItemKeys = data.selectedRowKeys
   }
 
   Add() {
-    // console.log('open drawer to add ... ');
+    // console.debug('open drawer to add ... ');
     this.openDrawer()
   }
 
   Delete() {
-    // console.log('open drawer to delete ... ');
+    // console.debug('open drawer to delete ... ');
     this.openDrawer()
   }
 
   Clone() {
-    // console.log('open drawer to clone ... ');
+    // console.debug('open drawer to clone ... ');
     this.openDrawer()
   }
 
@@ -141,12 +141,12 @@ export class ImagesComponent implements OnInit {
     const currentUser = this.auth.currentUser
     currentUser.finally()
     newItem.user_updated = this.current_user
-    // console.log(`onCreate ${newItem}`);
+    // console.debug(`onCreate ${newItem}`);
     this.imageMaintanenceService.create(newItem)
   }
 
   onImages() {
-    // console.log('onImages');
+    // console.debug('onImages');
     const parentId = this.imageForm.getRawValue()
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
@@ -159,11 +159,11 @@ export class ImagesComponent implements OnInit {
       }
       switch (result.event) {
         case 'Create':
-          // console.log(`create Images to save: ${JSON.stringify(result.data)}`);
+          // console.debug(`create Images to save: ${JSON.stringify(result.data)}`);
           this.create(result)
           break
         case 'Cancel':
-          // console.log(`Image transfer cancelled`);
+          // console.debug(`Image transfer cancelled`);
           break
       }
     })
@@ -176,7 +176,7 @@ export class ImagesComponent implements OnInit {
   }
 
   onUpdate(data: IImageMaintenance) {
-    // console.log(`onUpdate:  ${data}`);
+    // console.debug(`onUpdate:  ${data}`);
     data = this.imageForm.getRawValue()
     this.imageMaintanenceService.update(data)
   }
