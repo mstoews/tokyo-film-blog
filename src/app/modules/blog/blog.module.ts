@@ -12,6 +12,7 @@ import { IconsModule } from 'app/icons.module';
 import { BlogCardComponent } from './blog-card/blog-card.component';
 import { BlogRoutingModule } from './blog-routing/blog-routing.module';
 import { SharedModule } from '../shared-module/shared.module';
+import { CommentsComponent } from './comments/comments.component';
 
 
 
@@ -22,7 +23,8 @@ import { SharedModule } from '../shared-module/shared.module';
     FashionComponent,
     DetailComponent,
     SafePipe,
-    BlogCardComponent
+    BlogCardComponent,
+    CommentsComponent
   ],
   imports: [
     CommonModule,
