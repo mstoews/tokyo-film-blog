@@ -54,7 +54,7 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
       this.email = user?.email;
@@ -82,8 +82,13 @@ export class AddressComponent implements OnInit {
     this.updateBtnState = true;
     console.debug('update address data: ', JSON.stringify(data));
     data.id = this.profileId;
-    console.debug(`update address data:  ${JSON.stringify(data)} userid : ${this.userId}`);
-    this.profileService.update(this.userId, data);
+    // console.debug(`update address data:  ${JSON.stringify(data)} userid : ${this.userId}`);
+    this.authService.afAuth.currentUser.then(user => {
+      console.log('User uid from address: ', user.uid);
+        this.profileService.update(this.userId, data);
+    }).catch(error => {
+      this.snack.open(`Failed to update user profile\n ${error}`)
+    })
     this.updateBtnState = false;
   }
 
@@ -93,7 +98,7 @@ export class AddressComponent implements OnInit {
       email: [profile.email, Validators.required],
       first_name: [profile.first_name, Validators.required],
       last_name: [profile.last_name, Validators.required],
-      middle_name: [profile.middle_name, Validators.required],
+      middle_name: [profile.middle_name],
       address_line1: [profile.address_line1, Validators.required],
       address_line2: [profile.address_line2, Validators.required],
       city: [profile.city, Validators.required],

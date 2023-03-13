@@ -23,6 +23,12 @@ const routes: Route[] = [
     title: 'Login'
    },
    {
+      path: 'login',
+      loadChildren: () => import('./modules/auth/auth.module').then((mod) => mod.AuthModule),
+      data: { state: 'login' },
+      title: 'Login'
+   },
+   {
     path: 'shop',
     loadChildren: () => import('./modules/shop/shop.module').then( (mod) => mod.ShopModule),
     data: { state: 'shop' },
@@ -64,6 +70,7 @@ const routes: Route[] = [
    {
     path: 'profile',
     loadChildren: () => import('./modules/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
+    //loadChildren: () => import('./modules/auth/auth.module').then((mod) => mod.AuthModule),
     data: { state: 'profile' },
     title: 'Profile'
    },

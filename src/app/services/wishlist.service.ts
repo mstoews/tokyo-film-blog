@@ -81,11 +81,11 @@ export class WishListService {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
-        const wish: WishList = {
+        const cart : WishList = {
           ...result,
           product_id: result.id,
         };
-        this.create(wish);
+        this.create(cart);
       });
     }
   }

@@ -10,6 +10,7 @@ import { AuthService } from 'app/services/auth/auth.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class LandingHeaderComponent implements OnInit{
     private _location: Location,
     private _router: Router,
     private menuToggle: MenuToggleService,
+    private afAuth: AngularFireAuth,
 
     private authService: AuthService,
     private cartService: CartService,
@@ -39,14 +41,23 @@ export class LandingHeaderComponent implements OnInit{
   @Input() sub_title : string;
   @Input() back = true;
   @Input() home: boolean;
+  headerEmail: string;
   isClicked = false;
   doAnimation = false;
   isLoggedIn = true;
   wishCount = 0;
   cartCount = 0;
-  isAdmin = false;m
+  isAdmin = false;
 
   async ngOnInit(){
+
+    this.afAuth.currentUser.then((user) => {
+      if (user !== null || user !== undefined) {
+        this.headerEmail = user.email;
+        console.log(`User email in header:  ${user.email}`);
+        console.log('Display name:', user.displayName);
+      }
+    });
 
     this.authService.getAuth().subscribe( res => {
       if (res !== true) {

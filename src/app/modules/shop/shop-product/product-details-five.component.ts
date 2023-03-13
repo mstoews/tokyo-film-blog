@@ -19,6 +19,7 @@ import { imageItem } from 'app/models/imageItem';
 import { Cart } from 'app/models/cart';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MenuToggleService } from 'app/services/menu-toggle.service';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Component({
   selector: 'app-product-details-five',
@@ -49,8 +50,9 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private productService: ProductsService,
     private cartService: CartService,
     private categories: CategoryService,
-    private snackBar: MatSnackBar, 
-    private menuToggleService: MenuToggleService
+    private snackBar: MatSnackBar,
+    private menuToggleService: MenuToggleService,
+    private afAuth: AngularFireAuth
   ) {}
 
   mainImage: string;
@@ -64,16 +66,20 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userData = this.authService.userData;
-    this.wishListIds = [];
+    console.log(JSON.stringify(this.userData));
+
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
     this.authService.getAuth().subscribe((access) => {
       this.loggedIn = access;
     });
 
+    this.afAuth.authState
+
     this.product = this.activateRoute.snapshot.data['product'];
     this.productId = this.product.id;
     this.mainImage = this.product.image;
+    console.log('User id from cart', this.authService.userData.uid);
 
     if (this.authService.userData) {
       this.cartService
@@ -150,22 +156,22 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-    if (this.authService.userData.uid !== undefined) {
+
       if (this.cartCount > 0) {
-        this.route.navigate(['shop/cart', this.userId]);
+        this.route.navigate(['shop/cart', this.authService.userData.uid ]);
       } else {
         this.snackBar.open('There are no items in your cart', 'OK', {
           duration: 3000,
         });
         return;
       }
-    } else {
-      this.snackBar.open('You must be logged in access the cart', 'OK', {
-        duration: 3000,
-      });
-      this.snackBar._openedSnackBarRef!.onAction().subscribe();
-    }
-    this.route.navigate(['shop/coming-soon']);
+    // } else {
+    //   this.snackBar.open('You must be logged in access the cart', 'OK', {
+    //     duration: 3000,
+    //   });
+    //   this.snackBar._openedSnackBarRef!.onAction().subscribe();
+    // }
+    // this.route.navigate(['shop/coming-soon']);
   }
 
   ngOnDestroy() {

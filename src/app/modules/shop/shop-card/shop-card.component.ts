@@ -24,7 +24,7 @@ export class ShopCardComponent implements OnInit {
     this.wishList.createWishList(this.product.id);
     }
     
-  openCart() {
-    this.router.navigate(['shop/product', this.product.id])
+  openProductDetail() {
+    this.router.navigate(['shop/product', this.product.id]);
   }
 }

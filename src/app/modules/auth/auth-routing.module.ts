@@ -19,6 +19,13 @@ const routes: Routes = [
     loadChildren: () =>
       import('./reset/reset.module').then((m) => m.ResetModule),
   },
+  {
+    path: '**',
+    redirectTo: 'login',
+    data: { state: 'login' }
+    // Maybe create a page not found component page instead of just going to the 'home'
+   },
+
 ];
 
 @NgModule({

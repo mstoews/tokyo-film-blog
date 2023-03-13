@@ -35,6 +35,7 @@
 							"devexpress-gantt",
 							"file-saver",
 							"jszip",
+							"dialog-polyfill",
 							"luxon"
 						],
 						"styles": [

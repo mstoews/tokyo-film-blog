@@ -51,7 +51,7 @@ export class ResetComponent implements OnInit {
 
   onSendPasswordResetCode(resetForm: NgForm) {
     this.httpClient
-      .post( `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${environment.firebaseApiKey}`,
+      .post( `https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=${environment.firebase.apiKey}`,
         { ...resetForm.value, requestType: 'PASSWORD_RESET' }
       )
       .subscribe(

@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 import { Router, RouterLink, RouterModule } from '@angular/router';
 
@@ -7,28 +14,33 @@ import { Location } from '@angular/common';
 
 import { MenuToggleService } from 'app/services/menu-toggle.service';
 import { AuthService } from 'app/services/auth/auth.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
+
 import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
-
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { ProfileService } from 'app/services/profile.service';
+import { observable, map, Observable, first } from 'rxjs';
+import { ProfileModel } from 'app/models/profile';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   animations: [onMainContentChange],
-
 })
 export class HeaderComponent implements OnInit {
-
   constructor(
     private _location: Location,
     private _router: Router,
     private menuToggle: MenuToggleService,
     private authService: AuthService,
+    private afAuth: AngularFireAuth,
     private cartService: CartService,
     private wishListService: WishListService,
+    private profile: ProfileService,
+    private afs: AngularFirestore
   ) {
-    this.title = "Add Title as Parameter in the Template";
+    this.title = 'Add Title as Parameter in the Template';
     menuToggle.setDrawerState(false);
   }
 
@@ -37,47 +49,70 @@ export class HeaderComponent implements OnInit {
   @Input() back = true;
   @Input() home: boolean;
   isClicked = false;
+  emailName: string;
+  profile$: Observable<ProfileModel[]>;
 
   isLoggedIn = true;
   wishCount = 0;
   cartCount = 0;
-  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter()
+  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    this.authService.getAuth().subscribe(res => {
+    this.emailName = 'Guest';
+    this.authService.getAuth().subscribe((res) => {
       if (res === true) {
         this.isLoggedIn = true;
 
-        this.cartService.cartByStatus(this.authService.userData.uid, 'open').subscribe(cart => {
-          this.cartCount = cart.length;
-        })
+        this.cartService
+          .cartByStatus(this.authService.userData.uid, 'open')
+          .subscribe((cart) => {
+            this.cartCount = cart.length;
+          });
 
-        this.wishListService.wishListByUserId(this.authService.userData.uid).subscribe(wishlist => {
-          this.wishCount = wishlist.length;
-        })
-
-      }
-      else {
+        this.wishListService
+          .wishListByUserId(this.authService.userData.uid)
+          .subscribe((wishlist) => {
+            this.wishCount = wishlist.length;
+          });
+      } else {
         this.isLoggedIn = false;
       }
-    })
+    });
+
+    this.authService.afAuth.authState.subscribe((user) => {
+      const userId = user.uid;
+
+      let collection = this.afs.collection<ProfileModel>( `users/${userId}/profile` );
+      const profiles = collection.valueChanges({ idField: 'id' });
+
+      profiles.pipe(first()).subscribe((ref) => {
+        if (ref.length > 0)
+          ref.forEach((mr) => {
+            console.debug(mr);
+            this.emailName = mr.first_name;
+          });
+         else {
+          this.emailName = 'Guest';
+         }
+      });
+    });
+
   }
 
   public onToggleSideNav() {
     this.menuToggle.setDrawerState(true);
     this.notifyNavBarToggleMenu.emit();
-
   }
 
   onLogout() {
     this._router.navigate(['/authentication/signout/modern']);
   }
   onLogin() {
-    this._router.navigate(['/authentication/signin/modern']); 
+    this._router.navigate(['/authentication/signin/modern']);
   }
 
   onProfile() {
-    this._router.navigate(['/profile']); 
+    this._router.navigate(['/profile']);
   }
 
   onThoughts() {
@@ -88,7 +123,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onBack() {
-    this._location.back()
+    this._location.back();
   }
 
   public onHome() {
@@ -99,9 +134,7 @@ export class HeaderComponent implements OnInit {
     this._router.navigate(['/shop']);
   }
 
-  doAnimate() {
-
-  }
+  doAnimate() {}
 
   openShoppingCart() {
     this._router.navigate(['shop/cart', this.authService.userData.uid]);
@@ -110,6 +143,4 @@ export class HeaderComponent implements OnInit {
   openWishList() {
     this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
   }
-
-
 }

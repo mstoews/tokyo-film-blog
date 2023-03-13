@@ -14,13 +14,7 @@
             </ng-template>
           </mat-tab>
         </div>
-        <div *ngIf="isRegistered">
-          <mat-tab label="Sign Out">
-            <ng-template matTabContent>
-              <sign-out-fullscreen></sign-out-fullscreen>
-            </ng-template>
-          </mat-tab>
-        </div>
+       
           
           <!-- <mat-tab label="Register">
             <ng-template matTabContent>
@@ -34,6 +28,14 @@
               <app-address></app-address>
             </ng-template>
           </mat-tab>
+
+          <div *ngIf="isRegistered">
+            <mat-tab label="Sign Out">
+              <ng-template matTabContent>
+                <sign-out-fullscreen></sign-out-fullscreen>
+              </ng-template>
+            </mat-tab>
+          </div>
       
         </mat-tab-group>
       </mat-card>

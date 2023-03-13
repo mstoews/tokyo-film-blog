@@ -1,5 +1,5 @@
-
 <nav class="relattive flex-auto p-2 sm:p-6">
+  <div class="text-center  text-gray-400 mr-20 text-right">{{emailName}}</div>
   <div class="items-center justify-between sm:space-x-10 sm:my-6">
     <div class="flex flex-col sm:flex-row sm:space-x-4 sm:mr-20 sm:mt-10 sm:ml-2 bg-white">
       <div class="block">
@@ -8,8 +8,6 @@
           <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
         </a>
       </div>
-
-
       <h1
         class="flex-col inline-block align-middle sm:ml-4 sm:w-auto font-garamond focus:outline-none font-bold text-3xl lg:text-4xl  text-gray-800 dark:text-white">
         {{ title }}
@@ -52,7 +50,7 @@
         </a>
       </div>
 
-       <div class="hidden md:block">
+      <div class="hidden md:block">
         <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
           <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0"
@@ -67,52 +65,14 @@
         </a>
       </div>
     </div>
-
-      <!-- <div class="hidden md:block">
-        <a [matMenuTriggerFor]="menu" matTooltip="Profile"
-          class="flex focus:ring items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  hover:text-gray-100  dark:hover:bg-gray-700">
-          <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
-        </a>
-      </div>
-
-      <mat-menu class="drop-menu bg-gray-100 border-spacing-1" #menu="matMenu">
-        <a mat-menu-item (click)="onLogout()"
-          class="bg-gray-100  text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700">
-          <mat-icon [svgIcon]="'heroicons_outline:logout'" class="text-gray-300"></mat-icon>
-          <span class="text-gray-300">Logout</span>
-        </a>
-
-
-        <div *ngIf="isLoggedIn">
-          <a mat-menu-item (click)="onLogin()"
-            class="bg-gray-100 font-normal  text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
-            <mat-icon [svgIcon]="'heroicons_outline:login'" class="text-gray-300"> </mat-icon>
-            <span class="text-gray-300">Signin</span>
-          </a>
-        </div>
-
-        <div *ngIf="isLoggedIn">
-          <a mat-menu-item (click)="onProfile()"
-            class="bg-gray-100 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-200">
-            <mat-icon [svgIcon]="'heroicons_outline:user-circle'" class="text-gray-300"> </mat-icon>
-            <span class="text-gray-300">Profile</span>
-          </a>
-        </div>
-      </mat-menu>
-      </div> -->
-
-      <div class="flex flex-col ml-5 sm:flex-row md:ml-10 mr-20 mt-1 sm:ml-10 bg-white">
-        <ng-container *ngIf="sub_title != undefined">
-          <h1
-        class="flex-col inline-block align-middle sm:w-auto font-garamond focus:outline-none font-bold text-1xl sm:text-2xl text-gray-500 dark:text-white">
-        {{ sub_title }}
-      </h1>
-          <span class="flex-auto"></span>
-
-        </ng-container>
-      </div>
+    <div class="flex flex-col ml-5 sm:flex-row md:ml-10 mr-20 mt-1 sm:ml-10 bg-white">
+      <ng-container>
+        <h1 *ngIf="sub_title != undefined"
+          class="flex-col inline-block align-middle sm:w-auto font-garamond focus:outline-none font-bold text-1xl sm:text-2xl text-gray-500 dark:text-white">
+          {{ sub_title }}
+        </h1>
+        <span class="flex-auto"></span>
+      </ng-container>
     </div>
+  </div>
 </nav>
-
-
-<!-- HEADER -->

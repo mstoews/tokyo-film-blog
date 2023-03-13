@@ -76,8 +76,8 @@ export class ProductsService {
       return this.getAvailableInventory();
     } else {
       return this.getAvailableInventory().pipe(
-        map((images) =>
-          images.filter((product) => product.category === category)
+        map((inventory) =>
+        inventory.filter((product) => product.category === category)
         )
       );
     }

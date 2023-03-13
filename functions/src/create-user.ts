@@ -7,6 +7,7 @@ import {getUserCredentialsMiddleware} from "./auth.middleware";
 import bodyParser = require("body-parser");
 import cors = require("cors");
 
+
 export const createUserApp = express();
 
 createUserApp.use(bodyParser.json());

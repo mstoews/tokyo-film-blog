@@ -24,7 +24,7 @@ export class SignOutFullscreenComponent implements OnInit {
   }
   signInForm!: UntypedFormGroup
   showAlert: boolean = false
-  redirect = ['/home']
+  redirect = ['profile']
 
   constructor(
     private _formBuilder: UntypedFormBuilder,
@@ -34,8 +34,9 @@ export class SignOutFullscreenComponent implements OnInit {
 
 
   signOut() {
+    console.log('Sign out');
     this.authService.signOut();
-    this.router.navigate(this.redirect)
+    this.router.navigate(['home']) 
   }
 
   ngOnInit(): void {

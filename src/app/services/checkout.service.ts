@@ -24,11 +24,16 @@ export class CheckoutService {
     afAuth.idToken.subscribe((jwt) => (this.jwtAuth = jwt))
   }
 
+ 
   startProductCheckoutSession(cartId: any): Observable<CheckoutSession> {
     const headers = new HttpHeaders().set(
       'Authorization',
       this.jwtAuth as string
     )
+
+ 
+    alert('Currently checkout is disabled for testing');
+
     if (environment.production === false ) {
     return this.http.post<CheckoutSession>(
       environment.api.baseUrl + '/api/checkout',

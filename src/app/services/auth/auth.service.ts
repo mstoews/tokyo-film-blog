@@ -52,36 +52,18 @@ export class AuthService {
     });
 
     this.afAuth.onAuthStateChanged((user) => {
+      console.log('Auth state changed ...')
       if (user) {
         this.userId = user.uid;
         this.email = user.email;
         this.isAnonymous = user.isAnonymous;
-        // console.debug(`User: ${this.userId} email: ${this.email}`);
-        // var displayName = user.displayName;
-        // var email = user.email;
-        // var emailVerified = user.emailVerified;
-        // var photoURL = user.photoURL;
-        // var uid = user.uid;
-        // var phoneNumber = user.phoneNumber;
-        // var providerData = user.providerData;
-        // user.getIdToken().then(function(accessToken) {
-        //   document.getElementById('sign-in-status').textContent = 'Signed in';
-        //   document.getElementById('sign-in').textContent = 'Sign out';
-        //   document.getElementById('account-details').textContent = JSON.stringify({
-        //     displayName: displayName,
-        //     email: email,
-        //     emailVerified: emailVerified,
-        //     phoneNumber: phoneNumber,
-        //     photoURL: photoURL,
-        //     uid: uid,
-        //     accessToken: accessToken,
-        //     providerData: providerData
-        //   }, null, '  ');
-        // });
 
+        console.log('logged in state', JSON.stringify(user));
+     
       } else {
         this.userId = undefined;
         this.email = undefined;
+        console.log('logged out state', JSON.stringify(user));
       }
     })
 
@@ -95,7 +77,6 @@ export class AuthService {
 
   async loginAnonymously() {
     this.afAuth.signInAnonymously().then((result) => {
-      //this.SendVerificationMail();
       this.SetUserData(result.user);
     })
       .catch((error) => {
@@ -132,7 +113,7 @@ export class AuthService {
       this.afAuth.signOut();
       localStorage.setItem('user', 'null');
       JSON.parse(localStorage.getItem('user')!);
-      this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/profile');
     } catch (e) {
       console.error(e);
       return;
@@ -198,7 +179,7 @@ export class AuthService {
     await this.afAuth.currentUser
       .then((u: any) => u.sendEmailVerification())
       .then(() => {
-        this.router.navigate(['verify-email-address']);
+        this.router.navigate(['home']);
       });
   }
 
@@ -214,26 +195,30 @@ export class AuthService {
   }
 
   async SetUserData(user: any) {
+    console.log('set user Data from service');
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );
-    const userData: IUser = {
-      uid: user.uid,
-      email: user.email,
-      displayName: user.displayName,
-      photoURL: user.photoURL,
-      emailVerified: user.emailVerified,
-      phoneNumber: user.phoneNumber,
-      age: user.age,
-      role: {
-        admin: false,
-        subscriber: true,
-        editor: false
-      }
-    };
-    return userRef.set(userData, {
-      merge: true,
-    });
+
+    user.age = 0; 
+
+    // const userData: IUser = {
+    //   uid: user.uid,
+    //   email: user.email,
+    //   displayName: user.displayName,
+    //   photoURL: user.photoURL,
+    //   emailVerified: user.emailVerified,
+    //   phoneNumber: user.phoneNumber,
+    //   age: user.age,
+    //   role: {
+    //     admin: false,
+    //     subscriber: true,
+    //     editor: false
+    //   }
+    // };
+    // return userRef.set(userData, {
+    //   merge: true,
+    // });
   }
   // Sign out
 

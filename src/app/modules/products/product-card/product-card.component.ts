@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Product } from 'app/models/products';
 
 @Component({
@@ -8,9 +9,10 @@ import { Product } from 'app/models/products';
 })
 export class ProductCardComponent implements OnInit {
 
+
   @Input() product: Product;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -21,6 +23,10 @@ export class ProductCardComponent implements OnInit {
 
   onQuickLook() {
       throw new Error('Method not implemented.');
+    }
+
+    onOpenShopDetails() {
+      this.router.navigate(['shop/product', this.product.id]);
     }
 
 }

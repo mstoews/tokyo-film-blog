@@ -11,6 +11,7 @@ import { map, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from "./services/auth/auth.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthTokenService } from './services/auth/auth-token.service';
 
 
 @Component({
@@ -39,10 +40,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class AppComponent implements OnInit {
   isLoggedOut$: Observable<boolean>;
+  User$: Observable<any>;
   constructor(
     private afAuth: AngularFireAuth,
     public authService: AuthService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private token: AuthTokenService
   ) {
 
   }

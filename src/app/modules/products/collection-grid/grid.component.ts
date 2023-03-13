@@ -44,7 +44,7 @@ export class GridComponent implements OnInit, OnDestroy {
   constructor(
     private route: Router,
     private activateRoute: ActivatedRoute,
-    public authService: AuthService,
+    private authService: AuthService,
     private wishlistService: WishListService,
     private productService: ProductsService,
     private cartService: CartService,
@@ -74,7 +74,7 @@ export class GridComponent implements OnInit, OnDestroy {
     });
 
     this.product = this.activateRoute.snapshot.data['product'];
-    this.productId = this.product.id;
+    //this.productId = this.product.id;
     this.mainImage = this.product.image;
 
     if (this.authService.userData) {
@@ -152,9 +152,11 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
+    const userId = this.authService.userData.uid;
+    console.log('got to checkout ', userId);
     if (this.authService.userData.uid !== undefined) {
       if (this.cartCount > 0) {
-        this.route.navigate(['shop/cart', this.userId]);
+        this.route.navigate(['shop/cart', userId]);
       } else {
         this.snackBar.open('There are no items in your cart', 'OK', {
           duration: 3000,

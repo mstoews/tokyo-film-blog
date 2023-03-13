@@ -46,7 +46,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
             signInOptions: [
                 EmailAuthProvider.PROVIDER_ID,
                 GoogleAuthProvider.PROVIDER_ID,
-              
+
             ],
             callbacks: {
                 signInSuccessWithAuthResult: this.onLoginSuccess.bind(this)
@@ -57,16 +57,24 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
 
         this.ui.start("#firebaseui-auth-container", uiConfig);
 
-        //this.ui.disableAutoSignIn();
+        this.ui.disableAutoSignIn();
     });
   }
 
   onLoginSuccess(result) {
-    this.router.navigate(['/home']);
+    const user = this.authService.afAuth.currentUser;
+    user.then(sendEmail => {
+      //this.router.navigate(['/authentication/confirmation-required/split-screen']);
+      console.log('user id send mail onLoginSuccess:', sendEmail.uid);
+      //sendEmail.sendEmailVerification();
+      this.router.navigate(['/home']);
+    }).catch(error => {
+      console.log('Verification email not sent', error.message);
+    }).finally();
   }
 
   signUpEmail(){
-    this.router.navigate(['/authentication/sign-up/modern']);
+    this.router.navigate(['/authentication/confirmation-required/modern']);
   }
 
   async signInEmail() {

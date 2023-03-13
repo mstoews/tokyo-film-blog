@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../../../environments/environment.prod';
 
 import {
   CrossFieldErrorMatcher,
@@ -52,7 +52,7 @@ export class SignupFormComponent implements OnInit {
 
     this.httpClient
       .post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebaseApiKey}`,
+        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${environment.firebase.apiKey}`,
         { ...this.signupForm.value, returnSecureToken: true }
       )
       .subscribe(
