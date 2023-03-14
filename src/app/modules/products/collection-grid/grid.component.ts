@@ -7,7 +7,7 @@ import {
 import { Product } from 'app/models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/services/products.service';
-import { Observable, Subscription } from 'rxjs';
+import { filter, map, Observable, Subscription } from 'rxjs';
 import { WishListService } from 'app/services/wishlist.service';
 
 import { CartService } from 'app/services/cart.service';
@@ -64,7 +64,8 @@ export class GridComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.Products$ = this.productService.getAll()
+    this.Products$ =  this.productService.getAll().pipe( map((inventory) => inventory.filter((available) => available.is_featured === 'Featured')));
+ 
     this.userData = this.authService.userData;
     this.wishListIds = [];
     this.productIds = [];
@@ -96,9 +97,7 @@ export class GridComponent implements OnInit, OnDestroy {
           });
         });
     }
-    this.inventoryImages$ = this.productService.getImageListByProduct(
-      this.productId
-    );
+    this.inventoryImages$ = this.productService.getImageListByProduct(this.productId);
     this.menuToggleService.setCartListCount(this.productIds.length);
     this.menuToggleService.setWishListCount(this.wishListIds.length);
   }

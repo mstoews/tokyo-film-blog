@@ -13,6 +13,7 @@ import { Comments } from '../../../models/comments'
 export class CommentsComponent {
 
   commentGroup: FormGroup;
+  blog_id: string;
 
   constructor(
     private afs: AngularFirestore,
