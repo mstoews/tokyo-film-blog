@@ -13,6 +13,8 @@ import { BlogCardComponent } from './blog-card/blog-card.component';
 import { BlogRoutingModule } from './blog-routing/blog-routing.module';
 import { SharedModule } from '../shared-module/shared.module';
 import { CommentsComponent } from './comments/comments.component';
+import { CommentsListComponent } from './comments-list/comments-list.component';
+import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 
 
 
@@ -24,7 +26,9 @@ import { CommentsComponent } from './comments/comments.component';
     DetailComponent,
     SafePipe,
     BlogCardComponent,
-    CommentsComponent
+    CommentsComponent,
+    CommentsListComponent,
+    ReplyDialogComponent
   ],
   imports: [
     CommonModule,

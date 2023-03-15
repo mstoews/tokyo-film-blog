@@ -26,7 +26,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
 import { SafePipe } from './safe.pipe';
 import { InventoryContentComponent } from './inventory-content/inventory-content.component';
-import { ContactGridComponent } from './contact-grid/contact-grid.component';
+
 import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
 import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
@@ -58,7 +58,7 @@ import { SharedModule } from '../shared-module/shared.module';
     AdminFormComponent,
     GalleryComponent,
     ServicesComponent,
-    ContactGridComponent,
+   // ContactGridComponent,
     SafePipe,
     InventoryContentComponent,
     InventoryImageSelectionComponent,

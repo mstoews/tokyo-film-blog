@@ -90,9 +90,11 @@ export class HeaderComponent implements OnInit {
           ref.forEach((mr) => {
             console.debug(mr);
             this.emailName = mr.first_name;
+            this.authService.setUserName(mr.first_name);
           });
          else {
           this.emailName = 'Guest';
+          this.authService.setUserName(this.emailName);
          }
       });
     });

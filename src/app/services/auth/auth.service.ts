@@ -20,6 +20,9 @@ export class AuthService {
   userId: string;
   isAnonymous: boolean;
   email: string
+  private userName: string;
+
+  
 
   isLoggedIn$: Observable<boolean>;
   isLoggedOut$: Observable<boolean>;
@@ -29,6 +32,15 @@ export class AuthService {
   // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
   private userCollection: AngularFirestoreCollection<User>;
   private userItems: Observable<User[]>;
+
+
+  setUserName(userName: string) {
+    this.userName = userName;
+  }
+
+  getUserName(): string {
+    return this.userName;
+  }
 
   constructor(
     public afAuth: AngularFireAuth,

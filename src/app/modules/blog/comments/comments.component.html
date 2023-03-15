@@ -1,8 +1,6 @@
 <mat-card class="flex flex-col-1 text-gray-700">
-    <h1 class="p-2">Leave a comment</h1>
-
+    <h1 class="">Leave a comment</h1>
     <form [formGroup]="commentGroup" (ngSubmit)="onSubmit()">
-    
       <div class="m-2">
         <div class="mt-2" hintLabel="Min 15 characters: ">
           <p class="text-base text-gray-800">Message</p>
@@ -13,9 +11,9 @@
         </div>
       </div>
       <div class="m-2">
-        <div class="mt-10">
+        <div class="mt-10" >
           <button #send type="submit" [disabled]="!commentGroup.valid"
-            class="h-14  text-sm font-semibold leading-none text-white bg-gray-700 focus:outline-none disabled:bg-gray-400 border rounded hover:bg-gray-800 py-4 w-full"
+            class="h-14 p-10 text-sm font-semibold leading-none text-white bg-gray-700 focus:outline-none disabled:bg-gray-400 border rounded hover:bg-gray-800 py-4 w-full"
             mat-raised-button>
             Add Comment
             <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
@@ -24,3 +22,4 @@
       </div>
     </form>
   </mat-card>
+

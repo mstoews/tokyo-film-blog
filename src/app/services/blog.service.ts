@@ -4,30 +4,68 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { first, map, Observable, tap } from 'rxjs';
-import { Blog, BlogPartial } from 'app/models/blog';
+import { Blog, BlogPartial, Comments } from 'app/models/blog';
 import { convertSnaps } from './db-utils';
-import { IImageStorage } from 'app/models/maintenance';
 import { ImageListService } from './image-list.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogService {
+  
   private blogCollection: AngularFirestoreCollection<Blog>;
   private blogPartialCollection: AngularFirestoreCollection<BlogPartial>;
-  private blogPartialItems: Observable<BlogPartial[]>
   private blogItems: Observable<Blog[]>;
+  private commentItems: Observable<Comments[]>;
+  private commentCollection : AngularFirestoreCollection<Comments>;
+
 
   constructor(
     private afs: AngularFirestore,
+    private snack: MatSnackBar,
     private imageListService: ImageListService
-    ) {
-
+  ) {
     this.blogCollection = afs.collection<Blog>('blog');
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
-    this.blogPartialItems = this.blogPartialCollection.valueChanges({ idField: 'id'});
+    this.blogCollection = afs.collection<Blog>('blog');
   }
+
+  createComment(comment: Comments) {
+    console.log('this comment  ... ', JSON.stringify(comment));
+    console.log(`create blog comment at : blog/${comment.blog_id}/comment`);
+    const collectionRef = this.afs.collection(`/blog/${comment.blog_id}/comment`);
+  
+    collectionRef.add(comment).then ( newComment => {
+      comment.id = newComment.id
+      this.updateComment (comment);
+      this.snack.open('Comment added to the thoughts ... ', 'OK', {duration: 3000 });
+    }).catch (error => {
+      alert('Unable to update comment');
+      console.log(error);
+    }).finally();
+  }
+
+  addCommentReply(blog_id: string, commentId: string, reply: string) {
+    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('created_date', 'desc'));
+    const dDate = new Date();
+    const updateDate = dDate.toISOString();
+    const comment = {'reply': reply, reply_date: updateDate};
+    collectionRef.doc(commentId).update(comment);
+  }
+
+  updateComment(comment: Comments) {
+    const collectionRef = this.afs.collection(`blog/${comment.blog_id}/comment/`);
+    collectionRef.doc(comment.id).update(comment);
+  }
+
+  getComments(blog_id: string): any {
+    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('created_date', 'desc'));
+    const commentItems = collectionRef.valueChanges({ idField: 'id' });
+    return commentItems;
+  }
+  
 
 
   setToPublish(blog: Blog) {
@@ -37,28 +75,15 @@ export class BlogService {
 
   getBlogImage(parentId: string): any {
     return this.imageListService.getImagesByProductId(parentId);
-    // var blogImages: Observable<IImageStorage[]>;
-    // var blogImagesCollection: AngularFirestoreCollection<IImageStorage>;
-    // blogImagesCollection = this.afs.collection<IImageStorage>(`blog/${parentId}/images`);
-    // blogImages = blogImagesCollection.valueChanges({ idField: 'id' });
-    // return blogImages;
   }
 
-  //getAllPublishedBlog(): Observable<Blog[]> {
-    getAllPublishedBlog() {
-    return this.blogItems;
-    // const blog$ = this.blogItems;
-    // const publishedBlogs =  blog$.pipe(map((blogs) => {
-    //   tap(() => console.debug('published blogs')),
-    //   blogs.filter( blog => blog.published === true);
-    // }));
-    // return publishedBlogs;
-  }
-
-  getAll() : any {
+  getAllPublishedBlog() {
     return this.blogItems;
   }
 
+  getAll(): any {
+    return this.blogItems;
+  }
 
   getBlog(id: string) {
     const ref = this.afs

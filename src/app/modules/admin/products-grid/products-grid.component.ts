@@ -28,7 +28,6 @@ export class CreationsGridComponent implements OnInit  {
 
     allProducts$: Observable<Product[]>;
 
-
     constructor(private readonly productService: ProductsService) {}
 
     ngOnInit(){

@@ -9,14 +9,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FuseAlertModule } from '@fuse/components/alert';
-import { SharedModule } from 'app/shared/shared.module';
-import { SettingsComponent } from 'app/features/admin/pages/settings/settings.component';
-import { SettingsAccountComponent } from 'app/features/admin/pages/settings/account/account.component';
-import { SettingsSecurityComponent } from 'app/features/admin/pages/settings/security/security.component';
-import { SettingsPlanBillingComponent } from 'app/features/admin/pages/settings/plan-billing/plan-billing.component';
-import { SettingsNotificationsComponent } from 'app/features/admin/pages/settings/notifications/notifications.component';
-import { SettingsTeamComponent } from 'app/features/admin/pages/settings/team/team.component';
-import { settingsRoutes } from 'app/features/admin/pages/settings/settings.routing';
+import { SharedModule } from 'app/modules/shared-module/shared.module';
+import { SettingsComponent } from 'app/modules/pages/settings/settings.component';
+import { SettingsAccountComponent } from 'app/modules/pages/settings/account/account.component';
+import { SettingsSecurityComponent } from 'app/modules/pages/settings/security/security.component';
+import { SettingsPlanBillingComponent } from 'app/modules/pages/settings/plan-billing/plan-billing.component';
+import { SettingsNotificationsComponent } from 'app/modules/pages/settings/notifications/notifications.component';
+import { SettingsTeamComponent } from 'app/modules/pages/settings/team/team.component';
+import { settingsRoutes } from 'app/modules/pages/settings/settings.routing';
 
 @NgModule({
     declarations: [
@@ -27,7 +27,7 @@ import { settingsRoutes } from 'app/features/admin/pages/settings/settings.routi
         SettingsNotificationsComponent,
         SettingsTeamComponent
     ],
-    imports     : [
+    imports : [
         RouterModule.forChild(settingsRoutes),
         MatButtonModule,
         MatFormFieldModule,
@@ -41,6 +41,7 @@ import { settingsRoutes } from 'app/features/admin/pages/settings/settings.routi
         SharedModule
     ]
 })
+
 export class SettingsModule
 {
 }

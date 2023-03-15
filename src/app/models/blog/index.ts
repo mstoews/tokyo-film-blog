@@ -1,3 +1,4 @@
+
 export interface BlogImages {
   image: string;
   thumbImage: string;
@@ -23,6 +24,16 @@ export interface BlogPartial {
   title:   string;
   date_created: string;
   published: boolean;
+}
+
+export interface Comments {
+  id: string;
+  blog_id: string;
+  name: string;
+  message: string;
+  created_date: string;
+  reply: string;
+  reply_date: string
 }
 
 

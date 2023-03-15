@@ -1,0 +1,50 @@
+<div class="bg-white shadow sm:rounded-lg">
+  <form [formGroup]="formGroup">
+    <div class="px-4 py-5 sm:p-6">
+      <div class="sm:flex sm:items-start sm:justify-between">
+        <div>
+          <h3 class="text-base font-semibold leading-6 text-gray-900">Add a Reply</h3>
+          <div class="mt-2 max-w-xl text-sm text-gray-500">
+            <textarea matInput #input maxlength="300" formControlName="reply" type="text" placeholder="Enter a reply"
+              class="placeholder:text-sm placeholdertext-gray-500 focus:outline-none border border-gray-300 lg:min-w-[450px] w-full py-3 px-3 rounded "></textarea>
+            <mat-hint class="text-sm" align="end"> {{ input.value.length }}/300</mat-hint>
+          </div>
+        </div>
+
+      </div>
+      <button class="m-2" mat-button (click)="onUpdateReply()" [mat-dialog-close]="data" mat-flat-button color="primary">
+        Add
+      </button>
+      <button class="m-2" mat-button (click)="Cancel()" [mat-dialog-close]="data" mat-flat-button color="accent">
+        Close
+      </button>
+    </div>
+  </form>
+</div>
+
+<!-- <h1 mat-dialog-title>Clone Party</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="formGroup">
+    
+    <mat-form-field>
+        <input
+          matInput
+          placeholder="Party Clone Reference"
+          formControlName="new_party_ref"
+      /></mat-form-field>
+    </form>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-button
+      (click)="onUpdateReply()"
+      [mat-dialog-close]="data"
+      mat-flat-button
+      color="primary"
+    >
+      Clone
+    </button>
+    <button mat-button (click)="closeDialog()" mat-flat-button color="warn">
+      Cancel
+    </button>
+  </div> -->

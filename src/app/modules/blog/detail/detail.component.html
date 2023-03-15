@@ -39,8 +39,10 @@
       <div class="hidden md:block sm:block" *ngIf="blogImages?.length > 2">
         <img [ngSrc]="blogImages[2].imageSrc" width="400" height="400" alt="caps" class="rounded-lg " />
       </div>
-
     </div>
+
+    <blog-comments [blog_id]='blog.id' [userName]='userName' ></blog-comments>
+    <blog-comments-list [blog_id]='blog.id'></blog-comments-list>
 
     <style>
       .bg-blur {

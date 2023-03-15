@@ -1,0 +1,25 @@
+<div class="mt-10">
+<h2 class="text-gray-500" >Comments</h2>
+<div *ngIf="Comments$ | async as comments">
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div *ngFor="let comment of comments">
+      <mat-card (click)="createReply(comment.blog_id, comment.id)"
+        class="relative flex items-left space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+        <div class="min-w-0 flex-1">
+            <p class="text-sm font-medium text-gray-600">{{comment.name}}</p>
+            <p class="text-sm text-gray-500">{{comment.message}}</p>
+            <p class="text-sm font-medium text-gray-600 text-right">{{comment.created_date | date}}</p>
+       
+        <ng-container *ngIf="comment.reply">
+          <p class="text-sm font-medium text-gray-600">Reply from Made To Cassie</p>
+          <p class="text-sm text-gray-500">{{comment.reply}}</p>
+          <p class="text-sm font-medium text-gray-600 text-right">{{comment.reply_date | date}}</p>
+        </ng-container>
+      </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+</div>
+
+
