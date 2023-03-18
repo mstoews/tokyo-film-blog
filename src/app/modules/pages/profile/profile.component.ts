@@ -58,8 +58,9 @@ export class ProfileComponent implements OnInit {
   }
 
   addUserByFunction() {
+    const api = environment.api.baseUrl + '/api/addAdminToRole'
     this.http
-      .post(environment.api.addAdminRole, {
+      .post(api, {
         email: 'cassandra_harada@hotmail.com',
         password: 'secret123',
       })
@@ -77,6 +78,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     let currentUser: any;
+
+   // this.addUserByFunction();
     
     this.afAuth.currentUser
       .then((user) => {

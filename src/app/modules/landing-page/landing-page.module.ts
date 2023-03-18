@@ -20,6 +20,7 @@ import { MaterialModule } from "app/material.module";
 import { IconsModule } from "app/icons.module";
 import { ImageSwipeComponent } from "./image-swipe/image-swipe-content.component";
 import { SwiperModule } from "swiper/angular";
+import { DataPolicyComponent } from "./data-policy/data-policy.component";
 
 const routes: Routes = [
     {
@@ -33,6 +34,13 @@ const routes: Routes = [
         pathMatch: "full",
         component: ContactsComponent,
         data: { state: "contacts" },
+    },
+    {
+    path: "data-policy",
+    pathMatch: "full",
+      title: "Data Policy",
+    component: DataPolicyComponent,
+    data: { state: "data-policy" },
     },
     {
         path: "tailoring",
@@ -84,6 +92,7 @@ const routes: Routes = [
         AboutUsComponent,
         ContactsComponent,
         ImageSwipeComponent,
+        DataPolicyComponent
     ],
     imports: [
         CommonModule,
@@ -97,7 +106,7 @@ const routes: Routes = [
         MaterialModule,
         IconsModule,
         SwiperModule,
-        
+
     ]
 })
 export class LandingPageModule {

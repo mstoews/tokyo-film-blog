@@ -45,7 +45,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
         const uiConfig = {
             signInOptions: [
                 EmailAuthProvider.PROVIDER_ID,
-                GoogleAuthProvider.PROVIDER_ID,
+                //GoogleAuthProvider.PROVIDER_ID,
 
             ],
             callbacks: {
@@ -57,7 +57,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
 
         this.ui.start("#firebaseui-auth-container", uiConfig);
 
-        this.ui.disableAutoSignIn();
+        // this.ui.disableAutoSignIn();
     });
   }
 

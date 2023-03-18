@@ -4,6 +4,13 @@
     <div class="px-3 py-10 text-white bg-gray-700 rounded w-50 dark:bg-gray-800">
       <ul class="space-y-2">
         <ng-container *ngIf="admin === false">
+          <li>
+            <a routerLink="profile" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">
+              <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Profile</span>
+            </a>
+          </li>
             <li>
               <a routerLink="home" (click)="onClose()"
                 class="flex items-center p-2 pr-5 font-normal text-gray-300 rounded-lg text-1xl grow hover:bg-gray-800 dark:hover:bg-gray-700">

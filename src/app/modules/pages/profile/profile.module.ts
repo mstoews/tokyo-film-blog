@@ -35,7 +35,7 @@ import { TableRowComponent } from './table-row/table-row.component';
         SignInModule,
         SignUpModule,
         SignOutModule,
-        AuthModule,
+        //AuthModule,
     ],
     exports: [
       ProfileComponent

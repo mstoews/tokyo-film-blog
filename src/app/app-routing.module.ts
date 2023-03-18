@@ -70,7 +70,6 @@ const routes: Route[] = [
    {
     path: 'profile',
     loadChildren: () => import('./modules/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
-    //loadChildren: () => import('./modules/auth/auth.module').then((mod) => mod.AuthModule),
     data: { state: 'profile' },
     title: 'Profile'
    },
