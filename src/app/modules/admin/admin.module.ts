@@ -41,6 +41,8 @@ import { InventoryPreviewComponent } from './inventory-maintenance/inventory-pre
 import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-menubar.component';
 import { ImageListComponent } from "./image-list/image-list.component";
 import { SharedModule } from '../shared-module/shared.module';
+import { PolicyModule } from './policy/policy.module';
+
 
 
 @NgModule({
@@ -58,18 +60,17 @@ import { SharedModule } from '../shared-module/shared.module';
     AdminFormComponent,
     GalleryComponent,
     ServicesComponent,
-   // ContactGridComponent,
     SafePipe,
     InventoryContentComponent,
     InventoryImageSelectionComponent,
     InventoryComponent,
-
     ProductEditComponent,
     AdminShellComponent,
     AddComponentDialog,
     InventoryPreviewComponent,
     ImageMenubarComponent,
-    ImageListComponent
+    ImageListComponent,
+ 
 
   ],
   imports: [
@@ -88,9 +89,8 @@ import { SharedModule } from '../shared-module/shared.module';
     SwiperModule,
     NgOptimizedImage,
     IconsModule,
-    SharedModule
-
-
+    SharedModule,
+    PolicyModule
   ],
   exports: [AdminComponent, OrdersGridComponent],
   providers: [BlogResolver, ProductResolver],

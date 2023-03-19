@@ -3,7 +3,6 @@ import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MaterialModule } from 'app/material.module';
 import { BlogResolver } from 'app/services/blog.resolver';
 import { DxHtmlEditorModule } from 'devextreme-angular';
-import { HeaderComponent } from 'app/main/header/header.component';
 import { FuseCardModule } from '@fuse/components/card';
 import { IconsModule } from 'app/icons.module';
 import { BlogEditRoutingModule } from './blog-routing.module';

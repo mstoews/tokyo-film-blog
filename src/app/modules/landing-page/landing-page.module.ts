@@ -21,6 +21,7 @@ import { IconsModule } from "app/icons.module";
 import { ImageSwipeComponent } from "./image-swipe/image-swipe-content.component";
 import { SwiperModule } from "swiper/angular";
 import { DataPolicyComponent } from "./data-policy/data-policy.component";
+import { TosComponent } from './tos/tos.component';
 
 const routes: Routes = [
     {
@@ -92,7 +93,8 @@ const routes: Routes = [
         AboutUsComponent,
         ContactsComponent,
         ImageSwipeComponent,
-        DataPolicyComponent
+        DataPolicyComponent,
+        TosComponent
     ],
     imports: [
         CommonModule,
