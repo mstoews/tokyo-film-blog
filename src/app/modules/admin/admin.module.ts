@@ -41,7 +41,7 @@ import { InventoryPreviewComponent } from './inventory-maintenance/inventory-pre
 import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-menubar.component';
 import { ImageListComponent } from "./image-list/image-list.component";
 import { SharedModule } from '../shared-module/shared.module';
-import { PolicyModule } from './policy/policy.module';
+import { PolicyModule } from '../policy/policy.module';
 
 
 

@@ -7,7 +7,7 @@ import { PolicyComponent } from './policy.component';
 import { PolicyEditComponent } from './policy-edit/policy-edit.component';
 import { MaterialModule } from 'app/material.module';
 import { DxHtmlEditorModule } from 'devextreme-angular';
-import { SharedModule } from '../../shared-module/shared.module';
+import { SharedModule } from '../shared-module/shared.module';
 
 
 

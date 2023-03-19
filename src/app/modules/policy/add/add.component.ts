@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Category } from 'app/models/category';
+import { PolicyDocuments } from 'app/models/policy-documents';
 import { ProductPartial } from 'app/models/products';
 import { CategoryService } from 'app/services/category.service';
 import { ProductsService } from 'app/services/products.service';
@@ -72,7 +73,7 @@ export class AddPolicyComponentDialog {
 
 }
 
-export function openAddComponentDialog(dialog: MatDialog, product: ProductPartial) {
+export function openAddPolicyDialog(dialog: MatDialog, policy: PolicyDocuments) {
 
   const config = new MatDialogConfig();
 
@@ -80,10 +81,10 @@ export function openAddComponentDialog(dialog: MatDialog, product: ProductPartia
   config.autoFocus = true;
   config.panelClass = "modal-panel";
   config.backdropClass = "backdrop-modal-panel";
-  config.width = "400px"
+  config.width = "450px"
 
   config.data = {
-      ...product
+      ...policy
   };
 
   const dialogRef = dialog.open(AddPolicyComponentDialog, config);

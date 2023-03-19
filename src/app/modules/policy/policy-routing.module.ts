@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'policy-admin/:id',
-    title: 'Thoughts',
+    title: 'Policy',
     component: PolicyComponent,
     resolve: {
       blog: BlogResolver,
