@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { AuthService } from 'app/services/auth/auth.service';
+import { UserService } from 'app/services/auth/user.service';
 import { BlogService } from 'app/services/blog.service';
 import { Observable } from 'rxjs';
 import { Comments } from '../../../models/blog';
@@ -13,7 +14,7 @@ import { ReplyDialogComponent } from '../reply-dialog/reply-dialog.component';
 export class CommentsListComponent implements OnInit {
   constructor(
     private blogService: BlogService,
-    private authService: AuthService,
+    private userService: UserService,
     private dialog: MatDialog
   ) {}
 
@@ -28,9 +29,6 @@ export class CommentsListComponent implements OnInit {
       this.Comments$ = this.blogService.getComments(this.blog_id);
     }
 
-    this.authService.isAdmin().then(admin => {
-      this.isAdmin = admin;
-    })
   }
 
   valueChangedEvent($event: any) {}

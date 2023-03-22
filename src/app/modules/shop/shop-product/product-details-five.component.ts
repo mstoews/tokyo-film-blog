@@ -20,6 +20,7 @@ import { Cart } from 'app/models/cart';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MenuToggleService } from 'app/services/menu-toggle.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserService } from 'app/services/auth/user.service';
 
 @Component({
   selector: 'app-product-details-five',
@@ -52,7 +53,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private categories: CategoryService,
     private snackBar: MatSnackBar,
     private menuToggleService: MenuToggleService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private userService: UserService,
   ) {}
 
   mainImage: string;
@@ -66,20 +68,16 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userData = this.authService.userData;
-    console.log(JSON.stringify(this.userData));
+    // console.log(JSON.stringify(this.userData));
 
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
-    this.authService.getAuth().subscribe((access) => {
-      this.loggedIn = access;
-    });
-
-    this.afAuth.authState
+    this.userService.isLoggedIn$
 
     this.product = this.activateRoute.snapshot.data['product'];
     this.productId = this.product.id;
     this.mainImage = this.product.image;
-    console.log('User id from cart', this.authService.userData.uid);
+    // console.log('User id from cart', this.authService.userData.uid);
 
     if (this.authService.userData) {
       this.cartService

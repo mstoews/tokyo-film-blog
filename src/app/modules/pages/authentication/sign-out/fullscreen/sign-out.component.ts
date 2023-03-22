@@ -34,7 +34,7 @@ export class SignOutFullscreenComponent implements OnInit {
 
 
   signOut() {
-    console.log('Sign out');
+    // console.log('Sign out');
     this.authService.signOut();
     this.router.navigate(['home']) 
   }

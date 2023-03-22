@@ -19,6 +19,7 @@ import { imageItem } from 'app/models/imageItem';
 import { Cart } from 'app/models/cart';
 
 import { MenuToggleService } from 'app/services/menu-toggle.service';
+import { UserService } from 'app/services/auth/user.service';
 
 @Component({
   selector: 'collection-grid',
@@ -50,7 +51,8 @@ export class GridComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private categories: CategoryService,
     private snackBar: MatSnackBar, 
-    private menuToggleService: MenuToggleService
+    private menuToggleService: MenuToggleService,
+    public  userService: UserService
   ) {}
 
   mainImage: string;
@@ -70,7 +72,7 @@ export class GridComponent implements OnInit, OnDestroy {
     this.wishListIds = [];
     this.productIds = [];
     this.Categories$ = this.categories.getAll();
-    this.authService.getAuth().subscribe((access) => {
+    this.userService.isLoggedIn$.subscribe((access) => {
       this.loggedIn = access;
     });
 
@@ -152,7 +154,7 @@ export class GridComponent implements OnInit, OnDestroy {
 
   onGoShoppingCart() {
     const userId = this.authService.userData.uid;
-    console.log('got to checkout ', userId);
+    // console.log('got to checkout ', userId);
     if (this.authService.userData.uid !== undefined) {
       if (this.cartCount > 0) {
         this.route.navigate(['shop/cart', userId]);

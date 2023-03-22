@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
 import { MenuToggleService } from 'app/services/menu-toggle.service';
+import { UserService } from 'app/services/auth/user.service';
 
 @Component({
   selector: 'shell',
@@ -35,6 +36,7 @@ export class ShellComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private authService: AuthService,
     private cartService: CartService,
+    public userService: UserService,
     private wishListService: WishListService,
     private menuToggleService: MenuToggleService,
     public router: Router) 
@@ -49,15 +51,12 @@ export class ShellComponent implements OnInit {
 
 
   async ngOnInit() {
-       this.authService.getAuth().subscribe( res => {
+       this.userService.isLoggedIn$.subscribe( res => {
         if (res === true)
         {
           this.isLoggedIn = true;
 
-          this.authService.isAdmin().then(admin => {
-            
-          })
-
+         
           this.cartService.cartByStatus(this.authService.userData.uid ,'open').subscribe(cart => {
             this.cartCount = cart.length;
           })

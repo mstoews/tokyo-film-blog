@@ -22,6 +22,7 @@ import { ProfileService } from 'app/services/profile.service';
 import { observable, map, Observable, first } from 'rxjs';
 import { ProfileModel } from 'app/models/profile';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UserService } from 'app/services/auth/user.service';
 
 @Component({
   selector: 'app-header',
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit {
     private menuToggle: MenuToggleService,
     private authService: AuthService,
     private afAuth: AngularFireAuth,
+    public userService: UserService,
     private cartService: CartService,
     private wishListService: WishListService,
     private profile: ProfileService,
@@ -59,7 +61,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.emailName = 'Guest';
-    this.authService.getAuth().subscribe((res) => {
+    this.userService.isLoggedIn$.subscribe((res) => {
       if (res === true) {
         this.isLoggedIn = true;
 

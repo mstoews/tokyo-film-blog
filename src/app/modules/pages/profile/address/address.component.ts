@@ -7,8 +7,7 @@ import { ProfileService } from 'app/services/profile.service';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { convertSnaps} from 'app/services/db-utils'
-
+import { UserService } from 'app/services/auth/user.service';
 
 @Component({
   standalone: true,
@@ -26,11 +25,12 @@ export class AddressComponent implements OnInit {
   email: string;
   profileId: string;
   constructor(
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private afs: AngularFirestore,
-    private profileService: ProfileService,
-    private snack: MatSnackBar
+    public fb: FormBuilder,
+    public authService: AuthService,
+    public userService: UserService,
+    public afs: AngularFirestore,
+    public profileService: ProfileService,
+    public snack: MatSnackBar
   ) {
     const theDate = new Date();
     const address: ProfileModel = {
@@ -54,41 +54,50 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
       this.email = user?.email;
 
-      let collection = this.afs.collection<ProfileModel>(`users/${this.userId}/profile`);
-      const profiles = collection.valueChanges({idField: 'id'});
+      let collection = this.afs.collection<ProfileModel>(
+        `users/${this.userId}/profile`
+      );
+      const profiles = collection.valueChanges({ idField: 'id' });
 
       console.debug('ngOnInit', this.userId);
 
       // return only the first element of document which constains the only profile for the user ID if it exists.
 
-      profiles.pipe(first()).subscribe(ref => {
-       if ( ref.length > 0  )
-        ref.forEach(mr => {
-          console.debug(mr);
-          this.profileId = mr.id;
-          this.createForm(mr);
-        })
-      })
+      profiles.pipe(first()).subscribe((ref) => {
+        if (ref.length > 0)
+          ref.forEach((mr) => {
+            console.debug(mr);
+            this.profileId = mr.id;
+            this.createForm(mr);
+          });
+      });
     });
   }
 
   onUpdateProfile() {
     let data = this.formGroup.getRawValue();
     this.updateBtnState = true;
-    console.debug('update address data: ', JSON.stringify(data));
-    data.id = this.profileId;
-    // console.debug(`update address data:  ${JSON.stringify(data)} userid : ${this.userId}`);
-    this.authService.afAuth.currentUser.then(user => {
-      console.log('User uid from address: ', user.uid);
-        this.profileService.update(this.userId, data);
-    }).catch(error => {
-      this.snack.open(`Failed to update user profile\n ${error}`)
-    })
+    // console.log('update address data: ', JSON.stringify(data));
+    this.authService.afAuth.currentUser
+      .then((user) => {
+        // console.log('User uid from address: ', user.uid);
+        const collectionRef = this.afs.collection(
+          `users/${this.userId}/profile/`
+        );
+        collectionRef.add(data);
+        this.snack.open('Profile has been added ...', 'OK', { duration: 3000 });
+      })
+      .then(() => {
+        // console.log('Document successfully written!');
+      })
+      .catch((error) => {
+        console.error('Error writing document: ', error);
+      });
+
     this.updateBtnState = false;
   }
 
@@ -111,7 +120,8 @@ export class AddressComponent implements OnInit {
     });
   }
 }
-function pipe(arg0: OperatorFunction<unknown, void>): Partial<import("rxjs").Observer<(ProfileModel & { id: string; })[]>> {
+function pipe(
+  arg0: OperatorFunction<unknown, void>
+): Partial<import('rxjs').Observer<(ProfileModel & { id: string })[]>> {
   throw new Error('Function not implemented.');
 }
-

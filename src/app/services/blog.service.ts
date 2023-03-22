@@ -33,8 +33,8 @@ export class BlogService {
   }
 
   createComment(comment: Comments) {
-    console.log('this comment  ... ', JSON.stringify(comment));
-    console.log(`create blog comment at : blog/${comment.blog_id}/comment`);
+    // console.log('this comment  ... ', JSON.stringify(comment));
+    // console.log(`create blog comment at : blog/${comment.blog_id}/comment`);
     const collectionRef = this.afs.collection(`/blog/${comment.blog_id}/comment`);
   
     collectionRef.add(comment).then ( newComment => {
@@ -43,7 +43,7 @@ export class BlogService {
       this.snack.open('Comment added to the thoughts ... ', 'OK', {duration: 3000 });
     }).catch (error => {
       alert('Unable to update comment');
-      console.log(error);
+      // console.log(error);
     }).finally();
   }
 

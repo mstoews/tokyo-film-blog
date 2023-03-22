@@ -60,9 +60,9 @@ export class LandingHeaderComponent implements OnInit{
     });
 
 
-    
 
-    this.authService.getAuth().subscribe( res => {
+
+    this.userService.isLoggedIn$.subscribe( res => {
       if (res !== true) {
         this.isLoggedIn = false;
       } else {

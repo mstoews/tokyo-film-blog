@@ -32,9 +32,7 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient
   ) {
     this.userId = authService.userId;
-    this.authService.isLoggedIn$.subscribe((loggedin) => {
-      console.debug('Subscribed is logged in: ', loggedin);
-    });
+   
   }
 
   addAdminUser(email: string, password: string) {
@@ -48,12 +46,12 @@ export class ProfileComponent implements OnInit {
       })
       .pipe(
         catchError((err) => {
-          console.log(err);
+          // console.log(err);
           alert('Could not update User to Admin');
           return throwError(() => new Error());
         })
       ).subscribe((user) => {
-        console.log('Admin updated ... ', user);
+        // console.log('Admin updated ... ', user);
       });
   }
 
@@ -66,13 +64,13 @@ export class ProfileComponent implements OnInit {
       })
       .pipe(
         catchError((err) => {
-          console.log(err);
+          // console.log(err);
           alert('Could not update User to Admin');
           return throwError(() => new Error());
         })
       )
       .subscribe((user) => {
-        console.log('Admin updated ... ', user);
+        // console.log('Admin updated ... ', user);
       });
   }
 
@@ -87,7 +85,7 @@ export class ProfileComponent implements OnInit {
           if (user.isAnonymous !== null) {
             if (user.isAnonymous === true) {
               this.isRegistered = false;
-              console.log(
+               console.log(
                 `this user : ${this.userId} is registered ? : ${this.isRegistered}`
               );
             }

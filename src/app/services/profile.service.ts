@@ -35,7 +35,7 @@ export class ProfileService {
     this.auth.user.subscribe((user) => {
       if (user !== null) {
         this.userId = user.uid;
-        console.log('User id from profile service is : ', this.userId);
+        // console.log('User id from profile service is : ', this.userId);
       }
     });
 
@@ -57,6 +57,8 @@ export class ProfileService {
 
   update(userId: string, profile: ProfileModel) {
     const profileCollection = this.afs.collection<ProfileModel>( `users/${userId}/profile` );
+
+
     profileCollection
       .doc(profile.id)
       .update(profile)

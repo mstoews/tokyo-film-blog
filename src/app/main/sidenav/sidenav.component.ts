@@ -64,10 +64,10 @@ export class SideNavComponent implements OnInit{
   } 
 
   isAdminUser() {
-    console.log('Is admin ', this.admin_login);
+    // console.log('Is admin ', this.admin_login);
   
     if (this.userEmail === 'mstoews@hotmail.com'  ||  this.userEmail === 'cassandra_haruma@hotmail.com') {
-      console.log('sidenav admin user is true');
+      // console.log('sidenav admin user is true');
      this.admin_login = true;
     }
 }

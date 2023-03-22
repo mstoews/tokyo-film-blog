@@ -31,12 +31,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
       let id: string;
       this.userName = this.authService.getUserName();
-      console.log('User Name from blog details : ', this.userName);
+      // console.log('User Name from blog details : ', this.userName);
       this.blog = this.activateRoute.snapshot.data["blog"];
      
       if (this.blog.id) {
         this.blog_id = this.blog.id;
-        console.log('Blog ID: ' , this.blog_id);
+        // console.log('Blog ID: ' , this.blog_id);
          this.blogImages$ = this.imageListService.getImagesByType(this.blog.id);
       }
   }

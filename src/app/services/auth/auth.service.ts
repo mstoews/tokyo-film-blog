@@ -23,13 +23,6 @@ export class AuthService {
   email: string
   private userName: string;
 
-  
-
-  isLoggedIn$: Observable<boolean>;
-  isLoggedOut$: Observable<boolean>;
-  pictureUrl$: Observable<string | null>;
-  roles$: Observable<UserRoles | any>;
-
   // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
   private userCollection: AngularFirestoreCollection<User>;
   private userItems: Observable<User[]>;
@@ -50,11 +43,7 @@ export class AuthService {
     private snackBar: MatSnackBar
   ) {
     this.isAdminUser = false;
-    this.isLoggedIn$ = this.afAuth.authState.pipe(map((user: any) => !!user));
-    this.isLoggedOut$ = this.afAuth.authState.pipe(map((loggedIn: any) => !!loggedIn));
-    this.pictureUrl$ = this.afAuth.authState.pipe(map(user => user ? user.photoURL : null));
-    this.roles$ = this.afAuth.idTokenResult.pipe(map(token => token?.claims ?? { admin: false }));
-
+   
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -66,33 +55,22 @@ export class AuthService {
     });
 
     this.afAuth.onAuthStateChanged((user) => {
-      console.log('Auth state changed ...')
+      // console.log('Auth state changed ...')
       if (user) {
         this.userId = user.uid;
         this.email = user.email;
         this.isAnonymous = user.isAnonymous;
 
-        console.log('logged in state', JSON.stringify(user));
+        // console.log('logged in state', JSON.stringify(user));
      
       } else {
         this.userId = undefined;
         this.email = undefined;
-        console.log('logged out state', JSON.stringify(user));
+        // console.log('logged out state', JSON.stringify(user));
       }
     })
-
-    this.isAdmin().then( admin => {
-      this.isAdminUser = admin;
-      console.log('AuthService Admin? :', this.isAdminUser);
-    })
-
   }
 
-  
-
-  getAuth(): Observable<boolean> {
-    return this.isLoggedIn$;
-  }
 
   async loginAnonymously() {
     this.afAuth.signInAnonymously().then((result) => {
@@ -181,16 +159,7 @@ export class AuthService {
     return user !== null && user.emailVerified !== false ? true : false;
   }
 
-  async isAdmin() {
-    return (await this.afAuth.currentUser).getIdTokenResult().then((idTokenResult) => {
-      if (idTokenResult.claims.admin) { 
-        return true; 
-      }
-      else {
-        return false;
-      }
-    });
-  }
+ 
 
   async getUserId() {
     return (await this.afAuth.currentUser).uid;
@@ -216,7 +185,7 @@ export class AuthService {
   }
 
   async SetUserData(user: any) {
-    console.log('set user Data from service');
+    // console.log('set user Data from service');
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
       `users/${user.uid}`
     );

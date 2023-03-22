@@ -52,7 +52,7 @@ export class PolicyEditComponent implements OnInit {
 
 
     if (this.policy) {
-      console.log('Policy : ', JSON.stringify(this.policy));
+      // console.log('Policy : ', JSON.stringify(this.policy));
       this.rich_description = this.policy.rich_description;
       this.description = this.policy.description
       this.createForm(this.policy);
