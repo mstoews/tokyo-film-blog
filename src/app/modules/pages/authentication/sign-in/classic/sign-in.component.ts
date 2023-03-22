@@ -29,7 +29,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
   }
   signInForm!: UntypedFormGroup
   showAlert: boolean = false
-  redirect = ['/profile']
+  redirect = ['/home']
   ui: firebaseui.auth.AuthUI;
 
   constructor(
@@ -64,7 +64,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
   onLoginSuccess(result) {
     const user = this.authService.afAuth.currentUser;
     user.then(sendEmail => {
-      this.router.navigate(['/profile']);
+      this.router.navigate(['/home']);
     }).catch(error => {
       // console.log('Verification email not sent', error.message);
     }).finally();
