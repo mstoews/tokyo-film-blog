@@ -11,6 +11,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { UserService } from 'app/services/auth/user.service';
 
 
 @Component({
@@ -28,6 +29,7 @@ export class LandingHeaderComponent implements OnInit{
     private _router: Router,
     private menuToggle: MenuToggleService,
     private afAuth: AngularFireAuth,
+    public userService: UserService,
 
     private authService: AuthService,
     private cartService: CartService,
@@ -54,10 +56,11 @@ export class LandingHeaderComponent implements OnInit{
     this.afAuth.currentUser.then((user) => {
       if (user !== null || user !== undefined) {
         this.headerEmail = user.email;
-        console.log(`User email in header:  ${user.email}`);
-        console.log('Display name:', user.displayName);
       }
     });
+
+
+    
 
     this.authService.getAuth().subscribe( res => {
       if (res !== true) {
@@ -73,13 +76,10 @@ export class LandingHeaderComponent implements OnInit{
         });
       }
      })
-    await this.isAdminUser();
+ 
   }
 
-  async isAdminUser() {
-      this.isAdmin = await this.authService.isAdmin();
-  }
-
+ 
 
   public onToggleSideNav() {
     this.menuToggle.setDrawerState(true);

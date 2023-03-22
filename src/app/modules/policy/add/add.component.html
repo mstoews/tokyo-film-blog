@@ -8,38 +8,13 @@
 
       <mat-form-field>
 
-        <input matInput placeholder="Product Description" formControlName="description">
+        <input matInput placeholder="Policy Title" formControlName="description">
 
       </mat-form-field>
 
       <mat-form-field>
-          <mat-label>Category</mat-label>
-          <mat-select  formControlName="category"
-            (selectionChange)="changeCategory($event.value)">
-            <mat-option *ngFor="let p of categories" [value]="p.name">
-              {{ p.name }}
-            </mat-option>
-          </mat-select>
-      </mat-form-field>
-
-      <mat-form-field>
-
-        <input matInput [matDatepicker]="myDatepicker" formControlName="date_created">
-
-        <mat-datepicker-toggle matSuffix [for]="myDatepicker">
-
-        </mat-datepicker-toggle>
-
-        <mat-datepicker #myDatepicker></mat-datepicker>
-
-      </mat-form-field>
-
-      <mat-form-field>
-
-        <textarea matInput placeholder="Description" formControlName="rich_description">
-
+        <textarea matInput placeholder="Short Description" formControlName="rich_description">
         </textarea>
-
       </mat-form-field>
 
     </mat-dialog-content>

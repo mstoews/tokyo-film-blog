@@ -21,3 +21,9 @@
   table {
     width: 100%;
   }
+
+  .table-row {
+    height: 30px !important;
+  }
+
+  

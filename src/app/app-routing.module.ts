@@ -74,6 +74,12 @@ const routes: Route[] = [
     title: 'Profile'
    },
    {
+      path: 'policy',
+      loadChildren: () => import('./modules/policy/policy.module').then( (mod) => mod.PolicyModule),
+      data: { state: 'policy' },
+      title: 'Policy'
+     },
+   {
     path: '**',
     redirectTo: '/home',
     data: { state: 'home' }

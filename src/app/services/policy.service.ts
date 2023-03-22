@@ -49,7 +49,7 @@ export class PolicyService {
   }
 
   create(mtPolicy: PolicyDocuments) {
-    return from(this.policyCollection.add(mtPolicy));
+    return this.policyCollection.add(mtPolicy);
   }
 
   update(mtPolicy: PolicyDocuments) {

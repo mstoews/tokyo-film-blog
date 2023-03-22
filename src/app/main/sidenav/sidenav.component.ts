@@ -1,18 +1,23 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core'
+import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { Router } from '@angular/router'
 import { AuthService } from 'app/services/auth/auth.service'
+import { UserService } from 'app/services/auth/user.service'
 import { map, Observable } from 'rxjs'
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
 })
-export class SideNavComponent {
+export class SideNavComponent implements OnInit{
   public isLoggedIn$: Observable<boolean>
   public isLoggedOut$: Observable<boolean>
   loggedIn = false
-  admin = false;
+
   admin_login = false;
   private userId: string;
+  userEmail: string;
+  show_admin_menu = false;
+  isLoggedIn = false;
   pictureUrl$: Observable<string | null>
 
   @Output() notifyParentCloseDrawer: EventEmitter<any> = new EventEmitter()
@@ -20,17 +25,22 @@ export class SideNavComponent {
 
 
   constructor(
-    private authService: AuthService,
-    private route: Router
-
+    private afAuth: AngularFireAuth,
+    public authService: AuthService,
+    private route: Router,
+    public user: UserService
     ) {
+    
     this.authService.afAuth.authState.subscribe((user) => {
           this.userId = user?.uid;
-          const userEmail = user?.email
-          if (userEmail === 'mstoews@hotmail.com' || userEmail === 'cassandraaprilharada@gmail.com' ) {
-            this.admin_login = true;
-          }
+          this.userEmail = user?.email    
     })
+
+    this.isAdminUser();
+
+  }
+
+  async ngOnInit() {
 
     this.isLoggedIn$ = this.authService.afAuth.authState.pipe(
       map((user) => { !!user;
@@ -49,24 +59,33 @@ export class SideNavComponent {
     this.isLoggedOut$ = this.authService.afAuth.authState.pipe(
       map((loggedIn) => !!loggedIn)
     )
+  
+    this.isAdminUser();
+  } 
 
-    this.pictureUrl$ = this.authService.afAuth.authState.pipe(
-      map((user) => (user ? user.photoURL : null))
-    )
-  }
+  isAdminUser() {
+    console.log('Is admin ', this.admin_login);
+  
+    if (this.userEmail === 'mstoews@hotmail.com'  ||  this.userEmail === 'cassandra_haruma@hotmail.com') {
+      console.log('sidenav admin user is true');
+     this.admin_login = true;
+    }
+}
 
   onAdmin()
   {
-    if (this.admin === false) {
-      this.admin = true;
+    if (this.show_admin_menu === false) {
+      this.show_admin_menu = true;
       this.notifyParentDrawerOpen.emit();
 
     } else
     {
-      this.admin = false;
+      this.show_admin_menu = false;
       this.notifyParentCloseDrawer.emit()
       this.route.navigate(['home'])
     }
+
+    this.isAdminUser();
 
   }
 

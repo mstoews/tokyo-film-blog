@@ -28,7 +28,7 @@ import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
     BlogCardComponent,
     CommentsComponent,
     CommentsListComponent,
-    ReplyDialogComponent
+    ReplyDialogComponent,
   ],
   imports: [
     CommonModule,

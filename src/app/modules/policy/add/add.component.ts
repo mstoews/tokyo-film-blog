@@ -6,6 +6,7 @@ import { Category } from 'app/models/category';
 import { PolicyDocuments } from 'app/models/policy-documents';
 import { ProductPartial } from 'app/models/products';
 import { CategoryService } from 'app/services/category.service';
+import { PolicyService } from 'app/services/policy.service';
 import { ProductsService } from 'app/services/products.service';
 import { Observable } from 'rxjs';
 
@@ -16,15 +17,12 @@ import { Observable } from 'rxjs';
 })
 export class AddPolicyComponentDialog {
   description: string;
-  categories: Category[];
-  updated_category: string;
-  category$: Observable<Category[]>;
   form: FormGroup;
-  productId: string;
+  policyId: string;
 
   constructor(private fb: FormBuilder,
               @Inject(MAT_DIALOG_DATA) private product: ProductPartial ,
-              private readonly productService : ProductsService,
+              private readonly policyService : PolicyService,
               private readonly categoryService: CategoryService,
               private dialogRef: MatDialogRef<AddPolicyComponentDialog>,
               private route: Router) {
@@ -33,16 +31,12 @@ export class AddPolicyComponentDialog {
   }
 
   ngOnInit() {
-    this.category$ = this.categoryService.getAll();
-    this.category$.subscribe((result) => {
-      this.categories = result;
-    });
+   
   }
 
   createForm() {
     this.form = this.fb.group({
       id: [''],
-      category: ['',  Validators.required],
       description: ['', Validators.required],
       rich_description:  ['', Validators.required],
       date_created: ['', Validators.required]
@@ -51,20 +45,21 @@ export class AddPolicyComponentDialog {
 
 
 
-  update(results: any) {
-    const newProductPartial = { ...this.form.value } as ProductPartial
-    this.productService.createPartial(newProductPartial).then ( product => {
-      this.productId = product.id;
-      newProductPartial.id = this.productId;
-      this.productService.updatePartial (newProductPartial);
-      this.route.navigate(['admin/inventory', this.productId]);
+  update(results: PolicyDocuments) {
+
+    const newPolicyDoc = { ...this.form.value } as PolicyDocuments;
+
+    const theDate = new Date();
+    
+
+    this.policyService.create(newPolicyDoc).then ( policy => {
+      this.policyId = policy.id;
+      newPolicyDoc.id = this.policyId;
+      this.policyService.update(newPolicyDoc);
+      this.route.navigate(['policy', this.policyId]);
     })
 
     this.close();
-  }
-
-  changeCategory(category: any) {
-    this.updated_category = category;
   }
 
   close() {

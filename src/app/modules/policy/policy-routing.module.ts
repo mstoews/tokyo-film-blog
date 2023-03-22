@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BlogResolver } from 'app/services/blog.resolver';
-import { PolicyEditComponent } from './policy-edit/policy-edit.component';
+import { PolicyResolver } from 'app/services/policy.resolver';
 import { PolicyComponent } from './policy.component';
+import { PolicyEditComponent } from './policy-edit/policy-edit.component';
 
 const routes: Routes = [
   {
@@ -14,9 +14,9 @@ const routes: Routes = [
   {
     path: 'policy-admin/:id',
     title: 'Policy',
-    component: PolicyComponent,
+    component: PolicyEditComponent,
     resolve: {
-      blog: BlogResolver,
+      policy: PolicyResolver,
     },
     data: { state: 'policy/:id' },
   },

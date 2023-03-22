@@ -19,6 +19,7 @@ export class AuthService {
   userData: any;
   userId: string;
   isAnonymous: boolean;
+  isAdminUser: boolean;
   email: string
   private userName: string;
 
@@ -48,6 +49,7 @@ export class AuthService {
     public router: Router,
     private snackBar: MatSnackBar
   ) {
+    this.isAdminUser = false;
     this.isLoggedIn$ = this.afAuth.authState.pipe(map((user: any) => !!user));
     this.isLoggedOut$ = this.afAuth.authState.pipe(map((loggedIn: any) => !!loggedIn));
     this.pictureUrl$ = this.afAuth.authState.pipe(map(user => user ? user.photoURL : null));
@@ -79,9 +81,14 @@ export class AuthService {
       }
     })
 
+    this.isAdmin().then( admin => {
+      this.isAdminUser = admin;
+      console.log('AuthService Admin? :', this.isAdminUser);
+    })
+
   }
 
-
+  
 
   getAuth(): Observable<boolean> {
     return this.isLoggedIn$;
@@ -176,7 +183,9 @@ export class AuthService {
 
   async isAdmin() {
     return (await this.afAuth.currentUser).getIdTokenResult().then((idTokenResult) => {
-      if (idTokenResult.claims.admin) { return true; }
+      if (idTokenResult.claims.admin) { 
+        return true; 
+      }
       else {
         return false;
       }

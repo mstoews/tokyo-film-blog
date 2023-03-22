@@ -39,10 +39,7 @@ export class PolicyComponent {
   allPolicies$: Observable<PolicyDocuments[]>;
 
   columnsToDisplay: string[] = [
-
-    'title',
     'description',
-
     'rich_description',
   ];
 
@@ -50,7 +47,7 @@ export class PolicyComponent {
 
   selectedItemKeys: any;
 
-  selection = new SelectionModel<PolicyDocuments>();
+  
 
 
   constructor(
@@ -90,7 +87,6 @@ export class PolicyComponent {
   }
 
   Refresh() {
-    this.sTitle = 'Blog Lists';
     this.allPolicies$ = this.policyService.getAll();
   }
 
@@ -107,17 +103,6 @@ export class PolicyComponent {
     data = this.policyGroup.getRawValue();
     this.policyService.delete(data.id.toString());
   }
-
-  public blogType = {
-    id: '',
-    title: '',
-    paragraph: '',
-    body: '',
-    conclusion: '',
-    user_updated: '',
-    date_created: '',
-    date_updated: '',
-  };
 
   valueChangedEvent(e: any) {
     // console.debug(`blog grid value changed ${e}`)

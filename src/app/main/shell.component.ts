@@ -48,11 +48,15 @@ export class ShellComponent implements OnInit {
     }
 
 
-  ngOnInit() {
+  async ngOnInit() {
        this.authService.getAuth().subscribe( res => {
         if (res === true)
         {
           this.isLoggedIn = true;
+
+          this.authService.isAdmin().then(admin => {
+            
+          })
 
           this.cartService.cartByStatus(this.authService.userData.uid ,'open').subscribe(cart => {
             this.cartCount = cart.length;

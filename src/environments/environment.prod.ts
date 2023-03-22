@@ -18,6 +18,6 @@ export const environment = {
     stripeDevUrl: "https://made-to-dev.df.r.appspot.com",
     createMessage: "https://made-to-cassie.df.r.appspot.com/api/createMessage",
     createUser: "https://made-to-cassie.df.r.appspot.com/api/createUser",
-    addAdminRole: "http://localhost:9000/api/addAdminRole",
+    addAdminRole: "https://made-to-cassie.df.r.appspot.com/api/addAdminRole",
   }
 };

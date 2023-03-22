@@ -17,6 +17,7 @@ import { PolicyDocuments } from 'app/models/policy-documents';
 export class PolicyEditComponent implements OnInit {
   sTitle: any;
   rich_description: string;
+  description : string;
   policyGroup: FormGroup;
   action: string;
   cRAG: string;
@@ -28,6 +29,7 @@ export class PolicyEditComponent implements OnInit {
   prd: any;
   sub: any;
   policyItem$: Observable<PolicyDocuments>;
+  policy: PolicyDocuments;
   
 
   constructor(
@@ -44,22 +46,18 @@ export class PolicyEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    var counter = 0;
-    this.sTitle = 'Policy Documents';
-    this.sub = this.activateRoute.params.subscribe((params) => {
-      const policy= this.policyService.findPolicyByUrl(params['id']);
-      if (policy) {
-        this.policyItem$ = policy;
-        this.policyId = params['id'];
-        this.policyItem$.subscribe((prd) => {
-          if (prd !== undefined) {
-            this.rich_description = prd.rich_description;
-            this.createForm(prd);
-          }
-        });
-      }
-    });
 
+    var id: string;
+    this.policy = this.activateRoute.snapshot.data["policy"];
+
+
+    if (this.policy) {
+      console.log('Policy : ', JSON.stringify(this.policy));
+      this.rich_description = this.policy.rich_description;
+      this.description = this.policy.description
+      this.createForm(this.policy);
+    }
+   
   }
 
   onDelete(data: PolicyDocuments) {
@@ -91,25 +89,16 @@ export class PolicyEditComponent implements OnInit {
     this.policyGroup = this.fb.group({
       id: [''],
       description: ['', Validators.required],
-      rich_description: ['', Validators.required],
-      user_updated: ['', Validators.required],
-      date_created: [new Date(), Validators.required],
-      date_updated: [new Date(), Validators.required],
       show_allowed: [true, Validators.requiredTrue]
     });
   }
 
   createForm(prd: PolicyDocuments) {
     this.sTitle = 'Inventory - ' + prd.description;
-
     this.policyGroup = this.fb.group({
       id: [prd.id],
       description: [prd.description],
-      rich_description: [prd.rich_description],
       show_allowed: [prd.show_allowed],
-      user_updated: [prd.user_updated],
-      date_created: [prd.date_created],
-      date_updated: [prd.date_updated],
     });
   }
 
