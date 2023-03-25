@@ -40,12 +40,14 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     // Create the form
+    let anonymousUser = this.authService.afAuth.currentUser;
 
     this.authService.afAuth.app.then( app => {
         const uiConfig = {
+            //autoUpgradeAnonymousUsers: true,
             signInOptions: [
                 EmailAuthProvider.PROVIDER_ID,
-                //GoogleAuthProvider.PROVIDER_ID,
+                // GoogleAuthProvider.PROVIDER_ID,
 
             ],
             callbacks: {
@@ -64,14 +66,15 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
   onLoginSuccess(result) {
     const user = this.authService.afAuth.currentUser;
     user.then(sendEmail => {
+      console.log('Verification mail ', sendEmail.emailVerified)
+      if (sendEmail.emailVerified == false) {
+         sendEmail.sendEmailVerification();
+      }
+
       this.router.navigate(['/home']);
     }).catch(error => {
       // console.log('Verification email not sent', error.message);
     }).finally();
-  }
-
-  signUpEmail(){
-    this.router.navigate(['/authentication/confirmation-required/modern']);
   }
 
   async signInEmail() {
@@ -82,6 +85,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
       this.router.navigate(this.redirect)
     } catch (e) {
       console.error(e)
+      console.log("tesst");
     }
   }
 

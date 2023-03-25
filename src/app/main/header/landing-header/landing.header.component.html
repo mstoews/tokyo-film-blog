@@ -1,7 +1,5 @@
-<nav class="relattive flex-auto">
-
-  <div class="flex flex-col sm:flex-row sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
-
+<nav class="relattive flex">
+  <div class="flex flex-row sm:flex-col sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
     <ng-container *ngIf="(userService.roles$ | async) as roles">
       <ng-container *ngIf="roles.admin">
         <div class="md:block hidden">
@@ -9,7 +7,7 @@
             class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl">
             <mat-icon [svgIcon]="'mat_outline:support'"></mat-icon>
           </a>
-          <div>{{headerEmail}}</div>
+          <div class="flex flex-col">{{headerEmail}}</div>
         </div>
       </ng-container>
     </ng-container>

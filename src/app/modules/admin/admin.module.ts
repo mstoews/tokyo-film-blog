@@ -42,6 +42,11 @@ import { ImageMenubarComponent } from './image-maintenance/image-menubar/image-m
 import { ImageListComponent } from "./image-list/image-list.component";
 import { SharedModule } from '../shared-module/shared.module';
 import { PolicyModule } from '../policy/policy.module';
+import { ContactListComponent } from './contact-list/contact-list.component';
+
+
+
+
 
 
 
@@ -70,9 +75,8 @@ import { PolicyModule } from '../policy/policy.module';
     InventoryPreviewComponent,
     ImageMenubarComponent,
     ImageListComponent,
- 
-
-  ],
+    ContactListComponent
+    ],
   imports: [
     AdminRouteModule,
     CommonModule,
