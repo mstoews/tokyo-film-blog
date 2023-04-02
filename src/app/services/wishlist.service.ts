@@ -237,6 +237,11 @@ export class WishListService {
     return wishListItems;
   }
 
+  wishCountByUserId(userId: string) {
+    const wishListItems = this.wishListByUserId(userId)
+    return wishListItems.length;
+  }
+
   update(mtProduct: WishList) {
     this.wishListCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }

@@ -33,7 +33,6 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
   ui: firebaseui.auth.AuthUI;
 
   constructor(
-    private _formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     public router: Router
   ) {}
@@ -59,7 +58,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
 
         this.ui.start("#firebaseui-auth-container", uiConfig);
 
-        // this.ui.disableAutoSignIn();
+        this.ui.disableAutoSignIn();
     });
   }
 
@@ -77,17 +76,17 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
     }).finally();
   }
 
-  async signInEmail() {
-    const { email, password } = this.signInForm.value
-    // console.debug(`email ${email} , ${password}`)
-    try {
-      const loggedIn = await this.authService.signIn(email, password)
-      this.router.navigate(this.redirect)
-    } catch (e) {
-      console.error(e)
-      console.log("tesst");
-    }
-  }
+  // async signInEmail() {
+  //   const { email, password } = this.signInForm.value
+  //   // console.debug(`email ${email} , ${password}`)
+  //   try {
+  //     const loggedIn = await this.authService.signIn(email, password)
+  //     this.router.navigate(this.redirect)
+  //   } catch (e) {
+  //     console.error(e)
+  //     console.log("tesst");
+  //   }
+  // }
 
   ngOnDestroy() {
     this.ui.delete();

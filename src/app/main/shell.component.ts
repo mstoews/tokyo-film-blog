@@ -113,7 +113,7 @@ export class ShellComponent implements OnInit {
 
   async logout() {
     this.loading = true;
-    await this.authService.signOut();
+    await this.authService.SignOut();
     this.loading = false;
   }
 

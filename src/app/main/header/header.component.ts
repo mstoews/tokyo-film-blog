@@ -82,6 +82,7 @@ export class HeaderComponent implements OnInit {
     });
 
     this.authService.afAuth.authState.subscribe((user) => {
+      if (user) {
       const userId = user.uid;
 
       let collection = this.afs.collection<ProfileModel>( `users/${userId}/profile` );
@@ -98,7 +99,10 @@ export class HeaderComponent implements OnInit {
           this.emailName = 'Guest';
           this.authService.setUserName(this.emailName);
          }
-      });
+        });
+        this.emailName = 'Guest';
+        this.authService.setUserName('');
+        }
     });
 
   }

@@ -13,6 +13,10 @@ import { ImageListService } from 'app/services/image-list.service';
   styleUrls: ['./fashion.component.css'],
 })
 export class FashionComponent implements OnInit {
+  onAdd() {
+    console.log('onAdd --- add a new comment');
+  }
+
   valueChangedEvent($event: Event) {
     throw new Error('Method not implemented.');
   }

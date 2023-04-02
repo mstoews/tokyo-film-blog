@@ -1,45 +1,57 @@
-import {Injectable} from "@angular/core";
-import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {Router} from "@angular/router";
-import {UserRoles} from "../../models/user-roles";
-import { AngularFireAuth } from "@angular/fire/compat/auth";
-
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { UserRoles } from '../../models/user-roles';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable({
-    providedIn: "root"
+  providedIn: 'root',
 })
 export class UserService {
+  isLoggedIn$: Observable<boolean>;
+  isLoggedOut$: Observable<boolean>;
+  pictureUrl$: Observable<string>;
+  uid$: Observable<string>;
+  roles$: Observable<UserRoles>;
 
-    isLoggedIn$ : Observable<boolean>;
+  constructor(private afAuth: AngularFireAuth, private router: Router) {
+    this.isLoggedIn$ = afAuth.authState.pipe(map((user) => !!user));
 
-    isLoggedOut$: Observable<boolean>;
+    this.isLoggedOut$ = this.isLoggedIn$.pipe(map((loggedIn) => !loggedIn));
 
-    pictureUrl$: Observable<string>;
+    this.pictureUrl$ = afAuth.authState.pipe(
+      map((user) => (user ? user.photoURL : null))
+    );
 
-    roles$ : Observable<UserRoles>;
+    this.roles$ = this.afAuth.idTokenResult.pipe(
+      map((token) => <any>token?.claims ?? { admin: false })
+    );
+  }
 
-    constructor(
-        private afAuth: AngularFireAuth,
-        private router: Router) {
+  async getUserId() : Promise<any> {
+    return (await this.afAuth.currentUser).uid;
+  }
 
-        this.isLoggedIn$ = afAuth.authState.pipe(map(user => !!user));
+  async getUserEmail(): Promise<any> {
+    let email: string;
+    this.afAuth.currentUser.then((user) => {
+      if (user !== null || user !== undefined) {
+        if (user) {
+          email = user.email;
+        }
+      } else {
+        email = '';
+      }
+    });
+    return email;
+  }
 
-        this.isLoggedOut$ = this.isLoggedIn$.pipe(map(loggedIn => !loggedIn));
-
-        this.pictureUrl$ =
-            afAuth.authState.pipe(map(user => user? user.photoURL : null));
-
-        this.roles$ = this.afAuth.idTokenResult
-            .pipe(
-                map(token => <any>token?.claims ?? {admin:false})
-            )
-
-    }
-
-
-    logout() {
-        this.afAuth.signOut();
-        this.router.navigateByUrl('/login');
-    }
+  logout() {
+    this.afAuth.signOut();
+    this.router.navigateByUrl('/login');
+  }
+}
+function of(email: string): any {
+  throw new Error('Function not implemented.');
 }

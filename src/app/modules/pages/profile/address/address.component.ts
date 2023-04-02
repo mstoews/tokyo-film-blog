@@ -6,7 +6,10 @@ import { MaterialModule } from '../../../../material.module';
 import { ProfileService } from 'app/services/profile.service';
 import { AuthService } from '../../../../services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import { UserService } from 'app/services/auth/user.service';
 
 @Component({
@@ -19,6 +22,9 @@ export class AddressComponent implements OnInit {
   profile: ProfileModel;
   profile$: Observable<ProfileModel[]>;
   formGroup: FormGroup;
+  profileExists: boolean;
+  private profileCollection: AngularFirestoreCollection<ProfileModel>;
+  private profileItems: Observable<ProfileModel[]>;
 
   updateBtnState: boolean = false;
   userId: string;
@@ -32,6 +38,11 @@ export class AddressComponent implements OnInit {
     public profileService: ProfileService,
     public snack: MatSnackBar
   ) {
+    this.profileCollection = afs.collection<ProfileModel>(
+      `users/${this.authService.userId}/profile`
+    );
+    this.profileItems = this.profileCollection.valueChanges({ idField: 'id' });
+
     const theDate = new Date();
     const address: ProfileModel = {
       id: '',
@@ -54,49 +65,79 @@ export class AddressComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.profileExists = false;
     this.authService.afAuth.authState.subscribe((user) => {
+      
       this.userId = user?.uid;
       this.email = user?.email;
+     
+        let collection = this.afs.collection<ProfileModel>(
+          `users/${this.userId}/profile`
+        );
+        const profiles = collection.valueChanges({ idField: 'id' });
 
-      let collection = this.afs.collection<ProfileModel>(
-        `users/${this.userId}/profile`
-      );
-      const profiles = collection.valueChanges({ idField: 'id' });
+        console.debug('ngOnInit', this.userId);
 
-      console.debug('ngOnInit', this.userId);
+        // return only the first element of document which constains the only profile for the user ID if it exists.
 
-      // return only the first element of document which constains the only profile for the user ID if it exists.
+        profiles.pipe(first()).subscribe((ref) => {
+          if (ref.length > 0) {
+            this.profileExists = true;
+            console.log('The profile exists for this user!');
+            ref.forEach((mr) => {
+              console.debug(mr);
+              this.profileId = mr.id;
+              this.createForm(mr);
+            });
+          }
+        });
+      }
+    );
 
-      profiles.pipe(first()).subscribe((ref) => {
-        if (ref.length > 0)
-          ref.forEach((mr) => {
-            console.debug(mr);
-            this.profileId = mr.id;
-            this.createForm(mr);
-          });
-      });
-    });
   }
 
   onUpdateProfile() {
     let data = this.formGroup.getRawValue();
     this.updateBtnState = true;
-    // console.log('update address data: ', JSON.stringify(data));
-    this.authService.afAuth.currentUser
-      .then((user) => {
-        // console.log('User uid from address: ', user.uid);
-        const collectionRef = this.afs.collection(
-          `users/${this.userId}/profile/`
-        );
-        collectionRef.add(data);
-        this.snack.open('Profile has been added ...', 'OK', { duration: 3000 });
-      })
-      .then(() => {
-        // console.log('Document successfully written!');
-      })
-      .catch((error) => {
-        console.error('Error writing document: ', error);
-      });
+
+    if (this.profileExists === false) {
+      this.authService.afAuth.currentUser
+        .then((user) => {
+          //const collectionRef = this.afs.collection(`users/${user.uid}/profile/`);
+          this.profileCollection
+            .add(data)
+            .then((newProfile) => {
+              data.id = newProfile.id;
+              this.profileCollection.doc(data.id).update(data);
+            })
+            .catch()
+            .finally();
+          this.snack.open('Profile has been added ...', 'OK', {
+            duration: 3000,
+          });
+        })
+        .then()
+        .catch((error) => {
+          console.error('Error writing document: ', error);
+        });
+    } else {
+      this.authService.afAuth.currentUser
+        .then((user) => {
+          const collectionRef = this.afs.collection(
+            `users/${user.uid}/profile/`
+          );
+          collectionRef.doc(data.id).update(data);
+          this.snack.open('Profile has been updated ...', 'OK', {
+            duration: 3000,
+          });
+        })
+        .then(() => {
+          // console.log('Document successfully written!');
+        })
+        .catch((error) => {
+          console.error('Error writing document: ', error);
+        });
+    }
 
     this.updateBtnState = false;
   }
@@ -119,9 +160,4 @@ export class AddressComponent implements OnInit {
       userId: this.userId,
     });
   }
-}
-function pipe(
-  arg0: OperatorFunction<unknown, void>
-): Partial<import('rxjs').Observer<(ProfileModel & { id: string })[]>> {
-  throw new Error('Function not implemented.');
 }

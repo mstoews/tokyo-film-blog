@@ -29,7 +29,6 @@ export class BlogService {
     this.blogCollection = afs.collection<Blog>('blog');
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
-    this.blogCollection = afs.collection<Blog>('blog');
   }
 
   createComment(comment: Comments) {

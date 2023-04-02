@@ -8,7 +8,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
-import { BehaviorSubject, first, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, of, Subject } from 'rxjs';
 import { Cart } from 'app/models/cart';
 import { Product } from 'app/models/products';
 import { convertSnaps } from './db-utils';
@@ -105,6 +105,14 @@ export class CartService {
         });
       })
     );
+  }
+
+  cartCountByUserId(userId: string): any
+  {
+    const cartCount = this.cartByStatus(userId,'Open');
+    cartCount.subscribe(cart => {
+       return of(cart.length);
+    });
   }
 
   findCartByUrl(id: string): Observable<Cart | undefined> {

@@ -27,27 +27,29 @@ export class ProfileService {
     public authService: AuthService,
     private snack: MatSnackBar
   ) {
-    this.profileCollection = afs.collection<ProfileModel>(
-      `users/${this.userId}/profile`
-    );
-    this.profileItems = this.profileCollection.valueChanges({ idField: 'id' });
-
     this.auth.user.subscribe((user) => {
       if (user !== null) {
         this.userId = user.uid;
         // console.log('User id from profile service is : ', this.userId);
+
+        this.profileCollection = afs.collection<ProfileModel>(
+          `users/${this.userId}/profile`
+        );
+        this.profileItems = this.profileCollection.valueChanges({
+          idField: 'id',
+        });
       }
     });
 
-    this.authService
-      .getUserId()
-      .then((user) => {
-        this.userId = user;
-        console.debug('User ID from promise', this.userId);
-      })
-      .catch((e) => {
-        console.error(e.message); // error caught ...
-      });
+    // this.authService
+    //   .getUserId()
+    //   .then((user) => {
+    //     this.userId = user;
+    //     console.debug('User ID from promise', this.userId);
+    //   })
+    //   .catch((e) => {
+    //     console.error(e.message); // error caught ...
+    //   });
   }
 
   getAll() {
@@ -56,8 +58,9 @@ export class ProfileService {
   }
 
   update(userId: string, profile: ProfileModel) {
-    const profileCollection = this.afs.collection<ProfileModel>( `users/${userId}/profile` );
-
+    const profileCollection = this.afs.collection<ProfileModel>(
+      `users/${userId}/profile`
+    );
 
     profileCollection
       .doc(profile.id)
@@ -91,7 +94,9 @@ export class ProfileService {
         );
       })
       .catch((error) => {
-        this.snack.open('Error adding new profile definition ... ', 'Error', { duration: 3000 });
+        this.snack.open('Error adding new profile definition ... ', 'Error', {
+          duration: 3000,
+        });
       })
       .finally();
   }
