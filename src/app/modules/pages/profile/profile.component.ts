@@ -11,7 +11,6 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.prod';
 import { catchError, first, throwError } from 'rxjs';
-import { ProfileModel } from 'app/models/profile';
 import { UserService } from 'app/services/auth/user.service';
 
 @Component({
@@ -84,35 +83,21 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    let currentUser: any;
-    this.authService.isRegistered = true;
-
-   // this.addUserByFunction();
-
-   this.userService.isLoggedIn$.subscribe((user) => {
-    this.loggedIn = user;
-   });
-    
-    // this.afAuth.currentUser
-    //   .then((user) => {
-    //     if (user !== null || user !== undefined) {
-    //       if (user.isAnonymous !== null) {
-    //         if (user.isAnonymous === true) {
-    //           this.authService.isRegistered = true;
-    //            console.log(
-    //             `this user : ${this.userId} is registered ? : ${this.authService.isRegistered}`
-    //           );
-    //         }
-    //       }
-    //       else {
-    //         this.authService.isRegistered = false;
-    //       }
-    //       // this.updateProfile(user.uid);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log('unable to get correct user ');
-    //   });
+    this.loggedIn = false;
+    this.afAuth.currentUser
+      .then((user) => {
+        if (user !== null) {
+              this.loggedIn = true;
+              console.log(
+                `this user : ${this.userId} is registered ? : ${this.loggedIn}`); 
+          }
+          else {
+           this.loggedIn = false;
+          }
+        }
+      ).catch((error) => {
+        console.log('unable to get correct user ');
+      });
   }
 
   backToHome() {

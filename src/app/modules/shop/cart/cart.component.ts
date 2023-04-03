@@ -49,10 +49,6 @@ export class CartComponent implements OnInit, OnDestroy {
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
-      const userEmail = user?.email
-      if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
-        this.admin_login = true;
-      }
     });
   }
 
