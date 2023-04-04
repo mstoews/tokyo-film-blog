@@ -37,9 +37,15 @@ export class CommentsListComponent implements OnInit {
     return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
   }
 
+  deleteComment(blog_id: string , comment_id: string){
+    this.blogService.deleteComment(
+      blog_id,
+      comment_id,
+    );
+  }
+
   createReply(blog_id: string, comment_id: string) {
     
-
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false; // closes when you tap outside the dialog box
       dialogConfig.autoFocus = true; //

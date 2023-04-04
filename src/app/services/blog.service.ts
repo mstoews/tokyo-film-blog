@@ -54,6 +54,12 @@ export class BlogService {
     collectionRef.doc(commentId).update(comment);
   }
 
+  deleteComment(blog_id: string, comment_id: string) {
+    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('created_date', 'desc'));
+    collectionRef.doc(comment_id).delete();
+  }
+
+
   updateComment(comment: Comments) {
     const collectionRef = this.afs.collection(`blog/${comment.blog_id}/comment/`);
     collectionRef.doc(comment.id).update(comment);

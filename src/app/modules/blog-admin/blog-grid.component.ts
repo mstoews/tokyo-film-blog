@@ -52,7 +52,7 @@ export class BlogAdminComponent implements OnInit {
     'title',
     'paragraph',
     // 'body',
-    'conclusion',
+    //'conclusion',
   ];
 
   blog: Blog;

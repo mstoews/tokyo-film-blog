@@ -33,28 +33,19 @@
           <td mat-cell *matCellDef="let element">
             <p class="align-text-top w-250 h-30" [innerHTML]="element.body | safe : 'html'"></p>
           </td>
-        </ng-container> -->
+        </ng-container>
 
         <ng-container matColumnDef="conclusion">
           <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
             *matHeaderCellDef>
             Conclusion
           </th>
-          <td mat-cell *matCellDef="let element" class="align-text-top h-20"
+          <td mat-cell *matCellDef="let element" class="h-30 align-text-top"
             [innerHTML]="element.conclusion | safe : 'html'"></td>
-        </ng-container>
-
-        <ng-container matColumnDef="selection">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
-            *matHeaderCellDef>
-            Edit
-          </th>
-          <!-- <td mat-cell *matCellDef="let element">
-            <mat-checkbox (change)="onBlogToggle(blog)">
-
-            </mat-checkbox>
-          </td> -->
-        </ng-container>
+            <td mat-cell *matCellDef="let element" class="h-30 align-text-top" >
+              <p>{{ element.conclusion }}</p>
+          </td>
+        </ng-container> -->
 
         <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr class="m-1 hover:bg-gray-100" mat-row *matRowDef="let row; columns: columnsToDisplay"  (click)="onOpenRow(row)"></tr>

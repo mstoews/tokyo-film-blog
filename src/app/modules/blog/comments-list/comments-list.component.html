@@ -23,8 +23,13 @@
             <button 
               mat-button 
               (click)="createReply(comment.blog_id, comment.id)"
-              class="text-gray-200 bg-blue-600 hover:bg-blue-800 hover:text-white"
+              class="text-gray-200 bg-blue-600 hover:bg-blue-800 hover:text-white m-2"
             >REPLY</button>
+            <button 
+            mat-button 
+            (click)="deleteComment(comment.blog_id, comment.id)"
+            class="text-gray-200 bg-red-600 hover:bg-red-800 hover:text-white"
+          >DELETE</button>
           </ng-container>
         </ng-container>
       </div>
