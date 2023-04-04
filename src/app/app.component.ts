@@ -56,21 +56,10 @@ export class AppComponent implements OnInit {
 
     this.isLoggedOut$ = this.afAuth.authState.pipe(map(loggedIn => !loggedIn));
 
-    // this.isLoggedOut$.subscribe((loggedOut) => {
-    //   if (loggedOut === true) {
-    //     this.authService.loginAnonymously().then(login => {
-    //       loggedOut = false;
-    //     })
-    //       .catch((error) => {
-    //         let errorMessage = error.message;
-    //         this.snackBar.open(`Failed to login anonymously: ${errorMessage}`, 'Error', { duration: 3000 });
-    //       });
-    //   }
-    // });
 
   }
 
-  title = 'Condo-Mgmt';
+  title = 'Made-To';
   getState(outlet: any) {
     return outlet.activatedRouteData.state;
   }

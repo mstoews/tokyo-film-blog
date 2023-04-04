@@ -9,10 +9,11 @@ export const environment = {
     messagingSenderId: '819679326368',
     measurementId: 'G-WGMMJK9NR3',
   },
-  production: false,
+  production: true,
   useEmulators: false,
   gtm_id: "G-WGMMJK9NR3",
   api: {
+    
     prdUrl: "https://made-to-cassie.df.r.appspot.com",
     baseUrl:  "http://localhost:9000",
     stripeDevUrl: "https://made-to-dev.df.r.appspot.com",

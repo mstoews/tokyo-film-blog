@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { MatDialog } from '@angular/material/dialog';
@@ -13,27 +13,26 @@ import { PolicyDocuments } from 'app/models/policy-documents';
   selector: 'app-product-edit',
   templateUrl: './policy-edit.component.html',
   styleUrls: ['./policy-edit.component.css'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class PolicyEditComponent implements OnInit {
   sTitle: any;
   rich_description: string;
+  readonly_rich_description: string;
   description : string;
   policyGroup: FormGroup;
-  action: string;
-  cRAG: string;
-  cType: string;
-  currentDate: Date;
+ 
+
+
   policyId: string;
   selectedItemKeys: string;
   allPolicyDocuments$: Observable<PolicyDocuments>;
-  prd: any;
-  sub: any;
+ 
   policyItem$: Observable<PolicyDocuments>;
   policy: PolicyDocuments;
   
 
   constructor(
-    private matDialog: MatDialog,
     private activateRoute: ActivatedRoute,
     private route: Router,
     private _location: Location,
@@ -50,10 +49,9 @@ export class PolicyEditComponent implements OnInit {
     var id: string;
     this.policy = this.activateRoute.snapshot.data["policy"];
 
-
     if (this.policy) {
-      // console.log('Policy : ', JSON.stringify(this.policy));
       this.rich_description = this.policy.rich_description;
+      this.readonly_rich_description = this.policy.rich_description;
       this.description = this.policy.description
       this.createForm(this.policy);
     }
@@ -72,6 +70,7 @@ export class PolicyEditComponent implements OnInit {
     console.debug('PolicyDocuments can be sold ...: ', policy.show_allowed);
     const dDate = new Date();
     policy.rich_description = this.rich_description;
+    this.readonly_rich_description = this.rich_description;
     const updateDate = dDate.toISOString().split('T')[0];
     this.policyService.update(policy);
   }
@@ -94,7 +93,7 @@ export class PolicyEditComponent implements OnInit {
   }
 
   createForm(prd: PolicyDocuments) {
-    this.sTitle = 'Inventory - ' + prd.description;
+    this.sTitle = 'Policy - ' + prd.description;
     this.policyGroup = this.fb.group({
       id: [prd.id],
       description: [prd.description],

@@ -103,7 +103,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   existsInWishList(): boolean {
     let found = this.wishListIds.find((item) => {
-      item === this.productId;
+      return item === this.productId;
     });
     if (found) {
       this.snackBar.open(
@@ -118,7 +118,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   existsInCart(): boolean {
     let found = this.productIds.find((item) => {
-      item === this.productId;
+      return item === this.productId;
     });
     if (found) {
       this.snackBar.open('The item already exists in your cart ... ', 'OK', {
@@ -179,13 +179,6 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       });
       return;
     }
-    // } else {
-    //   this.snackBar.open('You must be logged in access the cart', 'OK', {
-    //     duration: 3000,
-    //   });
-    //   this.snackBar._openedSnackBarRef!.onAction().subscribe();
-    // }
-    // this.route.navigate(['shop/coming-soon']);
   }
 
   ngOnDestroy() {

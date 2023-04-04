@@ -1,10 +1,13 @@
 <div class="mt-10">
 <h2 class="text-gray-500" >Comments</h2>
+
 <div *ngIf="Comments$ | async as comments">
   <div class="grid grid-cols-1 gap-4 sm:grid-cols-3">
     <div *ngFor="let comment of comments">
-      <mat-card (click)="createReply(comment.blog_id, comment.id)"
+      <mat-card 
+     
         class="relative flex items-left space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:border-gray-400">
+       
         <div class="min-w-0 flex-1">
             <p class="text-sm font-medium text-gray-600">{{comment.name}}</p>
             <p class="text-sm text-gray-500">{{comment.message}}</p>
@@ -14,6 +17,15 @@
           <p class="text-sm font-medium text-gray-600">Reply from Made To Cassie</p>
           <p class="text-sm text-gray-500">{{comment.reply}}</p>
           <p class="text-sm font-medium text-gray-600 text-right">{{comment.reply_date | date}}</p>
+        </ng-container>
+         <ng-container *ngIf="(userService.roles$ | async) as roles">
+          <ng-container *ngIf="roles.admin">
+            <button 
+              mat-button 
+              (click)="createReply(comment.blog_id, comment.id)"
+              class="text-gray-200 bg-blue-600 hover:bg-blue-800 hover:text-white"
+            >REPLY</button>
+          </ng-container>
         </ng-container>
       </div>
       </mat-card>

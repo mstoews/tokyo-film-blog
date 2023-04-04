@@ -7,6 +7,7 @@ import { Category } from 'app/models/category'
 import { Observable, Subscription } from 'rxjs'
 import { AuthService } from 'app/services/auth/auth.service'
 import { CartService } from 'app/services/cart.service'
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'shop-card',
@@ -33,6 +34,8 @@ export class ShopCardComponent implements OnInit {
     private cartService: CartService,
     private wishlistService: WishListService,
     private userService: UserService,
+    private route: Router,
+    private snackBar: MatSnackBar,
     private wishList: WishListService) {}
 
   ngOnInit(): void {
@@ -65,17 +68,86 @@ export class ShopCardComponent implements OnInit {
   }
 
   addToCart() {
-    this.userService.isLoggedIn$.subscribe( user => {
-      if (user === true)
-      {
-        this.wishList.addToCart(this.product.id);
-      }
-      else {
-        this.router.navigate(['/profile']);
-      }
-    })
+    // this.userService.isLoggedIn$.subscribe( user => {
+    //   if (user === true)
+    //   {
+    //     this.wishList.addToCart(this.product.id);
+    //   }
+    //   else {
+    //     this.router.navigate(['/profile']);
+    //   }
+    // })
+    this.onAddToShoppingCart();
    
   }
+
+  existsInWishList(): boolean {
+    let found = this.wishListIds.find((item) => {
+      return item === this.productId;
+    });
+    if (found) {
+      this.snackBar.open(
+        'The item already exists in your wishlist ... ',
+        'OK',
+        { duration: 3000 }
+      );
+      return true;
+    }
+    return false;
+  }
+
+  existsInCart(): boolean {
+    let found = this.productIds.find((item) => {
+      return item === this.productId;
+    });
+    if (found) {
+      this.snackBar.open('The item already exists in your cart ... ', 'OK', {
+        duration: 3000,
+      });
+      return true;
+    }
+    return false;
+  }
+
+  onAddToWishList() {
+    let inWishList: Boolean;
+    let inCart: Boolean;
+
+    this.userService.isLoggedIn$.subscribe((user) => {
+      this.loggedIn = user;
+      if (this.loggedIn === true) {
+        inWishList = this.existsInWishList();
+        if (inWishList === false) {
+          inCart = this.existsInCart();
+        }
+        if (inCart === false) {
+          this.wishlistService.createWishList(this.productId);
+          this.wishListIds.push(this.productId);
+        }
+      } else {
+        this.route.navigate(['/profile']);
+      }
+    });
+  }
+
+  onAddToShoppingCart() {
+    let inCart: Boolean;
+    this.userService.isLoggedIn$.subscribe((user) => {
+      this.loggedIn = user;
+      if (this.loggedIn === true) {
+        inCart = this.existsInCart();
+        if (inCart === false) {
+          this.wishlistService.addToCart(this.productId);
+          this.productIds.push(this.productId);
+        }
+      } else {
+        this.route.navigate(['/profile']);
+      }
+    });
+  }
+
+
+
   addToWishlist() {
     this.wishList.createWishList(this.product.id);
     }
