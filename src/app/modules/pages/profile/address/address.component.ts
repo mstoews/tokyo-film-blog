@@ -67,7 +67,7 @@ export class AddressComponent implements OnInit {
   ngOnInit() {
     this.profileExists = false;
     this.authService.afAuth.authState.subscribe((user) => {
-      
+
       this.userId = user?.uid;
       this.email = user?.email;
      
@@ -82,10 +82,9 @@ export class AddressComponent implements OnInit {
 
         profiles.pipe(first()).subscribe((ref) => {
           if (ref.length > 0) {
-            this.profileExists = true;
+              this.profileExists = true;
             console.log('The profile exists for this user!');
             ref.forEach((mr) => {
-              console.debug(mr);
               this.profileId = mr.id;
               this.createForm(mr);
             });
@@ -112,7 +111,7 @@ export class AddressComponent implements OnInit {
             })
             .catch()
             .finally();
-          this.snack.open('Profile has been added ...', 'OK', {
+          this.snack.open('Profile has been add ...', 'OK', {
             duration: 3000,
           });
         })
@@ -126,7 +125,8 @@ export class AddressComponent implements OnInit {
           const collectionRef = this.afs.collection(
             `users/${user.uid}/profile/`
           );
-          collectionRef.doc(data.id).update(data);
+          data.id = this.profileId;
+          collectionRef.doc(this.profileId).update(data);
           this.snack.open('Profile has been updated ...', 'OK', {
             duration: 3000,
           });

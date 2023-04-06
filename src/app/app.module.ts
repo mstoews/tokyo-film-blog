@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,12 +25,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth/auth.interceptor';
 import { CartResolver } from './services/cart.resolver';
 import { WishListResolver } from './services/wishlist.resolver';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 
 // import { environment } from '../environments/dev';
 
 import { environment} from '../environments/environment.prod';
 import { HeadingModule } from './main/header/heading.module';
+
 
 
 
@@ -52,6 +54,7 @@ import { HeadingModule } from './main/header/heading.module';
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
     AngularFireModule.initializeApp(environment.firebase),
+    NgxSpinnerModule,
   ],
   providers: [
     ScrollService,
@@ -60,13 +63,17 @@ import { HeadingModule } from './main/header/heading.module';
     CartResolver,
     WishListResolver,
     BlogResolver,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
     },
-    {provide: 'googleTagManagerId', useValue: environment.gtm_id}
+   
+    {provide: 'googleTagManagerId', useValue: environment.gtm_id},
+   
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

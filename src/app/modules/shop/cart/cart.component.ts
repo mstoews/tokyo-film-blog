@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Cart } from 'app/models/cart';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from "../../../services/auth/auth.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 interface profile {
   email: string;
@@ -45,7 +46,9 @@ export class CartComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
     private cartService: CartService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private ngxSpinner: NgxSpinnerService,
+  
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
@@ -54,6 +57,9 @@ export class CartComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
+    
+
     this.userId = this.activateRoute.snapshot.params.id;
     this.cart$ = this.cartService.cartByStatus(this.userId, 'open');
 
@@ -65,6 +71,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckOut() {
     // this.calculateTotals();
+
+    this.ngxSpinner.show().then(()=> {
+      setTimeout(()=> {
+        this.ngxSpinner.hide();
+      }, 3000)}
+    );
+   
     if (this.userId !== undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
@@ -74,9 +87,11 @@ export class CartComponent implements OnInit, OnDestroy {
           });
         this.purchaseStarted = false;
       } else {
-        this.snack.open('Unable to reach the payment server. Please try again in a moment.','Payment Failed');
         this.purchaseStarted = false;
+        this.route.navigate(['profile'])    
       }
+     
+      
   }
 
   calculateTotals() {

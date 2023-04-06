@@ -21,6 +21,7 @@ import { PurchaseThanksComponent } from './thanks/purchase-thanks';
 import { CheckoutComponent } from './checkout.component';
 import { AddressComponent } from '../pages/profile/address/address.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const routes: Routes = [
   {
@@ -111,7 +112,8 @@ const routes: Routes = [
     SharedModule,
     NotificationComponent,
     RouterModule.forChild(routes),
-    AddressComponent
+    AddressComponent,
+    NgxSpinnerModule
   ]
 })
 export class ShopModule { }

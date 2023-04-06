@@ -83,7 +83,7 @@ export class BlogService {
   }
 
   getAllPublishedBlog() {
-    return this.blogItems;
+    return this.blogItems.pipe( map((blogs) => blogs.filter((pub) => pub.published === true)));
   }
 
   getAll(): any {
