@@ -83,7 +83,7 @@ export class AddressComponent implements OnInit {
         profiles.pipe(first()).subscribe((ref) => {
           if (ref.length > 0) {
               this.profileExists = true;
-            console.log('The profile exists for this user!');
+            // console.log('The profile exists for this user!');
             ref.forEach((mr) => {
               this.profileId = mr.id;
               this.createForm(mr);

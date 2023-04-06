@@ -129,6 +129,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     return false;
   }
 
+ 
   onAddToWishList() {
     let inWishList: Boolean;
     let inCart: Boolean;

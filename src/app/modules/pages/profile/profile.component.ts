@@ -88,15 +88,14 @@ export class ProfileComponent implements OnInit {
       .then((user) => {
         if (user !== null) {
               this.loggedIn = true;
-              console.log(
-                `this user : ${this.userId} is registered ? : ${this.loggedIn}`); 
+              // console.log( `this user : ${this.userId} is registered ? : ${this.loggedIn}`); 
           }
           else {
            this.loggedIn = false;
           }
         }
       ).catch((error) => {
-        console.log('unable to get correct user ');
+        // console.log('unable to get correct user ');
       });
   }
 
@@ -105,6 +104,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(userId: string) {
-    console.log('updateProfile', userId);
+   // console.log('updateProfile', userId);
   }
 }

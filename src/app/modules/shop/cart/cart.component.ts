@@ -71,13 +71,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckOut() {
     // this.calculateTotals();
-
+    this.route.navigate(['coming-soon']);
     this.ngxSpinner.show().then(()=> {
       setTimeout(()=> {
         this.ngxSpinner.hide();
-      }, 3000)}
+      }, 4000)}
     );
-   
+    
     if (this.userId !== undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
@@ -85,6 +85,7 @@ export class CartComponent implements OnInit, OnDestroy {
           .subscribe((checkoutSession) => {
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
+       
         this.purchaseStarted = false;
       } else {
         this.purchaseStarted = false;

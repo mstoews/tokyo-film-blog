@@ -34,7 +34,7 @@ export class ContactListComponent implements OnInit {
   onRefresh() {
     this.allContact$ = this.contactService.getAll();
     this.allContact$.subscribe((contact) => {
-      console.log(JSON.stringify(contact));
+      // console.log(JSON.stringify(contact));
     });
   }
 

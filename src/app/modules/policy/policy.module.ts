@@ -10,6 +10,8 @@ import { DxHtmlEditorModule } from 'devextreme-angular';
 import { SharedModule } from '../shared-module/shared.module';
 import { PolicyRoutingModule } from './policy-routing.module';
 import { FuseCardModule } from '@fuse/components/card';
+import { TosComponent } from './tos/tos.component';
+import { DataComponent } from './data/data.component';
 
 
 
@@ -34,7 +36,7 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [...declarations],
+  declarations: [...declarations, TosComponent, DataComponent],
   imports: [
     ...modules
   ]

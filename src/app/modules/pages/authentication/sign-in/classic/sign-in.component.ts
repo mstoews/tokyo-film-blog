@@ -72,7 +72,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
 
       this.router.navigate(['/home']);
     }).catch(error => {
-      // console.log('Verification email not sent', error.message);
+       console.log('Verification email not sent', error.message);
     }).finally();
   }
 

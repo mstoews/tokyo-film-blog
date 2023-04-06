@@ -14,7 +14,7 @@ import { ImageListService } from 'app/services/image-list.service';
 })
 export class FashionComponent implements OnInit {
   onAdd() {
-    console.log('onAdd --- add a new comment');
+   // console.log('onAdd --- add a new comment');
   }
 
   valueChangedEvent($event: Event) {

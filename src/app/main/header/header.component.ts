@@ -19,10 +19,12 @@ import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ProfileService } from 'app/services/profile.service';
-import { observable, map, Observable, first } from 'rxjs';
 import { ProfileModel } from 'app/models/profile';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserService } from 'app/services/auth/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable, first } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -40,7 +42,8 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService,
     private wishListService: WishListService,
     private profile: ProfileService,
-    private afs: AngularFirestore
+    private afs: AngularFirestore,
+    private snackBar: MatSnackBar
   ) {
     this.title = 'Add Title as Parameter in the Template';
     menuToggle.setDrawerState(false);
@@ -145,10 +148,28 @@ export class HeaderComponent implements OnInit {
   doAnimate() {}
 
   openShoppingCart() {
+    if (this.authService.isLoggedIn === false){
+      this.snackBar.open('Please sign in to access the cart', 'Ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: 'bg-danger',
+        duration: 3000,
+      });
+      this._router.navigate(['profile']);
+    }
     this._router.navigate(['shop/cart', this.authService.userData.uid]);
   }
 
   openWishList() {
+    if (this.authService.isLoggedIn === false){
+      this.snackBar.open('Please sign in to access the wish list', 'Ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: 'bg-danger',
+        duration: 3000,
+      });
+      this._router.navigate(['profile']);
+    }
     this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
   }
 }
