@@ -148,7 +148,9 @@ export class HeaderComponent implements OnInit {
   doAnimate() {}
 
   openShoppingCart() {
-    if (this.authService.isLoggedIn === false){
+    this.userService.isLoggedIn$.subscribe(user => {
+      if( user === false)
+      {
       this.snackBar.open('Please sign in to access the cart', 'Ok', {
         verticalPosition: 'top',
         horizontalPosition: 'center',
@@ -156,12 +158,17 @@ export class HeaderComponent implements OnInit {
         duration: 3000,
       });
       this._router.navigate(['profile']);
-    }
-    this._router.navigate(['shop/cart', this.authService.userData.uid]);
+     } else {
+      this._router.navigate(['shop/cart', this.authService.userData.uid]);
+      }
+    });
+  
   }
 
   openWishList() {
-    if (this.authService.isLoggedIn === false){
+    this.userService.isLoggedIn$.subscribe(user => {
+      if( user === false)
+      {
       this.snackBar.open('Please sign in to access the wish list', 'Ok', {
         verticalPosition: 'top',
         horizontalPosition: 'center',
@@ -169,7 +176,9 @@ export class HeaderComponent implements OnInit {
         duration: 3000,
       });
       this._router.navigate(['profile']);
-    }
-    this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
+     } else {
+      this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
+      }
+    });
   }
 }

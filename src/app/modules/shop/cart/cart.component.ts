@@ -71,7 +71,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckOut() {
     // this.calculateTotals();
-    this.route.navigate(['coming-soon']);
+    this.route.navigate(['shop/coming-soon']);
     this.ngxSpinner.show().then(()=> {
       setTimeout(()=> {
         this.ngxSpinner.hide();
@@ -89,7 +89,7 @@ export class CartComponent implements OnInit, OnDestroy {
         this.purchaseStarted = false;
       } else {
         this.purchaseStarted = false;
-        this.route.navigate(['profile'])    
+        this.route.navigate(['profile']); 
       }
      
       

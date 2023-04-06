@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth/auth.service';
 import { UserService } from 'app/services/auth/user.service';
@@ -11,6 +12,7 @@ export class SideNavComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public userService: UserService,
+    public snackBar: MatSnackBar,
     private route: Router,
     public user: UserService
   ) {
@@ -48,14 +50,40 @@ export class SideNavComponent implements OnInit {
   }
 
   onWishList() {
-    this.route.navigate(['/shop/wishlist/', this.userId]);
-    this.notifyParentCloseDrawer.emit();
+    this.userService.isLoggedIn$.subscribe(user => {
+      if( user === false)
+      {
+      this.snackBar.open('Please sign in to access the wish list', 'Ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: 'bg-danger',
+        duration: 3000,
+      });
+      this.route.navigate(['profile']);
+     } else {
+      this.route.navigate(['/shop/wishlist/', this.userId]);
+      this.notifyParentCloseDrawer.emit();
+      }
+    });
   }
 
   onCart() {
-    // }
-    this.route.navigate(['/shop/cart/', this.userId]);
-    this.notifyParentCloseDrawer.emit();
+    this.userService.isLoggedIn$.subscribe(user => {
+      if( user === false)
+      {
+      this.snackBar.open('Please sign in to access the cart', 'Ok', {
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: 'bg-danger',
+        duration: 3000,
+      });
+      this.route.navigate(['profile']);
+     } else {
+      this.route.navigate(['/shop/cart/', this.userId]);
+      this.notifyParentCloseDrawer.emit();
+      }
+    });
+   
   }
 
   onClose() {
