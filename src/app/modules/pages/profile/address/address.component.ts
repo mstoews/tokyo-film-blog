@@ -67,32 +67,29 @@ export class AddressComponent implements OnInit {
   ngOnInit() {
     this.profileExists = false;
     this.authService.afAuth.authState.subscribe((user) => {
-
       this.userId = user?.uid;
       this.email = user?.email;
-     
-        let collection = this.afs.collection<ProfileModel>(
-          `users/${this.userId}/profile`
-        );
-        const profiles = collection.valueChanges({ idField: 'id' });
 
-        console.debug('ngOnInit', this.userId);
+      let collection = this.afs.collection<ProfileModel>(
+        `users/${this.userId}/profile`
+      );
+      const profiles = collection.valueChanges({ idField: 'id' });
 
-        // return only the first element of document which constains the only profile for the user ID if it exists.
+      console.debug('ngOnInit', this.userId);
 
-        profiles.pipe(first()).subscribe((ref) => {
-          if (ref.length > 0) {
-              this.profileExists = true;
-            // console.log('The profile exists for this user!');
-            ref.forEach((mr) => {
-              this.profileId = mr.id;
-              this.createForm(mr);
-            });
-          }
-        });
-      }
-    );
+      // return only the first element of document which constains the only profile for the user ID if it exists.
 
+      profiles.pipe(first()).subscribe((ref) => {
+        if (ref.length > 0) {
+          this.profileExists = true;
+          // console.log('The profile exists for this user!');
+          ref.forEach((mr) => {
+            this.profileId = mr.id;
+            this.createForm(mr);
+          });
+        }
+      });
+    });
   }
 
   onUpdateProfile() {
@@ -114,6 +111,7 @@ export class AddressComponent implements OnInit {
           this.snack.open('Profile has been add ...', 'OK', {
             duration: 3000,
           });
+          console.log('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then()
         .catch((error) => {
@@ -130,6 +128,8 @@ export class AddressComponent implements OnInit {
           this.snack.open('Profile has been updated ...', 'OK', {
             duration: 3000,
           });
+          this.updateStripeCustomerId(user.uid);
+          console.log('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then(() => {
           // console.log('Document successfully written!');
@@ -138,8 +138,23 @@ export class AddressComponent implements OnInit {
           console.error('Error writing document: ', error);
         });
     }
-
     this.updateBtnState = false;
+  }
+
+  updateStripeCustomerId(userId: string) {
+    this.afs
+    .collection(`/users/{$userId}/stripe`)
+    .get()
+    .pipe(
+      map((result) => {
+        return result.docs.map((snap) => {
+          return {
+            id: snap.id,
+            ...(<any>snap.data()),
+          };
+        });
+      })
+    );
   }
 
   createForm(profile: ProfileModel) {

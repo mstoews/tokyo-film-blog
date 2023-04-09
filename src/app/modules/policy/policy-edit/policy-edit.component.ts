@@ -43,6 +43,7 @@ export class PolicyEditComponent implements OnInit {
   ) {
     this.createEmptyForm();
   }
+  public editorType = 'markdown';
 
   ngOnInit() {
 

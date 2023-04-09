@@ -42,6 +42,7 @@ export class LandingHeaderComponent implements OnInit {
   @Input() sub_title: string;
   @Input() back = true;
   @Input() home: boolean;
+  @Input() userName: string;
   headerEmail: string;
   isClicked = false;
   doAnimation = false;

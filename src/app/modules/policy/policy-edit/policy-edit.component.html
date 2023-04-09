@@ -41,7 +41,11 @@
       <mat-tab label="Document Details">
         <ng-template matTabContent>
           <!-- <text-editor [valueContent]="para" ></text-editor> -->
-          <dx-html-editor height="600px" [(value)]="rich_description">
+          <dx-html-editor 
+          height="600px" 
+          [(value)]="rich_description"
+          [(valueType)]="editorType"
+          >
             <dxo-toolbar>
               <dxi-item name="undo"></dxi-item>
               <dxi-item name="redo"></dxi-item>
@@ -88,6 +92,7 @@
               <dxi-item name="clear"></dxi-item>
               <dxi-item name="codeBlock"></dxi-item>
               <dxi-item name="blockquote"></dxi-item>
+              <dxi-item text="Markdown"></dxi-item>
             </dxo-toolbar>
           </dx-html-editor>
         </ng-template>

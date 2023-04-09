@@ -1,5 +1,5 @@
-<nav class="relattive flex-auto p-2 sm:p-6">
-  <div class="text-center  text-gray-400 mr-20 text-right">{{emailName}}</div>
+<nav class="relative flex-auto p-2 sm:p-6">
+  
   <div class="items-center justify-between sm:space-x-10 sm:my-6">
     <div class="flex flex-row sm:flex-row sm:space-x-4 sm:mr-20 sm:mt-10 sm:ml-2 bg-white">
       <div class="block">
@@ -67,11 +67,13 @@
       </div>
 
       <div class="hidden md:block">
-        <a (click)="onProfile()" matTooltip="Toggle Navigation" matTooltip="User Profile"
+        <button (click)="onProfile()" matTooltip="Toggle Navigation" matTooltip="Profile"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
-          <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
-        </a>
+          <!-- <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon> -->
+          {{emailName}}
+        </button>
       </div>
+      <!-- <div class="text-end mt-2 uppercase text-gray-400 mr-20">{{emailName}}</div> -->
     </div>
     <div class="flex flex-col ml-5 sm:flex-row md:ml-10 mr-20 mt-1 sm:ml-10 bg-white">
       <ng-container>

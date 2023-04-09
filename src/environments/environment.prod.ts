@@ -9,7 +9,7 @@ export const environment = {
     messagingSenderId: '819679326368',
     measurementId: 'G-WGMMJK9NR3',
   },
-  production: false,
+  production: true,
   useEmulators: false,
   gtm_id: "G-WGMMJK9NR3",
   api: {

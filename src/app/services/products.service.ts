@@ -51,7 +51,10 @@ export class ProductsService {
       "image" : mainImage
     }
     this.afs.doc(`inventory/${productId}`).update( image );
-    this.snackBar.open('Main image updated', 'OK');
+    console.log('main image updated: ', image );
+    this.snackBar.open('Main image updated', 'OK' , {
+      duration: 3000
+    });
   }
 
   deleteEmptyInventory() {

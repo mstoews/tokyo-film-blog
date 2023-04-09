@@ -95,6 +95,7 @@ export class HeaderComponent implements OnInit {
         if (ref.length > 0)
           ref.forEach((mr) => {
             console.debug(mr);
+            // this.emailName = mr.first_name.charAt(0) + mr.last_name.charAt(0);
             this.emailName = mr.first_name;
             this.authService.setUserName(mr.first_name);
           });
