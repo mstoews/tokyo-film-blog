@@ -35,8 +35,8 @@ export class SignOutFullscreenComponent implements OnInit {
 
   signOut() {
     // console.log('Sign out');
-    this.authService.signOut();
-    this.router.navigate(['home']) 
+    this.authService.SignOut();
+    this.router.navigate(['/home']) 
   }
 
   ngOnInit(): void {

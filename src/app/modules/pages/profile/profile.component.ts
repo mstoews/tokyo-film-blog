@@ -11,7 +11,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.prod';
 import { catchError, first, throwError } from 'rxjs';
-import { ProfileModel } from 'app/models/profile';
+import { UserService } from 'app/services/auth/user.service';
 
 @Component({
   selector: 'profile',
@@ -21,18 +21,26 @@ import { ProfileModel } from 'app/models/profile';
 })
 export class ProfileComponent implements OnInit {
   private userId: string;
-  public isRegistered: boolean = true;
   public displayName: string;
+  public loggedIn: boolean;
 
   constructor(
     private router: Router,
-    private authService: AuthService,
+    public authService: AuthService,
     public afAuth: AngularFireAuth,
     public afs: AngularFirestore,
+    public userService: UserService,
     private http: HttpClient
   ) {
-    this.userId = authService.userId;
-   
+    
+    this.afAuth.currentUser.then((user) => {
+      if (user !== null || user !== undefined) {
+        if (user) {
+          this.userId = user.uid;
+       
+        } 
+      }
+    });
   }
 
   addAdminUser(email: string, password: string) {
@@ -75,26 +83,19 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    let currentUser: any;
-
-   // this.addUserByFunction();
-    
+    this.loggedIn = false;
     this.afAuth.currentUser
       .then((user) => {
-        if (user !== null || user !== undefined) {
-          if (user.isAnonymous !== null) {
-            if (user.isAnonymous === true) {
-              this.isRegistered = false;
-               console.log(
-                `this user : ${this.userId} is registered ? : ${this.isRegistered}`
-              );
-            }
+        if (user !== null) {
+              this.loggedIn = true;
+              // console.log( `this user : ${this.userId} is registered ? : ${this.loggedIn}`); 
           }
-          this.updateProfile(user.uid);
+          else {
+           this.loggedIn = false;
+          }
         }
-      })
-      .catch((error) => {
-        console.log('unable to get correct user ');
+      ).catch((error) => {
+        // console.log('unable to get correct user ');
       });
   }
 
@@ -102,5 +103,7 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['home']);
   }
 
-  updateProfile(userId: string) {}
+  updateProfile(userId: string) {
+   // console.log('updateProfile', userId);
+  }
 }

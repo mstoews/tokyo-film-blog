@@ -16,11 +16,12 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { WishListComponent } from './wishlist/wishlist.component';
 import { CartResolver } from 'app/services/cart.resolver';
 import { WishListResolver } from 'app/services/wishlist.resolver';
-import { HeaderComponent } from 'app/main/header/header.component';
 import { NotificationComponent } from 'app/components/notification/notification.component';
 import { PurchaseThanksComponent } from './thanks/purchase-thanks';
 import { CheckoutComponent } from './checkout.component';
 import { AddressComponent } from '../pages/profile/address/address.component';
+import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const routes: Routes = [
   {
@@ -100,6 +101,7 @@ const routes: Routes = [
     WishListComponent,
     PurchaseThanksComponent,
     CheckoutComponent,
+    PaymentConfirmationComponent
     
   ],
   imports: [
@@ -110,7 +112,8 @@ const routes: Routes = [
     SharedModule,
     NotificationComponent,
     RouterModule.forChild(routes),
-    AddressComponent
+    AddressComponent,
+    NgxSpinnerModule
   ]
 })
 export class ShopModule { }

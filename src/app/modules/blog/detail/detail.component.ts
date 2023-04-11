@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { imageItem } from 'app/models/imageItem';
 import { ImageListService } from 'app/services/image-list.service';
 import { AuthService } from 'app/services/auth/auth.service';
+import { ScrollService } from 'app/services/scroll.service';
 
 
 @Component({
@@ -21,10 +22,12 @@ export class DetailComponent implements OnInit, OnDestroy {
   public blog!: Blog;
   public userName: string;
   public blog_id: string;
+  public bottom = false;
 
   constructor(
     private activateRoute: ActivatedRoute,
     private authService: AuthService,
+    private scrollTo: ScrollService,
     private route: Router,
     private imageListService: ImageListService ) { }
 
@@ -45,8 +48,19 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   }
 
+  onAdd() {
+   this.scrollTo.scrollToElementById('comment');
+   this.bottom = true;
+  }
+  gotoTop() {
+    this.scrollTo.scrollToElementById('top');
+    this.bottom = false;
+   }
+ 
+
   backToHome() {
     this.route.navigate(['blog']);
+    
   }
 
 }

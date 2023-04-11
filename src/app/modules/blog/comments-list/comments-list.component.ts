@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { AuthService } from 'app/services/auth/auth.service';
 import { UserService } from 'app/services/auth/user.service';
 import { BlogService } from 'app/services/blog.service';
 import { Observable } from 'rxjs';
@@ -14,7 +13,7 @@ import { ReplyDialogComponent } from '../reply-dialog/reply-dialog.component';
 export class CommentsListComponent implements OnInit {
   constructor(
     private blogService: BlogService,
-    private userService: UserService,
+    public userService: UserService,
     private dialog: MatDialog
   ) {}
 
@@ -28,7 +27,6 @@ export class CommentsListComponent implements OnInit {
     if (this.blog_id !== undefined) {
       this.Comments$ = this.blogService.getComments(this.blog_id);
     }
-
   }
 
   valueChangedEvent($event: any) {}
@@ -39,9 +37,15 @@ export class CommentsListComponent implements OnInit {
     return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
   }
 
+  deleteComment(blog_id: string , comment_id: string){
+    this.blogService.deleteComment(
+      blog_id,
+      comment_id,
+    );
+  }
+
   createReply(blog_id: string, comment_id: string) {
-   
-    if (this.isAdmin === true) {
+    
       const dialogConfig = new MatDialogConfig();
       dialogConfig.disableClose = false; // closes when you tap outside the dialog box
       dialogConfig.autoFocus = true; //
@@ -57,6 +61,5 @@ export class CommentsListComponent implements OnInit {
           );
         }
       });
-    }
   }
 }

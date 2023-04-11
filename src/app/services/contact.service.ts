@@ -27,7 +27,7 @@ export class ContactService {
     
 
     const contact_update = {
-      id: '',
+   
       name: contact.name,
       email: contact.email,
       message: contact.message,
@@ -38,7 +38,7 @@ export class ContactService {
   }
 
   update(contact: Contact) {
-    this.contactCollection.doc(contact.id.toString()).update(contact);
+    // this.contactCollection.doc(contact.id.toString()).update(contact);
   }
 
   delete(name: string) {

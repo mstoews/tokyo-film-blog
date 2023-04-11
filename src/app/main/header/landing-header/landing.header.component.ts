@@ -1,97 +1,90 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
-
 import { onMainContentChange } from '../../animations';
 import { Location } from '@angular/common';
-
 import { MenuToggleService } from 'app/services/menu-toggle.service';
 import { AuthService } from 'app/services/auth/auth.service';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { CartService } from 'app/services/cart.service';
 import { WishListService } from 'app/services/wishlist.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from 'app/services/auth/user.service';
 
-
 @Component({
   selector: 'land-header',
   templateUrl: './landing.header.component.html',
   animations: [onMainContentChange],
-
 })
-export class LandingHeaderComponent implements OnInit{
-  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter()
+export class LandingHeaderComponent implements OnInit {
+  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
-
-  constructor (
+  constructor(
     private _location: Location,
     private _router: Router,
     private menuToggle: MenuToggleService,
     private afAuth: AngularFireAuth,
     public userService: UserService,
-
     private authService: AuthService,
     private cartService: CartService,
-    private wishListService: WishListService,
-    ) {
-    this.title = "Add Title as Parameter in the Template";
+    private wishListService: WishListService
+  ) {
+    this.title = 'Add Title as Parameter in the Template';
     menuToggle.setDrawerState(false);
   }
 
-  @Input() title : string;
-  @Input() sub_title : string;
+  @Input() title: string;
+  @Input() sub_title: string;
   @Input() back = true;
   @Input() home: boolean;
+  @Input() userName: string;
   headerEmail: string;
   isClicked = false;
   doAnimation = false;
-  isLoggedIn = true;
   wishCount = 0;
   cartCount = 0;
   isAdmin = false;
+  userId = '';
 
-  async ngOnInit(){
-
+  async ngOnInit() {
+    
     this.afAuth.currentUser.then((user) => {
       if (user !== null || user !== undefined) {
-        this.headerEmail = user.email;
+        if (user) {
+          this.userId = user.uid;
+          this.headerEmail = user.email;
+        } else {
+          this.headerEmail = '';
+        }
       }
-    });
+   
 
+    // this.headerEmail = await this.userService.getUserEmail();
+    if(this.userId !== ''){
+    this.cartCount = this.cartService.cartCountByUserId(this.userId
+    );
 
+    this.wishCount = this.wishListService.wishCountByUserId( this.userId );
+    }
+  });
 
-
-    this.userService.isLoggedIn$.subscribe( res => {
-      if (res !== true) {
-        this.isLoggedIn = false;
-      } else {
-        this.isLoggedIn = true;
-        this.cartService.cartByStatus(this.authService.userData.uid, "open").subscribe(cart => {
-          this.cartCount = cart.length;
-        });
-
-        this.wishListService.wishListByUserId(this.authService.userData.uid).subscribe(wishlist => {
-          this.wishCount = wishlist.length;
-        });
-      }
-     })
- 
   }
-
- 
 
   public onToggleSideNav() {
     this.menuToggle.setDrawerState(true);
     this.notifyNavBarToggleMenu.emit();
-
   }
 
-  public onBack(){
-    this._location.back()
+  public onBack() {
+    this._location.back();
   }
 
-  public onHome(){
+  public onHome() {
     this._router.navigate(['/home']);
   }
 
@@ -99,9 +92,7 @@ export class LandingHeaderComponent implements OnInit{
     this._router.navigate(['/shop']);
   }
 
-  doAnimate() {
-
-  }
+  doAnimate() {}
 
   onProfile() {
     this._router.navigate(['/profile']);
@@ -114,6 +105,4 @@ export class LandingHeaderComponent implements OnInit{
   openWishList() {
     this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
   }
-
-
 }

@@ -12,6 +12,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from "./services/auth/auth.service";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthTokenService } from './services/auth/auth-token.service';
+import { UserService } from './services/auth/user.service';
 
 
 @Component({
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit {
   constructor(
     private afAuth: AngularFireAuth,
     public authService: AuthService,
+    public userService: UserService,
     private snackBar: MatSnackBar,
     private token: AuthTokenService
   ) {
@@ -54,17 +56,6 @@ export class AppComponent implements OnInit {
 
     this.isLoggedOut$ = this.afAuth.authState.pipe(map(loggedIn => !loggedIn));
 
-    this.isLoggedOut$.subscribe((loggedOut) => {
-      if (loggedOut === true) {
-        this.authService.loginAnonymously().then(login => {
-          loggedOut = false;
-        })
-          .catch((error) => {
-            let errorMessage = error.message;
-            this.snackBar.open(`Failed to login anonymously: ${errorMessage}`, 'Error', { duration: 3000 });
-          });
-      }
-    });
 
   }
 

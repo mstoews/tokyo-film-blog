@@ -24,6 +24,7 @@ export class InventoryPreviewComponent implements OnInit {
 
   onUpdate() {
     // set current image as main image
+    
     this.productService.updateMainImage(this.product.id, this.mainImage)
   }
 

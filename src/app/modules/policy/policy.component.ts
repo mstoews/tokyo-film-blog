@@ -13,7 +13,6 @@ import { openAddPolicyDialog } from './add/add.component';
 import { PolicyDocuments } from 'app/models/policy-documents'
 import { PolicyService } from 'app/services/policy.service';
 
-
 @Component({
   selector: 'app-policy',
   templateUrl: './policy.component.html',

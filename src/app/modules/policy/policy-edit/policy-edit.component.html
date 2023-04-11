@@ -1,4 +1,4 @@
-<ng-container>
+
   <div class="flex flex-col sm:flex-row sm:space-x-4 md:ml-20 mr-20 mt-10 sm:ml-2">
     <h1
       class="flex-auto sm:w-auto font-garamond focus:outline-none font-bold text-1x1 md:text-3xl lg:text-4xl leading-tight text-gray-800 dark:text-white">
@@ -10,10 +10,8 @@
       <mat-icon class="mb-2" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
     </button>
   </div>
-
-  <mat-card [class.mat-elevation-z8]="true"
-            class="m-10 flex flex-col text-gray-700 filter-article filter-interactive">
-    <mat-tab-group class="mt-2 items-centered " mat-stretch-tabs="false">
+  <mat-card class="m-10">
+    <mat-tab-group class="mt-2" mat-stretch-tabs="false">
       <mat-tab class="text-bold m-1" label="Title">
         <ng-template matTabContent>
           <div mat-dialog-content>
@@ -43,7 +41,11 @@
       <mat-tab label="Document Details">
         <ng-template matTabContent>
           <!-- <text-editor [valueContent]="para" ></text-editor> -->
-          <dx-html-editor height="600px" [(value)]="rich_description">
+          <dx-html-editor 
+          height="600px" 
+          [(value)]="rich_description"
+          [(valueType)]="editorType"
+          >
             <dxo-toolbar>
               <dxi-item name="undo"></dxi-item>
               <dxi-item name="redo"></dxi-item>
@@ -90,15 +92,19 @@
               <dxi-item name="clear"></dxi-item>
               <dxi-item name="codeBlock"></dxi-item>
               <dxi-item name="blockquote"></dxi-item>
+              <dxi-item text="Markdown"></dxi-item>
             </dxo-toolbar>
           </dx-html-editor>
         </ng-template>
       </mat-tab>
       <mat-tab label="Preview">
         <ng-template matTabContent>
-          <p style="text-decoration:circle;" class="align-text-top h-full m-2 list-square text-1xl" [innerHTML]="rich_description | safe : 'html'"></p>
+          <div class="text-gray-700">
+            <div class="max-w-[1200px]"
+               [innerHTML]="readonly_rich_description | safe: 'html'"></div>
+          </div>
         </ng-template>
       </mat-tab>
     </mat-tab-group>
   </mat-card>
-</ng-container>
+

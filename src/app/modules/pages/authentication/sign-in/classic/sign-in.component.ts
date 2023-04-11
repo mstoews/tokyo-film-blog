@@ -33,19 +33,20 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
   ui: firebaseui.auth.AuthUI;
 
   constructor(
-    private _formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     public router: Router
   ) {}
 
   ngOnInit(): void {
     // Create the form
+    let anonymousUser = this.authService.afAuth.currentUser;
 
     this.authService.afAuth.app.then( app => {
         const uiConfig = {
+            //autoUpgradeAnonymousUsers: true,
             signInOptions: [
                 EmailAuthProvider.PROVIDER_ID,
-                //GoogleAuthProvider.PROVIDER_ID,
+                // GoogleAuthProvider.PROVIDER_ID,
 
             ],
             callbacks: {
@@ -57,33 +58,35 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
 
         this.ui.start("#firebaseui-auth-container", uiConfig);
 
-        // this.ui.disableAutoSignIn();
+        this.ui.disableAutoSignIn();
     });
   }
 
   onLoginSuccess(result) {
     const user = this.authService.afAuth.currentUser;
     user.then(sendEmail => {
+      console.log('Verification mail ', sendEmail.emailVerified)
+      if (sendEmail.emailVerified == false) {
+         sendEmail.sendEmailVerification();
+      }
+
       this.router.navigate(['/home']);
     }).catch(error => {
-      // console.log('Verification email not sent', error.message);
+       console.log('Verification email not sent', error.message);
     }).finally();
   }
 
-  signUpEmail(){
-    this.router.navigate(['/authentication/confirmation-required/modern']);
-  }
-
-  async signInEmail() {
-    const { email, password } = this.signInForm.value
-    // console.debug(`email ${email} , ${password}`)
-    try {
-      const loggedIn = await this.authService.signIn(email, password)
-      this.router.navigate(this.redirect)
-    } catch (e) {
-      console.error(e)
-    }
-  }
+  // async signInEmail() {
+  //   const { email, password } = this.signInForm.value
+  //   // console.debug(`email ${email} , ${password}`)
+  //   try {
+  //     const loggedIn = await this.authService.signIn(email, password)
+  //     this.router.navigate(this.redirect)
+  //   } catch (e) {
+  //     console.error(e)
+  //     console.log("tesst");
+  //   }
+  // }
 
   ngOnDestroy() {
     this.ui.delete();

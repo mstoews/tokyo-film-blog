@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PolicyEditComponent } from './policy-edit.component';
+import { ContactListComponent } from './contact-list.component';
 
-describe('ProductEditComponent', () => {
-  let component: PolicyEditComponent;
-  let fixture: ComponentFixture<PolicyEditComponent>;
+describe('ContactListComponent', () => {
+  let component: ContactListComponent;
+  let fixture: ComponentFixture<ContactListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PolicyEditComponent ]
+      declarations: [ ContactListComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PolicyEditComponent);
+    fixture = TestBed.createComponent(ContactListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

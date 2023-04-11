@@ -32,7 +32,7 @@ export class CheckoutService {
     )
 
  
-    alert('Currently checkout is disabled for testing');
+    // alert('Currently checkout is disabled for testing');
 
     if (environment.production === false ) {
     return this.http.post<CheckoutSession>(

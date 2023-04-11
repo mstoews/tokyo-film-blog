@@ -26,10 +26,9 @@ export class BlogService {
     private snack: MatSnackBar,
     private imageListService: ImageListService
   ) {
-    this.blogCollection = afs.collection<Blog>('blog');
+    this.blogCollection = afs.collection('blog', ref => ref.orderBy('date_created', 'desc'));
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
-    this.blogCollection = afs.collection<Blog>('blog');
   }
 
   createComment(comment: Comments) {
@@ -48,12 +47,18 @@ export class BlogService {
   }
 
   addCommentReply(blog_id: string, commentId: string, reply: string) {
-    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('created_date', 'desc'));
+    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('date_created', 'desc'));
     const dDate = new Date();
     const updateDate = dDate.toISOString();
     const comment = {'reply': reply, reply_date: updateDate};
     collectionRef.doc(commentId).update(comment);
   }
+
+  deleteComment(blog_id: string, comment_id: string) {
+    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('created_date', 'desc'));
+    collectionRef.doc(comment_id).delete();
+  }
+
 
   updateComment(comment: Comments) {
     const collectionRef = this.afs.collection(`blog/${comment.blog_id}/comment/`);
@@ -78,7 +83,7 @@ export class BlogService {
   }
 
   getAllPublishedBlog() {
-    return this.blogItems;
+    return this.blogItems.pipe( map((blogs) => blogs.filter((pub) => pub.published === true)));
   }
 
   getAll(): any {

@@ -6,6 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Cart } from 'app/models/cart';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from "../../../services/auth/auth.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 interface profile {
   email: string;
@@ -45,19 +46,20 @@ export class CartComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
     private cartService: CartService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
+    private ngxSpinner: NgxSpinnerService,
+  
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
-      const userEmail = user?.email
-      if (userEmail === 'mstoews@hotmail.com' || this.userId === 'cassandraaprilharada@gmail.com') {
-        this.admin_login = true;
-      }
     });
   }
 
 
   ngOnInit(): void {
+
+    
+
     this.userId = this.activateRoute.snapshot.params.id;
     this.cart$ = this.cartService.cartByStatus(this.userId, 'open');
 
@@ -69,6 +71,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
   onCheckOut() {
     // this.calculateTotals();
+    // this.route.navigate(['shop/coming-soon']);
+    this.ngxSpinner.show().then(()=> {
+      setTimeout(()=> {
+        this.ngxSpinner.hide();
+      }, 4000)}
+    );
+    
     if (this.userId !== undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
@@ -76,11 +85,13 @@ export class CartComponent implements OnInit, OnDestroy {
           .subscribe((checkoutSession) => {
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
+       
         this.purchaseStarted = false;
       } else {
-        this.snack.open('Unable to reach the payment server. Please try again in a moment.','Payment Failed');
         this.purchaseStarted = false;
+        this.route.navigate(['profile']); 
       }
+  
   }
 
   calculateTotals() {
@@ -128,8 +139,6 @@ export class CartComponent implements OnInit, OnDestroy {
   backToShopping() {
     this.route.navigate(['shop']);
   }
-
-
 
   ngOnDestroy(): void {
 

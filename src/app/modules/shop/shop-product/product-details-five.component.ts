@@ -1,15 +1,9 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ɵconvertToBitFlags,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Product } from 'app/models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/services/products.service';
 import { Observable, Subscription } from 'rxjs';
 import { WishListService } from 'app/services/wishlist.service';
-import { CheckoutService } from 'app/services/checkout.service';
 import { CartService } from 'app/services/cart.service';
 import { AuthService } from 'app/services/auth/auth.service';
 import { CategoryService } from 'app/services/category.service';
@@ -17,7 +11,6 @@ import { Category } from 'app/models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { imageItem } from 'app/models/imageItem';
 import { Cart } from 'app/models/cart';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MenuToggleService } from 'app/services/menu-toggle.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from 'app/services/auth/user.service';
@@ -53,8 +46,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private categories: CategoryService,
     private snackBar: MatSnackBar,
     private menuToggleService: MenuToggleService,
-    private afAuth: AngularFireAuth,
-    private userService: UserService,
+    private userService: UserService
   ) {}
 
   mainImage: string;
@@ -71,8 +63,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     // console.log(JSON.stringify(this.userData));
 
     this.productIds = [];
+    this.wishListIds = [];
     this.Categories$ = this.categories.getAll();
-    this.userService.isLoggedIn$
 
     this.product = this.activateRoute.snapshot.data['product'];
     this.productId = this.product.id;
@@ -109,44 +101,70 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.mainImage = e;
   }
 
-  onAddToWishList() {
-    if (this.loggedIn === true) {
-      const found = this.wishListIds.find((item) => {
-        return item === this.productId;
-      });
-      if (found) {
-        this.snackBar.open(
-          'The item already exists in your wishlist ... ',
-          'OK',
-          { duration: 3000 }
-        );
-        return;
-      } else {
-        this.wishlistService.createWishList(this.productId);
-        this.wishListIds.push(this.productId);
-      }
-    } else {
-      this.route.navigate(['shop/coming-soon']);
+  existsInWishList(): boolean {
+    let found = this.wishListIds.find((item) => {
+      return item === this.productId;
+    });
+    if (found) {
+      this.snackBar.open(
+        'The item already exists in your wishlist ... ',
+        'OK',
+        { duration: 3000 }
+      );
+      return true;
     }
+    return false;
+  }
+
+  existsInCart(): boolean {
+    let found = this.productIds.find((item) => {
+      return item === this.productId;
+    });
+    if (found) {
+      this.snackBar.open('The item already exists in your cart ... ', 'OK', {
+        duration: 3000,
+      });
+      return true;
+    }
+    return false;
+  }
+
+ 
+  onAddToWishList() {
+    let inWishList: Boolean;
+    let inCart: Boolean;
+
+    this.userService.isLoggedIn$.subscribe((user) => {
+      this.loggedIn = user;
+      if (this.loggedIn === true) {
+        inWishList = this.existsInWishList();
+        if (inWishList === false) {
+          inCart = this.existsInCart();
+        }
+        if (inCart === false) {
+          this.wishlistService.createWishList(this.productId);
+          this.wishListIds.push(this.productId);
+        }
+      } else {
+        this.route.navigate(['/profile']);
+      }
+    });
   }
 
   onAddToShoppingCart() {
-    if (this.loggedIn === true) {
-      const found = this.productIds.find((item) => {
-        return item === this.productId;
-      });
-      if (found) {
-        this.snackBar.open('The item already exists in your cart ... ', 'OK', {
-          duration: 3000,
-        });
-        return;
+    let inCart: Boolean;
+    this.userService.isLoggedIn$.subscribe((user) => {
+      this.loggedIn = user;
+      if (this.loggedIn === true) {
+        inCart = this.existsInCart();
+        if (inCart === false) {
+          this.wishlistService.addToCart(this.productId);
+          this.productIds.push(this.productId);
+        }
       } else {
-        this.wishlistService.addToCart(this.productId);
+        this.route.navigate(['/profile']);
       }
-    } else {
-      this.route.navigate(['shop/coming-soon']);
-    }
-
+    });
   }
 
   onContinueShopping() {
@@ -154,22 +172,14 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   }
 
   onGoShoppingCart() {
-
-      if (this.cartCount > 0) {
-        this.route.navigate(['shop/cart', this.authService.userData.uid ]);
-      } else {
-        this.snackBar.open('There are no items in your cart', 'OK', {
-          duration: 3000,
-        });
-        return;
-      }
-    // } else {
-    //   this.snackBar.open('You must be logged in access the cart', 'OK', {
-    //     duration: 3000,
-    //   });
-    //   this.snackBar._openedSnackBarRef!.onAction().subscribe();
-    // }
-    // this.route.navigate(['shop/coming-soon']);
+    if (this.cartCount > 0) {
+      this.route.navigate(['shop/cart', this.authService.userData.uid]);
+    } else {
+      this.snackBar.open('There are no items in your cart', 'OK', {
+        duration: 3000,
+      });
+      return;
+    }
   }
 
   ngOnDestroy() {

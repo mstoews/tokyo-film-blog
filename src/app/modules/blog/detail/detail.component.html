@@ -1,3 +1,4 @@
+<section id="top"></section>
 <div class="relative mx-auto max-w-7xl font-garamond">
   <div class="text-center">
     <h2 class="text-3xl mt-10 font-garamond font-bold tracking-tight text-gray-900 sm:text-4xl">Thoughts and Images</h2>
@@ -10,6 +11,7 @@
       <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
     </button>
   </div>
+
 
   <div class="px-4 py-12" *ngIf="blogImages$ | async as blogImages">
     <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white py-12 lg:px-10 md-px-6 px-4">
@@ -41,8 +43,25 @@
       </div>
     </div>
 
-    <blog-comments [blog_id]='blog.id' [userName]='userName' ></blog-comments>
-    <blog-comments-list [blog_id]='blog.id'></blog-comments-list>
+    <section id="comment">
+      <blog-comments [blog_id]='blog.id' [userName]='userName'></blog-comments>
+      <blog-comments-list [blog_id]='blog.id'></blog-comments-list>
+
+      <div *ngIf="!bottom">
+        <button (click)="onAdd()"
+          class="fixed bottom-30 right-14 w-12 h-12 bg-gray-400 rounded-full hover:bg-gray-600 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+          <mat-icon class="mt-1.5" [svgIcon]="'mat_outline:insert_comment'"></mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="bottom">
+        <button (click)="gotoTop()"
+          class="fixed md:bottom-30 bottom-36 right-14 w-12 h-12 bg-gray-400 rounded-full hover:bg-gray-600 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+          <mat-icon class="mt-1.5" [svgIcon]="'heroicons_outline:arrow-circle-up'"></mat-icon>
+        </button>
+      </div>
+    </section>
+
 
     <style>
       .bg-blur {

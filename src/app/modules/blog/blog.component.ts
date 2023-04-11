@@ -11,6 +11,11 @@ import { fadeInOut } from '../landing-page/animations';
   animations: [fadeInOut],
 })
 export class BlogComponent implements OnInit {
+  
+  
+  onAdd() {
+   // console.log('Add a comment to the blog');
+  }
   onToggleMenu() {
     console.debug('blog - notifiy side menu');
   }

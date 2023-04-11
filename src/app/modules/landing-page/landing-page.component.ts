@@ -1,8 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core'
-
-import { MatDialog } from '@angular/material/dialog'
-import { Router, TitleStrategy, UrlHandlingStrategy } from '@angular/router'
-import { DndComponent } from '../../components/loaddnd/dnd.component'
+import { Router } from '@angular/router'
 import { ScrollService } from 'app/services/scroll.service'
 import { animate, style, transition, trigger } from '@angular/animations'
 import { Observable, of } from 'rxjs'
@@ -63,8 +60,6 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private scrollTo: ScrollService,
     private fb: FormBuilder,
-    private cartService: CartService,
-    private wishListService: WishListService,
     private authService: AuthService
   ) {}
 

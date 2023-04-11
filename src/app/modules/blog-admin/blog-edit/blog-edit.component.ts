@@ -46,6 +46,8 @@ export class BlogEditComponent implements OnInit{
       this.blog = this.activateRoute.snapshot.data["blog"];
       //this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
 
+     // console.log("Blog data", this.blog);
+
       if (this.blog) {
         this.blogId = this. blog.id
         this.para = this.blog.paragraph;
@@ -55,15 +57,27 @@ export class BlogEditComponent implements OnInit{
         }
   }
 
-  onUpdate(data: Blog) {
+  onUpdate(blog: Blog) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
-    data = this.blogGroup.getRawValue();
-    data.paragraph = this.para;
-    data.body = this.body;
-    data.conclusion = this.conclusion;
-    data.date_updated = updateDate;
-    this.blogService.update(data);
+    blog = { ...this.blogGroup.value } as Blog;
+    console.debug('Product can be sold ...: ', blog.published);
+    if(this.para === undefined){
+      this.para = '';
+    }
+    blog.paragraph = this.para;
+    if (this.body === undefined)
+    {
+      this.body = '';
+    }
+    blog.body = this.body;
+    if (this.conclusion === undefined)
+    {
+      this.conclusion = ''
+    }
+    blog.conclusion = this.conclusion;
+    blog.date_updated = updateDate;
+    this.blogService.update(blog);
   }
 
 
@@ -109,6 +123,7 @@ export class BlogEditComponent implements OnInit{
       user_updated: [blog.user_updated],
       date_created: [blog.date_created],
       date_updated: [blog.date_updated],
+      published: [blog.published],
     });
   }
 

@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Routes, RouterModule } from '@angular/router';
-import { BlogResolver } from 'app/services/blog.resolver';
+
 import { ProductResolver } from 'app/services/product.resolver';
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { AdminShellComponent } from './admin-shell/admin-shell.component';
 import { AdminComponent } from './admin/admin.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
-import { GalleryComponent } from './gallery/gallery.component';
+
 import { InventoryComponent } from './inventory-maintenance/inventory-grid.component';
 import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
 import { ProductEditComponent } from './inventory-maintenance/product-edit/product-edit.component';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
-import { ContactGridComponent } from './contact-grid/contact-grid.component';
+import { ContactListComponent } from './contact-list/contact-list.component';
 
 const routes: Routes = [
   {
@@ -65,7 +65,7 @@ const routes: Routes = [
   {
     path: 'contact-grid',
     pathMatch: 'full',
-    component: ContactGridComponent,
+    component: ContactListComponent,
     data: { state: 'contact-grid' },
   },
   {
