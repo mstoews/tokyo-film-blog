@@ -26,7 +26,7 @@ export class BlogService {
     private snack: MatSnackBar,
     private imageListService: ImageListService
   ) {
-    this.blogCollection = afs.collection<Blog>('blog');
+    this.blogCollection = afs.collection('blog', ref => ref.orderBy('date_created', 'desc'));
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
   }
@@ -47,7 +47,7 @@ export class BlogService {
   }
 
   addCommentReply(blog_id: string, commentId: string, reply: string) {
-    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('created_date', 'desc'));
+    const collectionRef = this.afs.collection(`blog/${blog_id}/comment/`, ref => ref.orderBy('date_created', 'desc'));
     const dDate = new Date();
     const updateDate = dDate.toISOString();
     const comment = {'reply': reply, reply_date: updateDate};
