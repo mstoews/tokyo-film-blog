@@ -7,12 +7,13 @@ import {
   StripeElementsOptions
 } from '@stripe/stripe-js';
 import { MaterialModule } from 'app/material.module';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'stripe-checkout',
   templateUrl: 'stripe-checkout.component.html',
-  imports: [MaterialModule, NgxStripeModule],
+  imports: [CommonModule, MaterialModule, NgxStripeModule],
 
 })
 export class StripeCheckoutComponent implements OnInit {
@@ -21,13 +22,14 @@ export class StripeCheckoutComponent implements OnInit {
   cardOptions: StripeCardElementOptions = {
     style: {
       base: {
-        iconColor: '#666EE8',
+        iconColor: '#0b120c',
         color: '#31325F',
+       
         fontWeight: '300',
         fontFamily: '"Helvetica", Helvetica, sans-serif',
         fontSize: '20px',
         '::placeholder': {
-          color: '#CFD7E0'
+          color: '#0b120c'
         }
       }
     }

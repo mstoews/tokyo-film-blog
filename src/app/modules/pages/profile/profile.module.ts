@@ -14,7 +14,7 @@ import { CaraselComponent } from './carasel/carasel.component';
 import { ProfileListComponent } from './profile-list/profile-list.component';
 import { TableRowComponent } from './table-row/table-row.component';
 import { SetAdminComponent } from './set-admin/set-admin.component';
-import { StripeCheckoutComponent } from './stripe/stripe-checkout/stripe-checkout.component';
+import { StripeCheckoutComponent } from '../../../components/stripe-checkout/stripe-checkout.component';
 
 
 @NgModule({

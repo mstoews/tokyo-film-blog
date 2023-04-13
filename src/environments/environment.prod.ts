@@ -20,6 +20,7 @@ export const environment = {
   dev: {
     createMessage: "http://localhost:9000/api/createMessage",
     createAdmin: "http://localhost:9000/api/createAdmin",
+    paymentIntent: "http://localhost:9000/api/payment_intent",
   },
   api: {
     prdUrl: "https://made-to-cassie.df.r.appspot.com",
