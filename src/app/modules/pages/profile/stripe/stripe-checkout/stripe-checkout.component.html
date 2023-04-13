@@ -1,0 +1,18 @@
+<mat-card class="text-gray-700 ">
+  <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[450px] mx-auto bg-white relative lg:px-10 md:px-6 px-4 py-7">
+  <div class="flex lg:flex justify-center gap-2">
+    <div class="w-full py-12 md:py-8 px-4 sm:px-0 md:px-6">
+      <p class="text-xl font-semibold leading-tight text-gray-800">
+        Payments
+      </p>
+      <form class="w-[400px]" novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+        <input type="text" formControlName="name" placeholder="Jane Doe">
+        <ngx-stripe-card class="m-2 w-[500px]" [options]="cardOptions" [elementsOptions]="elementsOptions"></ngx-stripe-card>
+        <button class="m-2" mat-flat-button type="submit">
+          CREATE TOKEN
+        </button>
+      </form>
+    </div>
+  </div>
+  </div>
+</mat-card>

@@ -28,7 +28,6 @@ import { TitleStrategy } from '@angular/router';
 export class ImageListService {
   private imageItemCollections: AngularFirestoreCollection<imageItem>;
   private updateItemsCollection: AngularFirestoreCollection<imageItem>;
-  private RawImagesCollection: AngularFirestoreCollection<rawImageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private loadImageItems: Observable<imageItem[]>;
   private imageItems: Observable<imageItem[]>;
@@ -74,7 +73,6 @@ export class ImageListService {
   }
 
   getImagesByTypeAndProductId(imageType: string, productId: string) {
-    //console.debug('Product id for filtering images', productId)
     return this.imageItems.pipe(
       map((images) => images.filter((type) => type.type === imageType).filter((prod) => prod.parentId === productId)
     ));

@@ -25,36 +25,37 @@ export class CheckoutService {
   }
 
  
+ 
   startProductCheckoutSession(cartId: any): Observable<CheckoutSession> {
     const headers = new HttpHeaders().set(
       'Authorization',
       this.jwtAuth as string
     )
 
- 
-    // alert('Currently checkout is disabled for testing');
-
     if (environment.production === false ) {
-    return this.http.post<CheckoutSession>(
-      environment.api.baseUrl + '/api/checkout',
-      {
-        cartId,
-        callbackUrl: this.buildCallbackUrl(),
-      },
-      { headers }
-    )
-    }
-    else  {
       return this.http.post<CheckoutSession>(
-        environment.api.prdUrl + '/api/checkout',
+        environment.api.baseUrl + '/api/checkout',
         {
           cartId,
           callbackUrl: this.buildCallbackUrl(),
         },
         { headers }
       )
-    }
-   
+      }
+      else  {
+        return this.http.post<CheckoutSession>(
+          environment.api.prdUrl + '/api/checkout',
+          {
+            cartId,
+            callbackUrl: this.buildCallbackUrl(),
+          },
+          { headers }
+        )
+      }
+     
+    // alert('Currently checkout is disabled for testing');
+
+    
   }
 
   buildCallbackUrl() {

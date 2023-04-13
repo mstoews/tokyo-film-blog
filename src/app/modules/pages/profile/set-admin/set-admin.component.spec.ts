@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StripeCheckoutComponent } from './stripe-checkout.component';
+import { SetAdminComponent } from './set-admin.component';
 
-describe('StripeCheckoutComponent', () => {
-  let component: StripeCheckoutComponent;
-  let fixture: ComponentFixture<StripeCheckoutComponent>;
+describe('SetAdminComponent', () => {
+  let component: SetAdminComponent;
+  let fixture: ComponentFixture<SetAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StripeCheckoutComponent ]
+      declarations: [ SetAdminComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(StripeCheckoutComponent);
+    fixture = TestBed.createComponent(SetAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
