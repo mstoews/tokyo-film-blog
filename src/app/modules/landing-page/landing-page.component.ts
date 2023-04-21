@@ -102,6 +102,12 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate([service]);
   }
 
+  onAboutUs(service: string) {
+    // console.debug(service);
+    this.onClickAboutUs()
+  }
+
+
   onUpdate(contact: Contact) {
     contact = this.contactGroup.getRawValue();
     this.contactService.create(contact);

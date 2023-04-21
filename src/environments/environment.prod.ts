@@ -1,3 +1,5 @@
+import { CdkTreeNodeOutlet } from "@angular/cdk/tree";
+
 export const environment = {
   firebase: {
     projectId: 'made-to-cassie',
@@ -12,13 +14,20 @@ export const environment = {
   production: false,
   useEmulators: false,
   gtm_id: "G-WGMMJK9NR3",
+  stripe: {
+    public_key: 'pk_test_51JogSuCGT3ceZF7pYLMW9IZjEOaMGFqz5YOoBaNGTgT8dl72ThRvLgfx1DEFlQPteFpFlwgfpJLPnuJ1X60UCc8m00yEl0F8ra',
+  },
+  dev: {
+    createMessage: "http://localhost:9000/api/createMessage",
+    createAdmin: "http://localhost:9000/api/createAdmin",
+    paymentIntent: "http://localhost:9000/api/payment_intent",
+  },
   api: {
-    
     prdUrl: "https://made-to-cassie.df.r.appspot.com",
     baseUrl:  "http://localhost:9000",
     stripeDevUrl: "https://made-to-dev.df.r.appspot.com",
     createMessage: "https://made-to-cassie.df.r.appspot.com/api/createMessage",
     createUser: "https://made-to-cassie.df.r.appspot.com/api/createUser",
-    addAdminRole: "https://made-to-cassie.df.r.appspot.com/api/addAdminRole",
+    createAdmin: "https://made-to-cassie.df.r.appspot.com/api/createAdmin",
   }
 };

@@ -1,0 +1,31 @@
+<div class="container justify-center">
+<mat-card class="w-160 m-5 p-2">
+<div [formGroup]="paymentElementForm">
+    <mat-card-title class="m-1 h-11">Payment</mat-card-title>
+    <mat-form-field class="h-[70px] w-full" appearance="outline">
+      <input matInput placeholder="Full Name" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <input matInput placeholder="Email" type="email" formControlName="email" />
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <input matInput placeholder="Address" formControlName="address" />
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <input matInput placeholder="Postal Code" formControlName="postal_code" />
+    </mat-form-field>
+    <mat-form-field class="w-full" appearance="outline">
+      <input matInput placeholder="City" formControlName="city" />
+    </mat-form-field>
+
+    <ng-container *ngIf="elementsOptions?.clientSecret as clientSecret">
+      <ngx-stripe-payment [clientSecret]="clientSecret"> 
+      </ngx-stripe-payment>
+    </ng-container>
+    
+    <button class="mt-2 w-full h-[40px] bg-blue-600 text-white hover:bg-blue-500 disabled:bg-gray-400" mat-flat-button (click)="pay()" [disabled]="!validated">
+        PAYMENT
+     </button>
+  </div>
+</mat-card>
+</div>

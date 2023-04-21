@@ -11,9 +11,10 @@ import { SharedModule } from 'app/modules/shared-module/shared.module';
 import { SignInModule } from '../authentication/sign-in/sign-in.module';
 import { SignUpModule } from '../authentication/sign-up/sign-up.module';
 import { CaraselComponent } from './carasel/carasel.component';
-import { AuthModule } from '@angular/fire/auth';
 import { ProfileListComponent } from './profile-list/profile-list.component';
 import { TableRowComponent } from './table-row/table-row.component';
+import { SetAdminComponent } from './set-admin/set-admin.component';
+import { StripeCheckoutComponent } from '../../../components/stripe-checkout/stripe-checkout.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { TableRowComponent } from './table-row/table-row.component';
         ProfileComponent,
         CaraselComponent,
         ProfileListComponent,
-        TableRowComponent
+        TableRowComponent,
+        SetAdminComponent
 
     ],
     imports     : [
@@ -35,7 +37,7 @@ import { TableRowComponent } from './table-row/table-row.component';
         SignInModule,
         SignUpModule,
         SignOutModule,
-        //AuthModule,
+        StripeCheckoutComponent
     ],
     exports: [
       ProfileComponent

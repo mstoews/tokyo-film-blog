@@ -22,6 +22,8 @@ import { ImageSwipeComponent } from "./image-swipe/image-swipe-content.component
 import { SwiperModule } from "swiper/angular";
 import { DataPolicyComponent } from "./data-policy/data-policy.component";
 import { TosComponent } from './tos/tos.component';
+import { StripeCheckoutComponent } from "app/components/stripe-checkout/stripe-checkout.component";
+import { PaymentComponent } from "app/components/payment/payment.component";
 
 const routes: Routes = [
     {
@@ -108,6 +110,8 @@ const routes: Routes = [
         MaterialModule,
         IconsModule,
         SwiperModule,
+        StripeCheckoutComponent,
+        PaymentComponent
 
     ]
 })

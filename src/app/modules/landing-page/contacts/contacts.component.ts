@@ -48,10 +48,32 @@ export class ContactsComponent implements OnInit {
     this.onUpdate(this.contactGroup.value)
   }
 
+  
   onUpdate(contact: Contact) {
     const currentDate = new Intl.DateTimeFormat('en');
     const theDate = currentDate.format();
 
+    if (environment.production === false) {
+      this.http.post<any>(environment.dev.createMessage, {
+        name: contact.name,
+        email: contact.email,
+        message : contact.message
+  
+      }).pipe( catchError( err => {
+        console.debug('Error ', err);
+        this._snackBar.open(JSON.stringify(err), 'Not Sent', {
+          duration: 3000
+        });
+        return throwError(err);
+      }))
+      .subscribe((response: any) => {
+            this._snackBar.open(JSON.stringify(response.message), 'OK', {
+              duration: 3000
+            });
+            this.contactGroup.reset();
+      });
+    }
+    else {
     this.http.post<any>(environment.api.createMessage, {
       name: contact.name,
       email: contact.email,
@@ -70,6 +92,7 @@ export class ContactsComponent implements OnInit {
           });
           this.contactGroup.reset();
     });
+  }
   }
 
   scrollToId() {

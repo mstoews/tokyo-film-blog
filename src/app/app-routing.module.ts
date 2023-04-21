@@ -62,12 +62,6 @@ const routes: Route[] = [
     title: 'Featured'
    },
    {
-    path: 'stripe-checkout',
-    loadChildren: () => import('./modules/stripe/stripe.module').then( (mod) => mod.StripeModule),
-    data: { state: 'strip-checkout' },
-    title: 'Checkout'
-   },
-   {
     path: 'profile',
     loadChildren: () => import('./modules/pages/profile/profile.module').then( (mod) => mod.ProfileModule),
     data: { state: 'profile' },

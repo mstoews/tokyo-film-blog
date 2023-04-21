@@ -1,0 +1,23 @@
+<mat-card class="text-gray-700 m-2">
+  <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[600px] mx-auto bg-white relative lg:px-10 md:px-6 px-4 py-7">
+  <div class="flex lg:flex justify-center gap-2">
+    <div class="w-full py-12 md:py-8 px-4 sm:px-0 md:px-6">
+      <p class="flex text-xl font-semibold leading-tight text-gray-800">
+        Enter your payment information
+      </p>
+      <form class="w-[800px] items-center" (ngSubmit)="createToken()" [formGroup]="stripeTest">
+        <input class="p-2 bg-gray-50 h-[50px] w-full text-gray-700 border border-gray-800 rounded-lg " type="text" formControlName="name" placeholder="Full Name">
+        <ngx-stripe-card class="m-3 w-full] h-[50px] text-gray-800  rounded-lg" [options]="cardOptions" [elementsOptions]="elementsOptions">
+       
+      </ngx-stripe-card>
+        <!-- <ngx-stripe-address [options]="cardOptions" [elementsOptions]="elementsOptions" ></ngx-stripe-address> -->
+        <div class="rounded border-gray-400">
+        <button class="w-full h-[40px] bg-blue-600 text-white hover:bg-blue-500 " mat-flat-button type="submit">
+          PAYMENT
+        </button>
+      </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</mat-card>

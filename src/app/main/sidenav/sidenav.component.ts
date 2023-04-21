@@ -21,16 +21,21 @@ export class SideNavComponent implements OnInit {
     });
   }
 
-  userId = this.authService.afAuth.authState;
+  userId: string;
   userEmail: string;
   show_admin_menu = false;
-  cartCount=0;
+  cartCount = 0;
 
   @Output() notifyParentCloseDrawer: EventEmitter<any> = new EventEmitter();
   @Output() notifyParentDrawerOpen: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    
+    this.userService.isLoggedIn$.subscribe((user) => {
+        this.userService.getUserId().then((id) => {
+          this.userId = id;
+          console.log('User ID: ' + this.userId);
+        });
+      });
   }
 
   onAdmin() {
@@ -50,40 +55,37 @@ export class SideNavComponent implements OnInit {
   }
 
   onWishList() {
-    this.userService.isLoggedIn$.subscribe(user => {
-      if( user === false)
-      {
-      this.snackBar.open('Please sign in to access the wish list', 'Ok', {
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        panelClass: 'bg-danger',
-        duration: 3000,
-      });
-      this.route.navigate(['profile']);
-     } else {
-      this.route.navigate(['/shop/wishlist/', this.userId]);
-      this.notifyParentCloseDrawer.emit();
+    this.userService.isLoggedIn$.subscribe((user) => {
+      if (user === false) {
+        this.snackBar.open('Please sign in to access the wish list', 'Ok', {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'bg-danger',
+          duration: 3000,
+        });
+        this.route.navigate(['profile']);
+      } else {
+        this.route.navigate(['/shop/wishlist/', this.userId]);
+        this.notifyParentCloseDrawer.emit();
       }
     });
   }
 
   onCart() {
-    this.userService.isLoggedIn$.subscribe(user => {
-      if( user === false)
-      {
-      this.snackBar.open('Please sign in to access the cart', 'Ok', {
-        verticalPosition: 'top',
-        horizontalPosition: 'center',
-        panelClass: 'bg-danger',
-        duration: 3000,
-      });
-      this.route.navigate(['profile']);
-     } else {
-      this.route.navigate(['/shop/cart/', this.userId]);
-      this.notifyParentCloseDrawer.emit();
+    this.userService.isLoggedIn$.subscribe((user) => {
+      if (user === false) {
+        this.snackBar.open('Please sign in to access the cart', 'Ok', {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'bg-danger',
+          duration: 3000,
+        });
+        this.route.navigate(['profile']);
+      } else {
+        this.route.navigate(['/shop/cart/', this.userId]);
+        this.notifyParentCloseDrawer.emit();
       }
     });
-   
   }
 
   onClose() {

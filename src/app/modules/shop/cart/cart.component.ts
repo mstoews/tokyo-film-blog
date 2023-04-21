@@ -83,6 +83,32 @@ export class CartComponent implements OnInit, OnDestroy {
         this.checkoutService
           .startProductCheckoutSession(this.cartId)
           .subscribe((checkoutSession) => {
+
+            this.checkoutService.redirectToCheckout(checkoutSession);
+          });
+       
+        this.purchaseStarted = false;
+      } else {
+        this.purchaseStarted = false;
+        this.route.navigate(['profile']); 
+      }
+  
+  }
+
+  onCheckOutPaymentIntent() {
+    // this.calculateTotals();
+    // this.route.navigate(['shop/coming-soon']);
+    this.ngxSpinner.show().then(()=> {
+      setTimeout(()=> {
+        this.ngxSpinner.hide();
+      }, 4000)}
+    );
+    
+    if (this.userId !== undefined && this.cartId !== undefined) {
+        this.purchaseStarted = true;
+        this.checkoutService
+          .startProductCheckoutSession(this.cartId)
+          .subscribe((checkoutSession) => {
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
        
