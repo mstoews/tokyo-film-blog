@@ -15,7 +15,7 @@ export const environment = {
   useEmulators: false,
   gtm_id: "G-WGMMJK9NR3",
   stripe: {
-    public_key: 'pk_  test_51JogSuCGT3ceZF7pYLMW9IZjEOaMGFqz5YOoBaNGTgT8dl72ThRvLgfx1DEFlQPteFpFlwgfpJLPnuJ1X60UCc8m00yEl0F8ra',
+    public_key: 'pk_test_51JogSuCGT3ceZF7pYLMW9IZjEOaMGFqz5YOoBaNGTgT8dl72ThRvLgfx1DEFlQPteFpFlwgfpJLPnuJ1X60UCc8m00yEl0F8ra',
   },
   dev: {
     createMessage: "http://localhost:9000/api/createMessage",

@@ -46,7 +46,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
             //autoUpgradeAnonymousUsers: true,
             signInOptions: [
                 EmailAuthProvider.PROVIDER_ID,
-                // GoogleAuthProvider.PROVIDER_ID,
+                GoogleAuthProvider.PROVIDER_ID,
 
             ],
             callbacks: {

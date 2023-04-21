@@ -18,14 +18,15 @@
             </div>
 
             <div *ngIf="loggedIn">
-              <mat-tab label="Sign Out">
-                <ng-template matTabContent>
-                  <sign-out-fullscreen></sign-out-fullscreen>
-                </ng-template>
-              </mat-tab>
+              
               <mat-tab label="Profile Details">
                 <ng-template matTabContent>
                   <app-address></app-address>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="Sign Out">
+                <ng-template matTabContent>
+                  <sign-out-fullscreen></sign-out-fullscreen>
                 </ng-template>
               </mat-tab>
               <mat-tab label="Purchase">
