@@ -1,10 +1,10 @@
-<div class="absolute inset-0 -px-20 flex flex-col min-w-0 overflow-y-auto" cdkScrollable>
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-y-auto -px-20" cdkScrollable>
   <app-header [title]="'User Profile'"></app-header>
 
   <!-- Main -->
   <div class="flex-auto p-6 sm:p-10">
 
-    <div class="h-auto   border-gray-300 rounded-2xl">
+    <div class="h-auto border-gray-300 rounded-2xl">
       <mat-card>
         <mat-tab-group #tabGroup mat-stretch-tabs="false">
 
@@ -18,7 +18,7 @@
             </div>
 
             <div *ngIf="loggedIn">
-              
+
               <mat-tab label="Profile Details">
                 <ng-template matTabContent>
                   <app-address></app-address>
@@ -29,11 +29,11 @@
                   <sign-out-fullscreen></sign-out-fullscreen>
                 </ng-template>
               </mat-tab>
-              <mat-tab label="Purchase">
+              <!-- <mat-tab label="Purchase">
                 <ng-template matTabContent>
                   <stripe-checkout></stripe-checkout>
                 </ng-template>
-              </mat-tab>
+              </mat-tab> -->
             </div>
           <!-- </ng-container> -->
         </mat-tab-group>

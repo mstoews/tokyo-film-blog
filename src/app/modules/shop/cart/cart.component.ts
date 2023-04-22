@@ -48,7 +48,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private cartService: CartService,
     private snack: MatSnackBar,
     private ngxSpinner: NgxSpinnerService,
-  
+
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
@@ -58,10 +58,11 @@ export class CartComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    
+
 
     this.userId = this.activateRoute.snapshot.params.id;
     this.cart$ = this.cartService.cartByStatus(this.userId, 'open');
+
 
     if (this.cart$) {
       this.calculateTotals();
@@ -77,7 +78,7 @@ export class CartComponent implements OnInit, OnDestroy {
         this.ngxSpinner.hide();
       }, 4000)}
     );
-    
+
     if (this.userId !== undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
@@ -86,13 +87,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
-       
+
         this.purchaseStarted = false;
       } else {
         this.purchaseStarted = false;
-        this.route.navigate(['profile']); 
+        this.route.navigate(['profile']);
       }
-  
+
   }
 
   onCheckOutPaymentIntent() {
@@ -103,7 +104,7 @@ export class CartComponent implements OnInit, OnDestroy {
         this.ngxSpinner.hide();
       }, 4000)}
     );
-    
+
     if (this.userId !== undefined && this.cartId !== undefined) {
         this.purchaseStarted = true;
         this.checkoutService
@@ -111,13 +112,13 @@ export class CartComponent implements OnInit, OnDestroy {
           .subscribe((checkoutSession) => {
             this.checkoutService.redirectToCheckout(checkoutSession);
           });
-       
+
         this.purchaseStarted = false;
       } else {
         this.purchaseStarted = false;
-        this.route.navigate(['profile']); 
+        this.route.navigate(['profile']);
       }
-  
+
   }
 
   calculateTotals() {
@@ -127,11 +128,16 @@ export class CartComponent implements OnInit, OnDestroy {
     this.cart$.subscribe((result) => {
       let total = 0.0;
       result.forEach((item) => {
-        let pricestring = item.price;
-        let price: number = +pricestring;
+
+        if (item.quantity === undefined) {
+            item.quantity = 1;
+        }
+        let quantity = item.quantity;
+        let pricestring = item.price * quantity;
+        let price: number = + pricestring;
         total = price + total;
         this.cartId = item.id;
-      }
+       }
       );
 
       this.total = total;

@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'app/models/category';
@@ -13,6 +13,8 @@ import { Location } from '@angular/common';
 import { imageItem } from 'app/models/imageItem';
 import { ImageListService } from 'app/services/image-list.service';
 import { DndComponent } from 'app/components/loaddnd/dnd.component';
+import { MatTabGroup } from '@angular/material/tabs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-edit',
@@ -37,6 +39,7 @@ export class ProductEditComponent implements OnInit {
   categories: Category[];
   imageArray: imageItem[] = [];
   inventoryImages$: Observable<IImageStorage[]>;
+  isFormDirty = false;
 
   allProducts$: Observable<Product>;
   category$: Observable<Category[]>;
@@ -55,7 +58,8 @@ export class ProductEditComponent implements OnInit {
     private readonly productService: ProductsService,
     private readonly imageListService: ImageListService,
     public dialog: MatDialog,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar,
   ) {
     // this.prd = this.productType;
     this.createEmptyForm();
@@ -82,41 +86,57 @@ export class ProductEditComponent implements OnInit {
     this.category$.subscribe((result) => {
       this.categories = result;
     });
+  }
 
-    // if (this.inventoryImages$) {
-    //   this.inventoryImages$.subscribe((image) => {
-    //     image.forEach((img) => {
-    //       counter++;
-    //       const image: imageItem = {
-    //         id: this.productId,
-    //         parentId: this.productId,
-    //         imageSrc: img.url,
-    //         caption: img.name,
-    //         type: this.IN_FEATURED,
-    //         imageAlt: 'Inventory Image',
-    //         ranking: counter,
-    //       };
-    //       this.imageArray.push(image);
-    //     });
-    //   });
-    // }
+  onTabClick(event) {
+    console.log(event.tab.textLabel);
+    const product = { ...this.prdGroup.value } as Product;
+    this.onUpdate(product);
   }
 
   onDelete(data: Product) {
-
     data = this.prdGroup.getRawValue();
     this.productService.delete(data.id.toString());
     this.route.navigate(['admin/inventory']);
   }
 
-  onUpdate() {
-    const product = { ...this.prdGroup.value } as Product;
-    console.debug('Product can be sold ...: ', product.purchases_allowed);
-    const dDate = new Date();
-    product.rich_description = this.rich_description;
-    const updateDate = dDate.toISOString().split('T')[0];
-    // data.date_updated = updateDate as FieldValue;
-    this.productService.update(product);
+  onUpdate(product: Product) {
+    if (this.isFormDirty) {
+      // const product = { ...this.prdGroup.value } as Product; const product = { ...this.prdGroup.value } as Product;
+      console.debug('Product can be sold ...: ', product.purchases_allowed);
+      product.rich_description = this.rich_description;
+      if(product.quantity === undefined || product.quantity === null) {
+        product.quantity = 1;
+      }
+
+      if (product.quantity_increment === undefined || product.quantity_increment === null) {
+        product.quantity_increment = 1;
+      }
+
+      const quantity_in = product.quantity_increment;
+
+      
+
+      const dDate = new Date();
+      const updateDate = dDate.toISOString().split('T')[0];
+      product.date_created = updateDate;
+      this.productService.update(product);
+      this.prdGroup.setValue(product);
+      this.snackBar.open('Product updated successfully', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+    }
+    else{
+      this.snackBar.open('No changes to save to the product', 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+    }
+
+    this.isFormDirty = false;
   }
 
   createProduct(results: any) {
@@ -142,16 +162,19 @@ export class ProductEditComponent implements OnInit {
       short_description: ['', Validators.required],
       rich_description: ['', Validators.required],
       image: [''],
-      images: [''],
       brand: ['', Validators.required],
-      price: ['', Validators.required ],
-      category: ['', Validators.required ],
+      price: ['', Validators.required],
+      category: ['', Validators.required],
       rating: [''],
       is_featured: ['', Validators.required],
-      user_updated: ['', Validators.required],
+      user_updated: [''],
       date_created: [new Date(), Validators.required],
       date_updated: [new Date(), Validators.required],
-      purchases_allowed: [true, Validators.requiredTrue]
+      purchases_allowed: [true, Validators.requiredTrue],
+      quantity: [1, Validators.required],
+      quantity_required: [true, Validators.required],
+      quantity_increment: [1, Validators.required],
+      is_active: [true, Validators.required],
     });
   }
 
@@ -166,18 +189,30 @@ export class ProductEditComponent implements OnInit {
       image: [prd.image],
       brand: [prd.brand],
       price: [prd.price],
+      quantity_increment: [prd.quantity_increment],
       category: [prd.category],
       rating: [prd.rating],
+      quantity: [prd.quantity],
       is_featured: [prd.is_featured],
       purchases_allowed: [prd.purchases_allowed],
+      quantity_required: [prd.quantity_required],
+      is_active: [prd.is_active],
       user_updated: [prd.user_updated],
       date_created: [prd.date_created],
       date_updated: [prd.date_updated],
     });
+
+    this.prdGroup.valueChanges.subscribe((x) => {
+      this.isFormDirty = true;
+    });
   }
 
   onBackToInventory() {
-    this._location.back();
+    if(this.isFormDirty) {
+      const product = { ...this.prdGroup.value } as Product;
+      this.onUpdate(product);
+    }
+    this.route.navigate(['admin/inventory']);
   }
 
   onImages() {

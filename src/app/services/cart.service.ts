@@ -160,6 +160,8 @@ export class CartService {
           user_purchased: userId,
           date_sold: Timestamp.now(),
           date_updated: Timestamp.now(),
+          quantity: 1,
+
         };
         this.create(cart);
       });
@@ -168,8 +170,10 @@ export class CartService {
 
   update(mtCart: Cart) {
     this.cartCollection.doc(mtCart.id.toString()).update(mtCart);
-    this.snack.open('Item ahs been updated ... ', 'OK',  { duration: 3000 });
+    this.snack.open('Cart has been updated ... ', 'OK',  { duration: 3000 });
   }
+
+
 
   delete(id: string) {
     var cartItems: Observable<Cart[]>;

@@ -18,6 +18,7 @@ specifiers:
   '@babel/runtime': ^7.21.0
   '@github/browser-support': ^1.3.2
   '@stripe/firestore-stripe-payments': ^0.0.6
+  '@stripe/stripe-js': ^1.52.1
   '@tailwindcss/line-clamp': ^0.4.2
   '@tailwindcss/typography': ^0.5.9
   '@types/file-saver': ^2.0.5
@@ -54,6 +55,7 @@ specifiers:
   ngx-lightbox: ^2.6.2
   ngx-markdown: ^15.1.2
   ngx-spinner: ^15.0.1
+  ngx-stripe: ^15.6.0
   ngx-useful-swiper: ^10.0.1
   postcss: ^8.4.21
   prettier: ^2.8.7
@@ -61,6 +63,7 @@ specifiers:
   quill: 1.3.7
   rxfire: ^6.0.3
   rxjs: ~7.5.7
+  stripe: ^12.0.0
   swiper: ^8.4.7
   tailwindcss: ^3.2.7
   tslib: ^2.5.0
@@ -83,6 +86,7 @@ dependencies:
   '@babel/runtime': 7.21.0
   '@github/browser-support': 1.3.2
   '@stripe/firestore-stripe-payments': 0.0.6
+  '@stripe/stripe-js': 1.52.1
   '@tailwindcss/line-clamp': 0.4.2_tailwindcss@3.2.7
   '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.7
   '@types/file-saver': 2.0.5
@@ -109,12 +113,14 @@ dependencies:
   ngx-lightbox: 2.6.2_@types+file-saver@2.0.5
   ngx-markdown: 15.1.2_rwrpoua5xwbpyyv7y4lhacgnhm
   ngx-spinner: 15.0.1_imy7u4geyz7xpmd5teaprpnfzi
+  ngx-stripe: 15.6.0_h7v5afwdoa3if6psccdoxemjqa
   ngx-useful-swiper: 10.0.1_ddj77wcnsy2j4ao2l7uej6lhlm
   prettier: 2.8.7
   prettier-standalone: 1.3.1-0
   quill: 1.3.7
   rxfire: 6.0.3_firebase@9.18.0+rxjs@7.5.7
   rxjs: 7.5.7
+  stripe: 12.2.0
   swiper: 8.4.7
   tslib: 2.5.0
   webpack: 5.76.3
@@ -3609,6 +3615,10 @@ packages:
       - bufferutil
       - encoding
       - utf-8-validate
+    dev: false
+
+  /@stripe/stripe-js/1.52.1:
+    resolution: {integrity: sha512-fza40OPSpGQlFxc5TZWiYC/6Lk89Sep1fLuv9ss33YS6lCAF8UZbfA1E6W+lwO4c7WRKZIZumHIEbPJfP/O9uw==}
     dev: false
 
   /@tailwindcss/line-clamp/0.4.2_tailwindcss@3.2.7:
@@ -7754,6 +7764,19 @@ packages:
       tslib: 2.5.0
     dev: false
 
+  /ngx-stripe/15.6.0_h7v5afwdoa3if6psccdoxemjqa:
+    resolution: {integrity: sha512-cUc/g05vLofPyRl/RJw60rgAB7x3QnquTKvZ6oj5A4C766cSfNXNYU+ONDEmvpFSdm8qeZzpKohlojpl//N4Dg==}
+    peerDependencies:
+      '@angular/common': '>=15.0.0 <16.0.0'
+      '@angular/core': '>=15.0.0 <16.0.0'
+      '@stripe/stripe-js': ^1.52.0 <2.0.0
+    dependencies:
+      '@angular/common': 15.2.4_2hbf4izlhxxeyt5vwbmahxw4wq
+      '@angular/core': 15.2.4_rxjs@7.5.7+zone.js@0.11.8
+      '@stripe/stripe-js': 1.52.1
+      tslib: 2.5.0
+    dev: false
+
   /ngx-useful-swiper/10.0.1_ddj77wcnsy2j4ao2l7uej6lhlm:
     resolution: {integrity: sha512-mkjdcnx7ampyzlv3F8wzNfeVvRfS0frJjLUljIL0VGUkKGBW9D0C4zvENygY5kjX8KMRJk4wh0c1pA3S7prLzw==}
     peerDependencies:
@@ -7978,7 +8001,6 @@ packages:
 
   /object-inspect/1.12.3:
     resolution: {integrity: sha512-geUvdk7c+eizMNUDkRpW1wJwgfOiOeHbxBR/hLXK1aT6zmVSO0jsQcs7fj6MGw89jC/cjGfLcNOrtMYtGqm81g==}
-    dev: true
 
   /object-is/1.1.5:
     resolution: {integrity: sha512-3cyDsyHgtmi7I7DfSSI2LDp6SK2lwvtbg0p0R1e0RvTqF5ceGx+K2dfSjm1bKDMVCFEDAQvy+o8c6a7VujOddw==}
@@ -8537,7 +8559,6 @@ packages:
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
-    dev: true
 
   /qs/6.5.3:
     resolution: {integrity: sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==}
@@ -9095,7 +9116,6 @@ packages:
       call-bind: 1.0.2
       get-intrinsic: 1.2.0
       object-inspect: 1.12.3
-    dev: true
 
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
@@ -9380,6 +9400,14 @@ packages:
     resolution: {integrity: sha512-BrpvfNAE3dcvq7ll3xVumzjKjZQ5tI1sEUIKr3Uoks0XUl45St3FlatVqef9prk4jRDzhW6WZg+3bk93y6pLjA==}
     engines: {node: '>=6'}
     dev: true
+
+  /stripe/12.2.0:
+    resolution: {integrity: sha512-OVqmUuHvDL8z9pBhrhL0HkjPduBM6x1KJCSnVC8R3m+nWpTb7xRpqNuETEkvkYrek1QpfzbcS+UlOCTpv7SC/w==}
+    engines: {node: '>=12.*'}
+    dependencies:
+      '@types/node': 18.15.7
+      qs: 6.11.0
+    dev: false
 
   /strnum/1.0.5:
     resolution: {integrity: sha512-J8bbNyKKXl5qYcR36TIO8W3mVGVHrmmxsd5PAItGkmyzwJvybiw2IVq5nqd0i4LSNSkB/sx9VHllbfFdr9k1JA==}

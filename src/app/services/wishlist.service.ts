@@ -72,7 +72,7 @@ export class WishListService {
         };
         this.create(wish);
       });
-      
+
     }
     //}
   }
@@ -216,7 +216,8 @@ export class WishListService {
           user_purchased: this.userId,
           date_sold: Timestamp.now(),
           date_updated: Timestamp.now(),
-          status: 'open'
+          status: 'open',
+          quantity: 1,
         };
         const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
         collectionRef.add(cart);

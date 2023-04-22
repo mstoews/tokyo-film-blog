@@ -53,6 +53,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   productIds: string[] = [];
   wishListIds: string[] = [];
   loggedIn: boolean = false;
+  quantity: number = 1.0;
+  total_cost: number = 0.0;
 
   userData: any;
 
@@ -66,7 +68,18 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.wishListIds = [];
     this.Categories$ = this.categories.getAll();
 
+
+
     this.product = this.activateRoute.snapshot.data['product'];
+    if (this.product.quantity == undefined) {
+      this.quantity = 1;
+    }
+    else
+    {
+      this.quantity = this.product.quantity;
+      this.total_cost = this.product.price * this.quantity;
+    }
+
     this.productId = this.product.id;
     this.mainImage = this.product.image;
     // console.log('User id from cart', this.authService.userData.uid);
@@ -101,6 +114,53 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.mainImage = e;
   }
 
+  add() {
+    let quantity_increment: number;
+    let quantity: number;
+    if (this.product.quantity_increment) {
+      quantity_increment  = + this.round(this.product.quantity_increment,1);
+    }
+
+    quantity = + this.round(this.quantity,1);
+
+    this.quantity = this.round(quantity, 1) + this.round(quantity_increment, 1);
+    this.total_cost = this.product.price * this.quantity;
+
+    console.log('quantity', this.quantity);
+  }
+
+  subtract() {
+    let quantity_increment: number;
+    let quantity: number;
+    if (this.product.quantity_increment) {
+      quantity_increment  = + this.product.quantity_increment;
+    }
+
+    quantity = + this.quantity;
+
+    this.quantity = this.round(quantity, 1) - this.round(quantity_increment,1);
+
+    this.total_cost = this.product.price * this.quantity;
+
+    console.log(`quantity  ${this.product.quantity} ${this.quantity} ${this.product.quantity_increment} ${quantity_increment} ${this.total_cost}`);
+
+  }
+
+
+  round(number: number, precision: number) {
+    if (precision < 0) {
+      let factor = Math.pow(10, precision);
+      return Math.round(number * factor) / factor;
+    } else
+      return +(
+        Math.round(Number(number + 'e+' + precision)) +
+        'e-' +
+        precision
+      );
+  }
+
+
+
   existsInWishList(): boolean {
     let found = this.wishListIds.find((item) => {
       return item === this.productId;
@@ -129,7 +189,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     return false;
   }
 
- 
+
   onAddToWishList() {
     let inWishList: Boolean;
     let inCart: Boolean;

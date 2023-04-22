@@ -1,6 +1,7 @@
 import { FieldValue } from "firebase/firestore";
 import { imageItem } from '../imageItem'
 export interface Product {
+
   id:   string;
   description:   string;
   short_description: string;
@@ -15,7 +16,11 @@ export interface Product {
   date_created: string;
   date_updated: string;
   status: string;
-  purchases_allowed: boolean
+  purchases_allowed: boolean;
+  quantity_required: boolean;
+  is_active: any;
+  quantity: number;
+  quantity_increment: number;
   // imageUrls: imageItem[];
 }
 
