@@ -88,7 +88,11 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        this.snackBar.open(error, 'Error', { duration: 3000 });
+        this.snackBar.open(error, 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
+        });
       });
   }
 
@@ -139,7 +143,7 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign 
+        /* Call the SendVerificaitonMail() function when new user sign
       up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
@@ -197,8 +201,8 @@ export class AuthService {
       });
   }
 
-  /* Setting up user data when sign in with username/password, 
-sign up with username/password and sign in with social auth  
+  /* Setting up user data when sign in with username/password,
+sign up with username/password and sign in with social auth
 provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(

@@ -22,7 +22,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
     private wishListService: WishListService,
-  
+
     ) { }
 
   ngOnInit(): void {
@@ -55,8 +55,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   addToCart(productId: string, itemId: string) {
-    this.wishListService.delete(itemId);
-    this.wishListService.addToCart(productId);
+    this.wishListService.addToCartFromWishList(productId, 1)
   }
 }
 

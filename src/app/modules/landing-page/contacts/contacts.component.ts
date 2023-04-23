@@ -48,7 +48,7 @@ export class ContactsComponent implements OnInit {
     this.onUpdate(this.contactGroup.value)
   }
 
-  
+
   onUpdate(contact: Contact) {
     const currentDate = new Intl.DateTimeFormat('en');
     const theDate = currentDate.format();
@@ -58,17 +58,21 @@ export class ContactsComponent implements OnInit {
         name: contact.name,
         email: contact.email,
         message : contact.message
-  
+
       }).pipe( catchError( err => {
         console.debug('Error ', err);
-        this._snackBar.open(JSON.stringify(err), 'Not Sent', {
-          duration: 3000
+        this._snackBar.open(JSON.stringify(err), 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
         });
         return throwError(err);
       }))
       .subscribe((response: any) => {
-            this._snackBar.open(JSON.stringify(response.message), 'OK', {
-              duration: 3000
+            this._snackBar.open(JSON.stringify(response.message), 'Close', {
+              verticalPosition: 'top',
+              horizontalPosition: 'right',
+              panelClass: 'bg-danger',
             });
             this.contactGroup.reset();
       });
@@ -81,14 +85,18 @@ export class ContactsComponent implements OnInit {
 
     }).pipe( catchError( err => {
       console.debug('Error ', err);
-      this._snackBar.open(JSON.stringify(err), 'Not Sent', {
-        duration: 3000
+      this._snackBar.open(JSON.stringify(err), 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: 'bg-danger',
       });
-      return throwError(err);
+      return throwError(() => {console.log(err)});
     }))
     .subscribe((response: any) => {
-          this._snackBar.open(JSON.stringify(response.message), 'OK', {
-            duration: 3000
+          this._snackBar.open(JSON.stringify(response.message), 'Close', {
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'bg-danger',
           });
           this.contactGroup.reset();
     });
@@ -111,7 +119,7 @@ export class ContactsComponent implements OnInit {
       email: ['',
         [Validators.required,
         Validators.email]],
-      message: ['', 
+      message: ['',
        [Validators.required,
        Validators.minLength(15),
        Validators.maxLength(100)]]}

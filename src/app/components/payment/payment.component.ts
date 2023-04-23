@@ -27,7 +27,7 @@ export class PaymentComponent implements OnInit {
   @ViewChild(StripePaymentElementComponent)
   paymentElement: StripePaymentElementComponent;
   validated = false;
-  
+
 
   paymentElementForm = this.fb.group({
     name: ['', [Validators.required]],
@@ -59,8 +59,10 @@ export class PaymentComponent implements OnInit {
     this.createPaymentIntent(this.paymentElementForm.get('amount').value)
     .pipe( catchError( err => {
       console.debug('Error ', err);
-      this._snackBar.open(JSON.stringify(err), 'Not Sent', {
-        duration: 3000
+      this._snackBar.open(JSON.stringify(err), 'Close', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
       });
       return throwError(() => new Error('Error creating payment intent'));
     }))
@@ -68,8 +70,10 @@ export class PaymentComponent implements OnInit {
           console.log('Response', response);
           this.validated = true;
           this.elementsOptions.clientSecret = response.client_secret;
-          this._snackBar.open(JSON.stringify(response.message), 'OK', {
-            duration: 3000
+          this._snackBar.open(JSON.stringify(response.message), 'Close', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
           });
     });
   }
@@ -99,12 +103,12 @@ export class PaymentComponent implements OnInit {
         }
       }
     );
-   
+
 
     // console.log('confirm payment', this.elementsOptions.clientSecret );
     // if (this.paymentElementForm.valid) {
     //   this.paying = true;
-    
+
     //   console.log('confirm payment', this.paymentElement);
     //   this.stripeService.confirmPayment( {
     //     elements: this.paymentElement.elements,

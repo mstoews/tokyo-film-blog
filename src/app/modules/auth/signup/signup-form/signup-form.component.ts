@@ -60,10 +60,11 @@ export class SignupFormComponent implements OnInit {
           console.debug('response', response);
           this.signupForm.reset();
 
-          this.snackBar.open('Account Created!', 'Ok', {
+          this.snackBar.open('Account Created!', 'Close', {
             verticalPosition: 'top',
-            horizontalPosition: 'center',
+            horizontalPosition: 'right',
             panelClass: 'bg-success',
+            duration: 3000,
           });
 
           this.router.navigate(['/']);
@@ -71,9 +72,9 @@ export class SignupFormComponent implements OnInit {
         (error) => {
           let errorMessage = 'Signup Failed - ' + error.error.error.message;
 
-          this.snackBar.open(errorMessage, 'Ok', {
+          this.snackBar.open(errorMessage, 'Close', {
             verticalPosition: 'top',
-            horizontalPosition: 'center',
+            horizontalPosition: 'right',
             panelClass: 'bg-danger',
           });
         }

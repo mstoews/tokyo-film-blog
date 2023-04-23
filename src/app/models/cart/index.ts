@@ -3,8 +3,8 @@ import { FieldValue } from "firebase/firestore";
 export interface Cart {
   id: string;
   product_id:   string;
-  description:   string;
-  image:     string;
+  description:  string;
+  image:        string;
   price:        number;
   category:     string;
   rating:       string;

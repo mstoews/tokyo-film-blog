@@ -68,16 +68,21 @@ export class ProfileService {
       .then((profile) => {
         this.snack.open(
           'Profile address has been updated to your profile ...',
-          'Completed',
-          { duration: 3000 }
-        );
+          'Close', {
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'bg-danger',
+          });
+
       })
       .catch((error) => {
         this.snack.open(
           'Profile address was NOT updated to your profile ...',
-          error,
-          { duration: 3000 }
-        );
+          'Close', {
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'bg-danger',
+          });
       })
       .finally();
   }
@@ -89,13 +94,19 @@ export class ProfileService {
       .then((profile) => {
         this.snack.open(
           'Profile address has been updated to your profile ...',
-          'Completed',
-          { duration: 3000 }
-        );
+          'Close', {
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'bg-danger',
+            duration: 3000
+          });
       })
       .catch((error) => {
-        this.snack.open('Error adding new profile definition ... ', 'Error', {
-          duration: 3000,
+        this.snack.open('Error adding new profile definition ... ', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
+          duration: 3000
         });
       })
       .finally();

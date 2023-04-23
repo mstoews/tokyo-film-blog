@@ -154,7 +154,7 @@ export class HeaderComponent implements OnInit {
       {
       this.snackBar.open('Please sign in to access the cart', 'Ok', {
         verticalPosition: 'top',
-        horizontalPosition: 'center',
+        horizontalPosition: 'right',
         panelClass: 'bg-danger',
         duration: 3000,
       });
@@ -163,16 +163,16 @@ export class HeaderComponent implements OnInit {
       this._router.navigate(['shop/cart', this.authService.userData.uid]);
       }
     });
-  
+
   }
 
   openWishList() {
     this.userService.isLoggedIn$.subscribe(user => {
       if( user === false)
       {
-      this.snackBar.open('Please sign in to access the wish list', 'Ok', {
+      this.snackBar.open('Please sign in to access the wish list', 'Close', {
         verticalPosition: 'top',
-        horizontalPosition: 'center',
+        horizontalPosition: 'right',
         panelClass: 'bg-danger',
         duration: 3000,
       });

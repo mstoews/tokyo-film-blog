@@ -57,7 +57,7 @@ export class SideNavComponent implements OnInit {
   onWishList() {
     this.userService.isLoggedIn$.subscribe((user) => {
       if (user === false) {
-        this.snackBar.open('Please sign in to access the wish list', 'Ok', {
+        this.snackBar.open('Please sign in to access the wish list', 'Close', {
           verticalPosition: 'top',
           horizontalPosition: 'center',
           panelClass: 'bg-danger',
@@ -74,9 +74,9 @@ export class SideNavComponent implements OnInit {
   onCart() {
     this.userService.isLoggedIn$.subscribe((user) => {
       if (user === false) {
-        this.snackBar.open('Please sign in to access the cart', 'Ok', {
+        this.snackBar.open('Please sign in to access the cart', 'Close', {
           verticalPosition: 'top',
-          horizontalPosition: 'center',
+          horizontalPosition: 'right',
           panelClass: 'bg-danger',
           duration: 3000,
         });

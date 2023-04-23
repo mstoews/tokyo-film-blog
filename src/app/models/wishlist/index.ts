@@ -9,6 +9,7 @@ export interface WishList {
   price:        number;
   category:     string;
   rating:       string;
+  quantity: number;
   is_featured:  string;
   user_updated: string;
   date_created: string;

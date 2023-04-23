@@ -22,32 +22,7 @@ export class ResetComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // onReset(resetForm: NgForm) {
-  //   this.httpClient
-  //     .post(
-  //       `https://identitytoolkit.googleapis.com/v1/accounts:resetPassword?key==${environment.firebaseApiKey}`,
-  //       { ...resetForm.value, requestType: 'PASSWORD_RESET' }
-  //     )
-  //     .subscribe(
-  //       () => {
-  //         this.snackBar.open('Password Reset Successful', 'Ok', {
-  //           verticalPosition: 'top',
-  //           horizontalPosition: 'center',
-  //           panelClass: 'bg-success',
-  //         });
-  //         this.router.navigate(['auth/login']);
-  //       },
-  //       (error) => {
-  //         let errorMessage = 'Operation Failed - ' + error.error.error.message;
 
-  //         this.snackBar.open(errorMessage, 'Ok', {
-  //           verticalPosition: 'top',
-  //           horizontalPosition: 'center',
-  //           panelClass: 'bg-danger',
-  //         });
-  //       }
-  //     );
-  // }
 
   onSendPasswordResetCode(resetForm: NgForm) {
     this.httpClient
@@ -56,10 +31,11 @@ export class ResetComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.snackBar.open('Email Sent.', 'Ok', {
+          this.snackBar.open('Email Sent.', 'Close', {
             verticalPosition: 'top',
-            horizontalPosition: 'center',
+            horizontalPosition: 'right',
             panelClass: 'bg-success',
+            duration: 3000,
           });
           this.isPasswordResetCodeSent = true;
           this.router.navigate(['auth/login']);
@@ -67,10 +43,11 @@ export class ResetComponent implements OnInit {
         (error) => {
           let errorMessage = 'Operation Failed - ' + error.error.error.message;
 
-          this.snackBar.open(errorMessage, 'Ok', {
+          this.snackBar.open(errorMessage, 'Close', {
             verticalPosition: 'top',
-            horizontalPosition: 'center',
+            horizontalPosition: 'right',
             panelClass: 'bg-danger',
+            duration: 3000,
           });
         }
       );

@@ -15,6 +15,8 @@ import { convertSnaps } from './db-utils';
 import { IImageStorage } from 'app/models/maintenance';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth/auth.service';
+import { WishListService } from './wishlist.service';
+import { WishList } from 'app/models/wishlist';
 
 @Injectable({
   providedIn: 'root',
@@ -31,7 +33,7 @@ export class CartService {
     public afs: AngularFirestore,
     public auth: AngularFireAuth,
     public authService: AuthService,
-    private snack: MatSnackBar
+    private snack: MatSnackBar,
   ) {
     auth.authState.subscribe((user) => {
       this.userId = user?.uid;
@@ -132,7 +134,12 @@ export class CartService {
     // console.debug('product id:', mtCart.id);
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
     collectionRef.add(mtCart);
-    this.snack.open('Selection has been added to your cart ...', 'OK', { duration: 3000 });
+    this.snack.open('Selection has been added to your cart ...', 'Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: 'bg-danger',
+      duration: 3000,
+    });
   }
 
   findProductById(id: string): Observable<Product | undefined> {
@@ -160,6 +167,7 @@ export class CartService {
           user_purchased: userId,
           date_sold: Timestamp.now(),
           date_updated: Timestamp.now(),
+          status: 'open',
           quantity: 1,
 
         };
@@ -168,9 +176,39 @@ export class CartService {
     }
   }
 
+  addToCartWithQuantity(productId: string, quantity: number) {
+    let userId = this.userId;
+    let prod = this.findProductById(productId);
+    if (prod) {
+      prod.subscribe((result) => {
+        const cart: Cart = {
+          ...result,
+          product_id: productId,
+          is_completed: false,
+          user_purchased: userId,
+          date_sold: Timestamp.now(),
+          date_updated: Timestamp.now(),
+          quantity: quantity,
+          status: 'open',
+        };
+        this.create(cart);
+      });
+      let wishlistItems: Observable<WishList[]>;
+      let wishlistCollection: AngularFirestoreCollection<WishList>;
+      wishlistCollection = this.afs.collection<WishList>(`users/${this.userId}/wishlist` );
+      wishlistItems = wishlistCollection.valueChanges({ idField: 'id' });
+      wishlistCollection.doc(productId).delete();
+    }
+  }
+
+
   update(mtCart: Cart) {
     this.cartCollection.doc(mtCart.id.toString()).update(mtCart);
-    this.snack.open('Cart has been updated ... ', 'OK',  { duration: 3000 });
+    this.snack.open('Cart has been updated ... ', 'Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: 'bg-danger',
+    });
   }
 
 
@@ -183,6 +221,10 @@ export class CartService {
     );
     cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
     cartItemsCollection.doc(id).delete();
-    this.snack.open('Item has been removed ... ', 'OK', { duration: 3000 });
+    this.snack.open('Item has been removed ... ','Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: 'bg-danger',
+    });
   }
 }

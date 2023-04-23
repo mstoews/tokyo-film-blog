@@ -41,9 +41,9 @@ export class ShopCardComponent implements OnInit {
   ngOnInit(): void {
     this.productIds = [];
     this.wishListIds = [];
-   
+
     this.productId = this.product.id;
-   
+
     // console.log('User id from cart', this.authService.userData.uid);
 
     if (this.authService.userData) {
@@ -68,17 +68,7 @@ export class ShopCardComponent implements OnInit {
   }
 
   addToCart() {
-    // this.userService.isLoggedIn$.subscribe( user => {
-    //   if (user === true)
-    //   {
-    //     this.wishList.addToCart(this.product.id);
-    //   }
-    //   else {
-    //     this.router.navigate(['/profile']);
-    //   }
-    // })
     this.onAddToShoppingCart();
-   
   }
 
   existsInWishList(): boolean {
@@ -88,9 +78,12 @@ export class ShopCardComponent implements OnInit {
     if (found) {
       this.snackBar.open(
         'The item already exists in your wishlist ... ',
-        'OK',
-        { duration: 3000 }
-      );
+        'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
+        });
+
       return true;
     }
     return false;
@@ -101,7 +94,10 @@ export class ShopCardComponent implements OnInit {
       return item === this.productId;
     });
     if (found) {
-      this.snackBar.open('The item already exists in your cart ... ', 'OK', {
+      this.snackBar.open('The item already exists in your cart ... ', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: 'bg-danger',
         duration: 3000,
       });
       return true;
@@ -137,7 +133,7 @@ export class ShopCardComponent implements OnInit {
       if (this.loggedIn === true) {
         inCart = this.existsInCart();
         if (inCart === false) {
-          this.wishlistService.addToCart(this.productId);
+          this.wishlistService.addToCart(this.productId, 1);
           this.productIds.push(this.productId);
         }
       } else {
@@ -151,7 +147,7 @@ export class ShopCardComponent implements OnInit {
   addToWishlist() {
     this.wishList.createWishList(this.product.id);
     }
-    
+
   openProductDetail() {
     this.router.navigate(['shop/product', this.product.id]);
   }

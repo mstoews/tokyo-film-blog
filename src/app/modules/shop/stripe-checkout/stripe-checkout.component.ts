@@ -36,7 +36,7 @@ export class StripeCheckoutComponent implements OnInit {
                   () => {
                       this.waiting = false;
                       this.message = "Purchase SUCCESSFUL, redirecting...";
-                      setTimeout(() => this.router.navigateByUrl("/shop"), 5000);
+                      setTimeout(() => this.router.navigateByUrl("/shop"), 3000);
                   })
            }
       }

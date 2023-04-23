@@ -108,8 +108,10 @@ export class AddressComponent implements OnInit {
             })
             .catch()
             .finally();
-          this.snack.open('Profile has been add ...', 'OK', {
-            duration: 3000,
+          this.snack.open('Profile has been add ...', 'Close', {
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'bg-danger',
           });
           console.log('user doc', this.updateStripeCustomerId(user.uid));
         })

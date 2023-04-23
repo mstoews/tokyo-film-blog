@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class BlogService {
-  
+
   private blogCollection: AngularFirestoreCollection<Blog>;
   private blogPartialCollection: AngularFirestoreCollection<BlogPartial>;
   private blogItems: Observable<Blog[]>;
@@ -32,13 +32,17 @@ export class BlogService {
   }
 
   createComment(comment: Comments) {
-  
+
     const collectionRef = this.afs.collection(`/blog/${comment.blog_id}/comment`);
-  
+
     collectionRef.add(comment).then ( newComment => {
       comment.id = newComment.id
       this.updateComment (comment);
-      this.snack.open('Comment added to the thoughts ... ', 'OK', {duration: 3000 });
+      this.snack.open('Comment added to the thoughts ... ', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: 'bg-danger',
+      });
     }).catch (error => {
       alert('Unable to update comment');
     }).finally();

@@ -18,8 +18,10 @@ export class SnackService {
   }
 
   authError() {
-    this.snackBar.open('You must be logged in!', 'OK', {
-      duration: 3000,
+    this.snackBar.open('You must be logged in!', 'Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: 'bg-danger',
     });
 
     return this.snackBar._openedSnackBarRef!
@@ -29,8 +31,10 @@ export class SnackService {
   }
 
   showMessage(message: string) {
-    this.snackBar.open(message, 'OK', {
-      duration: 3000,
+    this.snackBar.open(message, 'Close', {
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      panelClass: 'bg-danger',
     });
   }
 }

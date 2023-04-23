@@ -131,8 +131,10 @@ export class PaymentAddressComponent implements OnInit {
             })
             .catch()
             .finally();
-          this.snackBar.open('Profile has been add ...', 'OK', {
+          this.snackBar.open('Profile has been add ...', 'Close', {
             duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
           });
           console.log('user doc', this.updateStripeCustomerId(user.uid));
         })
@@ -148,8 +150,10 @@ export class PaymentAddressComponent implements OnInit {
           );
           data.id = this.profileId;
           collectionRef.doc(this.profileId).update(data);
-          this.snackBar.open('Profile has been updated ...', 'OK', {
+          this.snackBar.open('Profile has been updated ...', 'Close', {
             duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
           });
           this.updateStripeCustomerId(user.uid);
           console.log('user doc', this.updateStripeCustomerId(user.uid));
@@ -227,8 +231,10 @@ export class PaymentAddressComponent implements OnInit {
       .pipe(
         catchError((err) => {
           console.debug('Error ', err);
-          this.snackBar.open(JSON.stringify(err), 'Not Sent', {
+          this.snackBar.open(JSON.stringify(err), 'Close', {
             duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
           });
           return throwError(() => new Error('Error creating payment intent'));
         })
@@ -237,8 +243,10 @@ export class PaymentAddressComponent implements OnInit {
         console.log('Response', response);
         this.validated = true;
         this.elementsOptions.clientSecret = response.client_secret;
-        this.snackBar.open(JSON.stringify(response.message), 'OK', {
+        this.snackBar.open(JSON.stringify(response.message), 'Close', {
           duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top'
         });
       });
   }

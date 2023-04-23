@@ -50,7 +50,7 @@ export class GridComponent implements OnInit, OnDestroy {
     private productService: ProductsService,
     private cartService: CartService,
     private categories: CategoryService,
-    private snackBar: MatSnackBar, 
+    private snackBar: MatSnackBar,
     private menuToggleService: MenuToggleService,
     public  userService: UserService
   ) {}
@@ -67,7 +67,7 @@ export class GridComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
 
     this.Products$ =  this.productService.getAll().pipe( map((inventory) => inventory.filter((available) => available.is_featured === 'Featured')));
- 
+
     this.userData = this.authService.userData;
     this.wishListIds = [];
     this.productIds = [];
@@ -105,7 +105,7 @@ export class GridComponent implements OnInit, OnDestroy {
   }
 
   setImage(e: string) {
-    
+
   }
 
   onAddToWishList() {
@@ -135,12 +135,14 @@ export class GridComponent implements OnInit, OnDestroy {
         return item === this.productId;
       });
       if (found) {
-        this.snackBar.open('The item already exists in your cart ... ', 'OK', {
-          duration: 3000,
+        this.snackBar.open('The item already exists in your cart ... ', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
         });
         return;
       } else {
-        this.wishlistService.addToCart(this.productId);
+        this.wishlistService.addToCart(this.productId, 1);
       }
     } else {
       this.route.navigate(['shop/coming-soon']);
@@ -159,14 +161,18 @@ export class GridComponent implements OnInit, OnDestroy {
       if (this.cartCount > 0) {
         this.route.navigate(['shop/cart', userId]);
       } else {
-        this.snackBar.open('There are no items in your cart', 'OK', {
-          duration: 3000,
+        this.snackBar.open('There are no items in your cart', 'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
         });
         return;
       }
     } else {
-      this.snackBar.open('You must be logged in access the cart', 'OK', {
-        duration: 3000,
+      this.snackBar.open('You must be logged in access the cart', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: 'bg-danger',
       });
       this.snackBar._openedSnackBarRef!.onAction().subscribe();
     }

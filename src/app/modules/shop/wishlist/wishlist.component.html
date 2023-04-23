@@ -1,18 +1,18 @@
 <ng-container class="bg-white" *ngIf="wishList$ | async as wishItems">
   <app-header [title]="header_title" [sub_title]="'Save some favorites'"></app-header>
   <div
-    class="2xl:mx-auto 2xl:container md:py-12 py-9 lg:px-20 px-4 md:px-6 flex justify-center items-center flex-col space-y-8">
+    class="flex flex-col items-center justify-center px-4 space-y-8 2xl:mx-auto 2xl:container md:py-12 py-9 lg:px-20 md:px-6">
     <div
-      class="grid grid-cols-1 sm:px-20 md:px-0 md:grid-cols-2 xl:grid-cols-3 w-full justify-items-center gap-x-6 lg:gap-x-8 gap-y-12 xl:gap-y-0">
+      class="grid w-full grid-cols-1 sm:px-20 md:px-0 md:grid-cols-2 xl:grid-cols-3 justify-items-center gap-x-6 lg:gap-x-8 gap-y-12 xl:gap-y-0">
       <div *ngIf="wishItems.length > 0; else no_wish">
         <div *ngFor="let item of wishItems">
-          <div class="flex w-full flex-col justify-center items-start space-y-4">
-            <div class="group relative w-full flex justify-center items-center">
-              <img class="w-full hidden lg:block" [src]="item.image" alt="watch-1" />
-              <img class="w-full hidden md:block lg:hidden" [src]="item.image" alt="watch-1" />
+          <div class="flex flex-col items-start justify-center w-full space-y-4">
+            <div class="relative flex items-center justify-center w-full group">
+              <img class="hidden w-full lg:block" [src]="item.image" alt="watch-1" />
+              <img class="hidden w-full md:block lg:hidden" [src]="item.image" alt="watch-1" />
               <img class="w-full md:hidden" [src]="item.image" alt="watch-1" />
               <button (click)="onRemoveItem(item.id)"
-                class="z-30 p-2 rounded-full bg-white absolute top-4 right-4 hover:text-red-600 text-gray-600">
+                class="absolute z-30 p-2 text-gray-600 bg-white rounded-full top-4 right-4 hover:text-red-600">
                 <svg class="fill-stroke" width="30" height="30" viewBox="0 0 30 30" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
                   <path d="M5 8.75H25" stroke="currentColor" stroke-width="1.25" stroke-linecap="round"
@@ -30,16 +30,16 @@
                 </svg>
               </button>
               <button (click)="addToCart(item.product_id, item.id)"
-                class="opacity-0 hover:text-black z-10 group-hover:opacity-100 transition duration-200 absolute bg-white flex justify-center items-center text-center py-3 text-base font-medium leading-4 bottom-8 w-5/6 text-gray-800">
+                class="absolute z-10 flex items-center justify-center w-5/6 py-3 text-base font-medium leading-4 text-center text-gray-800 transition duration-200 bg-white opacity-0 hover:text-black group-hover:opacity-100 bottom-8">
                 Add to cart
               </button>
               <div
-                class="w-full h-full opacity-0 group-hover:opacity-25 transition duration-200 bg-gradient-to-t z-0 from-gray-800 to-opacity-0 absolute bottom-0">
+                class="absolute bottom-0 z-0 w-full h-full transition duration-200 opacity-0 group-hover:opacity-25 bg-gradient-to-t from-gray-800 to-opacity-0">
               </div>
             </div>
             <div class="text-left">
               <p class="text-sm leading-3 text-gray-600">{{ item.category }}</p>
-              <h2 class="mt-1 text-xl lg:text-2xl font-semibold leading-5 lg:leading-6 text-gray-800">
+              <h2 class="mt-1 text-xl font-semibold leading-5 text-gray-800 lg:text-2xl lg:leading-6">
                 {{ item.description }}
               </h2>
             </div>
@@ -55,12 +55,12 @@
   </div>
   <ng-template #no_wish>
     <div class="col-start-2 col-end-2 sm:col-start-1 sm:col-end-1">
-      <div class="mx-auto max-w-2xl px-4 pt-6 sm:px-6 ">
-        <h2 class="text-lg font-medium text-gray-900 text-center">
+      <div class="max-w-2xl px-4 pt-6 mx-auto sm:px-6 ">
+        <h2 class="text-lg font-medium text-center text-gray-900">
           Currently nothing in your wishlist
         </h2>
         <button type="submit" (click)="backToShopping()"
-          class="w-full rounded-md border border-transparent bg-gray-800 py-3 px-4 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
+          class="w-full px-4 py-3 text-base font-medium text-white bg-gray-800 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50">
           Continue to Shopping
         </button>
         <h2></h2>

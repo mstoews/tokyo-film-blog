@@ -168,9 +168,12 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     if (found) {
       this.snackBar.open(
         'The item already exists in your wishlist ... ',
-        'OK',
-        { duration: 3000 }
-      );
+        'Close', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
+          duration: 3000,
+        });
       return true;
     }
     return false;
@@ -181,7 +184,10 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       return item === this.productId;
     });
     if (found) {
-      this.snackBar.open('The item already exists in your cart ... ', 'OK', {
+      this.snackBar.open('The item already exists in your cart ... ', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: 'bg-danger',
         duration: 3000,
       });
       return true;
@@ -218,7 +224,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       if (this.loggedIn === true) {
         inCart = this.existsInCart();
         if (inCart === false) {
-          this.wishlistService.addToCart(this.productId);
+          this.wishlistService.addToCart(this.productId, this.quantity);
           this.productIds.push(this.productId);
         }
       } else {
@@ -235,7 +241,10 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     if (this.cartCount > 0) {
       this.route.navigate(['shop/cart', this.authService.userData.uid]);
     } else {
-      this.snackBar.open('There are no items in your cart', 'OK', {
+      this.snackBar.open('There are no items in your cart', 'Close', {
+        verticalPosition: 'top',
+        horizontalPosition: 'right',
+        panelClass: 'bg-danger',
         duration: 3000,
       });
       return;
