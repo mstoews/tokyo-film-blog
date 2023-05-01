@@ -57,6 +57,12 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     this.imageListService.createRawImagesList();
   }
 
+  onImageSelected(e: any) {
+    console.log('onImageSelected: ' + JSON.stringify(e));
+  }
+
+
+
   createImageOnce() {
     // const data: imageItem = {
     //   id: '',

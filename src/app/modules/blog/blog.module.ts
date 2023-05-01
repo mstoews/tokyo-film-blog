@@ -17,8 +17,6 @@ import { CommentsListComponent } from './comments-list/comments-list.component';
 import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 
 
-
-
 @NgModule({
   declarations: [
     BlogComponent,
@@ -29,6 +27,7 @@ import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
     CommentsComponent,
     CommentsListComponent,
     ReplyDialogComponent,
+
   ],
   imports: [
     CommonModule,

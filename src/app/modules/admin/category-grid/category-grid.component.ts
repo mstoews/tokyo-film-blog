@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional, ViewChild } from '@angular/core'
+import { Component, AfterViewInit, Inject, OnInit, Optional, ViewChild } from '@angular/core'
 import { Observable } from 'rxjs'
 import { MatDrawer } from '@angular/material/sidenav'
 import { FormBuilder, FormGroup } from '@angular/forms'
@@ -7,6 +7,10 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog'
 import { AngularFireAuth } from '@angular/fire/compat/auth'
 import { Category } from 'app/models/category'
 import { CategoryService } from 'app/services/category.service'
+
+import {LiveAnnouncer} from '@angular/cdk/a11y';
+import {MatSort, Sort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
 
 @Component({
   selector: 'category-list',

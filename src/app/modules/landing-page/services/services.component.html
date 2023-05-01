@@ -1,0 +1,59 @@
+<app-header class="bg-gray-100" [title]="'Services'"></app-header>
+<div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
+  <!-- Creations Header -->
+
+
+  <div class="flex gap-3 my-32 text-gray-100 flex-px-6 max-w-7xl md:px-0">
+
+    <div (click)="onServices('home/knitting')" class="flex-1 group item">
+      <img [src]="services_one" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+        width="300" />
+
+      <img [src]="services_one" alt="services" class="w-full md:hidden" />
+
+      <div class="item-gradient"></div>
+
+      <h5 class="text-2xl font-garamond">Bespoke Tailoring</h5>
+    </div>
+
+
+    <div (click)="onServices('home/knitting')" class="group item">
+
+      <img [src]="services_two" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+        width="300" />
+
+      <img [src]="services_two" alt="" class="w-full md:hidden" />
+
+      <div class="item-gradient"></div>
+
+
+      <h5 class="text-2xl font-garamond">Bespoke Knitwear</h5>
+    </div>
+
+
+    <div (click)="onServices('home/repairs')" class="group item">
+
+      <img [src]="services_three" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110" height="400"
+        width="300" />
+
+      <img [src]="services_three" alt="" class="w-full md:hidden" />
+
+      <div class="item-gradient"></div>
+
+
+      <h5 class="text-2xl font-garamond">Mending and Repairs</h5>
+    </div>
+
+
+    <div (click)="onServices('home/ready-to-wear')" class="group item">
+
+      <img [src]="services_four" alt="" class="hidden duration-200 h-120 md:block group-hover:scale-110"
+       height="400"
+        width="300" />
+      <img [src]="services_four" alt="" class="w-full md:hidden" />
+      <div class="item-gradient"></div>
+
+      <h5 class="text-2xl font-garamond">Ready to Wear</h5>
+    </div>
+  </div>
+</div>

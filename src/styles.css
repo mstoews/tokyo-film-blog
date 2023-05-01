@@ -53,14 +53,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 }
 
 #hero {
-  background-image: url('assets/images/hero_image.jpg');
+  background-image: url('assets/images/cloth_background_3.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 @media (max-width: 576px) {
   #hero {
-    background-image: url('assets/images/hero_image.jpg');
+    background-image: url('assets/images/cloth_background_3.jpg');
     background-position: center;
   }
 }

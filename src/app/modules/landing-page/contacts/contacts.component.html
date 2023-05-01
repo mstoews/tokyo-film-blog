@@ -72,11 +72,11 @@
           referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
-    <mat-card class="flex flex-col-1 text-gray-700">
+    <mat-card class="flex text-gray-700 flex-col-1">
       <h1 class="p-2">Leave a Message</h1>
 
       <form [formGroup]="contactGroup" (ngSubmit)="onSubmit()">
-        <!-- <mat-form-field class="p-2 flex-col w-full" appearance="fill">
+        <!-- <mat-form-field class="flex-col w-full p-2" appearance="fill">
           <mat-label>Name</mat-label>
           <input matInput formControlName="name" required />
         </mat-form-field> -->
@@ -110,13 +110,13 @@
         <div class="m-2">
           <div class="mt-10">
             <button #send type="submit" [disabled]="!contactGroup.valid"
-              class="h-14  text-sm font-semibold leading-none text-white bg-gray-700 focus:outline-none disabled:bg-gray-400 border rounded hover:bg-gray-800 py-4 w-full"
+              class="w-full py-4 text-sm font-semibold leading-none text-white bg-gray-700 border rounded h-14 focus:outline-none disabled:bg-gray-400 hover:bg-gray-800"
               mat-raised-button>
               Send your message
               <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
             </button>
           </div>
-        
+
         </div>
 
       </form>

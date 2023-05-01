@@ -41,6 +41,7 @@ export class AdminFormComponent implements OnInit {
       features_header: [''],
       features_subheader: [''],
       cta_left: [''],
+      cta_center: [''],
       cta_right: [''],
       contact_email: [''],
       contact_telephone: [''],
@@ -56,6 +57,7 @@ export class AdminFormComponent implements OnInit {
       features_header: [mainPage.features_header],
       features_subheader: [mainPage.features_subheader],
       cta_left: [mainPage.cta_left],
+      cta_center: [mainPage.cta_center],
       cta_right: [mainPage.cta_right],
       contact_email: [mainPage.contact_email],
       contact_telephone: [mainPage.contact_telephone],
@@ -72,7 +74,7 @@ export class AdminFormComponent implements OnInit {
 
   onUpdate(mainPage: Mainpage) {
     mainPage = this.mainpageGroup.getRawValue()
-    console.debug(`onUpdate: ${JSON.stringify(mainPage)}`);
+    console.log(`onUpdate: ${JSON.stringify(mainPage)}`);
     this.mainPageService.update(mainPage);
   }
 

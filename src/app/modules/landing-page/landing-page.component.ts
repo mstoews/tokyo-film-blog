@@ -1,18 +1,20 @@
-import { Component, OnInit, Output } from '@angular/core'
-import { Router } from '@angular/router'
-import { ScrollService } from 'app/services/scroll.service'
-import { animate, style, transition, trigger } from '@angular/animations'
-import { Observable, of } from 'rxjs'
-import { ContactService } from 'app/services/contact.service'
-import { FormBuilder, FormGroup } from '@angular/forms'
-import { Contact } from 'app/models/contact'
-import { MainPageService } from 'app/services/main-page.service'
-import { Mainpage } from 'app/models/mainpage'
-import { ImageListService } from 'app/services/image-list.service'
-import { imageItem } from 'app/models/imageItem'
-import { CartService } from 'app/services/cart.service'
-import { WishListService } from 'app/services/wishlist.service'
-import { AuthService } from 'app/services/auth/auth.service'
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
+import { ScrollService } from 'app/services/scroll.service';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Observable, of } from 'rxjs';
+import { ContactService } from 'app/services/contact.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Contact } from 'app/models/contact';
+import { MainPageService } from 'app/services/main-page.service';
+import { Mainpage } from 'app/models/mainpage';
+import { ImageListService } from 'app/services/image-list.service';
+import { imageItem } from 'app/models/imageItem';
+import { CartService } from 'app/services/cart.service';
+import { WishListService } from 'app/services/wishlist.service';
+import { AuthService } from 'app/services/auth/auth.service';
+import { BlogService } from '../../services/blog.service';
+import { MenuToggleService } from '../../services/menu-toggle.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -60,7 +62,9 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private scrollTo: ScrollService,
     private fb: FormBuilder,
-    private authService: AuthService
+    private authService: AuthService,
+    private blogService: BlogService,
+    private menuToggle: MenuToggleService,
   ) {}
 
   ngOnInit(): void {
@@ -77,6 +81,7 @@ export class LandingPageComponent implements OnInit {
           features_header: 'Header',
           features_subheader: 'Sub Title',
           cta_left: 'Left',
+          cta_center: 'Center',
           cta_right: 'Right',
           contact_email: 'Joey',
           contact_telephone: '555-1212',
@@ -88,13 +93,41 @@ export class LandingPageComponent implements OnInit {
       }
     });
     const UserId = of(this.authService.afAuth.currentUser);
-    UserId.subscribe(user => {
-      console.debug (JSON.stringify(user));
-    })
-    
+    UserId.subscribe((user) => {
+      console.debug(JSON.stringify(user));
+    });
+
     this.createEmptyForm();
-    this.populateImageList();
+    // this.populateImageList();
     //this.cartService.cartByUserId()
+  }
+
+  @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
+
+  onMenuToggle() {
+    this.menuToggle.setDrawerState(true);
+    this.notifyNavBarToggleMenu.emit();
+  }
+
+
+  onLastestBlog() {
+    // console.debug('navigate to blog');
+    this.blogService.getAllPublishedBlog().subscribe((blog) => {
+      if (blog.length > 0) {
+          this.router.navigate(['blog/detail',blog[0].id]);
+          return;
+      } else {
+        this.router.navigate(['blog']);
+      }
+    });
+  }
+
+  onService() {
+    this.router.navigate(['home/services']);
+  }
+
+  onFollowing() {
+    this.router.navigate(['home/following']);
   }
 
   onServices(service: string) {
@@ -104,9 +137,8 @@ export class LandingPageComponent implements OnInit {
 
   onAboutUs(service: string) {
     // console.debug(service);
-    this.onClickAboutUs()
+    this.onClickAboutUs();
   }
-
 
   onUpdate(contact: Contact) {
     contact = this.contactGroup.getRawValue();
@@ -138,10 +170,9 @@ export class LandingPageComponent implements OnInit {
     this.scrollTo.scrollToElementById(id);
   }
 
-  onFeatured(){
+  onFeatured() {
     this.router.navigate(['collections']);
   }
-
 
   populateImageList() {
     let imageCount = 0;
@@ -158,5 +189,3 @@ export class LandingPageComponent implements OnInit {
     // });
   }
 }
-
-
