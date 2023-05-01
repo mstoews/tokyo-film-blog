@@ -1,6 +1,6 @@
  <div class="h-screen flex-container">
   <mat-sidenav-container class="flex-1 bg-white">
-    <mat-sidenav class="flex-1 ml-1 bg-gray-100  " #drawer [mode]="'over'" closed
+    <mat-sidenav class="flex-1 ml-1 bg-gray-100 " #drawer [mode]="'over'" closed
       [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
       <app-sidenav
       (notifyParentCloseDrawer)="closeDrawer()"
@@ -8,18 +8,19 @@
       (notifyParentDrawerOpen)="openDrawer()">
       </app-sidenav>
     </mat-sidenav>
-    <main class="max-h-content text-gray-800 bg-white rounded-lg flex-main">
-      <article class="flex-article bg-white">
+    <main class="text-gray-800 bg-white rounded-lg max-h-content flex-main">
+      <article class="bg-white flex-article">
         <ng-content>
-         
+
         </ng-content>
       </article>
     </main>
   </mat-sidenav-container>
-</div> 
-<footer class="bg-gray-100 mt-auto">
-  <app-footer class="m-1"></app-footer> 
-</footer>
+  <footer class="mt-auto bg-gray-100 -mb-50px">
+    <app-footer class="m-1 " ></app-footer>
+  </footer>
+</div>
+
 
 
 
