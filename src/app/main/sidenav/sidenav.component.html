@@ -2,8 +2,11 @@
 <div class="container relative h-screen">
   <aside aria-label="Sidebar">
     <div class="px-3 py-10 text-gray-100 bg-gray-100 rounded w-50 dark:bg-gray-800">
+      <div class="ml-4">
+        <img src="assets/madetologo-black.svg" alt="logo">
+      </div>
       <ul class="space-y-2">
-        <li class="mt-5 text-gray-500">Main Menu</li>
+
         <ng-container *ngIf="show_admin_menu === false">
           <li>
             <a routerLink="profile" (click)="onClose()"
@@ -70,7 +73,7 @@
               </li>
             </ng-container>
           </ng-container> -->
-        </ng-container> 
+        </ng-container>
 
         <ng-container *ngIf="show_admin_menu === false">
           <ng-container *ngIf="(userService.roles$ | async) as roles">
@@ -99,6 +102,15 @@
                   <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
                 </a>
               </li>
+
+              <li>
+                <a routerLink="collections-admin"
+                  class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                  <mat-icon [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+                  <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
+                </a>
+              </li>
+
 
               <li>
                 <a routerLink="admin/inventory"

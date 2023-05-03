@@ -49,6 +49,13 @@ const routes: Route[] = [
    },
 
    {
+    path: 'collections-admin',
+    loadChildren: () => import('./modules/collections-admin/collections-admin.module').then( (mod) => mod.CollectionsAdminModule),
+    data: { state: 'collection-admin' },
+    title: 'Collection Admin'
+   },
+
+   {
     path: 'admin',
     loadChildren: () => import('./modules/admin/admin.module').then( (mod) => mod.AdminModule),
     canActivate: [AngularFireAuthGuard],
