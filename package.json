@@ -31,7 +31,7 @@
     "@types/swiper": "^6.0.0",
     "angular-google-tag-manager": "^1.7.0",
     "chroma-js": "^2.4.2",
-    "devextreme": "~22.1.8",
+    "devextreme": "23.1.2-beta",
     "devextreme-angular": "~22.1.8",
     "devextreme-schematics": "^1.5.1",
     "fast-xml-parser": "^4.1.3",
