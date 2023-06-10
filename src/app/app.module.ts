@@ -5,42 +5,43 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CommonModule } from '@angular/common';
-import { NavService } from './main/static-sidebar/nav-list-item/nav-service';
-import { SharedModule } from './modules/shared-module/shared.module';
-import { ScrollService } from './services/scroll.service';
+import { NavService } from './2.main/static-sidebar/nav-list-item/nav-service';
+import { SharedModule } from './1.modules/shared-module/shared.module';
+import { ScrollService } from './4.services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
-import { ProductResolver } from './services/product.resolver';
-import { BlogResolver } from './services/blog.resolver';
-
-
+import { ProductResolver } from './4.services/product.resolver';
+import { BlogResolver } from './4.services/blog.resolver';
 
 // Firebase services + environment module
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
-import { AngularFireAuthModule, USE_EMULATOR as USE_AUTH_EMULATOR } from '@angular/fire/compat/auth';
-import { AngularFirestoreModule, USE_EMULATOR as USE_FIRESTORE_EMULATOR } from '@angular/fire/compat/firestore';
-import { AngularFireFunctionsModule, USE_EMULATOR as USE_FUNCTIONS_EMULATOR} from '@angular/fire/compat/functions';
-import { AngularFireModule} from '@angular/fire/compat';
+import {
+  AngularFireAuthModule,
+  USE_EMULATOR as USE_AUTH_EMULATOR,
+} from '@angular/fire/compat/auth';
+import {
+  AngularFirestoreModule,
+  USE_EMULATOR as USE_FIRESTORE_EMULATOR,
+} from '@angular/fire/compat/firestore';
+import {
+  AngularFireFunctionsModule,
+  USE_EMULATOR as USE_FUNCTIONS_EMULATOR,
+} from '@angular/fire/compat/functions';
+import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './services/auth/auth.interceptor';
-import { CartResolver } from './services/cart.resolver';
-import { WishListResolver } from './services/wishlist.resolver';
-import { NgxSpinnerModule } from "ngx-spinner";
+import { AuthInterceptor } from './4.services/auth/auth.interceptor';
+import { CartResolver } from './4.services/cart.resolver';
+import { WishListResolver } from './4.services/wishlist.resolver';
+import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxStripeModule } from 'ngx-stripe';
-
 
 // import { environment } from '../environments/dev';
 
-import { environment} from '../environments/environment.prod';
-import { HeadingModule } from './main/header/heading.module';
-
-
-
+import { environment } from '../environments/environment.prod';
+import { HeadingModule } from './2.main/header/heading.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -69,13 +70,12 @@ import { HeadingModule } from './main/header/heading.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
-      multi: true
+      multi: true,
     },
-   
-    {provide: 'googleTagManagerId', useValue: environment.gtm_id},
-   
+
+    { provide: 'googleTagManagerId', useValue: environment.gtm_id },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule { }
+export class AppModule {}
