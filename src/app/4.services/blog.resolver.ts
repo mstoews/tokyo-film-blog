@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Blog } from '../5.models/blog';
 import { Observable } from 'rxjs';
 import { BlogService } from './blog.service';
 
 @Injectable()
-export class BlogResolver implements Resolve<Blog | undefined> {
+export class BlogResolver  {
   constructor(private blogService: BlogService) {}
   resolve(
     route: ActivatedRouteSnapshot,

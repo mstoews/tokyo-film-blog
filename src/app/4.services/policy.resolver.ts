@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { PolicyDocuments } from '../5.models/policy-documents';
 import { Observable } from 'rxjs';
 import { PolicyService } from './policy.service';
 
 @Injectable({ providedIn: 'root' })
-export class PolicyResolver implements Resolve<PolicyDocuments> {
+export class PolicyResolver  {
   constructor(private policyService: PolicyService) {}
   resolve(
     route: ActivatedRouteSnapshot,

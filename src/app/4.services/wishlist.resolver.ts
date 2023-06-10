@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { WishList } from '../5.models/wishlist';
 import { Observable } from 'rxjs';
 import { WishListService } from './wishlist.service';
 
 @Injectable()
-export class WishListResolver implements Resolve<WishList | undefined> {
+export class WishListResolver  {
   constructor(private cartService: WishListService) {}
   resolve(
     route: ActivatedRouteSnapshot,

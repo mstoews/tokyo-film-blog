@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Cart } from '../5.models/cart';
 import { Observable } from 'rxjs';
 import { CartService } from './cart.service';
 
 @Injectable()
-export class CartResolver implements Resolve<Cart[] | undefined> {
+export class CartResolver  {
   constructor(private cartService: CartService) {}
   resolve(
     route: ActivatedRouteSnapshot,
