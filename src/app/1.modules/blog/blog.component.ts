@@ -15,7 +15,7 @@ export class BlogComponent implements OnInit {
     // console.log('Add a comment to the blog');
   }
   onToggleMenu() {
-    console.debug('blog - notifiy side menu');
+    //console.debug('blog - notifiy side menu');
   }
 
   constructor(private route: Router, private blogService: BlogService) {}

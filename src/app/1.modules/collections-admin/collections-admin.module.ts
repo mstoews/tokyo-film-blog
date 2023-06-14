@@ -14,6 +14,8 @@ import { SharedModule } from '../shared-module/shared.module';
 import { CollectionsAddDialog } from './add/collections-add.component';
 import { CollectionsAdminComponent } from './collections-grid.component';
 import { CollectionResolver } from 'app/4.services/collection.resolver';
+import { CollectionsDetailsAddDialog } from './collections-edit/collections-details-add/collections-details-add.component';
+import { CollectionsDetailsGridComponent } from './collections-edit/collection-details/collections-details-grid.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { CollectionResolver } from 'app/4.services/collection.resolver';
     CollectionsAdminComponent,
     CollectionsImageSelectionComponent,
     CollectionsAddDialog,
+    CollectionsDetailsAddDialog,
+    CollectionsDetailsGridComponent,
     SafePipe,
   ],
   imports: [

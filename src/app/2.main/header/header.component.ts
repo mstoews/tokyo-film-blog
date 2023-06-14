@@ -5,6 +5,7 @@ import {
   OnInit,
   Output,
   ViewChild,
+  signal,
 } from '@angular/core';
 
 import { Router, RouterLink, RouterModule } from '@angular/router';
@@ -59,6 +60,8 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = true;
   wishCount = 0;
   cartCount = 0;
+  cartCounter = signal<number>(0);
+
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
@@ -70,7 +73,7 @@ export class HeaderComponent implements OnInit {
         this.cartService
           .cartByStatus(this.authService.userData.uid, 'open')
           .subscribe((cart) => {
-            this.cartCount = cart.length;
+            this.cartCounter.set(cart.length);
           });
 
         this.wishListService

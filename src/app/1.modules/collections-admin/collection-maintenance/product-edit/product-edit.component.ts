@@ -89,7 +89,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onTabClick(event) {
-    //console.log(event.tab.textLabel);
+    // console.log(event.tab.textLabel);
     const product = { ...this.prdGroup.value } as Product;
     this.onUpdate(product);
   }
@@ -103,7 +103,7 @@ export class ProductEditComponent implements OnInit {
   onUpdate(product: Product) {
     if (this.isFormDirty) {
       // const product = { ...this.prdGroup.value } as Product; const product = { ...this.prdGroup.value } as Product;
-      //console.debug('Product can be sold ...: ', product.purchases_allowed);
+      console.debug('Product can be sold ...: ', product.purchases_allowed);
       product.rich_description = this.rich_description;
       if (product.quantity === undefined || product.quantity === null) {
         product.quantity = 1;
@@ -205,12 +205,6 @@ export class ProductEditComponent implements OnInit {
     this.prdGroup.valueChanges.subscribe((x) => {
       this.isFormDirty = true;
     });
-  }
-
-  onValueChange()
-  {
-    this.isFormDirty = true;
-    //console.log('Value changed in text editor');
   }
 
   onBackToInventory() {

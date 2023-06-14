@@ -118,9 +118,7 @@
       <mat-tab label="Description">
         <ng-template matTabContent>
           <!-- <text-editor [valueContent]="para" ></text-editor> -->
-          <dx-html-editor
-            (valueChange)="onValueChange($event)"
-            height="600px" [(value)]="rich_description">
+          <dx-html-editor height="600px" [(value)]="rich_description">
             <dxo-toolbar>
               <dxi-item name="undo"></dxi-item>
               <dxi-item name="redo"></dxi-item>

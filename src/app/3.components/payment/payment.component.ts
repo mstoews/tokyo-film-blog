@@ -67,7 +67,7 @@ export class PaymentComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        console.log('Response', response);
+        //console.log('Response', response);
         this.validated = true;
         this.elementsOptions.clientSecret = response.client_secret;
         this._snackBar.open(JSON.stringify(response.message), 'Close', {
@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit {
 
   // const handleSubmit = async (event) => {
   pay() {
-    console.log('Card ', this.paymentElement.elements.getElement('card'));
+    // console.log('Card ', this.paymentElement.elements.getElement('card'));
 
     this.stripeService
       .confirmCardPayment(this.elementsOptions.clientSecret, {

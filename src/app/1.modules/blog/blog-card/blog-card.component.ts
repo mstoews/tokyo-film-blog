@@ -22,9 +22,9 @@ export class BlogCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.blogImages$ = this.imageListService.getImagesByType(this.blog.id);
-    console.debug('on initialize...', this.blog.id);
+    //console.debug('on initialize...', this.blog.id);
     this.blogImages$.subscribe((images) => {
-      console.debug(JSON.stringify(images));
+      //console.debug(JSON.stringify(images));
     });
   }
 

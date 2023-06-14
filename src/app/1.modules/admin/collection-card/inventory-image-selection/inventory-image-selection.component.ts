@@ -130,7 +130,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string,
     currentIndex: number
   ) {
-    console.debug('Updatedate Image Type', JSON.stringify(newData));
+    // debug('Updatedate Image Type', JSON.stringify(newData));
     const cnt = newData.length;
     if (cnt > 0) {
       let i = 1;

@@ -6,6 +6,7 @@ import { Category } from 'app/5.models/category';
 import { ProductsService } from 'app/4.services/products.service';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'shop',
   templateUrl: './shop.component.html',

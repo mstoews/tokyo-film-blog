@@ -1,26 +1,173 @@
 <app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
+<!--
+<div class="py-14 px-3">
+  <div    class="lg:max-w-[1280px] md:max-w-[744px] max-w-[375px] mx-auto bg-white"  >
+    <div class="bg-white lg:px-10 md:px-6 px-4 py-7">
+      <p        class="lg:text-4xl md:text-3xl text-3xl font-semibold leading-9 text-gray-800"      >
+        Explore categories
+      </p>
+      <div class="swiper mySwiper_carousel_14">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide mt-8">
+            <div
+              class="text-center px-4 py-4 border border-gray-300 lg:max-w-[405px] w-full"
+            >
+              <div class="text-center">
+                <p
+                  class="text-2xl font-medium leading-none text-center text-gray-800"
+                >
+                  Sunglasses
+                </p>
+              </div>
+              <div>
+                <img
+                  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/gogles.png"
+                  alt="nike shoes"
+                  class="mx-auto mt-10"
+                />
+              </div>
+              <p class="text-base mt-8 text-center text-gray-600">
+                Versace Medusa Charm Matte Black Plastic Aviator Sunglasses
+                Silver Mirror Lens
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide mt-8">
+            <div
+              class="px-4 py-4 border border-gray-300 lg:max-w-[405px] w-full"
+            >
+              <div>
+                <p class="text-2xl text-center text-gray-600 font-medium">
+                  Leather bags
+                </p>
+              </div>
+              <div>
+                <img
+                  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/leatgerbagg.png"
+                  alt="nike shoes"
+                  class="mx-auto mt-8"
+                />
+              </div>
+              <p class="text-base mt-8 text-center text-gray-600">
+                Women Genuine Leather Crossbody Bags Cowhide Shoulder Handbag
+                Ladies Purse
+              </p>
+            </div>
+          </div>
+
+          <div class="swiper-slide mt-8">
+            <div
+              class="px-4 py-4 border border-gray-300 lg:max-w-[405px] md:max-w-[336px] w-full"
+            >
+              <div>
+                <p class="text-2xl text-center text-gray-600 font-medium">
+                  Shorts
+                </p>
+              </div>
+              <div>
+                <img
+                  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/shorts.png"
+                  alt="mist"
+                  class="mx-auto mt-8"
+                />
+              </div>
+              <p class="text-base mt-8 text-center text-gray-600">
+                Women Genuine Leather Crossbody Bags Cowhide Shoulder Handbag
+                Ladies Purse
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide mt-8">
+            <div
+              class="px-4 py-4 border border-gray-300 lg:max-w-[405px] w-full"
+            >
+              <div>
+                <p class="text-2xl font-medium text-gray-800 text-center">
+                  Sweatshirts
+                </p>
+              </div>
+              <div>
+                <img
+                  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/tshirtss.png"
+                  alt="watch"
+                  class="mx-auto mt-8"
+                />
+              </div>
+              <p class="text-base mt-8 text-center text-gray-600">
+                Women Genuine Leather Crossbody Bags Cowhide Shoulder Handbag
+                Ladies Purse
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide mt-8">
+            <div
+              class="px-4 py-4 border border-gray-300 lg:max-w-[405px] w-full"
+            >
+              <div>
+                <p class="text-2xl text-center text-gray-600">Headphones</p>
+              </div>
+              <div>
+                <img
+                  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/headd.png"
+                  alt="baggggggg"
+                  class="mx-auto mt-8"
+                />
+              </div>
+              <p class="text-base mt-8 text-center text-gray-600">
+                Planar Magnetic Full-Size Over-Ear Open-Back Hi-Fi Headphones
+              </p>
+            </div>
+          </div>
+          <div class="swiper-slide mt-8">
+            <div
+              class="px-4 py-4 border border-gray-300 lg:max-w-[405px] md:max-w-[336px] w-full"
+            >
+              <div>
+                <p class="text-2xl font-medium leading-normal text-gray-800">
+                  Watches
+                </p>
+              </div>
+              <div>
+                <img
+                  src="https://tuk-cdn.s3.amazonaws.com/can-uploader/jhjh.png"
+                  alt="mist"
+                  class="mx-auto mt-8"
+                />
+              </div>
+              <p class="text-base mt-7 text-center text-gray-600">
+                Women Genuine Leather Crossbody Bags Cowhide Shoulder Handbag
+                Ladies Purse
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
 <div *ngIf="Products$ | async as products">
-  <div class="relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6 ">
-      <button class="font-garamond bg-white" [matMenuTriggerFor]="menu" mat-flat-button matTooltip="Select Category"
-        aria-label="menu">
-        <span class="font-garamond text-2xl font-bold">Filter</span>
-        <mat-icon [svgIcon]="'heroicons_outline:filter'"></mat-icon>
-      </button>
-      <span class="font-garamond m-2 pb-1 text-2xl">{{currentCategory}}</span>
-      <!-- menu selected -->
-      <mat-menu class="side-nav" #menu="matMenu">
-        <ul *ngIf="this.Category$| async as party">
-          <ui class="side-nave__item" *ngFor="let item of party">
-            <button mat-menu-item (click)="onRefreshName(item.name)" xPosition="after">
-              {{item.name}}
-            </button>
-          </ui>
-        </ul>
-      </mat-menu>
+  <div class="relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6">
+    <button class="font-garamond bg-white" [matMenuTriggerFor]="menu" mat-flat-button matTooltip="Select Category"
+      aria-label="menu">
+      <span class="font-garamond text-2xl font-bold">Filter</span>
+      <mat-icon [svgIcon]="'heroicons_outline:filter'"></mat-icon>
+    </button>
+    <span class="font-garamond m-2 pb-1 text-2xl">{{ currentCategory }}</span>
+    <!-- menu selected -->
+    <mat-menu class="side-nav" #menu="matMenu">
+      <ul *ngIf="this.Category$ | async as party">
+        <ui class="side-nave__item" *ngFor="let item of party">
+          <button mat-menu-item (click)="onRefreshName(item.name)" xPosition="after">
+            {{ item.name }}
+          </button>
+        </ui>
+      </ul>
+    </mat-menu>
   </div>
   <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">
-    <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 xl:gap-x-8">
-      <li *ngFor="let product of products ">
+    <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+      <li *ngFor="let product of products">
         <shop-card [product]="product"></shop-card>
       </li>
     </div>

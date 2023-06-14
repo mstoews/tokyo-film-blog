@@ -49,6 +49,7 @@ export class InventoryComponent implements OnInit {
     private readonly categoryService: CategoryService,
     private readonly productService: ProductsService,
     private dialog: MatDialog,
+    private responsive: BreakpointObserver,
     private fb: FormBuilder
   ) {
     this.prd = this.productType;

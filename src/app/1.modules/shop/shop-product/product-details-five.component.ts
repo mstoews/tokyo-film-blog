@@ -122,7 +122,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     this.quantity = this.round(quantity, 1) + this.round(quantity_increment, 1);
     this.total_cost = this.product.price * this.quantity;
 
-    console.log('quantity', this.quantity);
+    //('quantity', this.quantity);
   }
 
   subtract() {

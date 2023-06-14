@@ -33,7 +33,7 @@ export class SideNavComponent implements OnInit {
     this.userService.isLoggedIn$.subscribe((user) => {
       this.userService.getUserId().then((id) => {
         this.userId = id;
-        console.log('User ID: ' + this.userId);
+        //console.log('User ID: ' + this.userId);
       });
     });
   }

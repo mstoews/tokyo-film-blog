@@ -24,7 +24,7 @@ export class StripeCheckoutComponent implements OnInit {
       base: {
         iconColor: '#0b120c',
         color: '#31325F',
-       
+
         fontWeight: '300',
         fontFamily: '"Helvetica", Helvetica, sans-serif',
         fontSize: '20px',
@@ -56,10 +56,10 @@ export class StripeCheckoutComponent implements OnInit {
       .subscribe((result) => {
         if (result.token) {
           // Use the token
-          console.log(result.token.id);
+          console.debug(result.token.id);
         } else if (result.error) {
           // Error creating the token
-          console.log(result.error.message);
+          console.debug(result.error.message);
         }
       });
   }

@@ -16,7 +16,7 @@ import { Lightbox } from './lightbox.service';
     LightboxEvent,
     LightboxWindowRef
   ],
-  entryComponents: [ LightboxOverlayComponent, LightboxComponent ],
+  exports: [ LightboxOverlayComponent, LightboxComponent ],
   imports: [ FileSaverModule ]
 })
 export class LightboxModule { }

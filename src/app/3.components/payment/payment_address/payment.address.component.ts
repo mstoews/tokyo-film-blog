@@ -136,7 +136,7 @@ export class PaymentAddressComponent implements OnInit {
             horizontalPosition: 'right',
             verticalPosition: 'top',
           });
-          console.log('user doc', this.updateStripeCustomerId(user.uid));
+          //console.log('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then()
         .catch((error) => {
@@ -156,7 +156,7 @@ export class PaymentAddressComponent implements OnInit {
             verticalPosition: 'top',
           });
           this.updateStripeCustomerId(user.uid);
-          console.log('user doc', this.updateStripeCustomerId(user.uid));
+          // console.log('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then(() => {
           // console.log('Document successfully written!');
@@ -204,7 +204,7 @@ export class PaymentAddressComponent implements OnInit {
   }
 
   onMakePayment() {
-    console.log('Card ', this.paymentElement.elements.getElement('card'));
+    //console.log('Card ', this.paymentElement.elements.getElement('card'));
 
     this.stripeService
       .confirmCardPayment(this.elementsOptions.clientSecret, {
@@ -240,7 +240,7 @@ export class PaymentAddressComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        console.log('Response', response);
+        //console.log('Response', response);
         this.validated = true;
         this.elementsOptions.clientSecret = response.client_secret;
         this.snackBar.open(JSON.stringify(response.message), 'Close', {

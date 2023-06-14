@@ -28,6 +28,7 @@ export class CartService {
   userId: string;
   cart$: Observable<Cart[]>;
   cartItems: Observable<Cart[]>;
+  cartCounter: number;
 
   constructor(
     public afs: AngularFirestore,

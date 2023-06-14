@@ -97,7 +97,7 @@ export class ContactsComponent implements OnInit {
               panelClass: 'bg-danger',
             });
             return throwError(() => {
-              console.log(err);
+              console.debug(err);
             });
           })
         )

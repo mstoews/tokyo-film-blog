@@ -61,7 +61,7 @@
       <div class="hidden md:block">
         <a (click)="openShoppingCart()" matTooltip="Shopping Cart"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
-          <mat-icon [matBadge]=cartCount [matBadgeHidden]="cartCount===0"
+          <mat-icon [matBadge]=cartCounter() [matBadgeHidden]="cartCounter()===0"
             [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
         </a>
       </div>
