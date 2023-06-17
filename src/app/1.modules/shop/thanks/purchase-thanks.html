@@ -1,4 +1,4 @@
-<div *ngIf="purchaseFailed == false">
+<div *ngIf="purchaseFailed == false; else failed">
   <div class="py-12 px-4">
     <div class="text-center">
       <h2 class="text-3xl font-garamond font-bold tracking-tight text-gray-900 sm:text-4xl">Made To Online Shopping</h2>
@@ -21,6 +21,7 @@
             </p>
           </div>
           <div class="md:p-10 p-4">
+
             <img src='../../../../assets/images/thank-you-purchase.jpg' class="w-full h-full" />
           </div>
         </div>
@@ -29,7 +30,7 @@
   </div>
 </div>
 
-<div *ngIf="purchaseFailed == true">
+<ng-template #failed>
   <div class="py-12 px-4">
     <div class="text-center">
       <h2 class="text-3xl font-garamond font-bold tracking-tight text-gray-900 sm:text-4xl">Made To Online Shopping</h2>
@@ -52,10 +53,10 @@
             </p>
           </div>
           <div class="md:p-10 p-4">
-            <img src='../../../../assets/images/thank-you-purchase.jpg' class="w-full h-full" />
+            <img src='../../../../assets/images/cta_knitting_200x200.png' class="w-full h-full" />
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
