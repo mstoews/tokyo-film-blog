@@ -32,6 +32,7 @@ import { Observable, first } from 'rxjs';
   animations: [onMainContentChange],
 })
 export class HeaderComponent implements OnInit {
+  country: string;
   constructor(
     private _location: Location,
     private _router: Router,
@@ -101,6 +102,7 @@ export class HeaderComponent implements OnInit {
               console.debug(mr);
               // this.emailName = mr.first_name.charAt(0) + mr.last_name.charAt(0);
               this.emailName = mr.first_name;
+              this.country = mr.country;
               this.authService.setUserName(mr.first_name);
             });
           else {

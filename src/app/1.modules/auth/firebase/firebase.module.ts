@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { firebase, firebaseui, FirebaseUIModule } from 'firebaseui-angular';

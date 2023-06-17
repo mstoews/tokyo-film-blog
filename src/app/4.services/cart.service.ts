@@ -1,21 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
-
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-
-import { BehaviorSubject, first, map, Observable, of, Subject } from 'rxjs';
+import { first, map, Observable, of } from 'rxjs';
 import { Cart } from 'app/5.models/cart';
 import { Product } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
-import { IImageStorage } from 'app/5.models/maintenance';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth/auth.service';
-import { WishListService } from './wishlist.service';
 import { WishList } from 'app/5.models/wishlist';
 
 @Injectable({
@@ -23,12 +19,14 @@ import { WishList } from 'app/5.models/wishlist';
 })
 export class CartService {
   private cartCollection: AngularFirestoreCollection<Cart>;
-  private cartItems$: Observable<Cart[]>;
   isLoggedIn: boolean;
   userId: string;
   cart$: Observable<Cart[]>;
-  cartItems: Observable<Cart[]>;
+  cartItems$: Observable<Cart[]>;
   cartCounter: number;
+  userCountry: string;
+  // Manage state with signals
+  cartItem = signal<Cart[]>([]);
 
   constructor(
     public afs: AngularFirestore,
@@ -47,13 +45,6 @@ export class CartService {
     if (this.isLoggedIn) {
       this.cartItems$ = this.cartCollection.valueChanges({ idField: 'id' });
     }
-
-    // this.cartByUserId(this.userId).subscribe((cart) => {
-    //   cart.forEach((item) => {
-    //     this.productIds.push(item.product_id);
-    //   });
-    //   console.debug('Number of items in the cart: ', this.productIds.length);
-    // });
   }
 
   getCartCount(userId: string): Observable<Cart[] | undefined> {
@@ -83,8 +74,8 @@ export class CartService {
   getAll() {
     var cartItemsCollection: AngularFirestoreCollection<Cart>;
     cartItemsCollection = this.afs.collection<Cart>(`user/${this.userId}/cart`);
-    this.cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
-    return this.cartItems;
+    this.cartItems$ = cartItemsCollection.valueChanges({ idField: 'id' });
+    return this.cartItems$;
   }
 
   get(id: string) {

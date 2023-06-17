@@ -10,7 +10,7 @@ export const environment = {
     appId: "1:819679326368:web:8bf0a91436ec18a06019c5",
     measurementId: "G-WGMMJK9NR3"
   },
-  production: false,
+  production: true,
   useEmulators: false,
   gtm_id: "G-WGMMJK9NR3",
   stripe: {
@@ -22,7 +22,7 @@ export const environment = {
     paymentIntent: "http://localhost:9000/api/payment_intent",
   },
   api: {
-    prdUrl: "https://made-to-cassie.df.r.appspot.com",
+    prdUrl: "https://made-to-server.an.r.appspot.com/",
     baseUrl:  "http://localhost:9000",
     stripeDevUrl: "https://made-to-dev.df.r.appspot.com",
     createMessage: "https://made-to-cassie.df.r.appspot.com/api/createMessage",

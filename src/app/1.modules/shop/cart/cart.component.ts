@@ -1,12 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { CartService } from 'app/4.services/cart.service';
 import { CheckoutService } from 'app/4.services/checkout.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, first, Subscription } from 'rxjs';
 import { Cart } from 'app/5.models/cart';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../../4.services/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ProfileModel } from 'app/5.models/profile';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 interface profile {
   email: string;
@@ -38,6 +41,7 @@ export class CartComponent implements OnInit, OnDestroy {
   purchaseStarted: boolean;
   admin_login = false;
   cartItemsAvailable: boolean = false;
+  userCountry: string;
 
   constructor(
     private authService: AuthService,
@@ -46,14 +50,20 @@ export class CartComponent implements OnInit, OnDestroy {
     private checkoutService: CheckoutService,
     private cartService: CartService,
     private snack: MatSnackBar,
-    private ngxSpinner: NgxSpinnerService
+    private ngxSpinner: NgxSpinnerService,
+    public afs: AngularFirestore,
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userId = user?.uid;
     });
+
   }
 
-  ngOnInit(): void {
+  async ngAfterViewInit(){
+    this.userCountry = await this.getUserCountry(this.userId);
+  }
+
+  async ngOnInit(): Promise<void> {
     this.userId = this.activateRoute.snapshot.params.id;
     this.cart$ = this.cartService.cartByStatus(this.userId, 'open');
 
@@ -110,7 +120,23 @@ export class CartComponent implements OnInit, OnDestroy {
     }
   }
 
-  calculateTotals() {
+  async getUserCountry(userId: string) {
+    let userCountry = '';
+    let collection = this.afs.collection<ProfileModel>( `users/${userId}/profile` );
+    const profiles = collection.valueChanges({ idField: 'id' });
+
+    await profiles.pipe(first()).subscribe((ref) => {
+      if (ref.length > 0) {
+        ref.forEach((mr) => {
+          userCountry = mr.country
+        });
+      }
+    });
+    return userCountry;
+  }
+
+
+  async calculateTotals() {
     this.cartItemsAvailable = false;
     this.grand_total = 0.0;
     this.total = 0.0;
@@ -136,6 +162,12 @@ export class CartComponent implements OnInit, OnDestroy {
       if (this.total === 0) {
         this.shipping = Math.trunc(0);
       }
+
+      if (this.userCountry === 'Japan')
+      {
+       this.shipping = Math.trunc(7);
+      }
+
       this.grand_total = this.round(this.total + this.tax + this.shipping, 2);
       if (this.grand_total > 0) {
         this.cartItemsAvailable = true;
@@ -154,6 +186,7 @@ export class CartComponent implements OnInit, OnDestroy {
         precision
       );
   }
+
 
   backToShopping() {
     this.route.navigate(['shop']);

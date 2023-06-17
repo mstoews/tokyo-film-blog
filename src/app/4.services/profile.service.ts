@@ -57,6 +57,7 @@ export class ProfileService {
     // .pipe(map(profile => profile.;
   }
 
+
   update(userId: string, profile: ProfileModel) {
     const profileCollection = this.afs.collection<ProfileModel>(
       `users/${userId}/profile`
