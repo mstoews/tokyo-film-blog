@@ -22,6 +22,7 @@ import { CheckoutComponent } from './checkout.component';
 import { AddressComponent } from '../pages/profile/address/address.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { WishlistCardComponent } from './wishlist/wishlist-card/wishlist-card.component';
 
 const routes: Routes = [
   {
@@ -112,6 +113,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AddressComponent,
     NgxSpinnerModule,
+    WishlistCardComponent,
   ],
 })
 export class ShopModule {}

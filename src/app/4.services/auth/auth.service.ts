@@ -44,15 +44,6 @@ export class AuthService {
   ) {
     this.isAdminUser = false;
 
-    // this.afAuth.authState.subscribe((user) => {
-    //   if (user) {
-    //     this.userData = user;
-    //     localStorage.setItem('user', JSON.stringify(this.userData));
-    //     JSON.parse(localStorage.getItem('user')!);
-    //   } else {
-    //     this.loginAnonymously();
-    //   }
-
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
