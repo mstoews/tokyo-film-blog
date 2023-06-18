@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router'
 import { AuthService } from 'app/4.services/auth/auth.service';
 import { CartService } from 'app/4.services/cart.service';
@@ -13,6 +14,7 @@ export class PurchaseThanksComponent {
   purchaseFailed: boolean = false;
   constructor(
     private authService: AuthService,
+    private snackBar: MatSnackBar,
     private route: Router ) {
 
       this.authService.afAuth.authState.subscribe((user) => {
@@ -23,6 +25,11 @@ export class PurchaseThanksComponent {
           const  url = new URL(window.location.href);
           console.log(url.searchParams.get('purchaseResult'));
           if (url.searchParams.get('purchaseResult') === 'failed') {
+            this.snackBar.open('Purchase checkout has been cancelled by the users', 'Close', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+            });
             this.backToCart(this.userId);
           }
         }
