@@ -21,9 +21,7 @@ export class PurchaseThanksComponent {
         if (user) {
           const userId = user.uid;
           this.userId = userId;
-          console.log('user id', userId);
           const  url = new URL(window.location.href);
-          console.log(url.searchParams.get('purchaseResult'));
           if (url.searchParams.get('purchaseResult') === 'failed') {
             this.snackBar.open('Purchase checkout has been cancelled by the users', 'Close', {
               duration: 3000,
@@ -38,7 +36,6 @@ export class PurchaseThanksComponent {
 
   ngOnInit(): void {
     const  url = new URL(window.location.href);
-    console.log(url.searchParams.get('purchaseResult'));
     if (url.searchParams.get('purchaseResult') === 'failed') {
       this.purchaseFailed = true;
     }

@@ -3,5 +3,8 @@
     "cSpell.words": [
         "Firestore",
         "signout"
+    ],
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
     ]
 }

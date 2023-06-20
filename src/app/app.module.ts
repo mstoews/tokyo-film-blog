@@ -39,6 +39,7 @@ import { NgxStripeModule } from 'ngx-stripe';
 
 import { environment } from '../environments/environment.prod';
 import { HeadingModule } from './2.main/header/heading.module';
+import { UserService } from './4.services/auth/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -66,7 +67,7 @@ import { HeadingModule } from './2.main/header/heading.module';
     CartResolver,
     WishListResolver,
     BlogResolver,
-
+    UserService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
