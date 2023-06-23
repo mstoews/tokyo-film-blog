@@ -7,7 +7,7 @@ import {
 import { Product } from 'app/5.models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/4.services/products.service';
-import { filter, map, Observable, Subscription } from 'rxjs';
+import {  map, Observable, Subscription } from 'rxjs';
 import { WishListService } from 'app/4.services/wishlist.service';
 
 import { CartService } from 'app/4.services/cart.service';
@@ -26,7 +26,7 @@ import { UserService } from 'app/4.services/auth/user.service';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.css'],
 })
-export class GridComponent implements OnInit, OnDestroy {
+export class CollectionGrid implements OnInit, OnDestroy {
   purchaseStarted: boolean;
   product$: Observable<Product | undefined>;
   productId: string;
@@ -80,10 +80,6 @@ export class GridComponent implements OnInit, OnDestroy {
     this.userService.isLoggedIn$.subscribe((access) => {
       this.loggedIn = access;
     });
-
-    this.product = this.activateRoute.snapshot.data['product'];
-    //this.productId = this.product.id;
-    this.mainImage = this.product.image;
 
     if (this.authService.userData) {
       this.cartService

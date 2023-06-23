@@ -30,7 +30,17 @@ export class UserService {
   }
 
   async getUserId(): Promise<any> {
-    return (await this.afAuth.currentUser).uid;
+    let uid: string;
+    this.afAuth.currentUser.then((user) => {
+      if (user !== null || user !== undefined) {
+        if (user) {
+          uid = user.uid;
+        }
+      } else {
+        uid = '';
+      }
+    });
+    return uid;
   }
 
   async getUserEmail(): Promise<any> {

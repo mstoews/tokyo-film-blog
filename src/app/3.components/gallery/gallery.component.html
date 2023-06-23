@@ -1,37 +1,35 @@
-<ng-container *ngIf="imageCount > 0">
+<ng-container *ngIf="imageCount() > 0">
   <div class="container relative flex flex-col max-w-6xl mx-auto text-gray-900 md:flex-row md:px-0">
-    <div class="overflow-hidden text-gray-700">
       <div class="flex flex-wrap -m-1 md:-m-2">
-        <div class="flex flex-wrap w-1/2">
-          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount > 0">
-            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-              [src]="imageCollection[0].imageSrc">
+        <div class="flex flex-wrap w-1/2 h-80">
+          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount() > 0">
+            <img alt="gallery1" class="block object-cover object-center w-full h-full rounded-lg"
+            [src]="imageItems[0].imageSrc">
           </div>
-          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount > 1">
-            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-              [src]="imageCollection[1].imageSrc">
+          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount() > 1">
+            <img alt="gallery2" class="block object-cover object-center w-full h-full rounded-lg"
+
+            [src]="imageItems[1].imageSrc">
           </div>
-          <div class="w-full p-1 md:p-2" *ngIf="imageCount > 2">
-            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-              [src]="imageCollection[2].imageSrc">
+          <div class="w-full p-1 md:p-2" *ngIf="imageCount() > 2">
+            <img alt="gallery3" class="block object-cover object-center w-full h-full rounded-lg"
+            [src]="imageItems[2].imageSrc">
           </div>
         </div>
-        <div class="flex flex-wrap w-1/2">
-          <div class="w-full p-1 md:p-2" *ngIf="imageCount > 3">
-            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-              [src]="imageCollection[3].imageSrc">
+        <div class="flex flex-wrap w-1/2 h-80">
+          <div class="w-full p-1 md:p-2" *ngIf="imageCount() > 3">
+            <img alt="gallery4" class="block object-cover object-center w-full h-full rounded-lg"
+            [src]="imageItems[3].imageSrc">
           </div>
-          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount > 4">
-            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-              [src]="imageCollection[4].imageSrc">
+          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount() > 4">
+            <img alt="gallery5" class="block object-cover object-center w-full h-full rounded-lg"
+            [src]="imageItems[4].imageSrc">
           </div>
-          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount > 5">
-            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
-              [src]="imageCollection[5].imageSrc">
+          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount() > 5">
+            <img alt="gallery6" class="block object-cover object-center w-full h-full rounded-lg"
+            [src]="imageItems[5].imageSrc">
           </div>
         </div>
       </div>
     </div>
-
-  </div>
 </ng-container>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { imageItem } from 'app/5.models/imageItem';
 
 @Component({
@@ -7,11 +7,18 @@ import { imageItem } from 'app/5.models/imageItem';
 })
 export class GalleryComponent implements OnInit {
   @Input() public imageCollection: imageItem[] = [];
-  imageCount = 0;
+
+  imageCount = signal<number>(0);
+  imageItems = <imageItem[]>([]);
+  
 
   ngOnInit(): void {
-    this.imageCount = this.imageCollection.length;
-    console.log('Image count', this.imageCount);
+    this.imageCount.set(this.imageCollection.length);
+    if (this.imageCollection.length > 6) {
+      this.imageItems = this.imageCollection.slice(0, 6);
+    } else {
+      this.imageItems = this.imageCollection;
+    }
   }
 
   onPreviewImage(imageNumber: number) {

@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HighlightComponent } from '../landing-page/highlight/highlight.component';
 import { BannerComponent } from './banner/banner.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
-import { GridComponent } from './collection-grid/grid.component';
+import { CollectionGrid } from './collection-grid/grid.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { MaterialModule } from 'app/material.module';
@@ -27,7 +27,7 @@ const routes: Routes = [
     ProductsComponent,
     BannerComponent,
     OrderSummaryComponent,
-    GridComponent,
+    CollectionGrid,
     CarouselComponent,
     ProductCardComponent,
   ],
