@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { CartService } from 'app/4.services/cart.service';
 import { CheckoutService } from 'app/4.services/checkout.service';
@@ -22,6 +22,7 @@ interface profile {
 @Component({
   selector: 'cart',
   templateUrl: './payment-confirmation.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaymentConfirmationComponent implements OnInit, OnDestroy {
   sub: Subscription;

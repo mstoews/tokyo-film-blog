@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
 import { CartService } from 'app/4.services/cart.service';
 import { CheckoutService } from 'app/4.services/checkout.service';
@@ -27,6 +27,7 @@ interface profile {
   selector: 'cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartComponent implements OnInit, OnDestroy {
   sub: Subscription;

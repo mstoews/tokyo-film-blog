@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { IImageStorage } from 'app/5.models/maintenance';
 
@@ -11,6 +11,7 @@ interface Item {
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GalleryComponent implements OnInit {
   inventoryImages: Item[] = [];

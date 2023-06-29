@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {
@@ -12,20 +12,21 @@ import { Category } from 'app/5.models/category';
 import { ProductPartial } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
 })
-export class AddComponentDialog {
+export class AddComponentDialog implements OnInit, OnDestroy {
   description: string;
   categories: Category[];
   updated_category: string;
   category$: Observable<Category[]>;
   form: FormGroup;
   productId: string;
+  subCategeory: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -41,9 +42,13 @@ export class AddComponentDialog {
 
   ngOnInit() {
     this.category$ = this.categoryService.getAll();
-    this.category$.subscribe((result) => {
+    this.subCategeory = this.category$.subscribe((result) => {
       this.categories = result;
     });
+  }
+
+  ngOnDestroy() {
+    this.subCategeory.unsubscribe();
   }
 
   createForm() {

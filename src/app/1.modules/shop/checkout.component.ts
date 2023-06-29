@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,6 +10,7 @@ import { CheckoutService } from 'app/4.services/checkout.service';
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckoutComponent {
   cartId: string;

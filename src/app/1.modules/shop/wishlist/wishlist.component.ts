@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WishListService } from 'app/4.services/wishlist.service';
 import { CheckoutService } from 'app/4.services/checkout.service';
@@ -10,6 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'wishlist',
   templateUrl: './wishlist.component.html',
   styleUrls: ['./wishlist.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WishListComponent implements OnInit, OnDestroy {
   sub: Subscription;

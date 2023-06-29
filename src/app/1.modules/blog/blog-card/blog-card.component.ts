@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Blog } from 'app/5.models/blog';
 import { IImageStorage } from 'app/5.models/maintenance';
@@ -10,6 +10,7 @@ import { ImageListService } from '../../../4.services/image-list.service';
 @Component({
   selector: 'app-blog-card',
   templateUrl: './blog-card.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogCardComponent implements OnInit {
   @Input() blog: Blog;

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CheckoutService } from 'app/4.services/checkout.service';
 
@@ -6,6 +6,7 @@ import { CheckoutService } from 'app/4.services/checkout.service';
   selector: 'stripe-checkout',
   templateUrl: './stripe-checkout.component.html',
   styleUrls: ['./stripe-checkout.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StripeCheckoutComponent implements OnInit {
   message = 'Waiting for purchase to complete...';

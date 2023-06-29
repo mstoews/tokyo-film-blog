@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Output, ViewChild } from '@angular/core';
 import { BlogService } from 'app/4.services/blog.service';
 import { Blog } from 'app/5.models/blog';
 import { Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { fadeInOut } from '../landing-page/animations';
   selector: 'app-blog',
   templateUrl: './blog.component.html',
   animations: [fadeInOut],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogComponent implements OnInit {
   onAdd() {

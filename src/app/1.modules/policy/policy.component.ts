@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { filter, Observable, Subscription } from 'rxjs';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -13,6 +13,7 @@ import { PolicyService } from 'app/4.services/policy.service';
   selector: 'app-policy',
   templateUrl: './policy.component.html',
   styleUrls: ['./policy.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PolicyComponent {
   policyGroup: FormGroup;

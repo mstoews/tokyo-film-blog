@@ -5,6 +5,7 @@ import {
   OnInit,
   Optional,
   ViewChild,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -23,6 +24,7 @@ import { MatTableDataSource } from '@angular/material/table';
   selector: 'category-list',
   templateUrl: './category-grid.component.html',
   styleUrls: ['./category-grid.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryGridComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;

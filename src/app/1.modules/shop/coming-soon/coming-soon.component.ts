@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'app-coming-soon',
   templateUrl: './coming-soon.component.html',
-  styleUrls: ['./coming-soon.component.css']
+  styleUrls: ['./coming-soon.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComingSoonComponent {
 

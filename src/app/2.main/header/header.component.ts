@@ -1,10 +1,13 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
+  inject,
   signal,
 } from '@angular/core';
 
@@ -24,31 +27,29 @@ import { ProfileModel } from 'app/5.models/profile';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserService } from 'app/4.services/auth/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, first } from 'rxjs';
+import { Observable, Subscription, first } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   animations: [onMainContentChange],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   country: string;
-  constructor(
-    private _location: Location,
-    private _router: Router,
-    private menuToggle: MenuToggleService,
-    private authService: AuthService,
-    private afAuth: AngularFireAuth,
-    public userService: UserService,
-    private cartService: CartService,
-    private wishListService: WishListService,
-    private profile: ProfileService,
-    private afs: AngularFirestore,
-    private snackBar: MatSnackBar
-  ) {
-    this.title = 'Add Title as Parameter in the Template';
-    menuToggle.setDrawerState(false);
-  }
+  constructor() {}
+
+  private _router = inject(Router);
+  private menuToggle = inject(MenuToggleService);
+  private authService = inject(AuthService);
+  private afAuth = inject(AngularFireAuth);
+  public userService = inject(UserService);
+  private cartService = inject(CartService);
+  private wishListService = inject(WishListService);
+  private profile = inject(ProfileService);
+  private afs = inject(AngularFirestore);
+  private snackBar = inject(MatSnackBar);
+  private _location = inject(Location);
 
   @Input() title: string;
   @Input() sub_title: string;
@@ -59,35 +60,40 @@ export class HeaderComponent implements OnInit {
   profile$: Observable<ProfileModel[]>;
 
   isLoggedIn = true;
-  wishCount = 0;
-  cartCount = 0;
+  wishCounter = signal<number>(0);
   cartCounter = signal<number>(0);
+  subUserService: Subscription;
+  subCartService: Subscription;
+  subWishListService: Subscription;
+  subAuth: Subscription;
+  subUser: Subscription;
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
+    this.menuToggle.setDrawerState(false);
     this.emailName = 'Guest';
-    this.userService.isLoggedIn$.subscribe((res) => {
+    this.subUserService = this.userService.isLoggedIn$.subscribe((res) => {
       if (res === true) {
         this.isLoggedIn = true;
 
-        this.cartService
+        this.subCartService = this.cartService
           .cartByStatus(this.authService.userData.uid, 'open')
           .subscribe((cart) => {
             this.cartCounter.set(cart.length);
           });
 
-        this.wishListService
+        this.subWishListService = this.wishListService
           .wishListByUserId(this.authService.userData.uid)
           .subscribe((wishlist) => {
-            this.wishCount = wishlist.length;
+            this.wishCounter.set(wishlist.length);
           });
       } else {
         this.isLoggedIn = false;
       }
     });
 
-    this.authService.afAuth.authState.subscribe((user) => {
+    this.subAuth = this.authService.afAuth.authState.subscribe((user) => {
       if (user) {
         const userId = user.uid;
 
@@ -114,6 +120,7 @@ export class HeaderComponent implements OnInit {
         this.authService.setUserName('');
       }
     });
+    
   }
 
   public onToggleSideNav() {
@@ -154,19 +161,21 @@ export class HeaderComponent implements OnInit {
   doAnimate() {}
 
   openShoppingCart() {
-    this.userService.isLoggedIn$.subscribe((user) => {
-      if (user === false) {
-        this.snackBar.open('Please sign in to access the cart', 'Ok', {
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-          panelClass: 'bg-danger',
-          duration: 3000,
-        });
-        this._router.navigate(['profile']);
-      } else {
-        this._router.navigate(['shop/cart', this.authService.userData.uid]);
+    this.subUser = this.subUserService = this.userService.isLoggedIn$.subscribe(
+      (user) => {
+        if (user === false) {
+          this.snackBar.open('Please sign in to access the cart', 'Ok', {
+            verticalPosition: 'top',
+            horizontalPosition: 'right',
+            panelClass: 'bg-danger',
+            duration: 3000,
+          });
+          this._router.navigate(['profile']);
+        } else {
+          this._router.navigate(['shop/cart', this.authService.userData.uid]);
+        }
       }
-    });
+    );
   }
 
   openWishList() {
@@ -182,6 +191,14 @@ export class HeaderComponent implements OnInit {
       } else {
         this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
       }
+      this.subUser.unsubscribe();
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subUserService.unsubscribe();
+    this.subAuth.unsubscribe();
+    this.subCartService.unsubscribe();
+    this.subWishListService.unsubscribe();
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from 'app/5.models/products';
 import { Router } from '@angular/router';
 import { WishListService } from 'app/4.services/wishlist.service';
@@ -13,6 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'shop-card',
   templateUrl: './shop-card.component.html',
   styleUrls: ['./shop-card.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopCardComponent implements OnInit {
   @Input() product: Product;

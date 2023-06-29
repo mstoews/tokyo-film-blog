@@ -53,7 +53,7 @@
       <div class="hidden md:block">
         <a (click)="openWishList()" matTooltip="Wish List"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
-          <mat-icon [matBadge]=wishCount [matBadgeHidden]="wishCount===0"
+          <mat-icon [matBadge]=wishCounter() [matBadgeHidden]="wishCounter()===0"
             [svgIcon]="'heroicons_outline:gift'"></mat-icon>
         </a>
       </div>

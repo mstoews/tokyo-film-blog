@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Optional } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, Optional } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Contact } from 'app/5.models/contact';
 import { ContactService } from 'app/4.services/contact.service';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactListComponent implements OnInit {
   constructor(public contactService: ContactService, private fb: FormBuilder) {}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router'
 import { AuthService } from 'app/4.services/auth/auth.service';
@@ -7,7 +7,8 @@ import { CartService } from 'app/4.services/cart.service';
 @Component({
   selector: 'purchase-thanks',
   templateUrl: './purchase-thanks.html',
-  styleUrls: ['./purchase-thanks.css']
+  styleUrls: ['./purchase-thanks.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PurchaseThanksComponent {
   userId: string;

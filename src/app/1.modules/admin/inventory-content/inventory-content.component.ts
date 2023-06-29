@@ -46,13 +46,14 @@ export class InventoryContentComponent implements OnInit {
   imagesArray: IImageStorage[] = [];
   constructor(public storage: AngularFireStorage) {}
 
+
   ngOnInit(): void {
     this.ImagesList();
   }
 
   ImagesList() {
     var imageCount = 0;
-    this.storage
+    var sub = this.storage
       .ref('/800')
       .listAll()
       .subscribe((files) => {
@@ -70,5 +71,6 @@ export class InventoryContentComponent implements OnInit {
           });
         });
       });
+     sub.unsubscribe();
   }
 }

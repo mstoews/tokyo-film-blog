@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {
   MAT_DIALOG_DATA,
@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddCategoryDialog {
   description: string;

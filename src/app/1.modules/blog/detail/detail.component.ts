@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { Blog } from 'app/5.models/blog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import { ScrollService } from 'app/4.services/scroll.service';
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DetailComponent implements OnInit, OnDestroy {
   blogId: string;

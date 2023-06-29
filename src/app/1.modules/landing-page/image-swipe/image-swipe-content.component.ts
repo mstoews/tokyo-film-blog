@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { Router } from '@angular/router';
 import { IImageStorage } from 'app/5.models/maintenance';
@@ -9,6 +9,7 @@ SwiperCore.use([Navigation]);
   selector: 'app-swiper',
   templateUrl: './image-swipe-content.component.html',
   styleUrls: ['./image-swipe-content.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ImageSwipeComponent implements OnInit {
   imagesArray: IImageStorage[] = [];

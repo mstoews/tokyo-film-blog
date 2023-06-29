@@ -1,38 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Mainpage } from 'app/5.models/mainpage';
 import { MainPageService } from 'app/4.services/main-page.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription, first } from 'rxjs';
 
 @Component({
   selector: 'admin-form',
   templateUrl: './admin-form.component.html',
   styleUrls: ['./admin-form.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminFormComponent implements OnInit {
-  sTitle: any;
+export class AdminFormComponent implements OnInit, OnDestroy {
+  sTitle = 'Main Page';
   mainpageGroup: FormGroup;
   mainPage$: Observable<Mainpage[]>;
   mainPage: Mainpage;
+  subMainPage: Subscription;
 
-  constructor(
-    private fb: FormBuilder,
-    private mainPageService: MainPageService
-  ) {
-    this.sTitle = 'Main Page';
-  }
+  mainPageService = inject(MainPageService);
+  fb = inject(FormBuilder);
+
 
   ngOnInit(): void {
-    this.mainPage$ = this.mainPageService.getAll();
+    this.mainPage$ = this.mainPageService.getAll().pipe(first());
     this.createEmptyForm();
-    this.mainPage$.subscribe((page) => {
+    this.subMainPage = this.mainPage$.subscribe((page) => {
       if (page.length > 0) {
-        this.mainPage = page[0];
-        this.createForm(this.mainPage);
-      } else {
-        this.createEmptyForm();
+        this.createForm(page[0]);
       }
     });
+
+  }
+
+  ngOnDestroy(): void {
+     this.subMainPage.unsubscribe();
   }
 
   createEmptyForm() {

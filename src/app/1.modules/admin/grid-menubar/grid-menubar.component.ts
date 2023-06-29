@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, OnInit, Input } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Product } from 'app/5.models/products';
 import { Observable } from 'rxjs';
@@ -13,6 +13,7 @@ interface IValue {
   selector: 'grid-menubar',
   templateUrl: './grid-menubar.component.html',
   styleUrls: ['./grid-menubar.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridMenubarComponent implements OnInit {
   @Output() notifyParentAdd: EventEmitter<any> = new EventEmitter();

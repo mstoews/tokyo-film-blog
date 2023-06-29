@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from 'app/5.models/products';
 import { imageItem } from 'app/5.models/imageItem';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { ProductsService } from 'app/4.services/products.service';
   selector: 'inventory-preview',
   templateUrl: './inventory-preview.component.html',
   styleUrls: ['./inventory-preview.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryPreviewComponent implements OnInit {
   inventoryImages$: Observable<imageItem[]>;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { filter, Observable } from 'rxjs';
 import { ProductsService } from '../../../4.services/products.service';
 import { Product } from 'app/5.models/products';
@@ -18,6 +18,7 @@ import { openAddComponentDialog } from './add/add.component';
   selector: 'inventory-list',
   templateUrl: './inventory-grid.component.html',
   styleUrls: ['./inventory-grid.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;

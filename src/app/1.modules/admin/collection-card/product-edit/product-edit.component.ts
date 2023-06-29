@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -18,6 +18,7 @@ import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
   selector: 'app-product-edit',
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductEditComponent implements OnInit {
   sTitle: any;

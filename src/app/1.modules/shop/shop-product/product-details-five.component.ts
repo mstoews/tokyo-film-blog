@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Product } from 'app/5.models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/4.services/products.service';
@@ -19,6 +19,7 @@ import { UserService } from 'app/4.services/auth/user.service';
   selector: 'app-product-details-five',
   templateUrl: './product-details-five.component.html',
   styleUrls: ['./product-details-five.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   purchaseStarted: boolean;

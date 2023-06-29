@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UserService } from 'app/4.services/auth/user.service';
 import { BlogService } from 'app/4.services/blog.service';
@@ -9,6 +9,7 @@ import { ReplyDialogComponent } from '../reply-dialog/reply-dialog.component';
 @Component({
   selector: 'blog-comments-list',
   templateUrl: './comments-list.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CommentsListComponent implements OnInit {
   constructor(

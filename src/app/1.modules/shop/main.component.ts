@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   trigger,
   transition,
@@ -27,6 +27,7 @@ import {
       ])
     ])
    ],
+   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopComponent implements OnInit {
 

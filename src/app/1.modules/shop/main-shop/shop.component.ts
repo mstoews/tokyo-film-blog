@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
   selector: 'shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainShopComponent implements OnInit {
   categories: Category[];

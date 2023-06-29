@@ -37,9 +37,14 @@
 
     <ng-container *ngIf="allCategories$ | async as rows">
       <div class="m-20">
-      <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
-        [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true"
-        (onFocusedRowChanged)="onFocusedRowChanged($event)" keyExpr="id">
+      <dx-data-grid flex id="categoryGrid" [dataSource]="rows"
+        [showBorders]="true"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0"
+        (onCellDblClick)="onCellDoublClicked($event)"
+        [repaintChangesOnly]="true"
+        (onFocusedRowChanged)="onFocusedRowChanged($event)"
+        keyExpr="id">
         <dxi-column width="500px" dataField="name"> </dxi-column>
       </dx-data-grid>
     </div>

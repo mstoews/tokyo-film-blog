@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, Input, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
@@ -17,6 +17,7 @@ import { ProductsService } from 'app/4.services/products.service';
   selector: 'image-selection',
   templateUrl: './inventory-image-selection.component.html',
   styleUrls: ['./inventory-image-selection.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   @Input() productId: string;

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'environments/environment.prod';
 import { catchError, throwError } from 'rxjs';
@@ -9,7 +9,8 @@ import { catchError, throwError } from 'rxjs';
 @Component({
   selector: 'app-set-admin',
   templateUrl: './set-admin.component.html',
-  styleUrls: ['./set-admin.component.css']
+  styleUrls: ['./set-admin.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SetAdminComponent {
 
@@ -19,7 +20,7 @@ export class SetAdminComponent {
   ) { }
 
   ngOnInit(): void {
-  } 
+  }
   onAdmin() {
     const currentDate = new Intl.DateTimeFormat('en');
     const theDate = currentDate.format();
