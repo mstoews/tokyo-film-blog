@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { Category } from 'app/5.models/category';
+import { Category, CategorySnap } from 'app/5.models/category';
+import { CollectionReference, collection, doc } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -20,19 +21,23 @@ export class CategoryService {
     });
   }
 
+  auth = inject(AngularFirestore);
+
   getAll() {
     return this.categoryItems;
   }
 
-  create(category: Category) {
-    return this.categoryCollection.add(category);
+  create(category: Partial<Category>) {
+    return this.update(category);
   }
 
-  update(category: Category) {
-    this.categoryCollection.doc(category.id.toString()).update(category);
+  update(category: Partial<Category>) {
+    this.categoryCollection.doc(category.id).update(category);
   }
 
-  delete(name: string) {
-    this.categoryCollection.doc(name).delete();
+  delete(id: string) {
+    this.categoryCollection.doc(id).delete();
   }
+
+
 }

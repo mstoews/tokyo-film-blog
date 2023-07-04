@@ -253,13 +253,9 @@ export class WishListService {
   }
 
   wishListByUserId(userId: string): any {
-    let wishListItems: Observable<WishList[]>;
-    let wishListItemsCollection: AngularFirestoreCollection<WishList>;
-    wishListItemsCollection = this.afs.collection<WishList>(
-      `users/${userId}/wishlist`
-    );
-    wishListItems = wishListItemsCollection.valueChanges({ idField: 'id' });
-    return wishListItems;
+    let col: AngularFirestoreCollection<WishList>;
+    col = this.afs.collection<WishList>(`users/${userId}/wishlist`);
+    return col.valueChanges({ idField: 'id' });
   }
 
   wishCountByUserId(userId: string) {

@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ShopComponent } from './main.component';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot, Resolve } from '@angular/router';
 import { MainShopComponent } from './main-shop/shop.component';
-import { ShopCardComponent } from './shop-card/shop-card.component';
+import { ShopCardComponent } from './main-shop/shop-card/shop-card.component';
 import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
@@ -23,13 +23,42 @@ import { AddressComponent } from '../pages/profile/address/address.component';
 import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { WishlistCardComponent } from './wishlist/wishlist-card/wishlist-card.component';
+import { ShopLandingComponent } from './shop-landing/shop-landing.component';
+import { ShopLandingCardComponent } from './shop-landing/shop-landing-card/shop-landing-card.component';
+import { Product } from 'app/5.models/products';
+import { ProductsService } from 'app/4.services/products.service';
+import { ShopCategoryCardComponent } from './main-shop/shop-category-card/shop-category-card.component';
+
+
+export const ProductFuncResolver: ResolveFn<Product[]> = (
+  route: ActivatedRouteSnapshot,
+  state: RouterStateSnapshot) => {
+  return inject(ProductsService).getInventoryByCategory(route.paramMap.get("id"));
+};
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
+    title: 'Shop Landing',
+    component: ShopLandingComponent,
+    data: { state: 'shop-landing' },
+  },
+  {
+    path: 'shop',
+    pathMatch: 'full',
     title: 'Shopping',
     component: MainShopComponent,
+  },
+  {
+    path: 'category/:id',
+    pathMatch: 'full',
+    title: 'Shopping',
+    component: MainShopComponent,
+    resolve: {
+      shop: ProductFuncResolver,
+    },
+    data: { state: 'category/:id' },
   },
   {
     path: 'product/:id',
@@ -79,6 +108,7 @@ const routes: Routes = [
     component: PurchaseThanksComponent,
     data: { state: 'purchase-thanks' },
   },
+
   {
     path: 'checkout',
     pathMatch: 'full',
@@ -102,6 +132,10 @@ const routes: Routes = [
     PurchaseThanksComponent,
     CheckoutComponent,
     PaymentConfirmationComponent,
+    WishlistCardComponent,
+    ShopLandingComponent,
+    ShopLandingCardComponent,
+    ShopCategoryCardComponent,
   ],
   imports: [
     CommonModule,
@@ -113,7 +147,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AddressComponent,
     NgxSpinnerModule,
-    WishlistCardComponent,
+
   ],
 })
 export class ShopModule {}

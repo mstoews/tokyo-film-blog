@@ -113,7 +113,7 @@ export class AddressComponent implements OnInit {
             horizontalPosition: 'right',
             panelClass: 'bg-danger',
           });
-          console.log('user doc', this.updateStripeCustomerId(user.uid));
+          console.debug('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then()
         .catch((error) => {

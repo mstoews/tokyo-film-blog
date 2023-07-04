@@ -1,22 +1,75 @@
 
-<div class="h-screen">
   <app-header [title]="'Update Categories'" [sub_title]="'Each category represents type of product'"></app-header>
-  <mat-drawer-container class="flex-col h-full">
+  <mat-drawer-container class="flex-col h-[800px] m-2">
     <mat-drawer class="lg:w-1/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
       [disableClose]="false">
-      <mat-card class="flex flex-col w-full max-w-120 filter-article filter-interactive text-gray-700">
-        <div mat-dialog-title [ngStyle]="{ 'border-left': '10px solid' + cRAG }">
-          {{ sTitle }}
-        </div>
+      <mat-card class="flex flex-col h-[700px] max-w-120 filter-article filter-interactive text-gray-700">
+        
         <div mat-dialog-content>
           <form [formGroup]="categoryGroup" (ngSubmit)="onUpdate(categoryGroup.value)" class="form">
-            <mat-form-field class="form-element m-1" [ngStyle]="{ width: '100%' }">
-              <input matInput placeholder="Category Name" formControlName="name" />
-            </mat-form-field>
+
+            <div class="flex flex-col m-1">
+              
+              
+                <section class="flex md:flex-row">
+                  
+                  <div *ngIf="!categoryGroup.value.image" class="flex flex-col mt-8">
+                    <img [src]="categoryGroup.value.image" width="40" height="40" alt="cell.value" >
+                  </div>
+                  <div  *ngIf="categoryGroup.value.image" class="flex flex-col mt-8">
+                    <img [src]="categoryGroup.value.image" width="40" height="40" lg-rounded alt="cell.value" >
+                  </div>
+
+                  <div class="flex flex-col grow">
+                    <mat-label class="ml-2 text-base">Name</mat-label>
+                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
+                      <input matInput placeholder="Name" formControlName="name" />
+                    </mat-form-field>
+                  </div>
+                  </section>
+               
+
+
+                  <div class="flex flex-col grow">
+                    <mat-label class="ml-2 text-base">Description</mat-label>
+                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
+                      <input matInput placeholder="Description" formControlName="description" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="flex flex-col grow">
+                    <mat-label class="ml-2 text-base">Update Date</mat-label>
+                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
+                      <input matInput placeholder="Update Date" formControlName="updateDate" />
+                    </mat-form-field>
+                  </div>
+
+
+                  <div class="flex flex-col grow">
+                    <mat-label class="ml-2 text-base">Created Date</mat-label>
+                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
+                      <input matInput placeholder="Created Date" formControlName="createDate" />
+                    </mat-form-field>
+                  </div>
+                  <div class="flex flex-col grow">
+                    <mat-label class="ml-2 text-base">Updated By</mat-label>
+                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
+                      <input matInput placeholder="Updated By" formControlName="updateBy" />
+                    </mat-form-field>
+                  </div>
+
+                  <div class="flex flex-col grow">
+                    <mat-label class="ml-2 text-base">Image URL</mat-label>
+                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
+                      <input matInput placeholder="Image URL" formControlName="image" />
+                    </mat-form-field>
+                  </div>
+
+            </div>  
           </form>
         </div>
         <div mat-dialog-actions>
-          <button mat-icon-button (click)="onUpdate(category)" color="primary" aria-label="Add">
+          <button mat-icon-button (click)="onUpdate(categoryGroup.value)" color="primary" aria-label="Add">
             <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
           </button>
           <button mat-icon-button (click)="onCreate()" color="primary" [disabled]="!categoryGroup.valid">
@@ -36,27 +89,39 @@
     </mat-drawer>
 
     <ng-container *ngIf="allCategories$ | async as rows">
-      <div class="m-20">
-      <dx-data-grid flex id="categoryGrid" [dataSource]="rows"
-        [showBorders]="true"
-        [focusedRowEnabled]="true"
-        [focusedRowIndex]="0"
-        (onCellDblClick)="onCellDoublClicked($event)"
-        [repaintChangesOnly]="true"
-        (onFocusedRowChanged)="onFocusedRowChanged($event)"
-        keyExpr="id">
-        <dxi-column width="500px" dataField="name"> </dxi-column>
-      </dx-data-grid>
-    </div>
+      <div class="m-1 h-full">
+        <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
+          [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true"
+           keyExpr="name">
+          <dxi-column dataField="name"> </dxi-column>
+          <dxi-column dataField="description"> </dxi-column>
+          <dxi-column dataField="createDate"> </dxi-column>
+          <dxi-column dataField="updateDate"> </dxi-column>
+          <dxi-column dataField="updateBy"> </dxi-column>
+          <dxi-column dataField="image" [width]="100" cellTemplate="cellTemplate"> </dxi-column>
+          <div *dxTemplate="let data of 'cellTemplate'">
+            <img [src]="data.value" class="lg-rounded" alt="cell.value" >
+          </div>
+        </dx-data-grid>
+      </div>
     </ng-container>
     <button (click)="onAdd()"
-    class="fixed bottom-3 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
-    <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
-      <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+      class="fixed bottom-20 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+      <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
+        <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
             C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
             C15.952,9,16,9.447,16,10z" />
-    </svg>
-  </button>
+      </svg>
+    </button>
   </mat-drawer-container>
 
-</div>
+
+<!-- Category Model
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  createDate: Date;
+  updateDate: Date;
+  updateBy: string; 
+-->

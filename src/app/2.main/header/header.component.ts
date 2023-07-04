@@ -58,6 +58,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   isClicked = false;
   emailName: string;
   profile$: Observable<ProfileModel[]>;
+  userId: string;
 
   isLoggedIn = true;
   wishCounter = signal<number>(0);
@@ -66,7 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subCartService: Subscription;
   subWishListService: Subscription;
   subAuth: Subscription;
-  subUser: Subscription;
+  
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
@@ -95,10 +96,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.subAuth = this.authService.afAuth.authState.subscribe((user) => {
       if (user) {
-        const userId = user.uid;
+        this.userId = user.uid;
+        console.log(this.userId);
 
         let collection = this.afs.collection<ProfileModel>(
-          `users/${userId}/profile`
+          `users/${this.userId}/profile`
         );
         const profiles = collection.valueChanges({ idField: 'id' });
 
@@ -118,9 +120,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });
         this.emailName = 'Guest';
         this.authService.setUserName('');
+      } else {
+        this.emailName = 'Guest';
+        this.authService.setUserName('');
       }
     });
-    
+
   }
 
   public onToggleSideNav() {
@@ -161,7 +166,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   doAnimate() {}
 
   openShoppingCart() {
-    this.subUser = this.subUserService = this.userService.isLoggedIn$.subscribe(
+    this.subUserService = this.userService.isLoggedIn$.subscribe(
       (user) => {
         if (user === false) {
           this.snackBar.open('Please sign in to access the cart', 'Ok', {
@@ -172,7 +177,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           });
           this._router.navigate(['profile']);
         } else {
-          this._router.navigate(['shop/cart', this.authService.userData.uid]);
+          this._router.navigate(['shop/cart', this.userId]);
         }
       }
     );
@@ -189,15 +194,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });
         this._router.navigate(['profile']);
       } else {
-        this._router.navigate(['shop/wishlist', this.authService.userData.uid]);
+        console.log('User ID: ' + this.userId);
+        this._router.navigate(['shop/wishlist', this.userId]);
       }
-      this.subUser.unsubscribe();
     });
   }
 
   ngOnDestroy(): void {
     this.subUserService.unsubscribe();
-    this.subAuth.unsubscribe();
+
     this.subCartService.unsubscribe();
     this.subWishListService.unsubscribe();
   }

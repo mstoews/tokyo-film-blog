@@ -156,7 +156,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
       this.total = total;
       this.tax = Math.trunc(this.total * 0);
-      this.shipping = Math.trunc(20);
+      this.shipping = Math.trunc(25);
       if (this.total > 500) {
         this.shipping = Math.trunc(40);
       }

@@ -4,8 +4,6 @@ import { WishList } from 'app/5.models/wishlist';
 
 @Component({
   selector: 'app-wishlist-card',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './wishlist-card.component.html',
   styleUrls: ['./wishlist-card.component.css']
 })

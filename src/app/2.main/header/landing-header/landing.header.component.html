@@ -3,7 +3,7 @@
     <ng-container *ngIf="(userService.roles$ | async) as roles">
       <ng-container *ngIf="roles.admin">
         <div class="md:block hidden">
-          <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" matTooltip="Toggle Navigation"
+          <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation"
             class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl">
             <mat-icon [svgIcon]="'mat_outline:support'"></mat-icon>
           </a>
@@ -12,7 +12,7 @@
       </ng-container>
     </ng-container>
     <div class="block md:hidden">
-      <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" matTooltip="Toggle Navigation"
+      <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" 
         class="flex items-center p-2 font-normal text-white rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
         <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
       </a>

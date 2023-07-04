@@ -82,8 +82,9 @@ export class ProductsService {
     return this.productsCollection.doc(id).get();
   }
 
-  getFilteredInventory(category: string) {
-    if (category === 'All Categories') {
+  getInventoryByCategory(category: string) {
+    console.log('getInventoryByCategory: ', category);
+    if (category === 'All Categories' || category === null) {
       return this.getAvailableInventory();
     } else {
       return this.getAvailableInventory().pipe(
@@ -93,6 +94,20 @@ export class ProductsService {
       );
     }
   }
+
+  getInventoryByCat(category: string) {
+    if (category === null) {
+      return this.getAvailableInventory();
+    } else {
+      return this.getAvailableInventory().pipe(
+        map((inventory) =>
+          inventory.filter((product) => product.category === category)
+        )
+      );
+    }
+  }
+
+
 
   getProductImage(parentId: string): any {
     var productImages: Observable<imageItem[]>;

@@ -6,6 +6,7 @@ import {
   Optional,
   ViewChild,
   ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -16,9 +17,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Category } from 'app/5.models/category';
 import { CategoryService } from 'app/4.services/category.service';
 
-import { LiveAnnouncer } from '@angular/cdk/a11y';
-import { MatSort, Sort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'category-list',
@@ -30,6 +28,7 @@ export class CategoryGridComponent implements OnInit {
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   categoryGroup: FormGroup;
+  currentDoc: string;
   sTitle: string;
   cRAG: string;
 
@@ -41,13 +40,15 @@ export class CategoryGridComponent implements OnInit {
 
   constructor(
     private matDialog: MatDialog,
-    private auth: AngularFireAuth,
+    
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string,
     private categoryService: CategoryService,
     private fb: FormBuilder
   ) {
     this.category = this.categoryType;
   }
+
+  auth = inject(AngularFireAuth);
 
   ngOnInit() {
     this.Refresh();
@@ -91,12 +92,46 @@ export class CategoryGridComponent implements OnInit {
   }
 
   create(data: any) {
-    const rawData = this.categoryGroup.getRawValue();
-    this.categoryService.update(rawData);
+    this.categoryService.update(data);
   }
 
   onCellDoublClicked(e: any) {
-    this.categoryGroup.setValue(e.data);
+    this.currentDoc = e.data.id;
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
+    e.data.updateDate = updateDate;
+  
+    if (e.data.name === undefined) {
+      e.data.name = '';
+    }
+    if (e.data.description === undefined) {
+      e.data.description = '';
+    }
+    
+    if (e.data.createDate === undefined) {
+      e.data.createDate = updateDate;
+  
+    }
+    if (e.data.updateBy === undefined || e.data.updateBy === null) {
+      e.data.updateBy = '';
+    }
+
+    if (e.data.image === undefined || e.data.image === null) {
+      e.data.image = 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/thumbnails%2FB1BB2A28-C895-4AA8-9072-948EE9FB2EAE_200x200.JPG?alt=media&token=4e5183f5-cd14-43af-99de-008e7f564a84';
+    }
+
+
+    console.log(`onCellDoublClicked ${JSON.stringify(e.data)}`);
+
+    const data = {
+      name: e.data.name,
+      description: e.data.description,
+      image: e.data.image,
+      createDate: e.data.createDate,
+      updateDate: e.data.updateDate,
+      updateBy: e.data.updateBy,
+    }
+    this.categoryGroup.setValue(data);
     this.openDrawer();
   }
 
@@ -105,13 +140,7 @@ export class CategoryGridComponent implements OnInit {
     this.toggleDrawer();
   }
 
-  onFocusedRowChanged(e: any) {
-    const rowData = e.row && e.row.data;
-    // console.debug(`onFocusRowChanged ${JSON.stringify(rowData)}`);
-    this.categoryGroup.setValue(rowData);
-    this.openDrawer();
-  }
-
+  
   openDrawer() {
     const opened = this.drawer.opened;
     if (opened !== true) {
@@ -168,11 +197,21 @@ export class CategoryGridComponent implements OnInit {
     return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
   }
 
-  onUpdate(data: Category) {
-    data = this.categoryGroup.getRawValue();
+  onUpdate(category: Partial<Category>) {
+  
+    console.log(`onUpdate: ${JSON.stringify(this.currentDoc)}`);
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
+    
+    
+    if (category.name === undefined || category.name === null) {
+      category.name = '';
+    }
+    
+    category.id = this.currentDoc;
 
-    // console.debug(`onUpdate: ${JSON.stringify(data)}`);
-    this.categoryService.update(data);
+    this.categoryService.update(category);
+    this.Refresh();
   }
 
   onDelete(data: Category) {
@@ -195,9 +234,13 @@ export class CategoryGridComponent implements OnInit {
   }
 
   createEmptyForm() {
-    this.categoryGroup = this.fb.group({
-      id: [''],
+    this.categoryGroup = this.fb.group({      
       name: [''],
+      description: [''],
+      image: [''],
+      createDate: [''],
+      updateDate: [''],
+      updateBy: [''],
     });
   }
 
@@ -205,8 +248,12 @@ export class CategoryGridComponent implements OnInit {
     this.sTitle = 'Category';
 
     this.categoryGroup = this.fb.group({
-      id: [category.id],
       name: [category.name],
+      description: [category.description],
+      image: [category.image],
+      createDate: [category.createDate],
+      updateDate: [category.updateDate],
+      updateBy: [category.updateBy],
     });
   }
 }

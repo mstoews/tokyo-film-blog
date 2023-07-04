@@ -1,0 +1,15 @@
+
+<div (click)="openShopByCategory()" class="mx-auto container">
+  <!-- <div>
+      <h2 class="text-2xl font-bold text-gray-800">{{category.name}}</h2>
+      <p class="text-gray-600 w-90">{{category.description}}</p>
+  </div> -->
+  <div class="lg:pt-2 w-full lg:flex xl:px-0 px-4">
+      <div class="w-full h-100 relative lg:mb-0 mb-1 lg:mr-8">
+          <img [src]="category.image" class="rounded absolute inset-0 w-full h-full object-cover object-center" />
+          <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-lg">
+          <h1 class="text-white font-normal text-lg ">{{category.name}}</h1>
+          <h1 class="text-white font-normal text-sm ">{{category.description}}</h1>
+          </div>
+      </div>
+  </div>

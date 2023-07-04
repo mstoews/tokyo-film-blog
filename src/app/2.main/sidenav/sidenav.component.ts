@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/4.services/auth/auth.service';
@@ -11,6 +12,7 @@ import { Observable } from 'rxjs';
 export class SideNavComponent implements OnInit {
   constructor(
     public authService: AuthService,
+    public auth: AngularFireAuth,
     public userService: UserService,
     public snackBar: MatSnackBar,
     private route: Router,
@@ -18,6 +20,7 @@ export class SideNavComponent implements OnInit {
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userEmail = user?.email;
+      console.log('User Email: ' + this.userEmail);
     });
   }
 
@@ -30,12 +33,11 @@ export class SideNavComponent implements OnInit {
   @Output() notifyParentDrawerOpen: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
-    this.userService.isLoggedIn$.subscribe((user) => {
-      this.userService.getUserId().then((id) => {
-        this.userId = id;
-        //console.log('User ID: ' + this.userId);
+    this.auth.authState.subscribe((user) => {
+      if (user) {
+        this.userId = user.uid;}
       });
-    });
+
   }
 
   onAdmin() {
@@ -65,8 +67,12 @@ export class SideNavComponent implements OnInit {
         });
         this.route.navigate(['profile']);
       } else {
-        this.route.navigate(['/shop/wishlist/', this.userId]);
-        this.notifyParentCloseDrawer.emit();
+        this.auth.authState.subscribe((user) => {
+          if (user) {
+            this.userId = user.uid;}
+            this.route.navigate(['/shop/wishlist/', this.userId]);
+            this.notifyParentCloseDrawer.emit();
+          });
       }
     });
   }
