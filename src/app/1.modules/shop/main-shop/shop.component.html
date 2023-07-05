@@ -1,25 +1,26 @@
 <app-header class="bg-white" [title]="'Made To Shopping'" [sub_title]="currentCategory"></app-header>
 
-  <div class="invisible sm:visible sm:relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6">
-    <div *ngIf="Category$ | async as cats">
-        <div class="flex justify-between md:mx-10 md:gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-8 xl:gap-x-10">
-          <div *ngFor="let item of cats">
-              <shop-category-card
-              [category]="item"
-              (notifyCategoryRefresh)="updateCategory($event)">
-            </shop-category-card>
-          </div>
-        </div>
+<ngx-spinner [fullScreen]="false" type="ball-scale-multiple" size="medium">
+  <p class="loading">Loading Shop ...</p>
+</ngx-spinner>
+
+<div class="invisible sm:visible sm:relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6">
+  <div *ngIf="Category$ | async as cats">
+    <div class="flex justify-between md:mx-10 md:gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-8 xl:gap-x-10">
+      <div *ngFor="let item of cats">
+        <shop-category-card [category]="item" (notifyCategoryRefresh)="updateCategory($event)">
+        </shop-category-card>
+      </div>
     </div>
+  </div>
   <div *ngIf="Products$ | async as products">
-
-  <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">
-    <ngx-spinner [fullScreen]="false" type="ball-scale-multiple" size="medium">
-      <p class="loading">Loading Shop ...</p>
-    </ngx-spinner>
-
-    <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
-      <li *ngFor="let product of products">
-        <shop-card [product]="product"></shop-card>
-      </li>
+    <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">      
+      <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
+        <li *ngFor="let product of products">
+          <shop-card [product]="product"></shop-card>
+        </li>
+      </div>
+    </div>
+  </div>
 </div>
+

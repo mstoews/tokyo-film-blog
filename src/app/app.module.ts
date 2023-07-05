@@ -33,7 +33,7 @@ import { AuthInterceptor } from './4.services/auth/auth.interceptor';
 import { CartResolver } from './4.services/cart.resolver';
 import { WishListResolver } from './4.services/wishlist.resolver';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { NgxStripeModule } from 'ngx-stripe';
+// import { NgxStripeModule } from 'ngx-stripe';
 
 // import { environment } from '../environments/dev';
 
@@ -58,7 +58,7 @@ import { UserService } from './4.services/auth/user.service';
     AngularFireFunctionsModule,
     AngularFireModule.initializeApp(environment.firebase),
     NgxSpinnerModule,
-    NgxStripeModule.forRoot(environment.stripe.public_key),
+    //NgxStripeModule.forRoot(environment.stripe.public_key),
   ],
   providers: [
     ScrollService,

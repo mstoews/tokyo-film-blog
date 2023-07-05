@@ -12,7 +12,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'shop-card',
   templateUrl: './shop-card.component.html',
-  styleUrls: ['./shop-card.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopCardComponent implements OnInit {

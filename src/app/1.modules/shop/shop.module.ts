@@ -30,6 +30,7 @@ import { ProductsService } from 'app/4.services/products.service';
 import { ShopCategoryCardComponent } from './main-shop/shop-category-card/shop-category-card.component';
 
 
+
 export const ProductFuncResolver: ResolveFn<Product[]> = (
   route: ActivatedRouteSnapshot,
   state: RouterStateSnapshot) => {
@@ -41,8 +42,8 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     title: 'Shop Landing',
-    // component: ShopLandingComponent,
-    component: MainShopComponent,
+    component: ShopLandingComponent,
+    /// component: MainShopComponent,
     data: { state: 'shop-landing' },
   },
   {
@@ -148,7 +149,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AddressComponent,
     NgxSpinnerModule,
-
   ],
 })
 export class ShopModule {}

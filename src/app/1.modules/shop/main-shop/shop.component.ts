@@ -11,33 +11,26 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'shop',
   templateUrl: './shop.component.html',
-  styleUrls: ['./shop.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainShopComponent implements OnInit {
+
+  ngxSpinner = inject(NgxSpinnerService);
+  route = inject(Router);
+  productService= inject( ProductsService);
+  categoryService= inject( CategoryService);
+  actRoute= inject( ActivatedRoute);
+  snack= inject( MatSnackBar);
+
   categories: Category[]=[];
   products: Product[]=[];
   Category$: Observable<Category[]>;
   Products$: Observable<Product[]>;
-  dropdown: boolean = false;
-  filters: boolean = false;
+
   currentCategory: string;
-
-  prd: any;
   sTitle: string;
+  myVar: any;
 
-  constructor(
-    private route: Router,
-    private readonly productService: ProductsService,
-    private readonly categoryService: CategoryService,
-    private actRoute: ActivatedRoute,
-    private snack: MatSnackBar
-  ) {
-
-
-  }
-
-  ngxSpinner = inject(NgxSpinnerService);
 
   showSpinner() {
     this.ngxSpinner.show();
@@ -46,18 +39,25 @@ export class MainShopComponent implements OnInit {
     }, 1500);
   }
 
-
   backToHome() {
     this.route.navigate(['home']);
   }
-
 
   updateCategory(e: any) {
     this.onRefreshName(e);
   }
 
+
+  startTimer() {
+    this.myVar = setTimeout(function(){ window.location.reload(); }, 10000);
+  }
+  
+  myStopFunction() {
+    clearTimeout(this.myVar);
+  }
+
   onRefreshName(category: string) {
-    //this.showSpinner();
+    this.showSpinner();
     this.currentCategory = category;
     this.Products$ = this.productService.getInventoryByCategory(category);
     this.snack.open('Updating category ...', 'OK', {
@@ -68,15 +68,15 @@ export class MainShopComponent implements OnInit {
     });
   }
 
-
   ngOnInit(): void {
-    //this.showSpinner();
+    
+    this.showSpinner();
     this.Category$ = this.categoryService.getAll();
     this.sTitle = 'Shop';
     this.currentCategory = 'Shawls';
-    // this.actRoute.data.subscribe(data => {
-    //   this.Products$ = of(data.shop);
-    // })
-    this.onRefreshName(this.currentCategory);
+    this.actRoute.data.subscribe(data => {
+       this.Products$ = of(data.shop);
+    });
+    
   }
 }

@@ -1,11 +1,7 @@
 
-  <div class="h-[300px] w-[300px] flex flex-col jusitfy-start items-start from-gray-800 via-gray-800 to-opacity-30 group-hover:opacity-80" (click)="openProductDetail()">
-
-    <div class="w-full">
-      <img [src]="product.image" alt="product"  width="100%" height="auto"/>
-    </div>
-
-    <button (click)="openProductDetail()"
+  <div class="h-[300px] w-[300px] relative jusitfy-start items-start from-gray-800 via-gray-800 to-opacity-30 hover:opacity-80" (click)="openProductDetail()">
+   <img [ngSrc]="product.image" alt="product"  width="300" height="auto"/>
+   <button (click)="openProductDetail()"
      class="mt-2 relative z-10 flex items-center bg-gray-800 text-white justify-center w-full py-3 text-base font-medium leading-4 text-center transition duration-200 hover:text-white group-hover:opacity-100">
       View Details
     </button>
@@ -14,6 +10,6 @@
         <p class="text-lg dark:text-white lg:text-xl font-medium leading-6 lg:leading-5 text-gray-800">{{product.description}}</p>
     </div>
     <p class="text-lg dark:text-white lg:text-xl leading-6 lg:leading-5 text-gray-800">${{product.price}}</p>
-
-</div>
+  </div>
+  
 
