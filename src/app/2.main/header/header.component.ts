@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subCartService: Subscription;
   subWishListService: Subscription;
   subAuth: Subscription;
-  
+
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
@@ -201,9 +201,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subUserService.unsubscribe();
-
-    this.subCartService.unsubscribe();
-    this.subWishListService.unsubscribe();
+    //this.subUserService.unsubscribe();
+    //this.subCartService.unsubscribe();
+    //this.subWishListService.unsubscribe();
   }
 }

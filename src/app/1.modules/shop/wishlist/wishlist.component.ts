@@ -26,7 +26,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.sub = this.activateRoute.params.subscribe((params) => {
+    this.activateRoute.params.subscribe((params) => {
       const wishListItems = this.wishListService.wishListByUserId(params.id);
       if (wishListItems) {
         this.wishList$ = wishListItems;
@@ -44,7 +44,7 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    // this.sub.unsubscribe();
   }
 
   onRemoveItem(item: string) {

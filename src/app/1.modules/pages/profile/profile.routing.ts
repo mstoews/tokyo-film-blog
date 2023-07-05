@@ -7,5 +7,4 @@ export const profileRoutes: Route[] = [
         component: ProfileComponent
     }
 
-    
 ];
