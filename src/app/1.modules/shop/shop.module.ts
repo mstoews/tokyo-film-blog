@@ -41,7 +41,8 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     title: 'Shop Landing',
-    component: ShopLandingComponent,
+    // component: ShopLandingComponent,
+    component: MainShopComponent,
     data: { state: 'shop-landing' },
   },
   {

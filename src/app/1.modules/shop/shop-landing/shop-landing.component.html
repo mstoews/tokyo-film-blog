@@ -8,7 +8,7 @@
           size="large"  >
           <p class="loading">Loading Shop Categories...</p>
         </ngx-spinner>
-    <div class="grid grid-cols-1 md:mx-10 md:gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-10">
+    <div class="grid grid-cols-1 md:mx-10 md:gap-y-10 gap-x-10 sm:gap-x-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-10">
       <div *ngFor="let item of cats" >
         <app-shop-landing-card [category]="item"></app-shop-landing-card>
       </div>

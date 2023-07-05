@@ -57,7 +57,7 @@ export class MainShopComponent implements OnInit {
   }
 
   onRefreshName(category: string) {
-    // this.showSpinner();
+    //this.showSpinner();
     this.currentCategory = category;
     this.Products$ = this.productService.getInventoryByCategory(category);
     this.snack.open('Updating category ...', 'OK', {
@@ -68,15 +68,15 @@ export class MainShopComponent implements OnInit {
     });
   }
 
-  changeCategory(category: string) {}
 
   ngOnInit(): void {
-    // this.showSpinner();
+    //this.showSpinner();
     this.Category$ = this.categoryService.getAll();
     this.sTitle = 'Shop';
-    this.actRoute.data.subscribe(data => {
-    this.Products$ = of(data.shop);
-    })
-
+    this.currentCategory = 'Shawls';
+    // this.actRoute.data.subscribe(data => {
+    //   this.Products$ = of(data.shop);
+    // })
+    this.onRefreshName(this.currentCategory);
   }
 }
