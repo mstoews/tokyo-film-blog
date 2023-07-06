@@ -49,7 +49,6 @@ export class MainShopComponent implements OnInit, OnDestroy {
   }
 
   selectCategory(index: any) {
-    console.log('Category', index.index);
     if (index.index >= 0) {
       const category = this.categoryService.getAll();
       this.sub = category.subscribe((data) => {

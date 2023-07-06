@@ -11,9 +11,7 @@ export class ShopLandingCardComponent {
   @Input() category: Category;
   router = inject(Router);
 
-
   openShopByCategory() {
-    
     this.router.navigate(['shop/category', this.category.name]);
   }
 }

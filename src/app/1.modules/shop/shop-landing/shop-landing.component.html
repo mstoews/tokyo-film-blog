@@ -1,14 +1,8 @@
 
 <app-header class="bg-white" [title]="sTitle" [sub_title]="'Choose From Our Selection of Shopping Categories'"></app-header>
 <div *ngIf="Category$ | async as cats else loading" >
-  
-  <div class="relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6">
-        <ngx-spinner
-          [fullScreen]="false"
-          type="ball-scale-multiple"
-          size="large"  >
-          <p class="loading">Loading Shop Categories...</p>
-        </ngx-spinner>
+
+  <div class="relative mx-1 bg-white-100 px-4 pt-1 pb-5 sm:px-6">
     <div class="grid grid-cols-1 md:mx-10 md:gap-y-10 gap-x-10 sm:gap-x-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-10">
       <div *ngFor="let item of cats" >
         <app-shop-landing-card [category]="item"></app-shop-landing-card>
