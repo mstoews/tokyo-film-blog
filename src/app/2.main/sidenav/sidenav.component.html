@@ -17,22 +17,22 @@
           </li>
           <li>
             <a routerLink="home" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
               <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Home</span>
             </a>
           </li>
 
           <li>
-            <a (click)="onShop()"
-              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+            <a (click)="onShop()" (click)="onClose()"
+            class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
             </a>
           </li>
           <li>
             <a routerLink="blog" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
             </a>
@@ -47,7 +47,7 @@
 
           <li>
             <a (click)="onWishList()"
-              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
             </a>
@@ -55,27 +55,15 @@
 
           <li>
             <a (click)="onCart()"
-              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap" [matBadge]=cartCount [matBadgeHidden]="cartCount===0" >Shopping Cart</span>
             </a>
           </li>
 
-          <!-- <ng-container *ngIf="(user.roles$ | async) as roles">
-            <ng-container *ngIf="roles.admin">
-              <li>
-                <a routerLink="admin" (click)="onAdmin()" class="flex items-center p-2 pr-5 font-normal text-gray-700
-                    rounded-lg text-1xl grow hover:bg-gray-800
-                    dark:hover:bg-gray-700">
-                  <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-                  <span class="flex-1 ml-3 whitespace-nowrap">Maintenance</span>
-                </a>
-              </li>
-            </ng-container>
-          </ng-container> -->
         </ng-container>
 
-        <ng-container *ngIf="show_admin_menu === false">
+        <!-- <ng-container *ngIf="show_admin_menu === false"> -->
           <ng-container *ngIf="(userService.roles$ | async) as roles">
             <ng-container *ngIf="roles.admin">
               <!-- <li>
@@ -106,7 +94,7 @@
               <li>
                 <a routerLink="collections-admin"
                   class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
-                  <mat-icon [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
+                  <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
                   <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
                 </a>
               </li>
@@ -151,7 +139,7 @@
               </li>
             </ng-container>
           </ng-container>
-        </ng-container>
+        <!-- </ng-container> -->
       </ul>
     </div>
   </aside>

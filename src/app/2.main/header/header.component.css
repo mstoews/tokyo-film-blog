@@ -1,0 +1,10 @@
+.mat-toolbar {
+  border-color: aliceblue;
+  background: linear-gradient(rgba(0, 0, 0, 0.603), rgba(0, 0, 0, 0.411)), url('/assets/img/rainbow.jpg') center;
+  background-size: cover;
+  color: rgb(255, 255, 255);
+}
+
+.mat-toolbar:hover .mat-icon svgIcon {
+  transform: rotate(-180deg);
+}

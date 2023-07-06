@@ -1,11 +1,10 @@
 
-<div class="h-[150px] w-[150px] relative ease-in duration-300 hover:-m-2">
-  
-  <img (click)="onRefreshName(category.name)" 
-    class="w-100 rounded-lg" 
-    [ngSrc]="category.image" width="100%" height="auto"  
+<div class="md:h-[150px] md:w-[150px] relative ease-in duration-300 hover:-m-2">
+  <img (click)="onRefreshName(category.name)"
+    class="w-100 rounded-lg"
+    [ngSrc]="category.image" width="100%" height="auto"
     alt="category" />
-    <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-lg">
+    <div *ngIf="!mobile" class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-lg">
       <h1 class="text-white font-normal text-sm ">{{category.name}}</h1>
     </div>
  </div>

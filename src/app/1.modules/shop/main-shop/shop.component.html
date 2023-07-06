@@ -1,20 +1,39 @@
-<app-header class="bg-white" [title]="'Made To Shopping'" [sub_title]="currentCategory"></app-header>
+<div *ngIf="mobile">
+  <app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
+</div>
 
-<ngx-spinner [fullScreen]="false" type="ball-scale-multiple" size="medium">
-  <p class="loading">Loading Shop ...</p>
-</ngx-spinner>
+<div *ngIf="!mobile">
+  <app-header class="bg-white" [title]="'Made To Shopping'" [sub_title]="currentCategory"></app-header>
+</div>
 
-<div class="invisible sm:visible sm:relative mx-10 bg-white-100 px-4 pt-1 pb-5 sm:px-6">
+
+<div  class="sm:relative md:mx-10 bg-white-100 pt-1 md:pb-5 sm:px-6">
   <div *ngIf="Category$ | async as cats">
-    <div class="flex justify-between md:mx-10 md:gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-8 xl:gap-x-10">
-      <div *ngFor="let item of cats">
-        <shop-category-card [category]="item" (notifyCategoryRefresh)="updateCategory($event)">
-        </shop-category-card>
+    <div *ngIf="mobile">
+      <mat-tab-group #tabGroup class="flex-1" (selectedTabChange)="selectCategory($event)">
+        <div *ngFor="let item of cats">
+          <mat-tab class="m-1 border ">
+            <mat-tab-label>
+              <h2 class="text-gray-700 ml-12">{{item.name}}</h2>
+            <ng-template mat-tab-label >
+              <img class="rounded-lg p-1" [ngSrc]="item.image" alt="product" width="50" height="auto" />
+            </ng-template>
+            </mat-tab-label>
+          </mat-tab>
+        </div>
+      </mat-tab-group>
+    </div>
+    <div *ngIf="!mobile">
+      <div class="flex justify-between md:mx-10 md:gap-y-10 gap-x-10 sm:grid-cols-2 lg:grid-cols-8 xl:gap-x-10">
+        <div *ngFor="let item of cats">
+          <shop-category-card [category]="item" (notifyCategoryRefresh)="updateCategory($event)">
+          </shop-category-card>
+        </div>
       </div>
     </div>
   </div>
-  <div *ngIf="Products$ | async as products">
-    <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">      
+  <div *ngIf="Products$ | async as products else loading">
+    <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">
       <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
         <li *ngFor="let product of products">
           <shop-card [product]="product"></shop-card>
@@ -24,3 +43,8 @@
   </div>
 </div>
 
+<ng-template #loading>
+  <div class="flex flex-col items-center justify-center h-screen">
+    <mat-spinner [diameter]="60"></mat-spinner>
+    <p class="text-gray-500 text-2xl">Loading...</p>
+</div>

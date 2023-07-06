@@ -27,9 +27,9 @@ export class BlogComponent implements OnInit {
     this.route.navigate(['home']);
   }
 
-  allBlogs$: Observable<Blog[]>;
+  allBlogs$ = this.blogService.getAllPublishedBlog();
 
   ngOnInit(): void {
-    this.allBlogs$ = this.blogService.getAllPublishedBlog();
+
   }
 }

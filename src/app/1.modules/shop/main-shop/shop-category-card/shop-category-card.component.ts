@@ -9,11 +9,23 @@ import { Category } from 'app/5.models/category';
 })
 export class ShopCategoryCardComponent {
 
+  mobile: boolean = false;
+
   @Input() category: Category
   @Output() private notifyCategoryRefresh: EventEmitter<any> = new EventEmitter()
 
   onRefreshName(category: string) {
     this.notifyCategoryRefresh.emit(category)
+  }
+
+  ngOnInit() {
+    if (window.screen.width <= 1200) { // 768px portrait
+      this.mobile = true;
+    }
+    else
+    {
+      this.mobile = false;
+    }
   }
 
 }

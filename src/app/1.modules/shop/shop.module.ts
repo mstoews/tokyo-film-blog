@@ -28,6 +28,7 @@ import { ShopLandingCardComponent } from './shop-landing/shop-landing-card/shop-
 import { Product } from 'app/5.models/products';
 import { ProductsService } from 'app/4.services/products.service';
 import { ShopCategoryCardComponent } from './main-shop/shop-category-card/shop-category-card.component';
+import { LightboxModule } from '../lightbox';
 
 
 
@@ -149,6 +150,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     AddressComponent,
     NgxSpinnerModule,
+    LightboxModule,
   ],
 })
 export class ShopModule {}

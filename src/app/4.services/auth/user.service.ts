@@ -9,59 +9,37 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   providedIn: 'root',
 })
 export class UserService {
-  isLoggedIn$: Observable<boolean>;
-  isLoggedOut$: Observable<boolean>;
-  pictureUrl$: Observable<string>;
-  uid$: Observable<string>;
-  roles$: Observable<UserRoles>;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) {
-    this.isLoggedIn$ = afAuth.authState.pipe(map((user) => !!user));
 
-    this.isLoggedOut$ = this.isLoggedIn$.pipe(map((loggedIn) => !loggedIn));
-
-    this.pictureUrl$ = afAuth.authState.pipe(
-      map((user) => (user ? user.photoURL : null))
-    );
-
-    this.roles$ = this.afAuth.idTokenResult.pipe(
-      map((token) => <any>token?.claims ?? { admin: false })
-    );
   }
 
-  async getUserId(): Promise<any> {
-    let uid: string;
-    this.afAuth.currentUser.then((user) => {
-      if (user !== null || user !== undefined) {
-        if (user) {
-          uid = user.uid;
-        }
+  user$ = this.afAuth.authState.pipe(
+    map((authState) => {
+      if (!authState) {
+        return null;
       } else {
-        uid = '';
+        return {
+          uid: authState.uid,
+          displayName: authState.displayName,
+          email: authState.email,
+          photoURL: authState.photoURL,
+          emailVerified: authState.emailVerified,
+        };
       }
-    });
-    return uid;
-  }
+    })
+  );
 
-  async getUserEmail(): Promise<any> {
-    let email: string;
-    this.afAuth.currentUser.then((user) => {
-      if (user !== null || user !== undefined) {
-        if (user) {
-          email = user.email;
-        }
-      } else {
-        email = '';
-      }
-    });
-    return email;
-  }
+  isLoggedIn$ = this.afAuth.authState.pipe(map((user) => !!user));
+
+  isLoggedOut$ = this.isLoggedIn$.pipe(map((loggedIn) => !loggedIn));
+
+  roles$ = this.afAuth.idTokenResult.pipe(
+    map((token) => <any>token?.claims ?? { admin: false })
+  );
 
   logout() {
     this.afAuth.signOut();
     this.router.navigateByUrl('/login');
   }
-}
-function of(email: string): any {
-  throw new Error('Function not implemented.');
 }

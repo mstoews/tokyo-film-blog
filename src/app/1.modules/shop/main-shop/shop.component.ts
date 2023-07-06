@@ -1,43 +1,39 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  inject,
+} from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
-import { Category } from 'app/5.models/category';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable, of } from 'rxjs';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable, Subscribable, Subscription, of } from 'rxjs';
+import { Category } from 'app/5.models/category';
+import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'shop',
   templateUrl: './shop.component.html',
+  styleUrls: ['./shop.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainShopComponent implements OnInit {
-
-  ngxSpinner = inject(NgxSpinnerService);
+export class MainShopComponent implements OnInit, OnDestroy {
   route = inject(Router);
-  productService= inject( ProductsService);
-  categoryService= inject( CategoryService);
-  actRoute= inject( ActivatedRoute);
-  snack= inject( MatSnackBar);
-
-  categories: Category[]=[];
-  products: Product[]=[];
-  Category$: Observable<Category[]>;
+  productService = inject(ProductsService);
+  categoryService = inject(CategoryService);
+  actRoute = inject(ActivatedRoute);
   Products$: Observable<Product[]>;
-
+  category: Category[] = [];
   currentCategory: string;
   sTitle: string;
-  myVar: any;
+  sub: Subscription;
 
+  Category$ = this.categoryService.getAll();
 
-  showSpinner() {
-    this.ngxSpinner.show();
-    setTimeout(() => {
-      this.ngxSpinner.hide();
-    }, 1500);
-  }
+  mobile = true;
 
   backToHome() {
     this.route.navigate(['home']);
@@ -47,36 +43,38 @@ export class MainShopComponent implements OnInit {
     this.onRefreshName(e);
   }
 
-
-  startTimer() {
-    this.myVar = setTimeout(function(){ window.location.reload(); }, 10000);
-  }
-  
-  myStopFunction() {
-    clearTimeout(this.myVar);
-  }
-
   onRefreshName(category: string) {
-    this.showSpinner();
     this.currentCategory = category;
     this.Products$ = this.productService.getInventoryByCategory(category);
-    this.snack.open('Updating category ...', 'OK', {
-      duration: 2000,
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-      panelClass: 'bg-danger',
-    });
+  }
+
+  selectCategory(index: any) {
+    console.log('Category', index.index);
+    if (index.index >= 0) {
+      const category = this.categoryService.getAll();
+      this.sub = category.subscribe((data) => {
+        this.onRefreshName(data[index.index].name);
+      });
+    }
   }
 
   ngOnInit(): void {
-    
-    this.showSpinner();
-    this.Category$ = this.categoryService.getAll();
     this.sTitle = 'Shop';
-    this.currentCategory = 'Shawls';
-    this.actRoute.data.subscribe(data => {
-       this.Products$ = of(data.shop);
+    this.actRoute.data.subscribe((data) => {
+      this.Products$ = of(data.shop);
     });
-    
+
+    if (window.screen.width <= 768) {
+      // 768px portrait
+      this.mobile = true;
+    } else {
+      this.mobile = false;
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
+    }
   }
 }
