@@ -60,6 +60,7 @@ export class MainShopComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.sTitle = 'Shop';
     this.actRoute.data.subscribe((data) => {
+      this.currentCategory = data.shop[0].category;
       this.Products$ = of(data.shop);
     });
 

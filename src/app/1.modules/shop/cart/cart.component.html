@@ -29,13 +29,15 @@
                         </div>
 
                         <div *ngIf="item.quantity_required == true">
-                        <p class="mt-1 text-sm font-medium text-gray-900">{{ item.quantity | number: '1.1-1' }} meters at ${{item.price}} per item</p>
-                        <p class="mt-1 text-sm font-medium text-gray-900">Total Cost : {{ item.quantity * item.price | number: '1.0-0' }}</p>
+                          <p class="mt-1 text-sm font-medium text-gray-900">{{ item.quantity | number: '1.1-1' }} meters
+                            at ${{item.price}} per item</p>
+                          <p class="mt-1 text-sm font-medium text-gray-900">Total Cost : {{ item.quantity * item.price |
+                            number: '1.0-0' }}</p>
                         </div>
 
-                        <div *ngIf="!item.quantity_required" >
+                        <div *ngIf="!item.quantity_required">
                           <p class="mt-1 text-sm font-medium text-gray-900">$ {{item.price}} </p>
-                          </div>
+                        </div>
                       </div>
 
                       <div class="mt-4 sm:mt-0 sm:pr-9">
