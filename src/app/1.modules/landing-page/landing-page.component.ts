@@ -38,7 +38,6 @@ export class LandingPageComponent implements OnInit {
   public bottomCollection: imageItem[] = [];
 
   contactGroup: FormGroup;
-  mainPage$: Observable<Mainpage[]>;
   featuredList$: Observable<imageItem[]>;
   mainPageDoc: Mainpage;
   titleMessage = '';
@@ -67,31 +66,33 @@ export class LandingPageComponent implements OnInit {
     private menuToggle: MenuToggleService
   ) {}
 
+  mainPage$ = this.mainPage.getAll();
+
   ngOnInit(): void {
-    this.mainPage$ = this.mainPage.getAll();
+
     this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
-    this.mainPage$.subscribe((doc) => {
-      if (doc.length > 0) {
-        this.mainPageDoc = doc[0];
-        this.titleMessage = this.mainPageDoc.hero_title;
-      } else {
-        let document = {
-          id: 1,
-          hero_title: 'There should be something at the tope of the HERO',
-          features_header: 'Header',
-          features_subheader: 'Sub Title',
-          cta_left: 'Left',
-          cta_center: 'Center',
-          cta_right: 'Right',
-          contact_email: 'Joey',
-          contact_telephone: '555-1212',
-          contact_shipping: 'Shipping',
-          active: true,
-        };
-        this.mainPageDoc = document;
-        this.titleMessage = document.hero_title;
-      }
-    });
+    // this.mainPage$.subscribe((doc) => {
+    //   if (doc.length > 0) {
+    //     this.mainPageDoc = doc[0];
+    //     this.titleMessage = this.mainPageDoc.hero_title;
+    //   } else {
+    //     let document = {
+    //       id: 1,
+    //       hero_title: 'There should be something at the tope of the HERO',
+    //       features_header: 'Header',
+    //       features_subheader: 'Sub Title',
+    //       cta_left: 'Left',
+    //       cta_center: 'Center',
+    //       cta_right: 'Right',
+    //       contact_email: 'Joey',
+    //       contact_telephone: '555-1212',
+    //       contact_shipping: 'Shipping',
+    //       active: true,
+    //     };
+    //     this.mainPageDoc = document;
+    //     this.titleMessage = document.hero_title;
+    //   }
+    // });
     const UserId = of(this.authService.afAuth.currentUser);
     UserId.subscribe((user) => {
       console.debug(JSON.stringify(user));

@@ -14,7 +14,7 @@ import { IImageStorage } from 'app/5.models/maintenance';
 import { ProductsService } from 'app/4.services/products.service';
 
 @Component({
-  selector: 'image-selection',
+  selector: 'inventory-image-selection',
   templateUrl: './inventory-image-selection.component.html',
   styleUrls: ['./inventory-image-selection.component.css'],
 })
@@ -45,17 +45,27 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {}
 
+
+  addImageToItemList(image: any) {
+    image.parentId = this.productId;
+    // search for the image in the list 400 size and add it to the list
+    this.imageListService.updateImageList(image);
+  }
+
+  UpdateInventoryItem(e: imageItem) {
+    e.type = this.productId;
+    this.imageListService.updateImageList(e);
+  }
+
   Refresh() {
     this.imageListService.createRawImagesList();
 
     if (this.productId) {
-      this.inventoryImages$ = this.productService.getProductImage(
-        this.productId
-      );
+      this.inventoryImages$ = this.productService.getProductImage(this.productId);
     }
 
     this.subNotUsed = this.imageListService
-      .getImagesByType(this.IN_NOT_USED)
+      .getImagesBySize('200')
       .subscribe((item) => {
         this.not_usedImages = item;
       });
@@ -117,7 +127,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        image.parentIdma = this.productId;
+        image.parentId = this.productId;
         this.imageListService.updateImageList(image);
         i++;
       });

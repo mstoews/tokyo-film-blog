@@ -43,6 +43,8 @@ import { ImageListComponent } from './image-list/image-list.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { PolicyModule } from '../policy/policy.module';
 import { ContactListComponent } from './contact-list/contact-list.component';
+import { InventoryImageCardComponent } from './inventory-maintenance/inventory-image-card/inventory-image-card.component';
+
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { ContactListComponent } from './contact-list/contact-list.component';
     ImageMenubarComponent,
     ImageListComponent,
     ContactListComponent,
+    InventoryImageCardComponent
   ],
   imports: [
     AdminRouteModule,

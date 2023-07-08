@@ -40,9 +40,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { environment } from '../environments/environment.prod';
 import { HeadingModule } from './2.main/header/heading.module';
 import { UserService } from './4.services/auth/user.service';
+import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CookieBannerComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -73,7 +74,14 @@ import { UserService } from './4.services/auth/user.service';
       useClass: AuthInterceptor,
       multi: true,
     },
-
+    {
+      provide: 'window',
+      useValue: window,
+    },
+    {
+      provide: 'document',
+      useValue: document,
+    },
     { provide: 'googleTagManagerId', useValue: environment.gtm_id },
   ],
   bootstrap: [AppComponent],

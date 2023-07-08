@@ -37,7 +37,6 @@ export class ImageListService {
 
   constructor(
     public afs: AngularFirestore,
-
     private storage: AngularFireStorage
   ) {
     this.updateItemsCollection = afs.collection<imageItem>('imagelist');
@@ -53,8 +52,7 @@ export class ImageListService {
 
   getImagesList(): Observable<imageItem[]> {
     const imagesRef = collection(this.afs.firestore, 'imagelist');
-    return collectionData(imagesRef, { idField: 'id' }) as Observable<
-      imageItem[]
+    return collectionData(imagesRef, { idField: 'id' }) as Observable<imageItem[]
     >;
   }
 
@@ -64,6 +62,12 @@ export class ImageListService {
 
   getImages() {
     return this.imageItems;
+  }
+
+  getImagesBySize(size: string) {
+    return this.imageItems.pipe(
+      map((images) => images.filter((type) => type.imageAlt.includes(size)).filter((type) => type.type === 'IN_NOT_USED')));
+
   }
 
   getImagesByType(imageType: string) {
@@ -204,7 +208,41 @@ export class ImageListService {
     this.updateRawImageList();
     let ranking = 0;
     this.storage
-      .ref('/800')
+      .ref('/thumbnails')
+      .listAll()
+      .subscribe((files) => {
+        files.items.forEach((imageRef) => {
+          imageRef.getDownloadURL().then((downloadURL) => {
+            ranking++;
+            const imageUrl = downloadURL;
+            const imageData: imageItem = {
+              parentId: '',
+              caption: imageRef.fullPath,
+              type: 'IN_NOT_USED',
+              imageSrc: imageUrl,
+              imageAlt: imageRef.name,
+              ranking: ranking,
+              id: '',
+            };
+            let found = false;
+            this.rawImagesArray.forEach((img) => {
+              if (img.imageAlt === imageData.imageAlt) {
+                found = true;
+              }
+            });
+            if (!found) {
+              this.createItem(imageData);
+            }
+          });
+        });
+      });
+  }
+
+  createRawImagesList_400() {
+    this.updateRawImageList();
+    let ranking = 0;
+    this.storage
+      .ref('/400')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {

@@ -6,7 +6,7 @@ import {
   ViewChild,
   inject,
 } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Route, Router, TitleStrategy } from '@angular/router';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
@@ -30,6 +30,7 @@ export class MainShopComponent implements OnInit, OnDestroy {
   currentCategory: string;
   sTitle: string;
   sub: Subscription;
+  loading = false;
 
   Category$ = this.categoryService.getAll();
 
@@ -44,8 +45,16 @@ export class MainShopComponent implements OnInit, OnDestroy {
   }
 
   onRefreshName(category: string) {
+    this.setLoading();
     this.currentCategory = category;
     this.Products$ = this.productService.getInventoryByCategory(category);
+  }
+
+  setLoading() {
+    this.loading = true;
+    setTimeout(()=> {
+      this.loading = false;
+    }, 2000);
   }
 
   selectCategory(index: any) {
@@ -59,8 +68,14 @@ export class MainShopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sTitle = 'Shop';
+    this.setLoading();
     this.actRoute.data.subscribe((data) => {
-      this.currentCategory = data.shop[0].category;
+      if (data.length > 0) {
+        this.currentCategory = data.shop[0].category;
+      }
+      else {
+        this.currentCategory = '';
+      }
       this.Products$ = of(data.shop);
     });
 

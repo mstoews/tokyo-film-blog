@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductsComponent } from './products/products.component';
 import { RouterModule, Routes } from '@angular/router';
-import { HighlightComponent } from '../landing-page/highlight/highlight.component';
 import { BannerComponent } from './banner/banner.component';
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { CollectionGrid } from './collection-grid/grid.component';
@@ -12,7 +11,6 @@ import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@fuse/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 import { SafePipe } from './safe.pipe';
-import { HeaderComponent } from 'app/2.main/header/header.component';
 
 const routes: Routes = [
   {
@@ -40,4 +38,5 @@ const routes: Routes = [
     NgOptimizedImage,
   ],
 })
+
 export class ProductsModule {}

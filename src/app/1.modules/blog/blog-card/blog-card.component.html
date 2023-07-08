@@ -1,3 +1,12 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WGMMJK9NR3');
+</script>
+
 <div (click)="onOpenBlog(blog.id)" class="flex flex-col w-full text-gray-700 max-w-140 filter-article filter-interactive" >
   <ng-container  *ngIf="blogImages$ | async as blogImages">
     <img class="object-cover w-140" [src]="blogImages[0].imageSrc" width="290" height="400" alt="caps"
