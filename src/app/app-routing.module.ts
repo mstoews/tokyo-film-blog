@@ -13,7 +13,7 @@ const adminOnly = () => hasCustomClaim('admin');
 const routes: Route[] = [
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -82,7 +82,7 @@ const routes: Route[] = [
     loadChildren: () =>
       import('./1.modules/admin/admin.module').then((mod) => mod.AdminModule),
       canActivate: [AngularFireAuthGuard],
-      data: { authGuardPipe: adminOnly },
+      data: { authGuardPipe: redirectLoggedInToHome },
       title: 'Maintenance',
   },
   {
@@ -130,7 +130,10 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,
+    {
+      scrollPositionRestoration: 'enabled'
+    })],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "made-to-dev",
+    "default": "made-to-cassie",
     "production": "made-to-cassie",
     "staging": "made-to-dev",
     "production ": "made-to-cassie"
