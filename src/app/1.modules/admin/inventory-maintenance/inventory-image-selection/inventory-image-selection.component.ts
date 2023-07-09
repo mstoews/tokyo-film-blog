@@ -65,7 +65,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     }
 
     this.subNotUsed = this.imageListService
-      .getImagesBySize('200')
+      .getImagesBySize('400')
       .subscribe((item) => {
         this.not_usedImages = item;
       });

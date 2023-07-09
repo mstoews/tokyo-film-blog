@@ -236,6 +236,8 @@ export class ImageListService {
           });
         });
       });
+      this.createRawImagesList_400();
+      this.createRawImagesList_800()
   }
 
   createRawImagesList_400() {
@@ -243,6 +245,39 @@ export class ImageListService {
     let ranking = 0;
     this.storage
       .ref('/400')
+      .listAll()
+      .subscribe((files) => {
+        files.items.forEach((imageRef) => {
+          imageRef.getDownloadURL().then((downloadURL) => {
+            ranking++;
+            const imageUrl = downloadURL;
+            const imageData: imageItem = {
+              parentId: '',
+              caption: imageRef.fullPath,
+              type: 'IN_NOT_USED',
+              imageSrc: imageUrl,
+              imageAlt: imageRef.name,
+              ranking: ranking,
+              id: '',
+            };
+            let found = false;
+            this.rawImagesArray.forEach((img) => {
+              if (img.imageAlt === imageData.imageAlt) {
+                found = true;
+              }
+            });
+            if (!found) {
+              this.createItem(imageData);
+            }
+          });
+        });
+      });
+  }
+  createRawImagesList_800() {
+    this.updateRawImageList();
+    let ranking = 0;
+    this.storage
+      .ref('/800')
       .listAll()
       .subscribe((files) => {
         files.items.forEach((imageRef) => {
