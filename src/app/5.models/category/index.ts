@@ -1,4 +1,5 @@
-import { DocumentReference } from "firebase/firestore";
+import { Time } from "@angular/common";
+import { DocumentReference, Timestamp } from "firebase/firestore";
 
 export interface Category {
   id?: string;

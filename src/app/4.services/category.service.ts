@@ -38,8 +38,8 @@ export class CategoryService {
     return rc;
   }
 
-  create(category: Partial<Category>) {
-    return this.update(category);
+  create(category: Category) {
+    this.categoryCollection.add(category);
   }
 
   update(category: Partial<Category>) {

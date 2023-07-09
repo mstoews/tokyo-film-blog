@@ -173,19 +173,28 @@
             </dxo-toolbar>
           </dx-html-editor>
           <div mat-dialog-actions>
-            <button mat-icon-button (click)="onUpdate(prdGroup.value)" color="primary" aria-label="Add" matTooltip="Update Item">
+            <button mat-icon-button (click)="onUpdate(prdGroup.value)"
+              color="primary"
+              aria-label="Update"
+              matTooltip="Update Item" >
               <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
             </button>
 
-            <button (click)="onImages()" mat-icon-button color="primary" matTooltip="Manage Images">
-              <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
+            <button
+                mat-icon-button
+                (click)="onImages()"
+                color="primary"
+                matTooltip="Manage Images">
+              <mat-icon [svgIcon]="'mat_outline:image'"> </mat-icon>
             </button>
+
             <button (click)="onSweep()" mat-icon-button color="primary" matTooltip="Sweep empty inventory">
               <mat-icon [svgIcon]="'mat_outline:delete_sweep'"></mat-icon>
             </button>
-            <button mat-icon-button (click)="onDelete(product)" color="primary" [disabled]="!prdGroup.valid"
-                    matTooltip="Delete Item">
-              <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+            <button mat-icon-button
+                    (click)="onDelete(product)"
+                    color="primary"
+                    matTooltip="Delete Item"> <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
             </button>
           </div>
         </ng-template>

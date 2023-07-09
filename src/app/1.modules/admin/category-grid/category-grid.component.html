@@ -1,119 +1,139 @@
+<app-header [title]="'Update Categories'"></app-header>
+<mat-drawer-container class="flex-col h-[800px] m-2">
+  <mat-drawer class="lg:w-1/4 sm:h-full sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
+    [disableClose]="false">
+    <mat-card class="flex flex-col h-full max-w-120 filter-article filter-interactive text-gray-700">
 
-  <app-header [title]="'Update Categories'" [sub_title]="'Each category represents type of product'"></app-header>
-  <mat-drawer-container class="flex-col h-[800px] m-2">
-    <mat-drawer class="lg:w-1/4 sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
-      [disableClose]="false">
-      <mat-card class="flex flex-col h-[700px] max-w-120 filter-article filter-interactive text-gray-700">
-        
-        <div mat-dialog-content>
-          <form [formGroup]="categoryGroup" (ngSubmit)="onUpdate(categoryGroup.value)" class="form">
+      <div mat-dialog-content>
+        <form [formGroup]="categoryGroup" (ngSubmit)="onUpdate(categoryGroup.value)" class="form">
 
-            <div class="flex flex-col m-1">
-              
-              
-                <section class="flex md:flex-row">
-                  
-                  <div *ngIf="!categoryGroup.value.image" class="flex flex-col mt-8">
-                    <img [src]="categoryGroup.value.image" width="40" height="40" alt="cell.value" >
-                  </div>
-                  <div  *ngIf="categoryGroup.value.image" class="flex flex-col mt-8">
-                    <img [src]="categoryGroup.value.image" width="40" height="40" lg-rounded alt="cell.value" >
-                  </div>
-
-                  <div class="flex flex-col grow">
-                    <mat-label class="ml-2 text-base">Name</mat-label>
-                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
-                      <input matInput placeholder="Name" formControlName="name" />
-                    </mat-form-field>
-                  </div>
-                  </section>
-               
+          <div class="flex flex-col m-1">
 
 
-                  <div class="flex flex-col grow">
-                    <mat-label class="ml-2 text-base">Description</mat-label>
-                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
-                      <input matInput placeholder="Description" formControlName="description" />
-                    </mat-form-field>
-                  </div>
+            <section class="flex md:flex-row">
 
-                  <div class="flex flex-col grow">
-                    <mat-label class="ml-2 text-base">Update Date</mat-label>
-                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
-                      <input matInput placeholder="Update Date" formControlName="updateDate" />
-                    </mat-form-field>
-                  </div>
+              <div *ngIf="!categoryGroup.value.image" class="flex flex-col mt-4">
+                <img src='assets/madetologo.svg' width="40" height="40" alt="thumbnails">
+              </div>
+              <div *ngIf="categoryGroup.value.image" class="flex flex-col m-2">
+                <img [src]="categoryGroup.value.image" width="40" height="40" lg-rounded alt="image">
+              </div>
+
+              <div class="flex flex-col grow">
+                <mat-label>Name</mat-label>
+                <mat-form-field appearance="outline">
+                  <input matInput formControlName="name">
+                </mat-form-field>
+              </div>
+            </section>
 
 
-                  <div class="flex flex-col grow">
-                    <mat-label class="ml-2 text-base">Created Date</mat-label>
-                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
-                      <input matInput placeholder="Created Date" formControlName="createDate" />
-                    </mat-form-field>
-                  </div>
-                  <div class="flex flex-col grow">
-                    <mat-label class="ml-2 text-base">Updated By</mat-label>
-                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
-                      <input matInput placeholder="Updated By" formControlName="updateBy" />
-                    </mat-form-field>
-                  </div>
+            <div class="flex flex-col grow">
+              <mat-label class="ml-2 text-base">Description</mat-label>
+              <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <input type="text" matInput placeholder="Description" formControlName="description" />
+              </mat-form-field>
+            </div>
 
-                  <div class="flex flex-col grow">
-                    <mat-label class="ml-2 text-base">Image URL</mat-label>
-                    <mat-form-field class="m-1 form-element grow" appearance="outline">                      
-                      <input matInput placeholder="Image URL" formControlName="image" />
-                    </mat-form-field>
-                  </div>
+            <div class="flex flex-col grow">
+              <mat-label class="ml-2 text-base">Update Date</mat-label>
+              <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Created Date" formControlName="updateDate">
+              </mat-form-field>
+            </div>
 
-            </div>  
-          </form>
-        </div>
-        <div mat-dialog-actions>
-          <button mat-icon-button (click)="onUpdate(categoryGroup.value)" color="primary" aria-label="Add">
-            <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="onCreate()" color="primary" [disabled]="!categoryGroup.valid">
-            <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="onDelete(category)" color="primary" [disabled]="!categoryGroup.valid">
-            <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="onImages()" color="primary" [disabled]="!categoryGroup.valid">
-            <mat-icon [svgIcon]="'mat_outline:design_services'"></mat-icon>
-          </button>
-          <button mat-icon-button (click)="closeDialog()" color="warn">
-            <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
-          </button>
-        </div>
-      </mat-card>
-    </mat-drawer>
+            <div class="flex flex-col grow">
+              <mat-label>Created Date</mat-label>
+              <mat-form-field appearance="outline">
+                <input type="text" matInput placeholder="Created Date" formControlName="createDate">
+              </mat-form-field>
+            </div>
 
-    <ng-container *ngIf="allCategories$ | async as rows">
-      <div class="m-1 h-full">
-        <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
-          [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true"
-           keyExpr="name">
-          <dxi-column dataField="name"> </dxi-column>
-          <dxi-column dataField="description"> </dxi-column>
-          <dxi-column dataField="createDate"> </dxi-column>
-          <dxi-column dataField="updateDate"> </dxi-column>
-          <dxi-column dataField="updateBy"> </dxi-column>
-          <dxi-column dataField="image" [width]="100" cellTemplate="cellTemplate"> </dxi-column>
-          <div *dxTemplate="let data of 'cellTemplate'">
-            <img [src]="data.value" class="lg-rounded" alt="cell.value" >
+            <div class="flex flex-col grow">
+              <mat-label class="ml-2 text-base">Updated By</mat-label>
+              <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <input type="text" matInput placeholder="Updated By" formControlName="updateBy" />
+              </mat-form-field>
+            </div>
+
+            <div class="flex flex-col grow">
+              <mat-label class="ml-2 text-base">Image URL</mat-label>
+              <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <input type="text" matInput placeholder="Image URL" formControlName="image" />
+              </mat-form-field>
+            </div>
+
           </div>
-        </dx-data-grid>
+        </form>
       </div>
-    </ng-container>
-    <button (click)="onAdd()"
-      class="fixed bottom-20 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
-      <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
-        <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+      <!-- <div class="form-val">
+          {{categoryGroup.value | json }}
+        </div> -->
+      <div mat-dialog-actions class="mb-2">
+        <button mat-icon-button (click)="onUpdate(categoryGroup.value)" [disabled]="!categoryGroup.valid"
+          matTooltip="Update" color="primary" aria-label="Add">
+          <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="onCreate()" color="primary" matTooltip="Add New">
+          <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="onDelete(categoryGroup.value)" [disabled]="!categoryGroup.valid"
+          color="primary" matTooltip="Delete">
+          <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+        </button>
+        <button mat-icon-button (click)="closeDrawer()" matTooltip="Close" color="warn">
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+        </button>
+      </div>
+    </mat-card>
+
+  </mat-drawer>
+
+  <ng-container *ngIf="allCategories$ | async as rows">
+    <div class="m-1 h-full">
+      <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
+        [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true" keyExpr="name">
+        <dxi-column dataField="name"> </dxi-column>
+        <dxi-column dataField="description"> </dxi-column>
+        <dxi-column dataField="createDate" cellTemplate="dateTemplate"> </dxi-column>
+
+        <dxi-column dataField="updateDate" cellTemplate="dateTemplate"> </dxi-column>
+
+        <dxi-column dataField="updateBy"> </dxi-column>
+
+        <dxi-column dataField="image" [width]="100" cellTemplate="cellTemplate"> </dxi-column>
+
+        <div *dxTemplate="let data of 'cellTemplate'">
+          <img [src]="data.value" class="lg-rounded" alt="cell.value">
+        </div>
+        <div *dxTemplate="let data of 'dateTemplate'">
+          <div> {{data.value | date: 'dd/MM/YYYY' }} </div>
+        </div>
+      </dx-data-grid>
+      <div class="w-full h-full">
+        <div *ngIf="thumbnailList$ | async as imagesList"  class="col-start-1 col-end-6 item--1 lg-rounded" cdkScrollable>
+          <div class="sticky top-0 z-50 image_title">Available Images</div>
+          <div class="flex flex-wrap">
+            <div *ngFor="let item of imagesList" >
+              <div class="flex-none object-cover p-1">
+                <app-inventory-image-card (imageSelected)="UpdateCategoryURL($event)" [image]="item"> </app-inventory-image-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <button (click)="onCreate()"
+    class="fixed bottom-20 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+    <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
+      <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
             C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
             C15.952,9,16,9.447,16,10z" />
-      </svg>
-    </button>
-  </mat-drawer-container>
+    </svg>
+  </button>
+</mat-drawer-container>
 
 
 <!-- Category Model
@@ -123,5 +143,6 @@
   image: string;
   createDate: Date;
   updateDate: Date;
-  updateBy: string; 
+  updateBy: string;
+  https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/thumbnails%2F1DD0B7B3-574E-42A3-B2C0-1D0315595CFB_200x200.JPG?alt=media&token=b0055933-d844-4f73-8d8f-20f280140cd2
 -->

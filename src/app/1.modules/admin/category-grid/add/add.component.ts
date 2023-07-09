@@ -18,7 +18,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./add.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddCategoryDialog {
+export class ConfirmCategoryDialog {
   description: string;
 
   categoryId: string;
@@ -30,7 +30,7 @@ export class AddCategoryDialog {
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) private category: Category,
     private readonly categoryService: CategoryService,
-    private dialogRef: MatDialogRef<AddCategoryDialog>,
+    private dialogRef: MatDialogRef<ConfirmCategoryDialog>,
     private route: Router
   ) {
     this.description = category.name;
@@ -46,17 +46,7 @@ export class AddCategoryDialog {
     });
   }
 
-  update(results: any) {
-    const newCategory = { ...this.form.value } as Category;
-    this.categoryService.create(newCategory).then((category) => {
-      this.categoryId = category.id;
-      this.categoryService.update(newCategory);
-      this.route.navigate(['admin/category', this.category]);
-    });
-
-    this.close();
-  }
-
+  
   changeCategory(category: any) {
     this.updated_category = category;
   }
