@@ -1,59 +1,57 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
+import { fuseAnimations } from '@made-to/animations';
+import { FuseAlertType } from '@made-to/components/alert';
 // import { AuthService } from 'app/services/auth/auth.service';
 
 @Component({
-    selector     : 'sign-in-split-screen-reversed',
-    templateUrl  : './sign-in.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+  selector: 'sign-in-split-screen-reversed',
+  templateUrl: './sign-in.component.html',
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations,
 })
-export class SignInSplitScreenReversedComponent implements OnInit
-{
-    alert: { type: FuseAlertType; message: string } = {
-        type   : 'success',
-        message: ''
-    };
-    signInForm!: UntypedFormGroup;
-    showAlert: boolean = false;
+export class SignInSplitScreenReversedComponent implements OnInit {
+  alert: { type: FuseAlertType; message: string } = {
+    type: 'success',
+    message: '',
+  };
+  signInForm!: UntypedFormGroup;
+  showAlert: boolean = false;
 
-    /**
-     * Constructor
-     */
-    constructor(
-        // private _authService: AuthService,
-        private _formBuilder: UntypedFormBuilder
-    )
-    {
-    }
+  /**
+   * Constructor
+   */
+  constructor(
+    // private _authService: AuthService,
+    private _formBuilder: UntypedFormBuilder
+  ) {}
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Lifecycle hooks
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Lifecycle hooks
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * On init
-     */
-    ngOnInit(): void
-    {
-        // Create the form
-        this.signInForm = this._formBuilder.group({
-            email     : ['', [Validators.required, Validators.email]],
-            password  : ['', Validators.required],
-            rememberMe: ['']
-        });
-    }
+  /**
+   * On init
+   */
+  ngOnInit(): void {
+    // Create the form
+    this.signInForm = this._formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required],
+      rememberMe: [''],
+    });
+  }
 
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
+  // -----------------------------------------------------------------------------------------------------
+  // @ Public methods
+  // -----------------------------------------------------------------------------------------------------
 
-    /**
-     * Sign in
-     */
-    signIn(): void
-    {
-    }
+  /**
+   * Sign in
+   */
+  signIn(): void {}
 }

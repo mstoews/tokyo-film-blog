@@ -7,7 +7,7 @@ import { MaterialModule } from 'app/material.module';
 import { BlogResolver } from 'app/4.services/blog.resolver';
 import { SafePipe } from './safe.pipe';
 import { HeaderComponent } from 'app/2.main/header/header.component';
-import { FuseCardModule } from '@fuse/components/card';
+import { FuseCardModule } from '@made-to/components/card';
 import { IconsModule } from 'app/icons.module';
 import { BlogCardComponent } from './blog-card/blog-card.component';
 import { BlogRoutingModule } from './blog-routing/blog-routing.module';

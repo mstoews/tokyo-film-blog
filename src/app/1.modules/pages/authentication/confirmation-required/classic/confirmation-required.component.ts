@@ -1,18 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { fuseAnimations } from '@fuse/animations';
+import { fuseAnimations } from '@made-to/animations';
 
 @Component({
-    selector     : 'confirmation-required-classic',
-    templateUrl  : './confirmation-required.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+  selector: 'confirmation-required-classic',
+  templateUrl: './confirmation-required.component.html',
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations,
 })
-export class ConfirmationRequiredClassicComponent
-{
-    /**
-     * Constructor
-     */
-    constructor()
-    {
-    }
+export class ConfirmationRequiredClassicComponent {
+  /**
+   * Constructor
+   */
+  constructor() {}
 }

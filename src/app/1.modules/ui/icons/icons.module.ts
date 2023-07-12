@@ -5,42 +5,38 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FuseHighlightModule } from '@fuse/components/highlight';
+import { FuseHighlightModule } from '@made-to/components/highlight';
 import { SharedModule } from 'app/shared/shared.module';
 import { IconsComponent } from 'app/features/admin/ui/icons/icons.component';
 import { IconsResolver } from 'app/features/admin/ui/icons/icons.resolvers';
 
 export const routes: Route[] = [
-    {
-        // Redirect /icons to /icons/material-twotone
-        path      : '',
-        pathMatch : 'full',
-        redirectTo: 'material-twotone'
+  {
+    // Redirect /icons to /icons/material-twotone
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'material-twotone',
+  },
+  {
+    path: '**',
+    component: IconsComponent,
+    resolve: {
+      icons: IconsResolver,
     },
-    {
-        path     : '**',
-        component: IconsComponent,
-        resolve  : {
-            icons: IconsResolver
-        }
-    }
+  },
 ];
 
 @NgModule({
-    declarations: [
-        IconsComponent
-    ],
-    imports     : [
-        ReactiveFormsModule,
-        RouterModule.forChild(routes),
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        FuseHighlightModule,
-        SharedModule
-    ]
+  declarations: [IconsComponent],
+  imports: [
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    FuseHighlightModule,
+    SharedModule,
+  ],
 })
-export class IconsModule
-{
-}
+export class IconsModule {}

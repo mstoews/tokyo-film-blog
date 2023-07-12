@@ -5,7 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FuseHighlightModule } from '@fuse/components/highlight';
+import { FuseHighlightModule } from '@made-to/components/highlight';
 import { ConfirmationDialogComponent } from 'app/1.modules/ui/confirmation-dialog/confirmation-dialog.component';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 

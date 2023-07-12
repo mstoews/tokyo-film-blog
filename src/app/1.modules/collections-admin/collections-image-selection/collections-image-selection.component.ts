@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { FormBuilder} from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
 import { imageItem } from 'app/5.models/imageItem';
 
@@ -9,9 +9,6 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { routes } from 'app/1.modules/ui/advanced-search/advanced-search.module';
-import { IImageStorage } from 'app/5.models/maintenance';
-import { ProductsService } from 'app/4.services/products.service';
 
 @Component({
   selector: 'collection-image-selection',
@@ -21,15 +18,14 @@ import { ProductsService } from 'app/4.services/products.service';
 export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
   @Input() collectionId: string;
 
-  IN_NOT_USED = 'IN_FEATURED';
+  IN_NOT_USED = 'IN_NOT_USED';
   IN_FEATURED = 'IN_INVENTORY';
+  IMAGE_SIZE = '200';
 
   subNotUsed: Subscription;
-  subFeatured: Subscription;
   subCollections: Subscription;
 
   not_usedImages: imageItem[] = [];
-  featuredImages: imageItem[] = [];
   collectionsImages: imageItem[] = [];
 
   constructor(
@@ -37,18 +33,25 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
     private fb: FormBuilder
   ) {}
 
-  Refresh() {
+  UpdateInventoryItem(e: imageItem) {
+    e.type = this.collectionId;
+    this.imageListService.updateImageList(e);
     this.subNotUsed = this.imageListService
-      .getImagesByType(this.IN_NOT_USED)
+      .getImagesBySize(this.IMAGE_SIZE)
+      .subscribe((item) => {
+        this.not_usedImages = item;
+      });
+  }
+
+  async Refresh() {
+    await this.imageListService.createRawImagesList_200();
+
+    this.subNotUsed = this.imageListService
+      .getImagesBySize(this.IMAGE_SIZE)
       .subscribe((item) => {
         this.not_usedImages = item;
       });
 
-    this.subFeatured = this.imageListService
-      .getImagesByType(this.collectionId)
-      .subscribe((item) => {
-        this.featuredImages = item;
-      });
 
     this.subCollections = this.imageListService
       .getImagesByType(this.collectionId)
@@ -59,21 +62,12 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   verifyArray() {
-    //console.debug(`Not used images: ${this.not_usedImages.length}`)
-    //console.debug(`Featured images: ${this.featuredImages.length}`)
-    //console.debug(`Main images: ${this.collectionsImages.length}`)
+    console.debug(`Not used images: ${this.not_usedImages.length}`)
+    console.debug(`Main images: ${this.collectionsImages.length}`)
   }
 
   ngOnInit() {
-    // convert images to format of imageList
     this.Refresh();
-  }
-
-  onDelete(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
-  onCreate(arg0: any) {
-    throw new Error('Method not implemented.');
   }
 
   drop(event: CdkDragDrop<imageItem[]>) {
@@ -83,7 +77,7 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
-      this.updateRanking(event.container.data);
+      this.updateRanking(event.container.data, event.currentIndex, event.container.id);
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -100,14 +94,11 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateRanking(previousData: any[]) {
-    const cnt = previousData.length;
-    if (cnt > 0) {
-      let i = 1;
-      previousData.forEach((image) => {
-        image.ranking = i;
-        this.imageListService.updateImageList(image);
-        i++;
+  private updateRanking( imageItem: any, currentIndex: number, newContainerId: string) {
+    if (newContainerId !== this.IN_NOT_USED) {
+      imageItem.forEach((element: any) => {
+        element.ranking = imageItem.indexOf(element);
+        this.imageListService.updateImageList(element);
       });
     }
   }
@@ -118,21 +109,14 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string,
     currentIndex: number
   ) {
-    const cnt = newData.length;
-    if (cnt > 0) {
-      let i = 1;
-      newData.forEach((image: any) => {
-        image.ranking = i;
+        const image = newData[currentIndex];
+        image.ranking = 0;
         image.type = newContainerId;
         this.imageListService.updateImageList(image);
-        i++;
-      });
-    }
   }
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
-    this.subFeatured.unsubscribe();
     this.subCollections.unsubscribe();
   }
 }

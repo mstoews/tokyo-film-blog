@@ -10,14 +10,14 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
-import { FuseAlertModule } from '@fuse/components/alert';
-import { FuseCardModule } from '@fuse/components/card';
-import { FuseDrawerModule } from '@fuse/components/drawer';
-import { FuseHighlightModule } from '@fuse/components/highlight';
-import { FuseLoadingBarModule } from '@fuse/components/loading-bar';
-import { FuseMasonryModule } from '@fuse/components/masonry/masonry.module';
-import { FuseNavigationModule } from '@fuse/components/navigation';
-import { FuseScrollResetModule } from '@fuse/directives/scroll-reset';
+import { FuseAlertModule } from '@made-to/components/alert';
+import { FuseCardModule } from '@made-to/components/card';
+import { FuseDrawerModule } from '@made-to/components/drawer';
+import { FuseHighlightModule } from '@made-to/components/highlight';
+import { FuseLoadingBarModule } from '@made-to/components/loading-bar';
+import { FuseMasonryModule } from '@made-to/components/masonry/masonry.module';
+import { FuseNavigationModule } from '@made-to/components/navigation';
+import { FuseScrollResetModule } from '@made-to/directives/scroll-reset';
 import { SharedModule } from 'app/shared/shared.module';
 import { FuseComponentsComponent } from 'app/features/admin/ui/fuse-components/fuse-components.component';
 import { MockApiComponent } from 'app/features/admin/ui/fuse-components/libraries/mock-api/mock-api.component';
@@ -40,49 +40,47 @@ import { MustMatchComponent } from 'app/features/admin/ui/fuse-components/valida
 import { fuseComponentsRoutes } from 'app/features/admin/ui/fuse-components/fuse-components.routing';
 
 @NgModule({
-    declarations: [
-        FuseComponentsComponent,
-        MockApiComponent,
-        AlertComponent,
-        CardComponent,
-        DrawerComponent,
-        FullscreenComponent,
-        HighlightComponent,
-        LoadingBarComponent,
-        MasonryComponent,
-        NavigationComponent,
-        ScrollbarComponent,
-        ScrollResetComponent,
-        ConfigComponent,
-        ConfirmationComponent,
-        SplashScreenComponent,
-        MediaWatcherComponent,
-        FindByKeyComponent,
-        MustMatchComponent
-    ],
-    imports     : [
-        RouterModule.forChild(fuseComponentsRoutes),
-        MatButtonModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatSelectModule,
-        MatSlideToggleModule,
-        MatSliderModule,
-        MatSidenavModule,
-        MatTabsModule,
-        MatTreeModule,
-        FuseAlertModule,
-        FuseCardModule,
-        FuseDrawerModule,
-        FuseHighlightModule,
-        FuseLoadingBarModule,
-        FuseMasonryModule,
-        FuseNavigationModule,
-        FuseScrollResetModule,
-        SharedModule
-    ]
+  declarations: [
+    FuseComponentsComponent,
+    MockApiComponent,
+    AlertComponent,
+    CardComponent,
+    DrawerComponent,
+    FullscreenComponent,
+    HighlightComponent,
+    LoadingBarComponent,
+    MasonryComponent,
+    NavigationComponent,
+    ScrollbarComponent,
+    ScrollResetComponent,
+    ConfigComponent,
+    ConfirmationComponent,
+    SplashScreenComponent,
+    MediaWatcherComponent,
+    FindByKeyComponent,
+    MustMatchComponent,
+  ],
+  imports: [
+    RouterModule.forChild(fuseComponentsRoutes),
+    MatButtonModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSliderModule,
+    MatSidenavModule,
+    MatTabsModule,
+    MatTreeModule,
+    FuseAlertModule,
+    FuseCardModule,
+    FuseDrawerModule,
+    FuseHighlightModule,
+    FuseLoadingBarModule,
+    FuseMasonryModule,
+    FuseNavigationModule,
+    FuseScrollResetModule,
+    SharedModule,
+  ],
 })
-export class FuseComponentsModule
-{
-}
+export class FuseComponentsModule {}

@@ -3,9 +3,9 @@ import {
   Component,
   OnInit,
   ViewEncapsulation,
-} from '@angular/core'
-import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms'
-import { FuseConfirmationService } from '@fuse/services/confirmation'
+} from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { FuseConfirmationService } from '@made-to/services/confirmation';
 
 @Component({
   selector: 'confirmation',
@@ -14,7 +14,7 @@ import { FuseConfirmationService } from '@fuse/services/confirmation'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConfirmationDialogComponent implements OnInit {
-  configForm: UntypedFormGroup
+  configForm: UntypedFormGroup;
 
   /**
    * Constructor
@@ -54,7 +54,7 @@ export class ConfirmationDialogComponent implements OnInit {
         }),
       }),
       dismissible: true,
-    })
+    });
   }
 
   // -----------------------------------------------------------------------------------------------------
@@ -66,11 +66,11 @@ export class ConfirmationDialogComponent implements OnInit {
    */
   openConfirmationDialog(): void {
     // Open the dialog and save the reference of it
-    const dialogRef = this._fuseConfirmationService.open(this.configForm.value)
+    const dialogRef = this._fuseConfirmationService.open(this.configForm.value);
 
     // Subscribe to afterClosed from the dialog reference
     dialogRef.afterClosed().subscribe((result) => {
       // console.debug(result);
-    })
+    });
   }
 }

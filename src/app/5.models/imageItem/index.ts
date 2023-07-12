@@ -6,5 +6,6 @@ export interface imageItem {
   caption: string;
   type: string;
   ranking?: number;
+  description?: string;
 }
 

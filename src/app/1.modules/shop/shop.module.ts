@@ -1,11 +1,18 @@
 import { Injectable, NgModule, inject } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ShopComponent } from './main.component';
-import { Routes, RouterModule, ActivatedRouteSnapshot, ResolveFn, RouterStateSnapshot, Resolve } from '@angular/router';
+import {
+  Routes,
+  RouterModule,
+  ActivatedRouteSnapshot,
+  ResolveFn,
+  RouterStateSnapshot,
+  Resolve,
+} from '@angular/router';
 import { MainShopComponent } from './main-shop/shop.component';
 import { ShopCardComponent } from './main-shop/shop-card/shop-card.component';
 import { MaterialModule } from 'app/material.module';
-import { FuseCardModule } from '@fuse/components/card';
+import { FuseCardModule } from '@made-to/components/card';
 import { SharedModule } from '../shared-module/shared.module';
 import { CartComponent } from './cart/cart.component';
 import { ProductDetailsFiveComponent } from './shop-product/product-details-five.component';
@@ -30,12 +37,13 @@ import { ProductsService } from 'app/4.services/products.service';
 import { ShopCategoryCardComponent } from './main-shop/shop-category-card/shop-category-card.component';
 import { LightboxModule } from '../lightbox';
 
-
-
 export const ProductFuncResolver: ResolveFn<Product[]> = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot) => {
-  return inject(ProductsService).getInventoryByCategory(route.paramMap.get("id"));
+  state: RouterStateSnapshot
+) => {
+  return inject(ProductsService).getInventoryByCategory(
+    route.paramMap.get('id')
+  );
 };
 
 const routes: Routes = [

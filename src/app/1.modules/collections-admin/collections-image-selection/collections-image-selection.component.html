@@ -1,16 +1,19 @@
 <div class="h-screen">
   <mat-drawer-container>
     <mat-drawer-content>
-      <div cdkDropListGroup class="grid grid-cols-6 gap-1">
+      <div cdkDropListGroup class="grid grid-cols-8 gap-1">
         <!-- NOT_USED -->
-        <div class="col-start-1 col-end-6 item--1 lg-rounded" cdkScrollable>
+        <div class="col-start-1 col-end-8 item--1 lg-rounded" cdkScrollable>
           <div class="sticky top-0 z-50 image_title">Available Images</div>
           <div cdkDropList #notused="cdkDropList" [id]="IN_NOT_USED" [cdkDropListData]="not_usedImages"
             (cdkDropListDropped)="drop($event)">
             <div class="flex flex-wrap">
               <div *ngFor="let item of not_usedImages" cdkDrag>
                 <div class="flex-none object-cover p-1">
-                  <img [ngSrc]="item.imageSrc" alt="OPEN" width="150" height="150">
+                  <collection-image-card
+                  (collectionImageSelected)="UpdateInventoryItem($event)"
+                  [image]="item">
+                 </collection-image-card>
                 </div>
               </div>
             </div>
@@ -26,7 +29,7 @@
               <div *ngFor="let item of collectionsImages" cdkDrag>
                 <div class="p-2 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden">
                   <img [ngSrc]="item.imageSrc" alt="thumbnail"
-                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="150" height="150">
+                    class="h-full w-full object-cover object-center " width="150" height="150">
                 </div>
               </div>
             </div>

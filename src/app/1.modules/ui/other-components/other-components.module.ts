@@ -3,10 +3,10 @@ import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FuseHighlightModule } from '@fuse/components/highlight';
-import { FuseAlertModule } from '@fuse/components/alert';
-import { FuseNavigationModule } from '@fuse/components/navigation';
-import { FuseScrollResetModule } from '@fuse/directives/scroll-reset';
+import { FuseHighlightModule } from '@made-to/components/highlight';
+import { FuseAlertModule } from '@made-to/components/alert';
+import { FuseNavigationModule } from '@made-to/components/navigation';
+import { FuseScrollResetModule } from '@made-to/directives/scroll-reset';
 import { SharedModule } from 'app/shared/shared.module';
 import { OtherComponentsComponent } from 'app/features/admin/ui/other-components/other-components.component';
 import { OverviewComponent } from 'app/features/admin/ui/other-components/common/overview/overview.component';
@@ -23,32 +23,30 @@ import { QuillEditorComponent } from 'app/features/admin/ui/other-components/thi
 import { otherComponentsRoutes } from 'app/features/admin/ui/other-components/other-components.routing';
 
 @NgModule({
-    declarations: [
-        OtherComponentsComponent,
-        OverviewComponent,
-        LanguagesComponent,
-        MessagesComponent,
-        NotificationsComponent,
-        QuickChatComponent,
-        SearchComponent,
-        ShortcutsComponent,
-        UserComponent,
-        ApexChartsComponent,
-        NgxMarkdownComponent,
-        QuillEditorComponent
-    ],
-    imports     : [
-        RouterModule.forChild(otherComponentsRoutes),
-        MatButtonModule,
-        MatIconModule,
-        MatSidenavModule,
-        FuseHighlightModule,
-        FuseAlertModule,
-        FuseNavigationModule,
-        FuseScrollResetModule,
-        SharedModule
-    ]
+  declarations: [
+    OtherComponentsComponent,
+    OverviewComponent,
+    LanguagesComponent,
+    MessagesComponent,
+    NotificationsComponent,
+    QuickChatComponent,
+    SearchComponent,
+    ShortcutsComponent,
+    UserComponent,
+    ApexChartsComponent,
+    NgxMarkdownComponent,
+    QuillEditorComponent,
+  ],
+  imports: [
+    RouterModule.forChild(otherComponentsRoutes),
+    MatButtonModule,
+    MatIconModule,
+    MatSidenavModule,
+    FuseHighlightModule,
+    FuseAlertModule,
+    FuseNavigationModule,
+    FuseScrollResetModule,
+    SharedModule,
+  ],
 })
-export class OtherComponentsModule
-{
-}
+export class OtherComponentsModule {}

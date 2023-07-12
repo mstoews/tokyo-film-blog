@@ -13,11 +13,11 @@ import {
   DxTemplateModule,
   DxPopupModule,
 } from 'devextreme-angular';
-import { FuseCardModule } from '@fuse/components/card';
+import { FuseCardModule } from '@made-to/components/card';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 import { ImageCardComponent } from './image-card/image-card.component';
-import { CollectionCardComponent } from './collection-card/collection-card.component';
+
 import { ProductCardComponent } from './product-card/product-card.component';
 import { InventoryComponent } from './inventory-maintenance/inventory-grid.component';
 import { AdminFormComponent } from './admin-form/admin-form.component';
@@ -45,7 +45,6 @@ import { PolicyModule } from '../policy/policy.module';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { InventoryImageCardComponent } from './inventory-maintenance/inventory-image-card/inventory-image-card.component';
 
-
 @NgModule({
   declarations: [
     AdminComponent,
@@ -55,7 +54,7 @@ import { InventoryImageCardComponent } from './inventory-maintenance/inventory-i
     CategoryGridComponent,
     ImageMaintenanceComponent,
     ImageCardComponent,
-    CollectionCardComponent,
+
     ProductCardComponent,
     InventoryComponent,
     AdminFormComponent,
@@ -72,7 +71,7 @@ import { InventoryImageCardComponent } from './inventory-maintenance/inventory-i
     ImageMenubarComponent,
     ImageListComponent,
     ContactListComponent,
-    InventoryImageCardComponent
+    InventoryImageCardComponent,
   ],
   imports: [
     AdminRouteModule,

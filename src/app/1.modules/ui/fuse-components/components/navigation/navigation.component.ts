@@ -1,10 +1,10 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import {
   FuseNavigationItem,
   FuseNavigationService,
   FuseVerticalNavigationComponent,
-} from '@fuse/components/navigation'
-import { FuseComponentsComponent } from 'app/features/admin/ui/fuse-components/fuse-components.component'
+} from '@made-to/components/navigation';
+import { FuseComponentsComponent } from 'app/features/admin/ui/fuse-components/fuse-components.component';
 
 @Component({
   selector: 'navigation',
@@ -34,18 +34,18 @@ export class NavigationComponent {
     const navComponent =
       this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
         navigationName
-      )
+      );
 
     // Return if the navigation component does not exist
     if (!navComponent) {
-      return null
+      return null;
     }
 
     // Get the navigation item
-    const navigation = navComponent.navigation
-    const item = this._fuseNavigationService.getItem(itemId, navigation)
+    const navigation = navComponent.navigation;
+    const item = this._fuseNavigationService.getItem(itemId, navigation);
     // console.debug(item);
-    return item
+    return item;
   }
 
   /**
@@ -60,18 +60,18 @@ export class NavigationComponent {
     const navComponent =
       this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
         navigationName
-      )
+      );
 
     // Return if the navigation component does not exist
     if (!navComponent) {
-      return null
+      return null;
     }
 
     // Get the navigation item, update the badge and refresh the component
-    const navigation = navComponent.navigation
-    const item = this._fuseNavigationService.getItem(itemId, navigation)
-    item.badge.title = title
-    navComponent.refresh()
+    const navigation = navComponent.navigation;
+    const item = this._fuseNavigationService.getItem(itemId, navigation);
+    item.badge.title = title;
+    navComponent.refresh();
   }
 
   /**
@@ -85,18 +85,18 @@ export class NavigationComponent {
     const navComponent =
       this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
         navigationName
-      )
+      );
 
     // Return if the navigation component does not exist
     if (!navComponent) {
-      return null
+      return null;
     }
 
     // Get the navigation item, update the badge and refresh the component
-    const navigation = navComponent.navigation
-    const item = this._fuseNavigationService.getItem(itemId, navigation)
-    item.disabled = !item.disabled
-    navComponent.refresh()
+    const navigation = navComponent.navigation;
+    const item = this._fuseNavigationService.getItem(itemId, navigation);
+    item.disabled = !item.disabled;
+    navComponent.refresh();
   }
 
   /**
@@ -109,11 +109,11 @@ export class NavigationComponent {
     const navComponent =
       this._fuseNavigationService.getComponent<FuseVerticalNavigationComponent>(
         navigationName
-      )
+      );
 
     // Return if the navigation component does not exist
     if (!navComponent) {
-      return null
+      return null;
     }
 
     // A navigation data to replace with
@@ -162,11 +162,11 @@ export class NavigationComponent {
           },
         ],
       },
-    ]
+    ];
 
     // Replace the navigation data
-    navComponent.navigation = newNavigation
-    navComponent.refresh()
+    navComponent.navigation = newNavigation;
+    navComponent.refresh();
   }
 
   /**
@@ -174,6 +174,6 @@ export class NavigationComponent {
    */
   toggleDrawer(): void {
     // Toggle the drawer
-    this._fuseComponentsComponent.matDrawer.toggle()
+    this._fuseComponentsComponent.matDrawer.toggle();
   }
 }

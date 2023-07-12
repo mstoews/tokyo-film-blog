@@ -5,8 +5,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { fuseAnimations } from '@fuse/animations';
-import { FuseAlertType } from '@fuse/components/alert';
+import { fuseAnimations } from '@made-to/animations';
+import { FuseAlertType } from '@made-to/components/alert';
 import { AuthService } from 'app/4.services/auth/auth.service';
 
 @Component({

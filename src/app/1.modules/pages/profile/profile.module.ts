@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FuseCardModule } from '@fuse/components/card';
+import { FuseCardModule } from '@made-to/components/card';
 import { ProfileComponent } from './profile.component';
 import { profileRoutes } from './profile.routing';
 import { HeadingModule } from 'app/2.main/header/heading.module';

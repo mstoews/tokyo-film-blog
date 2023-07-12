@@ -6,7 +6,7 @@ import {
 import { imageItem } from 'app/5.models/imageItem';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 import { convertSnaps } from './db-utils';
-import { Observable, BehaviorSubject, map, first, of } from 'rxjs';
+import { Observable, BehaviorSubject, map, first, of, Subscription } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   Firestore,
@@ -26,6 +26,7 @@ import { TitleStrategy } from '@angular/router';
   providedIn: 'root',
 })
 export class ImageListService {
+
   private imageItemCollections: AngularFirestoreCollection<imageItem>;
   private updateItemsCollection: AngularFirestoreCollection<imageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
@@ -66,8 +67,8 @@ export class ImageListService {
 
   getImagesBySize(size: string) {
     return this.imageItems.pipe(
-      map((images) => images.filter((type) => type.imageAlt.includes(size)).filter((type) => type.type === 'IN_NOT_USED')));
-
+      map((images) => images.filter((image) => image.imageAlt.includes(size)).filter((type) => type.type === 'IN_NOT_USED')));
+      //map((images) => images.filter((type) => type.imageAlt.includes(size))));
   }
 
   getImagesByType(imageType: string) {
@@ -188,6 +189,11 @@ export class ImageListService {
     //this.updateInventory(item, productId)
   }
 
+  updateCollectionDescription(id: string, description: string) {
+    console.log(`Updating ${id} with ${description}`);
+    this.imageItemCollections.doc(id).update({ description: description });
+  }
+
   updateImageList(item: imageItem) {
     this.imageItemCollections.doc(item.id).update(item);
   }
@@ -204,43 +210,99 @@ export class ImageListService {
     });
   }
 
-  createRawImagesList() {
-    this.updateRawImageList();
-    let ranking = 0;
-    this.storage
-      .ref('/thumbnails')
-      .listAll()
-      .subscribe((files) => {
-        files.items.forEach((imageRef) => {
-          imageRef.getDownloadURL().then((downloadURL) => {
-            ranking++;
-            const imageUrl = downloadURL;
-            const imageData: imageItem = {
-              parentId: '',
-              caption: imageRef.fullPath,
-              type: 'IN_NOT_USED',
-              imageSrc: imageUrl,
-              imageAlt: imageRef.name,
-              ranking: ranking,
-              id: '',
-            };
-            let found = false;
-            this.rawImagesArray.forEach((img) => {
-              if (img.imageAlt === imageData.imageAlt) {
-                found = true;
-              }
-            });
-            if (!found) {
-              this.createItem(imageData);
-            }
-          });
-        });
-      });
-      this.createRawImagesList_400();
-      this.createRawImagesList_800()
+
+
+  dupes: string[] = [];
+
+  deleteDuplicateImages() {
+    let not_usedImages: imageItem[] = [];
+    let subNotUsed: Subscription;
+
+    subNotUsed = this.getImagesBySize('400')
+      .subscribe((item) => {
+        not_usedImages = item;
+        this.deleteDupes(not_usedImages);
+    });
+    console.log(`Deleting ${this.dupes.length}`);
+    this.deletefFromFirebase(this.dupes);
   }
 
-  createRawImagesList_400() {
+  deleteDupes(not_usedImages: imageItem[]) {
+    let found = false;
+
+    this.rawImagesArray = [];
+    not_usedImages.forEach((items) => {
+      found = this.doesItemExist(items, found);
+      if (!found) {
+        this.rawImagesArray.push(items);
+      }
+      else {
+        this.dupes.push(items.id);
+      }
+      found = false;
+    });
+  }
+
+  doesItemExist(image: imageItem, found: boolean): boolean {
+    found = false;
+    this.rawImagesArray.forEach((img) => {
+        if (img.imageAlt === image.imageAlt) {
+          found = true;
+        }
+     });
+    return found
+  }
+
+  deletefFromFirebase(dupes: string[]) {
+
+    dupes.forEach((dupe) => {
+        this.delete(dupe);
+    });
+  }
+
+
+  async createRawImagesList() {
+    await this.createRawImagesList_200();
+    await this.createRawImagesList_400();
+    await this.createRawImagesList_800();
+  }
+
+  async createRawImagesList_200() {
+    this.rawImagesArray = [];
+    this.getImagesBySize('200').subscribe((imageList) => {
+      this.rawImagesArray = imageList;
+      let ranking = 0;
+      this.storage.ref('/thumbnails').listAll()
+        .subscribe((files) => {
+          files.items.forEach((imageRef) => {
+            imageRef.getDownloadURL().then((downloadURL) => {
+              ranking++;
+              const imageUrl = downloadURL;
+              const imageData: imageItem = {
+                parentId: '',
+                caption: imageRef.fullPath,
+                type: 'IN_NOT_USED',
+                imageSrc: imageUrl,
+                imageAlt: imageRef.name,
+                ranking: ranking,
+                id: '',
+              };
+              let found = false;
+              this.rawImagesArray.forEach((img) => {
+                if (img.imageAlt === imageData.imageAlt) {
+                  found = true;
+                }
+              });
+              if (!found) {
+                this.createItem(imageData);
+              }
+            });
+          });
+        });
+    });
+  }
+
+  async createRawImagesList_400() {
     this.updateRawImageList();
     let ranking = 0;
     this.storage
@@ -273,7 +335,8 @@ export class ImageListService {
         });
       });
   }
-  createRawImagesList_800() {
+
+  async createRawImagesList_800() {
     this.updateRawImageList();
     let ranking = 0;
     this.storage

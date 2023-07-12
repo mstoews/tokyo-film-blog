@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CollectionResolver } from 'app/4.services/collection.resolver';
-import { CollectionsEditComponent } from './collections-edit/collections-edit.component';
-import { CollectionsAdminComponent } from './collections-grid.component';
+import { CollectionsEditComponent } from './collection-edit/collections-edit.component';
+import { CollectionsAdminComponent } from './collection-grid/collections-grid.component';
+
 
 const routes: Routes = [
   {

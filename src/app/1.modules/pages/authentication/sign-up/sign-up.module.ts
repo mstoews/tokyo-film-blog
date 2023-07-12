@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FuseAlertModule } from '@fuse/components/alert';
+import { FuseAlertModule } from '@made-to/components/alert';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { SignUpClassicComponent } from './classic/sign-up.component';
 import { SignUpModernComponent } from './modern/sign-up.component';

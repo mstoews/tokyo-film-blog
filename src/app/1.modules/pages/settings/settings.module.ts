@@ -8,7 +8,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { FuseAlertModule } from '@fuse/components/alert';
+import { FuseAlertModule } from '@made-to/components/alert';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { SettingsComponent } from 'app/1.modules/pages/settings/settings.component';
 import { SettingsAccountComponent } from 'app/1.modules/pages/settings/account/account.component';

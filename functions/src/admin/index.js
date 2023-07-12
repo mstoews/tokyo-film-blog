@@ -1,10 +1,13 @@
 const admin = require('firebase-admin');
 
 const dotenv = require("dotenv");
+const process = require("process");
 
 const result = dotenv.config();
 
 const serviceAccountPath = `./${process.env.SERVICE_ACCOUNT_FILE_NAME}`;
+
+console.log('process.env.SERVICE_ACCOUNT_FILE_NAME', process.env.SERVICE_ACCOUNT_FILE_NAME)
 
 admin.initializeApp({
    credential: admin.credential.cert(serviceAccountPath),
@@ -13,10 +16,10 @@ admin.initializeApp({
 
 const auth = admin.auth();
 
-const uid = 'fmhQtGt4JVQ0E1ET1cEXlMhcgZz2';
+const uid = process.argv[2];
 
 const customClaims = {
-    admin: false,
+    admin: true,
 };
 
 (async() => {

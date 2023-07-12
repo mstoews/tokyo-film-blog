@@ -57,10 +57,11 @@ export class ProductsService {
     };
     this.afs.doc(`inventory/${productId}`).update(image);
     console.log('main image updated: ', image);
-    this.snackBar.open('Main image updated', 'Close', {
+    this.snackBar.open('Main image updated', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
+      duration: 2000
     });
   }
 

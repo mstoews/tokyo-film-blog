@@ -5,7 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FuseHighlightModule } from '@fuse/components/highlight';
+import { FuseHighlightModule } from '@made-to/components/highlight';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { AdvancedSearchComponent } from './advanced-search.component';
 import { DragNDropComponent } from '../../../3.components/drag-n-drop/drag-n-drop.component';

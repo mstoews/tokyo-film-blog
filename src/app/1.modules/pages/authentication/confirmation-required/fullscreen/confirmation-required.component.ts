@@ -1,18 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { fuseAnimations } from '@fuse/animations';
+import { fuseAnimations } from '@made-to/animations';
 
 @Component({
-    selector     : 'confirmation-required-fullscreen',
-    templateUrl  : './confirmation-required.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+  selector: 'confirmation-required-fullscreen',
+  templateUrl: './confirmation-required.component.html',
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations,
 })
-export class ConfirmationRequiredFullscreenComponent
-{
-    /**
-     * Constructor
-     */
-    constructor()
-    {
-    }
+export class ConfirmationRequiredFullscreenComponent {
+  /**
+   * Constructor
+   */
+  constructor() {}
 }

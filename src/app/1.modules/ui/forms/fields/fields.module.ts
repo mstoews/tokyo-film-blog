@@ -11,38 +11,34 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatSelectModule } from '@angular/material/select';
-import { FuseHighlightModule } from '@fuse/components/highlight';
+import { FuseHighlightModule } from '@made-to/components/highlight';
 import { SharedModule } from 'app/shared/shared.module';
 import { FormsFieldsComponent } from 'app/features/admin/ui/forms/fields/fields.component';
 
 export const routes: Route[] = [
-    {
-        path     : '',
-        component: FormsFieldsComponent
-    }
+  {
+    path: '',
+    component: FormsFieldsComponent,
+  },
 ];
 
 @NgModule({
-    declarations: [
-        FormsFieldsComponent
-    ],
-    imports     : [
-        RouterModule.forChild(routes),
-        MatButtonModule,
-        MatButtonToggleModule,
-        MatChipsModule,
-        MatDatepickerModule,
-        MatDividerModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatMenuModule,
-        MatMomentDateModule,
-        MatSelectModule,
-        FuseHighlightModule,
-        SharedModule
-    ]
+  declarations: [FormsFieldsComponent],
+  imports: [
+    RouterModule.forChild(routes),
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDividerModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatMenuModule,
+    MatMomentDateModule,
+    MatSelectModule,
+    FuseHighlightModule,
+    SharedModule,
+  ],
 })
-export class FormsFieldsModule
-{
-}
+export class FormsFieldsModule {}

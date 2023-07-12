@@ -1,18 +1,15 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { fuseAnimations } from '@fuse/animations';
+import { fuseAnimations } from '@made-to/animations';
 
 @Component({
-    selector     : 'confirmation-required-split-screen',
-    templateUrl  : './confirmation-required.component.html',
-    encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+  selector: 'confirmation-required-split-screen',
+  templateUrl: './confirmation-required.component.html',
+  encapsulation: ViewEncapsulation.None,
+  animations: fuseAnimations,
 })
-export class ConfirmationRequiredSplitScreenComponent
-{
-    /**
-     * Constructor
-     */
-    constructor()
-    {
-    }
+export class ConfirmationRequiredSplitScreenComponent {
+  /**
+   * Constructor
+   */
+  constructor() {}
 }

@@ -3,11 +3,12 @@ import {
   OnInit,
   OnDestroy,
   ɵconvertToBitFlags,
+  inject,
 } from '@angular/core';
 import { Product } from 'app/5.models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/4.services/products.service';
-import {  map, Observable, Subscription } from 'rxjs';
+import { map, Observable, Subscription } from 'rxjs';
 import { WishListService } from 'app/4.services/wishlist.service';
 
 import { CartService } from 'app/4.services/cart.service';
@@ -20,6 +21,7 @@ import { Cart } from 'app/5.models/cart';
 
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
 import { UserService } from 'app/4.services/auth/user.service';
+import { ImageListService } from 'app/4.services/image-list.service';
 
 @Component({
   selector: 'collection-grid',
@@ -37,6 +39,9 @@ export class CollectionGrid implements OnInit, OnDestroy {
   wishListCount = 0;
   product: Product;
   isLoggedIn$: Observable<boolean>;
+  imageListService = inject(ImageListService);
+  images$: Observable<imageItem[]>;
+
 
   inventoryImages$: Observable<imageItem[]>;
   imagesList: string[];
@@ -59,12 +64,11 @@ export class CollectionGrid implements OnInit, OnDestroy {
   productIds: string[] = [];
   wishListIds: string[] = [];
   loggedIn: boolean = false;
-
   userData: any;
-
   userId: String;
 
   ngOnInit(): void {
+    this.images$ = this.imageListService.getImagesByType('1');
     this.Products$ = this.productService
       .getAll()
       .pipe(

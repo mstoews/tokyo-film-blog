@@ -1,0 +1,16 @@
+
+<div class="grid grid-cols-3 gap-4">
+  <div>
+    <h1 class="h-20 py-10 text-3xl lg:text-4xl font-semibold leading-7 xl:leading-9 text-center text-gray-700">{{Title}}</h1>
+    <p class="max-w-lg py-20 text-base text-center text-gray-700 md:text-left" [innerHTML]="collection.body | safe: 'html'"></p>
+  </div>
+  <div class="col-span-2">
+    <div class="grid grid-cols-3 gap-4">
+      <div  *ngFor="let image of collectionsImages">
+        <img (click)="EditTitle(image.id)" class="h-auto w-[100%] rounded-lg" [src]="image.imageSrc" alt="images">
+      </div>
+    </div>
+  </div>
+</div>
+
+

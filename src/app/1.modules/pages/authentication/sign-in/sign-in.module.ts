@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FuseAlertModule } from '@fuse/components/alert';
+import { FuseAlertModule } from '@made-to/components/alert';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { SignInClassicComponent } from './classic/sign-in.component';
 import { SignInModernComponent } from './modern/sign-in.component';
@@ -15,7 +15,7 @@ import { SignInFullscreenComponent } from './fullscreen/sign-in.component';
 import { SignInFullscreenReversedComponent } from './fullscreen-reversed/sign-in.component';
 import { SignInSplitScreenComponent } from './split-screen/sign-in.component';
 import { SignInSplitScreenReversedComponent } from './split-screen-reversed/sign-in.component';
-import { FuseCardModule } from '@fuse/components/card';
+import { FuseCardModule } from '@made-to/components/card';
 
 const routes: Routes = [
   {
