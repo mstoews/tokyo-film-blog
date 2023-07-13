@@ -60,7 +60,11 @@ export class InventoryComponent implements OnInit {
   }
 
   valueChangedEvent($event: Event) {
-    // console.debug('valueChangedEvent');
+    console.debug('valueChangedEvent');
+  }
+
+  onCellDoublClicked(e){
+      this.route.navigate(['admin/inventory', e.id]);
   }
 
   /**
