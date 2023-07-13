@@ -1,3 +1,45 @@
+<mat-drawer-container class="flex-col h-[800px] m-2">
+  <mat-drawer class="lg:w-1/4 sm:h-full sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
+    [disableClose]="false">
+    <mat-card class="m-2 flex flex-col h-full max-w-120 filter-article filter-interactive text-gray-700">
+
+      <div mat-dialog-content>
+        <form [formGroup]="collectionGroup" (ngSubmit)="UpdateDescription(collectionGroup.value.description)" class="form">
+
+          <div class="flex flex-col m-1">
+
+            <div class="flex flex-col grow">
+              <mat-label class="ml-2 text-base">Description</mat-label>
+              <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <input type="text" matInput placeholder="Description" formControlName="Description" />
+              </mat-form-field>
+            </div>
+
+            <div class="flex flex-col grow">
+              <mat-label class="ml-2 text-base">Image URL</mat-label>
+              <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <input type="text" matInput placeholder="Image URL" formControlName="URL" />
+              </mat-form-field>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <!-- <div class="form-val">
+          {{collectionGroup.value | json }}
+        </div> -->
+      <div mat-dialog-actions class="mb-2">
+        <button mat-icon-button (click)="UpdateDescription(collectionGroup.value.Description)" [disabled]="!collectionGroup.valid"
+          matTooltip="Update" color="primary" aria-label="Add">
+          <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+        </button>
+
+        <button mat-icon-button (click)="closeDrawer()" matTooltip="Close" color="warn">
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </mat-drawer>
 
 <div class="grid grid-cols-3 gap-4">
   <div>
@@ -6,11 +48,17 @@
   </div>
   <div class="col-span-2">
     <div class="grid grid-cols-3 gap-4">
-      <div  *ngFor="let image of collectionsImages">
-        <img (click)="EditTitle(image.id)" class="h-auto w-[100%] rounded-lg" [src]="image.imageSrc" alt="images">
+
+      <div *ngFor="let image of collectionsImages">
+        <mat-card>
+          <img (click)="EditTitle(image.id)" class="h-auto w-[100%] rounded-lg" [src]="image.imageSrc" alt="images">
+          <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-t-lg">
+            <h1 class="text-white font-normal text-sm">{{image.description}}</h1>
+          </div>
+        </mat-card>
       </div>
     </div>
   </div>
 </div>
-
+</mat-drawer-container>
 

@@ -96,13 +96,9 @@
         <dxi-column dataField="name"> </dxi-column>
         <dxi-column dataField="description"> </dxi-column>
         <dxi-column dataField="createDate" cellTemplate="dateTemplate"> </dxi-column>
-
         <dxi-column dataField="updateDate" cellTemplate="dateTemplate"> </dxi-column>
-
         <dxi-column dataField="updateBy"> </dxi-column>
-
         <dxi-column dataField="image" [width]="100" cellTemplate="cellTemplate"> </dxi-column>
-
         <div *dxTemplate="let data of 'cellTemplate'">
           <img [src]="data.value" class="lg-rounded" alt="cell.value">
         </div>

@@ -123,19 +123,12 @@ export class ProductEditComponent implements OnInit {
       product.date_created = updateDate;
       this.productService.update(product);
       this.prdGroup.setValue(product);
-      this.snackBar.open('Product updated successfully', 'Close', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      });
-    } else {
-      this.snackBar.open('No changes to save to the product', 'Close', {
-        duration: 3000,
+      this.snackBar.open('Product updated successfully', 'OK', {
+        duration: 1000,
         horizontalPosition: 'right',
         verticalPosition: 'top',
       });
     }
-
     this.isFormDirty = false;
   }
 

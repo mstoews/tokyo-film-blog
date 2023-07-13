@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -21,6 +21,7 @@ import {
   OrderByDirection,
 } from '@angular/fire/firestore';
 import { TitleStrategy } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,8 @@ export class ImageListService {
     );
     this.imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
   }
+
+  matSnackBar = inject(MatSnackBar);
 
   getImagesList(): Observable<imageItem[]> {
     const imagesRef = collection(this.afs.firestore, 'imagelist');
@@ -192,6 +195,9 @@ export class ImageListService {
   updateCollectionDescription(id: string, description: string) {
     console.log(`Updating ${id} with ${description}`);
     this.imageItemCollections.doc(id).update({ description: description });
+    this.matSnackBar.open(`Description with ${description}`, 'OK', {
+      duration: 2000,
+    });
   }
 
   updateImageList(item: imageItem) {
