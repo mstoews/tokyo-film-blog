@@ -64,7 +64,7 @@ export class InventoryComponent implements OnInit {
   }
 
   onCellDoublClicked(e){
-      this.route.navigate(['admin/inventory', e.id]);
+    this.route.navigate(['admin/inventory', e.data.id]);
   }
 
   /**

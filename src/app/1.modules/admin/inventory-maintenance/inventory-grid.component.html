@@ -1,21 +1,25 @@
-<app-header [title]="'Maintenance'"> </app-header>
+<app-header [title]="'Inventory Maintenance'"> </app-header>
 <div class="h-screen">
-  <mat-drawer-container class="m-10 flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
+  <mat-drawer-container class="ml-10 mr-10 -mt-5 flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
 
     <ng-container *ngIf="allProducts$ | async as rows">
 
       <div class="m-1 h-full">
-        <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
-          [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true" keyExpr="id">
+        <dx-data-grid flex id="categoryGrid" [wordWrapEnabled]="true" [dataSource]="rows" [showColumnLines]="true"
+        [showRowLines]="true"
+        [showBorders]="true"
+        [focusedRowEnabled]="true"
+        [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true" keyExpr="id">
 
-          <dxo-paging [pageSize]="10"></dxo-paging>
-          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+          <dxo-paging [pageSize]="6"></dxo-paging>
+          <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[6, 9, 12, 15]"></dxo-pager>
           <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
           <dxo-group-panel [visible]="true"></dxo-group-panel>
           <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
 
-          <dxi-column dataField="image" [width]="100" cellTemplate="imageTemplate"> </dxi-column>
-          <dxi-column dataField="category" [width]="100"> </dxi-column>
+          <dxi-column dataField="image" [width]="80" cellTemplate="imageTemplate"> </dxi-column>
+          <dxi-column dataField="category" [width]="150"> </dxi-column>
+          <dxi-column dataField="price" [width]="100"> </dxi-column>
           <dxi-column dataField="description" [width]="200"> </dxi-column>
           <dxi-column dataField="short_description"[width]="300"> </dxi-column>
           <dxi-column dataField="rich_description" cellTemplate="richTemplate"> </dxi-column>
@@ -26,7 +30,7 @@
             <div> {{data.value | date: 'dd/MM/YYYY' }} </div>
           </div>
           <div *dxTemplate="let data of 'richTemplate'">
-            <p class="m-1 w-200 h-30 hidden md:block" [innerHTML]="data.value | safe: 'html'"></p>
+            <p class="m-1 w-200 h-10 hidden md:block" [innerHTML]="data.value | safe: 'html'"></p>
           </div>
         </dx-data-grid>
 
@@ -78,7 +82,7 @@
       </table> -->
     </ng-container>
     <button (click)="onAdd()"
-    class="fixed bottom-3 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+    class="fixed bottom-20 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
     <svg viewBox="0 0 20 20" class="w-6 h-6 inline-block">
       <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
             C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
