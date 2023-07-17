@@ -17,6 +17,7 @@ export class CollectionsEditComponent implements OnInit {
   cRAG: any;
   sTitle: any;
   collectionGroup: any;
+  isFormDirty = false;
   //collectionImages$: any;
 
   sub: any;
@@ -40,6 +41,11 @@ export class CollectionsEditComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string
   ) {}
 
+  onValueChange() {
+    this.isFormDirty = true;
+    //console.log('Value changed in text editor');
+  }
+
   ngOnInit(): void {
     var id: string;
     this.collection = this.activateRoute.snapshot.data['collection'];
@@ -54,8 +60,8 @@ export class CollectionsEditComponent implements OnInit {
     }
   }
 
-  UpdateInventoryItem(e: string){
-    console.log("UpdateInventoryItem", e);
+  UpdateInventoryItem(e: string) {
+    console.log('UpdateInventoryItem', e);
   }
 
   onUpdate(collection: Collections) {
@@ -86,6 +92,10 @@ export class CollectionsEditComponent implements OnInit {
   }
 
   onBackToCollections() {
+    if (this.isFormDirty) {
+      const collection = { ...this.collectionGroup.value } as Collections;
+      this.onUpdate(collection);
+    }
     this._location.back();
   }
 
@@ -94,8 +104,13 @@ export class CollectionsEditComponent implements OnInit {
   }
 
   onDelete(data: Collections) {
-    data = this.collectionGroup.getRawValue();
-    this.collectionService.delete(data.id.toString());
+    if (confirm('Are you sure you want to delete this collection?') === true) {
+      this.collectionService.delete(data.id.toString());
+    }
+    else {
+
+      console.log('Cancelled deletion');
+    }
   }
 
   closeDialog() {}
@@ -110,6 +125,9 @@ export class CollectionsEditComponent implements OnInit {
       date_created: [collection.date_created],
       date_updated: [collection.date_updated],
       published: [collection.published],
+    });
+    this.collectionGroup.valueChanges.subscribe((x) => {
+      this.isFormDirty = true;
     });
   }
 

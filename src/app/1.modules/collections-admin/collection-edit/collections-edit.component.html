@@ -79,10 +79,13 @@
               </ng-container>
             </mat-tab>
           </mat-tab-group>
-
+          <mat-checkbox class="" color="primary" formControlName="published">
+            Published
+          </mat-checkbox>
         </form>
       </div>
       <div mat-dialog-actions>
+
         <button mat-icon-button (click)="onUpdate(collection)" matTooltip="Update" color="primary"
           class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" aria-label="Add">
           <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
@@ -95,8 +98,6 @@
           class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" [disabled]="!collectionGroup.valid">
           <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
         </button>
-
-
 
       </div>
     </mat-card>

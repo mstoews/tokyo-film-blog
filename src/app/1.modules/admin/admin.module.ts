@@ -25,9 +25,7 @@ import { DxHtmlEditorModule } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
 import { ServicesComponent } from './services/services.component';
 import { SafePipe } from './safe.pipe';
-import { InventoryContentComponent } from './inventory-content/inventory-content.component';
 
-import { SwiperModule } from 'swiper/angular';
 import { IconsModule } from 'app/icons.module';
 import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
 import { ProductEditComponent } from './inventory-maintenance/product-edit/product-edit.component';
@@ -44,6 +42,7 @@ import { SharedModule } from '../shared-module/shared.module';
 import { PolicyModule } from '../policy/policy.module';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { InventoryImageCardComponent } from './inventory-maintenance/inventory-image-card/inventory-image-card.component';
+import { ViewImageItemComponent } from './inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
 
 @NgModule({
   declarations: [
@@ -54,14 +53,12 @@ import { InventoryImageCardComponent } from './inventory-maintenance/inventory-i
     CategoryGridComponent,
     ImageMaintenanceComponent,
     ImageCardComponent,
-
     ProductCardComponent,
     InventoryComponent,
     AdminFormComponent,
     GalleryComponent,
     ServicesComponent,
     SafePipe,
-    InventoryContentComponent,
     InventoryImageSelectionComponent,
     InventoryComponent,
     ProductEditComponent,
@@ -86,11 +83,11 @@ import { InventoryImageCardComponent } from './inventory-maintenance/inventory-i
     GalleryLightboxModule,
     DxPopupModule,
     DxHtmlEditorModule,
-    SwiperModule,
     NgOptimizedImage,
     IconsModule,
     SharedModule,
     PolicyModule,
+    ViewImageItemComponent
   ],
   exports: [AdminComponent, OrdersGridComponent],
   providers: [BlogResolver, ProductResolver],

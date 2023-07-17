@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
   templateUrl: './collections-add.component.html',
   styleUrls: ['./collections-add.component.css'],
 })
+
 export class CollectionsAddDialog {
   title: string;
   collectionId: string;

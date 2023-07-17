@@ -3,6 +3,7 @@ import { Product } from 'app/5.models/products';
 import { imageItem } from 'app/5.models/imageItem';
 import { Observable } from 'rxjs';
 import { ProductsService } from 'app/4.services/products.service';
+import { ImageListService } from 'app/4.services/image-list.service';
 
 @Component({
   selector: 'inventory-preview',
@@ -16,9 +17,12 @@ export class InventoryPreviewComponent implements OnInit {
   mainImage: string;
 
   productService = inject(ProductsService);
+  imageListService = inject(ImageListService);
 
-  setImage(e: string) {
-    this.mainImage = e;
+  setImage(e: imageItem): void {
+    const searchString = e.imageAlt.substring(0, 10);
+    console.log('setImage', searchString);
+    this.mainImage = e.imageSrc;
   }
 
   onUpdate() {
@@ -31,6 +35,7 @@ export class InventoryPreviewComponent implements OnInit {
     //     this.product = prd;
     //   });
     // }
+    console.log('InventoryPreviewComponent', this.product.id );
 
     this.mainImage = this.product.image;
 

@@ -13,12 +13,8 @@ export class CollectionImageCardComponent {
   @Output() collectionImageSelected: EventEmitter<imageItem> = new EventEmitter()
 
   onDblClick(e: any): void {
+    console.log(this.image);
     this.collectionImageSelected.emit(this.image)
-  }
-
-  UpdateInventoryItem(e: imageItem) {
-    e.type = this.image.type;
-    this.imageListService.updateImageList(e);
   }
 
 }

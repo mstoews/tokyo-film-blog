@@ -3,13 +3,19 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { imageItem } from 'app/5.models/imageItem';
+import { ImageItemSnap, imageItem } from 'app/5.models/imageItem';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 import { convertSnaps } from './db-utils';
-import { Observable, BehaviorSubject, map, first, of, Subscription } from 'rxjs';
+import {
+  Observable,
+  BehaviorSubject,
+  map,
+  first,
+  of,
+  Subscription,
+} from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
-  Firestore,
   addDoc,
   collection,
   collectionData,
@@ -19,6 +25,7 @@ import {
   updateDoc,
   setDoc,
   OrderByDirection,
+  CollectionReference,
 } from '@angular/fire/firestore';
 import { TitleStrategy } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -27,12 +34,24 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class ImageListService {
-
   private imageItemCollections: AngularFirestoreCollection<imageItem>;
+
+  private originalImageCol: AngularFirestoreCollection<imageItem>;
+  private mediumImageCol: AngularFirestoreCollection<imageItem>;
+  private smallImageCol: AngularFirestoreCollection<imageItem>;
+  private largeImageCol: AngularFirestoreCollection<imageItem>;
+
+
   private updateItemsCollection: AngularFirestoreCollection<imageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private loadImageItems: Observable<imageItem[]>;
   private imageItems: Observable<imageItem[]>;
+
+  private largeImageItems: Observable<imageItem[]>;
+  private smallImageItems: Observable<imageItem[]>;
+  private mediumImageItems: Observable<imageItem[]>;
+  private originalImageItems: Observable<imageItem[]>;
+
   items$: Observable<imageItem[]>;
   typeFilter$: BehaviorSubject<string | null>;
   rawImagesArray: imageItem[] = [];
@@ -41,6 +60,11 @@ export class ImageListService {
     public afs: AngularFirestore,
     private storage: AngularFireStorage
   ) {
+    this.originalImageCol = afs.collection<imageItem>('originalImageList');
+    this.smallImageCol = afs.collection<imageItem>('smallImageList');
+    this.mediumImageCol = afs.collection<imageItem>('mediumImageList');
+    this.largeImageCol = afs.collection<imageItem>('largeImageList');
+
     this.updateItemsCollection = afs.collection<imageItem>('imagelist');
     this.loadImageItems = this.updateItemsCollection.valueChanges({
       idField: 'id',
@@ -50,14 +74,84 @@ export class ImageListService {
       ref.orderBy('ranking')
     );
     this.imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
+    this.mediumImageItems = this.mediumImageCol.valueChanges({ idField: 'id' });
   }
 
   matSnackBar = inject(MatSnackBar);
 
-  getImagesList(): Observable<imageItem[]> {
-    const imagesRef = collection(this.afs.firestore, 'imagelist');
-    return collectionData(imagesRef, { idField: 'id' }) as Observable<imageItem[]
-    >;
+
+  async createImageSrc(ref: string, size: string) {
+    let ranking = 0;
+    this.storage
+      .ref(ref)
+      .listAll()
+      .subscribe((files) => {
+        files.items.forEach((imageRef) => {
+          imageRef.getDownloadURL().then((downloadURL) => {
+            ranking++;
+            const imageUrl = downloadURL;
+            const imageData: imageItem = {
+              parentId: '',
+              caption: imageRef.fullPath,
+              type: 'IN_NOT_USED',
+              imageSrc: imageUrl,
+              largeImageSrc: imageUrl,
+              imageAlt: imageRef.name,
+              ranking: ranking,
+              id: '',
+            };
+            console.log(`Creating ${imageData.imageAlt}`);
+            switch (size) {
+              case 'small':
+                this.smallImageCol.doc(imageData.imageAlt).set(imageData);
+                break;
+              case 'medium':
+                this.mediumImageCol.doc(imageData.imageAlt).set(imageData);
+                break;
+              case 'large':
+                this.largeImageCol.doc(imageData.imageAlt).set(imageData);
+                break;
+              case 'original':
+                this.originalImageCol.doc(imageData.imageAlt).set(imageData);
+                break;
+              default:
+                this.originalImageCol.doc(imageData.imageAlt).set(imageData);
+            }
+          });
+        });
+      });
+  }
+
+
+  getLargeImagesList(): Observable<imageItem[]> {
+    const imagesRef = collection(this.afs.firestore, 'largeImageList');
+    return collectionData(imagesRef, { idField: 'id' }) as Observable<  imageItem[]  >;
+  }
+
+  LargeImageRef<T = imageItem | ImageItemSnap>(imageName: string) {
+    const imageCol = collection( this.afs.firestore,'largImageList') as CollectionReference<T>;
+    return doc<T>(imageCol, imageName);
+0  }
+
+
+  LargeImageCol<T = ImageItemSnap | imageItem>(imageName: string) {
+    const ref = this.LargeImageRef<ImageItemSnap>(imageName);
+    return collection(ref, 'largeimagelist') as CollectionReference<T>;
+  }
+
+  largeImages$(imageName: string) {
+    const ref = this.LargeImageCol<ImageItemSnap>(imageName);
+    return collectionData(ref, { idField: 'id' });
+  }
+
+  async updateLargeImageItem(image: Partial<imageItem>) {
+    const imageRef = this.LargeImageRef(image.imageAlt);
+    return setDoc(imageRef, image, { merge: true });
+  }
+
+  async deleteLargeImageItem(image: Partial<imageItem>) {
+    const imageRef = this.LargeImageRef(image.imageAlt);
+    return deleteDoc(imageRef);
   }
 
   getAllRawImages() {
@@ -68,10 +162,21 @@ export class ImageListService {
     return this.imageItems;
   }
 
+
+  getImageBySizeAndName(size: string, imageName: string) {
+    let image = this.mediumImageItems.pipe( map((images) => image.filter((type: imageItem) => type.imageAlt.includes(imageName))));
+    return image;
+  }
+
   getImagesBySize(size: string) {
     return this.imageItems.pipe(
-      map((images) => images.filter((image) => image.imageAlt.includes(size)).filter((type) => type.type === 'IN_NOT_USED')));
-      //map((images) => images.filter((type) => type.imageAlt.includes(size))));
+      map((images) =>
+        images
+          .filter((image) => image.imageAlt.includes(size))
+          .filter((type) => type.type === 'IN_NOT_USED')
+      )
+    );
+    //map((images) => images.filter((type) => type.imageAlt.includes(size))));
   }
 
   getImagesByType(imageType: string) {
@@ -138,6 +243,7 @@ export class ImageListService {
             parentId: img.id as string,
             caption: img.caption,
             imageSrc: img.imageSrc,
+            largeImageSrc: img.imageSrc,
             imageAlt: img.imageAlt,
             type: img.type,
             ranking: count,
@@ -202,6 +308,8 @@ export class ImageListService {
 
   updateImageList(item: imageItem) {
     this.imageItemCollections.doc(item.id).update(item);
+    // 161714D0-73C9-4C75-8D15-B8B2F08EE5E1_200x200.JPG
+    // find and update the additional inventory image
   }
 
   delete(id: string) {
@@ -216,69 +324,61 @@ export class ImageListService {
     });
   }
 
-
-
-  dupes: string[] = [];
-
-  deleteDuplicateImages() {
-    let not_usedImages: imageItem[] = [];
-    let subNotUsed: Subscription;
-
-    subNotUsed = this.getImagesBySize('400')
-      .subscribe((item) => {
-        not_usedImages = item;
-        this.deleteDupes(not_usedImages);
-    });
-    console.log(`Deleting ${this.dupes.length}`);
-    this.deletefFromFirebase(this.dupes);
-  }
-
-  deleteDupes(not_usedImages: imageItem[]) {
-    let found = false;
-
-    this.rawImagesArray = [];
-    not_usedImages.forEach((items) => {
-      found = this.doesItemExist(items, found);
-      if (!found) {
-        this.rawImagesArray.push(items);
-      }
-      else {
-        this.dupes.push(items.id);
-      }
-      found = false;
-    });
-  }
-
-  doesItemExist(image: imageItem, found: boolean): boolean {
-    found = false;
-    this.rawImagesArray.forEach((img) => {
-        if (img.imageAlt === image.imageAlt) {
-          found = true;
-        }
-     });
-    return found
-  }
-
-  deletefFromFirebase(dupes: string[]) {
-
-    dupes.forEach((dupe) => {
-        this.delete(dupe);
-    });
-  }
-
-
   async createRawImagesList() {
     await this.createRawImagesList_200();
     await this.createRawImagesList_400();
     await this.createRawImagesList_800();
   }
 
-  async createRawImagesList_200() {
+  getImagesSize(size: string) {
+    return this.imageItems.pipe(
+      map((images) => images.filter((image) => image.imageAlt.includes(size)))
+    );
+    //map((images) => images.filter((type) => type.imageAlt.includes(size))));
+  }
+
+  async updateImageListLargeImageSrc() {
+    const largeImages = this.getImagesSize('400');
+    this.getImagesSize('200').subscribe((imageList) => {
+      imageList.forEach((item) => {
+        largeImages.subscribe((largeImageList) => {
+          largeImageList.forEach((largeImage) => {
+            if (
+              item.imageAlt.substring(0, 15) ===
+              largeImage.imageAlt.substring(0, 15)
+            ) {
+              item.largeImageSrc = largeImage.imageSrc;
+              console.log(
+                `Updating ${item.imageAlt} with ${largeImage.imageSrc}`
+              );
+              this.updateImageList(item);
+            }
+          });
+        });
+      });
+    });
+  }
+
+  createOriginalItem(image: imageItem) {
+    this.imageItemOriginal.add(image).then((imgItem) => {
+      this.imageItemOriginal.doc(image.imageAlt).update(image);
+    });
+  }
+
+  private imageItemOriginal: AngularFirestoreCollection<imageItem>;
+  private imageItem200: AngularFirestoreCollection<imageItem>;
+  private imageItem400: AngularFirestoreCollection<imageItem>;
+  private imageItem800: AngularFirestoreCollection<imageItem>;
+
+
+  async createRawImagesList_200(): Promise<void> {
     this.rawImagesArray = [];
     this.getImagesBySize('200').subscribe((imageList) => {
       this.rawImagesArray = imageList;
       let ranking = 0;
-      this.storage.ref('/thumbnails').listAll()
+      this.storage
+        .ref('/thumbnails')
+        .listAll()
         .subscribe((files) => {
           files.items.forEach((imageRef) => {
             imageRef.getDownloadURL().then((downloadURL) => {
@@ -289,6 +389,7 @@ export class ImageListService {
                 caption: imageRef.fullPath,
                 type: 'IN_NOT_USED',
                 imageSrc: imageUrl,
+                largeImageSrc: imageUrl,
                 imageAlt: imageRef.name,
                 ranking: ranking,
                 id: '',
@@ -324,6 +425,7 @@ export class ImageListService {
               caption: imageRef.fullPath,
               type: 'IN_NOT_USED',
               imageSrc: imageUrl,
+              largeImageSrc: imageUrl,
               imageAlt: imageRef.name,
               ranking: ranking,
               id: '',
@@ -358,6 +460,7 @@ export class ImageListService {
               caption: imageRef.fullPath,
               type: 'IN_NOT_USED',
               imageSrc: imageUrl,
+              largeImageSrc: imageUrl,
               imageAlt: imageRef.name,
               ranking: ranking,
               id: '',

@@ -12,6 +12,7 @@ import { SwiperModule } from 'swiper/angular';
 import { ProductResolver } from './4.services/product.resolver';
 import { BlogResolver } from './4.services/blog.resolver';
 
+
 // Firebase services + environment module
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import {
@@ -41,6 +42,8 @@ import { environment } from '../environments/environment.prod';
 import { HeadingModule } from './2.main/header/heading.module';
 import { UserService } from './4.services/auth/user.service';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
+import { provideFirestore } from '@angular/fire/firestore';
+import { getFirestore } from 'firebase/firestore';
 
 @NgModule({
   declarations: [AppComponent, CookieBannerComponent],
@@ -68,6 +71,7 @@ import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
     CartResolver,
     WishListResolver,
     BlogResolver,
+
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

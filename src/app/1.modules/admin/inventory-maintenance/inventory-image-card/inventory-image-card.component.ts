@@ -1,5 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { imageItem } from 'app/5.models/imageItem';
+import { openViewComponentDialog } from './view-image-item/view-image-item.component';
+import { filter } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-inventory-image-card',
@@ -7,12 +10,29 @@ import { imageItem } from 'app/5.models/imageItem';
 })
 export class InventoryImageCardComponent {
 
+  dialog = inject(MatDialog)
+
   onDblClick(e: any) {
-    this.imageSelected.emit(this.image)
+      this.imageSelected.emit(this.image)
+      // openViewComponentDialog(this.dialog, this.image, this.productId);
   }
 
-  @Input() image: imageItem;
-  @Output() imageSelected: EventEmitter<imageItem> = new EventEmitter()
+  onView() {
+    let image = {
+      description:  this.image.description,
+      caption: this.image.caption,
+      imageSrc: this.image.imageSrc,
+      imageAlt: this.image.imageAlt,
+      type: this.image.type,
+      id: this.image.id,
+    }
+    console.log(JSON.stringify(image));
+    openViewComponentDialog(this.dialog, image, this.productId);
+  }
 
+
+  @Input() image: imageItem;
+  @Input() productId: string;
+  @Output() imageSelected: EventEmitter<imageItem> = new EventEmitter()
 
 }

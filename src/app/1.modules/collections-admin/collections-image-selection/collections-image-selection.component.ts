@@ -34,6 +34,7 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
   ) {}
 
   UpdateInventoryItem(e: imageItem) {
+    console.log(e);
     e.type = this.collectionId;
     this.imageListService.updateImageList(e);
     this.subNotUsed = this.imageListService
