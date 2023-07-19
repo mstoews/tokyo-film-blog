@@ -43,6 +43,11 @@ import { PolicyModule } from '../policy/policy.module';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { InventoryImageCardComponent } from './inventory-maintenance/inventory-image-card/inventory-image-card.component';
 import { ViewImageItemComponent } from './inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
+import { ImageSelectionComponent } from './image-maintenance/products-image-selection/image-selection.component';
+import { CollectionImageSelectionComponent } from './image-maintenance/collection-image-selection/collection-image-selection.component';
+import { ThoughtsImageSelectionComponent } from './image-maintenance/thoughts-image-selection/thoughts-image-selection.component';
+import { GalleryImageSelectionComponent } from './image-maintenance/gallery-image-selection/image-selection.component';
+import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-edit.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +74,11 @@ import { ViewImageItemComponent } from './inventory-maintenance/inventory-image-
     ImageListComponent,
     ContactListComponent,
     InventoryImageCardComponent,
+    ImageSelectionComponent,
+    CollectionImageSelectionComponent,
+    ThoughtsImageSelectionComponent,
+    GalleryImageSelectionComponent,
+    ImageMgtEditComponent,
   ],
   imports: [
     AdminRouteModule,

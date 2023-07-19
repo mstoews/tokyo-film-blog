@@ -19,6 +19,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./image-maintenance.component.css'],
 })
 export class ImageMaintenanceComponent implements OnInit, OnDestroy {
+onTabClick($event: any) {
+throw new Error('Method not implemented.');
+}
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   imageGroup: FormGroup;

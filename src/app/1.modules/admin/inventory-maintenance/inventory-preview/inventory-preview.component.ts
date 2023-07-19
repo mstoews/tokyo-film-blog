@@ -20,9 +20,15 @@ export class InventoryPreviewComponent implements OnInit {
   imageListService = inject(ImageListService);
 
   setImage(e: imageItem): void {
-    const searchString = e.imageAlt.substring(0, 10);
+    const searchString = e.imageAlt.substring(0, 15);
     console.log('setImage', searchString);
-    this.mainImage = e.imageSrc;
+    if(e.imageSrc400){
+      this.mainImage = e.imageSrc400
+    }
+    else
+    {
+      this.mainImage = e.imageSrc;
+    }
   }
 
   onUpdate() {

@@ -16,6 +16,7 @@
             </a>
           </li>
 
+
           <li>
             <a (click)="onShop()" (click)="onClose()"
               class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
@@ -54,6 +55,29 @@
                 Cart</span>
             </a>
           </li>
+          <li>
+            <a routerLink="home/about_us" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              <mat-icon [svgIcon]="'heroicons_outline:information-circle'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">About Us</span>
+            </a>
+          </li>
+          <li>
+            <a routerLink="home/services" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              <mat-icon [svgIcon]="'mat_outline:miscellaneous_services'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Services</span>
+            </a>
+          </li>
+
+          <li>
+            <a routerLink="home/following" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              <mat-icon [svgIcon]="'mat_outline:follow_the_signs'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Follow Us</span>
+            </a>
+          </li>
+
           <li>
             <a routerLink="profile" (click)="onClose()"
               class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-100">

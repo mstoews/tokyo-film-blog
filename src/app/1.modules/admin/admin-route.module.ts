@@ -29,7 +29,7 @@ const routes: Routes = [
     path: '',redirectTo: '/home', pathMatch: 'full'
   },
   {
-    path: 'admin',
+    path: 'company',
     pathMatch: 'full',
     title: 'Administration',
     canActivate: [AngularFireAuthGuard],

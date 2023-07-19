@@ -23,6 +23,11 @@ export interface imageItemPartial {
   description?: string;
 }
 
+interface HashMap<T> {
+  [key: string]: T;
+}
+
+
 export type ListUpdate<T, K = any> = { key: T, item: K, type: 'added' | 'removed' }
 
 export type OverviewUpdate = ListUpdate<'overview', string>;

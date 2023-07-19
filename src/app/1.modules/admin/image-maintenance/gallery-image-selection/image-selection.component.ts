@@ -9,23 +9,16 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-
-import { IImageStorage } from 'app/5.models/maintenance';
 import { ProductsService } from 'app/4.services/products.service';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
 
 @Component({
-  selector: 'inventory-image-selection',
-  templateUrl: './inventory-image-selection.component.html',
-  styleUrls: ['./inventory-image-selection.component.css'],
+  selector: 'gallery-img-selection',
+  templateUrl: './image-selection.component.html',
+  styleUrls: ['./image-selection.component.css'],
 })
-export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
-createImageOnce() {
-throw new Error('Method not implemented.');
-}
-RefreshList() {
-throw new Error('Method not implemented.');
-}
+export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
+
   @Input() productId: string;
 
   currentImage: imageItem;
@@ -51,6 +44,14 @@ throw new Error('Method not implemented.');
   fb = inject(FormBuilder);
 
 
+  createImageOnce() {
+    throw new Error('Method not implemented.');
+  }
+  RefreshList() {
+    throw new Error('Method not implemented.');
+  }
+
+
   addImageToItemList(image: any) {
     image.parentId = this.productId;
     // search for the image in the list 400 size and add it to the list
@@ -63,39 +64,26 @@ throw new Error('Method not implemented.');
   }
 
   sortNotUsed() {
-    return  this.imageListService.getImagesBySize('200').pipe(map((data) => {
+    return this.imageListService.getImagesBySize('400').pipe(map((data) => {
       data.sort((a, b) => {
-          return a.caption < b.caption ? -1 : 1;
-       });
+        return a.caption < b.caption ? -1 : 1;
+      });
       return data;
-      }))
+    }))
   }
 
   Refresh() {
-
-    // this.deleteDupes.deleteDuplicateImages();
-    // this.deleteDupes.createOrginalImageMap();
-
-    // this.imageListService.createImageSrc('/', 'original');
-    // this.imageListService.createImageSrc('/thumbnails', 'small');
-    // this.imageListService.createImageSrc('/400', 'medium');
-    // this.imageListService.createImageSrc('/800', 'large');
 
     this.subNotUsed = this.sortNotUsed().subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subDeleted = this.imageListService
-      .getImagesByType(this.IN_DELETED)
-      .subscribe((item) => {
-        this.deletedImages = item;
-    });
 
     this.subCollections = this.imageListService
       .getImagesByType(this.productId)
       .subscribe((item) => {
         this.collectionsImages = item;
-    });
+      });
 
   }
 
@@ -129,40 +117,7 @@ throw new Error('Method not implemented.');
     }
   }
 
-  // private updateRanking(previousData: any[]) {
-  //   const cnt = previousData.length;
-  //   if (cnt > 0) {
-  //     let i = 1;
-  //     previousData.forEach((image) => {
-  //       image.ranking = i;
-  //       image.parentId = this.productId;
-  //       this.imageListService.updateImageList(image);
-  //       i++;
-  //     });
-  //   }
-  // }
-
-  // private updateImageType(
-  //   previousData: any,
-  //   newData: any,
-  //   newContainerId: string,
-  //   currentIndex: number
-  // ) {
-  //   // console.debug('Updatedate Image Type', JSON.stringify(newData));
-  //   const cnt = newData.length;
-  //   if (cnt > 0) {
-  //     let i = 1;
-  //     newData.forEach((image: imageItem) => {
-  //       image.ranking = i;
-  //       image.parentId = this.productId;
-  //       image.type = newContainerId;
-  //       this.imageListService.updateImageList(image);
-  //       i++;
-  //     });
-  //   }
-  // }
-
-  private updateRanking( imageItem: any, currentIndex: number, newContainerId: string) {
+  private updateRanking(imageItem: any, currentIndex: number, newContainerId: string) {
     if (newContainerId !== this.IN_NOT_USED) {
       imageItem.forEach((element: any) => {
         element.ranking = imageItem.indexOf(element);
@@ -177,14 +132,12 @@ throw new Error('Method not implemented.');
     newContainerId: string,
     currentIndex: number
   ) {
-        const image = newData[currentIndex];
-        image.ranking = 0;
-        image.type = newContainerId;
-        console.log('Update Image Type', image );
-        this.imageListService.updateImageList(image);
+    const image = newData[currentIndex];
+    image.ranking = 0;
+    image.type = newContainerId;
+    console.log('Update Image Type', image);
+    this.imageListService.updateImageList(image);
   }
-
-
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
