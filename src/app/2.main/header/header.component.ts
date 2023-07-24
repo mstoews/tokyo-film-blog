@@ -69,7 +69,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   subWishListService: Subscription;
   subAuth: Subscription;
 
-
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
@@ -98,7 +97,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subAuth = this.authService.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userId = user.uid;
-        console.log(this.userId);
+        console.debug(this.userId);
 
         let collection = this.afs.collection<ProfileModel>(
           `users/${this.userId}/profile`
@@ -126,7 +125,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.authService.setUserName('');
       }
     });
-
   }
 
   public onToggleSideNav() {
@@ -167,21 +165,19 @@ export class HeaderComponent implements OnInit, OnDestroy {
   doAnimate() {}
 
   openShoppingCart() {
-    this.subUserService = this.userService.isLoggedIn$.subscribe(
-      (user) => {
-        if (user === false) {
-          this.snackBar.open('Please sign in to access the cart', 'Ok', {
-            verticalPosition: 'top',
-            horizontalPosition: 'right',
-            panelClass: 'bg-danger',
-            duration: 3000,
-          });
-          this._router.navigate(['profile']);
-        } else {
-          this._router.navigate(['shop/cart', this.userId]);
-        }
+    this.subUserService = this.userService.isLoggedIn$.subscribe((user) => {
+      if (user === false) {
+        this.snackBar.open('Please sign in to access the cart', 'Ok', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
+          duration: 3000,
+        });
+        this._router.navigate(['profile']);
+      } else {
+        this._router.navigate(['shop/cart', this.userId]);
       }
-    );
+    });
   }
 
   openWishList() {
@@ -195,7 +191,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         });
         this._router.navigate(['profile']);
       } else {
-        console.log('User ID: ' + this.userId);
+        console.debug('User ID: ' + this.userId);
         this._router.navigate(['shop/wishlist', this.userId]);
       }
     });

@@ -18,6 +18,7 @@ import {
   canActivate,
   redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
+import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-edit.component';
 
 // const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['authentication/split-screen/sign-in']);
 const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
@@ -71,7 +72,7 @@ const routes: Routes = [
   {
     path: 'gallery',
     pathMatch: 'full',
-    component: ImageMaintenanceComponent,
+    component:  ImageMgtEditComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly },
   },

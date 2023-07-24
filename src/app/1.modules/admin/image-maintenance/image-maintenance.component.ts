@@ -12,6 +12,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { DndComponent } from '../../../3.components/loaddnd/dnd.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
 
 @Component({
   selector: 'image-maintenance',
@@ -19,9 +20,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./image-maintenance.component.css'],
 })
 export class ImageMaintenanceComponent implements OnInit, OnDestroy {
-onTabClick($event: any) {
-throw new Error('Method not implemented.');
-}
+  onTabClick($event: any) {
+    throw new Error('Method not implemented.');
+  }
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   imageGroup: FormGroup;
@@ -50,30 +51,33 @@ throw new Error('Method not implemented.');
 
   constructor(
     public imageListService: ImageListService,
+    public duplicateService: DeleteDuplicateService,
     private matDialog: MatDialog,
     private fb: FormBuilder
   ) {}
 
   RefreshList() {
+    console.debug('RefreshList');
+    this.imageListService.createRawImagesOriginal();
+  }
+
+  RefreshImageList() {
     this.imageListService.createRawImagesList();
+  }
+  DeleteDupes() {
+    this.duplicateService.deleteDuplicateImages();
+  }
+
+  RefreshImages() {
+    this.duplicateService.updateImages();
   }
 
   onImageSelected(e: any) {
-    console.log('onImageSelected: ' + JSON.stringify(e));
+    console.debug('onImageSelected: ' + JSON.stringify(e));
   }
 
   createImageOnce() {
-    // const data: imageItem = {
-    //   id: '',
-    //   parentId: '',
-    //   imageSrc: 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2Fmunchdeathblog1_800x800.jpg?alt=media&token=9a754e17-5309-494d-9f56-7ab492bd7c85',     imageAlt: '800/munchdeathblog1_800x800.jpg',
-    //   caption: 'munchdeathblog1_800x800.jpg',
-    //   type: 'IN_NOT_USED',
-    //   ranking: 1
-    // }
-    // this.imageListService.createItem(data);
     this.onImages();
-    //alert('The one off updated is now disabled');
   }
 
   onImages() {
@@ -101,32 +105,31 @@ throw new Error('Method not implemented.');
   }
 
   Refresh() {
-    this.subNotUsed = this.imageListService
-      .getImagesByType(this.IN_NOT_USED)
-      .subscribe((item) => {
-        this.not_usedImages = item;
-      });
-    this.subFeatured = this.imageListService
-      .getImagesByType(this.IN_FEATURED)
-      .subscribe((item) => {
-        this.featuredImages = item;
-      });
-    this.subCollections = this.imageListService
-      .getImagesByType(this.IN_COLLECTION)
-      .subscribe((item) => {
-        this.collectionsImages = item;
-      });
-    this.subCreations = this.imageListService
-      .getImagesByType(this.IN_CREATION)
-      .subscribe((item) => {
-        this.creationsImages = item;
-      });
-    this.subGallery = this.imageListService
-      .getImagesByType(this.IN_GALLERY)
-      .subscribe((item) => {
-        this.galleryImages = item;
-      });
-
+    // this.subNotUsed = this.imageListService
+    //   .getImagesByType(this.IN_NOT_USED)
+    //   .subscribe((item) => {
+    //     this.not_usedImages = item;
+    //   });
+    // this.subFeatured = this.imageListService
+    //   .getImagesByType(this.IN_FEATURED)
+    //   .subscribe((item) => {
+    //     this.featuredImages = item;
+    //   });
+    // this.subCollections = this.imageListService
+    //   .getImagesByType(this.IN_COLLECTION)
+    //   .subscribe((item) => {
+    //     this.collectionsImages = item;
+    //   });
+    // this.subCreations = this.imageListService
+    //   .getImagesByType(this.IN_CREATION)
+    //   .subscribe((item) => {
+    //     this.creationsImages = item;
+    //   });
+    // this.subGallery = this.imageListService
+    //   .getImagesByType(this.IN_GALLERY)
+    //   .subscribe((item) => {
+    //     this.galleryImages = item;
+    //   });
     // this.printImageList('Featured', this.featuredImages)
     // this.printImageList('Collections', this.collectionsImages)
     // this.printImageList('Creations', this.creationsImages)

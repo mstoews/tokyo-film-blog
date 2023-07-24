@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Mainpage } from 'app/5.models/mainpage';
 import { MainPageService } from 'app/4.services/main-page.service';
@@ -20,7 +26,6 @@ export class AdminFormComponent implements OnInit, OnDestroy {
   mainPageService = inject(MainPageService);
   fb = inject(FormBuilder);
 
-
   ngOnInit(): void {
     this.mainPage$ = this.mainPageService.getAll().pipe(first());
     this.createEmptyForm();
@@ -29,11 +34,10 @@ export class AdminFormComponent implements OnInit, OnDestroy {
         this.createForm(page[0]);
       }
     });
-
   }
 
   ngOnDestroy(): void {
-     this.subMainPage.unsubscribe();
+    this.subMainPage.unsubscribe();
   }
 
   createEmptyForm() {
@@ -75,7 +79,7 @@ export class AdminFormComponent implements OnInit, OnDestroy {
 
   onUpdate(mainPage: Mainpage) {
     mainPage = this.mainpageGroup.getRawValue();
-    console.log(`onUpdate: ${JSON.stringify(mainPage)}`);
+    console.debug(`onUpdate: ${JSON.stringify(mainPage)}`);
     this.mainPageService.update(mainPage);
   }
 

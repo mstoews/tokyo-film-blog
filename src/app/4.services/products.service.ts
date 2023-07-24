@@ -56,12 +56,12 @@ export class ProductsService {
       image: mainImage,
     };
     this.afs.doc(`inventory/${productId}`).update(image);
-    console.log('main image updated: ', image);
+    console.debug('main image updated: ', image);
     this.snackBar.open('Main image updated', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
-      duration: 2000
+      duration: 2000,
     });
   }
 
@@ -84,7 +84,7 @@ export class ProductsService {
   }
 
   getInventoryByCategory(category: string) {
-    console.log('getInventoryByCategory: ', category);
+    console.debug('getInventoryByCategory: ', category);
     if (category === 'All Categories' || category === null) {
       return this.getAvailableInventory();
     } else {
@@ -107,8 +107,6 @@ export class ProductsService {
       );
     }
   }
-
-
 
   getProductImage(parentId: string): any {
     var productImages: Observable<imageItem[]>;

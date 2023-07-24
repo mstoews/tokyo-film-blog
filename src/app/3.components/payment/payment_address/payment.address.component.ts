@@ -104,7 +104,7 @@ export class PaymentAddressComponent implements OnInit {
       profiles.pipe(first()).subscribe((ref) => {
         if (ref.length > 0) {
           this.profileExists = true;
-          // console.log('The profile exists for this user!');
+          // console.debug('The profile exists for this user!');
           ref.forEach((mr) => {
             this.profileId = mr.id;
             this.createForm(mr);
@@ -136,7 +136,7 @@ export class PaymentAddressComponent implements OnInit {
             horizontalPosition: 'right',
             verticalPosition: 'top',
           });
-          //console.log('user doc', this.updateStripeCustomerId(user.uid));
+          //console.debug('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then()
         .catch((error) => {
@@ -156,10 +156,10 @@ export class PaymentAddressComponent implements OnInit {
             verticalPosition: 'top',
           });
           this.updateStripeCustomerId(user.uid);
-          // console.log('user doc', this.updateStripeCustomerId(user.uid));
+          // console.debug('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then(() => {
-          // console.log('Document successfully written!');
+          // console.debug('Document successfully written!');
         })
         .catch((error) => {
           console.error('Error writing document: ', error);
@@ -204,7 +204,7 @@ export class PaymentAddressComponent implements OnInit {
   }
 
   onMakePayment() {
-    //console.log('Card ', this.paymentElement.elements.getElement('card'));
+    //console.debug('Card ', this.paymentElement.elements.getElement('card'));
 
     this.stripeService
       .confirmCardPayment(this.elementsOptions.clientSecret, {
@@ -240,7 +240,7 @@ export class PaymentAddressComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        //console.log('Response', response);
+        //console.debug('Response', response);
         this.validated = true;
         this.elementsOptions.clientSecret = response.client_secret;
         this.snackBar.open(JSON.stringify(response.message), 'Close', {
@@ -252,7 +252,7 @@ export class PaymentAddressComponent implements OnInit {
   }
 
   private createPaymentIntent(amount: number): Observable<PaymentIntent> {
-    console.log('email', this.formGroup.get('email').value);
+    console.debug('email', this.formGroup.get('email').value);
 
     return this.http.post<PaymentIntent>(environment.dev.paymentIntent, {
       amount: amount,

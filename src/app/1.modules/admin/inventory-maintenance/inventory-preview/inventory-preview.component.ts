@@ -11,7 +11,6 @@ import { ImageListService } from 'app/4.services/image-list.service';
   styleUrls: ['./inventory-preview.component.css'],
 })
 export class InventoryPreviewComponent implements OnInit {
-
   @Input() product: Product;
   inventoryImages$: Observable<imageItem[]>;
   mainImage: string;
@@ -21,12 +20,10 @@ export class InventoryPreviewComponent implements OnInit {
 
   setImage(e: imageItem): void {
     const searchString = e.imageAlt.substring(0, 15);
-    console.log('setImage', searchString);
-    if(e.imageSrc400){
-      this.mainImage = e.imageSrc400
-    }
-    else
-    {
+    console.debug('setImage', searchString);
+    if (e.imageSrc400) {
+      this.mainImage = e.imageSrc400;
+    } else {
       this.mainImage = e.imageSrc;
     }
   }
@@ -41,7 +38,7 @@ export class InventoryPreviewComponent implements OnInit {
     //     this.product = prd;
     //   });
     // }
-    console.log('InventoryPreviewComponent', this.product.id );
+    console.debug('InventoryPreviewComponent', this.product.id);
 
     this.mainImage = this.product.image;
 

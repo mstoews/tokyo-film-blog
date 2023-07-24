@@ -67,7 +67,7 @@ export class PaymentComponent implements OnInit {
         })
       )
       .subscribe((response: any) => {
-        //console.log('Response', response);
+        //console.debug('Response', response);
         this.validated = true;
         this.elementsOptions.clientSecret = response.client_secret;
         this._snackBar.open(JSON.stringify(response.message), 'Close', {
@@ -80,7 +80,7 @@ export class PaymentComponent implements OnInit {
 
   // const handleSubmit = async (event) => {
   pay() {
-    // console.log('Card ', this.paymentElement.elements.getElement('card'));
+    // console.debug('Card ', this.paymentElement.elements.getElement('card'));
 
     this.stripeService
       .confirmCardPayment(this.elementsOptions.clientSecret, {
@@ -101,11 +101,11 @@ export class PaymentComponent implements OnInit {
         }
       });
 
-    // console.log('confirm payment', this.elementsOptions.clientSecret );
+    // console.debug('confirm payment', this.elementsOptions.clientSecret );
     // if (this.paymentElementForm.valid) {
     //   this.paying = true;
 
-    //   console.log('confirm payment', this.paymentElement);
+    //   console.debug('confirm payment', this.paymentElement);
     //   this.stripeService.confirmPayment( {
     //     elements: this.paymentElement.elements,
     //     confirmParams: {
@@ -124,7 +124,7 @@ export class PaymentComponent implements OnInit {
     //     redirect: 'if_required'
     //   }).subscribe(result => {
     //     this.paying = false;
-    //     console.log('Result', result);
+    //     console.debug('Result', result);
     //     if (result.error) {
     //       // Show error to your customer (e.g., insufficient funds)
     //       alert({ success: false, error: result.error.message });
@@ -137,12 +137,12 @@ export class PaymentComponent implements OnInit {
     //     }
     //   });
     // } else {
-    //   console.log(this.paymentElementForm);
+    //   console.debug(this.paymentElementForm);
     // }
   }
 
   private createPaymentIntent(amount: number): Observable<PaymentIntent> {
-    console.log('email', this.paymentElementForm.get('email').value);
+    console.debug('email', this.paymentElementForm.get('email').value);
 
     return this.http.post<PaymentIntent>(environment.dev.paymentIntent, {
       amount: amount,

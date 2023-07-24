@@ -89,7 +89,7 @@ export class ProductEditComponent implements OnInit {
   }
 
   onTabClick(event) {
-    //console.log(event.tab.textLabel);
+    //console.debug(event.tab.textLabel);
     const product = { ...this.prdGroup.value } as Product;
     this.onUpdate(product);
   }
@@ -179,20 +179,20 @@ export class ProductEditComponent implements OnInit {
       description: [prd.description, Validators.required],
       short_description: [prd.short_description, Validators.required],
       rich_description: [prd.rich_description, Validators.required],
-      image: [prd.image , Validators.required],
+      image: [prd.image, Validators.required],
       brand: [prd.brand, Validators.required],
       price: [prd.price, Validators.required],
       quantity_increment: [prd.quantity_increment, Validators.required],
       category: [prd.category, Validators.required],
-      rating: [prd.rating , Validators.required],
+      rating: [prd.rating, Validators.required],
       quantity: [prd.quantity, Validators.required],
       is_featured: [prd.is_featured, Validators.required],
-      purchases_allowed: [prd.purchases_allowed,  Validators.required],
-      quantity_required: [prd.quantity_required, Validators.required ],
-      is_active: [prd.is_active,  Validators.required],
-      user_updated: [prd.user_updated , Validators.required],
-      date_created: [prd.date_created , Validators.required],
-      date_updated: [prd.date_updated , Validators.required],
+      purchases_allowed: [prd.purchases_allowed, Validators.required],
+      quantity_required: [prd.quantity_required, Validators.required],
+      is_active: [prd.is_active, Validators.required],
+      user_updated: [prd.user_updated, Validators.required],
+      date_created: [prd.date_created, Validators.required],
+      date_updated: [prd.date_updated, Validators.required],
     });
 
     this.prdGroup.valueChanges.subscribe((x) => {
@@ -200,10 +200,9 @@ export class ProductEditComponent implements OnInit {
     });
   }
 
-  onValueChange()
-  {
+  onValueChange() {
     this.isFormDirty = true;
-    //console.log('Value changed in text editor');
+    //console.debug('Value changed in text editor');
   }
 
   onBackToInventory() {

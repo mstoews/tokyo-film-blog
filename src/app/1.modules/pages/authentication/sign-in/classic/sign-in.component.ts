@@ -66,7 +66,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
     const user = this.authService.afAuth.currentUser;
     user
       .then((sendEmail) => {
-        console.log('Verification mail ', sendEmail.emailVerified);
+        console.debug('Verification mail ', sendEmail.emailVerified);
         if (sendEmail.emailVerified == false) {
           sendEmail.sendEmailVerification();
         }
@@ -74,7 +74,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
         this.router.navigate(['/home']);
       })
       .catch((error) => {
-        console.log('Verification email not sent', error.message);
+        console.debug('Verification email not sent', error.message);
       })
       .finally();
   }
@@ -87,7 +87,7 @@ export class SignInClassicComponent implements OnInit, OnDestroy {
   //     this.router.navigate(this.redirect)
   //   } catch (e) {
   //     console.error(e)
-  //     console.log("tesst");
+  //     console.debug("tesst");
   //   }
   // }
 

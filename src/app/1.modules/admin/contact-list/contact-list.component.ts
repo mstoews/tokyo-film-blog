@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit, Optional } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  OnInit,
+  Optional,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Contact } from 'app/5.models/contact';
 import { ContactService } from 'app/4.services/contact.service';
@@ -28,7 +34,7 @@ export class ContactListComponent implements OnInit {
   onRefresh() {
     this.allContact$ = this.contactService.getAll();
     this.allContact$.subscribe((contact) => {
-      // console.log(JSON.stringify(contact));
+      // console.debug(JSON.stringify(contact));
     });
   }
 

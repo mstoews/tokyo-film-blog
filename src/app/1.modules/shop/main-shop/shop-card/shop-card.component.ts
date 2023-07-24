@@ -1,4 +1,9 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Product } from 'app/5.models/products';
 import { Router } from '@angular/router';
 import { WishListService } from 'app/4.services/wishlist.service';
@@ -44,7 +49,7 @@ export class ShopCardComponent implements OnInit {
 
     this.productId = this.product.id;
 
-    // console.log('User id from cart', this.authService.userData.uid);
+    // console.debug('User id from cart', this.authService.userData.uid);
 
     if (this.authService.userData) {
       this.cartService

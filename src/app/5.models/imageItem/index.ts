@@ -4,6 +4,7 @@ export interface imageItem {
   id: string;
   parentId: string;
   imageSrc: string;
+  imageSrc200?: string;
   imageSrc400?: string;
   imageSrc800?: string;
   largeImageSrc: string;
@@ -12,6 +13,20 @@ export interface imageItem {
   type: string;
   ranking?: number;
   description?: string;
+  size?: string;
+}
+
+export interface imageItemIndex {
+  id: string;
+  fullPath: string;
+  size: string;
+  fileName: string;
+  contentType: string;
+}
+
+
+export interface imageItemIndexMap {
+  [key: string]: imageItemIndex;
 }
 
 export interface imageItemPartial {

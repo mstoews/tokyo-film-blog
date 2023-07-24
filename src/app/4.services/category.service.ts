@@ -30,10 +30,9 @@ export class CategoryService {
 
   getCategoryByIndex(index: number): string {
     let rc = '';
-    const items = this.getAll().subscribe
-    (data => {
-       console.log('data', index);
-       rc = data[index].name ;
+    const items = this.getAll().subscribe((data) => {
+      console.debug('data', index);
+      rc = data[index].name;
     });
     return rc;
   }
@@ -53,5 +52,4 @@ export class CategoryService {
   onDestroy() {
     this.sub.unsubscribe();
   }
-
 }

@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  Input,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
@@ -20,12 +27,12 @@ import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service'
   styleUrls: ['./inventory-image-selection.component.css'],
 })
 export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
-createImageOnce() {
-throw new Error('Method not implemented.');
-}
-RefreshList() {
-throw new Error('Method not implemented.');
-}
+  createImageOnce() {
+    throw new Error('Method not implemented.');
+  }
+  RefreshList() {
+    throw new Error('Method not implemented.');
+  }
   @Input() productId: string;
 
   currentImage: imageItem;
@@ -50,7 +57,6 @@ throw new Error('Method not implemented.');
   productService = inject(ProductsService);
   fb = inject(FormBuilder);
 
-
   addImageToItemList(image: any) {
     image.parentId = this.productId;
     // search for the image in the list 400 size and add it to the list
@@ -63,16 +69,17 @@ throw new Error('Method not implemented.');
   }
 
   sortNotUsed() {
-    return  this.imageListService.getImagesBySize('200').pipe(map((data) => {
-      data.sort((a, b) => {
+    return this.imageListService.getImagesBySize('200').pipe(
+      map((data) => {
+        data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
-       });
-      return data;
-      }))
+        });
+        return data;
+      })
+    );
   }
 
   Refresh() {
-
     // this.deleteDupes.deleteDuplicateImages();
     // this.deleteDupes.createOrginalImageMap();
 
@@ -89,14 +96,13 @@ throw new Error('Method not implemented.');
       .getImagesByType(this.IN_DELETED)
       .subscribe((item) => {
         this.deletedImages = item;
-    });
+      });
 
     this.subCollections = this.imageListService
       .getImagesByType(this.productId)
       .subscribe((item) => {
         this.collectionsImages = item;
-    });
-
+      });
   }
 
   ngOnInit() {
@@ -112,7 +118,11 @@ throw new Error('Method not implemented.');
         event.previousIndex,
         event.currentIndex
       );
-      this.updateRanking(event.container.data, event.currentIndex, event.container.id);
+      this.updateRanking(
+        event.container.data,
+        event.currentIndex,
+        event.container.id
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -162,7 +172,11 @@ throw new Error('Method not implemented.');
   //   }
   // }
 
-  private updateRanking( imageItem: any, currentIndex: number, newContainerId: string) {
+  private updateRanking(
+    imageItem: any,
+    currentIndex: number,
+    newContainerId: string
+  ) {
     if (newContainerId !== this.IN_NOT_USED) {
       imageItem.forEach((element: any) => {
         element.ranking = imageItem.indexOf(element);
@@ -177,14 +191,12 @@ throw new Error('Method not implemented.');
     newContainerId: string,
     currentIndex: number
   ) {
-        const image = newData[currentIndex];
-        image.ranking = 0;
-        image.type = newContainerId;
-        console.log('Update Image Type', image );
-        this.imageListService.updateImageList(image);
+    const image = newData[currentIndex];
+    image.ranking = 0;
+    image.type = newContainerId;
+    console.debug('Update Image Type', image);
+    this.imageListService.updateImageList(image);
   }
-
-
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();

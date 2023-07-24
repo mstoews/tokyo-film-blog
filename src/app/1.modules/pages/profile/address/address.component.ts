@@ -82,7 +82,7 @@ export class AddressComponent implements OnInit {
       profiles.pipe(first()).subscribe((ref) => {
         if (ref.length > 0) {
           this.profileExists = true;
-          // console.log('The profile exists for this user!');
+          // console.debug('The profile exists for this user!');
           ref.forEach((mr) => {
             this.profileId = mr.id;
             this.createForm(mr);
@@ -131,10 +131,10 @@ export class AddressComponent implements OnInit {
             duration: 3000,
           });
           this.updateStripeCustomerId(user.uid);
-          console.log('user doc', this.updateStripeCustomerId(user.uid));
+          console.debug('user doc', this.updateStripeCustomerId(user.uid));
         })
         .then(() => {
-          // console.log('Document successfully written!');
+          // console.debug('Document successfully written!');
         })
         .catch((error) => {
           console.error('Error writing document: ', error);

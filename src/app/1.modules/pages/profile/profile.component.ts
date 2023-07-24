@@ -51,13 +51,13 @@ export class ProfileComponent implements OnInit {
       })
       .pipe(
         catchError((err) => {
-          // console.log(err);
+          // console.debug(err);
           alert('Could not update User to Admin');
           return throwError(() => new Error());
         })
       )
       .subscribe((user) => {
-        // console.log('Admin updated ... ', user);
+        // console.debug('Admin updated ... ', user);
       });
   }
 
@@ -70,13 +70,13 @@ export class ProfileComponent implements OnInit {
       })
       .pipe(
         catchError((err) => {
-          // console.log(err);
+          // console.debug(err);
           alert('Could not update User to Admin');
           return throwError(() => new Error());
         })
       )
       .subscribe((user) => {
-        // console.log('Admin updated ... ', user);
+        // console.debug('Admin updated ... ', user);
       });
   }
 
@@ -86,13 +86,13 @@ export class ProfileComponent implements OnInit {
       .then((user) => {
         if (user !== null) {
           this.loggedIn = true;
-          // console.log( `this user : ${this.userId} is registered ? : ${this.loggedIn}`);
+          // console.debug( `this user : ${this.userId} is registered ? : ${this.loggedIn}`);
         } else {
           this.loggedIn = false;
         }
       })
       .catch((error) => {
-        // console.log('unable to get correct user ');
+        // console.debug('unable to get correct user ');
       });
   }
 
@@ -101,6 +101,6 @@ export class ProfileComponent implements OnInit {
   }
 
   updateProfile(userId: string) {
-    // console.log('updateProfile', userId);
+    // console.debug('updateProfile', userId);
   }
 }

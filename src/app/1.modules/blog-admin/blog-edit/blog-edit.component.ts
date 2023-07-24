@@ -46,7 +46,7 @@ export class BlogEditComponent implements OnInit {
     this.blog = this.activateRoute.snapshot.data['blog'];
     //this.blogImages$ = this.blogService.getBlogImage(this.blog.id);
 
-    // console.log("Blog data", this.blog);
+    // console.debug("Blog data", this.blog);
 
     if (this.blog) {
       this.blogId = this.blog.id;

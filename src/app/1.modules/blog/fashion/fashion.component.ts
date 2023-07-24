@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Blog } from 'app/5.models/blog';
 import { Router } from '@angular/router';
 import { BlogService } from 'app/4.services/blog.service';
@@ -15,7 +21,7 @@ import { ImageListService } from 'app/4.services/image-list.service';
 })
 export class FashionComponent implements OnInit {
   onAdd() {
-    // console.log('onAdd --- add a new comment');
+    // console.debug('onAdd --- add a new comment');
   }
 
   valueChangedEvent($event: Event) {

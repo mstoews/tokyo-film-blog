@@ -42,7 +42,6 @@ export class CollectionGrid implements OnInit, OnDestroy {
   imageListService = inject(ImageListService);
   images$: Observable<imageItem[]>;
 
-
   inventoryImages$: Observable<imageItem[]>;
   imagesList: string[];
   cart: Observable<Cart[]>;
@@ -164,7 +163,7 @@ export class CollectionGrid implements OnInit, OnDestroy {
 
   onGoShoppingCart() {
     const userId = this.authService.userData.uid;
-    // console.log('got to checkout ', userId);
+    // console.debug('got to checkout ', userId);
     if (this.authService.userData.uid !== undefined) {
       if (this.cartCount > 0) {
         this.route.navigate(['shop/cart', userId]);

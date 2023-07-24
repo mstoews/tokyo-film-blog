@@ -10,7 +10,7 @@
         <ng-container *ngIf="show_admin_menu === false">
           <li>
             <a routerLink="home" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
               <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Home</span>
             </a>
@@ -19,21 +19,21 @@
 
           <li>
             <a (click)="onShop()" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
             </a>
           </li>
           <li>
             <a routerLink="blog" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon (onclick)="onClose()" [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
             </a>
           </li>
           <li>
             <a routerLink="collections" (click)="onClose()"
-              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
               <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
             </a>
@@ -41,7 +41,7 @@
 
           <li>
             <a (click)="onWishList()"
-              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
+              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'heroicons_outline:gift'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Wish List</span>
             </a>
@@ -49,7 +49,7 @@
 
           <li>
             <a (click)="onCart()"
-              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
+              class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap" [matBadge]=cartCount [matBadgeHidden]="cartCount===0">Shopping
                 Cart</span>
@@ -57,14 +57,14 @@
           </li>
           <li>
             <a routerLink="home/about_us" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
               <mat-icon [svgIcon]="'heroicons_outline:information-circle'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">About Us</span>
             </a>
           </li>
           <li>
             <a routerLink="home/services" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
               <mat-icon [svgIcon]="'mat_outline:miscellaneous_services'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Services</span>
             </a>
@@ -72,7 +72,7 @@
 
           <li>
             <a routerLink="home/following" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
               <mat-icon [svgIcon]="'mat_outline:follow_the_signs'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Follow Us</span>
             </a>
@@ -80,7 +80,7 @@
 
           <li>
             <a routerLink="profile" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-100">
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-100">
               <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Profile</span>
             </a>
@@ -92,7 +92,7 @@
             <li class="mt-5 text-gray-500">Administration</li>
             <li>
               <a routerLink="admin/company"
-                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'mat_outline:dashboard_customize'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Company</span>
               </a>
@@ -100,7 +100,7 @@
 
             <li>
               <a routerLink="blog-admin"
-                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'heroicons_outline:document-text'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Thoughts</span>
               </a>
@@ -108,14 +108,14 @@
 
             <li>
               <a routerLink="collections-admin"
-                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'mat_outline:shop_2'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
               </a>
             </li>
             <li>
               <a routerLink="admin/inventory"
-                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Inventory</span>
               </a>
@@ -123,7 +123,7 @@
 
             <li>
               <a routerLink="admin/contact-grid"
-                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Contacts</span>
               </a>
@@ -131,21 +131,21 @@
 
             <li>
               <a routerLink="admin/category"
-                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon (onclick)="onClose()" [svgIcon]="'mat_outline:category'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Category</span>
               </a>
             </li>
             <li>
               <a routerLink="admin/gallery"
-                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'mat_outline:album'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Images</span>
               </a>
             </li>
             <li>
               <a routerLink="policy"
-                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
                 <mat-icon [svgIcon]="'mat_outline:policy'"></mat-icon>
                 <span class="flex-1 ml-3 whitespace-nowrap">Policy</span>
               </a>

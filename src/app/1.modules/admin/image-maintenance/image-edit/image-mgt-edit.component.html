@@ -1,6 +1,11 @@
 <app-header [title]="'Image Maintenance'"> </app-header>
 
-<app-image-menubar (notifyParentRefresh)="RefreshList()" (notifyParentAdd)="createImageOnce()" [title]="'Image Buckets'"></app-image-menubar>
+<app-image-menubar
+  (notifyParentRefresh)="RefreshList()"
+  (notifyParentAdd)="createImageOnce()"
+  (notifyParentDelete)="DeleteDupes()"
+  (notifyParentRefreshImage)="RefreshImages()"
+  [title]="'Image Buckets'"></app-image-menubar>
 
 
   <mat-tab-group class="mt-2 items-centered" mat-stretch-tabs="false">

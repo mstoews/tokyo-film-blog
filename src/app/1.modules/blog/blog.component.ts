@@ -1,4 +1,10 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { BlogService } from 'app/4.services/blog.service';
 import { Blog } from 'app/5.models/blog';
 import { Observable } from 'rxjs';
@@ -13,7 +19,7 @@ import { fadeInOut } from '../landing-page/animations';
 })
 export class BlogComponent implements OnInit {
   onAdd() {
-    // console.log('Add a comment to the blog');
+    // console.debug('Add a comment to the blog');
   }
   onToggleMenu() {
     //console.debug('blog - notifiy side menu');
@@ -29,7 +35,5 @@ export class BlogComponent implements OnInit {
 
   allBlogs$ = this.blogService.getAllPublishedBlog();
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 }

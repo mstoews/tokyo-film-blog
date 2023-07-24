@@ -1,4 +1,10 @@
 <app-header [title]="'Images Maintenance'"> </app-header>
+<app-image-menubar
+  (notifyParentRefresh)="RefreshList()"
+  (notifyParentAdd)="createImageOnce()"
+  (notifyParentDelete)="DeleteDupes()"
+  (notifyParentRefreshImage)="RefreshImages()"
+  [title]="'Image Buckets'"></app-image-menubar>
 <div class="h-screen">
 
         <mat-drawer-container>
@@ -16,14 +22,14 @@
                   <div (click)="onImageSelected(item)" *ngFor="let item of not_usedImages" cdkDrag>
                     <div class="drop-placeholder" *cdkDragPlaceholder> </div>
                     <div class="text-gray-700">
-                      <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="p-1 m-1"> -->
+
                       <div
                         class="w-full mb-1 overflow-hidden bg-gray-200 rounded-md cdk-drag-preview min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:aspect-none lg:h-80">
                         <img [src]="item.imageSrc" alt="NOT USED"
                           class="object-cover object-center w-full h-full lg:h-full lg:w-full" width="400">
                       </div>
                     </div>
-                    <!-- <app-image-card (notifyOpenImageCard)="onOpenDrawer($event)" [url]="item.imageSrc" [file_name]="item.caption"></app-image-card> -->
+
                   </div>
                 </div>
               </div>
@@ -42,7 +48,7 @@
                         <p class="text-center text-gray-900">{{item.caption}}</p>
                       </div>
                     </div>
-                    <!-- <app-image-card  [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card> -->
+
                   </div>
                 </div>
               </div>
@@ -55,7 +61,7 @@
                     <!-- <app-image-card [url]="item.imageSrc" [file_name]="item.caption"> </app-image-card> -->
                     <div class="drop-placeholder" *cdkDragPlaceholder> </div>
                     <div class="text-gray-700">
-                      <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="p-1 m-1"> -->
+
                       <div
                         class="w-full mb-1 overflow-hidden bg-gray-200 rounded-md cdk-drag-preview min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:aspect-none lg:h-80">
                         <img [src]="item.imageSrc" alt="INVENTORY"
@@ -72,9 +78,7 @@
                 <div cdkDropList #gallerys="cdkDropList" [cdkDropListData]="galleryImages" [id]="IN_GALLERY"
                   class="list drag-drop-list" (cdkDropListDropped)="drop($event)">
                   <div *ngFor="let item of galleryImages" cdkDrag>
-                    <!-- <app-image-card [url]="item.imageSrc" [file_name]="item.caption"></app-image-card> -->
                     <div class="text-gray-700">
-                      <!-- <img [ngSrc]="item.imageSrc" width="400" height="400" class="p-1 m-1"> -->
                       <div
                         class="w-full mb-1 overflow-hidden bg-gray-200 rounded-md cdk-drag-preview min-h-80 aspect-w-1 aspect-h-1 group-hover:opacity-75 lg:aspect-none lg:h-80">
                         <img [src]="item.imageSrc" alt="GALLERY"

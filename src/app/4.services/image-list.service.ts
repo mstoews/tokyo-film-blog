@@ -40,17 +40,19 @@ export class ImageListService {
   private mediumImageCol: AngularFirestoreCollection<imageItem>;
   private smallImageCol: AngularFirestoreCollection<imageItem>;
   private largeImageCol: AngularFirestoreCollection<imageItem>;
-
+  private imageItemCopyCol: AngularFirestoreCollection<imageItem>;
 
   private updateItemsCollection: AngularFirestoreCollection<imageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private loadImageItems: Observable<imageItem[]>;
   private imageItems: Observable<imageItem[]>;
+  private imageCopy: Observable<imageItem[]>;
 
   private largeImageItems: Observable<imageItem[]>;
   private smallImageItems: Observable<imageItem[]>;
   private mediumImageItems: Observable<imageItem[]>;
   private originalImageItems: Observable<imageItem[]>;
+  private imageItemsCopy: Observable<imageItem[]>;
 
   items$: Observable<imageItem[]>;
   typeFilter$: BehaviorSubject<string | null>;
@@ -64,6 +66,10 @@ export class ImageListService {
     this.smallImageCol = afs.collection<imageItem>('smallImageList');
     this.mediumImageCol = afs.collection<imageItem>('mediumImageList');
     this.largeImageCol = afs.collection<imageItem>('largeImageList');
+    this.imageItemCopyCol = afs.collection<imageItem>('imageItemCopyList');
+    this.imageCopy = this.imageItemCopyCol.valueChanges({
+      idField: 'id',
+    });
 
     this.updateItemsCollection = afs.collection<imageItem>('imagelist');
     this.loadImageItems = this.updateItemsCollection.valueChanges({
@@ -75,10 +81,24 @@ export class ImageListService {
     );
     this.imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
     this.mediumImageItems = this.mediumImageCol.valueChanges({ idField: 'id' });
+    this.imageCopy = this.imageItemCopyCol.valueChanges({ idField: 'id' });
   }
 
   matSnackBar = inject(MatSnackBar);
 
+  async createImageCopy(image: imageItem) {
+    await this.imageItemCopyCol.add(image).then((imgItem) => {
+      image.id = imgItem.id;
+      this.imageItemCopyCol.doc(imgItem.id).update(image);
+    });
+  }
+
+  async createItem(image: imageItem) {
+    await this.imageItemCollections.add(image).then((imgItem) => {
+      image.id = imgItem.id;
+      this.imageItemCollections.doc(imgItem.id).update(image);
+    });
+  }
 
   async createImageSrc(ref: string, size: string) {
     let ranking = 0;
@@ -100,7 +120,7 @@ export class ImageListService {
               ranking: ranking,
               id: '',
             };
-            console.log(`Creating ${imageData.imageAlt}`);
+            console.debug(`Creating ${imageData.imageAlt}`);
             switch (size) {
               case 'small':
                 this.smallImageCol.doc(imageData.imageAlt).set(imageData);
@@ -122,17 +142,28 @@ export class ImageListService {
       });
   }
 
-
   getLargeImagesList(): Observable<imageItem[]> {
     const imagesRef = collection(this.afs.firestore, 'largeImageList');
-    return collectionData(imagesRef, { idField: 'id' }) as Observable<  imageItem[]  >;
+    return collectionData(imagesRef, { idField: 'id' }) as Observable<
+      imageItem[]
+    >;
+  }
+
+  getCopyList(): Observable<imageItem[]> {
+    const imagesRef = collection(this.afs.firestore, 'imageItemCopyList');
+    return collectionData(imagesRef, { idField: 'id' }) as Observable<
+      imageItem[]
+    >;
   }
 
   LargeImageRef<T = imageItem | ImageItemSnap>(imageName: string) {
-    const imageCol = collection( this.afs.firestore,'largImageList') as CollectionReference<T>;
+    const imageCol = collection(
+      this.afs.firestore,
+      'largImageList'
+    ) as CollectionReference<T>;
     return doc<T>(imageCol, imageName);
-0  }
-
+    0;
+  }
 
   LargeImageCol<T = ImageItemSnap | imageItem>(imageName: string) {
     const ref = this.LargeImageRef<ImageItemSnap>(imageName);
@@ -162,14 +193,28 @@ export class ImageListService {
     return this.imageItems;
   }
 
-
   getImageBySizeAndName(size: string, imageName: string) {
-    let image = this.mediumImageItems.pipe( map((images) => image.filter((type: imageItem) => type.imageAlt.includes(imageName))));
+    let image = this.mediumImageItems.pipe(
+      map((images) =>
+        image.filter((type: imageItem) => type.imageAlt.includes(imageName))
+      )
+    );
     return image;
   }
 
   getImagesBySize(size: string) {
     return this.imageItems.pipe(
+      map((images) =>
+        images
+          .filter((image) => image.imageAlt.includes(size))
+          .filter((type) => type.type === 'IN_NOT_USED')
+      )
+    );
+    //map((images) => images.filter((type) => type.imageAlt.includes(size))));
+  }
+
+  getCopyImagesBySize(size: string) {
+    return this.imageItemsCopy.pipe(
       map((images) =>
         images
           .filter((image) => image.imageAlt.includes(size))
@@ -284,13 +329,6 @@ export class ImageListService {
       );
   }
 
-  createItem(image: imageItem) {
-    this.imageItemCollections.add(image).then((imgItem) => {
-      image.id = imgItem.id;
-      this.imageItemCollections.doc(imgItem.id).update(image);
-    });
-  }
-
   update(item: imageItem, productId: string) {
     // console.debug(JSON.stringify(item));
     item.parentId = productId;
@@ -299,7 +337,7 @@ export class ImageListService {
   }
 
   updateCollectionDescription(id: string, description: string) {
-    console.log(`Updating ${id} with ${description}`);
+    console.debug(`Updating ${id} with ${description}`);
     this.imageItemCollections.doc(id).update({ description: description });
     this.matSnackBar.open(`Description with ${description}`, 'OK', {
       duration: 2000,
@@ -328,6 +366,7 @@ export class ImageListService {
     await this.createRawImagesList_200();
     await this.createRawImagesList_400();
     await this.createRawImagesList_800();
+    await this.createRawImagesOriginal();
   }
 
   getImagesSize(size: string) {
@@ -348,7 +387,7 @@ export class ImageListService {
               largeImage.imageAlt.substring(0, 15)
             ) {
               item.largeImageSrc = largeImage.imageSrc;
-              console.log(
+              console.debug(
                 `Updating ${item.imageAlt} with ${largeImage.imageSrc}`
               );
               this.updateImageList(item);
@@ -359,17 +398,141 @@ export class ImageListService {
     });
   }
 
-  createOriginalItem(image: imageItem) {
-    this.imageItemOriginal.add(image).then((imgItem) => {
-      this.imageItemOriginal.doc(image.imageAlt).update(image);
-    });
-  }
-
+  
   private imageItemOriginal: AngularFirestoreCollection<imageItem>;
   private imageItem200: AngularFirestoreCollection<imageItem>;
   private imageItem400: AngularFirestoreCollection<imageItem>;
   private imageItem800: AngularFirestoreCollection<imageItem>;
 
+  // use the standard image list to create the original image list
+
+  async createRawImagesOriginal(): Promise<void> {
+    this.getCopyList().subscribe((imageList) => {
+      //this.getImagesByType('0SqSwF3DZmkuFUzoz8dz').subscribe((imageList) => {
+      console.debug(`createRawImagesOriginal: ${imageList.length}`);
+      imageList.forEach(async (item) => {
+
+      });
+    });
+  }
+
+  async getImgFromServer(imgItem: imageItem): Promise<string> {
+    let img = '';
+    let size = '';
+    if (imgItem.imageAlt.includes('200')) {
+      size = '200';
+    }
+    if (imgItem.imageAlt.includes('400')) {
+      size = '400';
+    }
+    if (imgItem.imageAlt.includes('800')) {
+      size = '800';
+    }
+
+    var fileExt = imgItem.imageAlt.split('.').pop();
+    let fileName = imgItem.imageAlt.replace(/\.[^/.]+$/, "");
+    fileName = fileName.replace(`/${size}`,'').replace(`_${size}x${size}`,'');
+
+
+    switch (size) {
+      case '200':
+        fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+        var pathReference = this.storage
+          .ref(fileName)
+          .getDownloadURL()
+          .subscribe((smallSrc) => {
+            console.debug(smallSrc);
+            imgItem.imageSrc200 = smallSrc;
+            imgItem.id = imgItem.imageAlt;
+
+          });
+        break;
+      case '400':
+
+      fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+        var pathReference = this.storage
+          .ref(fileName)
+          .getDownloadURL()
+          .subscribe((smallSrc) => {
+            console.debug(smallSrc);
+            imgItem.imageSrc400 = smallSrc;
+            imgItem.id = imgItem.imageAlt;
+            //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
+          });
+        break;
+      case '800':
+        fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+        var pathReference = this.storage
+          .ref(fileName)
+          .getDownloadURL()
+          .subscribe((smallSrc) => {
+            console.debug(smallSrc);
+            imgItem.imageSrc800 = smallSrc;
+            imgItem.id = imgItem.imageAlt;
+            //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
+          });
+        break;
+      default:
+        let fileNameDefault = `/thumbnails/${imgItem}`;
+        var pathReferenceDefault = this.storage
+          .ref(fileNameDefault)
+          .getDownloadURL()
+
+          .subscribe((data) => {
+            console.debug(data);
+            img = data;
+          });
+        break;
+    }
+    this.imageItemCollections.doc(imgItem.id).update(imgItem);
+    return img;
+  }
+
+  getExistingImage(): Observable<imageItem[]> {
+    return this.imageItems.pipe(
+      map((images) => images.filter((type) => type.type === 'IN_NOT_USED'))
+    );
+  }
+
+  async createMainImageList(): Promise<void> {
+    this.rawImagesArray = [];
+    this.getExistingImage().subscribe((imageList) => {
+      this.rawImagesArray = imageList;
+      let ranking = 0;
+      this.storage
+        .ref('/thumbnails')
+        .listAll()
+        .subscribe((files) => {
+          files.items.forEach((imageRef) => {
+            imageRef.getDownloadURL().then((downloadURL) => {
+              ranking++;
+              const imageUrl = downloadURL;
+              const imageData: imageItem = {
+                parentId: '',
+                caption: imageRef.fullPath,
+                type: 'IN_NOT_USED',
+                imageSrc: imageUrl,
+                largeImageSrc: imageUrl,
+                imageAlt: imageRef.name,
+                ranking: ranking,
+                id: '',
+              };
+              let found = false;
+              this.rawImagesArray.forEach((img) => {
+                if (img.imageAlt === imageData.imageAlt) {
+                  found = true;
+                }
+              });
+              if (!found) {
+                this.createItem(imageData);
+                console.debug(`Added ${imageData.imageAlt}`);
+              }
+            });
+          });
+          console.debug('createRawImagesList_200 completed');
+        });
+    });
+  }
 
   async createRawImagesList_200(): Promise<void> {
     this.rawImagesArray = [];
@@ -402,9 +565,11 @@ export class ImageListService {
               });
               if (!found) {
                 this.createItem(imageData);
+                console.debug(`Added ${imageData.imageAlt}`);
               }
             });
           });
+          console.debug('createRawImagesList_200 completed');
         });
     });
   }
@@ -438,9 +603,11 @@ export class ImageListService {
             });
             if (!found) {
               this.createItem(imageData);
+              console.debug(`Added ${imageData.imageAlt}`);
             }
           });
         });
+        console.debug('createRawImagesList_400 completed');
       });
   }
 
@@ -473,9 +640,11 @@ export class ImageListService {
             });
             if (!found) {
               this.createItem(imageData);
+              console.debug(`Added ${imageData.imageAlt}`);
             }
           });
         });
+        console.debug('createRawImagesList_800 completed');
       });
   }
 }

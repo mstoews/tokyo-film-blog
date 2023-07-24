@@ -56,18 +56,18 @@ export class AuthService {
     });
 
     this.afAuth.onAuthStateChanged((user) => {
-      // console.log('Auth state changed ...')
+      // console.debug('Auth state changed ...')
       if (user) {
         this.userId = user.uid;
         this.email = user.email;
         this.isAnonymous = user.isAnonymous;
 
-        // console.log('logged in state', JSON.stringify(user));
+        // console.debug('logged in state', JSON.stringify(user));
       } else {
         this.userId = undefined;
         this.email = undefined;
         this.isRegistered = undefined;
-        // console.log('logged out state', JSON.stringify(user));
+        // console.debug('logged out state', JSON.stringify(user));
       }
     });
   }

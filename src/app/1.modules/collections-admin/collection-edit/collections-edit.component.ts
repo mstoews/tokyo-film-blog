@@ -43,7 +43,7 @@ export class CollectionsEditComponent implements OnInit {
 
   onValueChange() {
     this.isFormDirty = true;
-    //console.log('Value changed in text editor');
+    //console.debug('Value changed in text editor');
   }
 
   ngOnInit(): void {
@@ -51,7 +51,7 @@ export class CollectionsEditComponent implements OnInit {
     this.collection = this.activateRoute.snapshot.data['collection'];
     //this.collectionImages$ = this.collectionService.getCollectionsImage(this.collection.id);
 
-    // console.log("Collections data", this.collection);
+    // console.debug("Collections data", this.collection);
 
     if (this.collection) {
       this.collectionId = this.collection.id;
@@ -61,7 +61,7 @@ export class CollectionsEditComponent implements OnInit {
   }
 
   UpdateInventoryItem(e: string) {
-    console.log('UpdateInventoryItem', e);
+    console.debug('UpdateInventoryItem', e);
   }
 
   onUpdate(collection: Collections) {
@@ -106,10 +106,8 @@ export class CollectionsEditComponent implements OnInit {
   onDelete(data: Collections) {
     if (confirm('Are you sure you want to delete this collection?') === true) {
       this.collectionService.delete(data.id.toString());
-    }
-    else {
-
-      console.log('Cancelled deletion');
+    } else {
+      console.debug('Cancelled deletion');
     }
   }
 

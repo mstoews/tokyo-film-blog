@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { Product } from 'app/5.models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/4.services/products.service';
@@ -63,7 +68,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.userData = this.authService.userData;
-    // console.log(JSON.stringify(this.userData));
+    // console.debug(JSON.stringify(this.userData));
 
     this.productIds = [];
     this.wishListIds = [];
@@ -79,7 +84,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     this.productId = this.product.id;
     this.mainImage = this.product.image;
-    // console.log('User id from cart', this.authService.userData.uid);
+    // console.debug('User id from cart', this.authService.userData.uid);
 
     if (this.authService.userData) {
       this.cartService
@@ -139,7 +144,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     this.total_cost = this.product.price * this.quantity;
 
-    console.log(
+    console.debug(
       `quantity  ${this.product.quantity} ${this.quantity} ${this.product.quantity_increment} ${quantity_increment} ${this.total_cost}`
     );
   }

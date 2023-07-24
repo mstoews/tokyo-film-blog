@@ -20,7 +20,7 @@ export class SideNavComponent implements OnInit {
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userEmail = user?.email;
-      console.log('User Email: ' + this.userEmail);
+      console.debug('User Email: ' + this.userEmail);
     });
   }
 
@@ -35,9 +35,9 @@ export class SideNavComponent implements OnInit {
   ngOnInit() {
     this.auth.authState.subscribe((user) => {
       if (user) {
-        this.userId = user.uid;}
-      });
-
+        this.userId = user.uid;
+      }
+    });
   }
 
   onAdmin() {
@@ -69,10 +69,11 @@ export class SideNavComponent implements OnInit {
       } else {
         this.auth.authState.subscribe((user) => {
           if (user) {
-            this.userId = user.uid;}
-            this.route.navigate(['/shop/wishlist/', this.userId]);
-            this.notifyParentCloseDrawer.emit();
-          });
+            this.userId = user.uid;
+          }
+          this.route.navigate(['/shop/wishlist/', this.userId]);
+          this.notifyParentCloseDrawer.emit();
+        });
       }
     });
   }

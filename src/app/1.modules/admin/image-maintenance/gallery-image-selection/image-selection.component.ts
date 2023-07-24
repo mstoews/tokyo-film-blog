@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, OnDestroy, Input, inject } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  OnDestroy,
+  Input,
+  inject,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
@@ -18,7 +25,6 @@ import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service'
   styleUrls: ['./image-selection.component.css'],
 })
 export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
-
   @Input() productId: string;
 
   currentImage: imageItem;
@@ -43,14 +49,12 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
   productService = inject(ProductsService);
   fb = inject(FormBuilder);
 
-
   createImageOnce() {
     throw new Error('Method not implemented.');
   }
   RefreshList() {
     throw new Error('Method not implemented.');
   }
-
 
   addImageToItemList(image: any) {
     image.parentId = this.productId;
@@ -64,27 +68,26 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   sortNotUsed() {
-    return this.imageListService.getImagesBySize('400').pipe(map((data) => {
-      data.sort((a, b) => {
-        return a.caption < b.caption ? -1 : 1;
-      });
-      return data;
-    }))
+    return this.imageListService.getImagesBySize('400').pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.caption < b.caption ? -1 : 1;
+        });
+        return data;
+      })
+    );
   }
 
   Refresh() {
-
     this.subNotUsed = this.sortNotUsed().subscribe((item) => {
       this.not_usedImages = item;
     });
-
 
     this.subCollections = this.imageListService
       .getImagesByType(this.productId)
       .subscribe((item) => {
         this.collectionsImages = item;
       });
-
   }
 
   ngOnInit() {
@@ -100,7 +103,11 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
-      this.updateRanking(event.container.data, event.currentIndex, event.container.id);
+      this.updateRanking(
+        event.container.data,
+        event.currentIndex,
+        event.container.id
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -117,7 +124,11 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateRanking(imageItem: any, currentIndex: number, newContainerId: string) {
+  private updateRanking(
+    imageItem: any,
+    currentIndex: number,
+    newContainerId: string
+  ) {
     if (newContainerId !== this.IN_NOT_USED) {
       imageItem.forEach((element: any) => {
         element.ranking = imageItem.indexOf(element);
@@ -135,7 +146,7 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
     const image = newData[currentIndex];
     image.ranking = 0;
     image.type = newContainerId;
-    console.log('Update Image Type', image);
+    console.debug('Update Image Type', image);
     this.imageListService.updateImageList(image);
   }
 

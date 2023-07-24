@@ -9,30 +9,27 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './inventory-image-card.component.html',
 })
 export class InventoryImageCardComponent {
-
-  dialog = inject(MatDialog)
+  dialog = inject(MatDialog);
 
   onDblClick(e: any) {
-      this.imageSelected.emit(this.image)
-      // openViewComponentDialog(this.dialog, this.image, this.productId);
+    this.imageSelected.emit(this.image);
+    // openViewComponentDialog(this.dialog, this.image, this.productId);
   }
 
   onView() {
     let image = {
-      description:  this.image.description,
+      description: this.image.description,
       caption: this.image.caption,
       imageSrc: this.image.imageSrc,
       imageAlt: this.image.imageAlt,
       type: this.image.type,
       id: this.image.id,
-    }
-    console.log(JSON.stringify(image));
+    };
+    console.debug(JSON.stringify(image));
     openViewComponentDialog(this.dialog, image, this.productId);
   }
 
-
   @Input() image: imageItem;
   @Input() productId: string;
-  @Output() imageSelected: EventEmitter<imageItem> = new EventEmitter()
-
+  @Output() imageSelected: EventEmitter<imageItem> = new EventEmitter();
 }

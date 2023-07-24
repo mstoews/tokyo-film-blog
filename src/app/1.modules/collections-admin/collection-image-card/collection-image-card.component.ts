@@ -7,14 +7,13 @@ import { ImageListService } from 'app/4.services/image-list.service';
   templateUrl: './collection-image-card.component.html',
 })
 export class CollectionImageCardComponent {
-
   imageListService = inject(ImageListService);
   @Input() image: imageItem;
-  @Output() collectionImageSelected: EventEmitter<imageItem> = new EventEmitter()
+  @Output() collectionImageSelected: EventEmitter<imageItem> =
+    new EventEmitter();
 
   onDblClick(e: any): void {
-    console.log(this.image);
-    this.collectionImageSelected.emit(this.image)
+    console.debug(this.image);
+    this.collectionImageSelected.emit(this.image);
   }
-
 }
