@@ -10,7 +10,7 @@ import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { InventoryComponent } from './inventory-maintenance/inventory-grid.component';
 import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
 import { ProductEditComponent } from './inventory-maintenance/product-edit/product-edit.component';
-import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
+
 import { ContactListComponent } from './contact-list/contact-list.component';
 import {
   AngularFireAuthGuard,
@@ -21,7 +21,7 @@ import {
 import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-edit.component';
 
 // const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['authentication/split-screen/sign-in']);
-const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
+// const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
 const adminOnly = () => hasCustomClaim('admin');
 
 
@@ -70,7 +70,7 @@ const routes: Routes = [
     data: { authGuardPipe: adminOnly },
   },
   {
-    path: 'gallery',
+    path: 'image-maintenance',
     pathMatch: 'full',
     component:  ImageMgtEditComponent,
     canActivate: [AngularFireAuthGuard],

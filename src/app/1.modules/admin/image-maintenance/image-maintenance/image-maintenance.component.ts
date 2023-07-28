@@ -10,9 +10,10 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { DndComponent } from '../../../3.components/loaddnd/dnd.component';
+
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
+import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
 
 @Component({
   selector: 'image-maintenance',

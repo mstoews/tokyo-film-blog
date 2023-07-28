@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -20,6 +20,7 @@ import {
 import { IImageStorage } from 'app/5.models/maintenance';
 import { ProductsService } from 'app/4.services/products.service';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'inventory-image-selection',
@@ -38,38 +39,40 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   currentImage: imageItem;
 
   IN_NOT_USED = 'IN_NOT_USED';
-  IN_DELETED = 'IN_DELETED';
+
   IN_COLLECTION = 'IN_COLLECTION';
 
   subNotUsed: Subscription;
-  subDeleted: Subscription;
+
   subMain: Subscription;
   subCollections: Subscription;
 
-  not_usedImages: imageItem[] = [];
-  deletedImages: imageItem[] = [];
-  collectionsImages: imageItem[] = [];
-  inventoryImages$: Observable<imageItem[]>;
+  not_usedImages: imageItemIndex[] = [];
+  deletedImages: imageItemIndex[] = [];
+  collectionsImages: imageItemIndex[] = [];
+  inventoryImages$: Observable<imageItemIndex[]>;
   firstRun: boolean = true;
 
   deleteDupes = inject(DeleteDuplicateService);
-  imageListService = inject(ImageListService);
+  // imageListService = inject(ImageListService);
+  imageItemIndexService = inject(ImageItemIndexService);
   productService = inject(ProductsService);
   fb = inject(FormBuilder);
 
   addImageToItemList(image: any) {
     image.parentId = this.productId;
     // search for the image in the list 400 size and add it to the list
-    this.imageListService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image);
   }
 
-  UpdateInventoryItem(e: imageItem) {
+  UpdateInventoryItem(e: imageItemIndex) {
     e.type = this.productId;
-    this.imageListService.updateImageList(e);
+    this.imageItemIndexService.updateImageList(e);
   }
 
-  sortNotUsed() {
-    return this.imageListService.getImagesBySize('200').pipe(
+  async sortNotUsed() {
+    return (await this.imageItemIndexService.getImageItemIndexByType(this.IN_NOT_USED))
+    .pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -79,35 +82,18 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  Refresh() {
-    // this.deleteDupes.deleteDuplicateImages();
-    // this.deleteDupes.createOrginalImageMap();
+  async Refresh() {
 
-    // this.imageListService.createImageSrc('/', 'original');
-    // this.imageListService.createImageSrc('/thumbnails', 'small');
-    // this.imageListService.createImageSrc('/400', 'medium');
-    // this.imageListService.createImageSrc('/800', 'large');
-
-    this.subNotUsed = this.sortNotUsed().subscribe((item) => {
+    this.subNotUsed = (await this.sortNotUsed()).subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subDeleted = this.imageListService
-      .getImagesByType(this.IN_DELETED)
-      .subscribe((item) => {
-        this.deletedImages = item;
-      });
-
-    this.subCollections = this.imageListService
-      .getImagesByType(this.productId)
-      .subscribe((item) => {
+    this.subCollections = (await this.imageItemIndexService.getOriginalImageListByType(this.productId)).subscribe( (item) => {
         this.collectionsImages = item;
       });
   }
 
   ngOnInit() {
-    // convert images to format of imageList
-    // this.deleteDupes.deleteDuplicateImages();
     this.Refresh();
   }
 
@@ -139,48 +125,16 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  // private updateRanking(previousData: any[]) {
-  //   const cnt = previousData.length;
-  //   if (cnt > 0) {
-  //     let i = 1;
-  //     previousData.forEach((image) => {
-  //       image.ranking = i;
-  //       image.parentId = this.productId;
-  //       this.imageListService.updateImageList(image);
-  //       i++;
-  //     });
-  //   }
-  // }
-
-  // private updateImageType(
-  //   previousData: any,
-  //   newData: any,
-  //   newContainerId: string,
-  //   currentIndex: number
-  // ) {
-  //   // console.debug('Updatedate Image Type', JSON.stringify(newData));
-  //   const cnt = newData.length;
-  //   if (cnt > 0) {
-  //     let i = 1;
-  //     newData.forEach((image: imageItem) => {
-  //       image.ranking = i;
-  //       image.parentId = this.productId;
-  //       image.type = newContainerId;
-  //       this.imageListService.updateImageList(image);
-  //       i++;
-  //     });
-  //   }
-  // }
 
   private updateRanking(
-    imageItem: any,
+    imageItemIndex: any,
     currentIndex: number,
     newContainerId: string
   ) {
     if (newContainerId !== this.IN_NOT_USED) {
-      imageItem.forEach((element: any) => {
-        element.ranking = imageItem.indexOf(element);
-        this.imageListService.updateImageList(element);
+      imageItemIndex.forEach((element: any) => {
+        element.ranking = imageItemIndex.indexOf(element);
+        this.imageItemIndexService.updateImageList(element);
       });
     }
   }
@@ -195,12 +149,11 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     image.ranking = 0;
     image.type = newContainerId;
     console.debug('Update Image Type', image);
-    this.imageListService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image);
   }
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
-    this.subDeleted.unsubscribe();
     this.subCollections.unsubscribe();
   }
 }

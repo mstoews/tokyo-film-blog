@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -6,14 +6,16 @@ import {
 import { first, from, map, Observable } from 'rxjs';
 import { Product, ProductPartial } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { ImageListService } from './image-list.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageItemIndexService } from './image-item-index.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
+  [x: string]: any;
   private productsCollection: AngularFirestoreCollection<Product>;
   private inventoryItems: Observable<Product[]>;
 
@@ -34,6 +36,8 @@ export class ProductsService {
       idField: 'id',
     });
   }
+
+  imageItemIndexService = inject(ImageItemIndexService)
 
   createPartial(productPartial: ProductPartial) {
     return this.productPartialCollection.add(productPartial);
@@ -120,8 +124,8 @@ export class ProductsService {
     );
   }
 
-  getImageListByProduct(productId: string) {
-    return this.imageListService.getImagesByType(productId);
+  async getImageListByProduct(productId: string) {
+    return await this.imageItemIndexService.getImageItemIndexByType(productId);
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {

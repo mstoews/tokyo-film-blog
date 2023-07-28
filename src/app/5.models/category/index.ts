@@ -5,6 +5,7 @@ export interface Category {
   id?: string;
   name: string;
   description: string;
+  jp_description?: string;
   image: string;
   createDate: string;
   updateDate: string;

@@ -13,8 +13,9 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Category } from 'app/5.models/category';
 import { CategoryService } from 'app/4.services/category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+// import { ImageListService } from 'app/4.services/image-list.service';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'category-list',
@@ -38,11 +39,12 @@ export class CategoryGridComponent implements OnInit {
 
   auth = inject(AngularFireAuth);
   snackBar = inject(MatSnackBar);
-  imageListService = inject(ImageListService);
+  imageItemIndexService = inject(ImageItemIndexService);
+
   categoryService = inject(CategoryService);
   fb = inject(FormBuilder);
 
-  thumbnailList$ =  this.imageListService.getImagesBySize('200')
+  thumbnailList$ =  this.imageItemIndexService.getImageIndexListByType('IN_CATEGORY');
 
   ngOnInit(): void {
     this.Refresh();
@@ -61,6 +63,7 @@ export class CategoryGridComponent implements OnInit {
     this.categoryGroup = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
+      jp_description: ['', Validators.required],
       createDate: [new Date().toISOString().split('T')[0], Validators.required],
       updateDate: [new Date().toISOString().split('T')[0], Validators.required],
       updateBy: ['Admin'],
@@ -84,9 +87,14 @@ export class CategoryGridComponent implements OnInit {
     const dDate = new Date(e.data.updateDate);
     const updateDate = dDate.toISOString().split('T')[0];
 
+    if (e.data.jp_description === undefined) {
+      e.data.jp_description = '';
+    }
+
     const data = {
       name: e.data.name,
       description: e.data.description,
+      jp_description: e.data.jp_description,
       image: e.data.image,
       createDate: e.data.createDate,
       updateDate: updateDate,
@@ -150,6 +158,7 @@ export class CategoryGridComponent implements OnInit {
       const data = {
         name: category.name,
         description: category.description,
+        jp_description: category.jp_description,
         image: category.image,
         createDate: category.createDate,
         updateDate: category.updateDate,

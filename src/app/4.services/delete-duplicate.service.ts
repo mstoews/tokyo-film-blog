@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, inject } from '@angular/core';
+import { Injectable, OnDestroy, OnInit, inject } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -6,17 +6,31 @@ import {
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { collection, collectionData } from '@angular/fire/firestore';
 import { imageItem, imageItemIndex, imageItemIndexMap } from 'app/5.models/imageItem';
-import { Observable, Subscription, map } from 'rxjs';
+import { Observable, Subscription, filter, map, shareReplay } from 'rxjs';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 
 
 @Injectable({
   providedIn: 'root',
 })
-export class DeleteDuplicateService implements OnDestroy{
+export class DeleteDuplicateService implements OnDestroy {
+
+  hashLargeMap = new Map<string, imageItem>();
+  hashOriginalMap = new Map<string, imageItem>();
+  hashMediumMap = new Map<string, imageItem>();
+  hashSmallMap = new Map<string, imageItem>();
+  hashAllImagesMap = new Map<string, imageItem>();
+  hashUsedImagesMap = new Map<string, imageItem>();
+
+
+  constructor() {
+      this.createOriginalIndexMaps();
+      this.createImageListMap();
+      this.createUsedImageMaps()
+  }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe();
+
   }
   // Inject dependencies
   afs = inject(AngularFirestore);
@@ -26,23 +40,67 @@ export class DeleteDuplicateService implements OnDestroy{
   imageIndexArray: imageItemIndex[] = [];
   rawIndexArray: imageItem[] = [];
 
-  image_OriginalItemCollections =  this.afs.collection<imageItem>('originalImageList');
+  hashOriginalIndexMap = new Map<string, imageItemIndex>();
+  hashImageItemMap = new Map<string, imageItem>();
+
+  image_OriginalItemCollections = this.afs.collection<imageItem>('originalImageList');
   image_OriginalItems = this.image_OriginalItemCollections.valueChanges({ idField: 'id', });
   sub: Subscription
 
+  imageIndexMap: imageItemIndexMap = {};
+
+  private rawImageItems: Observable<rawImageItem[]>;
+
+  imageIndexCollections = this.afs.collection<imageItemIndex>('originalImageList');
+  imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id', });
+
+  createOriginalItem(image: imageItemIndex) {
+    this.imageIndexCollections.add(image).then((imgIndex) => {
+      this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
+    });
+  }
+
+  async getImageIndexList() {
+    return this.imageIndexItems;
+  }
+
+  async createOriginalIndexMaps(): Promise<void> {
+    this.hashOriginalIndexMap.clear();
+    (await this.getImageIndexList()).subscribe(async (items) => {
+      items.forEach((item) => {
+        this.hashOriginalIndexMap.set(item.fileName, item);
+      });
+    });
+  }
+
+  async createUsedImageMaps(): Promise<void> {
+    this.hashUsedImagesMap.clear();
+    (await this.getUsedImagesList()).subscribe(async (items) => {
+      items.forEach((item) => {
+        this.hashUsedImagesMap.set(item.id, item);
+      });
+    });
+  }
+
+
+  async createImageListMap(): Promise<void> {
+    this.hashImageItemMap.clear();
+    (await this.getImagesBySize('200')).subscribe(async (items) => {
+      items.forEach((item) => {
+        this.hashImageItemMap.set(item.imageAlt, item);
+      });
+    });
+  }
 
   async createMainImageList(): Promise<void> {
-      this.imageIndexArray = [];
-       this.sub = (await this.getImageIndexList()).subscribe((item) => {
-          this.imageIndexArray = item;
-        let ranking = 0;
+      console.debug(this.hashOriginalIndexMap.size);
       this.storage
         .ref('/')
         .listAll()
         .subscribe((files) => {
           files.items.forEach((imageRef) => {
             imageRef.getMetadata().then((meta) => {
-              const imageData:  imageItemIndex = {
+              const imageData: imageItemIndex = {
                 id: '',
                 fullPath: meta.fullPath,
                 size: 'original',
@@ -50,30 +108,195 @@ export class DeleteDuplicateService implements OnDestroy{
                 contentType: meta.contentType
               };
               let found = false;
-              console.debug(`imageIndexArray Length: ${this.imageIndexArray.length}`)
-              this.imageIndexArray.forEach((img) => {
-                if (img.fileName === imageData.fileName) {
-                  found = true;
+
+              if (this.hashOriginalIndexMap.get(imageData.fileName) === undefined) {
+                  this.updateIndexItem(imageData);
+                  console.debug(`Added ${imageData.fileName}`);
                 }
-              });
-              if (!found) {
-                this.updateIndexItem(imageData);
-                console.debug(`Added ${imageData.fileName}`);
-              }
             });
           });
-          console.debug('createRawImagesList completed');
         });
-      });
-
   }
 
-updateIndexItem(imageData: imageItemIndex) {
-  this.imageIndexCollections.add(imageData).then((imgIndex) => {
-    this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
-  });
-}
+  async updateUsedImageList(): Promise<void> {
+    this.hashUsedImagesMap.forEach((value, key) => {
+      console.debug(value.imageAlt);
+      var fileExt = value.imageAlt.split('.').pop();
+      let fileName = value.imageAlt.replace(/\.[^/.]+$/, "");
+      fileName = fileName.replace(`thumbnails/`,'').replace(`_200x200`,'');
+      fileName = fileName.replace(`400/`,'').replace(`_400x400`,'');
+      fileName = fileName.replace(`800/`,'').replace(`_800x800`,'');
+      fileName = `${fileName}.${fileExt}`;
+      let usedItem = this.hashOriginalIndexMap.get(fileName);
+      if (usedItem !== undefined) {
+        usedItem.type = value.type;
+        usedItem.caption= value.caption;
+        usedItem.ranking= value.ranking;
+        usedItem.parentId= value.parentId;
+        usedItem.imageSrc = value.imageSrc;
+        this.imageIndexCollections.doc(usedItem.id).update(usedItem);
+      }
+    });
+  }
 
+  async updateImageIndexList(size: string): Promise<void> {
+
+    console.debug(this.hashOriginalIndexMap.size);
+
+    this.hashOriginalIndexMap.forEach((value, key) => {
+
+        var fileExt = value.fileName.split('.').pop();
+        let fileName = value.fileName.replace(/\.[^/.]+$/, "");
+        fileName = fileName.replace(`/${size}`,'').replace(`_${size}x${size}`,'');
+
+        switch (size) {
+          case '200':
+            fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+               this.storage
+              .ref(fileName)
+              .getDownloadURL()
+              .subscribe((smallSrc) => {
+                console.debug(smallSrc);
+                value.imageSrc200 = smallSrc;
+                value.type = 'IN_NOT_USED';
+                this.imageIndexCollections.doc(value.id).update(value);
+              });
+            break;
+
+          case '400':
+          fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+               this.storage
+              .ref(fileName)
+              .getDownloadURL()
+              .subscribe((mediumSrc) => {
+
+                value.imageSrc400 = mediumSrc;
+                value.type = 'IN_NOT_USED';
+                this.imageIndexCollections.doc(value.id).update(value);
+                //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
+              });
+            break;
+
+          case '800':
+            fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+              this.storage
+              .ref(fileName)
+              .getDownloadURL()
+              .subscribe((smallSrc) => {
+                console.debug(smallSrc);
+                value.imageSrc800 = smallSrc;
+                value.type = 'IN_NOT_USED';
+                this.imageIndexCollections.doc(value.id).update(value);
+
+              });
+            break;
+          default:
+            let fileNameDefault = `/${value.fileName}`;
+              this.storage
+              .ref(fileNameDefault)
+              .getDownloadURL().subscribe((data) => {
+                console.debug(data);
+              });
+            break;
+        }
+    });
+  }
+
+  async getImgFromServer(imgItem: imageItem): Promise<string> {
+    let img = '';
+    let size = '';
+    if (imgItem.imageAlt.includes('200')) {
+      size = '200';
+    }
+    if (imgItem.imageAlt.includes('400')) {
+      size = '400';
+    }
+    if (imgItem.imageAlt.includes('800')) {
+      size = '800';
+    }
+
+    var fileExt = imgItem.imageAlt.split('.').pop();
+    let fileName = imgItem.imageAlt.replace(/\.[^/.]+$/, "");
+    fileName = fileName.replace(`/${size}`,'').replace(`_${size}x${size}`,'');
+
+
+    switch (size) {
+      case '200':
+        fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+        var pathReference = this.storage
+          .ref(fileName)
+          .getDownloadURL()
+          .subscribe((smallSrc) => {
+            console.debug(smallSrc);
+            imgItem.imageSrc200 = smallSrc;
+            imgItem.id = imgItem.imageAlt;
+
+          });
+        break;
+      case '400':
+
+      fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+        var pathReference = this.storage
+          .ref(fileName)
+          .getDownloadURL()
+          .subscribe((smallSrc) => {
+            console.debug(smallSrc);
+            imgItem.imageSrc400 = smallSrc;
+            imgItem.id = imgItem.imageAlt;
+            //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
+          });
+        break;
+      case '800':
+        fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+        var pathReference = this.storage
+          .ref(fileName)
+          .getDownloadURL()
+          .subscribe((smallSrc) => {
+            console.debug(smallSrc);
+            imgItem.imageSrc800 = smallSrc;
+            imgItem.id = imgItem.imageAlt;
+            //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
+          });
+        break;
+      default:
+        let fileNameDefault = `/thumbnails/${imgItem}`;
+        var pathReferenceDefault = this.storage
+          .ref(fileNameDefault)
+          .getDownloadURL()
+
+          .subscribe((data) => {
+            console.debug(data);
+            img = data;
+          });
+        break;
+    }
+    this.imageItemCollections.doc(imgItem.id).update(imgItem);
+    return img;
+  }
+
+
+  getImagesList() {
+    return this.imageItems.pipe(
+      map((images) => images.filter((type) => type.type === 'IN_NOT_USED'))
+    );
+  }
+
+  getUsedImagesList() {
+    return this.imageItems.pipe(
+      map((images) => images.filter((type) => type.type !== 'IN_NOT_USED'))
+    );
+  }
+
+
+
+
+
+  updateIndexItem(imageData: imageItemIndex) {
+    this.imageIndexCollections.add(imageData).then((img) => {
+      imageData.id = img.id;
+      this.imageIndexCollections.doc(imageData.id).update(imageData);
+    });
+  }
 
   // 400
   image_400ItemCollections = this.afs.collection<imageItem>(
@@ -93,16 +316,14 @@ updateIndexItem(imageData: imageItemIndex) {
     idField: 'id',
   });
 
-  imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking') );
+  imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking'));
   imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
 
   // updateItemsCollection = this.afs.collection<imageItem>('imagelist');
 
-  hashLargeMap = new Map<string, imageItem>();
-  hashOriginalMap = new Map<string, imageItem>();
-  hashMediumMap = new Map<string, imageItem>();
-  hashSmallMap = new Map<string, imageItem>();
-  hashAllImagesMap = new Map<string, imageItem>();
+
+
+
 
   async getOriginalImagesList(): Promise<Observable<imageItem[]>> {
     const imagesRef = collection(this.afs.firestore, 'originalImageList');
@@ -137,7 +358,7 @@ updateIndexItem(imageData: imageItemIndex) {
 
   updateImages() {
     this.createImageHashMap();
-    this.updateImageList();
+    // this.updateImageList();
   }
 
   createImageHashMap() {
@@ -178,45 +399,18 @@ updateIndexItem(imageData: imageItemIndex) {
     });
   }
 
-  async updateImageList(process: boolean = false) {
-    console.debug(`Updating image list`);
-
-    this.hashAllImagesMap.forEach((value, key) => {
-      const originalImage = this.hashOriginalMap.get(key);
-      if (originalImage) {
-        if (originalImage.imageSrc !== value.imageSrc) {
-          value.imageSrc = originalImage.imageSrc;
-        }
-
-        value.largeImageSrc = originalImage.imageSrc;
-      }
-
-      const largeImage = this.hashLargeMap.get(key);
-      if (largeImage) {
-        if (largeImage.imageSrc !== value.imageSrc800) {
-          if (originalImage.imageSrc) {
-            value.imageSrc800 = originalImage.imageSrc;
-          }
-        }
-      }
-
-      const mediumImage = this.hashMediumMap.get(key);
-      if (mediumImage) {
-        if (mediumImage.imageSrc !== value.imageSrc400) {
-          if (originalImage.imageSrc) {
-            process = true;
-            value.imageSrc400 = originalImage.imageSrc;
-          }
-        }
-      }
-      this.imageItemCollections.doc(value.id).update(value);
-      console.debug(`Updating ${value.caption}`);
-    });
-  }
 
   getImagesBySize(size: string) {
-    return this.imageItems;
+    return this.imageItems.pipe(
+      map((images) =>
+        images
+          .filter((image) => image.imageAlt.includes(size))
+          .filter((type) => type.type !== 'IN_NOT_USED')
+      )
+    );
   }
+
+
 
   sortNotUsed() {
     return this.getImagesBySize('200').pipe(
@@ -240,9 +434,7 @@ updateIndexItem(imageData: imageItemIndex) {
   }
 
   async deleteDupes(not_usedImages: imageItem[]) {
-    console.debug(
-      `Number un-used images in the imageList: ${not_usedImages.length}`
-    );
+
     let found = false;
     let dupes: string[] = [];
     this.rawIndexArray = [];
@@ -282,22 +474,6 @@ updateIndexItem(imageData: imageItemIndex) {
 
   // Create and retrieve the original index image collection
 
-  imageIndexMap: imageItemIndexMap = {};
-
-  private rawImageItems: Observable<rawImageItem[]>;
-
-  async getImageIndexList() {
-    return this.imageIndexItems;
-  }
-
-  imageIndexCollections =  this.afs.collection<imageItemIndex>('originalImageList');
-  imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id', });
-
-  createOriginalItem(image: imageItemIndex) {
-    this.imageIndexCollections.add(image).then((imgIndex) => {
-      this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
-    });
-  }
 
   ImagesIndexArray: imageItemIndex[];
 

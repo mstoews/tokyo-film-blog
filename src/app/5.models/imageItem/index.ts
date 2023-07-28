@@ -22,6 +22,16 @@ export interface imageItemIndex {
   size: string;
   fileName: string;
   contentType: string;
+  imageSrc200?: string;
+  imageSrc400?: string;
+  imageSrc800?: string;
+  type?: string;
+  ranking?: number;
+  description?: string;
+  parentId?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  caption?: string;
 }
 
 

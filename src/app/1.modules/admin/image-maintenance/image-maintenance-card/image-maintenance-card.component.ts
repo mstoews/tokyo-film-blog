@@ -1,14 +1,25 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
-import { openViewComponentDialog } from './view-image-item/view-image-item.component';
+import { imageItemIndex } from 'app/5.models/imageItem';
+import { openViewComponentDialog } from '../../inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
+// view-image-item/view-image-item.component
 import { filter } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-inventory-image-card',
-  templateUrl: './inventory-image-card.component.html',
+  selector: 'image-maintenance-card',
+  template: `
+    <div (dblclick)="onDblClick($event)">
+      <img
+        [ngSrc]="image.imageSrc200"
+        [alt]="image.imageAlt"
+        width="100"
+        height="100"
+        priority
+      />
+    </div>
+  `,
 })
-export class InventoryImageCardComponent {
+export class ImageMaintenanceCardComponent {
   dialog = inject(MatDialog);
 
   onDblClick(e: any) {
@@ -28,6 +39,8 @@ export class InventoryImageCardComponent {
     console.debug(JSON.stringify(image));
     openViewComponentDialog(this.dialog, image, this.productId);
   }
+
+
 
   @Input() image: imageItemIndex;
   @Input() productId: string;

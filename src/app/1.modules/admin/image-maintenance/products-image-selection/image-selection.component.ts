@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -68,7 +68,7 @@ export class ImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   sortNotUsed() {
-    return this.imageListService.getImagesBySize('400').pipe(
+    return this.imageListService.getImagesBySize('200').pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;

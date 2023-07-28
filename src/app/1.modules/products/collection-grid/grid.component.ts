@@ -16,7 +16,7 @@ import { AuthService } from 'app/4.services/auth/auth.service';
 import { CategoryService } from 'app/4.services/category.service';
 import { Category } from 'app/5.models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { Cart } from 'app/5.models/cart';
 
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
@@ -42,7 +42,7 @@ export class CollectionGrid implements OnInit, OnDestroy {
   imageListService = inject(ImageListService);
   images$: Observable<imageItem[]>;
 
-  inventoryImages$: Observable<imageItem[]>;
+  inventoryImages$: Observable<imageItemIndex[]>;
   imagesList: string[];
   cart: Observable<Cart[]>;
 
@@ -66,8 +66,8 @@ export class CollectionGrid implements OnInit, OnDestroy {
   userData: any;
   userId: String;
 
-  ngOnInit(): void {
-    this.images$ = this.imageListService.getImagesByType('1');
+  async ngOnInit(): Promise<void> {
+    // this.images$ = this.imageListService.getImagesByType('1');
     this.Products$ = this.productService
       .getAll()
       .pipe(
@@ -103,7 +103,7 @@ export class CollectionGrid implements OnInit, OnDestroy {
           });
         });
     }
-    this.inventoryImages$ = this.productService.getImageListByProduct(
+    this.inventoryImages$ = await this.productService.getImageListByProduct(
       this.productId
     );
     this.menuToggleService.setCartListCount(this.productIds.length);

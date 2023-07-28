@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy, Input, inject } from '@angular/core';
 import { Product } from 'app/5.models/products';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { Observable } from 'rxjs';
 import { ProductsService } from 'app/4.services/products.service';
 import { ImageListService } from 'app/4.services/image-list.service';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'inventory-preview',
@@ -12,11 +13,10 @@ import { ImageListService } from 'app/4.services/image-list.service';
 })
 export class InventoryPreviewComponent implements OnInit {
   @Input() product: Product;
-  inventoryImages$: Observable<imageItem[]>;
+  inventoryImages$: Observable<imageItemIndex[]>;
   mainImage: string;
 
   productService = inject(ProductsService);
-  imageListService = inject(ImageListService);
 
   setImage(e: imageItem): void {
     const searchString = e.imageAlt.substring(0, 15);
@@ -32,18 +32,12 @@ export class InventoryPreviewComponent implements OnInit {
     this.productService.updateMainImage(this.product.id, this.mainImage);
   }
 
-  ngOnInit() {
-    // if (this.product.id) {
-    //   this.productService.findProductByUrl(this.product.id).subscribe((prd) => {
-    //     this.product = prd;
-    //   });
-    // }
-    console.debug('InventoryPreviewComponent', this.product.id);
+  async ngOnInit() {
 
     this.mainImage = this.product.image;
 
     if (this.product.id) {
-      this.inventoryImages$ = this.productService.getImageListByProduct(
+      this.inventoryImages$ = await this.productService.getImageListByProduct(
         this.product.id
       );
     }

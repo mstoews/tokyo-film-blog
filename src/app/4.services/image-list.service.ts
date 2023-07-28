@@ -3,7 +3,7 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { ImageItemSnap, imageItem } from 'app/5.models/imageItem';
+import { ImageItemSnap, imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 import { convertSnaps } from './db-utils';
 import {
@@ -41,12 +41,14 @@ export class ImageListService {
   private smallImageCol: AngularFirestoreCollection<imageItem>;
   private largeImageCol: AngularFirestoreCollection<imageItem>;
   private imageItemCopyCol: AngularFirestoreCollection<imageItem>;
+  private imageItemIndexCol: AngularFirestoreCollection<imageItemIndex>;
 
   private updateItemsCollection: AngularFirestoreCollection<imageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private loadImageItems: Observable<imageItem[]>;
   private imageItems: Observable<imageItem[]>;
   private imageCopy: Observable<imageItem[]>;
+  private imageItemIndex: Observable<imageItemIndex[]>;
 
   private largeImageItems: Observable<imageItem[]>;
   private smallImageItems: Observable<imageItem[]>;
@@ -67,9 +69,18 @@ export class ImageListService {
     this.mediumImageCol = afs.collection<imageItem>('mediumImageList');
     this.largeImageCol = afs.collection<imageItem>('largeImageList');
     this.imageItemCopyCol = afs.collection<imageItem>('imageItemCopyList');
+
+
+    this.imageItemIndexCol = afs.collection<imageItemIndex>('originalImageList');
+    this.imageItemIndex = this.imageItemIndexCol.valueChanges({
+      idField: 'id',
+    });
+
     this.imageCopy = this.imageItemCopyCol.valueChanges({
       idField: 'id',
     });
+
+
 
     this.updateItemsCollection = afs.collection<imageItem>('imagelist');
     this.loadImageItems = this.updateItemsCollection.valueChanges({
@@ -212,6 +223,16 @@ export class ImageListService {
     );
     //map((images) => images.filter((type) => type.imageAlt.includes(size))));
   }
+
+  getNotUsedOriginalImageList() {
+    return this.imageItemIndex.pipe(
+      map((images) =>  images.filter((image) => image.type === 'IN_NOT_USED')))
+  };
+
+  getOriginalImageListByType(type: string) {
+    return this.imageItemIndex.pipe(
+      map((images) =>  images.filter((image) => image.type === type)))
+  };
 
   getCopyImagesBySize(size: string) {
     return this.imageItemsCopy.pipe(
@@ -398,7 +419,7 @@ export class ImageListService {
     });
   }
 
-  
+
   private imageItemOriginal: AngularFirestoreCollection<imageItem>;
   private imageItem200: AngularFirestoreCollection<imageItem>;
   private imageItem400: AngularFirestoreCollection<imageItem>;

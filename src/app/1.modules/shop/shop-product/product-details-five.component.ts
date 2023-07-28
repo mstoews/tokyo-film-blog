@@ -14,10 +14,9 @@ import { AuthService } from 'app/4.services/auth/auth.service';
 import { CategoryService } from 'app/4.services/category.service';
 import { Category } from 'app/5.models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 import { Cart } from 'app/5.models/cart';
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from 'app/4.services/auth/user.service';
 
 @Component({
@@ -38,14 +37,14 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   product: Product;
   isLoggedIn$: Observable<boolean>;
 
-  inventoryImages$: Observable<imageItem[]>;
+  inventoryImages$: Observable<imageItemIndex[]>;
   imagesList: string[];
   cart: Observable<Cart[]>;
 
   constructor(
     private route: Router,
     private activateRoute: ActivatedRoute,
-    public authService: AuthService,
+    private authService: AuthService,
     private wishlistService: WishListService,
     private productService: ProductsService,
     private cartService: CartService,
@@ -66,7 +65,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   userId: String;
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.userData = this.authService.userData;
     // console.debug(JSON.stringify(this.userData));
 
@@ -105,7 +104,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
           });
         });
     }
-    this.inventoryImages$ = this.productService.getImageListByProduct(
+    this.inventoryImages$ = await this.productService.getImageListByProduct(
       this.productId
     );
     this.menuToggleService.setCartListCount(this.productIds.length);

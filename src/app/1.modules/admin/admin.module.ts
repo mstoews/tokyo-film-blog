@@ -15,7 +15,7 @@ import {
 } from 'devextreme-angular';
 import { FuseCardModule } from '@made-to/components/card';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
-import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
+
 import { ImageCardComponent } from './image-card/image-card.component';
 
 import { ProductCardComponent } from './product-card/product-card.component';
@@ -48,6 +48,9 @@ import { CollectionImageSelectionComponent } from './image-maintenance/collectio
 import { ThoughtsImageSelectionComponent } from './image-maintenance/thoughts-image-selection/thoughts-image-selection.component';
 import { GalleryImageSelectionComponent } from './image-maintenance/gallery-image-selection/image-selection.component';
 import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-edit.component';
+import { ImageMaintenanceCardComponent } from './image-maintenance/image-maintenance-card/image-maintenance-card.component';
+import { HeadingModule } from 'app/2.main/header/heading.module';
+import { ImageMaintenanceModule } from './image-maintenance/image-maintenance.module';
 
 @NgModule({
   declarations: [
@@ -56,29 +59,20 @@ import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-
     CreationsGridComponent,
     GridMenubarComponent,
     CategoryGridComponent,
-    ImageMaintenanceComponent,
-    ImageCardComponent,
     ProductCardComponent,
     InventoryComponent,
     AdminFormComponent,
     GalleryComponent,
     ServicesComponent,
     SafePipe,
-    InventoryImageSelectionComponent,
     InventoryComponent,
     ProductEditComponent,
     AdminShellComponent,
     AddComponentDialog,
     InventoryPreviewComponent,
-    ImageMenubarComponent,
     ImageListComponent,
     ContactListComponent,
     InventoryImageCardComponent,
-    ImageSelectionComponent,
-    CollectionImageSelectionComponent,
-    ThoughtsImageSelectionComponent,
-    GalleryImageSelectionComponent,
-    ImageMgtEditComponent,
   ],
   imports: [
     AdminRouteModule,
@@ -87,7 +81,6 @@ import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-
     DxDataGridModule,
     DxBulletModule,
     DxTemplateModule,
-    NgImageSliderModule,
     AdminRouteModule,
     FuseCardModule,
     GalleryLightboxModule,
@@ -97,7 +90,9 @@ import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-
     IconsModule,
     SharedModule,
     PolicyModule,
-    ViewImageItemComponent
+    ViewImageItemComponent,
+    HeadingModule,
+    ImageMaintenanceModule
   ],
   exports: [AdminComponent, OrdersGridComponent],
   providers: [BlogResolver, ProductResolver],

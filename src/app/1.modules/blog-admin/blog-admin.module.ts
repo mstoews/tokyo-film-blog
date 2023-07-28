@@ -28,7 +28,6 @@ import { SharedModule } from '../shared-module/shared.module';
     NgOptimizedImage,
     SharedModule,
     //  FuseCardModule,
-    IconsModule,
     BlogEditRoutingModule,
   ],
   providers: [BlogResolver],

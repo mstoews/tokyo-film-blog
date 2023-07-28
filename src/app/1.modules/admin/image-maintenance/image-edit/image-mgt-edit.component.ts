@@ -14,7 +14,7 @@ export class ImageMgtEditComponent {
   route = inject(Router);
 
   onBackToInventory() {
-    this.route.navigate(['/admin/inventory']);
+    this.route.navigate(['home']);
   }
 
   createImageOnce() {
@@ -23,17 +23,21 @@ export class ImageMgtEditComponent {
 
   RefreshList() {
     // this.imageListService.createRawImagesOriginal();
-    this.deleteDupesService.createMainImageList()
+    this.deleteDupesService.updateUsedImageList();
   }
 
   RefreshImageList() {
-    this.imageListService.createRawImagesList();
+     this.deleteDupesService.updateImageIndexList('400')
+    // this.imageListService.createRawImagesList();
   }
   DeleteDupes() {
     this.deleteDupesService.deleteDuplicateImages();
   }
 
-  RefreshImages() {
-    this.deleteDupesService.updateImages();
+  async RefreshImages() {
+    // this.deleteDupesService.updateImageIndexList('400')
+    await this.deleteDupesService.updateImageIndexList('200')
+
+    // this.deleteDupesService.updateImages();
   }
 }

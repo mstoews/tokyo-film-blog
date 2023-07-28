@@ -56,6 +56,16 @@ const routes: Route[] = [
     title: 'Thoughts',
   },
   {
+    path: 'image-admin',
+    loadChildren: () =>
+    import('./1.modules/admin/image-maintenance/image-maintenance.module').then( (mod) => mod.ImageMaintenanceModule ),
+    title: 'Image Maintenance',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
+  },
+
+
+  {
     path: 'blog-admin',
     loadChildren: () =>
       import('./1.modules/blog-admin/blog-admin.module').then(

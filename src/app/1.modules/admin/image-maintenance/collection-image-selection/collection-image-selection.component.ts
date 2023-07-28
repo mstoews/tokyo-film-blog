@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -18,6 +18,8 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ProductsService } from 'app/4.services/products.service';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({
   selector: 'collection-img-selection',
@@ -30,22 +32,18 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   currentImage: imageItem;
 
   IN_NOT_USED = 'IN_NOT_USED';
-  IN_DELETED = 'IN_DELETED';
   IN_COLLECTION = 'IN_COLLECTION';
 
   subNotUsed: Subscription;
-  subDeleted: Subscription;
-  subMain: Subscription;
   subCollections: Subscription;
 
-  not_usedImages: imageItem[] = [];
-  deletedImages: imageItem[] = [];
-  collectionsImages: imageItem[] = [];
-  inventoryImages$: Observable<imageItem[]>;
+  not_usedImages: imageItemIndex[] = [];
+  collectionsImages: imageItemIndex[] = [];
+
   firstRun: boolean = true;
 
   deleteDupes = inject(DeleteDuplicateService);
-  imageListService = inject(ImageListService);
+  imageItemIndexService = inject(ImageItemIndexService);
   productService = inject(ProductsService);
   fb = inject(FormBuilder);
 
@@ -56,19 +54,71 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     this.deleteDupes.updateImages();
   }
 
+  @ViewChild('drawer') drawer: MatDrawer;
+  drawOpen: 'open' | 'close' = 'open';
+  categoryGroup: FormGroup;
+
+  onCreate() {
+    throw new Error('Method not implemented.');
+  }
+  onDelete(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  onUpdate(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
+
+  RefreshImages() {
+    throw new Error('Method not implemented.');
+  }
+  DeleteDupes() {
+    throw new Error('Method not implemented.');
+  }
+
+
+  openDrawer() {
+    const opened = this.drawer.opened;
+    if (opened !== true) {
+      this.drawer.toggle();
+    } else {
+      return;
+    }
+  }
+
+  closeDrawer() {
+    const opened = this.drawer.opened;
+    if (opened === true) {
+      this.drawer.toggle();
+    } else {
+      return;
+    }
+  }
+
+  toggleDrawer() {
+    const opened = this.drawer.opened;
+    if (opened !== true) {
+      this.drawer.toggle();
+    } else {
+      if (this.drawOpen === 'close') {
+        this.drawer.toggle();
+      }
+    }
+  }
+
+
   addImageToItemList(image: any) {
     image.parentId = this.productId;
-    // search for the image in the list 400 size and add it to the list
-    this.imageListService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image);
   }
 
-  UpdateInventoryItem(e: imageItem) {
-    e.type = this.productId;
-    this.imageListService.updateImageList(e);
+  UpdateInventoryItem(e: imageItemIndex) {
+    e.type = this.IN_COLLECTION
+    this.imageItemIndexService.updateImageList(e);
   }
 
-  sortNotUsed() {
-    return this.imageListService.getImagesBySize('400').pipe(
+  async sortNotUsed() {
+    return (await this.imageItemIndexService.getImageItemIndexByType('IN_NOT_USED')).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -78,13 +128,13 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  Refresh() {
-    this.subNotUsed = this.sortNotUsed().subscribe((item) => {
+  async Refresh() {
+    this.subNotUsed = (await this.sortNotUsed()).subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subCollections = this.imageListService
-      .getImagesByType(this.productId)
+    this.subCollections = (await this.imageItemIndexService
+      .getImageItemIndexByType(this.IN_COLLECTION))
       .subscribe((item) => {
         this.collectionsImages = item;
       });
@@ -130,10 +180,15 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string
   ) {
     if (newContainerId !== this.IN_NOT_USED) {
-      imageItem.forEach((element: any) => {
-        element.ranking = imageItem.indexOf(element);
-        this.imageListService.updateImageList(element);
-      });
+    const image = imageItem[currentIndex];
+    if (image.type === newContainerId) {
+      image.ranking = 0;
+      this.imageItemIndexService.updateImageList(image);
+      return;
+    }
+    image.ranking = 0;
+    image.type = newContainerId;
+    this.imageItemIndexService.updateImageList(image);
     }
   }
 
@@ -147,12 +202,11 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     image.ranking = 0;
     image.type = newContainerId;
     console.debug('Update Image Type', image);
-    this.imageListService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image);
   }
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
-    this.subDeleted.unsubscribe();
     this.subCollections.unsubscribe();
   }
 }
