@@ -7,7 +7,7 @@ import { ImageListService } from 'app/4.services/image-list.service';
   templateUrl: './collection-image-card.component.html',
 })
 export class CollectionImageCardComponent {
-  imageListService = inject(ImageListService);
+  
   @Input() image: imageItem;
   @Output() collectionImageSelected: EventEmitter<imageItem> =
     new EventEmitter();

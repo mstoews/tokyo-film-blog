@@ -10,7 +10,7 @@ import { ImageListService } from 'app/4.services/image-list.service';
 })
 export class ImageMgtEditComponent {
   deleteDupesService = inject(DeleteDuplicateService);
-  imageListService = inject(ImageListService);
+
   route = inject(Router);
 
   onBackToInventory() {
@@ -22,13 +22,12 @@ export class ImageMgtEditComponent {
   }
 
   RefreshList() {
-    // this.imageListService.createRawImagesOriginal();
+
     this.deleteDupesService.updateUsedImageList();
   }
 
   RefreshImageList() {
      this.deleteDupesService.updateImageIndexList('400')
-    // this.imageListService.createRawImagesList();
   }
   DeleteDupes() {
     this.deleteDupesService.deleteDuplicateImages();

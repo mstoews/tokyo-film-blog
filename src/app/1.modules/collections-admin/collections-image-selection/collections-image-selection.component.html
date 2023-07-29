@@ -1,56 +1,45 @@
 <div class="h-screen">
+
+
   <mat-drawer-container>
+    <mat-drawer class="lg:w-1/4 sm:h-full sm:w-full bg-white-100" #drawer [opened]="false" mode="side"
+      [position]="'end'" [disableClose]="false">
+    </mat-drawer>
     <mat-drawer-content>
-      <div cdkDropListGroup class="grid grid-cols-8 gap-1">
-        <!-- NOT_USED -->
-        <div class="col-start-1 col-end-8 item--1 lg-rounded" cdkScrollable>
-          <div class="sticky top-0 z-50 image_title">Available Images</div>
+      <div cdkDropListGroup class="grid grid-cols-14 gap-1">
+
+        <div class="col-start-1 col-end-8  lg-rounded" cdkScrollable>
+          <div class="sticky m-1 h-8 text-left p-1  bg-gray-200 top-0 z-50">Available Images</div>
           <div cdkDropList #notused="cdkDropList" [id]="IN_NOT_USED" [cdkDropListData]="not_usedImages"
             (cdkDropListDropped)="drop($event)">
             <div class="flex flex-wrap">
               <div *ngFor="let item of not_usedImages" cdkDrag>
                 <div class="flex-none object-cover p-1">
-                  <collection-image-card
-                  (collectionImageSelected)="UpdateInventoryItem($event)"
-                  [image]="item">
-                 </collection-image-card>
+                  <!-- <img [ngSrc]="item.imageSrc" [alt]="item.alt" width="100" height="100"> -->
+                  <collection-image-card (imageSelected)="UpdateInventoryItem($event)" [productId]="productId"
+                    [image]="item">
+                  </collection-image-card>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="item--2 lg-rounded" cdkScrollable>
-          <div class="sticky top-0 z-50 uppercase image_title lg-rounded">Featured Photos
-          </div>
-          <div cdkDropList #collections="cdkDropList" [id]="collectionId" [cdkDropListData]="collectionsImages"
+        <!-- COLLECTION -->
+        <div class="col-start-8 col-end-12 lg-rounded" cdkScrollable>
+          <div class="sticky m-1 h-8 text-center p-1  bg-gray-200 top-0 z-50">Collection Images</div>
+          <div cdkDropList #collections="cdkDropList" [id]="collectionsId" [cdkDropListData]="collectionsImages"
             class="list" (cdkDropListDropped)="drop($event)">
             <div class="flex flex-wrap">
               <div *ngFor="let item of collectionsImages" cdkDrag>
-                <div class="p-2 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden">
-                  <img [ngSrc]="item.imageSrc" alt="thumbnail"
-                    class="h-full w-full object-cover object-center " width="150" height="150">
+                <div class="flex-none object-cover p-1">
+                  <collection-image-card (imageSelected)="UpdateInventoryItem($event)" [productId]="IN_COLLECTION"
+                    [image]="item">
+                  </collection-image-card>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- <div class="item--3 lg-rounded" cdkScrollable>
-          <div class="sticky top-0 z-50 uppercase image_title lg-rounded">Landing Page/Blog </div>
-          <div cdkDropList #featured="cdkDropList" [id]="IN_FEATURED" [cdkDropListData]="featuredImages"
-            class="list" (cdkDropListDropped)="drop($event)">
-            <div class="flex flex-wrap">
-              <div *ngFor="let item of featuredImages" cdkDrag>
-                <div class="p-2 min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden">
-                  <img [ngSrc]="item.imageSrc" alt="thumbnail"
-                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="200" height="200">
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-
       </div>
     </mat-drawer-content>
   </mat-drawer-container>

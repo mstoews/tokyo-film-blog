@@ -44,7 +44,7 @@ export class CategoryGridComponent implements OnInit {
   categoryService = inject(CategoryService);
   fb = inject(FormBuilder);
 
-  thumbnailList$ =  this.imageItemIndexService.getImageIndexListByType('IN_CATEGORY');
+  thumbnailList$ =  this.imageItemIndexService.getImageItemByType('IN_CATEGORY');
 
   ngOnInit(): void {
     this.Refresh();
@@ -179,7 +179,7 @@ export class CategoryGridComponent implements OnInit {
 
   UpdateInventoryItem(e: imageItem) {
     // e.type = this.productId;
-    // this.imageListService.updateImageList(e);
+
   }
 
   onDelete(data: Category) {

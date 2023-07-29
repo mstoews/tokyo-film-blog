@@ -7,11 +7,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { Collections } from 'app/5.models/collection';
 import { Observable } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'app-collection-preview',
@@ -26,10 +27,10 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   @Input() collection: Collections;
   Title = '';
   Description = '';
-  imageListService = inject(ImageListService);
+  imageListService = inject(ImageItemIndexService);
   fb = inject(FormBuilder);
 
-  collectionsImages: imageItem[] = [];
+  collectionsImages: imageItemIndex[] = [];
   subCollections: any;
   item: imageItem = null;
   id: string;
@@ -43,11 +44,9 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
     this.Refresh(this.collection.id);
   }
 
-  onUpdate(imgItem: imageItem) {
-    this.imageListService.updateCollectionDescription(
-      imgItem.id,
-      imgItem.imageAlt
-    );
+  onUpdate(imgItem: imageItemIndex) {
+    this.imageListService.updateCollectionDescription(imgItem)
+
   }
 
   createEmptyForm() {
@@ -57,9 +56,8 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  Refresh(id: string) {
-    this.subCollections = this.imageListService
-      .getImagesByType(id)
+  async Refresh(id: string) {
+    this.subCollections = (await this.imageListService.getImageItemByType(id))
       .subscribe((item) => {
         this.collectionsImages = item;
       });
@@ -84,13 +82,12 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   UpdateDescription(desc: string) {
     let item = this.collectionsImages.find((x) => x.id === this.id);
     if (item !== undefined || item !== null) {
-      console.debug('UpdateDescription', desc);
       item.imageAlt = desc;
-      this.imageListService.updateCollectionDescription(item.id, desc);
+      this.imageListService.updateCollectionDescription(item);
     }
   }
 
-  createForm(item: imageItem) {
+  createForm(item: imageItemIndex) {
     if (item !== undefined || item !== null) {
       this.collectionGroup = this.fb.group({
         URL: [item.imageSrc, Validators.required],

@@ -8,13 +8,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Contact } from 'app/5.models/contact';
 import { MainPageService } from 'app/4.services/main-page.service';
 import { Mainpage } from 'app/5.models/mainpage';
-import { ImageListService } from 'app/4.services/image-list.service';
 import { imageItem } from 'app/5.models/imageItem';
-import { CartService } from 'app/4.services/cart.service';
-import { WishListService } from 'app/4.services/wishlist.service';
 import { AuthService } from 'app/4.services/auth/auth.service';
 import { BlogService } from '../../4.services/blog.service';
 import { MenuToggleService } from '../../4.services/menu-toggle.service';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -38,25 +36,18 @@ export class LandingPageComponent implements OnInit {
   public bottomCollection: imageItem[] = [];
 
   contactGroup: FormGroup;
-  featuredList$: Observable<imageItem[]>;
   mainPageDoc: Mainpage;
   titleMessage = '';
   features_image = './assets/images/tailoring.jpg';
-  // 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F161714D0-73C9-4C75-8D15-B8B2F08EE5E1_800x800.JPG?alt=media&token=b5401a57-c7cb-415d-b185-35d59b30a0c7'
   services_one = './assets/images/tailoring.jpg';
-  // 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicestailoring_400x400.JPG?alt=media&token=f5fcb885-70b8-4dfe-97ba-1db54699d7c1'
   services_two = './assets/images/knitting.jpg';
-  //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservices_400x400.JPG?alt=media&token=78f54e83-17d4-4f8c-8eeb-1def74080f74'
   services_three = './assets/images/repairs.jpg';
-  //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Fcroppedforservicesmending_400x400.JPG?alt=media&token=20779c32-8bc3-4bc0-a9dd-86093ad5c061'
   services_four = './assets/images/bespoke_knitting.jpg';
-  //'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/400%2Freadytowearcrop_400x400.JPEG?alt=media&token=ee82d3fa-82ed-402f-b364-17ec0024e3d8'
   about_us = './assets/images/about.jpg';
-  //  'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2F213E0BF3-EF7F-4C0F-AF24-86EA01398C81_800x800.jpeg?alt=media&token=120537a4-229d-4594-a787-41ff5ec4b42b'
 
   constructor(
     private contactService: ContactService,
-    private imageListService: ImageListService,
+    private imageListService: ImageItemIndexService,
     private mainPage: MainPageService,
     private router: Router,
     private scrollTo: ScrollService,
@@ -67,40 +58,15 @@ export class LandingPageComponent implements OnInit {
   ) {}
 
   mainPage$ = this.mainPage.getAll();
+  featuredList$ = this.imageListService.getImageItemByType('IN_GALLERY');
 
   ngOnInit(): void {
-
-    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
-    // this.mainPage$.subscribe((doc) => {
-    //   if (doc.length > 0) {
-    //     this.mainPageDoc = doc[0];
-    //     this.titleMessage = this.mainPageDoc.hero_title;
-    //   } else {
-    //     let document = {
-    //       id: 1,
-    //       hero_title: 'There should be something at the tope of the HERO',
-    //       features_header: 'Header',
-    //       features_subheader: 'Sub Title',
-    //       cta_left: 'Left',
-    //       cta_center: 'Center',
-    //       cta_right: 'Right',
-    //       contact_email: 'Joey',
-    //       contact_telephone: '555-1212',
-    //       contact_shipping: 'Shipping',
-    //       active: true,
-    //     };
-    //     this.mainPageDoc = document;
-    //     this.titleMessage = document.hero_title;
-    //   }
-    // });
     const UserId = of(this.authService.afAuth.currentUser);
     UserId.subscribe((user) => {
       console.debug(JSON.stringify(user));
     });
 
     this.createEmptyForm();
-    // this.populateImageList();
-    //this.cartService.cartByUserId()
   }
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
@@ -111,7 +77,6 @@ export class LandingPageComponent implements OnInit {
   }
 
   onLastestBlog() {
-    // console.debug('navigate to blog');
     this.blogService.getAllPublishedBlog().subscribe((blog) => {
       if (blog.length > 0) {
         this.router.navigate(['blog/detail', blog[0].id]);
@@ -157,12 +122,10 @@ export class LandingPageComponent implements OnInit {
   }
 
   onClickAboutUs() {
-    // console.debug('navigate to about us');
     this.router.navigate(['home/about_us']);
   }
 
   onContactUs() {
-    // console.debug('Products');
     this.router.navigate(['home/contacts']);
   }
 
@@ -176,16 +139,6 @@ export class LandingPageComponent implements OnInit {
 
   populateImageList() {
     let imageCount = 0;
-    this.featuredList$ = this.imageListService.getImagesByType('IN_GALLERY');
-    // featuredList.subscribe((img) => {
-    //   img.forEach((image) => {
-    //     if (imageCount < 3) {
-    //       this.topCollection.push(image);
-    //     } else {
-    //       this.bottomCollection.push(image);
-    //     }
-    //     imageCount++;
-    //   });
-    // });
+    this.featuredList$ = this.imageListService.getImageItemByType('IN_GALLERY');
   }
 }

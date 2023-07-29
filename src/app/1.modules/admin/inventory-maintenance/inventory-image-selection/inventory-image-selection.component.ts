@@ -71,8 +71,9 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   async sortNotUsed() {
-    return (await this.imageItemIndexService.getImageItemIndexByType(this.IN_NOT_USED))
-    .pipe(
+    return (
+      await this.imageItemIndexService.getImageItemByType(this.IN_NOT_USED)
+    ).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -83,14 +84,17 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   async Refresh() {
-
     this.subNotUsed = (await this.sortNotUsed()).subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subCollections = (await this.imageItemIndexService.getOriginalImageListByType(this.productId)).subscribe( (item) => {
-        this.collectionsImages = item;
-      });
+    this.subCollections = (
+      await this.imageItemIndexService.getOriginalImageListByType(
+        this.productId
+      )
+    ).subscribe((item) => {
+      this.collectionsImages = item;
+    });
   }
 
   ngOnInit() {
@@ -124,7 +128,6 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       );
     }
   }
-
 
   private updateRanking(
     imageItemIndex: any,

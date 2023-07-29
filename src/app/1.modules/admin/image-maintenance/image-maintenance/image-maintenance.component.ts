@@ -51,7 +51,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   galleryImages: imageItem[] = [];
 
   constructor(
-    public imageListService: ImageListService,
+    public imageItemIndexService: ImageListService,
     public duplicateService: DeleteDuplicateService,
     private matDialog: MatDialog,
     private fb: FormBuilder
@@ -59,18 +59,18 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
 
   RefreshList() {
     console.debug('RefreshList');
-    this.imageListService.createRawImagesOriginal();
+    //
   }
 
   RefreshImageList() {
-    this.imageListService.createRawImagesList();
+    // this.imageListService.createRawImagesList();
   }
   DeleteDupes() {
-    this.duplicateService.deleteDuplicateImages();
+    // this.duplicateService.deleteDuplicateImages();
   }
 
   RefreshImages() {
-    this.duplicateService.updateImages();
+    // this.duplicateService.updateImages();
   }
 
   onImageSelected(e: any) {
@@ -149,7 +149,6 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.imageListService.createImageList()
     this.createEmptyForm();
     this.Refresh();
   }
@@ -225,7 +224,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageListService.update(image, image.id);
+        this.imageItemIndexService.updateImageList(image);
         i++;
       });
     }
@@ -242,7 +241,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        this.imageListService.update(image, image.id);
+        this.imageItemIndexService.updateImageList(image);
         i++;
       });
     }

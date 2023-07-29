@@ -37,7 +37,7 @@ export class ProductsService {
     });
   }
 
-  imageItemIndexService = inject(ImageItemIndexService)
+  imageItemIndexService = inject(ImageItemIndexService);
 
   createPartial(productPartial: ProductPartial) {
     return this.productPartialCollection.add(productPartial);
@@ -125,7 +125,7 @@ export class ProductsService {
   }
 
   async getImageListByProduct(productId: string) {
-    return await this.imageItemIndexService.getImageItemIndexByType(productId);
+    return await this.imageItemIndexService.getImageItemByType(productId);
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {

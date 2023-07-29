@@ -51,7 +51,7 @@
 
       <div *ngFor="let image of collectionsImages">
         <mat-card>
-          <img (click)="EditTitle(image.id)" class="h-auto w-[100%] rounded-lg" [src]="image.imageSrc" alt="images">
+          <img (click)="EditTitle(image.id)" class="h-auto w-[100%] rounded-lg" [src]="image.imageSrc800" alt="images">
           <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-t-lg">
             <h1 class="text-white font-normal text-sm">{{image.description}}</h1>
           </div>

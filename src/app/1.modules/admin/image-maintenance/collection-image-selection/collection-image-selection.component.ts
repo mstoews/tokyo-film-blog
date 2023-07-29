@@ -76,7 +76,6 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
 
-
   openDrawer() {
     const opened = this.drawer.opened;
     if (opened !== true) {
@@ -106,19 +105,20 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-
   addImageToItemList(image: any) {
     image.parentId = this.productId;
     this.imageItemIndexService.updateImageList(image);
   }
 
   UpdateInventoryItem(e: imageItemIndex) {
-    e.type = this.IN_COLLECTION
+    e.type = this.IN_COLLECTION;
     this.imageItemIndexService.updateImageList(e);
   }
 
   async sortNotUsed() {
-    return (await this.imageItemIndexService.getImageItemIndexByType('IN_NOT_USED')).pipe(
+    return (
+      await this.imageItemIndexService.getImageItemByType('IN_NOT_USED')
+    ).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -133,11 +133,11 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
       this.not_usedImages = item;
     });
 
-    this.subCollections = (await this.imageItemIndexService
-      .getImageItemIndexByType(this.IN_COLLECTION))
-      .subscribe((item) => {
-        this.collectionsImages = item;
-      });
+    this.subCollections = (
+      await this.imageItemIndexService.getImageItemByType(this.IN_COLLECTION)
+    ).subscribe((item) => {
+      this.collectionsImages = item;
+    });
   }
 
   ngOnInit() {
@@ -180,15 +180,15 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string
   ) {
     if (newContainerId !== this.IN_NOT_USED) {
-    const image = imageItem[currentIndex];
-    if (image.type === newContainerId) {
+      const image = imageItem[currentIndex];
+      if (image.type === newContainerId) {
+        image.ranking = 0;
+        this.imageItemIndexService.updateImageList(image);
+        return;
+      }
       image.ranking = 0;
+      image.type = newContainerId;
       this.imageItemIndexService.updateImageList(image);
-      return;
-    }
-    image.ranking = 0;
-    image.type = newContainerId;
-    this.imageItemIndexService.updateImageList(image);
     }
   }
 

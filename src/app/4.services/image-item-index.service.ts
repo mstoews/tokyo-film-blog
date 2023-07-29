@@ -5,16 +5,12 @@ import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ImageItemIndexService {
-  getImageIndexListByType(arg0: string) {
-    throw new Error('Method not implemented.');
-  }
-
   constructor() {
     this.createOriginalIndexMaps();
-    this.createUsedImageMaps()
+    this.createUsedImageMaps();
   }
 
   afs = inject(AngularFirestore);
@@ -24,11 +20,14 @@ export class ImageItemIndexService {
   hashOriginalIndexMap = new Map<string, imageItemIndex>();
   hashImageItemMap = new Map<string, imageItem>();
 
-  imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking'));
+  imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) =>
+    ref.orderBy('ranking')
+  );
   imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
 
-  imageIndexCollections = this.afs.collection<imageItemIndex>('originalImageList');
-  imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id', });
+  imageIndexCollections =
+    this.afs.collection<imageItemIndex>('originalImageList');
+  imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id' });
 
   createOriginalItem(image: imageItemIndex) {
     this.imageIndexCollections.add(image).then((imgIndex) => {
@@ -36,11 +35,15 @@ export class ImageItemIndexService {
     });
   }
 
+  updateCollectionDescription(imgItem: imageItemIndex) {
+    this.imageIndexCollections.doc(imgItem.id).update(imgItem);
+  }
+
   async getImageIndexList() {
     return this.imageIndexItems;
   }
 
-  async getImageItemIndexByType(type: string) {
+  async getImageItemByType(type: string) {
     return (await this.getImageIndexList()).pipe(
       map((images) => images.filter((image) => image.type === type))
     );
@@ -48,9 +51,9 @@ export class ImageItemIndexService {
 
   async getOriginalImageListByType(type: string) {
     return (await this.getImageIndexList()).pipe(
-      map((images) =>  images.filter((image) => image.type === type)))
-  };
-
+      map((images) => images.filter((image) => image.type === type))
+    );
+  }
 
   async createOriginalIndexMaps(): Promise<void> {
     this.hashOriginalIndexMap.clear();
@@ -60,7 +63,6 @@ export class ImageItemIndexService {
       });
     });
   }
-
 
   async createUsedImageMaps(): Promise<void> {
     this.hashUsedImagesMap.clear();
@@ -85,21 +87,20 @@ export class ImageItemIndexService {
     this.imageIndexCollections.doc(id).delete();
   }
 
-
   async updateUsedImageList(): Promise<void> {
     this.hashUsedImagesMap.forEach((value, key) => {
       var fileExt = value.imageAlt.split('.').pop();
-      let fileName = value.imageAlt.replace(/\.[^/.]+$/, "");
-      fileName = fileName.replace(`thumbnails/`,'').replace(`_200x200`,'');
-      fileName = fileName.replace(`400/`,'').replace(`_400x400`,'');
-      fileName = fileName.replace(`800/`,'').replace(`_800x800`,'');
+      let fileName = value.imageAlt.replace(/\.[^/.]+$/, '');
+      fileName = fileName.replace(`thumbnails/`, '').replace(`_200x200`, '');
+      fileName = fileName.replace(`400/`, '').replace(`_400x400`, '');
+      fileName = fileName.replace(`800/`, '').replace(`_800x800`, '');
       fileName = `${fileName}.${fileExt}`;
       let usedItem = this.hashOriginalIndexMap.get(fileName);
       if (usedItem !== undefined) {
         usedItem.type = value.type;
-        usedItem.caption= value.caption;
-        usedItem.ranking= value.ranking;
-        usedItem.parentId= value.parentId;
+        usedItem.caption = value.caption;
+        usedItem.ranking = value.ranking;
+        usedItem.parentId = value.parentId;
         usedItem.imageSrc = value.imageSrc;
         this.imageIndexCollections.doc(usedItem.id).update(usedItem);
       }

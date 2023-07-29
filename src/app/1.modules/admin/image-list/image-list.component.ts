@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ImageListService } from '../../../4.services/image-list.service';
-import { imageItem } from '../../../5.models/imageItem';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { imageItem, imageItemIndex } from '../../../5.models/imageItem';
 import { Subscription } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import {
@@ -15,20 +16,6 @@ import {
   styleUrls: ['./image-list.component.css'],
 })
 export class ImageListComponent {
-  // constructor(
-  //     private imageListService: ImageListService) {
-  //
-  //     const data: imageItem = {
-  //       id: '',
-  //       parentId: '',
-  //       imageSrc: 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2Fmunchdeathblog1_800x800.jpg?alt=media&token=9a754e17-5309-494d-9f56-7ab492bd7c85'
-  // ,     imageAlt: '800/munchdeathblog1_800x800.jpg',
-  //       caption: 'munchdeathblog1_800x800.jpg',
-  //       type: 'NOT_IN_USE',
-  //       ranking: 1
-  //     }
-  //     imageListService.createItem(data);
-
   IN_NOT_USED = 'IN_NOT_USED';
   IN_FEATURED = 'IN_FEATURED';
   IN_COLLECTION = 'IN_COLLECTION';
@@ -41,54 +28,43 @@ export class ImageListComponent {
   subCreations: Subscription;
   subGallery: Subscription;
 
-  not_usedImages: imageItem[] = [];
-  featuredImages: imageItem[] = [];
-  collectionsImages: imageItem[] = [];
-  creationsImages: imageItem[] = [];
-  galleryImages: imageItem[] = [];
+  not_usedImages: imageItemIndex[] = [];
+  featuredImages: imageItemIndex[] = [];
+  collectionsImages: imageItemIndex[] = [];
+  creationsImages: imageItemIndex[] = [];
+  galleryImages: imageItemIndex[] = [];
 
   constructor(
-    public imageListService: ImageListService,
+    public imageItemIndexService: ImageItemIndexService,
     private fb: FormBuilder
-  ) {
-    this.imageListService.createRawImagesList();
-    // const data: imageItem = {
-    //   id: '',
-    //   parentId: '',
-    //   imageSrc: 'https://firebasestorage.googleapis.com/v0/b/made-to-cassie.appspot.com/o/800%2Fmunchdeathblog1_800x800.jpg?alt=media&token=9a754e17-5309-494d-9f56-7ab492bd7c85',     imageAlt: '800/munchdeathblog1_800x800.jpg',
-    //   caption: 'munchdeathblog1_800x800.jpg',
-    //   type: 'NOT_IN_USE',
-    //   ranking: 1
-    // }
-    // imageListService.createItem(data);
-  }
+  ) {}
 
-  Refresh() {
-    this.subNotUsed = this.imageListService
-      .getImagesByType(this.IN_NOT_USED)
-      .subscribe((item) => {
-        this.not_usedImages = item;
-      });
-    this.subFeatured = this.imageListService
-      .getImagesByType(this.IN_FEATURED)
-      .subscribe((item) => {
-        this.featuredImages = item;
-      });
-    this.subCollections = this.imageListService
-      .getImagesByType(this.IN_COLLECTION)
-      .subscribe((item) => {
-        this.collectionsImages = item;
-      });
-    this.subCreations = this.imageListService
-      .getImagesByType(this.IN_CREATION)
-      .subscribe((item) => {
-        this.creationsImages = item;
-      });
-    this.subGallery = this.imageListService
-      .getImagesByType(this.IN_GALLERY)
-      .subscribe((item) => {
-        this.galleryImages = item;
-      });
+  async Refresh() {
+    this.subNotUsed = (
+      await this.imageItemIndexService.getImageItemByType(this.IN_NOT_USED)
+    ).subscribe((item) => {
+      this.not_usedImages = item;
+    });
+    this.subFeatured = (
+      await this.imageItemIndexService.getImageItemByType(this.IN_FEATURED)
+    ).subscribe((item) => {
+      this.featuredImages = item;
+    });
+    this.subCollections = (
+      await this.imageItemIndexService.getImageItemByType(this.IN_COLLECTION)
+    ).subscribe((item) => {
+      this.collectionsImages = item;
+    });
+    this.subCreations = (
+      await this.imageItemIndexService.getImageItemByType(this.IN_CREATION)
+    ).subscribe((item) => {
+      this.creationsImages = item;
+    });
+    this.subGallery = (
+      await this.imageItemIndexService.getImageItemByType(this.IN_GALLERY)
+    ).subscribe((item) => {
+      this.galleryImages = item;
+    });
   }
 
   ngOnInit() {
@@ -126,7 +102,7 @@ export class ImageListComponent {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageListService.update(image, image.id);
+        this.imageItemIndexService.updateImageList(image);
         i++;
       });
     }
@@ -143,7 +119,7 @@ export class ImageListComponent {
       newData.forEach((image: any) => {
         image.ranking = i;
         image.type = newContainerId;
-        this.imageListService.update(image, image.id);
+        this.imageItemIndexService.updateImageList(image);
         i++;
       });
     }

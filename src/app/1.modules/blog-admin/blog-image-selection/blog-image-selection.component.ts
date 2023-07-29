@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { Observable, Subscription, map } from 'rxjs';
+
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -21,51 +22,49 @@ import { ProductsService } from 'app/4.services/products.service';
 export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   @Input() blogId: string;
 
-  IN_NOT_USED = 'IN_FEATURED';
-  IN_FEATURED = 'IN_INVENTORY';
+  IN_NOT_USED = 'IN_NOT_USED';
+  IN_THOUGHTS = 'IN_THOUGHTS';
 
   subNotUsed: Subscription;
-  subFeatured: Subscription;
-  subCollections: Subscription;
+  subThoughts: Subscription;
 
-  not_usedImages: imageItem[] = [];
-  featuredImages: imageItem[] = [];
-  collectionsImages: imageItem[] = [];
+  not_usedImages: imageItemIndex[] = [];
+  featuredImages: imageItemIndex[] = [];
+  collectionsImages: imageItemIndex[] = [];
 
   constructor(
-    public imageListService: ImageListService,
+    public imageItemIndexService: ImageItemIndexService,
     private fb: FormBuilder
   ) {}
 
-  Refresh() {
-    this.subNotUsed = this.imageListService
-      .getImagesByType(this.IN_NOT_USED)
-      .subscribe((item) => {
-        this.not_usedImages = item;
-      });
-
-    this.subFeatured = this.imageListService
-      .getImagesByType(this.blogId)
-      .subscribe((item) => {
-        this.featuredImages = item;
-      });
-
-    this.subCollections = this.imageListService
-      .getImagesByType(this.blogId)
-      .subscribe((item) => {
-        this.collectionsImages = item;
-      });
-    // this.verifyArray()
+  async sortNotUsed() {
+    return (
+      await this.imageItemIndexService.getImageItemByType('IN_NOT_USED')
+    ).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.caption < b.caption ? -1 : 1;
+        });
+        return data;
+      })
+    );
   }
 
-  verifyArray() {
-    //console.debug(`Not used images: ${this.not_usedImages.length}`)
-    //console.debug(`Featured images: ${this.featuredImages.length}`)
-    //console.debug(`Main images: ${this.collectionsImages.length}`)
+  async Refresh() {
+    this.subNotUsed = (await this.sortNotUsed()).subscribe((item) => {
+      this.not_usedImages = item;
+    });
+
+    this.subThoughts = (
+      await this.imageItemIndexService.getImageItemByType(this.blogId)
+    ).subscribe((item) => {
+      this.collectionsImages = item;
+    });
   }
+
+  verifyArray() {}
 
   ngOnInit() {
-    // convert images to format of imageList
     this.Refresh();
   }
 
@@ -83,7 +82,11 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
-      this.updateRanking(event.container.data);
+      this.updateRanking(
+        event.container.data,
+        event.currentIndex,
+        event.container.id
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -100,15 +103,21 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateRanking(previousData: any[]) {
-    const cnt = previousData.length;
-    if (cnt > 0) {
-      let i = 1;
-      previousData.forEach((image) => {
-        image.ranking = i;
-        this.imageListService.updateImageList(image);
-        i++;
-      });
+  private updateRanking(
+    imageItem: any,
+    currentIndex: number,
+    newContainerId: string
+  ) {
+    if (newContainerId !== this.IN_NOT_USED) {
+      const image = imageItem[currentIndex];
+      if (image.type === newContainerId) {
+        image.ranking = 0;
+        this.imageItemIndexService.updateImageList(image);
+        return;
+      }
+      image.ranking = 0;
+      image.type = newContainerId;
+      this.imageItemIndexService.updateImageList(image);
     }
   }
 
@@ -118,21 +127,15 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
     newContainerId: string,
     currentIndex: number
   ) {
-    const cnt = newData.length;
-    if (cnt > 0) {
-      let i = 1;
-      newData.forEach((image: any) => {
-        image.ranking = i;
-        image.type = newContainerId;
-        this.imageListService.updateImageList(image);
-        i++;
-      });
-    }
+    const image = newData[currentIndex];
+    image.ranking = 0;
+    image.type = newContainerId;
+    console.debug('Update Image Type', image);
+    this.imageItemIndexService.updateImageList(image);
   }
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
-    this.subFeatured.unsubscribe();
-    this.subCollections.unsubscribe();
+    this.subThoughts.unsubscribe();
   }
 }
