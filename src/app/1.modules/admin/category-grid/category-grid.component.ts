@@ -4,9 +4,10 @@ import {
   ViewChild,
   ChangeDetectionStrategy,
   inject,
+  OnDestroy,
 } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, Subscription, map, takeUntil } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -23,7 +24,8 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
   styleUrls: ['./category-grid.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CategoryGridComponent implements OnInit {
+export class CategoryGridComponent implements OnInit, OnDestroy {
+  
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   categoryGroup: FormGroup;
@@ -31,10 +33,11 @@ export class CategoryGridComponent implements OnInit {
   sTitle: string;
   cRAG: string;
 
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
+
   category: any;
   collapsed = false;
 
-  allCategories$: Observable<Category[]>;
   selectedItemKeys: any;
 
   auth = inject(AngularFireAuth);
@@ -44,12 +47,44 @@ export class CategoryGridComponent implements OnInit {
   categoryService = inject(CategoryService);
   fb = inject(FormBuilder);
 
-  thumbnailList$ =  this.imageItemIndexService.getImageItemByType('IN_CATEGORY');
+  subNotUsed: Subscription;
 
-  ngOnInit(): void {
-    this.Refresh();
-    this.createEmptyForm();
+  not_usedImages: imageItemIndex[] = [];
+  
+  allCategories$ = this.categoryService.getAll();
+
+  async onRefresh() {
+    this.allCategories$ = this.categoryService.getAll();
+    (await this.sortNotUsed()).pipe(
+    takeUntil(this._unsubscribeAll)).subscribe((item) => {
+      this.not_usedImages = item;
+    });
+  }
+  
+  async sortNotUsed() {
+    return (
+      await this.imageItemIndexService.getImageIndexList()
+    ).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.caption < b.caption ? -1 : 1;
+        });
+        return data;
+      })
+    );
+  }
+
+  async ngOnInit() {
+    this.sTitle = 'Category Lists';
     this.cRAG = '#238823';
+    this.createEmptyForm();
+    (await this.sortNotUsed()).subscribe((item) => {
+      this.not_usedImages = item;
+    });
+  }
+
+  ngOnDestroy(): void {
+    
   }
 
   contentReady = (e: any) => {
@@ -138,11 +173,7 @@ export class CategoryGridComponent implements OnInit {
     }
   }
 
-  Refresh() {
-    this.sTitle = 'Category Lists';
-    this.allCategories$ = this.categoryService.getAll();
-  }
-
+  
   onCreate() {
     this.currentDoc = '';
     this.createEmptyForm();

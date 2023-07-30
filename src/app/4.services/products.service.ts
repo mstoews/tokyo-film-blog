@@ -125,7 +125,7 @@ export class ProductsService {
   }
 
   async getImageListByProduct(productId: string) {
-    return await this.imageItemIndexService.getImageItemByType(productId);
+    return await this.imageItemIndexService.getImageByType(productId);
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {

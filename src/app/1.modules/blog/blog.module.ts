@@ -10,7 +10,7 @@ import { HeaderComponent } from 'app/2.main/header/header.component';
 import { FuseCardModule } from '@made-to/components/card';
 import { IconsModule } from 'app/icons.module';
 import { BlogCardComponent } from './blog-card/blog-card.component';
-import { BlogRoutingModule } from './blog-routing/blog-routing.module';
+import { BlogRoutingModule } from './blog-routing.module';
 import { SharedModule } from '../shared-module/shared.module';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsListComponent } from './comments-list/comments-list.component';
@@ -37,5 +37,11 @@ import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
     BlogRoutingModule,
   ],
   providers: [BlogResolver],
+  exports: [
+    BlogComponent,
+    BlogCardComponent,
+    FashionComponent,
+    DetailComponent,
+  ],
 })
-export class BlogModule {}
+export class MadeToBlogModule {}

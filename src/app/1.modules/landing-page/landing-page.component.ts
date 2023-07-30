@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ScrollService } from 'app/4.services/scroll.service';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -47,7 +47,6 @@ export class LandingPageComponent implements OnInit {
 
   constructor(
     private contactService: ContactService,
-    private imageListService: ImageItemIndexService,
     private mainPage: MainPageService,
     private router: Router,
     private scrollTo: ScrollService,
@@ -57,15 +56,12 @@ export class LandingPageComponent implements OnInit {
     private menuToggle: MenuToggleService
   ) {}
 
+  imageListService = inject(ImageItemIndexService);
+
   mainPage$ = this.mainPage.getAll();
-  featuredList$ = this.imageListService.getImageItemByType('IN_GALLERY');
+  featuredList$ = this.imageListService.getAllImages('IN_GALLERY');
 
   ngOnInit(): void {
-    const UserId = of(this.authService.afAuth.currentUser);
-    UserId.subscribe((user) => {
-      console.debug(JSON.stringify(user));
-    });
-
     this.createEmptyForm();
   }
 
@@ -139,6 +135,6 @@ export class LandingPageComponent implements OnInit {
 
   populateImageList() {
     let imageCount = 0;
-    this.featuredList$ = this.imageListService.getImageItemByType('IN_GALLERY');
+    this.featuredList$ = this.imageListService.getAllImages('IN_GAllERY');
   }
 }

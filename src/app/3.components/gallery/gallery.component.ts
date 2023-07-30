@@ -14,6 +14,7 @@ export class GalleryComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageCount.set(this.imageCollection.length);
+    console.log(this.imageCount());
     if (this.imageCollection.length > 6) {
       this.imageItems = this.imageCollection.slice(0, 6);
     } else {

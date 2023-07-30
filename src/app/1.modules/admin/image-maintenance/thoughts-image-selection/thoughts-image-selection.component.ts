@@ -34,14 +34,12 @@ export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
   IN_COLLECTION = 'IN_COLLECTION';
 
   subNotUsed: Subscription;
-  subDeleted: Subscription;
-  subMain: Subscription;
+
   subCollections: Subscription;
 
   not_usedImages: imageItem[] = [];
-  deletedImages: imageItem[] = [];
+
   collectionsImages: imageItem[] = [];
-  inventoryImages$: Observable<imageItem[]>;
   firstRun: boolean = true;
 
   deleteDupes = inject(DeleteDuplicateService);
@@ -157,7 +155,6 @@ export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
-    this.subDeleted.unsubscribe();
     this.subCollections.unsubscribe();
   }
 }

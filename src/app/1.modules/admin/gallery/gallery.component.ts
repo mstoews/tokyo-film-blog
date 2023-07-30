@@ -8,7 +8,7 @@ interface Item {
 }
 
 @Component({
-  selector: 'app-gallery',
+  selector: 'app-gallery-mozaic',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -8,6 +8,7 @@ import { Blog, BlogPartial, Comments } from 'app/5.models/blog';
 import { convertSnaps } from './db-utils';
 import { ImageListService } from './image-list.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ImageItemIndexService } from './image-item-index.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,17 +20,15 @@ export class BlogService {
   private commentItems: Observable<Comments[]>;
   private commentCollection: AngularFirestoreCollection<Comments>;
 
-  constructor(
-    private afs: AngularFirestore,
-    private snack: MatSnackBar,
-    private imageListService: ImageListService
-  ) {
+  constructor(private afs: AngularFirestore, private snack: MatSnackBar) {
     this.blogCollection = afs.collection('blog', (ref) =>
       ref.orderBy('date_created', 'desc')
     );
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
   }
+
+  imageItemIndexService = inject(ImageItemIndexService);
 
   createComment(comment: Comments) {
     const collectionRef = this.afs.collection(
@@ -94,7 +93,7 @@ export class BlogService {
   }
 
   getBlogImage(parentId: string): any {
-    return this.imageListService.getImagesByProductId(parentId);
+    return this.imageItemIndexService.getImageByType(parentId);
   }
 
   getAllPublishedBlog() {

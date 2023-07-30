@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ImageListService } from '../../../4.services/image-list.service';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 import { imageItem, imageItemIndex } from '../../../5.models/imageItem';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import {
   CdkDragDrop,
@@ -15,7 +15,8 @@ import {
   templateUrl: './image-list.component.html',
   styleUrls: ['./image-list.component.css'],
 })
-export class ImageListComponent {
+export class ImageListComponent implements OnDestroy {
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
   IN_NOT_USED = 'IN_NOT_USED';
   IN_FEATURED = 'IN_FEATURED';
   IN_COLLECTION = 'IN_COLLECTION';
@@ -41,27 +42,35 @@ export class ImageListComponent {
 
   async Refresh() {
     this.subNotUsed = (
-      await this.imageItemIndexService.getImageItemByType(this.IN_NOT_USED)
+      await (
+        await this.imageItemIndexService.getImageByType(this.IN_NOT_USED)
+      ).pipe(takeUntil(this._unsubscribeAll))
     ).subscribe((item) => {
       this.not_usedImages = item;
     });
     this.subFeatured = (
-      await this.imageItemIndexService.getImageItemByType(this.IN_FEATURED)
+      await (
+        await this.imageItemIndexService.getImageByType(this.IN_FEATURED)
+      ).pipe(takeUntil(this._unsubscribeAll))
     ).subscribe((item) => {
       this.featuredImages = item;
     });
     this.subCollections = (
-      await this.imageItemIndexService.getImageItemByType(this.IN_COLLECTION)
+      await (
+        await this.imageItemIndexService.getImageByType(this.IN_COLLECTION)
+      ).pipe(takeUntil(this._unsubscribeAll))
     ).subscribe((item) => {
       this.collectionsImages = item;
     });
     this.subCreations = (
-      await this.imageItemIndexService.getImageItemByType(this.IN_CREATION)
+      await (
+        await this.imageItemIndexService.getImageByType(this.IN_CREATION)
+      ).pipe(takeUntil(this._unsubscribeAll))
     ).subscribe((item) => {
       this.creationsImages = item;
     });
     this.subGallery = (
-      await this.imageItemIndexService.getImageItemByType(this.IN_GALLERY)
+      await this.imageItemIndexService.getImageByType(this.IN_GALLERY)
     ).subscribe((item) => {
       this.galleryImages = item;
     });
@@ -126,10 +135,7 @@ export class ImageListComponent {
   }
 
   ngOnDestroy() {
-    this.subNotUsed.unsubscribe();
-    this.subFeatured.unsubscribe();
-    this.subCollections.unsubscribe();
-    this.subCreations.unsubscribe();
-    this.subGallery.unsubscribe();
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 }

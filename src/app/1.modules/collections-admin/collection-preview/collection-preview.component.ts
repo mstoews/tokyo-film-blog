@@ -6,10 +6,10 @@ import {
   inject,
   ViewChild,
 } from '@angular/core';
-import { ImageListService } from 'app/4.services/image-list.service';
+
 import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { Collections } from 'app/5.models/collection';
-import { Observable } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
@@ -23,6 +23,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   collectionGroup: FormGroup;
+  private destroy$ = new Subject<void>();
 
   @Input() collection: Collections;
   Title = '';
@@ -45,8 +46,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   }
 
   onUpdate(imgItem: imageItemIndex) {
-    this.imageListService.updateCollectionDescription(imgItem)
-
+    this.imageListService.updateCollectionDescription(imgItem);
   }
 
   createEmptyForm() {
@@ -57,7 +57,8 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   }
 
   async Refresh(id: string) {
-    this.subCollections = (await this.imageListService.getImageItemByType(id))
+    this.subCollections = (await this.imageListService.getImageByType(id))
+      .pipe(takeUntil(this.destroy$))
       .subscribe((item) => {
         this.collectionsImages = item;
       });
@@ -76,7 +77,8 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subCollections.unsubscribe();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   UpdateDescription(desc: string) {

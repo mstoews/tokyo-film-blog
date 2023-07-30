@@ -11,11 +11,7 @@ const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
 const adminOnly = () => hasCustomClaim('admin');
 
 const routes: Route[] = [
-  {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
+
   {
     path: 'home',
     loadChildren: () =>
@@ -51,19 +47,22 @@ const routes: Route[] = [
   {
     path: 'blog',
     loadChildren: () =>
-      import('./1.modules/blog/blog.module').then((mod) => mod.BlogModule),
+      import('./1.modules/blog/blog.module').then(
+        (mod) => mod.MadeToBlogModule
+      ),
     data: { state: 'blog' },
     title: 'Thoughts',
   },
   {
     path: 'image-admin',
     loadChildren: () =>
-    import('./1.modules/admin/image-maintenance/image-maintenance.module').then( (mod) => mod.ImageMaintenanceModule ),
+      import(
+        './1.modules/admin/image-maintenance/image-maintenance.module'
+      ).then((mod) => mod.ImageMaintenanceModule),
     title: 'Image Maintenance',
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly },
   },
-
 
   {
     path: 'blog-admin',
@@ -82,18 +81,18 @@ const routes: Route[] = [
       import('./1.modules/collections-admin/collections-admin.module').then(
         (mod) => mod.CollectionsAdminModule
       ),
-      title: 'Collection Admin',
-      canActivate: [AngularFireAuthGuard],
-      data: { authGuardPipe: adminOnly },
+    title: 'Collection Admin',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
   },
 
   {
     path: 'admin',
     loadChildren: () =>
       import('./1.modules/admin/admin.module').then((mod) => mod.AdminModule),
-      canActivate: [AngularFireAuthGuard],
-      data: { authGuardPipe: redirectLoggedInToHome },
-      title: 'Maintenance',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToHome },
+    title: 'Maintenance',
   },
   {
     path: 'collections',
@@ -131,6 +130,16 @@ const routes: Route[] = [
     data: { state: 'tos' },
     title: 'Terms of Service',
   },
+
+  {
+    path: 'social/social',
+    loadChildren: () =>
+      import('./1.modules/social/social.module').then(
+        (mod) => mod.SocialModule
+      ),
+    title: 'Social Media',
+  },
+
   {
     path: '**',
     redirectTo: '/home',
@@ -140,10 +149,11 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,
-    {
-      scrollPositionRestoration: 'enabled'
-    })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

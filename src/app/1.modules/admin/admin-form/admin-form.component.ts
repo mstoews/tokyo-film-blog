@@ -8,7 +8,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Mainpage } from 'app/5.models/mainpage';
 import { MainPageService } from 'app/4.services/main-page.service';
-import { Observable, Subscription, first } from 'rxjs';
+import { Observable, Subscription, filter, first, take } from 'rxjs';
 
 @Component({
   selector: 'admin-form',
@@ -29,7 +29,7 @@ export class AdminFormComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.mainPage$ = this.mainPageService.getAll().pipe(first());
     this.createEmptyForm();
-    this.subMainPage = this.mainPage$.subscribe((page) => {
+    this.subMainPage = this.mainPage$.pipe(take(1)).subscribe((page) => {
       if (page.length > 0) {
         this.createForm(page[0]);
       }

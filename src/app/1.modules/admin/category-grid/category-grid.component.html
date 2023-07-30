@@ -1,3 +1,4 @@
+
 <app-header [title]="'Update Categories'"></app-header>
 <mat-drawer-container class="flex-col h-[800px] m-2">
   <mat-drawer class="lg:w-1/4 sm:h-full sm:w-full bg-white-100" #drawer [opened]="false" mode="side" [position]="'end'"
@@ -8,8 +9,6 @@
         <form [formGroup]="categoryGroup" (ngSubmit)="onUpdate(categoryGroup.value)" class="form">
 
           <div class="flex flex-col m-1">
-
-
             <section class="flex md:flex-row">
 
               <div *ngIf="!categoryGroup.value.image" class="flex flex-col mt-4">
@@ -27,7 +26,6 @@
               </div>
             </section>
 
-
             <div class="flex flex-col grow">
               <mat-label class="ml-2 text-base">Description</mat-label>
               <mat-form-field class="m-1 form-element grow" appearance="outline">
@@ -42,7 +40,7 @@
               </mat-form-field>
             </div>
 
-            <div class="flex flex-col grow">
+            <!-- <div class="flex flex-col grow">
               <mat-label class="ml-2 text-base">Update Date</mat-label>
               <mat-form-field appearance="outline">
                 <input type="text" matInput placeholder="Created Date" formControlName="updateDate">
@@ -54,14 +52,14 @@
               <mat-form-field appearance="outline">
                 <input type="text" matInput placeholder="Created Date" formControlName="createDate">
               </mat-form-field>
-            </div>
+            </div> -->
 
-            <div class="flex flex-col grow">
+            <!-- <div class="flex flex-col grow">
               <mat-label class="ml-2 text-base">Updated By</mat-label>
               <mat-form-field class="m-1 form-element grow" appearance="outline">
                 <input type="text" matInput placeholder="Updated By" formControlName="updateBy" />
               </mat-form-field>
-            </div>
+            </div> -->
 
             <div class="flex flex-col grow">
               <mat-label class="ml-2 text-base">Image URL</mat-label>
@@ -114,17 +112,20 @@
         </div>
       </dx-data-grid>
       <div class="w-full h-full">
-        <div *ngIf="thumbnailList$ | async as imagesList"  class="col-start-1 col-end-6 item--1 lg-rounded" cdkScrollable>
+        
+        <div   class="col-start-1 col-end-6 item--1 lg-rounded" cdkScrollable>
           <div class="sticky top-0 z-50 image_title">Available Images</div>
           <div class="flex flex-wrap">
-            <div *ngFor="let item of imagesList" >
+            <div *ngFor="let item of not_usedImages" >
               <div class="flex-none object-cover p-1">
-                <app-inventory-image-card (imageSelected)="UpdateCategoryURL($event)" [image]="item"> </app-inventory-image-card>
+                <image-maintenance-card (imageSelected)="UpdateCategoryURL($event)" [image]="item"> </image-maintenance-card> 
               </div>
-            </div>
+            </div> 
           </div>
         </div>
+      
       </div>
+    
     </div>
   </ng-container>
 

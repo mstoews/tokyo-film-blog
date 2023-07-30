@@ -8,11 +8,12 @@
 </script>
 
 <div (click)="onOpenBlog(blog.id)" class="flex flex-col w-full text-gray-700 max-w-140 filter-article filter-interactive" >
-  <ng-container  *ngIf="blogImages$ | async as blogImages">
-    <img class="object-cover w-140" [src]="blogImages[0].imageSrc" width="290" height="400" alt="caps"
+  <!-- <ng-container  *ngIf="blogImages$ | async as blogImages"> -->
+    <!-- <img class="object-cover w-140" [src]="blogImages[0].imageSrc200" width="290" height="400" alt="caps" -->
+    <img class="object-cover w-140" [src]="blog.image" width="290" height="400" alt="caps"
       alt="Card cover image" />
     <div class="m-8 mb-4">
       <div class="text-2xl font-semi-bold leading-tight" [innerHTML]="blog.paragraph | safe: 'html'"></div>
     </div>
-  </ng-container>
+  <!-- </ng-container> -->
 </div>

@@ -39,8 +39,7 @@ import { LightboxModule } from '../lightbox';
 
 export const ProductFuncResolver: ResolveFn<Product[]> = (
   route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
-) => {
+  state: RouterStateSnapshot) => {
   return inject(ProductsService).getInventoryByCategory(
     route.paramMap.get('id')
   );

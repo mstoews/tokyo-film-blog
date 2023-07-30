@@ -9,19 +9,31 @@
     </div>
   <span></span>
 <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
+
   <div mat-dialog-content>
     <form #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)" class="form">
       <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
         <input matInput placeholder="Title" formControlName="title" />
       </mat-form-field>
-      <mat-tab-group #tabGroup class="m-2" mat-stretch-tabs="false" mat-align-tabs="start">
+      <div mat-dialog-actions>
+        <button mat-icon-button (click)="onUpdate(blog)"  matTooltip="Update" color="primary" class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" aria-label="Add">
+          <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+        </button>
+        <button (click)="onDelete(blog)" mat-icon-button matTooltip="Remove" color="primary" class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100"[disabled]="!blogGroup.valid">
+          <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+        </button>
+        <button (click)="onPublish(blog)" mat-icon-button  matTooltip="Publish" color="primary" class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" [disabled]="!blogGroup.valid">
+          <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+        </button>
+      </div>
+      <mat-tab-group #tabGroup class="m-2" mat-stretch-tabs="false" mat-align-tabs="start">        
         <mat-tab label="Introduction">
           <ng-template matTabContent>
             <mat-checkbox color="primary" formControlName="published">
               Published
             </mat-checkbox>
             <!-- <text-editor [valueContent]="para" ></text-editor> -->
-            <dx-html-editor height="400px" [(value)]="para">
+            <dx-html-editor height="h-screen" [(value)]="para">
               <dxo-toolbar>
                 <dxi-item name="undo"></dxi-item>
                 <dxi-item name="redo"></dxi-item>
@@ -54,12 +66,12 @@
               </dxo-toolbar>
             </dx-html-editor>
           </ng-template>
-         
+
         </mat-tab>
         <mat-tab label="Main">
           <ng-template matTabContent>
             <!-- <text-editor [valueContent]="body"></text-editor> -->
-            <dx-html-editor height="400px" [(value)]="body">
+            <dx-html-editor [(value)]="body">
               <dxo-toolbar>
                 <dxi-item name="undo"></dxi-item>
                 <dxi-item name="redo"></dxi-item>
@@ -135,27 +147,16 @@
         </mat-tab>
         <mat-tab label="Images">
           <ng-container>
-            <!-- <app-gallery-lightbox class="h-100" [galleryData]="data" [showCount]="true">
-            </app-gallery-lightbox> -->
             <blog-image-selection [blogId]="blogId"></blog-image-selection>
+          </ng-container>
+        </mat-tab>
+        <mat-tab label="Preview">
+          <ng-container>
+          <app-blog-preview [blog]="blog"></app-blog-preview>
           </ng-container>
         </mat-tab>
       </mat-tab-group>
     </form>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-icon-button (click)="onUpdate(blog)"  matTooltip="Update" color="primary" class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" aria-label="Add">
-      <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
-    </button>
-    <button (click)="onDelete(blog)" mat-icon-button matTooltip="Remove" color="primary" class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100"[disabled]="!blogGroup.valid">
-      <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-    </button>
-    <button (click)="onPublish(blog)" mat-icon-button  matTooltip="Publish" color="primary" class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" [disabled]="!blogGroup.valid">
-      <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon> 
-    </button>
-
-
-
   </div>
 </mat-card>
 </div>

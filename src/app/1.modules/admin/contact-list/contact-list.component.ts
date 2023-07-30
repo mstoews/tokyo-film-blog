@@ -4,6 +4,7 @@ import {
   Inject,
   OnInit,
   Optional,
+  inject,
 } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Contact } from 'app/5.models/contact';
@@ -17,7 +18,9 @@ import { Observable } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactListComponent implements OnInit {
-  constructor(public contactService: ContactService, private fb: FormBuilder) {}
+
+  contactService = inject(ContactService);
+  fb = inject(FormBuilder);
 
   ngOnInit(): void {
     this.onRefresh();
@@ -33,9 +36,6 @@ export class ContactListComponent implements OnInit {
 
   onRefresh() {
     this.allContact$ = this.contactService.getAll();
-    this.allContact$.subscribe((contact) => {
-      // console.debug(JSON.stringify(contact));
-    });
   }
 
   columnsToDisplay: string[] = ['name', 'email', 'message', 'created_date'];

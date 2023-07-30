@@ -117,7 +117,7 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getImageItemByType('IN_NOT_USED')
+      await this.imageItemIndexService.getImageByType('IN_NOT_USED')
     ).pipe(
       map((data) => {
         data.sort((a, b) => {
@@ -134,7 +134,7 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
     });
 
     this.subCollections = (
-      await this.imageItemIndexService.getImageItemByType(this.collectionsId)
+      await this.imageItemIndexService.getImageByType(this.collectionsId)
     ).subscribe((item) => {
       this.collectionsImages = item;
     });

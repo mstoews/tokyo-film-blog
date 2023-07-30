@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { IUser } from './users';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
@@ -8,14 +8,14 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from 'firebase/auth';
-import { map, Observable, of } from 'rxjs';
+import { map, Observable, of, Subject, takeUntil } from 'rxjs';
 import { UserRoles } from 'app/5.models/user-roles';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
+export class AuthService implements OnDestroy{
   userData: any;
   userId: string;
   isAnonymous: boolean;
@@ -23,6 +23,8 @@ export class AuthService {
   isRegistered: boolean;
   email: string;
   private userName: string;
+  private destroy$ = new Subject<void>();
+
 
   // private subject = new BehaviorSubject<User>(ANONYMOUS_USER);
   private userCollection: AngularFirestoreCollection<User>;
@@ -44,7 +46,9 @@ export class AuthService {
   ) {
     this.isAdminUser = false;
 
-    this.afAuth.authState.subscribe((user) => {
+    this.afAuth.authState
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((user) => {
       if (user) {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
@@ -70,6 +74,10 @@ export class AuthService {
         // console.debug('logged out state', JSON.stringify(user));
       }
     });
+  }
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   async loginAnonymously() {
@@ -118,7 +126,9 @@ export class AuthService {
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         this.SetUserData(result.user);
-        this.afAuth.authState.subscribe((user) => {
+        this.afAuth.authState
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((user) => {
           if (user) {
             this.router.navigate(['dashboard']);
           }

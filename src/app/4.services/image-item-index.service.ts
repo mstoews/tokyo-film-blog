@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,21 @@ import { map } from 'rxjs';
 export class ImageItemIndexService {
   constructor() {
     this.createOriginalIndexMaps();
-    this.createUsedImageMaps();
+    // this.createUsedImageMaps();
   }
+
+
+  // private categoryCollection: AngularFirestoreCollection<Category>;
+  // private categoryItems: Observable<Category[]>;
+  // private sub: Subscription;
+
+  // constructor(public afs: AngularFirestore) {
+  //   this.categoryCollection = afs.collection<Category>('category');
+  //   this.categoryItems = this.categoryCollection.valueChanges({
+  //     idField: 'id',
+  //   });
+  // }
+
 
   afs = inject(AngularFirestore);
   storage = inject(AngularFireStorage);
@@ -20,13 +33,19 @@ export class ImageItemIndexService {
   hashOriginalIndexMap = new Map<string, imageItemIndex>();
   hashImageItemMap = new Map<string, imageItem>();
 
-  imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) =>
-    ref.orderBy('ranking')
-  );
-  imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
+  //private imageItems: Observable<imageItemIndex[]>;
+  // private itemsCollection: AngularFirestoreCollection<imageItemIndex>;
 
-  imageIndexCollections =
-    this.afs.collection<imageItemIndex>('originalImageList');
+  
+  itemsCollection = this.afs.collection<imageItemIndex[]>('originalImageList', (ref) => ref.orderBy('ranking'));
+  imageItems = this.itemsCollection.valueChanges({ idField: 'id' });
+  
+  // imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) =>
+  //   ref.orderBy('ranking')
+  // );
+  // imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
+
+  imageIndexCollections = this.afs.collection<imageItemIndex>('originalImageList', (ref) => ref.orderBy('ranking'));
   imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id' });
 
   createOriginalItem(image: imageItemIndex) {
@@ -40,10 +59,27 @@ export class ImageItemIndexService {
   }
 
   async getImageIndexList() {
-    return this.imageIndexItems;
+    return (await this.imageIndexItems.pipe(
+      map((images) => images.filter((type) => type.type !== '')))
+    );
   }
 
-  async getImageItemByType(type: string) {
+  getAllImages(type: string) {
+    if (type === null || type === undefined || type === '') {
+    let imageIndexCollections = this.afs.collection<imageItemIndex>('originalImageList', (ref) => ref.orderBy('ranking'));
+    let imageIndexItems = imageIndexCollections.valueChanges({ idField: 'id' });
+    return imageIndexItems;
+    }
+    else
+    {
+      let imageIndexCollections = this.afs.collection<imageItemIndex>('originalImageList', (ref) => ref.orderBy('ranking'))
+      let imageIndexItems = imageIndexCollections.valueChanges({ idField: 'id' }).pipe((map(images => images.filter((types) => types.type === type)
+      )));
+      return imageIndexItems
+    }
+  } 
+
+  async getImageByType(type: string) {
     return (await this.getImageIndexList()).pipe(
       map((images) => images.filter((image) => image.type === type))
     );
@@ -64,17 +100,17 @@ export class ImageItemIndexService {
     });
   }
 
-  async createUsedImageMaps(): Promise<void> {
-    this.hashUsedImagesMap.clear();
-    (await this.getUsedImagesList()).subscribe(async (items) => {
-      items.forEach((item) => {
-        this.hashUsedImagesMap.set(item.id, item);
-      });
-    });
-  }
+  // async createUsedImageMaps(): Promise<void> {
+  //   this.hashUsedImagesMap.clear();
+  //   (await this.getUsedImagesList()).subscribe(async (items) => {
+  //     items.forEach((item) => {
+  //       this.hashUsedImagesMap.set(item.id, item);
+  //     });
+  //   });
+  // }
 
   getUsedImagesList() {
-    return this.imageItems.pipe(
+    return this.imageIndexItems.pipe(
       map((images) => images.filter((type) => type.type !== 'IN_NOT_USED'))
     );
   }

@@ -105,37 +105,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     });
   }
 
-  Refresh() {
-    // this.subNotUsed = this.imageListService
-    //   .getImagesByType(this.IN_NOT_USED)
-    //   .subscribe((item) => {
-    //     this.not_usedImages = item;
-    //   });
-    // this.subFeatured = this.imageListService
-    //   .getImagesByType(this.IN_FEATURED)
-    //   .subscribe((item) => {
-    //     this.featuredImages = item;
-    //   });
-    // this.subCollections = this.imageListService
-    //   .getImagesByType(this.IN_COLLECTION)
-    //   .subscribe((item) => {
-    //     this.collectionsImages = item;
-    //   });
-    // this.subCreations = this.imageListService
-    //   .getImagesByType(this.IN_CREATION)
-    //   .subscribe((item) => {
-    //     this.creationsImages = item;
-    //   });
-    // this.subGallery = this.imageListService
-    //   .getImagesByType(this.IN_GALLERY)
-    //   .subscribe((item) => {
-    //     this.galleryImages = item;
-    //   });
-    // this.printImageList('Featured', this.featuredImages)
-    // this.printImageList('Collections', this.collectionsImages)
-    // this.printImageList('Creations', this.creationsImages)
-    // this.printImageList('Gallery', this.galleryImages)
-  }
+  Refresh() { }
 
   createEmptyForm() {
     this.imageGroup = this.fb.group({

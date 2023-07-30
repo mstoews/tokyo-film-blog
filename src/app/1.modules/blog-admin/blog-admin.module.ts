@@ -12,6 +12,7 @@ import { SafePipe } from './safe.pipe';
 import { BlogAddDialog } from './add/blog-add.component';
 import { BlogImageSelectionComponent } from './blog-image-selection/blog-image-selection.component';
 import { SharedModule } from '../shared-module/shared.module';
+import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { SharedModule } from '../shared-module/shared.module';
     BlogImageSelectionComponent,
     BlogAddDialog,
     SafePipe,
+    BlogPreviewComponent,
   ],
   imports: [
     CommonModule,
@@ -31,5 +33,6 @@ import { SharedModule } from '../shared-module/shared.module';
     BlogEditRoutingModule,
   ],
   providers: [BlogResolver],
+  exports: [BlogEditComponent, BlogAdminComponent],
 })
 export class BlogAdminModule {}

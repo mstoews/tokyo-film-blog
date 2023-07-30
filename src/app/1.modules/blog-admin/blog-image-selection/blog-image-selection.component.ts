@@ -29,8 +29,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   subThoughts: Subscription;
 
   not_usedImages: imageItemIndex[] = [];
-  featuredImages: imageItemIndex[] = [];
-  collectionsImages: imageItemIndex[] = [];
+  blogImages: imageItemIndex[] = [];
 
   constructor(
     public imageItemIndexService: ImageItemIndexService,
@@ -39,11 +38,22 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getImageItemByType('IN_NOT_USED')
+      await this.imageItemIndexService.getImageByType('IN_NOT_USED')
     ).pipe(
       map((data) => {
         data.sort((a, b) => {
-          return a.caption < b.caption ? -1 : 1;
+          return a.ranking < b.ranking ? -1 : 1;
+        });
+        return data;
+      })
+    );
+  }
+
+  async sortThoughtImages() {
+    return (await this.imageItemIndexService.getImageByType(this.blogId)).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.ranking < b.ranking ? -1 : 1;
         });
         return data;
       })
@@ -55,10 +65,8 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       this.not_usedImages = item;
     });
 
-    this.subThoughts = (
-      await this.imageItemIndexService.getImageItemByType(this.blogId)
-    ).subscribe((item) => {
-      this.collectionsImages = item;
+    this.subThoughts = (await this.sortThoughtImages()).subscribe((item) => {
+      this.blogImages = item;
     });
   }
 
@@ -82,11 +90,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
         event.previousIndex,
         event.currentIndex
       );
-      this.updateRanking(
-        event.container.data,
-        event.currentIndex,
-        event.container.id
-      );
+      this.updateRanking(event.previousContainer.data);
     } else {
       transferArrayItem(
         event.previousContainer.data,
@@ -103,21 +107,56 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateRanking(
+  private updateRanking(previousData: any) {
+    // loop through just the previous day
+    // previous status is the same so not updated
+    const cnt = previousData.length;
+    if (cnt > 0) {
+      let i = 1;
+      previousData.forEach((image) => {
+        image.ranking = i * 2;
+        this.imageItemIndexService.updateImageList(image);
+        i++;
+      });
+      console.log('updateRanking', previousData);
+    }
+  }
+
+  private updateRanking2(
+    previousData: any,
     imageItem: any,
     currentIndex: number,
     newContainerId: string
   ) {
     if (newContainerId !== this.IN_NOT_USED) {
-      const image = imageItem[currentIndex];
-      if (image.type === newContainerId) {
-        image.ranking = 0;
-        this.imageItemIndexService.updateImageList(image);
-        return;
+      let ranking = 0;
+      imageItem.forEach((element: any) => {
+        console.debug('image', JSON.stringify(element));
+        element.ranking = ranking;
+        this.imageItemIndexService.updateImageList(element);
+        ranking++;
+      });
+    }
+  }
+
+  private updateRanking1(
+    previousData: any,
+    imageItem: any,
+    currentIndex: number,
+    newContainerId: string
+  ) {
+    if (newContainerId === this.blogId) {
+      // const image = imageItem[currentIndex];
+      const cnt = previousData.length * 2;
+      if (cnt > 0) {
+        let i = 1;
+        previousData.forEach((image) => {
+          image.ranking = i;
+          this.imageItemIndexService.updateImageList(image);
+          i++;
+        });
+        console.log('updateRanking', previousData);
       }
-      image.ranking = 0;
-      image.type = newContainerId;
-      this.imageItemIndexService.updateImageList(image);
     }
   }
 

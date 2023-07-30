@@ -72,7 +72,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getImageItemByType(this.IN_NOT_USED)
+      await this.imageItemIndexService.getImageByType(this.IN_NOT_USED)
     ).pipe(
       map((data) => {
         data.sort((a, b) => {
