@@ -10,8 +10,11 @@ import { CategoryService } from 'app/4.services/category.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ShopLandingComponent  {
-  route = inject(Router);
-  categoryService = inject(CategoryService);
+  constructor(
+    private route: Router,
+    private categoryService: CategoryService
+  ) {}
+  
   sTitle = 'Made To Shopping Categories';
 
   Category$ = this.categoryService.getAll();
