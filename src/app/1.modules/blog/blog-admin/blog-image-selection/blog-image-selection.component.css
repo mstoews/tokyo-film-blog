@@ -32,7 +32,7 @@
 
 .list {
   flex-direction: column;
-  width: 100%;  
+  width: 100%;
   border: dashed 1px rgb(81, 50, 139);
   background: rgb(245, 246, 250);
   font-size: 10px;

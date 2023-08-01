@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 
-import { Routes, RouterModule } from '@angular/router'
+import { Routes, RouterModule } from '@angular/router';
 
 import { ProductResolver } from 'app/4.services/product.resolver';
-import { AdminFormComponent } from './admin-form/admin-form.component';
-import { AdminShellComponent } from './admin-shell/admin-shell.component';
+import { AdminFormComponent } from './company/admin-form/admin-form.component';
+import { AdminShellComponent } from './company/admin-shell/admin-shell.component';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 
-import { InventoryComponent } from './inventory-maintenance/inventory-grid.component';
-import { InventoryImageSelectionComponent } from './inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
-import { ProductEditComponent } from './inventory-maintenance/product-edit/product-edit.component';
+import { InventoryComponent } from '../shop/shop-inventory-maintenance/inventory-grid.component';
+import { InventoryImageSelectionComponent } from '../shop/shop-inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
+import { ProductEditComponent } from '../shop/shop-inventory-maintenance/product-edit/product-edit.component';
 
 import { ContactListComponent } from './contact-list/contact-list.component';
 import {
@@ -24,10 +24,11 @@ import { ImageMgtEditComponent } from './image-maintenance/image-edit/image-mgt-
 // const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
 const adminOnly = () => hasCustomClaim('admin');
 
-
 const routes: Routes = [
   {
-    path: '',redirectTo: '/home', pathMatch: 'full'
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
   },
   {
     path: 'company',
@@ -72,7 +73,7 @@ const routes: Routes = [
   {
     path: 'image-maintenance',
     pathMatch: 'full',
-    component:  ImageMgtEditComponent,
+    component: ImageMgtEditComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly },
   },
@@ -84,7 +85,9 @@ const routes: Routes = [
     data: { authGuardPipe: adminOnly },
   },
   {
-    path: '**',redirectTo: '/home', pathMatch: 'full'
+    path: '**',
+    redirectTo: '/home',
+    pathMatch: 'full',
   },
 ];
 

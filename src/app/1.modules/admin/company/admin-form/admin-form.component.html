@@ -1,0 +1,119 @@
+<app-header [title]="'Maintenance'"> </app-header>
+
+<mat-card class="m-4 text-gray-700 max-w-3/8 filter-article filter-interactive mat-elevation-z8">
+  <div mat-dialog-title class="pl-2 mb-3 ml-1 text-3xl border-green-600"
+    [ngStyle]="{ 'border-left': '10px solid', 'border-color': 'green' }">
+    {{ sTitle }}
+  </div>
+
+  <div mat-dialog-content>
+    <form [formGroup]="mainpageGroup" (ngSubmit)="onUpdate(mainpageGroup.value)">
+      <div class="flex flex-col m-1">
+        <div class="flex flex-col grow">
+          <mat-form-field class="m-1 flex-start" appearance="outline">
+            <mat-label class="ml-2 text-base">Landing Page Hero Title</mat-label>
+            <input matInput placeholder="Landing Page" formControlName="hero_title" />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col grow">
+          <mat-form-field class="m-1" appearance="outline">
+            <mat-label class="ml-2 text-base">Features Title</mat-label>
+            <input matInput placeholder="Feature" formControlName="features_header" />
+          </mat-form-field>
+        </div>
+
+        <div class="flex flex-col grow">
+
+          <mat-form-field class="m-1 form-element" appearance="outline">
+            <mat-label class="ml-2 text-base">Features Description</mat-label>
+            <input matInput placeholder="Description " formControlName="features_subheader" />
+          </mat-form-field>
+        </div>
+
+        <section class="flex flex-col md:flex-row">
+          <div class="flex flex-col grow">
+
+            <mat-form-field class="m-1 form-element grow" appearance="outline">
+              <mat-label class="ml-2 text-base">Left CTA</mat-label>
+              <input matInput placeholder="Call to Action Left" formControlName="cta_left" />
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-col grow">
+
+            <mat-form-field class="m-1 form-element grow" appearance="outline">
+              <mat-label class="ml-2 text-base">Center CTA</mat-label>
+              <input matInput placeholder="Call to Action Center" formControlName="cta_center" />
+            </mat-form-field>
+          </div>
+
+          <div class="flex flex-col grow">
+
+            <mat-form-field class="m-1 form-element grow" appearance="outline">
+              <mat-label class="ml-2 text-base">Right CTA</mat-label>
+              <input matInput placeholder="Call to Action Right" formControlName="cta_right" />
+            </mat-form-field>
+          </div>
+        </section>
+
+        <div mat-dialog-title class="flex-col font-bold">
+          Contact Information
+        </div>
+        <section class="flex flex-col md:flex-row">
+
+
+          <div class="flex flex-col grow">
+
+            <mat-form-field class="m-1 form-element grow" appearance="outline">
+              <mat-label class="ml-2 text-base">eMail</mat-label>
+              <input matInput placeholder="Contact Email" formControlName="contact_email" />
+            </mat-form-field>
+          </div>
+
+
+          <div class="flex flex-col grow">
+
+            <mat-form-field class="m-1 form-element grow" appearance="outline">
+              <mat-label class="ml-2 text-base">Telephone</mat-label>
+              <input matInput placeholder="Telephone" formControlName="contact_telephone" />
+            </mat-form-field>
+          </div>
+
+
+
+          <div class="flex flex-col grow">
+
+            <mat-form-field class="m-1 form-element grow" appearance="outline">
+              <mat-label class="ml-2 text-base">Shipping</mat-label>
+              <input matInput placeholder="Shipping Locations" formControlName="contact_shipping" />
+            </mat-form-field>
+          </div>
+        </section>
+
+        <!-- <mat-radio-group>
+        <mat-radio-button class="m-1" value="true">Active</mat-radio-button>
+        <mat-radio-button class="m-1" value="false">InActive</mat-radio-button>
+      </mat-radio-group> -->
+      </div>
+    </form>
+  </div>
+  <div mat-dialog-actions class="mt-10">
+    <button class="m-1" mat-flat-button (click)="onUpdate(mainPage)" color="primary">
+      <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+      Update Main Page
+    </button>
+    <button class="m-1" mat-flat-button (click)="onCreate()" color="primary">
+      <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
+      Create Main Page
+    </button>
+    <!--
+    <button class="m-1" mat-icon-button mat-flat-button (click)="onDelete(product)" color="primary"  [disabled]="!adminGroup.valid"        >
+      <mat-icon [svgIcon]="'mat_fill:delete'"></mat-icon>
+    </button>
+    <button class="m-1"  mat-icon-button mat-flat-button (click)="onImages()" color="primary" [disabled]="!adminGroup.valid"  >
+      <mat-icon [svgIcon]="'mat_fill:design_services'"></mat-icon>
+    </button> -->
+  </div>
+</mat-card>
+

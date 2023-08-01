@@ -23,7 +23,7 @@ const routes: Route[] = [
   {
     path: 'authentication',
     loadChildren: () =>
-      import('./1.modules/pages/authentication/authentication.module').then(
+      import('./1.modules/ui/pages/authentication/authentication.module').then(
         (mod) => mod.AuthenticationModule
       ),
     data: { state: 'authenication' },
@@ -105,7 +105,7 @@ const routes: Route[] = [
   {
     path: 'profile',
     loadChildren: () =>
-      import('./1.modules/pages/profile/profile.module').then(
+      import('./1.modules/ui/pages/profile/profile.module').then(
         (mod) => mod.ProfileModule
       ),
     data: { state: 'profile' },

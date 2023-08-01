@@ -9,32 +9,32 @@ import {
   RouterStateSnapshot,
   Resolve,
 } from '@angular/router';
-import { MainShopComponent } from './main-shop/shop.component';
-import { ShopCardComponent } from './main-shop/shop-card/shop-card.component';
+import { MainShopComponent } from './shop/main-shop/shop.component';
+import { ShopCardComponent } from './shop/main-shop/shop-card/shop-card.component';
 import { MaterialModule } from 'app/material.module';
 import { FuseCardModule } from '@made-to/components/card';
 import { SharedModule } from '../shared-module/shared.module';
-import { CartComponent } from './cart/cart.component';
-import { ProductDetailsFiveComponent } from './shop-product/product-details-five.component';
+import { CartComponent } from './shop/cart/cart.component';
+import { ProductDetailsFiveComponent } from './shop/shop-product/product-details-five.component';
 import { ProductResolver } from 'app/4.services/product.resolver';
 import { SafePipe } from './safe.pipe';
-import { StripeCheckoutComponent } from './stripe-checkout/stripe-checkout.component';
-import { ComingSoonComponent } from './coming-soon/coming-soon.component';
-import { WishListComponent } from './wishlist/wishlist.component';
+import { StripeCheckoutComponent } from './shop/stripe-checkout/stripe-checkout.component';
+import { ComingSoonComponent } from './shop/coming-soon/coming-soon.component';
+import { WishListComponent } from './shop/wishlist/wishlist.component';
 import { CartResolver } from 'app/4.services/cart.resolver';
 import { WishListResolver } from 'app/4.services/wishlist.resolver';
 import { NotificationComponent } from 'app/3.components/notification/notification.component';
-import { PurchaseThanksComponent } from './thanks/purchase-thanks';
-import { CheckoutComponent } from './checkout.component';
-import { AddressComponent } from '../pages/profile/address/address.component';
-import { PaymentConfirmationComponent } from './payment-confirmation/payment-confirmation.component';
+import { PurchaseThanksComponent } from './shop/thanks/purchase-thanks';
+import { CheckoutComponent } from './shop/checkout.component';
+import { AddressComponent } from 'app/1.modules/ui/pages/profile/address/address.component';
+import { PaymentConfirmationComponent } from './shop/payment-confirmation/payment-confirmation.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { WishlistCardComponent } from './wishlist/wishlist-card/wishlist-card.component';
-import { ShopLandingComponent } from './shop-landing/shop-landing.component';
-import { ShopLandingCardComponent } from './shop-landing/shop-landing-card/shop-landing-card.component';
+import { WishlistCardComponent } from './shop/wishlist/wishlist-card/wishlist-card.component';
+import { ShopLandingComponent } from './shop/shop-landing/shop-landing.component';
+import { ShopLandingCardComponent } from './shop/shop-landing/shop-landing-card/shop-landing-card.component';
 import { Product } from 'app/5.models/products';
 import { ProductsService } from 'app/4.services/products.service';
-import { ShopCategoryCardComponent } from './main-shop/shop-category-card/shop-category-card.component';
+import { ShopCategoryCardComponent } from './shop/main-shop/shop-category-card/shop-category-card.component';
 import { LightboxModule } from '../lightbox';
 
 export const ProductFuncResolver: ResolveFn<Product[]> = (

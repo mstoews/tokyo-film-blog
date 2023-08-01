@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  PLATFORM_ID,
+  Renderer2,
+} from '@angular/core';
 import {
   trigger,
   transition,
@@ -13,7 +19,9 @@ import { AuthService } from './4.services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthTokenService } from './4.services/auth/auth-token.service';
 import { UserService } from './4.services/auth/user.service';
- 
+import { DOCUMENT } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -52,6 +60,7 @@ import { UserService } from './4.services/auth/user.service';
     ]),
   ],
 })
+// <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
 export class AppComponent implements OnInit {
   isLoggedOut$: Observable<boolean>;
   User$: Observable<any>;
@@ -60,8 +69,16 @@ export class AppComponent implements OnInit {
     public authService: AuthService,
     public userService: UserService,
     private snackBar: MatSnackBar,
-    private token: AuthTokenService
-  ) {}
+    private token: AuthTokenService,
+    private renderer: Renderer2,
+    @Inject(DOCUMENT) private _document: any,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      //Client side execution
+      this.injectScripts();
+    }
+  }
 
   ngOnInit(): void {
     this.isLoggedOut$ = this.afAuth.authState.pipe(
@@ -72,5 +89,26 @@ export class AppComponent implements OnInit {
   title = 'Made-To';
   getState(outlet: any) {
     return outlet.activatedRouteData.state;
+  }
+  injectScripts() {
+    const gtmScriptTag = this.renderer.createElement('script');
+    gtmScriptTag.type = 'text/javascript';
+    gtmScriptTag.src =
+      'https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3';
+    this.renderer.appendChild(this._document.body, gtmScriptTag);
+
+    const gtagInitScript = this.renderer.createElement('script');
+    gtagInitScript.type = 'text/javascript';
+    gtagInitScript.text = `
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-WGMMJK9NR3');
+    `;
+    this.renderer.appendChild(this._document.body, gtagInitScript);
   }
 }

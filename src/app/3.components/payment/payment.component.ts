@@ -14,7 +14,7 @@ import { StripeElementsOptions, PaymentIntent } from '@stripe/stripe-js';
 import { MaterialModule } from 'app/material.module';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AddressComponent } from 'app/1.modules/pages/profile/address/address.component';
+import { AddressComponent } from 'app/1.modules/ui/pages/profile/address/address.component';
 
 @Component({
   standalone: true,

@@ -20,31 +20,31 @@ import { CollectionsAdminComponent } from './collection-grid/collections-grid.co
 import { CollectionsDetailsGridComponent } from './collection-details/collections-details-grid.component';
 import { CollectionPreviewComponent } from './collection-preview/collection-preview.component';
 import { CollectionImageCardComponent } from './collection-image-card/collection-image-card.component';
-import { ImageMaintenanceModule } from "../admin/image-maintenance/image-maintenance.module";
+import { ImageMaintenanceModule } from '../admin/image-maintenance/image-maintenance.module';
 
 @NgModule({
-    declarations: [
-        CollectionsEditComponent,
-        CollectionsAdminComponent,
-        CollectionsImageSelectionComponent,
-        CollectionsAddDialog,
-        CollectionsDetailsAddDialog,
-        CollectionsDetailsGridComponent,
-        SafePipe,
-        CollectionPreviewComponent,
-        CollectionImageCardComponent
-    ],
-    providers: [CollectionResolver],
-    imports: [
-        CommonModule,
-        MaterialModule,
-        DxHtmlEditorModule,
-        NgOptimizedImage,
-        SharedModule,
-        FuseCardModule,
-        IconsModule,
-        CollectionsEditRoutingModule,
-        ImageMaintenanceModule
-    ]
+  declarations: [
+    CollectionsEditComponent,
+    CollectionsAdminComponent,
+    CollectionsImageSelectionComponent,
+    CollectionsAddDialog,
+    CollectionsDetailsAddDialog,
+    CollectionsDetailsGridComponent,
+    SafePipe,
+    CollectionPreviewComponent,
+    CollectionImageCardComponent,
+  ],
+  providers: [CollectionResolver],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    DxHtmlEditorModule,
+    NgOptimizedImage,
+    SharedModule,
+    FuseCardModule,
+    IconsModule,
+    CollectionsEditRoutingModule,
+    ImageMaintenanceModule,
+  ],
 })
 export class CollectionsAdminModule {}

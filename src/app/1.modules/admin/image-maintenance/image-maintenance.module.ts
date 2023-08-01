@@ -4,7 +4,7 @@ import { MaterialModule } from 'app/material.module';
 import { ImageMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 import { ImageSelectionComponent } from './products-image-selection/image-selection.component';
 import { ImageCardComponent } from '../image-card/image-card.component';
-import { InventoryImageSelectionComponent } from '../inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
+import { InventoryImageSelectionComponent } from '../../shop/shop-inventory-maintenance/inventory-image-selection/inventory-image-selection.component';
 import { CollectionImageSelectionComponent } from './collection-image-selection/collection-image-selection.component';
 import { GalleryImageSelectionComponent } from './gallery-image-selection/image-selection.component';
 import { ImageMgtEditComponent } from './image-edit/image-mgt-edit.component';
@@ -17,15 +17,23 @@ import { PolicyModule } from 'app/1.modules/policy/policy.module';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { HeadingModule } from 'app/2.main/header/heading.module';
 import { IconsModule } from 'app/icons.module';
-import { DxDataGridModule, DxBulletModule, DxTemplateModule, DxPopupModule, DxHtmlEditorModule } from 'devextreme-angular';
+import {
+  DxDataGridModule,
+  DxBulletModule,
+  DxTemplateModule,
+  DxPopupModule,
+  DxHtmlEditorModule,
+} from 'devextreme-angular';
 import { AdminRouteModule } from '../admin-route.module';
-import { ViewImageItemComponent } from '../inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
+import { ViewImageItemComponent } from '../../shop/shop-inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AngularFireAuthGuard, hasCustomClaim } from '@angular/fire/compat/auth-guard';
+import {
+  AngularFireAuthGuard,
+  hasCustomClaim,
+} from '@angular/fire/compat/auth-guard';
 import { ImageMaintenanceRoutingModule } from './image-maintenance-routing.module';
 
 const adminOnly = () => hasCustomClaim('admin');
-
 
 const routes: Routes = [
   {
@@ -37,7 +45,6 @@ const routes: Routes = [
     component: ImageMgtEditComponent,
   },
 ];
-
 
 @NgModule({
   declarations: [
@@ -69,8 +76,7 @@ const routes: Routes = [
     ViewImageItemComponent,
     HeadingModule,
   ],
-  exports :
-  [
+  exports: [
     ImageMaintenanceComponent,
     ImageSelectionComponent,
     ImageMenubarComponent,
@@ -81,8 +87,6 @@ const routes: Routes = [
     CollectionImageSelectionComponent,
     ThoughtsImageSelectionComponent,
     InventoryImageSelectionComponent,
-  ]
+  ],
 })
-
-export class ImageMaintenanceModule {
-}
+export class ImageMaintenanceModule {}

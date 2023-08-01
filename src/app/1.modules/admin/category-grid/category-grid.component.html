@@ -19,23 +19,31 @@
               </div>
 
               <div class="flex flex-col grow">
-                <mat-label>Name</mat-label>
+
                 <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
                   <input matInput formControlName="name">
                 </mat-form-field>
               </div>
             </section>
 
             <div class="flex flex-col grow">
-              <mat-label class="ml-2 text-base">Description</mat-label>
               <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <mat-label class="ml-2 text-base">Japanese Name</mat-label>
+                <input type="text" matInput placeholder="Japanese Name" formControlName="jp_name" />
+              </mat-form-field>
+            </div>
+
+            <div class="flex flex-col grow">
+              <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <mat-label class="ml-2 text-base">Description</mat-label>
                 <input type="text" matInput placeholder="Description" formControlName="description" />
               </mat-form-field>
             </div>
 
             <div class="flex flex-col grow">
-              <mat-label class="ml-2 text-base">Japanese Description</mat-label>
               <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <mat-label class="ml-2 text-base">Japanese Description</mat-label>
                 <input type="text" matInput placeholder="Japanese Description" formControlName="jp_description" />
               </mat-form-field>
             </div>
@@ -62,8 +70,9 @@
             </div> -->
 
             <div class="flex flex-col grow">
-              <mat-label class="ml-2 text-base">Image URL</mat-label>
+
               <mat-form-field class="m-1 form-element grow" appearance="outline">
+                <mat-label class="ml-2 text-base">Image URL</mat-label>
                 <input type="text" matInput placeholder="Image URL" formControlName="image" />
               </mat-form-field>
             </div>
@@ -112,20 +121,20 @@
         </div>
       </dx-data-grid>
       <div class="w-full h-full">
-        
+
         <div   class="col-start-1 col-end-6 item--1 lg-rounded" cdkScrollable>
           <div class="sticky top-0 z-50 image_title">Available Images</div>
           <div class="flex flex-wrap">
             <div *ngFor="let item of not_usedImages" >
               <div class="flex-none object-cover p-1">
-                <image-maintenance-card (imageSelected)="UpdateCategoryURL($event)" [image]="item"> </image-maintenance-card> 
+                <image-maintenance-card (imageSelected)="UpdateCategoryURL($event)" [image]="item"> </image-maintenance-card>
               </div>
-            </div> 
+            </div>
           </div>
         </div>
-      
+
       </div>
-    
+
     </div>
   </ng-container>
 

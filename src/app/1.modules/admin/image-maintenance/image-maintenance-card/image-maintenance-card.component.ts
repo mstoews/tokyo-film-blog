@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { imageItemIndex } from 'app/5.models/imageItem';
-import { openViewComponentDialog } from '../../inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
+import { openViewComponentDialog } from '../../../shop/shop-inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
 // view-image-item/view-image-item.component
 import { filter } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
@@ -39,8 +39,6 @@ export class ImageMaintenanceCardComponent {
     console.debug(JSON.stringify(image));
     openViewComponentDialog(this.dialog, image, this.productId);
   }
-
-
 
   @Input() image: imageItemIndex;
   @Input() productId: string;

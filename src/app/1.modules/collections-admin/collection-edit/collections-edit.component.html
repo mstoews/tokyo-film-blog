@@ -11,13 +11,34 @@
     <span></span>
     <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
       <div mat-dialog-content>
-        <form #blogForm="ngForm" [formGroup]="collectionGroup" (ngSubmit)="onUpdate(collectionGroup.value)"
+        <form [formGroup]="collectionGroup" (ngSubmit)="onUpdate(collectionGroup.value)"
           class="form">
-          <mat-form-field class="m-1 form-element" [ngStyle]="{ width: '100%' }">
+          <mat-form-field class="flex flex-col grow" [ngStyle]="{ width: '100%' }" appearance="outline">
+            <mat-label class="ml-2">Title</mat-label>
             <input matInput placeholder="Title" formControlName="title" />
           </mat-form-field>
+          
+          <mat-toolbar class="flex-1-col bg-slate-300">
+            <span></span>
+            <mat-radio-group class="align-center items-center" formControlName="inventory_images" color="primary">
+              <mat-radio-button class="pb-2">All</mat-radio-button>
+              <mat-radio-button>Not Used</mat-radio-button>
+            </mat-radio-group>
+            <span class="flex-auto"></span>
+            <mat-checkbox color="primary" formControlName="published">
+              Published
+            </mat-checkbox>
+            <button mat-icon-button (click)="onUpdate(collection)" matTooltip="Update" color="primary"
+              class=" hover:bg-blue-500  hover:text-gray-100" aria-label="Add">
+              <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
+            </button>
+            <button (click)="onDelete(collection)" mat-icon-button matTooltip="Remove" color="primary"
+              class=" hover:bg-blue-500 m-1 hover:text-gray-100" [disabled]="!collectionGroup.valid">
+              <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+            </button>
+          </mat-toolbar>
+          
           <mat-tab-group #tabGroup class="m-2" mat-stretch-tabs="false" mat-align-tabs="start">
-
             <mat-tab label="Main">
               <ng-template matTabContent>
                 <!-- <text-editor [valueContent]="body"></text-editor> -->
@@ -77,22 +98,7 @@
           </mat-checkbox>
         </form>
       </div>
-      <div mat-dialog-actions>
-
-        <button mat-icon-button (click)="onUpdate(collection)" matTooltip="Update" color="primary"
-          class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" aria-label="Add">
-          <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
-        </button>
-        <button (click)="onDelete(collection)" mat-icon-button matTooltip="Remove" color="primary"
-          class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" [disabled]="!collectionGroup.valid">
-          <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-        </button>
-        <button (click)="onPublish(collection)" mat-icon-button matTooltip="Publish" color="primary"
-          class="bg-gray-100 hover:bg-blue-500 m-1 hover:text-gray-100" [disabled]="!collectionGroup.valid">
-          <mat-icon [svgIcon]="'mat_outline:add'"></mat-icon>
-        </button>
-
-      </div>
+      
     </mat-card>
   </div>
 </div>
