@@ -10,7 +10,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/4.services/products.service';
 import { map, Observable, Subscription } from 'rxjs';
 import { WishListService } from 'app/4.services/wishlist.service';
-
 import { CartService } from 'app/4.services/cart.service';
 import { AuthService } from 'app/4.services/auth/auth.service';
 import { CategoryService } from 'app/4.services/category.service';
@@ -18,7 +17,6 @@ import { Category } from 'app/5.models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { Cart } from 'app/5.models/cart';
-
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
 import { UserService } from 'app/4.services/auth/user.service';
 import { ImageListService } from 'app/4.services/image-list.service';

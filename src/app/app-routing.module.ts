@@ -11,7 +11,6 @@ const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
 const adminOnly = () => hasCustomClaim('admin');
 
 const routes: Route[] = [
-
   {
     path: 'home',
     loadChildren: () =>
@@ -67,7 +66,7 @@ const routes: Route[] = [
   {
     path: 'blog-admin',
     loadChildren: () =>
-      import('./1.modules/blog-admin/blog-admin.module').then(
+      import('./1.modules/blog/blog-admin/blog-admin.module').then(
         (mod) => mod.BlogAdminModule
       ),
     title: 'Blog Admin',

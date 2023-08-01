@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { IImageStorage } from 'app/5.models/maintenance';
+import { Subject, takeUntil } from 'rxjs';
 
 interface Item {
   imageSrc: string;
@@ -13,22 +14,30 @@ interface Item {
   styleUrls: ['./gallery.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class GalleryComponent implements OnInit {
+export class GalleryComponent implements OnInit, OnDestroy {
   inventoryImages: Item[] = [];
   imagesArray: IImageStorage[] = [];
   allImagesArray: IImageStorage[] = [];
 
   constructor(public storage: AngularFireStorage) {}
 
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
+
+
   ngOnInit(): void {
     this.ImagesList();
   }
 
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
+  
   ImagesList() {
     var imageCount = 0;
     this.storage
       .ref('/400')
-      .listAll()
+      .listAll().pipe(takeUntil(this._unsubscribeAll))
       .subscribe((files) => {
         files.items.forEach((imageRef) => {
           imageCount++;

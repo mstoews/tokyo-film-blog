@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { PolicyDocuments } from 'app/5.models/policy-documents';
-import { imageItem } from 'app/5.models/imageItem';
-import { Observable } from 'rxjs';
+
 import { PolicyService } from 'app/4.services/policy.service';
 
 @Component({
@@ -10,9 +9,9 @@ import { PolicyService } from 'app/4.services/policy.service';
   styleUrls: ['./policy-preview.component.css'],
 })
 export class PolicyPreviewComponent implements OnInit {
-  inventoryImages$: Observable<imageItem[]>;
+
   @Input() policy: PolicyDocuments;
-  images: imageItem[] = [];
+
   mainImage: string;
 
   constructor(private policyService: PolicyService) {}
@@ -20,6 +19,7 @@ export class PolicyPreviewComponent implements OnInit {
   setImage(e: string) {
     this.mainImage = e;
   }
+
 
   ngOnInit() {
     if (this.policy.id) {

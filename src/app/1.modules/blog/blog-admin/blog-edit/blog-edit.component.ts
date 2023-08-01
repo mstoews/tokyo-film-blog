@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
+import { Component, Inject, Input, OnInit, Optional, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from 'app/5.models/blog';
@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 
 @Component({
   selector: 'app-blog-edit',
@@ -19,6 +20,8 @@ export class BlogEditComponent implements OnInit {
   sTitle: any;
   blogGroup: any;
   //blogImages$: any;
+  inventory_images: 'all' | 'not_used' = 'not_used';
+
 
   sub: any;
   blogId: string;
@@ -102,8 +105,12 @@ export class BlogEditComponent implements OnInit {
   }
 
   onDelete(data: Blog) {
-    data = this.blogGroup.getRawValue();
-    this.blogService.delete(data.id.toString());
+    if (confirm('Are you sure to delete ' + data.title + '?')) {
+      this.blogService.delete(data.id.toString());
+      this.createEmptyForm();
+      return true;
+    }
+    return false
   }
 
   closeDialog() {}

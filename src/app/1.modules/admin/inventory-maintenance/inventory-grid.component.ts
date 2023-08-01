@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { filter, Observable } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { filter, Observable, Subject, takeUntil } from 'rxjs';
 import { ProductsService } from '../../../4.services/products.service';
 import { Product } from 'app/5.models/products';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -19,7 +19,7 @@ import { openAddComponentDialog } from './add/add.component';
   templateUrl: './inventory-grid.component.html',
   styleUrls: ['./inventory-grid.component.css'],
 })
-export class InventoryComponent implements OnInit {
+export class InventoryComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') drawer: MatDrawer;
   @Input() rich_description: string;
   drawOpen: 'open' | 'close' = 'open';
@@ -73,15 +73,24 @@ export class InventoryComponent implements OnInit {
    * The parentID must exist before the image collection could be created.
    */
 
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+
+  }
+
+  _unsubscribeAll:  Subject<any> = new Subject<any>();
+  // pipe(takeUntil(this._unsubscribeAll))
+
+
   onImages(): void {
     // console.debug('onImages');
     const parentId = this.prdGroup.getRawValue();
     const dialogRef = this.matDialog.open(DndComponent, {
       width: '500px',
-      data: parentId.id,
-    });
+      data: parentId.id });
 
-    dialogRef.afterClosed().subscribe((result: any) => {
+    dialogRef.afterClosed().pipe(takeUntil(this._unsubscribeAll)).subscribe((result: any) => {
       if (result === undefined) {
         result = { event: 'Cancel' };
       }
@@ -143,9 +152,10 @@ export class InventoryComponent implements OnInit {
     return `${dateParts[0]} - ${dateParts[1]} - ${dateParts[2].slice(0, 2)}`;
   }
 
+
   onAdd() {
     openAddComponentDialog(this.dialog, this.product)
-      .pipe(filter((val) => !!val))
+      .pipe(filter((val) => !!val)).pipe(takeUntil(this._unsubscribeAll))
       .subscribe((val) => console.debug('new inventory item', val));
   }
 

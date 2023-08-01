@@ -23,7 +23,7 @@ import { InventoryComponent } from './inventory-maintenance/inventory-grid.compo
 import { AdminFormComponent } from './admin-form/admin-form.component';
 import { DxHtmlEditorModule } from 'devextreme-angular';
 import { GalleryComponent } from './gallery/gallery.component';
-import { ServicesComponent } from './services/services.component';
+import { ServicesComponent } from './made-to-services/services.component';
 import { SafePipe } from './safe.pipe';
 
 import { IconsModule } from 'app/icons.module';

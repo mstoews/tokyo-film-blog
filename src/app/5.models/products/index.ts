@@ -1,5 +1,3 @@
-import { FieldValue } from "firebase/firestore";
-import { imageItem } from '../imageItem'
 
 export interface Product {
   id:   string;
@@ -21,7 +19,7 @@ export interface Product {
   is_active: any;
   quantity: number;
   quantity_increment: number;
-  // imageUrls: imageItem[];
+
 }
 
 

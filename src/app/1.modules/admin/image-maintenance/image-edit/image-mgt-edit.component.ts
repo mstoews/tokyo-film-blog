@@ -23,19 +23,19 @@ export class ImageMgtEditComponent {
 
   RefreshList() {
 
-    this.deleteDupesService.updateUsedImageList();
+    //this.deleteDupesService.updateUsedImageList();
   }
 
   RefreshImageList() {
-     this.deleteDupesService.updateImageIndexList('400')
+     //this.deleteDupesService.updateImageIndexList('400')
   }
   DeleteDupes() {
-    this.deleteDupesService.deleteDuplicateImages();
+    //this.deleteDupesService.deleteDuplicateImages();
   }
 
   async RefreshImages() {
     // this.deleteDupesService.updateImageIndexList('400')
-    await this.deleteDupesService.updateImageIndexList('200')
+    //await this.deleteDupesService.updateImageIndexList('200')
 
     // this.deleteDupesService.updateImages();
   }

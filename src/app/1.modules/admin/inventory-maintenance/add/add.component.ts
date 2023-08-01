@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import {
@@ -12,20 +12,22 @@ import { Category } from 'app/5.models/category';
 import { ProductPartial } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.css'],
 })
-export class AddComponentDialog {
+export class AddComponentDialog implements OnDestroy{
   description: string;
   categories: Category[];
   updated_category: string;
   category$: Observable<Category[]>;
   form: FormGroup;
   productId: string;
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
     private fb: FormBuilder,
@@ -38,10 +40,14 @@ export class AddComponentDialog {
     this.description = product.description;
     this.createForm();
   }
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
 
   ngOnInit() {
     this.category$ = this.categoryService.getAll();
-    this.category$.subscribe((result) => {
+    this.category$.pipe(takeUntil(this._unsubscribeAll)).subscribe((result) => {
       this.categories = result;
     });
   }

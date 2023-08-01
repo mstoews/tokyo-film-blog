@@ -7,9 +7,9 @@ import {
   inject,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Observable, Subscription, map } from 'rxjs';
-import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { Observable, Subject, Subscription, map } from 'rxjs';
+// import { ImageListService } from 'app/4.services/image-list.service';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -29,13 +29,15 @@ import { MatDrawer } from '@angular/material/sidenav';
 export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   @Input() productId: string;
 
-  currentImage: imageItem;
+  currentImage: imageItemIndex;
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_COLLECTION = 'IN_COLLECTION';
 
   subNotUsed: Subscription;
   subCollections: Subscription;
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   not_usedImages: imageItemIndex[] = [];
   collectionsImages: imageItemIndex[] = [];
@@ -51,7 +53,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
   RefreshList() {
-    this.deleteDupes.updateImages();
+    //this.deleteDupes.updateImages();
   }
 
   @ViewChild('drawer') drawer: MatDrawer;
@@ -146,7 +148,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     this.Refresh();
   }
 
-  drop(event: CdkDragDrop<imageItem[]>) {
+  drop(event: CdkDragDrop<imageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

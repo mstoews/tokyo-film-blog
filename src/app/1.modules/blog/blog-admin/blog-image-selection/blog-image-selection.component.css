@@ -9,6 +9,13 @@
   overflow: hidden;
 }
 
+.images-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
 .example-box {
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;

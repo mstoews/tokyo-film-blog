@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,9 +8,9 @@ import { IImageStorage } from 'app/5.models/maintenance';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { Location } from '@angular/common';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 import { ImageListService } from 'app/4.services/image-list.service';
 import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
 import { MatTabGroup } from '@angular/material/tabs';
@@ -21,7 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './product-edit.component.html',
   styleUrls: ['./product-edit.component.css'],
 })
-export class ProductEditComponent implements OnInit {
+export class ProductEditComponent implements OnInit, OnDestroy {
   sTitle: any;
   rich_description: string;
   prdGroup: FormGroup;
@@ -37,7 +37,7 @@ export class ProductEditComponent implements OnInit {
   updated_category: string;
   selectedItemKeys: string;
   categories: Category[];
-  imageArray: imageItem[] = [];
+  imageArray: imageItemIndex[] = [];
   inventoryImages$: Observable<IImageStorage[]>;
   isFormDirty = false;
 
@@ -64,16 +64,23 @@ export class ProductEditComponent implements OnInit {
     // this.prd = this.productType;
     this.createEmptyForm();
   }
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
+
+  _unsubscribeAll: Subject<any> = new Subject<any>();
+
 
   ngOnInit() {
     var counter = 0;
     this.sTitle = 'Product Inventory and Images';
-    this.sub = this.activateRoute.params.subscribe((params) => {
+    this.activateRoute.params.pipe(takeUntil(this._unsubscribeAll)).subscribe((params) => {
       const prd = this.productService.findProductByUrl(params['id']);
       if (prd) {
         this.productItem$ = prd;
         this.productId = params['id'];
-        this.productItem$.subscribe((prd) => {
+        this.productItem$.pipe(takeUntil(this._unsubscribeAll)).subscribe((prd) => {
           if (prd !== undefined) {
             this.rich_description = prd.rich_description;
             this.createForm(prd);
@@ -83,7 +90,7 @@ export class ProductEditComponent implements OnInit {
     });
 
     this.category$ = this.categoryService.getAll();
-    this.category$.subscribe((result) => {
+    this.category$.pipe(takeUntil(this._unsubscribeAll)).subscribe((result) => {
       this.categories = result;
     });
   }
@@ -195,7 +202,7 @@ export class ProductEditComponent implements OnInit {
       date_updated: [prd.date_updated, Validators.required],
     });
 
-    this.prdGroup.valueChanges.subscribe((x) => {
+    this.prdGroup.valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe((x) => {
       this.isFormDirty = true;
     });
   }

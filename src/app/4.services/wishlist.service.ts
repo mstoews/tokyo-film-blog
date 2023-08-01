@@ -15,7 +15,7 @@ import { MenuToggleService } from './menu-toggle.service';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
 import { collection, OrderByDirection } from 'firebase/firestore';
-import { FuseAlertService } from '@made-to/components/alert';
+
 import { Router } from '@angular/router';
 import { CartService } from './cart.service';
 

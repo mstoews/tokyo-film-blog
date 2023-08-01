@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Services } from 'app/5.models/services';
 import { ServicesService } from 'app/4.services/services.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.css'],
 })
-export class ServicesComponent implements OnInit {
+export class ServicesComponent implements OnInit, OnDestroy {
   sTitle: any;
   ServicesGroup: FormGroup;
   Services$: Observable<Services[]>;
@@ -22,10 +22,19 @@ export class ServicesComponent implements OnInit {
     this.sTitle = 'Services';
   }
 
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
+
+  _unsubscribeAll: Subject<any> = new Subject<any>();
+  // pipe(takeUntil(this._unsubscribeAll))
+
+
   ngOnInit(): void {
     this.Services$ = this.servicesService.getAll();
     this.createEmptyForm();
-    this.Services$.subscribe((page) => {
+    this.Services$.pipe(takeUntil(this._unsubscribeAll)).subscribe((page) => {
       if (page.length > 0) {
         this.ServicesPage = page[0];
         this.createForm(this.ServicesPage);

@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -18,6 +18,7 @@ import {
 } from '@angular/cdk/drag-drop';
 import { ProductsService } from 'app/4.services/products.service';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'thoughts-img-selection',
@@ -27,7 +28,16 @@ import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service'
 export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
   @Input() productId: string;
 
-  currentImage: imageItem;
+  constructor(
+    private imageListService: ImageItemIndexService,
+    private productService: ProductsService,
+    private deleteDupes: DeleteDuplicateService,
+    private fb: FormBuilder
+  ) { }
+
+
+
+  currentImage: imageItemIndex;
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_DELETED = 'IN_DELETED';
@@ -37,15 +47,10 @@ export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
 
   subCollections: Subscription;
 
-  not_usedImages: imageItem[] = [];
+  not_usedImages: imageItemIndex[] = [];
 
-  collectionsImages: imageItem[] = [];
+  collectionsImages: imageItemIndex[] = [];
   firstRun: boolean = true;
-
-  deleteDupes = inject(DeleteDuplicateService);
-  imageListService = inject(ImageListService);
-  productService = inject(ProductsService);
-  fb = inject(FormBuilder);
 
   createImageOnce() {
     throw new Error('Method not implemented.');
@@ -60,13 +65,13 @@ export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
     this.imageListService.updateImageList(image);
   }
 
-  UpdateInventoryItem(e: imageItem) {
+  UpdateInventoryItem(e: imageItemIndex) {
     e.type = this.productId;
     this.imageListService.updateImageList(e);
   }
 
   sortNotUsed() {
-    return this.imageListService.getImagesBySize('400').pipe(
+    return this.imageListService.getAllImages(null).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -76,13 +81,13 @@ export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  Refresh() {
+  async Refresh() {
     this.subNotUsed = this.sortNotUsed().subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subCollections = this.imageListService
-      .getImagesByType(this.productId)
+    this.subCollections = (await this.imageListService
+      .getImagesByType(this.productId))
       .subscribe((item) => {
         this.collectionsImages = item;
       });
@@ -99,7 +104,7 @@ export class ThoughtsImageSelectionComponent implements OnInit, OnDestroy {
     //this.Refresh();
   }
 
-  drop(event: CdkDragDrop<imageItem[]>) {
+  drop(event: CdkDragDrop<imageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

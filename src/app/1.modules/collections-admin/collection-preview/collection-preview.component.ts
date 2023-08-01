@@ -92,7 +92,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   createForm(item: imageItemIndex) {
     if (item !== undefined || item !== null) {
       this.collectionGroup = this.fb.group({
-        URL: [item.imageSrc, Validators.required],
+        URL: [item.imageSrc200, Validators.required],
         Description: [item.description, Validators.required],
       });
     } else {

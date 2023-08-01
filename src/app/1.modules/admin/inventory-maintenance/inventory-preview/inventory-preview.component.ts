@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input, inject } from '@angular/core';
 import { Product } from 'app/5.models/products';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 import { Observable } from 'rxjs';
 import { ProductsService } from 'app/4.services/products.service';
 import { ImageListService } from 'app/4.services/image-list.service';
@@ -18,13 +18,13 @@ export class InventoryPreviewComponent implements OnInit {
 
   productService = inject(ProductsService);
 
-  setImage(e: imageItem): void {
+  setImage(e: imageItemIndex): void {
     const searchString = e.imageAlt.substring(0, 15);
     console.debug('setImage', searchString);
     if (e.imageSrc400) {
       this.mainImage = e.imageSrc400;
     } else {
-      this.mainImage = e.imageSrc;
+      this.mainImage = e.imageSrc200;
     }
   }
 

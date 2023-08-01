@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 @Component({
   selector: 'app-image-card',
@@ -9,7 +9,7 @@ import { imageItem } from 'app/5.models/imageItem';
 export class ImageCardComponent implements OnInit {
   @Input() url: string | null;
   @Input() file_name: string | null;
-  @Input() imageItem: imageItem | null;
+  @Input() imageItem: imageItemIndex | null;
   @Output() private notifyOpenImageCard: EventEmitter<any> = new EventEmitter();
 
   constructor() {}

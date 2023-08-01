@@ -3,7 +3,11 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { ImageItemSnap, imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import {
+  ImageItemSnap,
+  imageItem,
+  imageItemIndex,
+} from 'app/5.models/imageItem';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 import { convertSnaps } from './db-utils';
 import {
@@ -70,8 +74,8 @@ export class ImageListService {
     this.largeImageCol = afs.collection<imageItem>('largeImageList');
     this.imageItemCopyCol = afs.collection<imageItem>('imageItemCopyList');
 
-
-    this.imageItemIndexCol = afs.collection<imageItemIndex>('originalImageList');
+    this.imageItemIndexCol =
+      afs.collection<imageItemIndex>('originalImageList');
     this.imageItemIndex = this.imageItemIndexCol.valueChanges({
       idField: 'id',
     });
@@ -79,8 +83,6 @@ export class ImageListService {
     this.imageCopy = this.imageItemCopyCol.valueChanges({
       idField: 'id',
     });
-
-
 
     this.updateItemsCollection = afs.collection<imageItem>('imagelist');
     this.loadImageItems = this.updateItemsCollection.valueChanges({
@@ -226,13 +228,15 @@ export class ImageListService {
 
   getNotUsedOriginalImageList() {
     return this.imageItemIndex.pipe(
-      map((images) =>  images.filter((image) => image.type === 'IN_NOT_USED')))
-  };
+      map((images) => images.filter((image) => image.type === 'IN_NOT_USED'))
+    );
+  }
 
   getOriginalImageListByType(type: string) {
     return this.imageItemIndex.pipe(
-      map((images) =>  images.filter((image) => image.type === type)))
-  };
+      map((images) => images.filter((image) => image.type === type))
+    );
+  }
 
   getCopyImagesBySize(size: string) {
     return this.imageItemsCopy.pipe(
@@ -419,7 +423,6 @@ export class ImageListService {
     });
   }
 
-
   private imageItemOriginal: AngularFirestoreCollection<imageItem>;
   private imageItem200: AngularFirestoreCollection<imageItem>;
   private imageItem400: AngularFirestoreCollection<imageItem>;
@@ -431,9 +434,7 @@ export class ImageListService {
     this.getCopyList().subscribe((imageList) => {
       //this.getImagesByType('0SqSwF3DZmkuFUzoz8dz').subscribe((imageList) => {
       console.debug(`createRawImagesOriginal: ${imageList.length}`);
-      imageList.forEach(async (item) => {
-
-      });
+      imageList.forEach(async (item) => {});
     });
   }
 
@@ -451,9 +452,8 @@ export class ImageListService {
     }
 
     var fileExt = imgItem.imageAlt.split('.').pop();
-    let fileName = imgItem.imageAlt.replace(/\.[^/.]+$/, "");
-    fileName = fileName.replace(`/${size}`,'').replace(`_${size}x${size}`,'');
-
+    let fileName = imgItem.imageAlt.replace(/\.[^/.]+$/, '');
+    fileName = fileName.replace(`/${size}`, '').replace(`_${size}x${size}`, '');
 
     switch (size) {
       case '200':
@@ -465,12 +465,10 @@ export class ImageListService {
             console.debug(smallSrc);
             imgItem.imageSrc200 = smallSrc;
             imgItem.id = imgItem.imageAlt;
-
           });
         break;
       case '400':
-
-      fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+        fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
         var pathReference = this.storage
           .ref(fileName)
           .getDownloadURL()

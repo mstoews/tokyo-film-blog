@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 import { openViewComponentDialog } from './view-image-item/view-image-item.component';
 import { filter } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';

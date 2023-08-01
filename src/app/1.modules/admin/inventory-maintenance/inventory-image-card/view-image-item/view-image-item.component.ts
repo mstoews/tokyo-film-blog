@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { imageItem, imageItemPartial } from 'app/5.models/imageItem';
+import { imageItemPartial, imageItemIndex } from 'app/5.models/imageItem';
 import {
   MAT_DIALOG_DATA,
   MatDialog,
@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ImageListService } from 'app/4.services/image-list.service';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MaterialModule } from 'app/material.module';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
   selector: 'view-image-item',
@@ -29,8 +30,8 @@ export class ViewImageItemComponent {
 
   constructor(
     private fb: FormBuilder,
-    private imageListService: ImageListService,
-    @Inject(MAT_DIALOG_DATA) private item: imageItem,
+    private imageListService: ImageItemIndexService,
+    @Inject(MAT_DIALOG_DATA) private item: imageItemIndex,
     private dialogRef: MatDialogRef<ViewImageItemComponent>
   ) {
     this.title = item.caption;
@@ -54,7 +55,7 @@ export class ViewImageItemComponent {
       this.item.type = 'IN_DELETED';
     }
     this.item.description = results.description;
-    this.imageListService.update(this.item, this.item.id);
+    this.imageListService.updateImageList(this.item);
     this.close();
   }
 

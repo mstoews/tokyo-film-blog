@@ -4,7 +4,7 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 import { ImageListService } from 'app/4.services/image-list.service';
 import { ScrollService } from 'app/4.services/scroll.service';
 import { Blog } from 'app/5.models/blog';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 import { Observable, map } from 'rxjs';
 
 @Component({

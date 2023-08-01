@@ -21,9 +21,11 @@ import { ProductsService } from 'app/4.services/products.service';
 })
 export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   @Input() blogId: string;
+  @Input() selection: string;
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_THOUGHTS = 'IN_THOUGHTS';
+  IN_FEATURED = 'IN_FEATURED';
 
   subNotUsed: Subscription;
   subThoughts: Subscription;
@@ -38,7 +40,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getImageByType('IN_NOT_USED')
+      await this.imageItemIndexService.getImageByType(this.IN_FEATURED)
     ).pipe(
       map((data) => {
         data.sort((a, b) => {

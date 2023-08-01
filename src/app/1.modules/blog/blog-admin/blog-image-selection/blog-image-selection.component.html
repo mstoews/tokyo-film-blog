@@ -1,23 +1,24 @@
+
 <div class="h-screen">
   <mat-drawer-container>
     <mat-drawer-content>
-      <div cdkDropListGroup class="grid grid-cols-6 gap-1">
+      <div cdkDropListGroup class="grid grid-cols-6 gap-1 w-full">
         <!-- NOT_USED -->
-        <div class="col-start-1 col-end-11  lg-rounded" cdkScrollable>
-          <div class="sticky m-1 h-8 text-left p-1  bg-gray-200 top-0 z-50">Available Images</div>        
+        <div class="col-start-1 col-span-5  lg-rounded" cdkScrollable>
+          <div class="sticky m-1 h-8 text-left p-1  bg-gray-200 top-0 z-50">All Images</div>        
           <div cdkDropList #notused="cdkDropList" [id]="IN_NOT_USED" [cdkDropListData]="not_usedImages"
             (cdkDropListDropped)="drop($event)">
             <div class="flex flex-wrap">
               <div *ngFor="let item of not_usedImages" cdkDrag>
                 <div class="flex-none object-cover p-1">
-                  <img [ngSrc]="item.imageSrc200" [alt]="item.caption" width="150" height="150">
+                  <img class="h-[150px] w-[150px] object-cover object-center" [ngSrc]="item.imageSrc200" [alt]="item.caption" width="150" height="150">
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="col-start-11 col-end-12 lg-rounded" cdkScrollable>
+        <div class="col-start-6 col-span-1 rounded-lg" cdkScrollable>
           <div class="sticky m-1 h-8 text-center p-1  bg-gray-200 top-0 z-50">Thoughts Images</div>
           <div cdkDropList class="flex flex-col" #collections="cdkDropList" [id]="blogId" [cdkDropListData]="blogImages"
              (cdkDropListDropped)="drop($event)">
@@ -25,8 +26,7 @@
               <div *ngFor="let item of blogImages" cdkDrag>
                 <div class="object-cover p-1 ">
                   <img [ngSrc]="item.imageSrc200" alt="thumbnail"
-                    class="h-full w-full object-cover object-center lg:h-full lg:w-full" width="150" height="150">
-                    
+                    class="h-[150px] w-[150px] object-center" width="auto" height="auto">                    
                 </div>
               </div>
             </div>

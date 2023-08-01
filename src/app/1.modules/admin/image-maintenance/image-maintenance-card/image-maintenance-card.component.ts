@@ -31,7 +31,7 @@ export class ImageMaintenanceCardComponent {
     let image = {
       description: this.image.description,
       caption: this.image.caption,
-      imageSrc: this.image.imageSrc,
+      imageSrc: this.image.imageSrc200,
       imageAlt: this.image.imageAlt,
       type: this.image.type,
       id: this.image.id,

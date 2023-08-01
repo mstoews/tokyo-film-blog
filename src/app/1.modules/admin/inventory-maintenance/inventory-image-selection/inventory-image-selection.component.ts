@@ -9,7 +9,7 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -36,7 +36,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   }
   @Input() productId: string;
 
-  currentImage: imageItem;
+  currentImage: imageItemIndex;
 
   IN_NOT_USED = 'IN_NOT_USED';
 
@@ -101,7 +101,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     this.Refresh();
   }
 
-  drop(event: CdkDragDrop<imageItem[]>) {
+  drop(event: CdkDragDrop<imageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

@@ -15,7 +15,7 @@ import { Category } from 'app/5.models/category';
 import { CategoryService } from 'app/4.services/category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 // import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
@@ -25,7 +25,7 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryGridComponent implements OnInit, OnDestroy {
-  
+
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   categoryGroup: FormGroup;
@@ -50,7 +50,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
   subNotUsed: Subscription;
 
   not_usedImages: imageItemIndex[] = [];
-  
+
   allCategories$ = this.categoryService.getAll();
 
   async onRefresh() {
@@ -60,7 +60,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
       this.not_usedImages = item;
     });
   }
-  
+
   async sortNotUsed() {
     return (
       await this.imageItemIndexService.getImageIndexList()
@@ -84,7 +84,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    
+
   }
 
   contentReady = (e: any) => {
@@ -106,9 +106,9 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
     });
   }
 
-  UpdateCategoryURL(e: imageItem) {
+  UpdateCategoryURL(e: imageItemIndex) {
     this.categoryGroup.patchValue({
-      image: e.imageSrc,
+      image: e.imageSrc200,
     });
   }
 
@@ -173,7 +173,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
     }
   }
 
-  
+
   onCreate() {
     this.currentDoc = '';
     this.createEmptyForm();
@@ -208,7 +208,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
     this.createEmptyForm();
   }
 
-  UpdateInventoryItem(e: imageItem) {
+  UpdateInventoryItem(e: imageItemIndex) {
     // e.type = this.productId;
 
   }

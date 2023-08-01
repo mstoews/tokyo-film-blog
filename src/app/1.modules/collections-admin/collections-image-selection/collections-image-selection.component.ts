@@ -51,7 +51,7 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
   RefreshList() {
-    this.deleteDupes.updateImages();
+    // this.deleteDupes.updateImages();
   }
 
   @ViewChild('drawer') drawer: MatDrawer;

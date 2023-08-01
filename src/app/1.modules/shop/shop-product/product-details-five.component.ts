@@ -61,6 +61,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   quantity: number = 1.0;
   total_cost: number = 0.0;
 
+  _unsubscribeAll: Subscription = new Subscription();
+
   userData: any;
 
   userId: String;

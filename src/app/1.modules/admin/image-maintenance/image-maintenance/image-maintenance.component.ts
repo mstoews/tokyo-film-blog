@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -30,7 +30,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   onUpdate: any;
   cRAG: any;
   sTitle: any;
-  currentImage: imageItem;
+  currentImage: imageItemIndex;
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_FEATURED = 'IN_FEATURED';
@@ -44,11 +44,11 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   subCreations: Subscription;
   subGallery: Subscription;
 
-  not_usedImages: imageItem[] = [];
-  featuredImages: imageItem[] = [];
-  collectionsImages: imageItem[] = [];
-  creationsImages: imageItem[] = [];
-  galleryImages: imageItem[] = [];
+  not_usedImages: imageItemIndex[] = [];
+  featuredImages: imageItemIndex[] = [];
+  collectionsImages: imageItemIndex[] = [];
+  creationsImages: imageItemIndex[] = [];
+  galleryImages: imageItemIndex[] = [];
 
   constructor(
     public imageItemIndexService: ImageListService,
@@ -163,7 +163,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
 
-  drop(event: CdkDragDrop<imageItem[]>) {
+  drop(event: CdkDragDrop<imageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

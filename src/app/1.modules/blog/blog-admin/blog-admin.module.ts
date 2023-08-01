@@ -11,7 +11,7 @@ import { BlogEditComponent } from './blog-edit/blog-edit.component';
 import { SafePipe } from './safe.pipe';
 import { BlogAddDialog } from './add/blog-add.component';
 import { BlogImageSelectionComponent } from './blog-image-selection/blog-image-selection.component';
-import { SharedModule } from '../shared-module/shared.module';
+import { SharedModule } from '../../shared-module/shared.module';
 import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
 
 @NgModule({
