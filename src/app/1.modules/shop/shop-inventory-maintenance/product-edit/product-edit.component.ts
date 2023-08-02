@@ -1,20 +1,16 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'app/5.models/category';
-import { IImageStorage } from 'app/5.models/maintenance';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Location } from '@angular/common';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
-import { ImageListService } from 'app/4.services/image-list.service';
 import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
-import { MatTabGroup } from '@angular/material/tabs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { InventoryImageSelectionComponent } from '../inventory-image-selection/inventory-image-selection.component';
 
 @Component({
   selector: 'app-product-edit',
@@ -25,69 +21,63 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   sTitle: any;
   rich_description: string;
   prdGroup: FormGroup;
-  action: string;
-  party: string;
-  cPriority: string;
-  cRAG: string;
-  cType: string;
   currentDate: Date;
   product: Product;
   productId: string;
-  current_Url: string;
   updated_category: string;
-  selectedItemKeys: string;
-  categories: Category[];
-  selection: 'not_used' | 'all' = 'all';
-  
-  isFormDirty = false;
 
+  categories: Category[];
+  imageQuery: 'not_used' | 'all' = 'all';
+  isFormDirty = false;
   allProducts$: Observable<Product>;
   category$: Observable<Category[]>;
   prd: any;
   sub: any;
   productItem$: Observable<Product>;
-  IN_FEATURED = 'IN_INVENTORY';
+
+  _unsubscribeAll: Subject<any> = new Subject<any>();
 
   constructor(
     private matDialog: MatDialog,
     private activateRoute: ActivatedRoute,
     private route: Router,
-    private _location: Location,
     private afs: AngularFirestore,
     private readonly categoryService: CategoryService,
     private readonly productService: ProductsService,
-    private readonly imageListService: ImageListService,
     public dialog: MatDialog,
     private fb: FormBuilder,
     public snackBar: MatSnackBar
   ) {
-    // this.prd = this.productType;
     this.createEmptyForm();
   }
+
+  @ViewChild(InventoryImageSelectionComponent)
+  private assetSelection: InventoryImageSelectionComponent;
+
   ngOnDestroy(): void {
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
   }
 
-  _unsubscribeAll: Subject<any> = new Subject<any>();
-
-
   ngOnInit() {
-    var counter = 0;
     this.sTitle = 'Product Inventory and Images';
-    this.activateRoute.params.pipe(takeUntil(this._unsubscribeAll)).subscribe((params) => {
-      const prd = this.productService.findProductByUrl(params['id']);
-      if (prd) {
-        this.productItem$ = prd;
-        this.productId = params['id'];
-        this.productItem$.pipe(takeUntil(this._unsubscribeAll)).subscribe((prd) => {
-          if (prd !== undefined) {
-            this.rich_description = prd.rich_description;
-            this.createForm(prd);
-          }
-        });
-      }
-    });
+    this.activateRoute.params
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((params) => {
+        const prd = this.productService.findProductByUrl(params['id']);
+        if (prd) {
+          this.productItem$ = prd;
+          this.productId = params['id'];
+          this.productItem$
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((prd) => {
+              if (prd !== undefined) {
+                this.rich_description = prd.rich_description;
+                this.createForm(prd);
+              }
+            });
+        }
+      });
 
     this.category$ = this.categoryService.getAll();
     this.category$.pipe(takeUntil(this._unsubscribeAll)).subscribe((result) => {
@@ -95,22 +85,21 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     });
   }
 
-  onTabClick(event) {
-    //console.debug(event.tab.textLabel);
+  onTabClick(event: any) {
     const product = { ...this.prdGroup.value } as Product;
     this.onUpdate(product);
   }
 
   onDelete(data: Product) {
-    data = this.prdGroup.getRawValue();
-    this.productService.delete(data.id.toString());
-    this.route.navigate(['admin/inventory']);
+    if (confirm('Are you sure you want to delete ?') === true) {
+      data = this.prdGroup.getRawValue();
+      this.productService.delete(data.id.toString());
+      this.route.navigate(['admin/inventory']);
+    }
   }
 
   onUpdate(product: Product) {
     if (this.isFormDirty) {
-      // const product = { ...this.prdGroup.value } as Product; const product = { ...this.prdGroup.value } as Product;
-      //console.debug('Product can be sold ...: ', product.purchases_allowed);
       product.rich_description = this.rich_description;
       if (product.quantity === undefined || product.quantity === null) {
         product.quantity = 1;
@@ -155,13 +144,14 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.updated_category = category;
   }
 
-  onAllImages(){
-    this.selection = 'all';
+  onAllImages() {
+    this.imageQuery = 'all';
+    //this.assetSelection.Refresh(this.imageQuery);
   }
 
   createEmptyForm() {
     this.prdGroup = this.fb.group({
-      id: [''],
+      // id: [''],
       description: ['', Validators.required],
       short_description: ['', Validators.required],
       rich_description: ['', Validators.required],
@@ -170,15 +160,15 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       price: ['', Validators.required],
       category: ['', Validators.required],
       rating: [''],
-      is_featured: ['', Validators.required],
       user_updated: [''],
       date_created: [new Date(), Validators.required],
       date_updated: [new Date(), Validators.required],
-      purchases_allowed: [true, Validators.requiredTrue],
       quantity: [1, Validators.required],
       quantity_required: [true, Validators.required],
       quantity_increment: [1, Validators.required],
       is_active: [true, Validators.required],
+      is_featured: [true, Validators.required],
+      purchases_allowed: [true, Validators.requiredTrue],
     });
   }
 
@@ -197,18 +187,20 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       category: [prd.category, Validators.required],
       rating: [prd.rating, Validators.required],
       quantity: [prd.quantity, Validators.required],
-      is_featured: [prd.is_featured, Validators.required],
-      purchases_allowed: [prd.purchases_allowed, Validators.required],
       quantity_required: [prd.quantity_required, Validators.required],
-      is_active: [prd.is_active, Validators.required],
       user_updated: [prd.user_updated, Validators.required],
       date_created: [prd.date_created, Validators.required],
       date_updated: [prd.date_updated, Validators.required],
+      purchases_allowed: [prd.purchases_allowed, Validators.required],
+      is_active: [prd.is_active, Validators.required],
+      is_featured: [prd.is_featured, Validators.required],
     });
 
-    this.prdGroup.valueChanges.pipe(takeUntil(this._unsubscribeAll)).subscribe((x) => {
-      this.isFormDirty = true;
-    });
+    this.prdGroup.valueChanges
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((x) => {
+        this.isFormDirty = true;
+      });
   }
 
   onValueChange() {
@@ -247,23 +239,6 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       }
     });
   }
-
-  public productType = {
-    id: '',
-    description: '',
-    short_description: '',
-    rich_description: '',
-    image: '',
-    images: '',
-    brand: '',
-    price: '',
-    category: '',
-    rating: '',
-    is_featured: '',
-    user_updated: '',
-    date_created: '',
-    date_updated: '',
-  };
 
   onSweep() {
     this.productService.deleteEmptyInventory();

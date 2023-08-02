@@ -51,15 +51,7 @@
             <a (click)="onCart()"
               class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-              <span class="flex-1 ml-3 whitespace-nowrap" [matBadge]=cartCount [matBadgeHidden]="cartCount===0">Shopping
-                Cart</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="home/about_us" (click)="onClose()"
-              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
-              <mat-icon [svgIcon]="'heroicons_outline:information-circle'"></mat-icon>
-              <span class="flex-1 ml-3 whitespace-nowrap">About Us</span>
+              <span class="flex-1 ml-3 whitespace-nowrap" [matBadge]=cartCount [matBadgeHidden]="cartCount===0">Shopping Cart</span>
             </a>
           </li>
           <li>
@@ -85,6 +77,14 @@
               <span class="flex-1 ml-3 whitespace-nowrap">Profile</span>
             </a>
           </li>
+          <li>
+            <a routerLink="home/about_us" (click)="onClose()"
+              class="flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              <mat-icon [svgIcon]="'heroicons_outline:information-circle'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">About Us</span>
+            </a>
+          </li>
+
         </ng-container>
 
         <ng-container *ngIf="(userService.roles$ | async) as roles">

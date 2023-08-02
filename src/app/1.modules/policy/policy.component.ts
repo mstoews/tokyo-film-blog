@@ -89,9 +89,27 @@ export class PolicyComponent {
   }
 
   onDelete(data: PolicyDocuments) {
+    if (confirm('Are you sure you want to delete ?') === true) {
     data = this.policyGroup.getRawValue();
     this.policyService.delete(data.id.toString());
+    }
+    return true
   }
+
+
+  // ERROR TypeError: Cannot read properties of null (reading 'addControl')
+  //   at FormControlName._setUpControl (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+forms@16.0.5_4qq3iruz7kfh6amajr4i2lp45e/node_modules/@angular/forms/fesm2022/forms.mjs:5370:43)
+  //   at FormControlName.ngOnChanges (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+forms@16.0.5_4qq3iruz7kfh6amajr4i2lp45e/node_modules/@angular/forms/fesm2022/forms.mjs:5315:18)
+  //   at FormControlName.rememberChangeHistoryAndInvokeOnChangesHook (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:2841:14)
+  //   at callHookInternal (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:3833:14)
+  //   at callHook (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:3864:9)
+  //   at callHooks (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:3815:17)
+  //   at executeInitAndCheckHooks (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:3765:9)
+  //   at selectIndexInternal (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:10483:17)
+  //   at Module.ɵɵadvance (/home/mst/Projects/made-to/node_modules/.pnpm/@angular+core@16.0.5_rxjs@7.5.7+zone.js@0.13.0/node_modules/@angular/core/fesm2022/core.mjs:10466:5)
+  //   at ProductEditComponent_ng_container_0_Template (http://localhost:43220/src_app_1_modules_admin_admin_module_ts.js:2805:60) {stack: 'TypeError: Cannot read properties of null (re…p_1_modules_admin_admin_module_ts.js:2805:60)', message: 'Cannot read properties of null (reading 'addControl')'}
+
+
 
   valueChangedEvent(e: any) {
     // console.debug(`blog grid value changed ${e}`)

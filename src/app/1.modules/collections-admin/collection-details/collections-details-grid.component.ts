@@ -120,9 +120,11 @@ export class CollectionsDetailsGridComponent implements OnInit {
   }
 
   onDelete(data: Collections) {
-    data = this.collectionGroup.getRawValue();
+    if (confirm('Are you sure you want to delete ?') === true) {
+      data = this.collectionGroup.getRawValue();
     // console.debug(`onDelete: ${data}`);
-    this.collectionService.delete(data.id.toString());
+      this.collectionService.delete(data.id.toString());
+    }
   }
 
   public collectionType = {

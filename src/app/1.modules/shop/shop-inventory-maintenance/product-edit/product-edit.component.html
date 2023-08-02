@@ -20,6 +20,7 @@
         <mat-radio-button >Not Used Images</mat-radio-button>
       </mat-radio-group>
 
+      <!--
       <mat-checkbox color="primary" formControlName="purchases_allowed">
         Purchases Allowed
       </mat-checkbox>
@@ -29,6 +30,7 @@
       <mat-checkbox color="primary" formControlName="is_active">
         Is Active
       </mat-checkbox>
+      -->
       <span class="flex-auto"></span>
       <button mat-icon-button (click)="onUpdate(prdGroup.value)" color="primary" aria-label="Add"
         matTooltip="Update Item">
@@ -38,9 +40,9 @@
       <button (click)="onImages()" mat-icon-button color="primary" matTooltip="Manage Images">
         <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
       </button>
-      <button (click)="onSweep()" mat-icon-button color="primary" matTooltip="Sweep empty inventory">
+      <!-- <button (click)="onSweep()" mat-icon-button color="primary" matTooltip="Sweep empty inventory">
         <mat-icon [svgIcon]="'mat_outline:delete_sweep'"></mat-icon>
-      </button>
+      </button> -->
       <button mat-icon-button (click)="onDelete(product)" color="primary" [disabled]="!prdGroup.valid"
         matTooltip="Delete Item">
         <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
@@ -131,7 +133,7 @@
               </mat-checkbox>
             </form>
           </div>
-          <div mat-dialog-actions>
+          <!-- <div mat-dialog-actions>
             <button mat-icon-button (click)="onUpdate(prdGroup.value)" color="primary" aria-label="Add"
               matTooltip="Update Item">
               <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
@@ -147,7 +149,7 @@
               matTooltip="Delete Item">
               <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
             </button>
-          </div>
+          </div> -->
         </ng-template>
       </mat-tab>
       <mat-tab label="Description">
@@ -205,7 +207,7 @@
               <dxi-item name="blockquote"></dxi-item>
             </dxo-toolbar>
           </dx-html-editor>
-          <div mat-dialog-actions> 
+          <div mat-dialog-actions>
             <button mat-icon-button (click)="onUpdate(prdGroup.value)" color="primary" aria-label="Update"
               matTooltip="Update Item">
               <mat-icon [svgIcon]="'mat_outline:update'"></mat-icon>
@@ -226,12 +228,12 @@
       </mat-tab>
       <mat-tab label="Images">
         <ng-template matTabContent>
-          <inventory-image-selection [productId]="productId"></inventory-image-selection>
+          <inventory-image-selection [productId]="productId" [imageQuery]="query" ></inventory-image-selection>
         </ng-template>
       </mat-tab>
       <mat-tab label="Preview">
         <ng-template matTabContent>
-          <inventory-preview [product]="product" [selection]="selection"></inventory-preview>
+          <inventory-preview [product]="product" ></inventory-preview>
         </ng-template>
       </mat-tab>
     </mat-tab-group>

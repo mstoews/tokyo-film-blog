@@ -1,4 +1,5 @@
-import { Component, OnInit,OnDestroy,Input,
+import {
+  Component, OnInit, OnDestroy, Input,
 } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subject, Subscription, map, pipe, takeUntil } from 'rxjs';
@@ -41,7 +42,7 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
     public productService: ProductsService,
     public deleteDupes: DeleteDuplicateService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
   createImageOnce() {
     throw new Error('Method not implemented.');
@@ -72,11 +73,11 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  async Refresh() {
+  public async Refresh() {
     (await this.imageItemIndexService.sortNotUsed())
       .pipe(takeUntil(this._unsubscribeAll)).subscribe((item) => {
-      this.not_usedImages = item;
-    });
+        this.not_usedImages = item;
+      });
 
     (await this.imageItemIndexService.getImageByType(this.productId))
       .pipe(takeUntil(this._unsubscribeAll)).subscribe((item) => {

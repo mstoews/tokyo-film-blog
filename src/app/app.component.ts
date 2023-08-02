@@ -38,7 +38,7 @@ import { isPlatformBrowser } from '@angular/common';
             [
               style({ transform: 'translateX(100%)' }),
               animate(
-                '1.0s ease-in-out',
+                '0.200s ease-in-out',
                 style({ transform: 'translateX(0%)' })
               ),
             ],
@@ -49,7 +49,7 @@ import { isPlatformBrowser } from '@angular/common';
             [
               style({ transform: 'translateX(0%)' }),
               animate(
-                '1.0s ease-in-out',
+                '0.200s ease-in-out',
                 style({ transform: 'translateX(-100%)' })
               ),
             ],

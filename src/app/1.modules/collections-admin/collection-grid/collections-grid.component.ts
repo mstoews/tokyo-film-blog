@@ -120,9 +120,11 @@ export class CollectionsAdminComponent implements OnInit {
   }
 
   onDelete(data: Collections) {
+    if (confirm('Are you sure you want to delete ?') === true) {
     data = this.collectionGroup.getRawValue();
     // console.debug(`onDelete: ${data}`);
     this.collectionService.delete(data.id.toString());
+    }
   }
 
   public collectionType = {
