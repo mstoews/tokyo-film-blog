@@ -16,25 +16,25 @@ export class InventoryPreviewComponent implements OnInit {
   inventoryImages$: Observable<imageItemIndex[]>;
   mainImage: string;
 
-  productService = inject(ProductsService);
+  constructor(
+    private productService: ProductsService
+  ){}
 
   setImage(e: imageItemIndex): void {
-    const searchString = e.imageAlt.substring(0, 15);
-    console.debug('setImage', searchString);
-    if (e.imageSrc400) {
       this.mainImage = e.imageSrc400;
-    } else {
-      this.mainImage = e.imageSrc200;
-    }
+      this.product.image200 = e.imageSrc200;
+      this.product.image = e.imageSrc400;
+
   }
 
   onUpdate() {
-    this.productService.updateMainImage(this.product.id, this.mainImage);
+    this.productService.updateMainImage(this.product);
   }
 
   async ngOnInit() {
 
     this.mainImage = this.product.image;
+    console.debug('inventory-preview.component.ts: ngOnInit()', JSON.stringify(this.product));
 
     if (this.product.id) {
       this.inventoryImages$ = await this.productService.getImageListByProduct(

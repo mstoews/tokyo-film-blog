@@ -23,6 +23,11 @@ export class SideNavComponent implements OnInit {
       console.debug('User Email: ' + this.userEmail);
     });
   }
+  isToggle: number = 1;
+  status: boolean = false;
+    clickEvent() {
+        this.status = !this.status;
+    }
 
   userId: string;
   userEmail: string;
@@ -55,6 +60,12 @@ export class SideNavComponent implements OnInit {
     this.route.navigate(['shop']);
     this.notifyParentCloseDrawer.emit();
   }
+
+  onProfile() {
+    this.route.navigate(['profile']);
+    this.notifyParentCloseDrawer.emit();
+  }
+
 
   onWishList() {
     this.userService.isLoggedIn$.subscribe((user) => {

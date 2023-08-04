@@ -18,12 +18,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { MaterialModule } from 'app/material.module';
 import { IconsModule } from 'app/icons.module';
-import { ImageSwipeComponent } from './image-swipe/image-swipe-content.component';
-import { SwiperModule } from 'swiper/angular';
 import { DataPolicyComponent } from './data-policy/data-policy.component';
 import { TosComponent } from './tos/tos.component';
 import { StripeCheckoutComponent } from 'app/3.components/stripe-checkout/stripe-checkout.component';
-import { PaymentComponent } from 'app/3.components/payment/payment.component';
 import { LastestBlogComponent } from 'app/3.components/lastest-blog/lastest-blog.component';
 import { ServicesComponent } from './services/services.component';
 import { FollowingComponent } from './following/following.component';
@@ -110,7 +107,6 @@ const routes: Routes = [
     HighlightComponent,
     AboutUsComponent,
     ContactsComponent,
-    ImageSwipeComponent,
     DataPolicyComponent,
     TosComponent,
     ServicesComponent,
@@ -127,9 +123,7 @@ const routes: Routes = [
     SocialModule,
     MaterialModule,
     IconsModule,
-    SwiperModule,
     StripeCheckoutComponent,
-    PaymentComponent,
     LastestBlogComponent,
   ],
 })

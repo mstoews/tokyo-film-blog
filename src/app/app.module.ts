@@ -33,17 +33,10 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './4.services/auth/auth.interceptor';
 import { CartResolver } from './4.services/cart.resolver';
 import { WishListResolver } from './4.services/wishlist.resolver';
-import { NgxSpinnerModule } from 'ngx-spinner';
-// import { NgxStripeModule } from 'ngx-stripe';
-
-// import { environment } from '../environments/dev';
-
 import { environment } from '../environments/environment.prod';
 import { HeadingModule } from './2.main/header/heading.module';
 import { UserService } from './4.services/auth/user.service';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
-import { provideFirestore } from '@angular/fire/firestore';
-import { getFirestore } from 'firebase/firestore';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 @NgModule({
@@ -64,8 +57,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000'
     }),
     //NgxStripeModule.forRoot(environment.stripe.public_key),

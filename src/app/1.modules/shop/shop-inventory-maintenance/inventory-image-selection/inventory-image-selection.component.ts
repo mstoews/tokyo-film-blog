@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, Input } from '@angular/core';
+import {Component, OnInit, OnDestroy, Input, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject, map, takeUntil } from 'rxjs';
 import { imageItemIndex } from 'app/5.models/imageItem';
@@ -6,6 +6,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem }  from '@angular/cdk/d
 import { ProductsService } from 'app/4.services/products.service';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.service';
 
 @Component({
   selector: 'inventory-image-selection',
@@ -31,6 +32,10 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   not_usedImages: imageItemIndex[] = [];
   collectionsImages: imageItemIndex[] = [];
 
+  imageToolbarService = inject(ImageToolbarService);
+  filterSig = this.imageToolbarService.filterSig;
+
+
   constructor(
     private deleteDupes: DeleteDuplicateService,
     public imageItemIndexService: ImageItemIndexService,
@@ -39,8 +44,8 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   )
   {
     this.imageQuery = 'all';
+    console.debug('inventory-image-selection.component.ts: filterSig', this.filterSig);
   }
-
 
   addImageToItemList(image: any) {
     image.parentId = this.productId;
@@ -54,10 +59,11 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   async sortNotUsed(query: string) {
-    if (query === 'all') {
+    query = this.imageToolbarService.filterSig()
+    if (query ===  FilterEnum.all) {
        query = null;
     }  else {
-      query = this.IN_NOT_USED;
+      query = FilterEnum.not_used;
     }
 
     return ( await this.imageItemIndexService.getAllImages(query)).pipe(
@@ -72,6 +78,9 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
 
   public async Refresh(query: string) {
     this.imageQuery = query;
+    if (query === undefined || query === null) {
+      query = 'all';
+    }
     (await this.sortNotUsed(query))
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((item) => {
@@ -86,7 +95,8 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // this.Refresh(this.imageQuery);
+    this.Refresh(this.imageToolbarService.filterSig());
+    console.debug('inventory-image-selection.component.ts: sortNotUsed()', this.filterSig);
   }
 
   ngOnDestroy() {

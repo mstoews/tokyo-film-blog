@@ -3,16 +3,13 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewChild,
-  inject,
 } from '@angular/core';
 import { ActivatedRoute, Route, Router, TitleStrategy } from '@angular/router';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable, Subscribable, Subscription, of } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { Category } from 'app/5.models/category';
-import { MatTabGroup } from '@angular/material/tabs';
 
 @Component({
   selector: 'shop',
@@ -21,10 +18,7 @@ import { MatTabGroup } from '@angular/material/tabs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainShopComponent implements OnInit, OnDestroy {
-  route = inject(Router);
-  productService = inject(ProductsService);
-  categoryService = inject(CategoryService);
-  actRoute = inject(ActivatedRoute);
+
   Products$: Observable<Product[]>;
   category: Category[] = [];
   currentCategory: string;
@@ -32,9 +26,21 @@ export class MainShopComponent implements OnInit, OnDestroy {
   sub: Subscription;
   loading = false;
 
+  constructor(
+    private route: Router,
+    private actRoute: ActivatedRoute,
+    private productService: ProductsService,
+    private categoryService: CategoryService,
+
+  ) {}
+
   Category$ = this.categoryService.getAll();
 
   mobile = true;
+
+  openProductDetail(productId: string) {
+    this.route.navigate(['shop/product', productId]);
+  }
 
   backToHome() {
     this.route.navigate(['home']);
@@ -45,17 +51,10 @@ export class MainShopComponent implements OnInit, OnDestroy {
   }
 
   onRefreshName(category: string) {
-    this.setLoading();
     this.currentCategory = category;
     this.Products$ = this.productService.getInventoryByCategory(category);
   }
 
-  setLoading() {
-    this.loading = true;
-    setTimeout(()=> {
-      this.loading = false;
-    }, 2000);
-  }
 
   selectCategory(index: any) {
     if (index.index >= 0) {
@@ -68,7 +67,6 @@ export class MainShopComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sTitle = 'Shop';
-    this.setLoading();
     this.actRoute.data.subscribe((data) => {
       if (data.length > 0) {
         this.currentCategory = data.shop[0].category;

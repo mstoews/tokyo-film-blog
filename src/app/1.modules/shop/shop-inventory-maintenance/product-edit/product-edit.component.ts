@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { InventoryImageSelectionComponent } from '../inventory-image-selection/inventory-image-selection.component';
+import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.service';
 
 @Component({
   selector: 'app-product-edit',
@@ -51,8 +52,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
     this.createEmptyForm();
   }
 
-  @ViewChild(InventoryImageSelectionComponent)
-  private assetSelection: InventoryImageSelectionComponent;
+
+  imageToolbarService = inject(ImageToolbarService);
+
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next(null);
@@ -145,13 +147,18 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   onAllImages() {
-    this.imageQuery = 'all';
-    //this.assetSelection.Refresh(this.imageQuery);
+    this.imageToolbarService.changeFilter(FilterEnum.all);
+    
   }
+
+  onNotUsedImages() {
+    this.imageToolbarService.changeFilter(FilterEnum.not_used);
+  }
+
 
   createEmptyForm() {
     this.prdGroup = this.fb.group({
-      // id: [''],
+      id: [''],
       description: ['', Validators.required],
       short_description: ['', Validators.required],
       rich_description: ['', Validators.required],
@@ -168,7 +175,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       quantity_increment: [1, Validators.required],
       is_active: [true, Validators.required],
       is_featured: [true, Validators.required],
-      purchases_allowed: [true, Validators.requiredTrue],
+      purchases_allowed: ['', Validators.requiredTrue],
     });
   }
 
@@ -193,7 +200,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
       date_updated: [prd.date_updated, Validators.required],
       purchases_allowed: [prd.purchases_allowed, Validators.required],
       is_active: [prd.is_active, Validators.required],
-      is_featured: [prd.is_featured, Validators.required],
+      is_featured: [prd.is_featured],
     });
 
     this.prdGroup.valueChanges

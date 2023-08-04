@@ -5,6 +5,7 @@ export interface Product {
   short_description: string;
   rich_description: string;
   image:     string;
+  image200?:  string;
   brand:        string;
   price:        number;
   category:     string;

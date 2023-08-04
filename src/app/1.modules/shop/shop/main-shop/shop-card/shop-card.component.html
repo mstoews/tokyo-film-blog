@@ -1,22 +1,29 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() {
+    dataLayer.push(arguments);
+  }
   gtag('js', new Date());
-
   gtag('config', 'G-WGMMJK9NR3');
 </script>
 
-  <div class="relative jusitfy-start items-start from-gray-800 via-gray-800 to-opacity-30 hover:opacity-80" (click)="openProductDetail()">
-   <img [ngSrc]="product.image" alt="product"  width="400" height="auto"/>
-   <button (click)="openProductDetail()"
-     class="mt-2 relative z-10 flex items-center bg-gray-800 text-white justify-center w-full py-3 text-base font-medium leading-4 text-center transition duration-200 hover:text-white group-hover:opacity-100">
+
+<app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
+<div *ngIf="(image$ | async) as images">
+  <div class="relative jusitfy-start items-start from-gray-800 via-gray-800 to-opacity-30 hover:opacity-80"  (click)="openProductDetail()">
+    <img [ngSrc]="image.imageSrc200[0]" alt="product" width="400" height="auto" />
+    <button (click)="openProductDetail()"
+      class="mt-2 relative z-10 flex items-center bg-gray-800 text-white justify-center w-full py-3 text-base font-medium leading-4 text-center transition duration-200 hover:text-white group-hover:opacity-100">
       View Details
     </button>
     <div class="mt-6 flex justify-between items-center w-full">
-        <p class="text-lg dark:text-white lg:text-xl font-medium leading-6 lg:leading-5 text-gray-800">{{product.description}}</p>
+      <p class="text-lg dark:text-white lg:text-xl font-medium leading-6 lg:leading-5 text-gray-800">
+        {{ product.description }}
+      </p>
     </div>
-    <p class="text-lg dark:text-white lg:text-xl leading-6 lg:leading-5 text-gray-800">${{product.price}}</p>
+    <p class="text-lg dark:text-white lg:text-xl leading-6 lg:leading-5 text-gray-800">
+      ${{ product.price }}
+    </p>
   </div>
-
-
+</div>

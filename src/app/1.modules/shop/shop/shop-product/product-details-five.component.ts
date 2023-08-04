@@ -15,6 +15,7 @@ import { CategoryService } from 'app/4.services/category.service';
 import { Category } from 'app/5.models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 import { Cart } from 'app/5.models/cart';
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
 import { UserService } from 'app/4.services/auth/user.service';
@@ -51,7 +52,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     private categories: CategoryService,
     private snackBar: MatSnackBar,
     private menuToggleService: MenuToggleService,
-    private userService: UserService
+    private userService: UserService,
+    private imageItemIndexService: ImageItemIndexService
   ) {}
 
   mainImage: string;
@@ -62,14 +64,11 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   total_cost: number = 0.0;
 
   _unsubscribeAll: Subscription = new Subscription();
-
   userData: any;
-
   userId: String;
 
-  async ngOnInit(): Promise<void> {
+   ngOnInit(): void {
     this.userData = this.authService.userData;
-    // console.debug(JSON.stringify(this.userData));
 
     this.productIds = [];
     this.wishListIds = [];
@@ -82,8 +81,6 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       this.quantity = this.product.quantity;
       this.total_cost = this.product.price * this.quantity;
     }
-
-    this.productId = this.product.id;
     this.mainImage = this.product.image;
     // console.debug('User id from cart', this.authService.userData.uid);
 
@@ -106,15 +103,13 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
           });
         });
     }
-    this.inventoryImages$ = await this.productService.getImageListByProduct(
-      this.productId
-    );
+    this.inventoryImages$ = this.imageItemIndexService.getAllImages( this.product.id);
     this.menuToggleService.setCartListCount(this.productIds.length);
     this.menuToggleService.setWishListCount(this.wishListIds.length);
   }
 
-  setImage(e: string) {
-    this.mainImage = e;
+  setImage(e: imageItemIndex) {
+    this.mainImage = e.imageSrc400;
   }
 
   add() {

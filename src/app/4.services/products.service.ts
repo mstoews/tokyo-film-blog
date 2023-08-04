@@ -6,8 +6,7 @@ import {
 import { first, from, map, Observable } from 'rxjs';
 import { Product, ProductPartial } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
-import { ImageListService } from './image-list.service';
+import { imageItemIndex } from 'app/5.models/imageItem';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageItemIndexService } from './image-item-index.service';
 
@@ -18,26 +17,20 @@ export class ProductsService {
   [x: string]: any;
   private productsCollection: AngularFirestoreCollection<Product>;
   private inventoryItems: Observable<Product[]>;
-
   private productPartialCollection: AngularFirestoreCollection<ProductPartial>;
-  private inventoryPartialItems: Observable<ProductPartial[]>;
 
   constructor(
+    public imageItemIndexService: ImageItemIndexService,
     public afs: AngularFirestore,
     private snackBar: MatSnackBar,
-    private imageListService: ImageListService
   ) {
     this.productsCollection = afs.collection<Product>('inventory');
-    this.inventoryItems = this.productsCollection.valueChanges({
-      idField: 'id',
-    });
+    this.inventoryItems = this.productsCollection.valueChanges({  idField: 'id', });
     this.productPartialCollection = afs.collection<ProductPartial>('inventory');
-    this.inventoryPartialItems = this.productPartialCollection.valueChanges({
-      idField: 'id',
-    });
+    this.inventoryPartialItems = this.productPartialCollection.valueChanges({ idField: 'id', });
   }
 
-  imageItemIndexService = inject(ImageItemIndexService);
+
 
   createPartial(productPartial: ProductPartial) {
     return this.productPartialCollection.add(productPartial);
@@ -55,12 +48,9 @@ export class ProductsService {
     );
   }
 
-  updateMainImage(productId: string, mainImage: string) {
-    const image = {
-      image: mainImage,
-    };
-    this.afs.doc(`inventory/${productId}`).update(image);
-    console.debug('main image updated: ', image);
+  updateMainImage(product: Product) {
+    this.afs.doc(`inventory/${product.id}`).set(product);
+    console.debug('main image updated: ', product.image200);
     this.snackBar.open('Main image updated', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
@@ -113,11 +103,9 @@ export class ProductsService {
   }
 
   getProductImage(parentId: string): any {
-    var productImages: Observable<imageItem[]>;
-    var productImagesCollection: AngularFirestoreCollection<imageItem>;
-    productImagesCollection = this.afs.collection<imageItem>(
-      `inventory/${parentId}/images`
-    );
+    var productImages: Observable<imageItemIndex[]>;
+    var productImagesCollection: AngularFirestoreCollection<imageItemIndex>;
+    productImagesCollection = this.afs.collection<imageItemIndex>(`inventory/${parentId}/images` );
     productImages = productImagesCollection.valueChanges({ idField: 'id' });
     return productImages.pipe(
       map((images) => images.filter((product) => product.parentId === parentId))
@@ -125,7 +113,7 @@ export class ProductsService {
   }
 
   async getImageListByProduct(productId: string) {
-    return await this.imageItemIndexService.getImageByType(productId);
+    return this.imageItemIndexService.getAllImages(productId);
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {
