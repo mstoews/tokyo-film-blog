@@ -124,23 +124,6 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
     }
   }
 
-  private updateRanking2(
-    previousData: any,
-    imageItem: any,
-    currentIndex: number,
-    newContainerId: string
-  ) {
-    if (newContainerId !== this.IN_NOT_USED) {
-      let ranking = 0;
-      imageItem.forEach((element: any) => {
-        console.debug('image', JSON.stringify(element));
-        element.ranking = ranking;
-        this.imageItemIndexService.updateImageList(element);
-        ranking++;
-      });
-    }
-  }
-
   private updateRanking1(
     previousData: any,
     imageItem: any,
