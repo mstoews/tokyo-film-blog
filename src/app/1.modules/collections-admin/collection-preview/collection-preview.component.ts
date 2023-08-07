@@ -84,7 +84,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   UpdateDescription(desc: string) {
     let item = this.collectionsImages.find((x) => x.id === this.id);
     if (item !== undefined || item !== null) {
-      item.imageAlt = desc;
+      item.description = desc;
       this.imageListService.updateCollectionDescription(item);
     }
   }
