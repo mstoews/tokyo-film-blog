@@ -8,11 +8,9 @@
   gtag('config', 'G-WGMMJK9NR3');
 </script>
 
-
-<app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
-<div *ngIf="(image$ | async) as images">
+<!-- <div *ngIf="(image$ | async) as images"> -->
   <div class="relative jusitfy-start items-start from-gray-800 via-gray-800 to-opacity-30 hover:opacity-80"  (click)="openProductDetail()">
-    <img [ngSrc]="image.imageSrc200[0]" alt="product" width="400" height="auto" />
+    <img [ngSrc]="product.image" alt="product" width="400" height="auto" />
     <button (click)="openProductDetail()"
       class="mt-2 relative z-10 flex items-center bg-gray-800 text-white justify-center w-full py-3 text-base font-medium leading-4 text-center transition duration-200 hover:text-white group-hover:opacity-100">
       View Details
@@ -26,4 +24,4 @@
       ${{ product.price }}
     </p>
   </div>
-</div>
+<!-- </div> -->

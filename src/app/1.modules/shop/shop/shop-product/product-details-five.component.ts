@@ -7,7 +7,7 @@ import {
 import { Product } from 'app/5.models/products';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
 import { WishListService } from 'app/4.services/wishlist.service';
 import { CartService } from 'app/4.services/cart.service';
 import { AuthService } from 'app/4.services/auth/auth.service';
@@ -24,14 +24,13 @@ import { UserService } from 'app/4.services/auth/user.service';
   selector: 'app-product-details-five',
   templateUrl: './product-details-five.component.html',
   styleUrls: ['./product-details-five.component.css'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   purchaseStarted: boolean;
   productItem$: Observable<Product | undefined>;
   productId: string;
   Products$: Observable<Product[]>;
-  Categories$: Observable<Category[]>;
+  // Categories$: Observable<Category[]>;
   sub: Subscription;
   cartCount = 0;
   wishListCount = 0;
@@ -63,7 +62,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   quantity: number = 1.0;
   total_cost: number = 0.0;
 
-  _unsubscribeAll: Subscription = new Subscription();
+  
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
   userData: any;
   userId: String;
 
@@ -72,7 +72,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     this.productIds = [];
     this.wishListIds = [];
-    this.Categories$ = this.categories.getAll();
+    // this.Categories$ = this.categories.getAll();
 
     this.product = this.activateRoute.snapshot.data['product'];
     if (this.product.quantity == undefined) {
@@ -86,7 +86,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     if (this.authService.userData) {
       this.cartService
-        .cartByUserId(this.authService.userData.uid)
+        .cartByUserId(this.authService.userData.uid).pipe(takeUntil(this._unsubscribeAll))
         .subscribe((cart) => {
           this.cartCount = cart.length;
           cart.forEach((item) => {
@@ -96,6 +96,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
       this.wishlistService
         .wishListByUserId(this.authService.userData.uid)
+        .pipe(takeUntil(this._unsubscribeAll))
         .subscribe((wishlist) => {
           this.wishListCount = wishlist.length;
           wishlist.forEach((item) => {
@@ -110,6 +111,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   setImage(e: imageItemIndex) {
     this.mainImage = e.imageSrc400;
+    console.log('setImage', e.imageSrc400);
   }
 
   add() {
@@ -250,5 +252,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     //this.sub.unsubscribe();
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 }

@@ -27,7 +27,7 @@ export class ShopCardComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.image$ = this.imageItemIndexService.getAllImages(this.product.id);
+    // this.image$ = this.imageItemIndexService.getAllImages(this.product.id);
   }
 
   openProductDetail() {

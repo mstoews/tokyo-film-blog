@@ -47,9 +47,9 @@
         <div class="relative bg-white px-2 pt-1 pb-2 sm:px-6">
           <div class="grid grid-cols-1 mx-5 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 ">
             <li *ngFor="let product of products">
-              <!-- <shop-card [product]="product"></shop-card> -->
+              <shop-card [product]="product"></shop-card> 
 
-              <img [ngSrc]="product.image" alt="product" width="400" height="auto" />
+              <!-- <img [ngSrc]="product.image" alt="product" width="400" height="auto" />
               <button (click)="openProductDetail()"
                 class="mt-2 relative z-10 flex items-center bg-gray-800 text-white justify-center w-full py-3 text-base font-medium leading-4 text-center transition duration-200 hover:text-white group-hover:opacity-100">
                 View Details
@@ -61,7 +61,7 @@
               </div>
               <p class="text-lg dark:text-white lg:text-xl leading-6 lg:leading-5 text-gray-800">
                 ${{ product.price }}
-              </p>
+              </p> -->
             </li>
           </div>
         </div>
