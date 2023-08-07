@@ -4,7 +4,6 @@ import { CartService } from 'app/4.services/cart.service';
 import { CheckoutService } from 'app/4.services/checkout.service';
 import { Observable, first, Subscription } from 'rxjs';
 import { Cart } from 'app/5.models/cart';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from 'app/4.services/auth/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ProfileModel } from 'app/5.models/profile';
@@ -50,7 +49,6 @@ export class CartComponent implements OnInit, OnDestroy {
     private activateRoute: ActivatedRoute,
     private checkoutService: CheckoutService,
     private cartService: CartService,
-    private snack: MatSnackBar,
     private ngxSpinner: NgxSpinnerService,
     public afs: AngularFirestore,
   ) {

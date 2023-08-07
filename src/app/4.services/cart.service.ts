@@ -214,6 +214,7 @@ export class CartService {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
+      duration : 2000
     });
   }
 }

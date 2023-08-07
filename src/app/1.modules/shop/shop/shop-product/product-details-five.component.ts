@@ -28,7 +28,6 @@ import { UserService } from 'app/4.services/auth/user.service';
 export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   purchaseStarted: boolean;
   productItem$: Observable<Product | undefined>;
-  productId: string;
   Products$: Observable<Product[]>;
   // Categories$: Observable<Category[]>;
   sub: Subscription;
@@ -111,7 +110,6 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   setImage(e: imageItemIndex) {
     this.mainImage = e.imageSrc400;
-    console.log('setImage', e.imageSrc400);
   }
 
   add() {
@@ -161,7 +159,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   existsInWishList(): boolean {
     let found = this.wishListIds.find((item) => {
-      return item === this.productId;
+      return item === this.product.id;
     });
     if (found) {
       this.snackBar.open(
@@ -181,7 +179,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   existsInCart(): boolean {
     let found = this.productIds.find((item) => {
-      return item === this.productId;
+      return item === this.product.id
     });
     if (found) {
       this.snackBar.open('The item already exists in your cart ... ', 'Close', {
@@ -207,8 +205,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
           inCart = this.existsInCart();
         }
         if (inCart === false) {
-          this.wishlistService.createWishList(this.productId);
-          this.wishListIds.push(this.productId);
+          this.wishlistService.createWishList(this.product.id);
+          this.wishListIds.push(this.product.id);
         }
       } else {
         this.route.navigate(['/profile']);
@@ -222,9 +220,10 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       this.loggedIn = user;
       if (this.loggedIn === true) {
         inCart = this.existsInCart();
+        // inCart = false
         if (inCart === false) {
-          this.wishlistService.addToCart(this.productId, this.quantity);
-          this.productIds.push(this.productId);
+          this.wishlistService.addToCart(this.product.id, this.quantity);
+          this.productIds.push(this.product.id);
         }
       } else {
         this.route.navigate(['/profile']);

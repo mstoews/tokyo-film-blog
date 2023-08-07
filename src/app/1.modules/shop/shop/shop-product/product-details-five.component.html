@@ -6,7 +6,7 @@
   <div class="grid gap-x-5 w-full gap-2 grid-cols-1 md:grid-cols-7">
     <div class="flex md:flex-col md:col-start-1 md:gap-y-4">
       <ng-container *ngFor="let p of images">
-        <img class="w-16 p-1 gap-2 md:max-h-32 md:min-w-32 flex grow rounded-md" (click)="setImage(p)" [ngSrc]="p.imageSrc" width="200" height="200"
+        <img class="w-16 p-1 gap-2 md:max-h-32 md:min-w-32 flex grow rounded-md hover:cursor-pointer" (click)="setImage(p)" [ngSrc]="p.imageSrc" width="200" height="200"
           alt="image" />
       </ng-container>
     </div>

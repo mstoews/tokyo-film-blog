@@ -1,15 +1,15 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
-import { imageItem } from 'app/5.models/imageItem';
+import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
 })
 export class GalleryComponent implements OnInit {
-  @Input() public imageCollection: imageItem[] = [];
+  @Input() public imageCollection: imageItemIndex[] = [];
 
   imageCount = signal<number>(0);
-  imageItems = <imageItem[]>([]);
+  imageItems = <imageItemIndex[]>([]);
   
 
   ngOnInit(): void {

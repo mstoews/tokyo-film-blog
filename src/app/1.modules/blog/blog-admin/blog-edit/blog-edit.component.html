@@ -12,7 +12,7 @@
     <mat-card class="flex flex-col m-1 text-gray-700 filter-article filter-interactive">
       <div mat-dialog-content>
         <form #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)" class="form">
-          <mat-toolbar class="flex-1-col bg-slate-300">
+          <mat-toolbar class="flex-1-col bg-slate-300 ">
             <span></span>
             <mat-radio-group class="align-center items-center" formControlName="inventory_images" color="primary">
               <mat-radio-button class="pb-2">All</mat-radio-button>
@@ -38,7 +38,7 @@
             <input matInput placeholder="Title" formControlName="title" />
           </mat-form-field>
 
-          <mat-tab-group #tabGroup class="m-2" mat-stretch-tabs="false" mat-align-tabs="start">
+          <mat-tab-group #tabGroup class="m-2 min-h-140" mat-stretch-tabs="false" mat-align-tabs="start">
             <mat-tab label="Introduction">
               <ng-template matTabContent>
 
