@@ -22,7 +22,7 @@ import { DataPolicyComponent } from './data-policy/data-policy.component';
 import { TosComponent } from './tos/tos.component';
 import { StripeCheckoutComponent } from 'app/3.components/stripe-checkout/stripe-checkout.component';
 import { LastestBlogComponent } from 'app/3.components/lastest-blog/lastest-blog.component';
-import { ServicesComponent } from './services/services.component';
+import { ServicesComponent } from './made-to-services/services.component';
 import { FollowingComponent } from './following/following.component';
 
 const routes: Routes = [

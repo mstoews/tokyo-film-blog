@@ -1,7 +1,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', 'G-WGMMJK9NR3');
@@ -13,7 +13,7 @@
     <div class="container h-screen max-w-8xl">
 
       <nav class="z-50 flex flex-wrap items-center justify-between text-2xl text-gray-900 md:ml-10">
-        <button mat-icon-button (click)="onMenuToggle()" class="visible text-white -pt-12" matTooltip="Open Menu" >
+        <button mat-icon-button (click)="onMenuToggle()" class="visible text-white -pt-12" matTooltip="Open Menu">
           <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
         </button>
 
@@ -26,7 +26,8 @@
         <div class="hidden h-10 mr-4 text-3xl">
 
           <div class="text-gray-100 uppercase 50 group font-garamond">
-            <button (click)="onAboutUs('about')" class="p-1 -mt-5 uppercase font-garamond hover:border-b hover:text-gray-100">
+            <button (click)="onAboutUs('about')"
+              class="p-1 -mt-5 uppercase font-garamond hover:border-b hover:text-gray-100">
               About Us</button>
           </div>
 
@@ -64,9 +65,10 @@
       </nav>
 
 
-      <div class="h-44 grid grid-cols-1 m-2 sm:grid-cols-3 gap-4 content-start">
+      <div class="h-44 grid grid-cols-1 m-2 sm:grid-cols-5 gap-4 content-start">
         <div></div>
-        <div class="text-center text-2xl m-10 font-bold text-gray-100 uppercase font-garamond sm:m-1 md:text-3xl lg:text-4xl">
+        <div
+          class="col-start-2 col-span-3 text-center text-2xl m-10 font-bold text-gray-100 uppercase font-garamond sm:m-1 md:text-3xl lg:text-4xl">
           {{ mainPageDoc[0].hero_title }}
         </div>
         <div></div>
