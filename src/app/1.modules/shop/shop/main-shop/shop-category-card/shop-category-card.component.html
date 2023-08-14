@@ -7,12 +7,12 @@
   gtag('config', 'G-WGMMJK9NR3');
 </script>
 
-<div class="h-full w-full md:min-h-full md:w-[200px] relative ease-in duration-300 hover:-m-2">
+<div class="h-full w-full md:min-h-full md:w-auto relative ease-in duration-300 hover:cursor-pointer hover:opacity-70">
   <img (click)="onRefreshName(category.name)"
     class="w-100 rounded-lg"
-    [ngSrc]="category.image" width="100%" height="auto"
+    [ngSrc]="category.image" width="auto" height="100"
     alt="category" />
     <div *ngIf="!mobile" class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-lg">
-      <h1 class="text-white font-normal text-sm ">{{category.name}}</h1>
+      <div class="text-white font-normal text-sm hover:text-bold">{{category.name}}</div>
     </div>
  </div>

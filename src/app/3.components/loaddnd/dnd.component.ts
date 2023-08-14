@@ -4,6 +4,8 @@ import {
   ElementRef,
   Inject,
   Optional,
+  inject,
+  OnDestroy,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
@@ -13,15 +15,13 @@ import {
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { Observable, Subject, map, shareReplay, take, takeUntil } from 'rxjs';
 import { MaterialModule } from '../../material.module';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
-import { IImageStorage } from 'app/5.models/maintenance';
-import { AuthService } from 'app/4.services/auth/auth.service';
-import { ImageMaintenanceService } from 'app/4.services/image-maintenance.service';
+import { imageItemIndex } from 'app/5.models/imageItem';
+import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
 
 @Component({
   standalone: true,
@@ -37,18 +37,20 @@ import { ImageMaintenanceService } from 'app/4.services/image-maintenance.servic
   templateUrl: './dnd.component.html',
   styleUrls: ['./dnd.component.scss'],
 })
-export class DndComponent {
+export class DndComponent implements OnDestroy {
+  subAllImages: any;
   constructor(
     private fb: UntypedFormBuilder,
     public dialogRef: MatDialogRef<DndComponent>,
-    public imageMaintenanceService: ImageMaintenanceService,
     public storage: AngularFireStorage,
-    public afs: AngularFirestore,
-    private auth: AuthService,
-    @Optional() @Inject(MAT_DIALOG_DATA) public parentImage: any
+
+    @Optional() @Inject(MAT_DIALOG_DATA) public imageData: any
   ) {
     this.createForm();
   }
+
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild('fileDropRef', { static: false })
   downloadUrl: Observable<string | null>;
@@ -59,7 +61,33 @@ export class DndComponent {
   fileData: any;
   VERSION_NO = 1;
   percentageChange$: Observable<number | undefined>;
-  public imageData!: IImageStorage;
+  public imageItemIndex!: imageItemIndex;
+  allImages: imageItemIndex[] = [];
+  hashOriginalIndexMap = new Map<string, imageItemIndex>();
+  deleteDuplicateService = inject(DeleteDuplicateService);
+
+
+  async sortAllImages() {
+    return (await this.deleteDuplicateService.getAllImages('')).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.ranking < b.ranking ? -1 : 1;
+        });
+        return data;
+      })
+    );
+  }
+
+  async onCheckList() {
+    let spinner = true;
+    this.subAllImages = (await this.sortAllImages()).subscribe((item) => {
+      this.allImages = item;
+      if (this.allImages.length > 0) {
+        this.deleteDuplicateService.onUpdateImageList(this.allImages);
+      }
+      spinner = false;
+    });
+  }
 
   createForm() {
     this.formGroup = this.fb.group({});
@@ -107,6 +135,7 @@ export class DndComponent {
       }
     }, 10);
   }
+
   uploadFilesSimulator(index: number) {
     setTimeout(() => {
       if (index === this.files.length) {
@@ -124,42 +153,30 @@ export class DndComponent {
     }, 10);
   }
 
-  async startUpload(file: File) {
+  async startUpload(file: File, imageDt: any) {
     const location = '/';
     const path = `${location}/${file.name}`;
-    // console.debug(`File path: ${path}`);
     const fileRef = this.storage.ref(path);
-
     const task = this.storage.upload(path, file, {
       cacheControl: 'max-age=2592000, public',
     });
+    let complete = true;
 
     this.percentageChange$ = task.percentageChanges();
+    this.percentageChange$.pipe(takeUntil(this._unsubscribeAll), shareReplay()).subscribe(async (data) => {
 
-    this.downloadUrl = fileRef.getDownloadURL();
-
-    this.downloadUrl.subscribe((dw) => {
-      this.imageData = {
-        url: dw,
-        parentId: this.parentImage,
-        name: file.name,
-        version_no: this.VERSION_NO,
-      };
-      this.imageMaintenanceService.createImageFirebaseInput(this.imageData);
-      // this.afs
-      //   .collection('blog')
-      //   .doc(this.imageData.parentId)
-      //   .collection('images')
-      //   .add(this.imageData);
-      let data = this.imageData;
-      this.dialogRef.close({ event: 'Create', data });
+      if (data === 100 && complete === true ) {
+        complete = false; // make sure this is only called once
+        console.debug(`complete: ${complete}`);
+        await this.deleteDuplicateService.getImageURL(fileRef, imageDt, file, path);
+      }
     });
   }
 
-  onCreate() {
+  async onCreate() {
     let data = this.imageData;
     for (const item of this.upLoadFiles) {
-      this.startUpload(item);
+      await this.startUpload(item, data);
     }
   }
 
@@ -177,4 +194,13 @@ export class DndComponent {
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
   }
+
+  ngOnDestroy(): void {
+    if (this.subAllImages != null) {
+      this.subAllImages.unsubscribe();
+    }
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
+
 }

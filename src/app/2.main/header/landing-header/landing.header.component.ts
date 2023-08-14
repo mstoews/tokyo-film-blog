@@ -72,8 +72,10 @@ export class LandingHeaderComponent implements OnInit {
   }
 
   public onToggleSideNav() {
-    this.menuToggle.setDrawerState(true);
-    this.notifyNavBarToggleMenu.emit();
+    if (this.menuToggle.getDrawerState() === true) {
+      this.menuToggle.setDrawerState(false);
+      this.notifyNavBarToggleMenu.emit();
+    }
   }
 
   public onBack() {

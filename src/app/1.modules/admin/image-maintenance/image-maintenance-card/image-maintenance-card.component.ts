@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'image-maintenance-card',
   template: `
     <div (dblclick)="onDblClick($event)">
-      <img
+      <img class="h-20 w-20"
         [ngSrc]="image.imageSrc200"
         [alt]="image.imageAlt"
         width="100"

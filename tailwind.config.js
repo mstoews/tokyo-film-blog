@@ -65,7 +65,8 @@ const themes = {
  */
 const config = {
     darkMode   : 'class',
-    content    : ['./src/**/*.{html,css,ts}'],
+    content    : ['./src/**/*.{html,css,ts}',
+                  "./node_modules/tw-elements/dist/js/**/*.js"],
     important  : true,
 
     theme      : {
@@ -256,28 +257,20 @@ const config = {
             })
         }
     },
-    corePlugins: {
-        appearance        : true,
-        container         : false,
-        float             : false,
-        clear             : false,
-        placeholderColor  : false,
-        placeholderOpacity: false,
-        verticalAlign     : false
-    },
     plugins    : [
 
         // Fuse - Tailwind plugins
         require(path.resolve(__dirname, ('src/@made-to/tailwind/plugins/utilities'))),
         require(path.resolve(__dirname, ('src/@made-to/tailwind/plugins/icon-size'))),
+
         require(path.resolve(__dirname, ('src/@made-to/tailwind/plugins/theming')))({themes}),
 
-        // Other third party and/or custom plugins
-        require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),
-        require('@tailwindcss/line-clamp'),
+        // // Other third party and/or custom plugins
+        // require('@tailwindcss/typography')({modifiers: ['sm', 'lg']}),
+        // require('@tailwindcss/line-clamp'),
+        require("./node_modules/tw-elements/dist/plugin.cjs")
     ]
 };
-
 
 module.exports = config;
 

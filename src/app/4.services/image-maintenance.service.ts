@@ -16,8 +16,7 @@ export class ImageMaintenanceService {
   private inventoryItems: Observable<IImageMaintenance[]>;
 
   constructor(public afs: AngularFirestore) {
-    this.mtImageMaintenanceCollection =
-      afs.collection<IImageMaintenance>('images');
+    this.mtImageMaintenanceCollection =  afs.collection<IImageMaintenance>('images');
     this.mtImageStorageCollection = afs.collection<IImageStorage>('files');
     this.inventoryItems = this.mtImageMaintenanceCollection.valueChanges({
       idField: 'id',

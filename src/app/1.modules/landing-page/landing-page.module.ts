@@ -24,6 +24,7 @@ import { StripeCheckoutComponent } from 'app/3.components/stripe-checkout/stripe
 import { LastestBlogComponent } from 'app/3.components/lastest-blog/lastest-blog.component';
 import { ServicesComponent } from './made-to-services/services.component';
 import { FollowingComponent } from './following/following.component';
+import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
 
 const routes: Routes = [
   {
@@ -125,6 +126,7 @@ const routes: Routes = [
     IconsModule,
     StripeCheckoutComponent,
     LastestBlogComponent,
+    TwLighthouseComponent
   ],
 })
 export class LandingPageModule {}

@@ -1,11 +1,12 @@
 <!-- side bar -->
-<div class="container h-screen flex">
-   <aside class="w-64 sm:ml-6 lg:ml-0 relative bg-white sm:h-full flex-col justify-between flex" aria-label="Sidebar">
+<div class="container h-screen flex transition duration-150 ease-in-out">
+   <aside class="w-64 sm:ml-6 lg:ml-0 relative bg-white h-full flex-col justify-between" aria-label="Sidebar">
+    <div class="ml-4">
+      <img src="assets/madetologo-black.svg" alt="logo">
+    </div>
+
     <div class="overflow-y-auto">
-     <div class="px-3 py-10 w-64 text-gray-100  rounded dark:bg-gray-800 ">
-      <div class="ml-4">
-        <img src="assets/madetologo-black.svg" alt="logo">
-      </div>
+     <div class="px-3 w-64 text-gray-100 rounded dark:bg-gray-800 ">
       <ul class="space-y-2">
         <ng-container *ngIf="show_admin_menu === false">
           <li class="mt-3 flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-300" (click)="isToggle === 1 ? (isToggle = 2) : (isToggle = 1)">
@@ -25,7 +26,7 @@
             </a>
           </li>
           <li>
-            <a (click)="onShop()" (click)="onClose()"
+            <a (click)="onShop()"
               class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
               <mat-icon [svgIcon]="'mat_outline:shop'"></mat-icon>
               <span class="flex-1 ml-3 whitespace-nowrap">Shop</span>
@@ -45,7 +46,6 @@
               <span class="flex-1 ml-3 whitespace-nowrap">Collections</span>
             </a>
           </li>
-
           <li>
             <a (click)="onWishList()"
               class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
@@ -76,14 +76,6 @@
               <span class="flex-1 ml-3 whitespace-nowrap">Follow Us</span>
             </a>
           </li>
-
-          <!-- <li>
-            <a routerLink="profile" (click)="onClose()"
-              class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-100">
-              <mat-icon [svgIcon]="'heroicons_outline:user'"></mat-icon>
-              <span class="flex-1 ml-3 whitespace-nowrap">Profile</span>
-            </a>
-          </li> -->
           <li>
             <a routerLink="home/about_us" (click)="onClose()"
               class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
@@ -96,14 +88,14 @@
 
         <ng-container *ngIf="(userService.roles$ | async) as roles">
           <div *ngIf="roles.admin">
-              <li class="mt-3 flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-300" (click)="isToggle === 2 ? (isToggle = 1) : (isToggle = 2)">
+              <li class="mt-3 transition-transform duration-300 motion-reduce:transition-none flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-300" (click)="isToggle === 2 ? (isToggle = 1) : (isToggle = 2)">
               <span></span>
               <mat-icon [svgIcon]="'heroicons_outline:briefcase'"></mat-icon>
               <span class="ml-3 whitespace-nowrap">Admin</span>
               <span class="flex-auto"></span>
               <mat-icon [svgIcon]="'heroicons_outline:chevron-right'"></mat-icon>
             </li>
-            <ul *ngIf="isToggle === 2" class="text-sm mt-3 leading-none w-full">
+            <ul *ngIf="isToggle === 2" class="text-sm mt-3 leading-none w-full transition-transform duration-300 motion-reduce:transition-none" >
             <li>
               <a routerLink="admin/company"
                 class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
@@ -171,8 +163,8 @@
 
     </div>
     </div>
-    <div class="flex items-center p-4 border-t mb-14">
-      <div class="w-10 h-10 bg-cover rounded-md mr-3">
+    <div class="flex items-center p-4 border-t mb-14 mt-14 hover:bg-gray-300">
+      <div class="w-10 h-10 bg-cover rounded-md mr-3 ">
         <img class="rounded-full h-full w-full overflow-hidden shadow bg-slate-700" src="assets/images/madetologowhite.svg" alt="avatar" role="img" />
       </div>
       <div>

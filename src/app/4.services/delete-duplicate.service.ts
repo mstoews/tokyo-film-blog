@@ -3,10 +3,10 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/compat/storage';
 import { collection, collectionData } from '@angular/fire/firestore';
 import { imageItem, imageItemIndex, imageItemIndexMap } from 'app/5.models/imageItem';
-import { Observable, Subscription, filter, map, shareReplay } from 'rxjs';
+import { Observable, Subject, Subscription, filter, map, shareReplay, takeUntil } from 'rxjs';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 
 
@@ -15,21 +15,17 @@ import { rawImageItem } from 'app/5.models/rawImagesList';
 })
 export class DeleteDuplicateService implements OnDestroy {
 
-  // hashLargeMap = new Map<string, imageItem>();
-  // hashOriginalMap = new Map<string, imageItem>();
-  // hashMediumMap = new Map<string, imageItem>();
-  // hashSmallMap = new Map<string, imageItem>();
-  // hashAllImagesMap = new Map<string, imageItem>();
-  // hashUsedImagesMap = new Map<string, imageItem>();
-
-
   constructor() {
       this.createOriginalIndexMaps();
-      //this.createImageListMap();
-      //this.createUsedImageMaps()
   }
 
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
+
   ngOnDestroy(): void {
+    this.sub.unsubscribe();
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
 
   }
   // Inject dependencies
@@ -55,6 +51,58 @@ export class DeleteDuplicateService implements OnDestroy {
   createOriginalItem(image: imageItemIndex) {
     this.imageIndexCollections.add(image).then((imgIndex) => {
       this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
+    });
+  }
+
+
+  async onUpdateImageList(allImages: imageItemIndex[]) {
+    if (allImages.length > 0) {
+      allImages.forEach((item) => {
+        this.hashOriginalIndexMap.set(item.fileName, item);
+      });
+    }
+
+    let ranking = 0;
+    this.storage
+      .ref('/')
+      .listAll()
+      .subscribe((files) => {
+        files.items.forEach((imageRef) => {
+          imageRef.getDownloadURL().then((downloadURL) => {
+            imageRef.getMetadata().then((meta) => {
+              meta.contentType;
+
+              const imageUrl = downloadURL;
+              const imageData: imageItemIndex = {
+                parentId: '',
+                caption: imageRef.fullPath,
+                type: 'IN_NOT_USED',
+                imageSrc: imageUrl,
+                fullPath: imageRef.fullPath,
+                fileName: imageRef.name,
+                size: 'original',
+                imageAlt: imageRef.name,
+                ranking: ranking,
+                contentType: meta.contentType,
+                id: '',
+              };
+
+              const file = this.hashOriginalIndexMap.get(imageData.fileName);
+              if (file === undefined || file === null) {
+                this.createImageItem(imageData);
+                console.debug(`Added ${imageData.fileName}`);
+              }
+            });
+          });
+        });
+      });
+  }
+
+  async createImageItem(image: imageItemIndex) {
+    await this.imageIndexCollections.add(image).then((imgItem) => {
+      image.id = imgItem.id;
+      this.imageIndexCollections.doc(imgItem.id).update(image);
+      this.updateImageIndexByFileName(image.fileName);
     });
   }
 
@@ -90,6 +138,33 @@ export class DeleteDuplicateService implements OnDestroy {
   //   });
   // }
 
+  async getImageURL(ref: AngularFireStorageReference, imageDt: any, file: File, path: string){
+        let updated = false;
+        let downloadUrl = ref.getDownloadURL();
+        const typeId = imageDt.parent;
+        if (downloadUrl !== undefined && updated === false) {
+           downloadUrl.subscribe((dw) => {
+             const imageItemIndex = {
+              parentId: '',
+              caption: imageDt.caption,
+              fileName: file.name,
+              fullPath: path,
+              imageSrc: dw,
+              imageSrc200: dw,
+              imageSrc400: dw,
+              imageSrc800: dw,
+              ranking: 0,
+              size: 'original',
+              type: typeId,
+              id: '',
+              contentType: file.type,
+            };
+            this.createImageItem(imageItemIndex);
+            updated = true;
+          });
+        }
+      };
+
   async createMainImageList(): Promise<void> {
       console.debug(this.hashOriginalIndexMap.size);
       this.storage
@@ -105,8 +180,6 @@ export class DeleteDuplicateService implements OnDestroy {
                 fileName: meta.name,
                 contentType: meta.contentType
               };
-              let found = false;
-
               if (this.hashOriginalIndexMap.get(imageData.fileName) === undefined) {
                   this.updateIndexItem(imageData);
                   console.debug(`Added ${imageData.fileName}`);
@@ -116,26 +189,67 @@ export class DeleteDuplicateService implements OnDestroy {
         });
   }
 
-  // async updateUsedImageList(): Promise<void> {
-  //   this.hashUsedImagesMap.forEach((value, key) => {
-  //     console.debug(value.imageAlt);
-  //     var fileExt = value.imageAlt.split('.').pop();
-  //     let fileName = value.imageAlt.replace(/\.[^/.]+$/, "");
-  //     fileName = fileName.replace(`thumbnails/`,'').replace(`_200x200`,'');
-  //     fileName = fileName.replace(`400/`,'').replace(`_400x400`,'');
-  //     fileName = fileName.replace(`800/`,'').replace(`_800x800`,'');
-  //     fileName = `${fileName}.${fileExt}`;
-  //     let usedItem = this.hashOriginalIndexMap.get(fileName);
-  //     if (usedItem !== undefined) {
-  //       usedItem.type = value.type;
-  //       usedItem.caption= value.caption;
-  //       usedItem.ranking= value.ranking;
-  //       usedItem.parentId= value.parentId;
-  //       usedItem.imageSrc = value.imageSrc;
-  //       this.imageIndexCollections.doc(usedItem.id).update(usedItem);
-  //     }
-  //   });
-  // }
+
+  getAllImages(type: string) {
+    if (type === null || type === undefined || type === '') {
+      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+        'originalImageList',
+        (ref) => ref.orderBy('ranking')
+      );
+      let imageIndexItems = imageIndexCollections.valueChanges({
+        idField: 'id',
+      });
+      return imageIndexItems;
+    } else {
+      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+        'originalImageList',
+        (ref) => ref.orderBy('ranking')
+      );
+      let imageIndexItems = imageIndexCollections
+        .valueChanges({ idField: 'id' })
+        .pipe(map((images) => images.filter((types) => types.type === type)));
+      return imageIndexItems;
+    }
+  }
+
+  async updateImageBySize(image: imageItemIndex, size: string): Promise<void> {
+    var fileExt = image.fileName.split('.').pop();
+    var fileName = image.fileName.replace(/\.[^/.]+$/, "");
+    fileName = fileName.replace(`/${size}`,'').replace(`_${size}x${size}`,'');
+    if (size === '200') {
+    fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+    } else {
+    fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+    }
+    this.storage.ref(fileName).getDownloadURL().pipe(takeUntil(this._unsubscribeAll)).subscribe((scr) => {
+            if (size === '200')
+                image.imageSrc200 = scr;
+            if (size === '400')
+                image.imageSrc400 = scr;
+            if (size === '800')
+                image.imageSrc800 = scr;
+            this.imageIndexCollections.doc(image.id).update(image);
+          });
+  }
+
+  async updateImageIndexByFileName(fileName: string): Promise<void> {
+
+    console.debug(this.hashOriginalIndexMap.size);
+
+    let value = this.hashOriginalIndexMap.get(fileName);
+
+    console.debug(JSON.stringify(value));
+
+    if (value !== undefined || this.hashOriginalIndexMap.size > 0) {
+          this.updateImageBySize(value, '200');
+          this.updateImageBySize(value, '400');
+          this.updateImageBySize(value, '800');
+    }
+    else
+    {
+        return null
+    }
+  }
 
   async updateImageIndexList(size: string): Promise<void> {
 
@@ -156,7 +270,6 @@ export class DeleteDuplicateService implements OnDestroy {
               .subscribe((smallSrc) => {
                 console.debug(smallSrc);
                 value.imageSrc200 = smallSrc;
-                value.type = 'IN_NOT_USED';
                 this.imageIndexCollections.doc(value.id).update(value);
               });
             break;
@@ -167,9 +280,7 @@ export class DeleteDuplicateService implements OnDestroy {
               .ref(fileName)
               .getDownloadURL()
               .subscribe((mediumSrc) => {
-
                 value.imageSrc400 = mediumSrc;
-                value.type = 'IN_NOT_USED';
                 this.imageIndexCollections.doc(value.id).update(value);
                 //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
               });
@@ -183,7 +294,6 @@ export class DeleteDuplicateService implements OnDestroy {
               .subscribe((smallSrc) => {
                 console.debug(smallSrc);
                 value.imageSrc800 = smallSrc;
-                value.type = 'IN_NOT_USED';
                 this.imageIndexCollections.doc(value.id).update(value);
 
               });
@@ -292,31 +402,6 @@ export class DeleteDuplicateService implements OnDestroy {
     });
   }
 
-  // // 400
-  // image_400ItemCollections = this.afs.collection<imageItem>(
-  //   'mediumImageList',
-  //   (ref) => ref.orderBy('ranking')
-  // );
-  // image_400Items = this.image_400ItemCollections.valueChanges({
-  //   idField: 'id',
-  // });
-
-  // // 800
-  // image_800ItemCollections = this.afs.collection<imageItem>(
-  //   'largeImageList',
-  //   (ref) => ref.orderBy('ranking')
-  // );
-  // image_800Items = this.image_800ItemCollections.valueChanges({
-  //   idField: 'id',
-  // });
-
-  // imageItemCollections = this.afs.collection<imageItem>('imagelist', (ref) => ref.orderBy('ranking'));
-  // imageItems = this.imageItemCollections.valueChanges({ idField: 'id' });
-
-  // updateItemsCollection = this.afs.collection<imageItem>('imagelist');
-
-
-
 
 
   async getOriginalImagesList(): Promise<Observable<imageItem[]>> {
@@ -345,88 +430,9 @@ export class DeleteDuplicateService implements OnDestroy {
 
   async getSmallImagesList(): Promise<Observable<imageItem[]>> {
     const imagesRef = collection(this.afs.firestore, 'smallImageList');
-    return collectionData(imagesRef, { idField: 'id' }) as Observable<
-      imageItem[]
-    >;
+    return collectionData(imagesRef, { idField: 'id' }) as Observable<imageItem[]>;
   }
 
-  // updateImages() {
-  //   this.createImageHashMap();
-  //   // this.updateImageList();
-  // }
-
-  // createImageHashMap() {
-  //   this.sortNotUsed().subscribe((item) => {
-  //     item.forEach((item) => {
-  //       this.hashAllImagesMap.set(item.caption, item);
-  //     });
-  //   });
-  // }
-
-
-  // async createImageMaps() {
-  //   (await this.getOriginalImagesList()).subscribe(async (items) => {
-  //     items.forEach((item) => {
-  //       item.caption = item.caption.replace(/\.[^/.]+$/, '');
-  //       this.hashOriginalMap.set(item.caption, item);
-  //     });
-  //   });
-
-  //   (await this.getMediumImagesList()).subscribe(async (items) => {
-  //     items.forEach((item) => {
-  //       item.caption = item.caption
-  //         .replace('_400x400', '')
-  //         .replace(/\.[^/.]+$/, '')
-  //         .replace('400/', '');
-  //       this.hashMediumMap.set(item.caption, item);
-  //     });
-  //   });
-
-  //   (await this.getLargeImagesList()).subscribe(async (items) => {
-  //     items.forEach((item) => {
-  //       item.caption = item.caption
-  //         .replace('_800x800', '')
-  //         .replace(/\.[^/.]+$/, '')
-  //         .replace('800/', '');
-  //       this.hashLargeMap.set(item.caption, item);
-  //     });
-  //     this.createImageMaps();
-  //   });
-  // }
-
-
-  // getImagesBySize(size: string) {
-  //   return this.imageItems.pipe(
-  //     map((images) =>
-  //       images
-  //         .filter((image) => image.imageAlt.includes(size))
-  //         .filter((type) => type.type !== 'IN_NOT_USED')
-  //     )
-  //   );
-  // }
-
-
-
-  // sortNotUsed() {
-  //   return this.getImagesBySize('200').pipe(
-  //     map((data) => {
-  //       data.sort((a, b) => {
-  //         return a.caption < b.caption ? -1 : 1;
-  //       });
-  //       return data;
-  //     })
-  //   );
-  // }
-
-  // async deleteDuplicateImages() {
-  //   await (
-  //     await this.sortNotUsed()
-  //   ).subscribe(async (item) => {
-  //     if (item.length > 0) {
-  //       this.deletefFromFirebase(await this.deleteDupes(item));
-  //     }
-  //   });
-  // }
 
   async deleteDupes(not_usedImages: imageItem[]) {
 

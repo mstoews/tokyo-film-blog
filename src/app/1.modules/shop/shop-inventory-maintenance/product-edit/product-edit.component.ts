@@ -148,7 +148,7 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 
   onAllImages() {
     this.imageToolbarService.changeFilter(FilterEnum.all);
-    
+
   }
 
   onNotUsedImages() {
@@ -224,12 +224,13 @@ export class ProductEditComponent implements OnInit, OnDestroy {
   }
 
   onImages() {
-    const parentId = this.prdGroup.getRawValue();
+    const data = this.prdGroup.getRawValue();
     const dialogRef = this.matDialog.open(DndComponent, {
-      width: '500px',
+      width: '600px',
       data: {
-        parent: parentId.id,
-        location: 'blog',
+        parent: data.id,
+        location: '/',
+        caption: data.description,
       },
     });
 

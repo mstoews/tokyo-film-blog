@@ -1,7 +1,10 @@
-<ng-container *ngIf="featuredList$ | async as galleryList">
+
 <app-header class="bg-gray-100" [title]="'Follow Us'"></app-header>
-<div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0">
+<div class="container max-w-6xl px-6 mx-auto my-16 text-gray-900 md:px-0"></div>
   <!-- Creations Header -->
+<app-tw-lightbox></app-tw-lightbox>
+
+<ng-container *ngIf="featuredList$ | async as galleryList">
  <section class="scroll-mt-20" id="gallery">
 
     <div class="container px-6 mx-auto my-16 text-gray-900 max-w-7xl md:px-0">
@@ -23,11 +26,11 @@
           <div class="flex items-center justify-center">
             <app-gallery [imageCollection]="galleryList"></app-gallery>
           </div>
+
         </div>
       </div>
     </div>
   </section>
 
-</div>
 </ng-container>
 

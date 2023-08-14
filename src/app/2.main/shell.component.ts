@@ -94,13 +94,30 @@ export class ShellComponent implements OnInit {
   }
 
   closeDrawer() {
-    this.drawer.close();
-    this.drawer.mode = 'over';
+    this.onSideNavChange = false;
+    if (this.drawer.mode === 'over') {
+      this.drawer.close();
+    }
+
+    // this.drawer.mode = 'over';
   }
 
   openDrawer() {
+    this.onSideNavChange = true;
     this.drawer.open();
     this.drawer.mode = 'over';
+  }
+
+  setDrawerSide(){
+    this.onSideNavChange = true;
+    if(this.drawer.mode !== 'side')
+    {
+      this.drawer.mode = 'side';
+    }
+    else{
+      this.drawer.mode = 'over';
+    }
+    this.drawer.open();
   }
 
   async logout() {

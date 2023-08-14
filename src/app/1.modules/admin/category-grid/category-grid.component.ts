@@ -31,19 +31,14 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
   categoryGroup: FormGroup;
   currentDoc: string;
   sTitle: string;
-  cRAG: string;
-
   private _unsubscribeAll: Subject<any> = new Subject<any>();
-
   category: any;
   collapsed = false;
-
   selectedItemKeys: any;
 
   auth = inject(AngularFireAuth);
   snackBar = inject(MatSnackBar);
   imageItemIndexService = inject(ImageItemIndexService);
-
   categoryService = inject(CategoryService);
   fb = inject(FormBuilder);
 
@@ -76,7 +71,6 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
 
   async ngOnInit() {
     this.sTitle = 'Category Lists';
-    this.cRAG = '#238823';
     this.createEmptyForm();
     (await this.sortNotUsed()).subscribe((item) => {
       this.not_usedImages = item;

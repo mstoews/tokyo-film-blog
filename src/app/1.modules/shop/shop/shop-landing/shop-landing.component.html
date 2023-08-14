@@ -1,7 +1,8 @@
 <app-header class="bg-white" [title]="sTitle" ></app-header>
+
 <div *ngIf="Category$ | async as cats else loading" >
   <div class="relative mx-1 bg-white-100 px-4 pt-1 pb-5 sm:px-6 md:-mt-20 mt-1">
-    <div class="grid grid-cols-1 mx-2 gap-x-2 sm:gap-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 md:m-20  xl:grid-cols-4 xl:m-30 xl:gap-4 ">
+    <div class="grid grid-cols-1 mx-2 gap-x-2 sm:gap-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 md:m-20  xl:grid-cols-4 xl:m-30">
       <div *ngFor="let item of cats" >
         <div *ngIf="!item.length">
         <app-shop-landing-card [category]="item"></app-shop-landing-card>

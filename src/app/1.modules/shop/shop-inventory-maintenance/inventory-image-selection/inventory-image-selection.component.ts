@@ -1,6 +1,6 @@
 import {Component, OnInit, OnDestroy, Input, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Subject, map, takeUntil } from 'rxjs';
+import { Subject, map, shareReplay, takeUntil } from 'rxjs';
 import { imageItemIndex } from 'app/5.models/imageItem';
 import { CdkDragDrop, moveItemInArray, transferArrayItem }  from '@angular/cdk/drag-drop';
 import { ProductsService } from 'app/4.services/products.service';
@@ -70,7 +70,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
-        });
+        }), shareReplay() ;
         return data;
       })
     );
@@ -83,13 +83,12 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     }
     (await this.sortNotUsed(query))
       .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((item) => {
-      this.not_usedImages = item;
+      .subscribe((images) => {
+       this.not_usedImages = images;
     });
 
     (await this.imageItemIndexService.getOriginalImageListByType(this.productId))
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((item) => {
+      .pipe(takeUntil(this._unsubscribeAll), shareReplay()).subscribe((item) => {
       this.collectionsImages = item;
     });
   }

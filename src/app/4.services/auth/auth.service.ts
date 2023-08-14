@@ -15,7 +15,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService implements OnDestroy{
+export class AuthService implements OnDestroy {
   userData: any;
   userId: string;
   isAnonymous: boolean;

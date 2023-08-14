@@ -11,6 +11,7 @@ import { ScrollService } from './4.services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
 import { ProductResolver } from './4.services/product.resolver';
 import { BlogResolver } from './4.services/blog.resolver';
+import "firebase/compat/performance";
 
 
 // Firebase services + environment module

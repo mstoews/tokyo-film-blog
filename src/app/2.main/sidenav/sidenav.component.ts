@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AuthService } from 'app/4.services/auth/auth.service';
 import { UserService } from 'app/4.services/auth/user.service';
+import { Carousel, Dropdown, Sidenav, Ripple, initTE } from 'tw-elements';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-sidenav',
@@ -16,7 +17,7 @@ export class SideNavComponent implements OnInit {
     public userService: UserService,
     public snackBar: MatSnackBar,
     private route: Router,
-    public user: UserService
+
   ) {
     this.authService.afAuth.authState.subscribe((user) => {
       this.userEmail = user?.email;
@@ -33,9 +34,12 @@ export class SideNavComponent implements OnInit {
   userEmail: string;
   show_admin_menu = false;
   cartCount = 0;
+  side = false;
 
   @Output() notifyParentCloseDrawer: EventEmitter<any> = new EventEmitter();
   @Output() notifyParentDrawerOpen: EventEmitter<any> = new EventEmitter();
+  @Output() notifyParentDrawerSide: EventEmitter<any> = new EventEmitter();
+  @Output() notifyParentDrawerOver: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
     this.auth.authState.subscribe((user) => {
@@ -43,6 +47,26 @@ export class SideNavComponent implements OnInit {
         this.userId = user.uid;
       }
     });
+    initTE({ Carousel, Dropdown, Sidenav, Ripple });
+  }
+
+
+  onClose() {
+    // if (this.side === true) {
+      this.notifyParentCloseDrawer.emit();
+    //}
+  }
+
+
+  setMenuMode(){
+    if (this.side === true) {
+      this.side = false;
+      this.notifyParentDrawerOver.emit();
+    }
+    else {
+      this.side = true;
+      this.notifyParentDrawerSide.emit();
+    }
   }
 
   onAdmin() {
@@ -106,7 +130,5 @@ export class SideNavComponent implements OnInit {
     });
   }
 
-  onClose() {
-    this.notifyParentCloseDrawer.emit();
-  }
+
 }
