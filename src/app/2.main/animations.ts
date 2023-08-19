@@ -36,7 +36,7 @@ export const onMainContentChange = trigger('onMainContentChange', [
   state(
     'open',
     style({
-      'margin-left': '200px',
+      'margin-left': '0px',
     })
   ),
   transition('close => open', animate('500ms ease-in')),

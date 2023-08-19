@@ -12,7 +12,7 @@ import {
 import { MainShopComponent } from './shop/main-shop/shop.component';
 import { ShopCardComponent } from './shop/main-shop/shop-card/shop-card.component';
 import { MaterialModule } from 'app/material.module';
-import { FuseCardModule } from '@made-to/components/card';
+
 import { SharedModule } from '../shared-module/shared.module';
 import { CartComponent } from './shop/cart/cart.component';
 import { ProductDetailsFiveComponent } from './shop/shop-product/product-details-five.component';
@@ -65,9 +65,9 @@ const routes: Routes = [
     pathMatch: 'full',
     title: 'Shopping',
     component: MainShopComponent,
-    resolve: {
-      shop: ProductFuncResolver,
-    },
+    // resolve: {
+    //   shop: ProductFuncResolver,
+    // },
     data: { state: 'category/:id' },
   },
   {
@@ -151,7 +151,6 @@ const routes: Routes = [
     CommonModule,
     NgOptimizedImage,
     MaterialModule,
-    FuseCardModule,
     SharedModule,
     NotificationComponent,
     RouterModule.forChild(routes),

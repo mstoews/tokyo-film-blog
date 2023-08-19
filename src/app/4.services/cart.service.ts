@@ -1,4 +1,4 @@
-import { Injectable, computed, signal } from '@angular/core';
+import { Injectable, OnDestroy, computed, signal } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
 import {
@@ -6,7 +6,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { first, map, Observable, of } from 'rxjs';
+import { first, map, Observable, of, Subject, takeUntil } from 'rxjs';
 import { Cart } from 'app/5.models/cart';
 import { Product } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
@@ -17,16 +17,17 @@ import { WishList } from 'app/5.models/wishlist';
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnDestroy {
   private cartCollection: AngularFirestoreCollection<Cart>;
   isLoggedIn: boolean;
   userId: string;
   cart$: Observable<Cart[]>;
   cartItems$: Observable<Cart[]>;
-  cartCounter: number;
   userCountry: string;
   // Manage state with signals
   cartItem = signal<Cart[]>([]);
+
+  cartCounter = signal<number>(0);
 
   constructor(
     public afs: AngularFirestore,
@@ -34,6 +35,7 @@ export class CartService {
     public authService: AuthService,
     private snack: MatSnackBar
   ) {
+
     auth.authState.subscribe((user) => {
       this.userId = user?.uid;
     });
@@ -42,10 +44,26 @@ export class CartService {
       this.isLoggedIn = isLoggedIn;
     });
 
-    if (this.isLoggedIn) {
+    if (this.isLoggedIn === true) {
       this.cartItems$ = this.cartCollection.valueChanges({ idField: 'id' });
     }
+   
   }
+
+  updateCartCounter(userId: string) {
+    this.cartByStatus(userId,'open').pipe(takeUntil(this._unsubscribeAll)).subscribe((cart) => {
+    this.cartCounter.set(1);
+    console.debug('cart length:', cart.length);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+
+  }
+
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   getCartCount(userId: string): Observable<Cart[] | undefined> {
     return this.afs
@@ -71,9 +89,9 @@ export class CartService {
       );
   }
 
-  getAll() {
+  getAll(userId: string) {
     var cartItemsCollection: AngularFirestoreCollection<Cart>;
-    cartItemsCollection = this.afs.collection<Cart>(`user/${this.userId}/cart`);
+    cartItemsCollection = this.afs.collection<Cart>(`user/${userId}/cart`);
     this.cartItems$ = cartItemsCollection.valueChanges({ idField: 'id' });
     return this.cartItems$;
   }
@@ -91,13 +109,7 @@ export class CartService {
   cartByStatus(userId: string, cartStatus: string) {
     let cartItemsCollection: AngularFirestoreCollection<Cart>;
     cartItemsCollection = this.afs.collection<Cart>(`users/${userId}/cart`);
-    let cart = cartItemsCollection.valueChanges({ idField: 'id' });
-    return cart.pipe(
-      map((cart) => {
-        return cart.filter((cart) => {
-          return cart.status === cartStatus;
-        });
-      })
+    return  cartItemsCollection.valueChanges({ idField: 'id' }).pipe(map((cart) => cart.filter((status) => status.status === cartStatus))
     );
   }
 
@@ -190,6 +202,7 @@ export class CartService {
       );
       wishlistItems = wishlistCollection.valueChanges({ idField: 'id' });
       wishlistCollection.doc(productId).delete();
+      this.cartCounter.set(this.cartCounter() + 1);
     }
   }
 
@@ -214,7 +227,7 @@ export class CartService {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
-      duration : 2000
+      duration: 2000
     });
   }
 }

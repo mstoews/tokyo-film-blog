@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MaterialModule } from 'app/material.module';
 import { DxHtmlEditorModule } from 'devextreme-angular';
-import { FuseCardModule } from '@made-to/components/card';
+
 import { IconsModule } from 'app/icons.module';
 import { CollectionsEditRoutingModule } from './collections-routing.module';
 
@@ -41,7 +41,7 @@ import { ImageMaintenanceModule } from '../admin/image-maintenance/image-mainten
     DxHtmlEditorModule,
     NgOptimizedImage,
     SharedModule,
-    FuseCardModule,
+
     IconsModule,
     CollectionsEditRoutingModule,
     ImageMaintenanceModule,

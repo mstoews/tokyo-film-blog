@@ -6,15 +6,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FuseAlertModule } from '@made-to/components/alert';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { SignUpClassicComponent } from './classic/sign-up.component';
-import { SignUpModernComponent } from './modern/sign-up.component';
-import { SignUpModernReversedComponent } from './modern-reversed/sign-up.component';
-import { SignUpFullscreenComponent } from './fullscreen/sign-up.component';
-import { SignUpFullscreenReversedComponent } from './fullscreen-reversed/sign-up.component';
-import { SignUpSplitScreenComponent } from './split-screen/sign-up.component';
-import { SignUpSplitScreenReversedComponent } from './split-screen-reversed/sign-up.component';
 
 const routes: Routes = [
   {
@@ -23,31 +16,6 @@ const routes: Routes = [
       {
         path: 'classic',
         component: SignUpClassicComponent,
-      },
-      {
-        path: 'modern',
-        component: SignUpModernComponent,
-        data: { state: 'modern' },
-      },
-      {
-        path: 'modern-reversed',
-        component: SignUpModernReversedComponent,
-      },
-      {
-        path: 'split-screen',
-        component: SignUpSplitScreenComponent,
-      },
-      {
-        path: 'split-screen-reversed',
-        component: SignUpSplitScreenReversedComponent,
-      },
-      {
-        path: 'fullscreen',
-        component: SignUpFullscreenComponent,
-      },
-      {
-        path: 'fullscreen-reversed',
-        component: SignUpFullscreenReversedComponent,
       },
       {
         path: '**',
@@ -59,12 +27,6 @@ const routes: Routes = [
 
 const components = [
   SignUpClassicComponent,
-  SignUpModernComponent,
-  SignUpModernReversedComponent,
-  SignUpFullscreenComponent,
-  SignUpFullscreenReversedComponent,
-  SignUpSplitScreenComponent,
-  SignUpSplitScreenReversedComponent,
 ];
 
 @NgModule({
@@ -77,7 +39,6 @@ const components = [
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    FuseAlertModule,
     SharedModule,
   ],
   exports: [...components],

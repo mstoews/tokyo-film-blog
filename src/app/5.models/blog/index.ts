@@ -16,8 +16,9 @@ export interface Blog {
   user_updated:     string;
   date_created:     string;
   date_updated:     string;
-  image:            string;
+  image?:            string;
   published:        boolean;
+  tailoring?:        boolean;
 }
 
 export interface BlogPartial {

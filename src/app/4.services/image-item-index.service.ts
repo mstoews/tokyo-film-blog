@@ -40,9 +40,6 @@ export class ImageItemIndexService {
     });
   }
 
-  
-
-
   async getImagesByType(productId: string) {
     return this.getImageByType(productId);
   }

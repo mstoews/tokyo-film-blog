@@ -1,20 +1,22 @@
-<nav class="relattive flex">
+<nav class="container relative flex">
   <div class="flex flex-row sm:flex-col sm:space-x-2 md:ml-4 mr-10 mt-1 sm:ml-2 ">
     <ng-container *ngIf="(userService.roles$ | async) as roles">
       <ng-container *ngIf="roles.admin">
         <div class="md:block hidden">
           <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation"
-            class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl">
-            <mat-icon [svgIcon]="'mat_outline:support'"></mat-icon>
-          </a>
-          <div class="flex flex-row">{{headerEmail}}</div>
+          class="flex items-center mt-1 bg-gray-100 font-normal text-gray-800 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+          <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
+        </a>
+          <div class="flex flex-row text-gray-800">{{headerEmail}}</div>
         </div>
       </ng-container>
     </ng-container>
-    <div class="block md:hidden">
+    <div class="block">
       <a (click)="onToggleSideNav()" matTooltip="Toggle Navigation" 
-        class="flex items-center p-2 font-normal text-white rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+        class="flex fill-slate-50 items-center p-2 font-normal text-gray-800 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
+        <span >
         <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
+        </span>
       </a>
     </div>
 

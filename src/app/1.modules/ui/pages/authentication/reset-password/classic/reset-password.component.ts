@@ -4,21 +4,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { fuseAnimations } from '@made-to/animations';
-import { FuseAlertType } from '@made-to/components/alert';
-import { FuseValidators } from '@made-to/validators';
 
 @Component({
   selector: 'reset-password-classic',
   templateUrl: './reset-password.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations,
+
 })
 export class ResetPasswordClassicComponent implements OnInit {
-  alert: { type: FuseAlertType; message: string } = {
-    type: 'success',
-    message: '',
-  };
   resetPasswordForm!: UntypedFormGroup;
   showAlert: boolean = false;
 
@@ -41,9 +34,6 @@ export class ResetPasswordClassicComponent implements OnInit {
         password: ['', Validators.required],
         passwordConfirm: ['', Validators.required],
       },
-      {
-        validators: FuseValidators.mustMatch('password', 'passwordConfirm'),
-      }
     );
   }
 

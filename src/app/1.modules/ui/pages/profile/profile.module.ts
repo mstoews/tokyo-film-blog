@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FuseCardModule } from '@made-to/components/card';
 import { ProfileComponent } from './profile.component';
 import { profileRoutes } from './profile.routing';
 import { HeadingModule } from 'app/2.main/header/heading.module';
@@ -27,7 +26,7 @@ import { StripeCheckoutComponent } from 'app/3.components/stripe-checkout/stripe
   imports: [
     RouterModule.forChild(profileRoutes),
     MaterialModule,
-    FuseCardModule,
+
     SharedModule,
     AddressComponent,
     SignOutModule,

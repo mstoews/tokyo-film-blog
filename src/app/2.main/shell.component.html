@@ -1,6 +1,8 @@
- <div class="h-screen flex-container">
-  <mat-drawer-container class="flex-1 bg-white">
-    <mat-drawer class="flex-1 ml-1 bg-gray-100 " #drawer [mode]="'side'" open
+ <div class="h-screen flex-container max-w-screen-2xl">
+  <!-- <mat-drawer-container class="flex-1 bg-fixed  bg-opacity-75 bg-[url('/assets/images/cloth_background_3.jpg')]"> -->
+    <mat-drawer-container class="flex-1 bg-cover md:bg-fixed md:bg-cover bg-center bg-opacity-75" style="background-image: url('/assets/images/cloth_background_3.jpg')">
+
+    <mat-drawer class="flex-1 ml-1" #drawer [mode]="'side'" open
       [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
       <app-sidenav
       (notifyParentDrawerSide)="setDrawerSide()"
@@ -9,15 +11,16 @@
       (notifyParentDrawerOpen)="openDrawer()">
       </app-sidenav>
     </mat-drawer>
-    <main class="text-gray-800 bg-white rounded-lg max-h-content flex-main">
-      <article class="bg-white flex-article">
+    <main class="text-gray-800 bg-transparent rounded-lg max-h-content flex-main">
+      <article class="bg-transparent flex-article">
         <ng-content >
 
         </ng-content>
       </article>
     </main>
+
   </mat-drawer-container>
-  <footer class="mt-auto bg-gray-100 -mb-50px">
+  <footer class="mt-auto bg-gray-100">
     <app-footer></app-footer>
   </footer>
 </div>

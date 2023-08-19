@@ -1,16 +1,16 @@
-<div (click)="onOpenBlog(blog.id)" *ngIf="blogImages$ | async as images"
-  class="relative bg-center bg-cover bg-no-repeat mb-40 w-11/12 mx-auto xl:w-full h-120">
+<div class="flex" (click)="onOpenBlog(blog.id)" *ngIf="blogImages$ | async as images"
+  class="relative bg-center bg-cover bg-no-repeat mb-20 w-11/12 mx-auto xl:w-full h-120 ">
   <div *ngIf="images.length > 0">
-    <img [src]="images[0].imageSrc" alt="" class="h-full w-full object-cover overflow-hidden absolute rounded" />
+    <img [src]="images[0].imageSrc400" alt="" class="h-[600px] w-[600px] object-cover rounded" width-="200" height="200" />
   </div>
-  <div
-    class="absolute bottom-0 w-11/12 ml-2 xl:mx-0 lg:mx-0 xl:w-6/12 lg:w-6/12 xl:ml-12 lg:ml-12 rounded-md lg:-mb-56 sm:-mb-48 -mb-64 xl:-mb-24">
+  <div class="z-0 absolute bottom-0 w-11/12 ml-2 xl:mx-0 lg:mx-0 xl:w-6/12 lg:w-6/12 xl:ml-12 lg:ml-12 -mb-12 rounded-md lg:-mb-12 sm:-mb-24 xl:-mb-12">
     <div class="w-full py-5 px-6 bg-white shadow rounded">
-      <p class="text-xl text-gray-800 font-bold pb-2">{{blog.title}}</p>
-      <p class="text-base text-gray-600" [innerHTML]="blog.paragraph | safe: 'html'"></p>
-      <div class="pt-4 flex justify-between">
-        <p class="text-sm text-gray-600"> {{blog.date_updated}} </p>
-      </div>
+        <p class="text-xl text-gray-800 font-bold pb-2">{{blog.title}}</p>
+        <p class="text-base text-gray-600" [innerHTML]="blog.paragraph | safe: 'html'"></p>
+        <div class="pt-4 flex justify-between">
+          <p class="text-sm text-gray-600"> {{blog.date_updated}} </p>
+        </div>
     </div>
   </div>
 </div>
+

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { initTE, Lightbox } from 'tw-elements';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 @Component({
   selector: 'app-tw-lightbox',
@@ -11,8 +12,23 @@ import { initTE, Lightbox } from 'tw-elements';
 })
 export class TwLighthouseComponent implements OnInit   {
 
+  @Input() public imageCollection: imageItemIndex[] = [];
+  imageCount = signal<number>(0);
+  imageItems = <imageItemIndex[]>([]);
+
+  imageURL: string;
+
+
   ngOnInit() {
     initTE({ Lightbox });
+    this.imageCount.set(this.imageCollection.length);
+    console.log(this.imageCount());
+    if (this.imageCollection.length > 6) {
+      this.imageItems = this.imageCollection.slice(0, 6);
+    } else {
+      this.imageItems = this.imageCollection;
+    }
+    this.imageURL = this.imageItems[0].imageSrc800;
   }
 
 }

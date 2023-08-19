@@ -15,7 +15,7 @@ export class ShopLandingComponent  {
     private categoryService: CategoryService
   ) {}
   
-  sTitle = 'Made To Shopping Categories';
+  sTitle = 'Made To Shopping By Categories';
 
   Category$ = this.categoryService.getAll();
 

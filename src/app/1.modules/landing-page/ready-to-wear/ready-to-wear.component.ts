@@ -12,6 +12,8 @@ export class ReadyToWearComponent implements OnInit {
   }
 
   constructor(private router: Router) {}
+  ready_to_wear = './assets/images/ready-to-wear.jpeg';
+  knitting_image = './assets/images/flamyarn_800x800.jpg';
 
   ngOnInit(): void {}
 

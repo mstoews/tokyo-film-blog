@@ -3,13 +3,22 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  inject,
 } from '@angular/core';
 import { ActivatedRoute, Route, Router, TitleStrategy } from '@angular/router';
 import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
-import { Observable, Subscription, of } from 'rxjs';
+import { Observable, Subscription, combineLatest, map, of, tap } from 'rxjs';
 import { Category } from 'app/5.models/category';
+
+
+
+interface shopData {
+  category: Category;
+  products: Product[];
+  categories: Category[];
+}
 
 @Component({
   selector: 'shop',
@@ -19,24 +28,45 @@ import { Category } from 'app/5.models/category';
 })
 export class MainShopComponent implements OnInit, OnDestroy {
 
-  Products$: Observable<Product[]>;
-  category: Category[] = [];
-  currentCategory: string;
-  sTitle: string;
+  products$: Observable<Product[]>;
+  category$: Observable<Category[]>;
+  category: string;
+  data$: Observable<shopData>;
+  refresh = true;
+
   sub: Subscription;
   loading = false;
+  MOBILE_SIZE = 768;
 
-  constructor(
-    private route: Router,
-    private actRoute: ActivatedRoute,
-    private productService: ProductsService,
-    private categoryService: CategoryService,
+  route = inject(Router);
+  actRoute = inject(ActivatedRoute);
+  productService = inject(ProductsService);
+  categoryService = inject(CategoryService);
 
-  ) {}
-
-  Category$ = this.categoryService.getAll();
+  //   Category$ = this.categoryService.getAll();
 
   mobile = true;
+
+  ngOnInit(): void {
+    this.category  = this.actRoute.snapshot.paramMap.get('id');
+    if (window.screen.width <= this.MOBILE_SIZE) {
+      // 768px portrait
+      this.mobile = true;
+    } else {
+      this.mobile = false;
+    }
+
+    this.products$ = this.productService.getInventoryByCategory(this.category);
+    this.category$ = this.categoryService.getAll();
+    this.data$ = combineLatest([this.category, this.products$, this.category$]).pipe(
+      map(([category, products, categories]) => {
+        return {category, products, categories }
+      }),
+      tap(console.debug)
+    );
+    this.refresh = true;
+  }
+
 
   openProductDetail(productId: string) {
     this.route.navigate(['shop/product', productId]);
@@ -51,10 +81,16 @@ export class MainShopComponent implements OnInit, OnDestroy {
   }
 
   onRefreshName(category: string) {
-    this.currentCategory = category;
-    this.Products$ = this.productService.getInventoryByCategory(category);
+    // this.category = category;
+    this.products$ = this.productService.getInventoryByCategory(category);
+    // this.category$ = this.categoryService.getAll();
+    this.data$ = combineLatest([category, this.products$, this.category$]).pipe(
+      map(([category, products, categories]) => {
+        return {category, products, categories }
+      }),
+      tap(console.debug)
+    );
   }
-
 
   selectCategory(index: any) {
     if (index.index >= 0) {
@@ -65,25 +101,6 @@ export class MainShopComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnInit(): void {
-    this.sTitle = 'Shop';
-    this.actRoute.data.subscribe((data) => {
-      if (data.length > 0) {
-        this.currentCategory = data.shop[0].category;
-      }
-      else {
-        this.currentCategory = '';
-      }
-      this.Products$ = of(data.shop);
-    });
-
-    if (window.screen.width <= 768) {
-      // 768px portrait
-      this.mobile = true;
-    } else {
-      this.mobile = false;
-    }
-  }
 
   ngOnDestroy() {
     if (this.sub) {

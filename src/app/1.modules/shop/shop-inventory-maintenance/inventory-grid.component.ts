@@ -11,8 +11,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { IImageStorage } from 'app/5.models/maintenance';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { openAddComponentDialog } from './add/add.component';
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
+// Our demo infrastructure requires us to use 'file-saver-es'. We recommend that you use the official 'file-saver' package in your applications.
+import { exportDataGrid } from 'devextreme/excel_exporter';
 
 @Component({
   selector: 'inventory-list',
@@ -72,6 +75,23 @@ export class InventoryComponent implements OnInit, OnDestroy {
    * passed back so the images collection can be created from the parent inventory item.
    * The parentID must exist before the image collection could be created.
    */
+
+  onExporting(e: { component: any; cancel: boolean; }) {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet('Inventory');
+
+    exportDataGrid({
+      component: e.component,
+      worksheet,
+      autoFilterEnabled: true,
+    }).then(() => {
+      workbook.xlsx.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'DataGrid.xlsx');
+      });
+    });
+    e.cancel = true;
+  }
+
 
   ngOnDestroy(): void {
     this._unsubscribeAll.next(null);

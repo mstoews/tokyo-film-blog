@@ -1,37 +1,38 @@
 <ng-container *ngIf="imageCount() > 0">
-  <div class="container relative flex flex-col max-w-6xl mx-auto text-gray-900 md:flex-row md:px-0">
+  
+  <div data-te-lightbox-init class="container relative flex flex-col max-w-6xl mx-auto text-gray-900 md:flex-row md:px-0">
       <div class="flex flex-wrap -m-1 md:-m-2">
         
         <div class="flex flex-wrap w-1/2 h-80">
-          <div class="w-1/2 p-1 md:p-2" *ngIf="imageCount() > 0">
+          <div class="w-1/2 p-1 md:p-2 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto" *ngIf="imageCount() > 0">
             <img alt="gallery1" class="block object-cover object-center w-full h-full rounded-lg"
-            [src]="imageItems[0].imageSrc200">
+            [src]="imageItems[0].imageSrc800">
             
           </div>
-          <div class="w-1/2 p-1 md:p-2 h-80" *ngIf="imageCount() > 1">
+          <div class="w-1/2 p-1 md:p-2 h-80 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto" *ngIf="imageCount() > 1">
             <img alt="gallery2" class="block object-cover object-center w-full h-full rounded-lg"
-            [src]="imageItems[1].imageSrc200">
+            [src]="imageItems[1].imageSrc800">
             
           </div>
-          <div class="w-full p-1 md:p-2 h-76" *ngIf="imageCount() > 2">
+          <div class="w-full p-1 md:p-2 h-76 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto" *ngIf="imageCount() > 2">
             <img alt="gallery3" class="block object-cover object-center w-full h-full rounded-lg"
-            [src]="imageItems[2].imageSrc200">            
+            [src]="imageItems[2].imageSrc800">            
           </div>
         </div>
-        <div class="flex flex-wrap w-1/2 h-76">
+        <div class="flex flex-wrap w-1/2 h-76 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto">
           <div class="w-full p-1 md:p-2" *ngIf="imageCount() > 3">
             <img alt="gallery4" class="block object-cover object-center w-full h-full rounded-lg"
-            [src]="imageItems[3].imageSrc200">
+            [src]="imageItems[3].imageSrc800">
             
           </div>
-          <div class="w-1/2 p-1 md:p-2 h-45" *ngIf="imageCount() > 20">
+          <div class="w-1/2 p-1 md:p-2 h-45 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto" *ngIf="imageCount() > 20">
             <img alt="gallery5" class="block object-cover object-center w-full h-full rounded-lg"
-            [src]="imageItems[4].imageSrc200">
+            [src]="imageItems[4].imageSrc800">
             
           </div>
-          <div class="w-1/2 p-1 md:p-2 h-45" *ngIf="imageCount() > 6">
+          <div class="w-1/2 p-1 md:p-2 h-45 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto" *ngIf="imageCount() > 6">
             <img alt="gallery6" class="block object-cover object-center w-full h-full rounded-lg"
-            [src]="imageItems[5].imageSrc200">
+            [src]="imageItems[5].imageSrc800">
             
           </div>
         </div>

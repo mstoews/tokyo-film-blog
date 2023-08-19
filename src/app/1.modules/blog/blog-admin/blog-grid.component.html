@@ -1,12 +1,13 @@
-<app-header class="bg-gray-50 m-5"
-  [title]="'Thoughts'"></app-header>
-<div class="h-screen">
-  <div class="flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
 
+
+  <div class="bg-white h-full">
+  <app-header class="bg-white" [title]="'Thoughts'"></app-header>
+  <div class="flex flex-col items-center ">
+  <div class="flex-col w-10/12 items-center" (onValueChangedEvent)="valueChangedEvent($event)">
     <ng-container *ngIf="allBlogs$ | async as rows">
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">
         <ng-container matColumnDef="title">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 text-align-center" mat-header-cell
+          <th class="m-1 text-base font-bold text-gray-600 bg-gray-800 text-align-center color=primary" mat-header-cell
             *matHeaderCellDef>
             Title
           </th>
@@ -16,7 +17,7 @@
         </ng-container>
 
         <ng-container matColumnDef="paragraph">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
+          <th class="m-1 text-base font-bold text-gray-600 bg-blue-500 text-align-center" mat-header-cell
             *matHeaderCellDef>
             Introduction
           </th>
@@ -25,7 +26,7 @@
             [innerHTML]="element.paragraph | safe : 'html'"></td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="body">
+        <ng-container matColumnDef="body">
           <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
             *matHeaderCellDef>
             Body
@@ -35,7 +36,7 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="conclusion">
+        <!-- <ng-container matColumnDef="conclusion">
           <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
             *matHeaderCellDef>
             Conclusion
@@ -45,7 +46,7 @@
             <td mat-cell *matCellDef="let element" class="h-30 align-text-top" >
               <p>{{ element.conclusion }}</p>
           </td>
-        </ng-container> -->
+        </ng-container>  -->
 
         <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr class="m-1 hover:bg-gray-100" mat-row *matRowDef="let row; columns: columnsToDisplay"  (click)="onOpenRow(row)"></tr>
@@ -61,4 +62,5 @@
 
     </ng-container>
   </div>
+</div>
 </div>

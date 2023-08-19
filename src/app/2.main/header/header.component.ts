@@ -45,8 +45,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private authService = inject(AuthService);
   private afAuth = inject(AngularFireAuth);
   public userService = inject(UserService);
-  private cartService = inject(CartService);
-  private wishListService = inject(WishListService);
+  public cartService = inject(CartService);
+  public wishListService = inject(WishListService);
   private profile = inject(ProfileService);
   private afs = inject(AngularFirestore);
   private snackBar = inject(MatSnackBar);
@@ -63,11 +63,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isLoggedIn = true;
   wishCounter = signal<number>(0);
-  cartCounter = signal<number>(0);
+
   subUserService: Subscription;
   subCartService: Subscription;
   subWishListService: Subscription;
   subAuth: Subscription;
+  subAfAuth: Subscription;
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
@@ -78,11 +79,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       if (res === true) {
         this.isLoggedIn = true;
 
-        this.subCartService = this.cartService
-          .cartByStatus(this.authService.userData.uid, 'open')
-          .subscribe((cart) => {
-            this.cartCounter.set(cart.length);
-          });
+        this.subAfAuth = this.authService.afAuth.authState.subscribe((user) => {
+          this.userId = user?.uid;
+        });
+
+        this.cartService.updateCartCounter(this.userId);
 
         this.subWishListService = this.wishListService
           .wishListByUserId(this.authService.userData.uid)

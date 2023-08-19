@@ -10,7 +10,6 @@ import {
   DxTemplateModule,
   DxPopupModule,
 } from 'devextreme-angular';
-import { FuseCardModule } from '@made-to/components/card';
 import { CategoryGridComponent } from './category-grid/category-grid.component';
 import { InventoryComponent } from '../shop/shop-inventory-maintenance/inventory-grid.component';
 import { AdminFormComponent } from './company/admin-form/admin-form.component';
@@ -39,14 +38,14 @@ import { ImageMaintenanceModule } from './image-maintenance/image-maintenance.mo
 @NgModule({
   declarations: [
     AdminComponent,
-    
+
     GridMenubarComponent,
     CategoryGridComponent,
-    
+
     InventoryComponent,
     AdminFormComponent,
     GalleryComponent,
-    
+
     SafePipe,
     InventoryComponent,
     ProductEditComponent,
@@ -65,7 +64,7 @@ import { ImageMaintenanceModule } from './image-maintenance/image-maintenance.mo
     DxBulletModule,
     DxTemplateModule,
     AdminRouteModule,
-    FuseCardModule,
+
     GalleryLightboxModule,
     DxPopupModule,
     DxHtmlEditorModule,

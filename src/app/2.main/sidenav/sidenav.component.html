@@ -1,12 +1,12 @@
 <!-- side bar -->
 <div class="container h-screen flex transition duration-150 ease-in-out">
-   <aside class="w-64 sm:ml-6 lg:ml-0 relative bg-white h-full flex-col justify-between" aria-label="Sidebar">
+   <aside class="sm:ml-6 lg:ml-0 relative bg-white h-full flex-col justify-between" aria-label="Sidebar">
     <div class="ml-4">
       <img src="assets/madetologo-black.svg" alt="logo">
     </div>
 
     <div class="overflow-y-auto">
-     <div class="px-3 w-64 text-gray-100 rounded dark:bg-gray-800 ">
+     <div class="px-3 text-gray-100 rounded dark:bg-gray-800 ">
       <ul class="space-y-2">
         <ng-container *ngIf="show_admin_menu === false">
           <li class="mt-3 flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-300" (click)="isToggle === 1 ? (isToggle = 2) : (isToggle = 1)">

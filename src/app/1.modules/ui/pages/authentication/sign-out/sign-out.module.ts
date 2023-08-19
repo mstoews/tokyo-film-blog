@@ -4,11 +4,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { SignOutClassicComponent } from './classic/sign-out.component';
-import { SignOutModernComponent } from './modern/sign-out.component';
-import { SignOutModernReversedComponent } from './modern-reversed/sign-out.component';
 import { SignOutFullscreenComponent } from './fullscreen/sign-out.component';
-import { SignOutFullscreenReversedComponent } from './fullscreen-reversed/sign-out.component';
-import { SignOutSplitScreenComponent } from './split-screen/sign-out.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -19,35 +16,16 @@ const routes: Routes = [
         component: SignOutClassicComponent,
       },
       {
-        path: 'modern',
-        component: SignOutModernComponent,
-      },
-      {
-        path: 'modern-reversed',
-        component: SignOutModernReversedComponent,
-      },
-      {
-        path: 'split-screen',
-        component: SignOutSplitScreenComponent,
-      },
-      {
         path: 'fullscreen',
         component: SignOutFullscreenComponent,
-      },
-      {
-        path: 'fullscreen-reversed',
-        component: SignOutFullscreenReversedComponent,
       },
     ],
   },
 ];
 
 const components = [
-  SignOutClassicComponent,
-  SignOutModernComponent,
   SignOutFullscreenComponent,
-  SignOutFullscreenReversedComponent,
-  SignOutSplitScreenComponent,
+  SignOutClassicComponent,
 ];
 
 @NgModule({
@@ -57,7 +35,8 @@ const components = [
     MatFormFieldModule,
     MatInputModule,
     SharedModule,
-  ],
+    FormsModule
+    ],
   exports: [...components],
 })
 export class SignOutModule {}

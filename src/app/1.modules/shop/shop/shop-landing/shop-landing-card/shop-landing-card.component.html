@@ -1,16 +1,31 @@
 
-<div (click)="openShopByCategory()" class="container mx-auto">
-  <!-- <div>
-      <h2 class="text-2xl font-bold text-gray-800">{{category.name}}</h2>
-      <p class="text-gray-600 w-90">{{category.description}}</p>
-  </div>  -->
-  <div class="lg:pt-2 w-full lg:flex xl:px-0 px-4 ">
-      <div class="w-full h-100 relative lg:mb-0 mb-1 lg:mr-8 hover:border-4 hover:border-radius-lg">
-          <img src="assets/images/cloth_background.jpg" class="absolute inset-0 w-full h-full object-cover object-center" width="200" height="200"/>
-          <img [ngSrc]="category.image" class="absolute inset-0 w-full h-full object-cover object-center" width="auto" height="auto" priority/>
-          <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full">
-          <h1 class="text-white font-normal text-lg">{{category.name}}</h1>
-          <h1 class="text-white font-normal text-sm">{{category.description}}</h1>
-          </div>
-      </div>
+<!-- <div (click)="openShopByCategory()" class="container mx-auto">
+  <div class="h-full w-full md:min-h-full md:w-auto relative ease-in duration-300 hover:cursor-pointer hover:opacity-70">
+    <img
+      class="w-full rounded-lg"
+      [ngSrc]="category.image" width="200" height="200"
+      alt="category" />
+       <div class="text-black relative block mb-20 font-normal text-2xl hover:text-bold">
+        {{category.name}}
+       </div>
+   </div>
+</div> -->
+
+<div (click)="openShopByCategory()"
+  class="w-[360px] rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">
+  <div class="relative overflow-hidden bg-cover bg-no-repeat ease-in duration-300 hover:cursor-pointer">
+    <img
+      class="rounded-t-lg w-full h-auto"
+      [src]="category.image"
+      alt="" />
   </div>
+  <div class="p-3 h-[100px]">
+    <p class="text-base text-center text-neutral-600 dark:text-neutral-200">
+      {{category.name}}
+    </p>
+    <p class="text-base text-center text-neutral-600 dark:text-neutral-200">
+      {{category.description}}
+    </p>
+  </div>
+</div>
+

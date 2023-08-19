@@ -1,6 +1,7 @@
+<div class=" bg-white">
 <app-header [title]="'Inventory Maintenance'"> </app-header>
-<div class="h-screen">
-  <mat-drawer-container class="ml-10 mr-10 -mt-5 flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
+
+  <mat-drawer-container class="ml-10 mr-10 -mt-5 flex-col h-screen" (onValueChangedEvent)="valueChangedEvent($event)">
 
     <ng-container *ngIf="allProducts$ | async as rows">
 
@@ -9,6 +10,7 @@
         [showRowLines]="true"
         [showBorders]="true"
         [focusedRowEnabled]="true"
+        (onExporting)="onExporting($event)"
         [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true" keyExpr="id">
 
           <dxo-paging [pageSize]="6"></dxo-paging>
@@ -32,6 +34,7 @@
           <div *dxTemplate="let data of 'richTemplate'">
             <p class="m-1 w-200 h-10 hidden md:block" [innerHTML]="data.value | safe: 'html'"></p>
           </div>
+          <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
         </dx-data-grid>
 
       </div>
@@ -92,3 +95,4 @@
 
   </mat-drawer-container>
 </div>
+

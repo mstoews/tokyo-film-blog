@@ -8,6 +8,7 @@ import { Location } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.service';
 
 
 @Component({
@@ -44,6 +45,9 @@ export class BlogEditComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string
   ) {}
 
+
+  imageToolbarService = inject(ImageToolbarService);
+
   ngOnInit(): void {
     var id: string;
     this.blog = this.activateRoute.snapshot.data['blog'];
@@ -60,11 +64,23 @@ export class BlogEditComponent implements OnInit {
     }
   }
 
+
+  onAllImages() {
+    this.imageToolbarService.changeFilter(FilterEnum.all);
+
+  }
+
+  onNotUsedImages() {
+    this.imageToolbarService.changeFilter(FilterEnum.not_used);
+  }
+
+
   onUpdate(blog: Blog) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
     blog = { ...this.blogGroup.value } as Blog;
-    console.debug('Product can be sold ...: ', blog.published);
+    console.debug('Set to be published? ...: ', blog.published);
+    console.debug('Is it a tailored blog post? ...: ', blog.tailoring);
     if (this.para === undefined) {
       this.para = '';
     }
@@ -127,6 +143,7 @@ export class BlogEditComponent implements OnInit {
       date_created: [blog.date_created],
       date_updated: [blog.date_updated],
       published: [blog.published],
+      tailoring: [blog.tailoring],
     });
   }
 

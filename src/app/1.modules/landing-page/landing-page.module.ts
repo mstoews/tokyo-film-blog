@@ -13,7 +13,6 @@ import { ReadyToWearComponent } from './ready-to-wear/ready-to-wear.component';
 import { KnittingComponent } from './knitting/knitting.component';
 import { RepairsComponent } from './repairs/repairs.component';
 import { HighlightComponent } from './highlight/highlight.component';
-import { SocialModule } from '../social/social.module';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { MaterialModule } from 'app/material.module';
@@ -121,7 +120,6 @@ const routes: Routes = [
     LightboxModule,
     RouterModule.forChild(routes),
     NgOptimizedImage,
-    SocialModule,
     MaterialModule,
     IconsModule,
     StripeCheckoutComponent,

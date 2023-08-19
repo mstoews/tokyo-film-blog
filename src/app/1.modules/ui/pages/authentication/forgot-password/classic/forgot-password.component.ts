@@ -4,20 +4,14 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { fuseAnimations } from '@made-to/animations';
-import { FuseAlertType } from '@made-to/components/alert';
 
 @Component({
   selector: 'forgot-password-classic',
   templateUrl: './forgot-password.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations,
+
 })
 export class ForgotPasswordClassicComponent implements OnInit {
-  alert: { type: FuseAlertType; message: string } = {
-    type: 'success',
-    message: '',
-  };
   forgotPasswordForm!: UntypedFormGroup;
   showAlert: boolean = false;
 

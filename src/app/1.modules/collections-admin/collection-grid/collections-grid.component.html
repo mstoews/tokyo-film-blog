@@ -1,3 +1,4 @@
+<div class="bg-white">
 <app-header class="bg-gray-50 m-5"
   [title]="'Collections'"></app-header>
 <div class="h-screen m-5">
@@ -6,7 +7,7 @@
     <ng-container *ngIf="allCollections$ | async as rows">
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">
         <ng-container matColumnDef="title">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 text-align-center" mat-header-cell
+          <th class="m-1 text-base font-bold text-gray-800 bg-gray-500 text-align-center" mat-header-cell
             *matHeaderCellDef>
             Title
           </th>
@@ -16,7 +17,7 @@
         </ng-container>
 
         <ng-container matColumnDef="paragraph">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
+          <th class="m-1 text-base font-bold text-gray-800 bg-gray-500 border-white text-align-center" mat-header-cell
             *matHeaderCellDef>
             Introduction
           </th>
@@ -61,4 +62,5 @@
 
     </ng-container>
   </div>
+</div>
 </div>

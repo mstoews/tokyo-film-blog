@@ -1,11 +1,11 @@
-<ng-container class="bg-white">
+<div class="bg-white h-screen">
   <app-header [title]="header_title" [sub_title]="'Wishlist products to remember'"></app-header>
   <!-- <div class="flex flex-row items-center justify-center px-4 space-y-8 2xl:mx-auto 2xl:container md:py-12 py-9 lg:px-20 md:px-6"> -->
     <div class="relative bg-white px-4 pt-1 pb-5 sm:px-6">
 
       <div *ngIf="wishList$ | async as wishItems">
       <div *ngIf="wishItems.length > 0; else no_wish">
-        <div class="grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+        <div class=" grid grid-cols-1 mx-10 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
         <div *ngFor="let item of wishItems">
           <div class="flex flex-col items-start justify-center w-full space-y-4">
             <div class="flex flex-col items-start justify-center w-full space-y-4">
@@ -59,7 +59,7 @@
     </div>
   </div>
   <ng-template #no_wish>
-    <div class="col-span-1 xl:col-start-2 xl:col-span-2">
+    <div class="h-screen col-span-1 xl:col-start-2 xl:col-span-2">
       <div class="max-w-2xl px-4 pt-6 mx-auto sm:px-6 ">
         <h2 class="text-lg font-medium text-center text-gray-900">
           Currently nothing in your wishlist
@@ -72,5 +72,4 @@
       </div>
     </div>
   </ng-template>
-
-</ng-container>
+</div>

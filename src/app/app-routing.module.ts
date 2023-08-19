@@ -131,15 +131,6 @@ const routes: Route[] = [
   },
 
   {
-    path: 'social/social',
-    loadChildren: () =>
-      import('./1.modules/social/social.module').then(
-        (mod) => mod.SocialModule
-      ),
-    title: 'Social Media',
-  },
-
-  {
     path: '**',
     redirectTo: '/home',
     data: { state: 'home' },

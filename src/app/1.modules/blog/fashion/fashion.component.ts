@@ -4,11 +4,14 @@ import {
   Input,
   OnInit,
   ViewChild,
+  inject,
 } from '@angular/core';
 import { Blog } from 'app/5.models/blog';
 import { Router } from '@angular/router';
 import { BlogService } from 'app/4.services/blog.service';
-import { ImageListService } from 'app/4.services/image-list.service';
+import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { imageItemIndex } from 'app/5.models/imageItem';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'blog-card',
@@ -17,6 +20,20 @@ import { ImageListService } from 'app/4.services/image-list.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FashionComponent implements OnInit {
+  @Input() blog: Blog;
+  blogImages$: Observable<(imageItemIndex & {id: string} )[]>;
+  imageList = inject(ImageItemIndexService);
+  router = inject(Router);
+  
+  ngOnInit(): void {
+    this.blogImages$ = this.imageList.getAllImages(this.blog.id);
+  }
+
+  onOpenBlog(id: string) {
+    this.router.navigate(['blog/detail', id]);
+    // this.toggleDrawer();
+  }
+
   onAdd() {
     // console.debug('onAdd --- add a new comment');
   }
@@ -25,21 +42,5 @@ export class FashionComponent implements OnInit {
     throw new Error('Method not implemented.');
   }
 
-  @Input() blog: Blog;
-  blogImages$: any;
 
-  constructor(
-    private router: Router,
-    private imageListService: ImageListService,
-    private blogService: BlogService
-  ) {}
-
-  ngOnInit(): void {
-    this.blogImages$ = this.imageListService.getImagesByType(this.blog.id);
-  }
-
-  onOpenBlog(id: string) {
-    this.router.navigate(['blog/detail', id]);
-    // this.toggleDrawer();
-  }
 }

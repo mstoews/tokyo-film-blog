@@ -7,20 +7,19 @@
   gtag('config', 'G-WGMMJK9NR3');
 </script>
 
+<app-header class="bg-white" [title]="'Thoughts and Images'" [sub_title]="'Impressions of our life and work, living in Tokyo'"></app-header>
 
-<section id="top"></section>
+<section id="top bg-white"></section>
 <div class="relative mx-auto max-w-7xl font-garamond">
-  <div class="text-center">
-    <h2 class="text-3xl mt-10 font-garamond font-bold tracking-tight text-gray-900 sm:text-4xl">Thoughts and Images</h2>
-    <p class="font-garamond mx-auto mt-3 max-w-2xl text-xl text-gray-500 sm:mt-4">Impressions of our life and work,
-      living in Tokyo</p>
-  </div>
-  <div class="hidden md:block sm:block">
-    <button mat-icon-button (click)="backToHome()"
+  <!-- <div class="text-center">
+    <div class="text-3xl mt-10 font-garamond font-bold tracking-tight text-gray-100 sm:text-4xl">Thoughts and Images</div>
+    <div class="font-garamond mx-auto mt-3 max-w-2xl text-xl text-gray-200 sm:mt-4">Impressions of our life and work,
+      living in Tokyo</div>
+      <button mat-icon-button (click)="backToHome()"
       class="sm-hidden lg:visible md:visible absolute top-12 mb-20 items-left font-semibold text-gray-700 align-middle right-30 btn bg-gray-300 hover:text-white hover:bg-gray-500 dark:hover:bg-gray-700">
       <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
     </button>
-  </div>
+  </div> -->
 
 
   <div class="px-4 py-12" *ngIf="blogImages$ | async as blogImages">
@@ -35,7 +34,7 @@
       </div>
 
       <div class="gap-4 mt-6 lg:flex lg:mt-12 justify-evenly ">
-        <p class="max-w-[700px] p-1 text-base text-center text-gray-700 bg-transparent top-48 md:text-left bg-blur"
+        <p class="max-w-[700px] p-1 text-base text-center text-gray-700 bg-white top-48 md:text-left bg-blur"
           [innerHTML]="blog.body | safe: 'html'"></p>
       </div>
 
@@ -44,7 +43,7 @@
       </div>
 
       <div class="gap-4 mt-6 lg:flex lg:mt-12 justify-evenly ">
-        <p class="max-w-[700px] p-1 text-base text-center text-gray-700 bg-transparent top-48 md:text-left bg-blur"
+        <p class="max-w-[700px] p-1 text-base text-center text-gray-700 bg-white top-48 md:text-left bg-blur"
           [innerHTML]="blog.conclusion | safe: 'html'"></p>
       </div>
 

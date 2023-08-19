@@ -10,9 +10,7 @@ import {
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-import { routes } from 'app/1.modules/ui/advanced-search/advanced-search.module';
-import { IImageStorage } from 'app/5.models/maintenance';
-import { ProductsService } from 'app/4.services/products.service';
+
 
 @Component({
   selector: 'blog-image-selection',
@@ -120,7 +118,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
         this.imageItemIndexService.updateImageList(image);
         i++;
       });
-      console.log('updateRanking', previousData);
+      console.debug('updateRanking', previousData);
     }
   }
 

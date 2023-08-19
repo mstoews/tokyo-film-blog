@@ -5,8 +5,6 @@ import {
   Validators,
 } from '@angular/forms';
 
-import { fuseAnimations } from '@made-to/animations';
-import { FuseAlertType } from '@made-to/components/alert';
 import { AuthService } from 'app/4.services/auth/auth.service';
 import * as firebaseui from 'firebaseui';
 
@@ -24,13 +22,9 @@ import {
   selector: 'sign-in-classic',
   templateUrl: './sign-in.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations,
+
 })
 export class SignInClassicComponent implements OnInit, OnDestroy {
-  alert: { type: FuseAlertType; message: string } = {
-    type: 'success',
-    message: '',
-  };
   signInForm!: UntypedFormGroup;
   showAlert: boolean = false;
   redirect = ['/home'];

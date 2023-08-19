@@ -5,22 +5,16 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
-import { fuseAnimations } from '@made-to/animations';
-import { FuseAlertType } from '@made-to/components/alert';
 
 @Component({
   selector: 'sign-up-classic',
   templateUrl: './sign-up.component.html',
   encapsulation: ViewEncapsulation.None,
-  animations: fuseAnimations,
+
 })
 export class SignUpClassicComponent implements OnInit {
   @ViewChild('signUpNgForm') signUpNgForm!: NgForm;
 
-  alert: { type: FuseAlertType; message: string } = {
-    type: 'success',
-    message: '',
-  };
   signUpForm!: UntypedFormGroup;
   showAlert: boolean = false;
 

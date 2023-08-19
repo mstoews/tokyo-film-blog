@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class RepairsComponent implements OnInit {
 
   constructor(private router: Router) { }
+  repairs = './assets/images/repairs.jpg';
 
   ngOnInit(): void {
   }

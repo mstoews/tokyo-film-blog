@@ -11,7 +11,6 @@ import { ImageMgtEditComponent } from './image-edit/image-mgt-edit.component';
 import { ImageMaintenanceCardComponent } from './image-maintenance-card/image-maintenance-card.component';
 import { ImageMenubarComponent } from './image-menubar/image-menubar.component';
 import { ThoughtsImageSelectionComponent } from './thoughts-image-selection/thoughts-image-selection.component';
-import { FuseCardModule } from '@made-to/components/card';
 import { GalleryLightboxModule } from 'app/1.modules/gallery-lightbox/gallery-lighthouse.module';
 import { PolicyModule } from 'app/1.modules/policy/policy.module';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
@@ -66,7 +65,6 @@ const routes: Routes = [
     DxDataGridModule,
     DxBulletModule,
     DxTemplateModule,
-    FuseCardModule,
     GalleryLightboxModule,
     DxPopupModule,
     DxHtmlEditorModule,

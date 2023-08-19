@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
+import { initTE, Lightbox } from 'tw-elements';
 import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
 
 @Component({
@@ -13,6 +14,7 @@ export class GalleryComponent implements OnInit {
   
 
   ngOnInit(): void {
+    initTE({ Lightbox });
     this.imageCount.set(this.imageCollection.length);
     console.log(this.imageCount());
     if (this.imageCollection.length > 6) {

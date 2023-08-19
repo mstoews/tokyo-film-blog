@@ -7,13 +7,19 @@
   gtag('config', 'G-WGMMJK9NR3');
 </script>
 
-<div (click)="onOpenBlog(blog.id)" class="flex flex-col w-full text-gray-700 max-w-140 filter-article filter-interactive" >
-  <!-- <ng-container  *ngIf="blogImages$ | async as blogImages"> -->
-    <!-- <img class="object-cover w-140" [src]="blogImages[0].imageSrc200" width="290" height="400" alt="caps" -->
-    <img class="object-cover w-140" [src]="blog.image" width="290" height="400" alt="caps"
-      alt="Card cover image" />
-    <div class="m-8 mb-4">
-      <div class="text-2xl font-semi-bold leading-tight" [innerHTML]="blog.paragraph | safe: 'html'"></div>
+<div (click)="onOpenBlog(blog.id)" *ngIf="blogImages$ | async as images"
+  class="flex relative bg-center bg-cover bg-no-repeat mb-40 w-11/12 mx-auto xl:w-full h-120">
+  <div *ngIf="images.length > 0">
+    <img [src]="images[0].imageSrc400" alt="" class="h-full w-full object-cover overflow-hidden absolute rounded" />
+  </div>
+  <div
+    class="absolute bottom-0 w-11/12 ml-2 xl:mx-0 lg:mx-0 xl:w-6/12 lg:w-6/12 xl:ml-12 lg:ml-12 rounded-md lg:-mb-56 sm:-mb-48 -mb-64 xl:-mb-24">
+    <div class="w-full py-5 px-6 bg-white shadow rounded">
+      <p class="text-xl text-gray-800 font-bold pb-2">{{blog.title}}</p>
+      <p class="text-base text-gray-600" [innerHTML]="blog.paragraph | safe: 'html'"></p>
+      <div class="pt-4 flex justify-between">
+        <p class="text-sm text-gray-600"> {{blog.date_updated}} </p>
+      </div>
     </div>
-  <!-- </ng-container> -->
+  </div>
 </div>

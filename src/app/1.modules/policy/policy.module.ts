@@ -9,7 +9,7 @@ import { MaterialModule } from 'app/material.module';
 import { DxHtmlEditorModule } from 'devextreme-angular';
 import { SharedModule } from '../shared-module/shared.module';
 import { PolicyRoutingModule } from './policy-routing.module';
-import { FuseCardModule } from '@made-to/components/card';
+
 import { TosComponent } from './tos/tos.component';
 import { DataComponent } from './data/data.component';
 
@@ -28,7 +28,7 @@ const modules = [
   SharedModule,
   PolicyRoutingModule,
   NgOptimizedImage,
-  FuseCardModule,
+
 ];
 
 @NgModule({

@@ -8,7 +8,7 @@ import { CollectionGrid } from './collection-grid/grid.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { MaterialModule } from 'app/material.module';
-import { FuseCardModule } from '@made-to/components/card';
+
 import { SharedModule } from '../shared-module/shared.module';
 import { SafePipe } from './safe.pipe';
 
@@ -33,7 +33,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     CommonModule,
     MaterialModule,
-    FuseCardModule,
     SharedModule,
     NgOptimizedImage,
   ],

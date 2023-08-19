@@ -9,18 +9,18 @@ import { ImageListService } from '../../../4.services/image-list.service';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
-  selector: 'app-blog-card',
+  selector: 'blog-card-old',
   templateUrl: './blog-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BlogCardComponent implements OnInit {
   @Input() blog: Blog;
-  blogImages$: Promise<Observable<(imageItemIndex & { id: string;})[]>>;
+  blogImages$: Observable<(imageItemIndex & { id: string;})[]>;
   route = inject(Router);
   imageItemIndexService = inject(ImageItemIndexService);
 
   async ngOnInit() {
-    this.blogImages$ = this.imageItemIndexService.getOriginalImageListByType(this.blog.id);
+    this.blogImages$ = this.imageItemIndexService.getAllImages(this.blog.id);
   }
 
   onOpenBlog(id: string) {

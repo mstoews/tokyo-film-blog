@@ -4,12 +4,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { FuseAlertModule } from '@made-to/components/alert';
+
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { ForgotPasswordClassicComponent } from './classic/forgot-password.component';
-import { ForgotPasswordModernComponent } from './modern/forgot-password.component';
-import { ForgotPasswordModernReversedComponent } from './modern-reversed/forgot-password.component';
-import { ForgotPasswordFullscreenComponent } from './fullscreen/forgot-password.component';
 
 const routes: Routes = [
   {
@@ -19,19 +16,6 @@ const routes: Routes = [
         path: 'classic',
         component: ForgotPasswordClassicComponent,
       },
-      {
-        path: 'modern',
-        component: ForgotPasswordModernComponent,
-      },
-      {
-        path: 'modern-reversed',
-        component: ForgotPasswordModernReversedComponent,
-      },
-
-      {
-        path: 'fullscreen',
-        component: ForgotPasswordFullscreenComponent,
-      },
     ],
   },
 ];
@@ -39,9 +23,6 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     ForgotPasswordClassicComponent,
-    ForgotPasswordModernComponent,
-    ForgotPasswordModernReversedComponent,
-    ForgotPasswordFullscreenComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -49,7 +30,6 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatProgressSpinnerModule,
-    FuseAlertModule,
     SharedModule,
   ],
 })

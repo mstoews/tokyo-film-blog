@@ -13,5 +13,4 @@ export class FollowingComponent {
   // featuredList$: Observable<imageItemIndex[]>;
   imageItemListService = inject(ImageItemIndexService);
   featuredList$ = this.imageItemListService.getAllImages('IN_GALLERY');
-  
 }
