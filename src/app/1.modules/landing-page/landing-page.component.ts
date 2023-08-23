@@ -78,7 +78,7 @@ export class LandingPageComponent implements OnInit {
   }
 
   onLastestBlog() {
-    this.blogService.getTailoringBlog().subscribe((blog) => {
+    this.blogService.getAllPublishedBlog().subscribe((blog) => {
       if (blog.length > 0) {
         this.router.navigate(['blog/detail', blog[0].id]);
         return;
