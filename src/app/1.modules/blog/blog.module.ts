@@ -15,6 +15,8 @@ import { CommentsComponent } from './comments/comments.component';
 import { CommentsListComponent } from './comments-list/comments-list.component';
 import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
+import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
+import { TailorCardComponent } from './tailoring-blog/tailor-card/tailor-card.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.componen
     CommentsListComponent,
     ReplyDialogComponent,
     TailoringBlogComponent,
+    TailoringDetailComponent,
+    TailorCardComponent,
   ],
   imports: [
     CommonModule,

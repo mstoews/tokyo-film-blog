@@ -4,6 +4,7 @@ import { BlogResolver } from 'app/4.services/blog.resolver';
 import { BlogComponent } from './blog.component';
 import { DetailComponent } from './detail/detail.component';
 import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
+import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
 
 const routes: Routes = [
   {
@@ -11,11 +12,7 @@ const routes: Routes = [
     pathMatch: 'full',
     component: BlogComponent,
   },
-  {
-    path: 'tailoring',
-    pathMatch: 'full',
-    component: TailoringBlogComponent,
-  },
+
   {
     path: 'detail/:id',
     title: 'Thoughts',
@@ -26,9 +23,14 @@ const routes: Routes = [
     data: { state: 'detail/:id' },
   },
   {
+    path: 'tailoring',
+    pathMatch: 'full',
+    component: TailoringBlogComponent,
+  },
+  {
     path: 'tailoring/:id',
     title: 'Tailoring',
-    component: DetailComponent,
+    component: TailoringDetailComponent,
     resolve: {
       blog: BlogResolver,
     },

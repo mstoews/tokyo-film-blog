@@ -12,13 +12,15 @@ import { ImageListService } from 'app/4.services/image-list.service';
 import { AuthService } from 'app/4.services/auth/auth.service';
 import { ScrollService } from 'app/4.services/scroll.service';
 
+
 @Component({
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css'],
+  selector: 'app-tailoring-detail',
+  templateUrl: './tailoring-detail.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
+
 })
-export class DetailComponent implements OnInit, OnDestroy {
+export class TailoringDetailComponent implements OnInit, OnDestroy {
+
   blogId: string;
   blogItem: Observable<Blog>;
   allBlogs$: Observable<Blog[]>;
@@ -38,9 +40,9 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     let id: string;
-  
-    // console.debug('User Name from blog details : ', this.userName);
-    this.blog = this.activateRoute.snapshot.data['blog'];
+    
+
+    this.blog = this.activateRoute.snapshot.data['blog/tailoring-blog'];
 
     if (this.blog.id) {
       this.blog_id = this.blog.id;
@@ -63,4 +65,5 @@ export class DetailComponent implements OnInit, OnDestroy {
   backToHome() {
     this.route.navigate(['blog']);
   }
+
 }
