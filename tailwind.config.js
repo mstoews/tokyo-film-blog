@@ -12,8 +12,10 @@ module.exports = {
       xl: '1440px',
     },
     fontFamily: {
-      sans: ['Graphik', 'sans-serif'],
       serif: ['Merriweather', 'serif'],
+      garamond: ['Garamond', 'sans-serif'],
+      primary:['Garamond', 'sans-serif'],
+      sans: ['Garamond', 'sans-serif'],
     },
     extend: {
       colors: {

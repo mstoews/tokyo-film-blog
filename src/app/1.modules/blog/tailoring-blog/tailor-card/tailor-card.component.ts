@@ -21,7 +21,7 @@ export class TailorCardComponent {
   }
 
   onOpenBlog(id: string) {
-    this.router.navigate(['blog/tailoring/id', id]);
+    this.router.navigate(['blog/detail', id]);
     // this.toggleDrawer();
   }
 

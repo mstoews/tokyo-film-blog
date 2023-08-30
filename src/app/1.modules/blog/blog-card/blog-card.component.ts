@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Blog } from 'app/5.models/blog';
-import { IImageStorage } from 'app/5.models/maintenance';
-import { BlogService } from 'app/4.services/blog.service';
 import { Observable } from 'rxjs';
-import { imageItem, imageItemIndex } from '../../../5.models/imageItem';
-import { ImageListService } from '../../../4.services/image-list.service';
+import { imageItemIndex } from '../../../5.models/imageItem';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({

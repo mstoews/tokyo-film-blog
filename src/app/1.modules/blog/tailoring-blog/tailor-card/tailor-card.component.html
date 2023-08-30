@@ -1,5 +1,5 @@
 <div class="flex" (click)="onOpenBlog(blog.id)" *ngIf="blogImages$ | async as images"
-  class="relative bg-center bg-cover bg-no-repeat mb-20 w-11/12 mx-auto xl:w-full h-120 ">
+  class="relative bg-center bg-cover bg-no-repeat mb-20 w-11/12 mx-auto xl:w-full h-120 hover:cursor-pointer">
   <div *ngIf="images.length > 0">
     <img [src]="images[0].imageSrc400" alt="" class="h-[600px] w-[600px] object-cover rounded" width-="200" height="200" />
   </div>

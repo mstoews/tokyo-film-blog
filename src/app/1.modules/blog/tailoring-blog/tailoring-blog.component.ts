@@ -18,6 +18,7 @@ import { imageItemIndex } from 'app/5.models/imageItem';
 @Component({
   selector: 'app-tailoring-blog',
   templateUrl: './tailoring-blog.component.html',
+  styleUrls: ['./tailoring-blog.css'],
   animations: [fadeInOut],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

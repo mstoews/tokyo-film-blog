@@ -40,9 +40,9 @@ export class TailoringDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     let id: string;
-    
 
-    this.blog = this.activateRoute.snapshot.data['blog/tailoring-blog'];
+
+    this.blog = this.activateRoute.snapshot.data['tailoring'];
 
     if (this.blog.id) {
       this.blog_id = this.blog.id;

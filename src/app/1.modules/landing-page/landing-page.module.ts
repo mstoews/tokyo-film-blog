@@ -111,6 +111,7 @@ const routes: Routes = [
     TosComponent,
     ServicesComponent,
     FollowingComponent,
+
   ],
   imports: [
     CommonModule,
@@ -124,7 +125,7 @@ const routes: Routes = [
     IconsModule,
     StripeCheckoutComponent,
     LastestBlogComponent,
-    TwLighthouseComponent
+    TwLighthouseComponent,
   ],
 })
 export class LandingPageModule {}

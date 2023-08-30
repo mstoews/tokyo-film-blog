@@ -43,4 +43,12 @@
          url('../../../styles/fonts/Roboto-400.woff2') format('woff2'),
          url('../../../styles/fonts/Roboto-400.woff') format('woff');
 }
-  
+
+@font-face {
+    font-family: 'Garamond';
+    font-style: normal;
+    font-weight: 400;
+    src: local(''),
+         url('CormorantGaramond-Regular.ttf') format('ttf'),
+}
+
