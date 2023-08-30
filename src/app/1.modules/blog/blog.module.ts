@@ -17,6 +17,9 @@ import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
 import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
 import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
 import { TailorCardComponent } from './tailoring-blog/tailor-card/tailor-card.component';
+import { CalendarBlogComponent } from './calendar-blog/calendar-blog.component';
+import { CalendarCardComponent } from './calendar-blog/calendar-card/calendar-card.component';
+import { CalendarDetailComponent } from './calendar-blog/calendar-detail/calendar-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { TailorCardComponent } from './tailoring-blog/tailor-card/tailor-card.co
     TailoringBlogComponent,
     TailoringDetailComponent,
     TailorCardComponent,
+    CalendarBlogComponent,
+    CalendarCardComponent,
+    CalendarDetailComponent
   ],
   imports: [
     CommonModule,

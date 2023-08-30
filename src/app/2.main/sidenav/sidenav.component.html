@@ -77,6 +77,13 @@
             </a>
           </li>
           <li>
+            <a routerLink="home/calendar" (click)="onClose()"
+              class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+              <mat-icon [svgIcon]="'heroicons_outline:calendar'"></mat-icon>
+              <span class="flex-1 ml-3 whitespace-nowrap">Calendar</span>
+            </a>
+          </li>
+          <li>
             <a routerLink="home/about_us" (click)="onClose()"
               class="flex pr-2 pl-5 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
               <mat-icon [svgIcon]="'heroicons_outline:information-circle'"></mat-icon>

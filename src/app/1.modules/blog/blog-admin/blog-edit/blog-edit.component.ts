@@ -144,6 +144,7 @@ export class BlogEditComponent implements OnInit {
       date_updated: [blog.date_updated],
       published: [blog.published],
       tailoring: [blog.tailoring],
+      calendar: [blog.calendar],
     });
   }
 

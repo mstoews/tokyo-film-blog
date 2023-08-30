@@ -5,6 +5,7 @@ import { BlogComponent } from './blog.component';
 import { DetailComponent } from './detail/detail.component';
 import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
 import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
+import { CalendarBlogComponent } from './calendar-blog/calendar-blog.component';
 
 const routes: Routes = [
   {
@@ -35,6 +36,20 @@ const routes: Routes = [
       blog: BlogResolver,
     },
     data: { state: 'tailoring/:id' },
+  },
+  {
+    path: 'calendar',
+    pathMatch: 'full',
+    component: CalendarBlogComponent,
+  },
+  {
+    path: 'calendar/:id',
+    title: 'Calendar',
+    component: CalendarBlogComponent,
+    resolve: {
+      blog: BlogResolver,
+    },
+    data: { state: 'calendar/:id' },
   },
 ];
 

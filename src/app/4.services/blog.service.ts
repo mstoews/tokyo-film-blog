@@ -112,6 +112,13 @@ export class BlogService {
     );
   }
 
+  getCalendarBlog() {
+    return this.blogItems.pipe(
+      map((blogs) => blogs.filter((pub) => pub.calendar === true && pub.published === true))
+    );
+  }
+
+
   getAll(): any {
     return this.blogItems;
   }

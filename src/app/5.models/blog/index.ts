@@ -19,6 +19,7 @@ export interface Blog {
   image?:            string;
   published:        boolean;
   tailoring?:        boolean;
+  calendar?:         boolean;
 }
 
 export interface BlogPartial {
