@@ -11,15 +11,15 @@
 
 
 <div class="bg-white">
-<div *ngIf="mobile">
-  <app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
-</div>
+  <div *ngIf="mobile">
+    <app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
+  </div>
 
-<div *ngIf="!mobile">
-  <app-header class="bg-white" [title]="'Made To Shopping'" [sub_title]="category"></app-header>
-</div>
+  <div *ngIf="!mobile">
+    <app-header class="bg-white" [title]="'Made To Shopping'" [sub_title]="category"></app-header>
+  </div>
 
-<ng-container *ngIf="data$ | async as data; else loading">
+  <ng-container *ngIf="data$ | async as data; else loading">
     <div *ngIf="mobile">
       <mat-tab-group #tabGroup class="flex-1" (selectedTabChange)="selectCategory($event)">
         <div *ngFor="let item of data.categories">
@@ -35,36 +35,36 @@
       </mat-tab-group>
     </div>
     <div *ngIf="!mobile" class="m-2 p-2 bg-white">
-        <!-- <div class="hidden md:grid md:grid-cols-4 gap-y-10 gap-x-6 mx-5 sm:grid-cols-3 lg:grid-cols-7 xl:grid-cols-7 xl:gap-x-7"> -->
-        <div class="flex flex-row gap-4 w-100 bg-white justify-around items-center flex-wrap">
+      <!-- <div class="hidden md:grid md:grid-cols-4 gap-y-10 gap-x-6 mx-5 sm:grid-cols-3 lg:grid-cols-7 xl:grid-cols-7 xl:gap-x-7"> -->
+      <div class="flex flex-row gap-4 w-100 bg-white justify-around items-center flex-wrap">
         <div *ngFor="let item of data.categories">
           <shop-category-card [category]="item" (notifyCategoryRefresh)="updateCategory($event)">
           </shop-category-card>
         </div>
+      </div>
     </div>
-    </div>
-</ng-container>
-<ng-container *ngIf="data$ | async as data; else loading" class="bg-white">
-  <div *ngIf="data.products.length > 0; else empty">
+  </ng-container>
+  <ng-container *ngIf="data$ | async as data; else loading" class="bg-white">
+    <div *ngIf="data.products.length > 0; else empty">
       <!-- <div class="grid grid-cols-1 mx-5 gap-y-10 gap-x-6 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 xl:gap-x-8"> -->
-        <div class="flex flex-row gap-4 w-100 bg-white justify-around items-center flex-wrap">
+      <div class="flex flex-row gap-4 w-100 bg-white justify-around items-center flex-wrap">
         <div *ngFor="let product of data.products">
           <shop-card [product]="product"></shop-card>
         </div>
       </div>
-  </div>
-
-  <ng-template #loading>
-    <div class="flex flex-col m-10 items-center justify-center h-[800]">
-      <mat-spinner *ngIf="loading" [diameter]="60"></mat-spinner>
-      <p class="text-gray-500 m-20 text-2xl">Loading...</p>
     </div>
-  </ng-template>
 
-  <ng-template #empty>
-    <div class="flex flex-col items-center justify-center h-[800]">
-      <p class="text-gray-500 m-10 text-2xl">Currently No Products</p>
-    </div>
-  </ng-template>
-</ng-container>
+    <ng-template #loading>
+      <div class="flex flex-col m-10 items-center justify-center h-[800]">
+        <mat-spinner *ngIf="loading" [diameter]="60"></mat-spinner>
+        <p class="text-gray-500 m-20 text-2xl">Loading...</p>
+      </div>
+    </ng-template>
+
+    <ng-template #empty>
+      <div class="flex flex-col items-center justify-center h-[800]">
+        <p class="text-gray-500 m-10 text-2xl">Currently No Products</p>
+      </div>
+    </ng-template>
+  </ng-container>
 </div>

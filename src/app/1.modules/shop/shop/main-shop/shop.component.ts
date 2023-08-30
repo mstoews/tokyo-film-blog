@@ -81,7 +81,7 @@ export class MainShopComponent implements OnInit, OnDestroy {
   }
 
   onRefreshName(category: string) {
-    // this.category = category;
+    this.category = category;
     this.products$ = this.productService.getInventoryByCategory(category);
     // this.category$ = this.categoryService.getAll();
     this.data$ = combineLatest([category, this.products$, this.category$]).pipe(
