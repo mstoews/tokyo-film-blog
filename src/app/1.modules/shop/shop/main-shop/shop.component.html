@@ -10,7 +10,7 @@
 </script>
 
 
-<div class="bg-white">
+<div class="bg-gray-200 h-screen">
   <div *ngIf="mobile">
     <app-header class="bg-white" [title]="'Made To Shopping'"></app-header>
   </div>
@@ -20,7 +20,7 @@
   </div>
 
   <ng-container *ngIf="data$ | async as data; else loading">
-    <div *ngIf="mobile">
+    <!-- <div *ngIf="mobile">
       <mat-tab-group #tabGroup class="flex-1" (selectedTabChange)="selectCategory($event)">
         <div *ngFor="let item of data.categories">
           <mat-tab class="m-1 border">
@@ -33,10 +33,10 @@
           </mat-tab>
         </div>
       </mat-tab-group>
-    </div>
-    <div *ngIf="!mobile" class="m-2 p-2 bg-white">
-      <!-- <div class="hidden md:grid md:grid-cols-4 gap-y-10 gap-x-6 mx-5 sm:grid-cols-3 lg:grid-cols-7 xl:grid-cols-7 xl:gap-x-7"> -->
-      <div class="flex flex-row gap-4 w-100 bg-white justify-around items-center flex-wrap">
+    </div> -->
+    <!-- <div *ngIf="!mobile" class="m-2 p-2 bg-gray-200"> -->
+    <div class="bg-gray-100">
+      <div class="flex flex-row gap-4 w-100 bg-gray-100 justify-around items-center flex-wrap p-2">
         <div *ngFor="let item of data.categories">
           <shop-category-card [category]="item" (notifyCategoryRefresh)="updateCategory($event)">
           </shop-category-card>
@@ -47,7 +47,7 @@
   <ng-container *ngIf="data$ | async as data; else loading" class="bg-white">
     <div *ngIf="data.products.length > 0; else empty">
       <!-- <div class="grid grid-cols-1 mx-5 gap-y-10 gap-x-6 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 xl:gap-x-8"> -->
-      <div class="flex flex-row gap-4 w-100 bg-white justify-around items-center flex-wrap">
+      <div class="flex flex-row gap-4 w-100 bg-gray-200 justify-around items-center flex-wrap">
         <div *ngFor="let product of data.products">
           <shop-card [product]="product"></shop-card>
         </div>

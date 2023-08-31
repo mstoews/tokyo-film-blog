@@ -7,10 +7,12 @@
   gtag('config', 'G-WGMMJK9NR3');
 </script>
 
+<div class="bg-gray-200">
 <app-header class="bg-white" [title]="'Tailoring Life'" [sub_title]="'Explanation of the life of Tailoring'"></app-header>
 
-<section id="top bg-white"></section>
-<div class="relative mx-auto max-w-7xl font-garamond">
+<section id="top"></section>
+
+<div class="relative mx-auto max-w-7xl font-garamond bg-white">
 
   <div class="px-4 py-12" *ngIf="blogImages$ | async as blogImages">
     <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[375px] mx-auto bg-white py-12 lg:px-10 md-px-6 px-4">
@@ -60,8 +62,7 @@
         </button>
       </div>
     </section>
-
-
+  </div>
     <style>
       .bg-blur {
         background: linear-gradient(91.25deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0.4) 99.82%);

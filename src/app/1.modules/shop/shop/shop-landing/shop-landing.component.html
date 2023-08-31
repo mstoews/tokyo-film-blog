@@ -1,27 +1,17 @@
 <ng-container *ngIf="Category$ | async as cats else loading" class="bg-white">
-
-<div class="bg-transparent">
-  <app-header class="bg-white" [title]="sTitle" ></app-header>
-
-  <!-- <div class="flex flex-row gap-4 w-100 bg-gray-200 justify-around items-center flex-wrap">
-    <div class="h-[306px] min-w-[360px] order-4 p-10 border border-blue-600 bg-blue-100">01</div>
-    <div class="h-[306px] min-w-[360px] order-4 p-10 border border-blue-600 bg-blue-100">01</div>
-    <div class="h-[306px] min-w-[360px] order-4 p-10 border border-blue-600 bg-blue-100">01</div>
-    <div class="h-[306px] min-w-[360px] order-4 p-10 border border-blue-600 bg-blue-100">01</div>
-    <div class="h-[306px] min-w-[360px] order-4 p-10 border border-blue-600 bg-blue-100">01</div>
-    <div class="h-[306px] min-w-[360px] order-4 p-10 border border-blue-600 bg-blue-100">01</div>
-  </div> -->
-
-  <div class="flex flex-row gap-4 w-100 bg-gray-200 justify-around items-center flex-wrap">
-    <div *ngFor="let item of cats" class="m-2">
+  <div class="bg-gray-200">
+    <app-header class="bg-white" [title]="sTitle"></app-header>
+    <div class="flex flex-row gap-4 w-100 bg-gray-200 justify-around items-center flex-wrap">
+      <div *ngFor="let item of cats" class="m-2">
         <app-shop-landing-card [category]="item"></app-shop-landing-card>
+      </div>
     </div>
   </div>
-</div>
 </ng-container>
 
 <ng-template #loading>
-    <div class="flex flex-col items-center justify-center h-[800]">
-      <mat-spinner [diameter]="100"></mat-spinner>
-      <p class="text-gray-500 text-2xl">Loading...</p>
-</div>
+  <div class="flex flex-col items-center justify-center h-[800]">
+    <mat-spinner [diameter]="100"></mat-spinner>
+    <p class="text-gray-500 text-2xl">Loading...</p>
+  </div>
+</ng-template>
