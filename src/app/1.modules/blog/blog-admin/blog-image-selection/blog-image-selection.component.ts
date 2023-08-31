@@ -38,7 +38,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getImageByType(this.IN_FEATURED)
+      await this.imageItemIndexService.getAllImages('')
     ).pipe(
       map((data) => {
         data.sort((a, b) => {
