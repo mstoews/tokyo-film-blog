@@ -48,6 +48,10 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       })
     );
   }
+  
+  updateImageSelection(image: imageItemIndex) {
+    console.log('updateImageSelection', image.fileName);
+  }
 
   async sortThoughtImages() {
     return (await this.imageItemIndexService.getImageByType(this.blogId)).pipe(
