@@ -10,7 +10,7 @@ import { SharedModule } from './1.modules/shared-module/shared.module';
 import { ScrollService } from './4.services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
 import { ProductResolver } from './4.services/product.resolver';
-import { BlogResolver } from './4.services/blog.resolver';
+import { BlogResolver, CalendarResolver } from './4.services/blog.resolver';
 import "firebase/compat/performance";
 
 
@@ -69,7 +69,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     CartResolver,
     WishListResolver,
     BlogResolver,
-
+    CalendarResolver,
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

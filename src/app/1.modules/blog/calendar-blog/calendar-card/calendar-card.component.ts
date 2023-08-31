@@ -21,7 +21,7 @@ export class CalendarCardComponent {
   }
 
   onOpenBlog(id: string) {
-    this.router.navigate(['blog/calendar/id', id]);
+    this.router.navigate(['blog/calendar', id]);
     // this.toggleDrawer();
   }
 

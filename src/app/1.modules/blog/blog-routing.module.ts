@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BlogResolver, TailoringResolver } from 'app/4.services/blog.resolver';
+import { BlogResolver, CalendarResolver, TailoringResolver } from 'app/4.services/blog.resolver';
 import { BlogComponent } from './blog.component';
 import { DetailComponent } from './detail/detail.component';
 import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
 import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
 import { CalendarBlogComponent } from './calendar-blog/calendar-blog.component';
+import { CalendarDetailComponent } from './calendar-blog/calendar-detail/calendar-detail.component';
 
 const routes: Routes = [
   {
@@ -33,7 +34,7 @@ const routes: Routes = [
     title: 'Tailoring',
     component: TailoringDetailComponent,
     resolve: {
-      tailoring: TailoringResolver,
+      blog: BlogResolver,
     },
     data: { state: 'tailoring/:id' },
   },
@@ -45,9 +46,9 @@ const routes: Routes = [
   {
     path: 'calendar/:id',
     title: 'Calendar',
-    component: CalendarBlogComponent,
+    component: CalendarDetailComponent,
     resolve: {
-      calendar: BlogResolver,
+      blog: BlogResolver,
     },
     data: { state: 'calendar/:id' },
   },

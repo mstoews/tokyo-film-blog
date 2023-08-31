@@ -20,3 +20,14 @@ export class TailoringResolver  {
     return this.blogService.findBlogByUrl(route.paramMap.get('id')!);
   }
 }
+
+
+@Injectable()
+export class CalendarResolver  {
+  blogService = inject(BlogService);
+  resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot ): Observable<Blog | undefined> {
+    const calender = this.blogService.findBlogByUrl(route.paramMap.get('id')!);
+    console.log('calender');
+    return calender;
+  }
+}

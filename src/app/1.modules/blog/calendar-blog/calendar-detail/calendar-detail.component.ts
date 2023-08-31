@@ -41,7 +41,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
     let id: string;
     
 
-    this.blog = this.activateRoute.snapshot.data['blog/calendar-blog'];
+    this.blog = this.activateRoute.snapshot.data['blog'];
 
     if (this.blog.id) {
       this.blog_id = this.blog.id;

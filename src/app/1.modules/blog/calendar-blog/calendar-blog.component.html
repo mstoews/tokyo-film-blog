@@ -10,13 +10,11 @@
 <div class="bg-white h-screen">
   <app-header class="bg-white" [title]="'Monthly Calendar Updates'"></app-header>
   <div class="pt-5 bg-white">
-
           <div class="grid grid-cols-1 mt-4 ml-5 mr-5 max-w-lg gap-5 lg:max-w-none lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ">
             <div *ngFor="let blog of blogs">
-                <tailor-card [blog]="blog"></tailor-card>
+                <calendar-card [blog]="blog"></calendar-card>
             </div>
           </div>
-
   </div>
 </div>
 </ng-container>
