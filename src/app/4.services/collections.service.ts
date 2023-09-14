@@ -43,7 +43,7 @@ export class CollectionsService {
       .then((newComment) => {
         comment.id = newComment.id;
         this.updateComment(comment);
-        this.snack.open('Comment added to the thoughts ... ', 'Close', {
+        this.snack.open('Comment added to the thoughts ... ', 'OK', {
           verticalPosition: 'top',
           horizontalPosition: 'right',
           panelClass: 'bg-danger',

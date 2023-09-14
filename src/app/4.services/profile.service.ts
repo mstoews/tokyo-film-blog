@@ -68,7 +68,7 @@ export class ProfileService {
       .then((profile) => {
         this.snack.open(
           'Profile address has been updated to your profile ...',
-          'Close',
+          'OK',
           {
             verticalPosition: 'top',
             horizontalPosition: 'right',
@@ -79,7 +79,7 @@ export class ProfileService {
       .catch((error) => {
         this.snack.open(
           'Profile address was NOT updated to your profile ...',
-          'Close',
+          'OK',
           {
             verticalPosition: 'top',
             horizontalPosition: 'right',
@@ -97,7 +97,7 @@ export class ProfileService {
       .then((profile) => {
         this.snack.open(
           'Profile address has been updated to your profile ...',
-          'Close',
+          'OK',
           {
             verticalPosition: 'top',
             horizontalPosition: 'right',
@@ -107,7 +107,7 @@ export class ProfileService {
         );
       })
       .catch((error) => {
-        this.snack.open('Error adding new profile definition ... ', 'Close', {
+        this.snack.open('Error adding new profile definition ... ', 'OK', {
           verticalPosition: 'top',
           horizontalPosition: 'right',
           panelClass: 'bg-danger',

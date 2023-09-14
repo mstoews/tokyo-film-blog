@@ -26,7 +26,7 @@ export class PurchaseThanksComponent {
         if (url.searchParams.get('purchaseResult') === 'failed') {
           this.snackBar.open(
             'Purchase checkout has been cancelled by the users',
-            'Close',
+            'OK',
             {
               duration: 3000,
               horizontalPosition: 'right',

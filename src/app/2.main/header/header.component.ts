@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewChild,
+
   inject,
   signal,
 } from '@angular/core';
@@ -27,7 +27,7 @@ import { ProfileModel } from 'app/5.models/profile';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UserService } from 'app/4.services/auth/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable, Subscription, first } from 'rxjs';
+import { Observable, Subject, Subscription, first, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -65,32 +65,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
   wishCounter = signal<number>(0);
   cartCounter = signal<number>(0);
 
-  subUserService: Subscription;
-  subCartService: Subscription;
-  subWishListService: Subscription;
-  subAuth: Subscription;
-  subAfAuth: Subscription;
+  _unsubscribeAll: Subject<any> = new Subject<any>();
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
   ngOnInit() {
     this.menuToggle.setDrawerState(false);
     this.emailName = 'Guest';
-    this.subUserService = this.userService.isLoggedIn$.subscribe((res) => {
+    this.userService.isLoggedIn$.pipe(takeUntil(this._unsubscribeAll)).subscribe((res) => {
       if (res === true) {
         this.isLoggedIn = true;
 
-        this.subAfAuth = this.authService.afAuth.authState.subscribe((user) => {
+        this.authService.afAuth.authState.pipe(takeUntil(this._unsubscribeAll)).subscribe((user) => {
           this.userId = user?.uid;
         });
 
         // this.cartService.updateCartCounter(this.userId);
 
-        this.subCartService = this.cartService.cartByUserId(this.authService.userData.uid).subscribe((cart) => {
+         this.cartService.cartByUserId(this.authService.userData.uid).pipe(takeUntil(this._unsubscribeAll)).subscribe((cart) => {
           this.cartCounter.set(cart.length);
         });
 
-        this.subWishListService = this.wishListService
+        this.wishListService
           .wishListByUserId(this.authService.userData.uid)
           .subscribe((wishlist) => {
             this.wishCounter.set(wishlist.length);
@@ -100,7 +96,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.subAuth = this.authService.afAuth.authState.subscribe((user) => {
+     this.authService.afAuth.authState.pipe(takeUntil(this._unsubscribeAll)).subscribe((user) => {
       if (user) {
         this.userId = user.uid;
         console.debug(this.userId);
@@ -110,7 +106,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
         );
         const profiles = collection.valueChanges({ idField: 'id' });
 
-        profiles.pipe(first()).subscribe((ref) => {
+        profiles.pipe(first()).pipe(takeUntil(this._unsubscribeAll)).subscribe((ref) => {
           if (ref.length > 0)
             ref.forEach((mr) => {
               console.debug(mr);
@@ -171,7 +167,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   doAnimate() {}
 
   openShoppingCart() {
-    this.subUserService = this.userService.isLoggedIn$.subscribe((user) => {
+    this.userService.isLoggedIn$.pipe(takeUntil(this._unsubscribeAll)).subscribe((user) => {
       if (user === false) {
         this.snackBar.open('Please sign in to access the cart', 'Ok', {
           verticalPosition: 'top',
@@ -189,9 +185,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
 
   openWishList() {
-    this.userService.isLoggedIn$.subscribe((user) => {
+    this.userService.isLoggedIn$.pipe(takeUntil(this._unsubscribeAll)).subscribe((user) => {
       if (user === false) {
-        this.snackBar.open('Please sign in to access the wish list', 'Close', {
+        this.snackBar.open('Please sign in to access the wish list', 'OK', {
           verticalPosition: 'top',
           horizontalPosition: 'right',
           panelClass: 'bg-danger',
@@ -206,8 +202,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //this.subUserService.unsubscribe();
-    //this.subCartService.unsubscribe();
-    //this.subWishListService.unsubscribe();
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 }

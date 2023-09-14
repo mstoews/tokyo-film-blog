@@ -139,7 +139,7 @@ export class CollectionGrid implements OnInit, OnDestroy {
       if (found) {
         this.snackBar.open(
           'The item already exists in your cart ... ',
-          'Close',
+          'OK',
           {
             verticalPosition: 'top',
             horizontalPosition: 'right',
@@ -166,7 +166,7 @@ export class CollectionGrid implements OnInit, OnDestroy {
       if (this.cartCount > 0) {
         this.route.navigate(['shop/cart', userId]);
       } else {
-        this.snackBar.open('There are no items in your cart', 'Close', {
+        this.snackBar.open('There are no items in your cart', 'OK', {
           verticalPosition: 'top',
           horizontalPosition: 'right',
           panelClass: 'bg-danger',
@@ -174,7 +174,7 @@ export class CollectionGrid implements OnInit, OnDestroy {
         return;
       }
     } else {
-      this.snackBar.open('You must be logged in access the cart', 'Close', {
+      this.snackBar.open('You must be logged in access the cart', 'OK', {
         verticalPosition: 'top',
         horizontalPosition: 'right',
         panelClass: 'bg-danger',

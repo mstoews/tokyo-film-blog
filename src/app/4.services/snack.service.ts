@@ -18,7 +18,7 @@ export class SnackService {
   }
 
   authError() {
-    this.snackBar.open('You must be logged in!', 'Close', {
+    this.snackBar.open('You must be logged in!', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
@@ -31,7 +31,7 @@ export class SnackService {
   }
 
   showMessage(message: string) {
-    this.snackBar.open(message, 'Close', {
+    this.snackBar.open(message, 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',

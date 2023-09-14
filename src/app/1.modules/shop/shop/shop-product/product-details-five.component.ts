@@ -61,7 +61,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   quantity: number = 1.0;
   total_cost: number = 0.0;
 
-  
+
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   userData: any;
   userId: String;
@@ -164,7 +164,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     if (found) {
       this.snackBar.open(
         'The item already exists in your wishlist ... ',
-        'Close',
+        'OK',
         {
           verticalPosition: 'top',
           horizontalPosition: 'right',
@@ -182,7 +182,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       return item === this.product.id
     });
     if (found) {
-      this.snackBar.open('The item already exists in your cart ... ', 'Close', {
+      this.snackBar.open('The item already exists in your cart ... ', 'OK', {
         verticalPosition: 'top',
         horizontalPosition: 'right',
         panelClass: 'bg-danger',
@@ -239,7 +239,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
     if (this.cartCount > 0) {
       this.route.navigate(['shop/cart', this.authService.userData.uid]);
     } else {
-      this.snackBar.open('There are no items in your cart', 'Close', {
+      this.snackBar.open('There are no items in your cart', 'OK', {
         verticalPosition: 'top',
         horizontalPosition: 'right',
         panelClass: 'bg-danger',

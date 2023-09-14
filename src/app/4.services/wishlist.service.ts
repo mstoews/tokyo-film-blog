@@ -80,7 +80,7 @@ export class WishListService {
     //}
   }
 
-  
+
   findWishListById(id: string): Observable<WishList | undefined> {
     return this.afs
       .collection(`users/${this.userId}/wishlist`, (ref) =>
@@ -150,7 +150,7 @@ export class WishListService {
       // create an api call to the server to create the wish list on the userId
       // if the users is not logged in create a user id from an anonymous login.
       collectionRef.add(mtProduct);
-      this.snack.open('Wish list has been added ...', 'Close', {
+      this.snack.open('Wish list has been added ...', 'OK', {
         verticalPosition: 'top',
         horizontalPosition: 'right',
         panelClass: 'bg-danger',
@@ -169,7 +169,7 @@ export class WishListService {
     );
     const wishlistId = collectionRef.get();
     if (wishlistId) {
-      this.snack.open('Item is already in your wishlist... ', 'Close', {
+      this.snack.open('Item is already in your wishlist... ', 'OK', {
         verticalPosition: 'top',
         horizontalPosition: 'right',
         panelClass: 'bg-danger',

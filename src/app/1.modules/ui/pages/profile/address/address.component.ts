@@ -108,7 +108,7 @@ export class AddressComponent implements OnInit {
             })
             .catch()
             .finally();
-          this.snack.open('Profile has been add ...', 'Close', {
+          this.snack.open('Profile has been add ...', 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-danger',

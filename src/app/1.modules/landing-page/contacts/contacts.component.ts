@@ -66,7 +66,7 @@ export class ContactsComponent implements OnInit {
         .pipe(
           catchError((err) => {
             console.debug('Error ', err);
-            this._snackBar.open(JSON.stringify(err), 'Close', {
+            this._snackBar.open(JSON.stringify(err), 'OK', {
               verticalPosition: 'top',
               horizontalPosition: 'right',
               panelClass: 'bg-danger',
@@ -75,7 +75,7 @@ export class ContactsComponent implements OnInit {
           })
         )
         .subscribe((response: any) => {
-          this._snackBar.open(JSON.stringify(response.message), 'Close', {
+          this._snackBar.open(JSON.stringify(response.message), 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-danger',
@@ -92,7 +92,7 @@ export class ContactsComponent implements OnInit {
         .pipe(
           catchError((err) => {
             console.debug('Error ', err);
-            this._snackBar.open(JSON.stringify(err), 'Close', {
+            this._snackBar.open(JSON.stringify(err), 'OK', {
               verticalPosition: 'top',
               horizontalPosition: 'right',
               panelClass: 'bg-danger',
@@ -103,7 +103,7 @@ export class ContactsComponent implements OnInit {
           })
         )
         .subscribe((response: any) => {
-          this._snackBar.open(JSON.stringify(response.message), 'Close', {
+          this._snackBar.open(JSON.stringify(response.message), 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-danger',

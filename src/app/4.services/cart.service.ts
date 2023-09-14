@@ -154,7 +154,7 @@ export class CartService implements OnDestroy {
     // console.debug('product id:', mtCart.id);
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
     collectionRef.add(mtCart);
-    this.snack.open('Selection has been added to your cart ...', 'Close', {
+    this.snack.open('Selection has been added to your cart ...', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
@@ -225,7 +225,7 @@ export class CartService implements OnDestroy {
 
   update(mtCart: Cart) {
     this.cartCollection.doc(mtCart.id.toString()).update(mtCart);
-    this.snack.open('Cart has been updated ... ', 'Close', {
+    this.snack.open('Cart has been updated ... ', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
@@ -240,7 +240,7 @@ export class CartService implements OnDestroy {
     );
     cartItems = cartItemsCollection.valueChanges({ idField: 'id' });
     cartItemsCollection.doc(id).delete();
-    this.snack.open('Item has been removed ... ', 'Close', {
+    this.snack.open('Item has been removed ... ', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',

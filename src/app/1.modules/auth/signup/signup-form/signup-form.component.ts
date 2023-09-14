@@ -60,7 +60,7 @@ export class SignupFormComponent implements OnInit {
          // console.debug('response', response);
           this.signupForm.reset();
 
-          this.snackBar.open('Account Created!', 'Close', {
+          this.snackBar.open('Account Created!', 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-success',
@@ -72,7 +72,7 @@ export class SignupFormComponent implements OnInit {
         (error) => {
           let errorMessage = 'Signup Failed - ' + error.error.error.message;
 
-          this.snackBar.open(errorMessage, 'Close', {
+          this.snackBar.open(errorMessage, 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-danger',

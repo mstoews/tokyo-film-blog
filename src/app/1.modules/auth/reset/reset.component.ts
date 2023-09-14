@@ -31,7 +31,7 @@ export class ResetComponent implements OnInit {
       )
       .subscribe(
         () => {
-          this.snackBar.open('Email Sent.', 'Close', {
+          this.snackBar.open('Email Sent.', 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-success',
@@ -43,7 +43,7 @@ export class ResetComponent implements OnInit {
         (error) => {
           let errorMessage = 'Operation Failed - ' + error.error.error.message;
 
-          this.snackBar.open(errorMessage, 'Close', {
+          this.snackBar.open(errorMessage, 'OK', {
             verticalPosition: 'top',
             horizontalPosition: 'right',
             panelClass: 'bg-danger',

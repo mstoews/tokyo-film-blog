@@ -87,7 +87,7 @@ export class AuthService implements OnDestroy {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        this.snackBar.open(error, 'Close', {
+        this.snackBar.open(error, 'OK', {
           verticalPosition: 'top',
           horizontalPosition: 'right',
           panelClass: 'bg-danger',
