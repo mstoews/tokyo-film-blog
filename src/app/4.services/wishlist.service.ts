@@ -80,25 +80,7 @@ export class WishListService {
     //}
   }
 
-  createCart(productId: string, quantity: number) {
-    let prod = this.findProductById(productId);
-    if (prod) {
-      prod.subscribe((result) => {
-        const cart: Cart = {
-          ...result,
-          product_id: result.id,
-          quantity: quantity,
-          is_completed: false,
-          user_purchased: this.userId,
-          date_sold: Timestamp.now(),
-          date_updated: Timestamp.now(),
-          status: 'open',
-        };
-        //this.create(cart);
-      });
-    }
-  }
-
+  
   findWishListById(id: string): Observable<WishList | undefined> {
     return this.afs
       .collection(`users/${this.userId}/wishlist`, (ref) =>

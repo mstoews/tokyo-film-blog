@@ -10,6 +10,7 @@ export interface Category {
   createDate: string;
   updateDate: string;
   updateBy: string;
+  isUsed?: boolean;
 }
 
 export type CategoryRef = DocumentReference<Category>;

@@ -36,6 +36,7 @@ import { Product } from 'app/5.models/products';
 import { ProductsService } from 'app/4.services/products.service';
 import { ShopCategoryCardComponent } from './shop/main-shop/shop-category-card/shop-category-card.component';
 import { LightboxModule } from '../lightbox';
+import { StripHtmlPipe } from './striphtml.pipe';
 
 export const ProductFuncResolver: ResolveFn<Product[]> = (
   route: ActivatedRouteSnapshot,
@@ -146,6 +147,7 @@ const routes: Routes = [
     ShopLandingComponent,
     ShopLandingCardComponent,
     ShopCategoryCardComponent,
+    StripHtmlPipe,
   ],
   imports: [
     CommonModule,

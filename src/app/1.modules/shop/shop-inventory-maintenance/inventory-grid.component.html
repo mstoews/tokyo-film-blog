@@ -17,7 +17,7 @@
           <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[6, 9, 12, 15]"></dxo-pager>
           <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
           <dxo-group-panel [visible]="true"></dxo-group-panel>
-          <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+          <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
 
           <dxi-column dataField="image" [width]="80" cellTemplate="imageTemplate"> </dxi-column>
           <dxi-column dataField="category" [width]="150"> </dxi-column>
@@ -25,6 +25,8 @@
           <dxi-column dataField="description" [width]="200"> </dxi-column>
           <dxi-column dataField="short_description"[width]="300"> </dxi-column>
           <dxi-column dataField="rich_description" cellTemplate="richTemplate"> </dxi-column>
+          <dxi-column dataField="purchases_allowed" caption="Sell" [width]="100" type="boolean"> </dxi-column>
+          <dxi-column dataField="quantity_required" caption="Per Quantity" [width]="100" type="boolean"> </dxi-column>
           <div *dxTemplate="let data of 'imageTemplate'">
             <img [src]="data.value" class="lg-rounded" alt="cell.value">
           </div>
@@ -36,63 +38,20 @@
           </div>
           <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export>
         </dx-data-grid>
-
       </div>
 
-      <!-- <table mat-table [dataSource]="rows" class="mat-elevation-z7">
 
-        <ng-container matColumnDef="image">
-          <th class="text-base font-bold text-gray-100 m-2" mat-header-cell *matHeaderCellDef>
-            Image
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <img class="m-1 w-30 rounded-lg" [ngSrc]="element.image" width="200" height="200" priority/>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description">
-          <th class="text-base font-bold text-gray-100" mat-header-cell *matHeaderCellDef>
-            Title
-          </th>
-          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="short_description">
-          <th class="text-base font-bold text-gray-100" mat-header-cell *matHeaderCellDef>
-            Short Description
-          </th>
-          <td mat-cell class="w-min-[300px] w-max-[600px]" *matCellDef="let element">{{ element.short_description}}</td>
-        </ng-container>
-
-        <ng-container class="hidden md:block" matColumnDef="rich_description">
-          <th class="text-base font-bold text-gray-100 " mat-header-cell *matHeaderCellDef>
-            Detail Description
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <p class="m-1 w-200 h-30 hidden md:block" [innerHTML]="element.rich_description | safe: 'html'"></p>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="price">
-          <th class="text-base font-bold text-gray-100 no-wrap" mat-header-cell *matHeaderCellDef>
-            Price
-          </th>
-          <td mat-cell clas="w-min-[150px]" *matCellDef="let element">USD {{ element.price }}</td>
-        </ng-container>
-        <tr class="text-base font-bold text-gray-100 bg-gray-500" mat-header-row *matHeaderRowDef="columnsToDisplay">
-        </tr>
-        <tr class="m-1 hover:bg-gray-100" mat-row *matRowDef="let row; columns: columnsToDisplay" (click)="onOpenRow(row)"></tr>
-      </table> -->
-    </ng-container>
     <button (click)="onAdd()"
-    class="fixed bottom-30 right-30 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+    class="fixed bottom-20 right-20 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
     <svg viewBox="0 0 20 20" class="w-6 h-6 inline-block">
       <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
             C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
             C15.952,9,16,9.447,16,10z" />
     </svg>
   </button>
+</ng-container>
 
   </mat-drawer-container>
+
 </div>
 

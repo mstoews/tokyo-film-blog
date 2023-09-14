@@ -1,14 +1,8 @@
-<div class="flex items-center justify-center w-full">
-  <div
-    class="flex-1 items-start justify-start px-4 py-16 md:w-10/12 lg:w-8/12 xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
-    <div class="flex items-start jusitfy-start justify-center pb-4">
-      <p class="text-4xl font-semibold leading-9 text-gray-800 font-garamond">Collections - Editing</p>
-      <span class="flex-auto"></span>
-      <button mat-icon-button class="bg-gray-300 hover:bg-gray-500 hover:text-gray-100" (click)="onBackToCollections()">
-        <mat-icon class="mb-2" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
-      </button>
-    </div>
-    <span></span>
+<div class="flex items-center justify-center w-full bg-white">
+
+  <div class="flex-1 items-start justify-start px-4 py-16 md:w-10/12 lg:w-8/12 xl:w-full md:px-6 xl:px-20 2xl:container 2xl:mx-auto">
+
+    <app-header class="bg-gray-50 m-5" [title]="'Collections - Editing'"></app-header>
     <mat-card class="flex flex-col w-full text-gray-700 filter-article filter-interactive">
       <div mat-dialog-content>
         <form [formGroup]="collectionGroup" (ngSubmit)="onUpdate(collectionGroup.value)"
@@ -17,7 +11,7 @@
             <mat-label class="ml-2">Title</mat-label>
             <input matInput placeholder="Title" formControlName="title" />
           </mat-form-field>
-          
+
           <mat-toolbar class="flex-1-col bg-slate-300">
             <span></span>
             <mat-radio-group class="align-center items-center" formControlName="inventory_images" color="primary">
@@ -37,7 +31,7 @@
               <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
             </button>
           </mat-toolbar>
-          
+
           <mat-tab-group #tabGroup class="m-2" mat-stretch-tabs="false" mat-align-tabs="start">
             <mat-tab label="Main">
               <ng-template matTabContent>
@@ -93,12 +87,10 @@
               </ng-container>
             </mat-tab>
           </mat-tab-group>
-          <mat-checkbox class="" color="primary" formControlName="published">
-            Published
-          </mat-checkbox>
+
         </form>
       </div>
-      
+
     </mat-card>
   </div>
 </div>

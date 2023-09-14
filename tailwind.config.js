@@ -25,6 +25,16 @@ module.exports = {
       spacing: {
         5: '3.5rem',
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite 3s',
+        'bounce-slow': 'bounce 3s infinite 3s',
+      },
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        }
+      }
     },
   },
 

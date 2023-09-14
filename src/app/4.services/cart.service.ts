@@ -13,6 +13,7 @@ import { convertSnaps } from './db-utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth/auth.service';
 import { WishList } from 'app/5.models/wishlist';
+import { CollectionReference, DocumentData, collection, getCountFromServer } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -47,14 +48,31 @@ export class CartService implements OnDestroy {
     if (this.isLoggedIn === true) {
       this.cartItems$ = this.cartCollection.valueChanges({ idField: 'id' });
     }
-   
+
   }
 
   updateCartCounter(userId: string) {
     this.cartByStatus(userId,'open').pipe(takeUntil(this._unsubscribeAll)).subscribe((cart) => {
-    this.cartCounter.set(1);
+
     console.debug('cart length:', cart.length);
     });
+  }
+
+  async cartCount(): Promise<number>  {
+    const { collection, getCountFromServer } = require("firebase/firestore");
+    const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
+    const snapshot = await getCountFromServer(collectionRef);
+    console.log('count: ', snapshot.data().count);
+    return snapshot.data().count;
+  }
+
+  async queryCartCount(userId: string): Promise<Observable<number>> {
+      const { collection, getCountFromServer } = require("firebase/firestore");
+      const coll = collection(this.afs.firestore, `users/${this.userId}/cart/`);
+      const q = query(coll, where("status", "==", "open"));
+      const snapshot = await getCountFromServer(q);
+      console.log('count: ', snapshot.data().count);
+      return of(snapshot.data().count);
   }
 
   ngOnDestroy(): void {
@@ -65,15 +83,14 @@ export class CartService implements OnDestroy {
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  getCartCount(userId: string): Observable<Cart[] | undefined> {
-    return this.afs
-      .collection(`users/${userId}/cart`)
+  getCartCount(userId: string): Observable<number | undefined> {
+    this.afs.collection(`users/${userId}/cart`)
       .snapshotChanges()
-      .pipe(
-        map((snaps) => {
-          return convertSnaps<Cart>(snaps);
-        })
-      );
+      .forEach((snaps) => {
+         return of(snaps.length);
+      }
+    );
+    return of(0);
   }
 
   getCartItem(userId: string, productId: string): Observable<Cart[]> {
@@ -231,3 +248,11 @@ export class CartService implements OnDestroy {
     });
   }
 }
+function query(coll: CollectionReference<DocumentData>, arg1: any) {
+  throw new Error('Function not implemented.');
+}
+
+function where(arg0: string, arg1: string, arg2: string): any {
+  throw new Error('Function not implemented.');
+}
+

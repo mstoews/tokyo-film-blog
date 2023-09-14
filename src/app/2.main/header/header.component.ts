@@ -63,6 +63,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   isLoggedIn = true;
   wishCounter = signal<number>(0);
+  cartCounter = signal<number>(0);
 
   subUserService: Subscription;
   subCartService: Subscription;
@@ -83,7 +84,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
           this.userId = user?.uid;
         });
 
-        this.cartService.updateCartCounter(this.userId);
+        // this.cartService.updateCartCounter(this.userId);
+
+        this.subCartService = this.cartService.cartByUserId(this.authService.userData.uid).subscribe((cart) => {
+          this.cartCounter.set(cart.length);
+        });
 
         this.subWishListService = this.wishListService
           .wishListByUserId(this.authService.userData.uid)
@@ -180,6 +185,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+
 
   openWishList() {
     this.userService.isLoggedIn$.subscribe((user) => {

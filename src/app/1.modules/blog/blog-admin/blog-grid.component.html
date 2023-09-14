@@ -5,7 +5,7 @@
   <div class="flex flex-col items-center ">
   <div class="flex-col w-10/12 items-center" (onValueChangedEvent)="valueChangedEvent($event)">
     <ng-container *ngIf="allBlogs$ | async as rows">
-      <table mat-table [dataSource]="rows" class="mat-elevation-z8">
+      <!-- <table mat-table [dataSource]="rows" class="mat-elevation-z8">
         <ng-container matColumnDef="title">
           <th class="m-1 text-base font-bold text-gray-600 bg-gray-800 text-align-center color=primary" mat-header-cell
             *matHeaderCellDef>
@@ -36,7 +36,7 @@
           </td>
         </ng-container>
 
-        <!-- <ng-container matColumnDef="conclusion">
+        <ng-container matColumnDef="conclusion">
           <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
             *matHeaderCellDef>
             Conclusion
@@ -46,13 +46,45 @@
             <td mat-cell *matCellDef="let element" class="h-30 align-text-top" >
               <p>{{ element.conclusion }}</p>
           </td>
-        </ng-container>  -->
-
+        </ng-container>
         <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
         <tr class="m-1 hover:bg-gray-100" mat-row *matRowDef="let row; columns: columnsToDisplay"  (click)="onOpenRow(row)"></tr>
-      </table>
+      </table> -->
+      <dx-data-grid flex id="title" [wordWrapEnabled]="true" [dataSource]="rows" [showColumnLines]="true"
+      [showRowLines]="true"
+      [showBorders]="true"
+      [focusedRowEnabled]="true"
+      (onExporting)="onExporting($event)"
+      [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true" keyExpr="id">
+
+        <dxo-paging [pageSize]="9"></dxo-paging>
+        <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[6, 9, 12, 15]"></dxo-pager>
+        <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+
+        <dxi-column dataField="title" [width]="200"></dxi-column>
+        <dxi-column dataField="paragraph" cellTemplate="richTemplate"></dxi-column>
+        <dxi-column dataField="published" [width]="100" type="boolean"></dxi-column>
+        <dxi-column dataField="calendar" [width]="100" type="boolean"></dxi-column>
+        <dxi-column dataField="tailoring" [width]="100" type="boolean"></dxi-column>
+        <!-- <dxi-column dataField="price" [width]="100"> </dxi-column>
+        <dxi-column dataField="description" [width]="200"> </dxi-column>
+        <dxi-column dataField="short_description"[width]="300"> </dxi-column>
+        <dxi-column dataField="rich_description" cellTemplate="richTemplate"> </dxi-column> -->
+        <div *dxTemplate="let data of 'imageTemplate'">
+          <img [src]="data.value" class="lg-rounded" alt="cell.value">
+        </div>
+        <div *dxTemplate="let data of 'dateTemplate'">
+          <div> {{data.value | date: 'dd/MM/YYYY' }} </div>
+        </div>
+        <div *dxTemplate="let data of 'richTemplate'">
+          <p class="m-1 w-200 h-10 hidden md:block" [innerHTML]="data.value | safe: 'html'"></p>
+        </div>
+        <!-- <dxo-export [enabled]="true" [allowExportSelectedData]="true"></dxo-export> -->
+      </dx-data-grid>
       <button (click)="onAdd()"
-        class="fixed bottom-3 right-14 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+        class="fixed bottom-40 right-20 p-1 w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-800 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
         <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
           <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
                 C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399

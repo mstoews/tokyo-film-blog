@@ -42,10 +42,9 @@
               "exceljs"
 						],
 						"styles": [
-							"node_modules/devextreme/dist/css/dx.common.css",
-							"node_modules/devextreme/dist/css/dx.light.css",
-							"node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+							"node_modules/devextreme/dist/css/dx.light.compact.css",
+							"node_modules/ngx-spinner/animations/ball-scale-multiple.css",
 							"src/styles.css"
             ],
             "serviceWorker": true,

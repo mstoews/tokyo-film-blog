@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MaterialModule } from 'app/material.module';
 import { BlogResolver } from 'app/4.services/blog.resolver';
-import { DxHtmlEditorModule } from 'devextreme-angular';
+import { DxDataGridModule, DxHtmlEditorModule } from 'devextreme-angular';
 import { BlogEditRoutingModule } from './blog-routing.module';
 import { BlogAdminComponent } from './blog-grid.component';
 import { BlogEditComponent } from './blog-edit/blog-edit.component';
@@ -25,6 +25,7 @@ import { BlogPreviewComponent } from './blog-preview/blog-preview.component';
     CommonModule,
     MaterialModule,
     DxHtmlEditorModule,
+    DxDataGridModule,
     NgOptimizedImage,
     SharedModule,
 

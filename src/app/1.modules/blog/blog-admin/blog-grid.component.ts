@@ -101,15 +101,16 @@ export class BlogAdminComponent implements OnInit {
   }
 
   onCellDoublClicked(e: any) {
-    this.data = [];
-    var counter = 0;
-    this.para = e.paragraph;
-    this.conclusion = e.conclusion;
-    this.body = e.body;
-    const parentId = e.id;
+    // this.data = [];
+    // var counter = 0;
+    // this.para = e.paragraph;
+    // this.conclusion = e.conclusion;
+    // this.body = e.body;
+    // const parentId = e.key;
 
-    this.blogImages$ = this.blogService.getBlogImage(parentId);
-    this.blogGroup.setValue(e);
+    // this.blogImages$ = this.blogService.getBlogImage(parentId);
+    // this.blogGroup.setValue(e);
+    this.route.navigate(['blog-admin/blog-admin', e.key]);
   }
 
   onNotify(event: any) {
@@ -135,17 +136,6 @@ export class BlogAdminComponent implements OnInit {
     // console.debug(`onDelete: ${data}`);
     this.blogService.delete(data.id.toString());
   }
-
-  public blogType = {
-    id: '',
-    title: '',
-    paragraph: '',
-    body: '',
-    conclusion: '',
-    user_updated: '',
-    date_created: '',
-    date_updated: '',
-  };
 
   valueChangedEvent(e: any) {
     // console.debug(`blog grid value changed ${e}`)

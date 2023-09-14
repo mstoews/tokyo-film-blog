@@ -13,13 +13,32 @@
       </div>
       <span class="flex-auto"></span>
 
+      <div class="block" *ngIf="cartCounter() > 0" >
+        <button (click)="openShoppingCart()" matTooltip="Shopping Cart"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [matBadge]=cartCounter() [matBadgeHidden]="cartCounter()===0"
+            [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
+      </button>
+      </div>
 
-       <div class="block">
+      <div class="block" *ngIf="wishCounter() > 0">
+        <button (click)="openWishList()" matTooltip="Wish List"
+          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+          <mat-icon [matBadge]=wishCounter() [matBadgeHidden]="wishCounter()===0"
+            [svgIcon]="'heroicons_outline:gift'"></mat-icon>
+        </button>
+      </div>
+
+
+
+       <div class="block" >
         <button (click)="onBack()" matTooltip="Back"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
           <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
         </button>
       </div>
+
+
 <!--
 
       <div class="hidden md:block">
