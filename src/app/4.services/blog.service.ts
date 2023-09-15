@@ -102,13 +102,14 @@ export class BlogService {
 
   getAllPublishedBlog() {
     return this.blogItems.pipe(
-      map((blogs) => blogs.filter((pub) => pub.published === true && pub.tailoring === false || pub.tailoring === undefined))
+      map((blogs) => blogs.filter((pub) => pub.published === true && pub.calendar === false && pub.tailoring === false || pub.tailoring === undefined
+      ))
     );
   }
 
   getTailoringBlog() {
     return this.blogItems.pipe(
-      map((blogs) => blogs.filter((pub) => pub.tailoring === true && pub.published === true))
+      map((blogs) => blogs.filter((pub) => pub.tailoring === true && pub.published === true && pub.calendar !== true))
     );
   }
 
