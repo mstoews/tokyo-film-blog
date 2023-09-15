@@ -6,7 +6,6 @@ import {
 import { first, map, Observable } from 'rxjs';
 import { WishList } from 'app/5.models/wishlist';
 import { Cart } from 'app/5.models/cart';
-
 import { convertSnaps } from './db-utils';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Product } from 'app/5.models/products';
@@ -14,8 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MenuToggleService } from './menu-toggle.service';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
-import { collection, OrderByDirection } from 'firebase/firestore';
-
+import { OrderByDirection } from 'firebase/firestore';
 import { Router } from '@angular/router';
 import { CartService } from './cart.service';
 
@@ -64,9 +62,6 @@ export class WishListService {
   }
 
   createWishList(productId: string) {
-    // if (this.isProductInCart(productId) === false)
-    // if (this.isProductInWishList(productId) === false)
-    // {
     let prod = this.findProductById(productId);
     if (prod) {
       prod.subscribe((result) => {
@@ -79,7 +74,6 @@ export class WishListService {
     }
     //}
   }
-
 
   findWishListById(id: string): Observable<WishList | undefined> {
     return this.afs

@@ -72,6 +72,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.menuToggle.setDrawerState(false);
     this.emailName = 'Guest';
+    
     this.userService.isLoggedIn$.pipe(takeUntil(this._unsubscribeAll)).subscribe((res) => {
       if (res === true) {
         this.isLoggedIn = true;

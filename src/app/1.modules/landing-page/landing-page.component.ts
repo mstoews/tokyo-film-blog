@@ -1,4 +1,12 @@
-import { Component, EventEmitter, OnInit, Output, inject } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 //import { ScrollService } from 'app/4.services/scroll.service';
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -13,6 +21,11 @@ import { Mainpage } from 'app/5.models/mainpage';
 import { BlogService } from '../../4.services/blog.service';
 import { MenuToggleService } from '../../4.services/menu-toggle.service';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { CartService } from 'app/4.services/cart.service';
+import { WishListService } from 'app/4.services/wishlist.service';
+import { Subject, takeUntil } from 'rxjs';
+import { UserService } from 'app/4.services/auth/user.service';
+import { AuthService } from 'app/4.services/auth/auth.service';
 
 @Component({
   selector: 'app-landing-page',
@@ -31,7 +44,7 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
     ]),
   ],
 })
-export class LandingPageComponent implements OnInit {
+export class LandingPageComponent implements OnInit, OnDestroy {
   // public topCollection: imageItem[] = [];
   // public bottomCollection: imageItem[] = [];
 
@@ -49,21 +62,55 @@ export class LandingPageComponent implements OnInit {
     private contactService: ContactService,
     private mainPage: MainPageService,
     private router: Router,
-    // private scrollTo: ScrollService,
-    private fb: FormBuilder,
-    // private authService: AuthService,
 
+    private fb: FormBuilder,
     private menuToggle: MenuToggleService
   ) {}
 
+  cartService = inject(CartService);
+  wishListService = inject(WishListService);
+
   imageListService = inject(ImageItemIndexService);
   blogService = inject(BlogService);
+  userService = inject(UserService);
+  authService = inject(AuthService);
 
   mainPage$ = this.mainPage.getAll();
+  wishCounter = signal<number>(0);
+  cartCounter = signal<number>(0);
+  _unsubscribeAll: Subject<any> = new Subject<any>();
+
   // featuredList$ = this.imageListService.getAllImages('IN_GALLERY');
 
   ngOnInit(): void {
-    // this.createEmptyForm();
+    this.userService.isLoggedIn$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((res) => {
+        if (res === true) {
+          this.authService.afAuth.authState
+            .pipe(takeUntil(this._unsubscribeAll))
+            .subscribe((user) => {
+              const userId = user?.uid;
+              this.cartService
+                .cartByUserId(this.authService.userData.uid)
+                .pipe(takeUntil(this._unsubscribeAll))
+                .subscribe((cart) => {
+                  this.cartCounter.set(cart.length);
+                });
+
+              this.wishListService
+                .wishListByUserId(this.authService.userData.uid)
+                .subscribe((wishlist) => {
+                  this.wishCounter.set(wishlist.length);
+                });
+            });
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
@@ -101,6 +148,14 @@ export class LandingPageComponent implements OnInit {
     this.router.navigate([service]);
   }
 
+  openShoppingCart() {
+    this.router.navigate(['shop/cart', this.authService.userData.uid]);
+  }
+
+  openWishList() {
+    this.router.navigate(['shop/wishlist', this.authService.userData.uid]);
+  }
+  
   onAboutUs(service: string) {
     // console.debug(service);
     this.onClickAboutUs();

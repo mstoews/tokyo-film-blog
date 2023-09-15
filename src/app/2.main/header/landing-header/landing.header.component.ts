@@ -2,9 +2,11 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
   ViewChild,
+  signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { onMainContentChange } from '../../animations';
@@ -15,13 +17,14 @@ import { CartService } from 'app/4.services/cart.service';
 import { WishListService } from 'app/4.services/wishlist.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { UserService } from 'app/4.services/auth/user.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'land-header',
   templateUrl: './landing.header.component.html',
   animations: [onMainContentChange],
 })
-export class LandingHeaderComponent implements OnInit {
+export class LandingHeaderComponent implements OnInit, OnDestroy {
   @Output() notifyNavBarToggleMenu: EventEmitter<any> = new EventEmitter();
 
   constructor(
@@ -51,24 +54,27 @@ export class LandingHeaderComponent implements OnInit {
   isAdmin = false;
   userId = '';
 
-  async ngOnInit() {
-    this.afAuth.currentUser.then((user) => {
-      if (user !== null || user !== undefined) {
-        if (user) {
-          this.userId = user.uid;
-          this.headerEmail = user.email;
-        } else {
-          this.headerEmail = '';
-        }
-      }
+  wishCounter = signal<number>(0);
+  cartCounter = signal<number>(0);
 
-      // this.headerEmail = await this.userService.getUserEmail();
-      if (this.userId !== '') {
-        this.cartCount = this.cartService.cartCountByUserId(this.userId);
+  _unsubscribeAll: Subject<any> = new Subject<any>();
 
-        this.wishCount = this.wishListService.wishCountByUserId(this.userId);
+
+  ngOnInit() {
+    this.userService.isLoggedIn$.pipe(takeUntil(this._unsubscribeAll)).subscribe((res) => {
+      if (res === true) {
+        this.authService.afAuth.authState.pipe(takeUntil(this._unsubscribeAll)).subscribe((user) => {
+          this.userId = user?.uid;
+          this.cartCounter.set(this.cartService.cartCountByUserId(this.userId));
+          this.wishCounter.set(this.wishListService.wishCountByUserId(this.userId));
+        });
       }
     });
+  }
+
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 
   public onToggleSideNav() {
