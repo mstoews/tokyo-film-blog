@@ -77,6 +77,7 @@ export class CollectionsAdminComponent implements OnInit {
   ngOnInit() {
     this.Refresh();
     this.cRAG = '#238823';
+    this.createForm(this.collection);
   }
 
   contentReady = (e: any) => {
