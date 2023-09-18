@@ -58,7 +58,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getImageIndexList()
+      await this.imageItemIndexService.getAllImages('IN_NOT_USED')
     ).pipe(
       map((data) => {
         data.sort((a, b) => {

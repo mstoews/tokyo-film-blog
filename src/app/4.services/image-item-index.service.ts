@@ -1,43 +1,117 @@
-import { Injectable, inject } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
+import { Injectable, OnDestroy, inject } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { imageItemIndex } from 'app/5.models/imageItem';
-import { Observable, Subject, map } from 'rxjs';
+import { Subscription, map } from 'rxjs';
 import { DeleteDuplicateService } from './delete-duplicate.service';
+import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ImageItemIndexService {
+export class ImageItemIndexService implements OnDestroy{
+
   afs = inject(AngularFirestore);
   storage = inject(AngularFireStorage);
   dup = inject(DeleteDuplicateService)
-
-  private _unsubscribeAll: Subject<any> = new Subject<any>();
+  inventory = inject(ProductsService);
+  private sub: Subscription;
 
   hashUsedImagesMap = new Map<string, imageItemIndex>();
   hashOriginalIndexMap = new Map<string, imageItemIndex>();
   hashImageItemMap = new Map<string, imageItemIndex>();
 
-  itemsCollection = this.afs.collection<imageItemIndex[]>(
-    'originalImageList',
+  itemsCollection = this.afs.collection<imageItemIndex[]>('originalImageList',
     (ref) => ref.orderBy('ranking')
   );
+
   imageItems = this.itemsCollection.valueChanges({ idField: 'id' });
 
   imageIndexCollections = this.afs.collection<imageItemIndex>(
     'originalImageList',
     (ref) => ref.orderBy('ranking')
   );
+
   imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id' });
 
   createOriginalItem(image: imageItemIndex) {
     this.imageIndexCollections.add(image).then((imgIndex) => {
       this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
     });
+  }
+
+  updateProductItems() {
+
+    // this.sub = this.inventory.getAll().subscribe((products) => {
+    //   products.forEach((product) => {
+    //     this.getAllImages(product.id).forEach((images) => {
+    //       images.forEach((image) => {
+    //         image.category = 'IN_PRODUCTS';
+    //         this.imageIndexCollections.doc(image.id).update(image);
+    //       });
+    //     });
+    //   });
+    // });
+
+    // this.getAllImages('IN_COLLECTION').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_COLLECTION';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+
+    // this.getAllImages('IN_INVENTORY').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_NOT_USED';
+    //     image.type = 'IN_NOT_USED';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+
+    // this.getAllImages('IN_GALLERY').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_GALLERY';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+
+    // this.getAllImages('IN_FEATURED').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_COLLECTION';
+    //     image.type = 'IN_COLLECTION';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+
+    // this.getAllImages('IN_INVENTORY').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_NOT_USED';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+
+  }
+
+
+
+
+
+
+  reNumber(type: string) {
+    let ranking = 0;
+    this.sub = this.getAllImages(type).subscribe((images) => {
+      images.forEach((image) => {
+        image.ranking = ranking;
+        ranking++;
+        this.imageIndexCollections.doc(image.id).update(image);
+      });
+    });
+  }
+
+  ngOnDestroy(): void {
+    if(this.sub !== undefined){
+      this.sub.unsubscribe();
+    }
   }
 
   async getImagesByType(productId: string) {
@@ -99,6 +173,13 @@ export class ImageItemIndexService {
       map((images) => images.filter((image) => image.type === type))
     );
   }
+
+  async getImagesByCategory(category: string) {
+    return (await this.getImageIndexList()).pipe(
+      map((images) => images.filter((image) => image.category === category))
+    );
+  }
+
 
   async getOriginalImageListByType(type: string) {
     return (await this.getImageIndexList()).pipe(

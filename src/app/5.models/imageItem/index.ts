@@ -32,6 +32,7 @@ export interface imageItemIndex {
   imageSrc?: string;
   imageAlt?: string;
   caption?: string;
+  category?: string;
 }
 
 

@@ -31,7 +31,7 @@ export class CollectionGalleryComponent implements OnInit {
   caption8: string;
   caption9: string;
 
-  
+
   ngOnInit(): void {
     initTE({ Lightbox });
     this.imageCount.set(this.imageCollection.length);
@@ -41,15 +41,15 @@ export class CollectionGalleryComponent implements OnInit {
     } else {
       this.imageItems = this.imageCollection;
     }
-    this.image1 = this.imageItems[0].imageSrc400;
-    this.image2 = this.imageItems[1].imageSrc400;
-    this.image3 = this.imageItems[2].imageSrc400;
-    this.image4 = this.imageItems[3].imageSrc400;
-    this.image5 = this.imageItems[4].imageSrc400;
-    this.image6 = this.imageItems[5].imageSrc400;
-    this.image7 = this.imageItems[6].imageSrc400;
-    this.image8 = this.imageItems[7].imageSrc400;
-    this.image9 = this.imageItems[8].imageSrc400;
+    this.image1 = this.imageItems[0].imageSrc800;
+    this.image2 = this.imageItems[1].imageSrc800;
+    this.image3 = this.imageItems[2].imageSrc800;
+    this.image4 = this.imageItems[3].imageSrc800;
+    this.image5 = this.imageItems[4].imageSrc800;
+    this.image6 = this.imageItems[5].imageSrc800;
+    this.image7 = this.imageItems[6].imageSrc800;
+    this.image8 = this.imageItems[7].imageSrc800;
+    this.image9 = this.imageItems[8].imageSrc800;
 
     this.caption1 = this.imageItems[0].description;
     this.caption2 = this.imageItems[1].description;

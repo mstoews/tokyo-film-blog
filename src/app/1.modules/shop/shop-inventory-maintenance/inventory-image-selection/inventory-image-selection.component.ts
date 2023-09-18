@@ -14,12 +14,7 @@ import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.se
   styleUrls: ['./inventory-image-selection.component.css'],
 })
 export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
-  createImageOnce() {
-    throw new Error('Method not implemented.');
-  }
-  RefreshList() {
-    throw new Error('Method not implemented.');
-  }
+
   @Input() productId: string;
   @Input() imageQuery: string;
 
@@ -45,12 +40,21 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   {
     this.imageQuery = 'all';
     console.debug('inventory-image-selection.component.ts: filterSig', this.filterSig);
+    this.imageItemIndexService.updateProductItems();
   }
 
   addImageToItemList(image: any) {
     image.parentId = this.productId;
     // search for the image in the list 400 size and add it to the list
     this.imageItemIndexService.updateImageList(image);
+  }
+
+  createImageOnce() {
+
+  }
+
+  refreshList() {
+
   }
 
   UpdateInventoryItem(e: imageItemIndex) {
@@ -66,7 +70,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
       query = FilterEnum.not_used;
     }
 
-    return ( await this.imageItemIndexService.getAllImages(query)).pipe(
+    return ( await this.imageItemIndexService.getAllImages(this.IN_NOT_USED)).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -81,7 +85,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     if (query === undefined || query === null) {
       query = 'all';
     }
-    (await this.sortNotUsed(query))
+    (await this.sortNotUsed(this.IN_NOT_USED))
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((images) => {
        this.not_usedImages = images;

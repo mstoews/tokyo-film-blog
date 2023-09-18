@@ -33,22 +33,19 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   currentImage: imageItemIndex;
 
   IN_NOT_USED = 'IN_NOT_USED';
-  IN_FEATURED = 'IN_FEATURED';
   IN_COLLECTION = 'IN_COLLECTION';
-  IN_CREATION = 'IN_CREATION';
   IN_GALLERY = 'IN_GALLERY';
+  IN_PRODUCTS = 'IN_PRODUCTS';
 
   subNotUsed: Subscription;
-  subFeatured: Subscription;
   subCollections: Subscription;
-  subCreations: Subscription;
   subGallery: Subscription;
+  subProducts: Subscription;
 
   not_usedImages: imageItemIndex[] = [];
-  featuredImages: imageItemIndex[] = [];
   collectionsImages: imageItemIndex[] = [];
-  creationsImages: imageItemIndex[] = [];
   galleryImages: imageItemIndex[] = [];
+  productsImages: imageItemIndex[] = [];
 
   constructor(
     public imageItemIndexService: ImageListService,
@@ -58,19 +55,23 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   ) {}
 
   RefreshList() {
-    console.debug('RefreshList');
-    //
+
+    alert('RefreshList');
+
   }
 
   RefreshImageList() {
     // this.imageListService.createRawImagesList();
+    alert('RefreshImageList');
   }
   DeleteDupes() {
     // this.duplicateService.deleteDuplicateImages();
+    alert('DeleteDupes');
   }
 
   RefreshImages() {
     // this.duplicateService.updateImages();
+    alert('RefreshImages');
   }
 
   onImageSelected(e: any) {
@@ -219,9 +220,9 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subNotUsed.unsubscribe();
-    this.subFeatured.unsubscribe();
     this.subCollections.unsubscribe();
-    this.subCreations.unsubscribe();
     this.subGallery.unsubscribe();
+    this.subProducts.unsubscribe();
+
   }
 }

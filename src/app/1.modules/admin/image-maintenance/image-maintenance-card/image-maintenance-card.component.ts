@@ -9,7 +9,7 @@ import { MatDialog } from '@angular/material/dialog';
   selector: 'image-maintenance-card',
   template: `
     <div (dblclick)="onDblClick($event)" class="hover:cursor-pointer">
-      <img class="h-20 w-20"
+      <img class="hover:cursor-pointer h-[150px] w-[150px] object-cover object-center max-w-sm rounded-lg shadow-none transition-shadow duration-300 ease-in-out hover:shadow-lg hover:shadow-black/30 "
         [ngSrc]="image.imageSrc200"
         [alt]="image.imageAlt"
         width="100"

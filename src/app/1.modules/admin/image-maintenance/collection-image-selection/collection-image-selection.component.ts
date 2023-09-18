@@ -33,14 +33,20 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_COLLECTION = 'IN_COLLECTION';
+  IN_PRODUCTS = 'IN_PRODUCTS';
+  IN_GALLERY = 'IN_GALLERY';
 
   subNotUsed: Subscription;
   subCollections: Subscription;
+  subProducts: Subscription;
+  subGallery: Subscription;
 
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   not_usedImages: imageItemIndex[] = [];
   collectionsImages: imageItemIndex[] = [];
+  productsImages: imageItemIndex[] = [];
+  galleryImages: imageItemIndex[] = [];
 
   firstRun: boolean = true;
 
@@ -49,9 +55,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   productService = inject(ProductsService);
   fb = inject(FormBuilder);
 
-  createImageOnce() {
-    throw new Error('Method not implemented.');
-  }
+
   RefreshList() {
     //this.deleteDupes.updateImages();
   }
@@ -60,23 +64,23 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   drawOpen: 'open' | 'close' = 'open';
   categoryGroup: FormGroup;
 
-  onCreate() {
-    throw new Error('Method not implemented.');
-  }
-  onDelete(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
+  // onCreate() {
+  //   throw new Error('Method not implemented.');
+  // }
+  // onDelete(arg0: any) {
+  //   throw new Error('Method not implemented.');
+  // }
 
-  onUpdate(arg0: any) {
-    throw new Error('Method not implemented.');
-  }
+  // onUpdate(arg0: any) {
+  //   throw new Error('Method not implemented.');
+  // }
 
-  RefreshImages() {
-    throw new Error('Method not implemented.');
-  }
-  DeleteDupes() {
-    throw new Error('Method not implemented.');
-  }
+  // RefreshImages() {
+  //   throw new Error('Method not implemented.');
+  // }
+  // DeleteDupes() {
+  //   throw new Error('Method not implemented.');
+  // }
 
   openDrawer() {
     const opened = this.drawer.opened;
@@ -113,13 +117,13 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   UpdateInventoryItem(e: imageItemIndex) {
-    e.type = this.IN_COLLECTION;
+    // e.type = this.IN_COLLECTION;
     this.imageItemIndexService.updateImageList(e);
   }
 
-  async sortNotUsed() {
+  async sort(sort: string) {
     return (
-      await this.imageItemIndexService.getImageIndexList()
+      await this.imageItemIndexService.getImagesByCategory(sort)
     ).pipe(
       map((data) => {
         data.sort((a, b) => {
@@ -130,16 +134,36 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     );
   }
 
+  async sortByProductId(sort: string) {
+    return (
+      await this.imageItemIndexService.getImagesByCategory(sort)
+    ).pipe(
+      map((data) => {
+        data.sort((a, b) => {
+          return a.type < b.type ? -1 : 1;
+        });
+        return data;
+      })
+    );
+  }
+
   async Refresh() {
-    this.subNotUsed = (await this.sortNotUsed()).subscribe((item) => {
+    this.subNotUsed =
+    (await this.sort(this.IN_NOT_USED)).subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subCollections = (
-      await this.imageItemIndexService.getImageByType(this.IN_COLLECTION)
-    ).subscribe((item) => {
-      this.collectionsImages = item;
-    });
+    this.subCollections =
+    (await this.sort(this.IN_COLLECTION)).subscribe((item) => {
+      this.collectionsImages = item;  });
+
+    this.subGallery =
+    (await this.sort(this.IN_GALLERY)).subscribe((item) => {
+      this.galleryImages = item;  });
+
+    this.subProducts =
+     (await this.sortByProductId(this.IN_PRODUCTS)).subscribe((item) => {
+      this.productsImages = item;  });
   }
 
   ngOnInit() {
@@ -208,7 +232,20 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.subNotUsed) {
     this.subNotUsed.unsubscribe();
-    this.subCollections.unsubscribe();
+    }
+    if (this.subCollections) {
+      this.subCollections.unsubscribe();
+    }
+
+    if (this.subGallery) {
+      this.subGallery.unsubscribe();
+    }
+
+    if (this.subProducts) {
+      this.subProducts.unsubscribe();
+    }
+
   }
 }

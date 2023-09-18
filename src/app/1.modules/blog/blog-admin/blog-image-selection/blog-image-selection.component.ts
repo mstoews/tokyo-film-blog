@@ -22,8 +22,6 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   @Input() selection: string;
 
   IN_NOT_USED = 'IN_NOT_USED';
-  IN_THOUGHTS = 'IN_THOUGHTS';
-  IN_FEATURED = 'IN_FEATURED';
 
   subNotUsed: Subscription;
   subThoughts: Subscription;
@@ -38,7 +36,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
 
   async sortNotUsed() {
     return (
-      await this.imageItemIndexService.getAllImages('')
+      await this.imageItemIndexService.getAllImages('IN_NOT_USED')
     ).pipe(
       map((data) => {
         data.sort((a, b) => {
@@ -48,9 +46,18 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       })
     );
   }
-  
+
   updateImageSelection(image: imageItemIndex) {
     console.log('updateImageSelection', image.fileName);
+  }
+
+  onAddImage(e: imageItemIndex) {
+    e.ranking = 0;
+    e.type = this.blogId;
+    console.debug('Update Image Type', JSON.stringify(e));
+    this.imageItemIndexService.updateImageList(e);
+    this.imageItemIndexService.reNumber(this.IN_NOT_USED);
+    this.Refresh();
   }
 
   async sortThoughtImages() {
@@ -73,8 +80,6 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       this.blogImages = item;
     });
   }
-
-  verifyArray() {}
 
   ngOnInit() {
     this.Refresh();

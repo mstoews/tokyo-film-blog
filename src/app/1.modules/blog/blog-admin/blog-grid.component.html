@@ -1,55 +1,9 @@
-
-
   <div class="bg-white h-screen">
-  <app-header class="bg-white" [title]="'Thoughts'"></app-header>
+  <app-header class="bg-white" [title]="'Thoughts - Admin'"></app-header>
   <div class="flex flex-col items-center ">
   <div class="flex-col w-10/12 items-center" (onValueChangedEvent)="valueChangedEvent($event)">
     <ng-container *ngIf="allBlogs$ | async as rows">
-      <!-- <table mat-table [dataSource]="rows" class="mat-elevation-z8">
-        <ng-container matColumnDef="title">
-          <th class="m-1 text-base font-bold text-gray-600 bg-gray-800 text-align-center color=primary" mat-header-cell
-            *matHeaderCellDef>
-            Title
-          </th>
-          <td mat-cell *matCellDef="let element" class="w-50">
-            <p>{{ element.title }}</p>
-          </td>
-        </ng-container>
 
-        <ng-container matColumnDef="paragraph">
-          <th class="m-1 text-base font-bold text-gray-600 bg-blue-500 text-align-center" mat-header-cell
-            *matHeaderCellDef>
-            Introduction
-          </th>
-
-          <td mat-cell *matCellDef="let element" class="align-text-top h-20"
-            [innerHTML]="element.paragraph | safe : 'html'"></td>
-        </ng-container>
-
-        <ng-container matColumnDef="body">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
-            *matHeaderCellDef>
-            Body
-          </th>
-          <td mat-cell *matCellDef="let element">
-            <p class="align-text-top w-250 h-30" [innerHTML]="element.body | safe : 'html'"></p>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="conclusion">
-          <th class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
-            *matHeaderCellDef>
-            Conclusion
-          </th>
-          <td mat-cell *matCellDef="let element" class="h-30 align-text-top"
-            [innerHTML]="element.conclusion | safe : 'html'"></td>
-            <td mat-cell *matCellDef="let element" class="h-30 align-text-top" >
-              <p>{{ element.conclusion }}</p>
-          </td>
-        </ng-container>
-        <tr class="text-base font-bold" mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr class="m-1 hover:bg-gray-100" mat-row *matRowDef="let row; columns: columnsToDisplay"  (click)="onOpenRow(row)"></tr>
-      </table> -->
       <dx-data-grid flex id="title" [wordWrapEnabled]="true" [dataSource]="rows" [showColumnLines]="true"
       [showRowLines]="true"
       [showBorders]="true"
@@ -68,10 +22,7 @@
         <dxi-column dataField="published" [width]="100" type="boolean"></dxi-column>
         <dxi-column dataField="calendar" [width]="100" type="boolean"></dxi-column>
         <dxi-column dataField="tailoring" [width]="100" type="boolean"></dxi-column>
-        <!-- <dxi-column dataField="price" [width]="100"> </dxi-column>
-        <dxi-column dataField="description" [width]="200"> </dxi-column>
-        <dxi-column dataField="short_description"[width]="300"> </dxi-column>
-        <dxi-column dataField="rich_description" cellTemplate="richTemplate"> </dxi-column> -->
+        
         <div *dxTemplate="let data of 'imageTemplate'">
           <img [src]="data.value" class="lg-rounded" alt="cell.value">
         </div>
