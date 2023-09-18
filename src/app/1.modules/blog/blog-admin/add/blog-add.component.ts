@@ -43,15 +43,17 @@ export class BlogAddDialog {
   save() {}
 
   update(results: any) {
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
     const newBlog = { ...this.form.value } as BlogPartial;
     this.blogService.createPartial(newBlog).then((blog) => {
       this.blogId = blog.id;
       newBlog.id = this.blogId;
       newBlog.published = false;
+      newBlog.date_created = updateDate;
       this.blogService.updatePartial(newBlog);
       this.route.navigate(['blog-admin/blog-admin', this.blogId]);
     });
-
     this.close();
   }
 

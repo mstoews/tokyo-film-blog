@@ -6,7 +6,7 @@ import {
   AnimationEvent,
 } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { IImageStorage } from 'app/5.models/maintenance';
+import { imageItemIndex } from 'app/5.models/imageItem'; 
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 interface Item {
@@ -22,18 +22,18 @@ interface Item {
   animations: [
     trigger('animation', [
       transition('void => visible', [
-        style({ transform: 'scale(0.5)' }),
-        animate('150ms', style({ transform: 'scale(1)' })),
+        style({ transform: 'scale(1.5)' }),
+        animate('300ms', style({ transform: 'scale(1)' })),
       ]),
       transition('visible => void', [
         style({ transform: 'scale(1)' }),
-        animate('150ms', style({ transform: 'scale(0.5)' })),
+        animate('300ms', style({ transform: 'scale(0.5)' })),
       ]),
     ]),
     trigger('animation2', [
       transition(':leave', [
         style({ opacity: 1 }),
-        animate('50ms', style({ opacity: 0.8 })),
+        animate('300ms', style({ opacity: 0.8 })),
       ]),
     ]),
   ],
@@ -43,12 +43,12 @@ export class GalleryLightboxComponent implements OnInit {
     moveItemInArray(this.galleryData, event.previousIndex, event.currentIndex);
   }
 
-  @Input() galleryData: IImageStorage[] = [];
+  @Input() galleryData: imageItemIndex[] = [];
   @Input() showCount = false;
 
   previewImage = false;
   showMask = false;
-  currentLightboxImage: IImageStorage = this.galleryData[0];
+  currentLightboxImage: imageItemIndex = this.galleryData[0];
   currentIndex = 0;
   controls = true;
   totalImageCount = 0;

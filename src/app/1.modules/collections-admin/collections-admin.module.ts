@@ -21,6 +21,11 @@ import { CollectionsDetailsGridComponent } from './collection-details/collection
 import { CollectionPreviewComponent } from './collection-preview/collection-preview.component';
 import { CollectionImageCardComponent } from './collection-image-card/collection-image-card.component';
 import { ImageMaintenanceModule } from '../admin/image-maintenance/image-maintenance.module';
+import { CollectionMainComponent } from './collection-page/collection-main.component';
+import { CollectionPage } from './collection-page/collection-page/collection-page.component';
+import { ProductCardComponent } from './collection-page/product-card/product-card.component';
+import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.module';
+import { CollectionGalleryComponent } from './collection-page/collection-gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +35,13 @@ import { ImageMaintenanceModule } from '../admin/image-maintenance/image-mainten
     CollectionsAddDialog,
     CollectionsDetailsAddDialog,
     CollectionsDetailsGridComponent,
-    SafePipe,
     CollectionPreviewComponent,
     CollectionImageCardComponent,
+    CollectionMainComponent,
+    CollectionPage,
+    ProductCardComponent,
+    CollectionGalleryComponent,
+    SafePipe,
   ],
   providers: [CollectionResolver],
   imports: [
@@ -41,7 +50,7 @@ import { ImageMaintenanceModule } from '../admin/image-maintenance/image-mainten
     DxHtmlEditorModule,
     NgOptimizedImage,
     SharedModule,
-
+    GalleryLightboxModule,
     IconsModule,
     CollectionsEditRoutingModule,
     ImageMaintenanceModule,

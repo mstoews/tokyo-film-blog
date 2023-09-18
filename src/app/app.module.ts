@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CommonModule } from '@angular/common';
-import { NavService } from './2.main/static-sidebar/nav-list-item/nav-service';
 import { SharedModule } from './1.modules/shared-module/shared.module';
 import { ScrollService } from './4.services/scroll.service';
 import { SwiperModule } from 'swiper/angular';
@@ -64,7 +63,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   providers: [
     ScrollService,
-    NavService,
     ProductResolver,
     CartResolver,
     WishListResolver,

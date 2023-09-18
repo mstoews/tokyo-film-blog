@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { initTE, Lightbox } from 'tw-elements';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItemIndex } from 'app/5.models/imageItem';
 
 @Component({
   selector: 'app-gallery',

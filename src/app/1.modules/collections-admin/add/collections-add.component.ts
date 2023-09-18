@@ -6,7 +6,7 @@ import {
   MatDialog,
   MatDialogConfig,
 } from '@angular/material/dialog';
-import { Collections, CollectionsPartial } from 'app/5.models/collection';
+import { Collection, CollectionsPartial } from 'app/5.models/collection';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { CollectionsService } from 'app/4.services/collections.service';
 import { Router } from '@angular/router';
@@ -16,7 +16,6 @@ import { Router } from '@angular/router';
   templateUrl: './collections-add.component.html',
   styleUrls: ['./collections-add.component.css'],
 })
-
 export class CollectionsAddDialog {
   title: string;
   collectionId: string;
@@ -24,7 +23,7 @@ export class CollectionsAddDialog {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private collection: Collections,
+    @Inject(MAT_DIALOG_DATA) private collection: Collection,
     private collectionService: CollectionsService,
     private afs: AngularFireStorage,
     private route: Router,
@@ -66,7 +65,7 @@ export class CollectionsAddDialog {
 
 export function openCollectionsAddDialog(
   dialog: MatDialog,
-  collection: Collections
+  collection: Collection
 ) {
   const config = new MatDialogConfig();
 

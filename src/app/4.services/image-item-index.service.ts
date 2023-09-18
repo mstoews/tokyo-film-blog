@@ -89,6 +89,11 @@ export class ImageItemIndexService {
     }
   }
 
+  getImagesByTypeId(id: string) {
+    this.imageIndexItems.pipe( map((images) => images.filter((type) => type.type === id)));
+  }
+
+
   async getImageByType(type: string) {
     return (await this.getImageIndexList()).pipe(
       map((images) => images.filter((image) => image.type === type))

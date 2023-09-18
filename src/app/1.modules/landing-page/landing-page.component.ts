@@ -145,7 +145,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   onServices(service: string) {
     // console.debug(service);
-    this.router.navigate([service]);
+    this.router.navigate(['service']);
   }
 
   openShoppingCart() {
@@ -190,7 +190,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   onFeatured() {
-    this.router.navigate(['collections']);
+    this.router.navigate(['collections-admin/collections']);
   }
 
   populateImageList() {

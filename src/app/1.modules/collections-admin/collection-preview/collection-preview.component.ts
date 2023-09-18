@@ -8,11 +8,12 @@ import {
 } from '@angular/core';
 
 import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
-import { Collections } from 'app/5.models/collection';
+import { Collection } from 'app/5.models/collection';
 import { Subject, takeUntil } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
+import { initTE, Lightbox } from 'tw-elements';
 
 @Component({
   selector: 'app-collection-preview',
@@ -25,7 +26,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   collectionGroup: FormGroup;
   private destroy$ = new Subject<void>();
 
-  @Input() collection: Collections;
+  @Input() collection: Collection;
   Title = '';
   Description = '';
   imageListService = inject(ImageItemIndexService);

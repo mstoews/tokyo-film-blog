@@ -9,7 +9,7 @@
 
 <ng-container *ngIf="mainPage$ | async as mainPageDoc " class="bg-slate-600">
 
-  <section  class="z-1 bg-fixed border-t-transparent ml-10 mr-10 mt-10">
+  <section  class="z-1 bg-fixed border-t-transparent ml-1 mr-1 mt-1  md:ml-10 md:mr-10 md:mt-10">
 
       <nav class="z-50 flex flex-wrap items-center justify-between text-2xl text-gray-900 md:ml-10">
         <button mat-icon-button (click)="onMenuToggle()" class="visible text-white -pt-12" matTooltip="Open Menu">
@@ -20,7 +20,7 @@
 
         <div class="block" *ngIf="cartCounter() > 0" >
           <button (click)="openShoppingCart()" matTooltip="Shopping Cart"
-            class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+            class="flex items-center p-2 ml-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
             <mat-icon [matBadge]=cartCounter() [matBadgeHidden]="cartCounter()===0"
               [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
         </button>
@@ -28,7 +28,7 @@
 
         <div class="block" *ngIf="wishCounter() > 0">
           <button (click)="openWishList()" matTooltip="Wish List"
-            class="flex items-center p-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
+            class="flex items-center p-2 ml-2 font-normal text-gray-100 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
             <mat-icon [matBadge]=wishCounter() [matBadgeHidden]="wishCounter()===0"
               [svgIcon]="'heroicons_outline:gift'"></mat-icon>
           </button>

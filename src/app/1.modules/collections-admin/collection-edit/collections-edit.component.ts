@@ -1,7 +1,7 @@
 import { Component, Inject, Input, OnInit, Optional } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Collections } from 'app/5.models/collection';
+import { Collection } from 'app/5.models/collection';
 import { CollectionsService } from 'app/4.services/collections.service';
 import { Observable } from 'rxjs';
 import { Location } from '@angular/common';
@@ -26,10 +26,10 @@ export class CollectionsEditComponent implements OnInit {
   body: string;
   conclusion: string;
 
-  collectionItem: Observable<Collections>;
-  allCollectionss$: Observable<Collections[]>;
+  collectionItem: Observable<Collection>;
+  allCollectionss$: Observable<Collection[]>;
 
-  collection!: Collections;
+  collection!: Collection;
 
   constructor(
     private matDialog: MatDialog,
@@ -64,10 +64,10 @@ export class CollectionsEditComponent implements OnInit {
     console.debug('UpdateInventoryItem', e);
   }
 
-  onUpdate(collection: Collections) {
+  onUpdate(collection: Collection) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
-    collection = { ...this.collectionGroup.value } as Collections;
+    collection = { ...this.collectionGroup.value } as Collection;
     console.debug('Product can be sold ...: ', collection.published);
 
     collection.body = this.body;
@@ -79,7 +79,7 @@ export class CollectionsEditComponent implements OnInit {
   onCreate(data: any) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
-    const newCollections = { ...this.collectionGroup.value } as Collections;
+    const newCollections = { ...this.collectionGroup.value } as Collection;
     newCollections.date_updated = updateDate;
     newCollections.date_created = updateDate;
     this.collectionService.createCollection(newCollections);
@@ -93,17 +93,17 @@ export class CollectionsEditComponent implements OnInit {
 
   onBackToCollections() {
     if (this.isFormDirty) {
-      const collection = { ...this.collectionGroup.value } as Collections;
+      const collection = { ...this.collectionGroup.value } as Collection;
       this.onUpdate(collection);
     }
     this._location.back();
   }
 
-  onPublish(collection: Collections) {
+  onPublish(collection: Collection) {
     this.collectionService.setToPublish(collection);
   }
 
-  onDelete(data: Collections) {
+  onDelete(data: Collection) {
     if (confirm('Are you sure you want to delete this collection?') === true) {
       this.collectionService.delete(data.id.toString());
     } else {
@@ -113,10 +113,11 @@ export class CollectionsEditComponent implements OnInit {
 
   closeDialog() {}
 
-  createForm(collection: Collections) {
+  createForm(collection: Collection) {
     this.sTitle = 'Collections - ' + collection.title;
     this.collectionGroup = this.fb.group({
       id: [collection.id],
+      short_description: [collection.short_description],
       title: [collection.title],
       body: [collection.body],
       user_updated: [collection.user_updated],

@@ -11,6 +11,10 @@
             <mat-label class="ml-2">Title</mat-label>
             <input matInput placeholder="Title" formControlName="title" />
           </mat-form-field>
+          <mat-form-field class="flex flex-col grow" [ngStyle]="{ width: '100%' }" appearance="outline">
+            <mat-label class="ml-2">Short Description</mat-label>
+            <input matInput placeholder="Short Description" formControlName="short_description" />
+          </mat-form-field>
 
           <mat-toolbar class="flex-1-col bg-slate-300">
             <span></span>

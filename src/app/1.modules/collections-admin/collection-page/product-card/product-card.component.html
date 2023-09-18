@@ -1,0 +1,50 @@
+<!-- <ng-container>
+  <div class="px-4 py-12">
+    <div class="lg:max-w-[1440px] md:max-w-[744px] max-w-[373px] lg:px-10 md:px-6 px-4 py-12 bg-white mx-auto">
+      <div class="bg-[#E5E7EB] lg:flex md:pb-4 pb-3 px-4">
+        <div class="bg-white max-w-[515px] h-[350px] w-full mx-auto mt-6 py-12 lg:mx-6 mb-6">
+          <div *ngIf="images$ | async as images">
+          <img [src]="images[0].imageSrc400" alt="Collection Image" />
+        </div>
+      </div>
+        <div class="bg-white max-w-[515px] h-[350px] w-full mx-auto mt-6 py-12 lg:mx-6 mb-6">
+          <div class="lg:text-4xl md:text-3xl text-2xl font-semibold leading-9 text-gray-800 text-center"
+            [innerHTML]="collection.title | safe: 'html'">
+          </div>
+          <div class="text-2xl leading-normal text-center text-gray-600 lg:max-w-[full] mx-auto w-full mt-8 px-4" >
+            {{collection.short_description}}
+        </div>
+
+          <div class="flex justify-center mt-8">
+          <button (click)="onOpenCollection()" class="pr-10 pl-10 w-full m-2 px-6 py-4 bg-gray-800 focus:outline-none text-base font-medium leading-4 text-white focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 hover:bg-gray-700">View details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container> -->
+
+<div class="lg:px-20 md:px-6 px-4 md:py-12 py-8 bg-gray-100">
+  <div class="lg:flex items-center justify-between">
+      <div class="lg:w-1/3">
+          <div class="text-4xl font-semibold leading-9 text-gray-800" [innerHTML]="collection.title | safe: 'html'"></div>
+          <div class="text-2xl leading-6 mt-4 text-gray-600">{{collection.short_description}}</div>
+          <button (click)="onOpenCollection()" role="button" aria-label="view catalogue" class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-700 focus:outline-none mt-6 md:mt-8 text-base font-semibold leading-none text-gray-800 flex items-center hover:underline">
+              View Details
+              <svg class="ml-2 mt-1" width="12" height="8" viewBox="0 0 12 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1.33325 4H10.6666" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M8 6.66667L10.6667 4" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M8 1.33398L10.6667 4.00065" stroke="#1F2937" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+          </button>
+      </div>
+      <div *ngIf="images$ | async as images">
+    
+        <div class="grid sm:grid-cols-1 lg:gap-8 gap-6 lg:mt-8 md:mt-6 mt-4">
+              <img src="assets/images/collection_scissors.jpg" alt="Collection Image" class="w-full h-[400px] sm:block hidden" /> -->
+        </div>
+      
+    </div>
+  </div>
+</div>
+

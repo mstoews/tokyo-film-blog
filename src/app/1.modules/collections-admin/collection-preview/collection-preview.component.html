@@ -41,18 +41,19 @@
     </mat-card>
   </mat-drawer>
 
-<div class="grid grid-cols-3 gap-4">
+<div data-te-lightbox-init class="grid grid-cols-1 md:grid-cols-3 gap-4">
   <div>
     <h1 class="h-20 py-10 text-3xl lg:text-4xl font-semibold leading-7 xl:leading-9 text-center text-gray-700">{{Title}}</h1>
     <p class="max-w-lg py-20 text-base text-center text-gray-700 md:text-left" [innerHTML]="collection.body | safe: 'html'"></p>
   </div>
   <div class="col-span-2">
-    <div class="grid grid-cols-3 gap-4">
-
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 item-center">
       <div *ngFor="let image of collectionsImages">
-        <mat-card>
-          <img (click)="EditTitle(image.id)" class="h-auto w-[100%] rounded-lg" [src]="image.imageSrc800" alt="images">
-          <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full rounded-t-lg">
+        <mat-card class="w-full lg:w-[350px] ">
+          <img  (dblclick)="EditTitle(image.id)"
+          class="lg: w-full h-auto lg:h-[350px] lg:w-[350px] rounded-t-sm cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto"
+          [src]="image.imageSrc200" alt="images">
+          <div class="absolute bottom-0 px-4 py-2 bg-gray-500/50 w-full " >
             <h1 class="text-white font-normal text-sm">{{image.description}}</h1>
           </div>
         </mat-card>

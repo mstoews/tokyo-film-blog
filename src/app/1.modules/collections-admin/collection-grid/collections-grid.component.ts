@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { filter, Observable, Subscription } from 'rxjs';
-import { Collections } from 'app/5.models/collection';
+import { Collection } from 'app/5.models/collection';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -35,7 +35,7 @@ export class CollectionsAdminComponent implements OnInit {
   private _subscription: Subscription;
 
   // collection dictionary
-  allCollections$: Observable<Collections[]>;
+  allCollections$: Observable<Collection[]>;
   collectionImages$: Observable<IImageStorage[]>;
   columnsToDisplay: string[] = [
     //'selection',
@@ -45,13 +45,13 @@ export class CollectionsAdminComponent implements OnInit {
     //'conclusion',
   ];
 
-  collection: Collections;
+  collection: Collection;
 
   selectedItemKeys: any;
 
-  selection = new SelectionModel<Collections>();
+  selection = new SelectionModel<Collection>();
 
-  onCollectionsToggle(collection: Collections) {
+  onCollectionsToggle(collection: Collection) {
     this.selection.toggle(collection);
     // console.debug(this.selection.selected);
   }
@@ -113,17 +113,17 @@ export class CollectionsAdminComponent implements OnInit {
   onCreate(data: any) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
-    const newCollections = { ...this.collectionGroup.value } as Collections;
+    const newCollections = { ...this.collectionGroup.value } as Collection;
     newCollections.date_updated = updateDate;
     newCollections.date_created = updateDate;
     this.collectionService.createCollection(newCollections);
   }
 
-  onDelete(data: Collections) {
+  onDelete(data: Collection) {
     if (confirm('Are you sure you want to delete ?') === true) {
-    data = this.collectionGroup.getRawValue();
-    // console.debug(`onDelete: ${data}`);
-    this.collectionService.delete(data.id.toString());
+      data = this.collectionGroup.getRawValue();
+      // console.debug(`onDelete: ${data}`);
+      this.collectionService.delete(data.id.toString());
     }
   }
 
@@ -142,7 +142,7 @@ export class CollectionsAdminComponent implements OnInit {
     // console.debug(`collection grid value changed ${e}`)
   }
 
-  createForm(collection: Collections) {
+  createForm(collection: Collection) {
     this.sTitle = 'Collections - ' + collection.title;
     this.collectionGroup = this.fb.group({
       id: [collection.id],

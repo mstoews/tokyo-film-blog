@@ -8,16 +8,16 @@ export interface BlogImages {
 }
 
 export interface Blog {
-  id:               string;
-  title:            string;
-  paragraph:        string;
-  body:             string;
-  conclusion:       string;
-  user_updated:     string;
-  date_created:     string;
-  date_updated:     string;
+  id:                string;
+  title:             string;
+  paragraph?:        string;
+  body?:             string;
+  conclusion?:       string;
+  user_updated?:     string;
+  date_created:      string;
+  date_updated?:     string;
   image?:            string;
-  published:        boolean;
+  published:         boolean;
   tailoring?:        boolean;
   calendar?:         boolean;
 }

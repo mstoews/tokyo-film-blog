@@ -13,7 +13,6 @@ import { CaraselComponent } from './carasel/carasel.component';
 import { ProfileListComponent } from './profile-list/profile-list.component';
 import { TableRowComponent } from './table-row/table-row.component';
 import { SetAdminComponent } from './set-admin/set-admin.component';
-import { StripeCheckoutComponent } from 'app/3.components/stripe-checkout/stripe-checkout.component';
 
 @NgModule({
   declarations: [
@@ -26,16 +25,14 @@ import { StripeCheckoutComponent } from 'app/3.components/stripe-checkout/stripe
   imports: [
     RouterModule.forChild(profileRoutes),
     MaterialModule,
-
     SharedModule,
     AddressComponent,
     SignOutModule,
     HeadingModule,
     SignInModule,
     SignUpModule,
-    SignOutModule,
-    StripeCheckoutComponent,
-  ],
+    SignOutModule],
+
   exports: [ProfileComponent],
 })
 export class ProfileModule {}

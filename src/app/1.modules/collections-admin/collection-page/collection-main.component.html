@@ -1,0 +1,33 @@
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  gtag('config', 'G-WGMMJK9NR3');
+</script>
+
+<!-- <app-header class="bg-white" [title]="'Thoughts and Images'"
+  [sub_title]="'Impressions of our life and work, living in Tokyo'"
+  (notifyNavBarToggleMenu)="onToggleMenu()"></app-header> -->
+<div class="h-full bg-gray-100 ">
+<app-header class="bg-white" [title]="'Made To Collections'"></app-header>
+
+
+  <div *ngIf="collectionImages$ | async as images">
+    <app-tw-lightbox class="hidden" [imageCollection]="images"></app-tw-lightbox>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 overflow-auto">
+      <div class="grid-col-2">
+        <div class="h-20 py-10 text-3xl font-garamond lg:text-4xl leading-7 xl:leading-9 text-center text-gray-700">
+          {{collection.title}}</div>
+        <div class="mt-10 h-20 py-10 text-3xl font-garamond lg:text-4xl leading-7 xl:leading-9 text-center text-gray-700"
+          [innerHTML]="collection.body | safe: 'html'"></div>
+      </div>
+      <div data-te-lightbox-init class="col-span-3 ">
+          <div class="flex w-full gap-4 item-center m-10 ">
+            <collection-gallery [imageCollection]="images"></collection-gallery>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -84,7 +84,6 @@ const routes: Route[] = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly },
   },
-
   {
     path: 'admin',
     loadChildren: () =>
@@ -94,11 +93,11 @@ const routes: Route[] = [
     title: 'Maintenance',
   },
   {
-    path: 'collections',
+    path: 'collections-admin/collection',
     loadChildren: () =>
-      import('./1.modules/products/products.module').then(
-        (mod) => mod.ProductsModule
-      ),
+    import('./1.modules/collections-admin/collections-admin.module').then(
+      (mod) => mod.CollectionsAdminModule
+    ),
     data: { state: 'collections' },
     title: 'Featured',
   },

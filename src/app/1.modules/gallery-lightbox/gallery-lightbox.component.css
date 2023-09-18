@@ -8,7 +8,7 @@
 
 .gallery-lightbox-container {
   position: relative;
-  display: inline-block;
+  display: flex;
   padding: 1px;
 }
 .gallery-lightbox-container .gallery {

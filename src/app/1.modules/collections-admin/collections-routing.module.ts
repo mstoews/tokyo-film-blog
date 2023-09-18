@@ -3,7 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CollectionResolver } from 'app/4.services/collection.resolver';
 import { CollectionsEditComponent } from './collection-edit/collections-edit.component';
 import { CollectionsAdminComponent } from './collection-grid/collections-grid.component';
-
+import { CollectionPage } from './collection-page/collection-page/collection-page.component';
+import { CollectionMainComponent } from './collection-page/collection-main.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,21 @@ const routes: Routes = [
       collection: CollectionResolver,
     },
     data: { state: 'item/:id' },
+  },
+  {
+    path: 'collections',
+    component: CollectionPage,
+    title: 'Collections',
+    data: { state: 'collections' },
+  },
+  {
+    path: 'collection/:id',
+    component: CollectionMainComponent,
+    resolve: {
+      collection: CollectionResolver,
+    },
+    title: 'Collections',
+    data: { state: 'collections' },
   },
 ];
 

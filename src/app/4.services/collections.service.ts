@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { first, map, Observable, tap } from 'rxjs';
-import { Collections, CollectionsPartial } from 'app/5.models/collection';
+import { Collection, CollectionsPartial } from 'app/5.models/collection';
 import { CollectionsComments } from 'app/5.models/collection';
 import { convertSnaps } from './db-utils';
 import { ImageListService } from './image-list.service';
@@ -14,9 +14,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   providedIn: 'root',
 })
 export class CollectionsService {
-  private colCollection: AngularFirestoreCollection<Collections>;
+  private colCollection: AngularFirestoreCollection<Collection>;
   private colPartialCollection: AngularFirestoreCollection<CollectionsPartial>;
-  private colItems: Observable<Collections[]>;
+  private colItems: Observable<Collection[]>;
   private commentItems: Observable<CollectionsComments[]>;
   private commentCollection: AngularFirestoreCollection<CollectionsComments>;
 
@@ -90,7 +90,7 @@ export class CollectionsService {
     return commentItems;
   }
 
-  setToPublish(collection: Collections) {
+  setToPublish(collection: Collection) {
     collection.published = true;
     this.colCollection.doc(collection.id).update(collection);
   }
@@ -105,13 +105,13 @@ export class CollectionsService {
     );
   }
 
-  getAll(): any {
+  getAll(): Observable<Collection[]> {
     return this.colItems;
   }
 
   getCollections(id: string) {
     const ref = this.afs
-      .collection<Collections>('collection', (ref) =>
+      .collection<Collection>('collection', (ref) =>
         ref.where('id', '==', id).limit(1)
       )
       .snapshotChanges()
@@ -124,13 +124,13 @@ export class CollectionsService {
       );
   }
 
-  findCollectionByUrl(id: string): Observable<Collections | undefined> {
+  findCollectionByUrl(id: string): Observable<Collection | undefined> {
     return this.afs
       .collection('collection', (ref) => ref.where('id', '==', id))
       .snapshotChanges()
       .pipe(
         map((snaps) => {
-          const col = convertSnaps<Collections>(snaps);
+          const col = convertSnaps<Collection>(snaps);
           return col.length == 1 ? col[0] : undefined;
         }),
         first()
@@ -141,12 +141,12 @@ export class CollectionsService {
     return this.colItems;
   }
 
-  createCollection(col: Collections) {
+  createCollection(col: Collection) {
     col.published = false;
     return this.colCollection.add(col);
   }
 
-  update(col: Collections) {
+  update(col: Collection) {
     this.colCollection.doc(col.id).update(col);
   }
 
