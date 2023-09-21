@@ -1,11 +1,10 @@
-<app-header class="bg-gray-50"
-  [title]="'Policy Documents'"></app-header>
+<app-header class="bg-gray-50" [title]="'Policy Documents'"></app-header>
   <div class="h-screen">
     <mat-drawer-container class="m-10 flex-col h-full" (onValueChangedEvent)="valueChangedEvent($event)">
 
     <ng-container *ngIf="allPolicies$ | async as rows">
       <table mat-table [dataSource]="rows" class="mat-elevation-z8">
-     
+
         <ng-container matColumnDef="description">
           <th  width="300px" class="m-1 text-base font-bold text-gray-100 bg-gray-500 border-white text-align-center" mat-header-cell
             *matHeaderCellDef>

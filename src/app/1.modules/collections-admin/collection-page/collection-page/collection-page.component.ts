@@ -7,7 +7,6 @@ import { imageItemIndex } from 'app/5.models/imageItem';
 
 import { ImageListService } from 'app/4.services/image-list.service';
 import { CollectionsService } from 'app/4.services/collections.service';
-import GLightbox from 'glightbox';
 
 @Component({
   selector: 'collection-page',
@@ -21,5 +20,5 @@ export class CollectionPage {
 
   collectionService = inject(CollectionsService);
   collection$ = this.collectionService.getAll();
-  
+
 }
