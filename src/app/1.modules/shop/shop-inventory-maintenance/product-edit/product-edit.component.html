@@ -1,23 +1,26 @@
 <div class="bg-white h-screen">
 <ng-container *ngIf="productItem$ | async as product">
-  <div class="flex flex-col sm:flex-row sm:space-x-4  bg-gray-100">
-    <div
+  <app-header [title]="product.description"></app-header>
+  <!-- <div class="flex flex-col sm:flex-row sm:space-x-4  bg-gray-100">
+   <div
       class="p-2 text-justify flex-auto font-bold leading-tight text-gray-800 sm:w-auto font-garamond focus:outline-none text-1x1 md:text-3xl lg:text-4xl dark:text-white">
       {{ product.description }}
   </div>
+
     <span class="flex-auto"></span>
     <button mat-icon-button class="invisible text-gray-700 bg-gray-200 sm:visible hover:bg-gray-500 hover:text-gray-100"
       (click)="onBackToInventory()" matTooltip="Back to Inventory">
       <mat-icon class="mb-2 text-gray-600 hover:text-gray-100" [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
     </button>
-  </div>
+  </div> -->
 
   <mat-card [class.mat-elevation-z8]="true" class="flex flex-col m-10 text-gray-700 filter-article filter-interactive">
     <mat-toolbar class="flex-1-col bg-slate-300">
       <span></span>
+      Inventory Management
       <mat-radio-group class="align-center items-center border-teal-200" color="primary">
-        <mat-radio-button (click)="onAllImages()">All Images</mat-radio-button>
-        <mat-radio-button (click)="onNotUsedImages()">Not Used</mat-radio-button>
+        <!-- <mat-radio-button (click)="onAllImages()">All Images</mat-radio-button>
+        <mat-radio-button (click)="onNotUsedImages()">Not Used</mat-radio-button> -->
       </mat-radio-group>
       <span class="flex-auto"></span>
       <button mat-icon-button (click)="onUpdate(prdGroup.value)" color="primary" aria-label="Add"   matTooltip="Update Item">

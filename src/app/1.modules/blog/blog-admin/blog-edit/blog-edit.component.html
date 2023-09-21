@@ -4,10 +4,7 @@
         <form class="w-10/12" #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)" >
           <mat-toolbar class=" bg-slate-300">
             <span></span>
-            <mat-radio-group class="align-center items-center border-teal-200" color="primary">
-              <mat-radio-button (click)="onAllImages()">All Images</mat-radio-button>
-              <mat-radio-button (click)="onNotUsedImages()">Not Used</mat-radio-button>
-            </mat-radio-group>
+            
             <span class="flex-auto"></span>
             <mat-checkbox color="primary" formControlName="published">
               Published
