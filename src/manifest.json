@@ -1,0 +1,24 @@
+  {
+    "name": "Tokyo Made To",
+    "short_name": "MadeTo",
+    "theme_color": "gray",
+    "background_color": "gray",
+    "description": "Tokyo Made To",
+    "start_url": "./index.html",
+    "id": "made-to",
+    "display": "standalone",
+    "scope": ".",
+    "icons": [
+       {
+          "src": "favicon.ico",
+          "type": "image/png",
+          "sizes": "512x512"
+       },
+       {
+          "src": "favicon.ico",
+          "type": "image/png",
+          "sizes": "512x512",
+          "purpose": "maskable"
+       }
+     ]
+  }

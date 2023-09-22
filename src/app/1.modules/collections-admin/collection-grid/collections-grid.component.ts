@@ -61,7 +61,6 @@ export class CollectionsAdminComponent implements OnInit {
     private fb: FormBuilder,
     private route: Router,
     private dialog: MatDialog,
-    private responsive: BreakpointObserver
   ) {}
 
   onOpenRow(row: any) {
@@ -122,9 +121,8 @@ export class CollectionsAdminComponent implements OnInit {
 
   onDelete(data: Collection) {
     if (confirm('Are you sure you want to delete ?') === true) {
-      data = this.collectionGroup.getRawValue();
-      // console.debug(`onDelete: ${data}`);
-      this.collectionService.delete(data.id.toString());
+      const newCollections = { ...this.collectionGroup.value } as Collection;
+      this.collectionService.delete(newCollections.id.toString());
     }
   }
 

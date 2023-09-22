@@ -17,7 +17,7 @@ export class ShopLandingComponent  {
     private route: Router,
     private categoryService: CategoryService
   ){
-    // this.categoryService.updateIsUsedCategoryList()
+    this.categoryService.updateIsUsedCategoryList()
   }
 
   Category$ = this.categoryService.getCategoryList();

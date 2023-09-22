@@ -1,11 +1,12 @@
-<div class=" bg-white h-screen">
-<app-header [title]="'Inventory Maintenance'"> </app-header>
+<div class=" bg-white h-full">
+<app-header [title]="'Inventory Maintenance'"> 
+</app-header>
 
-  <mat-drawer-container class="ml-10 mr-10 -mt-5 flex-col h-screen" (onValueChangedEvent)="valueChangedEvent($event)">
+  <mat-drawer-container class="ml-10 mr-10 -mt-5 flex-col h-full bg-white" (onValueChangedEvent)="valueChangedEvent($event)">
 
     <ng-container *ngIf="allProducts$ | async as rows">
 
-      <div class="m-1 h-full">
+      <div class="m-4 h-full">
         <dx-data-grid flex id="categoryGrid" [wordWrapEnabled]="true" [dataSource]="rows" [showColumnLines]="true"
         [showRowLines]="true"
         [showBorders]="true"
@@ -18,6 +19,7 @@
           <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
           <dxo-group-panel [visible]="true"></dxo-group-panel>
           <dxo-grouping [autoExpandAll]="true"></dxo-grouping>
+          <dxo-filter-row [visible]="true"></dxo-filter-row>
 
           <dxi-column dataField="image" [width]="80" cellTemplate="imageTemplate"> </dxi-column>
           <dxi-column dataField="category" [width]="150"> </dxi-column>

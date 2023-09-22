@@ -9,7 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { Category } from 'app/5.models/category';
 import { PolicyDocuments } from 'app/5.models/policy-documents';
-import { ProductPartial } from 'app/5.models/products';
+import { Product } from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { PolicyService } from 'app/4.services/policy.service';
 import { ProductsService } from 'app/4.services/products.service';
@@ -27,7 +27,7 @@ export class AddPolicyComponentDialog {
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private product: ProductPartial,
+    @Inject(MAT_DIALOG_DATA) private product: Product,
     private readonly policyService: PolicyService,
     private readonly categoryService: CategoryService,
     private dialogRef: MatDialogRef<AddPolicyComponentDialog>,
@@ -85,6 +85,5 @@ export function openAddPolicyDialog(
   };
 
   const dialogRef = dialog.open(AddPolicyComponentDialog, config);
-
   return dialogRef.afterClosed();
 }

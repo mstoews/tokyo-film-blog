@@ -1,10 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WishListService } from 'app/4.services/wishlist.service';
-import { CheckoutService } from 'app/4.services/checkout.service';
 import { Observable, Subscription } from 'rxjs';
-import { WishList } from 'app/5.models/wishlist';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Product } from 'app/5.models/products';
 
 @Component({
   selector: 'wishlist',
@@ -14,14 +12,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class WishListComponent implements OnInit, OnDestroy {
   sub: Subscription;
-  wishList$: Observable<WishList[]>;
+  wishList$: Observable<Product[]>;
   userId: string;
   header_title = 'Wishlist';
 
   constructor(
     private route: Router,
     private activateRoute: ActivatedRoute,
-    private checkoutService: CheckoutService,
     private wishListService: WishListService
   ) {}
 
@@ -47,8 +44,8 @@ export class WishListComponent implements OnInit, OnDestroy {
     // this.sub.unsubscribe();
   }
 
-  onRemoveItem(item: string) {
-    this.wishListService.delete(item);
+  onRemoveItem(product: Product) {
+    this.wishListService.delete(product);
   }
 
   addToCart(productId: string, itemId: string) {

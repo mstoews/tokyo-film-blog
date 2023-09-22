@@ -93,10 +93,6 @@ export class ImageItemIndexService implements OnDestroy{
   }
 
 
-
-
-
-
   reNumber(type: string) {
     let ranking = 0;
     this.sub = this.getAllImages(type).subscribe((images) => {

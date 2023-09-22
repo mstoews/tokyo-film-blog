@@ -9,7 +9,7 @@ import {
 } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Category } from 'app/5.models/category';
-import { ProductPartial } from 'app/5.models/products';
+import { Product} from 'app/5.models/products';
 import { CategoryService } from 'app/4.services/category.service';
 import { ProductsService } from 'app/4.services/products.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
@@ -31,7 +31,7 @@ export class AddComponentDialog implements OnDestroy{
 
   constructor(
     private fb: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private product: ProductPartial,
+    @Inject(MAT_DIALOG_DATA) private product: Product,
     private readonly productService: ProductsService,
     private readonly categoryService: CategoryService,
     private dialogRef: MatDialogRef<AddComponentDialog>,
@@ -63,7 +63,7 @@ export class AddComponentDialog implements OnDestroy{
   }
 
   update(results: any) {
-    const newProductPartial = { ...this.form.value } as ProductPartial;
+    const newProductPartial = { ...this.form.value } as Product;
     this.productService.createPartial(newProductPartial).then((product) => {
       this.productId = product.id;
       newProductPartial.id = this.productId;
@@ -85,7 +85,7 @@ export class AddComponentDialog implements OnDestroy{
 
 export function openAddComponentDialog(
   dialog: MatDialog,
-  product: ProductPartial
+  product: Product
 ) {
   const config = new MatDialogConfig();
 

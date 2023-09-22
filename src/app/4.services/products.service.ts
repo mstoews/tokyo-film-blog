@@ -4,7 +4,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { first, from, map, Observable } from 'rxjs';
-import { Product, ProductPartial } from 'app/5.models/products';
+import { Product } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
 import { imageItemIndex } from 'app/5.models/imageItem';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ export class ProductsService {
   [x: string]: any;
   private productsCollection: AngularFirestoreCollection<Product>;
   private inventoryItems: Observable<Product[]>;
-  private productPartialCollection: AngularFirestoreCollection<ProductPartial>;
+  private productPartialCollection: AngularFirestoreCollection<Product>;
 
   constructor(
     public imageItemIndexService: ImageItemIndexService,
@@ -26,13 +26,11 @@ export class ProductsService {
   ) {
     this.productsCollection = afs.collection<Product>('inventory');
     this.inventoryItems = this.productsCollection.valueChanges({  idField: 'id', });
-    this.productPartialCollection = afs.collection<ProductPartial>('inventory');
+    this.productPartialCollection = afs.collection<Product>('inventory');
     this.inventoryPartialItems = this.productPartialCollection.valueChanges({ idField: 'id', });
   }
 
-
-
-  createPartial(productPartial: ProductPartial) {
+  createPartial(productPartial: Product) {
     return this.productPartialCollection.add(productPartial);
   }
 
@@ -112,8 +110,26 @@ export class ProductsService {
     );
   }
 
-  async getImageListByProduct(productId: string) {
-    return this.imageItemIndexService.getAllImages(productId);
+  async getImageListByProduct(type: string) {
+    if (type === null || type === undefined || type === '') {
+      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+        'originalImageList',
+        (ref) => ref.orderBy('ranking')
+      );
+      let imageIndexItems = imageIndexCollections.valueChanges({
+        idField: 'id',
+      });
+      return imageIndexItems;
+    } else {
+      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+        'originalImageList',
+        (ref) => ref.orderBy('ranking')
+      );
+      let imageIndexItems = imageIndexCollections
+        .valueChanges({ idField: 'id' })
+        .pipe(map((images) => images.filter((types) => types.type === type)));
+      return imageIndexItems;
+    }
   }
 
   findProductByUrl(id: string): Observable<Product | undefined> {
@@ -136,7 +152,7 @@ export class ProductsService {
   update(mtProduct: Product) {
     this.productsCollection.doc(mtProduct.id.toString()).update(mtProduct);
   }
-  updatePartial(product: ProductPartial) {
+  updatePartial(product: Product) {
     this.productPartialCollection.doc(product.id.toString()).update(product);
   }
 

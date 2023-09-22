@@ -18,8 +18,7 @@ export class CollectionsEditComponent implements OnInit {
   sTitle: any;
   collectionGroup: any;
   isFormDirty = false;
-  //collectionImages$: any;
-
+  
   sub: any;
   @Input() collectionId: string;
   para: string;
@@ -60,18 +59,11 @@ export class CollectionsEditComponent implements OnInit {
     }
   }
 
-  UpdateInventoryItem(e: string) {
-    console.debug('UpdateInventoryItem', e);
-  }
-
   onUpdate(collection: Collection) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
     collection = { ...this.collectionGroup.value } as Collection;
-    console.debug('Product can be sold ...: ', collection.published);
-
     collection.body = this.body;
-
     collection.date_updated = updateDate;
     this.collectionService.update(collection);
   }

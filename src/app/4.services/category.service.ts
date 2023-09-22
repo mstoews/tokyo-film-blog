@@ -24,6 +24,8 @@ export class CategoryService {
       idField: 'id',
     });
 
+    // this.updateIsUsedCategoryList();
+
   }
 
   auth = inject(AngularFirestore);
@@ -43,8 +45,9 @@ export class CategoryService {
         }
       } );
 
+      this.hashUsedCategoryMap.set('All Categories', 'All Categories');
+
       this.hashUsedCategoryMap.forEach((value, key) => {
-        this.categoryCollection.get
          this.categoryCollection.doc(key).update({ isUsed: true });
       });
 

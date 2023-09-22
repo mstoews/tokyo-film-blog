@@ -14,7 +14,6 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Category } from 'app/5.models/category';
 import { CategoryService } from 'app/4.services/category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-// import { ImageListService } from 'app/4.services/image-list.service';
 import { imageItemIndex } from 'app/5.models/imageItem';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
@@ -31,10 +30,10 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
   categoryGroup: FormGroup;
   currentDoc: string;
   sTitle: string;
-  private _unsubscribeAll: Subject<any> = new Subject<any>();
   category: any;
   collapsed = false;
   selectedItemKeys: any;
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   auth = inject(AngularFireAuth);
   snackBar = inject(MatSnackBar);
@@ -78,7 +77,8 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 
   contentReady = (e: any) => {
@@ -200,11 +200,6 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
     });
 
     this.createEmptyForm();
-  }
-
-  UpdateInventoryItem(e: imageItemIndex) {
-    // e.type = this.productId;
-
   }
 
   onDelete(data: Category) {

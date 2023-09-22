@@ -11,21 +11,23 @@
   [sub_title]="'Impressions of our life and work, living in Tokyo'"
   (notifyNavBarToggleMenu)="onToggleMenu()"></app-header> -->
 <div class="h-full bg-white">
-<app-header class="bg-white hidden sm:block" [title]="'Made To Collections'"></app-header>
-<app-header class="bg-white block sm:hidden" [title]="'Made To Collections'"></app-header>
+<app-header class="bg-white hidden sm:block"  [title]="'Made To Collections'"></app-header>
+<app-header class="bg-white block  sm:hidden" [title]="'Collections'"></app-header>
 
   <div *ngIf="collectionImages$ | async as images">
     <app-tw-lightbox class="hidden" [imageCollection]="images"></app-tw-lightbox>
-    <div class="flex flex-col md:flex-row gap-4 h-screen">
-      <div class="text-black items-center md:w-[450px]">
+    <div class="flex flex-col lg:flex-row gap-4 h-screen">
+      <div class="text-black items-center lg:w-[450px]">
         <div>
-          <div class="h-20 py-10 text-3xl font-garamond lg:text-4xl text-center text-gray-700">
-            {{collection.title}}</div>
-            <div class="mt-10 py-10 text-3xl font-garamond lg:text-4xl leading-7 xl:leading-9 text-center text-gray-700"
-              [innerHTML]="collection.body | safe: 'html'"></div>
+          <div class="h-30 py-10 text-3xl font-garamond text-bold lg:text-4xl text-center text-gray-700">
+            {{collection.title}}
+          </div>
+          <div class="ml-4 mr-2 text-3xl font-garamond lg:text-4xl leading-7 xl:leading-9 text-center text-gray-700"
+              [innerHTML]="collection.body | safe: 'html'">
+          </div>
         </div>
       </div>
-      <div>
+      <div class="ml-5 mr-5">
           <collection-gallery [imageCollection]="images"></collection-gallery>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy, computed, signal } from '@angular/core';
+import { Injectable, OnDestroy, computed, inject, signal } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import Timestamp = firebase.firestore.Timestamp;
 import {
@@ -6,14 +6,15 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { first, map, Observable, of, Subject, takeUntil } from 'rxjs';
+import { first, map, Observable, of, Subject, takeUntil, throwError } from 'rxjs';
 import { Cart } from 'app/5.models/cart';
 import { Product } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from './auth/auth.service';
 import { WishList } from 'app/5.models/wishlist';
-import { CollectionReference, DocumentData, collection, getCountFromServer } from 'firebase/firestore';
+import { CollectionReference, DocumentData, collection, getCountFromServer, query, where } from 'firebase/firestore';
+import { WishListService } from './wishlist.service';
 
 @Injectable({
   providedIn: 'root',
@@ -51,9 +52,10 @@ export class CartService implements OnDestroy {
 
   }
 
+  wishListService = inject(WishListService);
+
   updateCartCounter(userId: string) {
     this.cartByStatus(userId,'open').pipe(takeUntil(this._unsubscribeAll)).subscribe((cart) => {
-
     console.debug('cart length:', cart.length);
     });
   }
@@ -68,7 +70,9 @@ export class CartService implements OnDestroy {
 
   async queryCartCount(userId: string): Promise<Observable<number>> {
       const { collection, getCountFromServer } = require("firebase/firestore");
-      const coll = collection(this.afs.firestore, `users/${this.userId}/cart/`);
+      const coll = collection(this.afs.firestore, `users/${this.userId}/cart/`, (ref) => {
+        ref.where('status', '==', 'open');
+      });
       const q = query(coll, where("status", "==", "open"));
       const snapshot = await getCountFromServer(q);
       console.log('count: ', snapshot.data().count);
@@ -150,16 +154,20 @@ export class CartService implements OnDestroy {
       );
   }
 
-  create(mtCart: Cart) {
-    // console.debug('product id:', mtCart.id);
+  public create(mtCart: Product) {
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
-    collectionRef.add(mtCart);
-    this.snack.open('Selection has been added to your cart ...', 'OK', {
+    collectionRef.add(mtCart).then ( (docRef) => {
+      console.debug('Document written with ID: ', docRef.id);
+      this.snack.open('Selection has been added to your cart ...', 'OK', {
       verticalPosition: 'top',
       horizontalPosition: 'right',
       panelClass: 'bg-danger',
       duration: 3000,
-    });
+      });
+      }).catch((error) => {
+         console.error('Error adding document: ', error);
+         throwError(() => new Error(error))
+      });
   }
 
   findProductById(id: string): Observable<Product | undefined> {
@@ -178,15 +186,18 @@ export class CartService implements OnDestroy {
   addToCart(productId: string) {
     let userId = this.userId;
     let prod = this.findProductById(productId);
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
+
     if (prod) {
       prod.subscribe((result) => {
-        const cart: Cart = {
+        const cart: Product = {
           ...result,
-          product_id: productId,
+          id: productId,
           is_completed: false,
           user_purchased: userId,
-          date_sold: Timestamp.now(),
-          date_updated: Timestamp.now(),
+          date_sold: updateDate,
+          date_updated: updateDate,
           status: 'open',
           quantity: 1,
         };
@@ -198,28 +209,27 @@ export class CartService implements OnDestroy {
   addToCartWithQuantity(productId: string, quantity: number) {
     let userId = this.userId;
     let prod = this.findProductById(productId);
+    const dDate = new Date();
+    const updateDate = dDate.toISOString().split('T')[0];
     if (prod) {
       prod.subscribe((result) => {
-        const cart: Cart = {
+        // get the wish item
+        const wish: Product = {
           ...result,
           product_id: productId,
           is_completed: false,
           user_purchased: userId,
-          date_sold: Timestamp.now(),
-          date_updated: Timestamp.now(),
+          date_sold: updateDate,
+          date_updated: updateDate,
           quantity: quantity,
           status: 'open',
         };
-        this.create(cart);
+        // create the cart item from the list item
+        this.create(wish);
+        // delete the wish item from the wish list
+        this.wishListService.deleteWishListItemById(productId);
+        this.cartCounter.set(this.cartCounter() + 1);
       });
-      let wishlistItems: Observable<WishList[]>;
-      let wishlistCollection: AngularFirestoreCollection<WishList>;
-      wishlistCollection = this.afs.collection<WishList>(
-        `users/${this.userId}/wishlist`
-      );
-      wishlistItems = wishlistCollection.valueChanges({ idField: 'id' });
-      wishlistCollection.doc(productId).delete();
-      this.cartCounter.set(this.cartCounter() + 1);
     }
   }
 
@@ -248,11 +258,3 @@ export class CartService implements OnDestroy {
     });
   }
 }
-function query(coll: CollectionReference<DocumentData>, arg1: any) {
-  throw new Error('Function not implemented.');
-}
-
-function where(arg0: string, arg1: string, arg2: string): any {
-  throw new Error('Function not implemented.');
-}
-

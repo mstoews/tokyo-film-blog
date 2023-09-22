@@ -16,13 +16,14 @@
         <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true"></dxo-search-panel>
         <dxo-group-panel [visible]="true"></dxo-group-panel>
         <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
 
         <dxi-column dataField="title" [width]="200"></dxi-column>
         <dxi-column dataField="paragraph" cellTemplate="richTemplate"></dxi-column>
         <dxi-column dataField="published" [width]="100" type="boolean"></dxi-column>
         <dxi-column dataField="calendar" [width]="100" type="boolean"></dxi-column>
         <dxi-column dataField="tailoring" [width]="100" type="boolean"></dxi-column>
-        
+
         <div *dxTemplate="let data of 'imageTemplate'">
           <img [src]="data.value" class="lg-rounded" alt="cell.value">
         </div>

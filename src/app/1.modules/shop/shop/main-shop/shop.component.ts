@@ -57,7 +57,7 @@ export class MainShopComponent implements OnInit, OnDestroy {
     }
 
     this.products$ = this.productService.getInventoryByCategory(this.category);
-    this.category$ = this.categoryService.getAll();
+    this.category$ = this.categoryService. getCategoryList();
     this.data$ = combineLatest([this.category, this.products$, this.category$]).pipe(
       map(([category, products, categories]) => {
         return {category, products, categories }
@@ -83,7 +83,6 @@ export class MainShopComponent implements OnInit, OnDestroy {
   onRefreshName(category: string) {
     this.category = category;
     this.products$ = this.productService.getInventoryByCategory(category);
-    // this.category$ = this.categoryService.getAll();
     this.data$ = combineLatest([category, this.products$, this.category$]).pipe(
       map(([category, products, categories]) => {
         return {category, products, categories }

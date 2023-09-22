@@ -2,20 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { MaterialModule } from 'app/material.module';
 import { DxHtmlEditorModule } from 'devextreme-angular';
-
 import { IconsModule } from 'app/icons.module';
 import { CollectionsEditRoutingModule } from './collections-routing.module';
-
 import { CollectionsEditComponent } from './collection-edit/collections-edit.component';
-import { SafePipe } from './safe.pipe';
-
 import { CollectionsImageSelectionComponent } from './collections-image-selection/collections-image-selection.component';
 import { SharedModule } from '../shared-module/shared.module';
 import { CollectionsAddDialog } from './add/collections-add.component';
-
 import { CollectionResolver } from 'app/4.services/collection.resolver';
 import { CollectionsDetailsAddDialog } from './collections-details-add/collections-details-add.component';
-
 import { CollectionsAdminComponent } from './collection-grid/collections-grid.component';
 import { CollectionsDetailsGridComponent } from './collection-details/collections-details-grid.component';
 import { CollectionPreviewComponent } from './collection-preview/collection-preview.component';
@@ -26,6 +20,8 @@ import { CollectionPage } from './collection-page/collection-page/collection-pag
 import { ProductCardComponent } from './collection-page/product-card/product-card.component';
 import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.module';
 import { CollectionGalleryComponent } from './collection-page/collection-gallery/gallery.component';
+import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -49,11 +45,12 @@ import { CollectionGalleryComponent } from './collection-page/collection-gallery
     MaterialModule,
     DxHtmlEditorModule,
     NgOptimizedImage,
-    SharedModule,
     GalleryLightboxModule,
-    IconsModule,
     CollectionsEditRoutingModule,
     ImageMaintenanceModule,
+    TwLighthouseComponent,
+    IconsModule,
+    SharedModule,
   ],
 })
 export class CollectionsAdminModule {}
