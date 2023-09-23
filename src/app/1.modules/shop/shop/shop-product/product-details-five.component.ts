@@ -20,7 +20,6 @@ import { Cart } from 'app/5.models/cart';
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
 import { UserService } from 'app/4.services/auth/user.service';
 import { Lightbox, initTE } from 'tw-elements';
-import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-product-details-five',
@@ -69,7 +68,9 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   userId: String;
 
    ngOnInit(): void {
+
     initTE({ Lightbox });
+
     this.userData = this.authService.userData;
 
     this.productIds = [];

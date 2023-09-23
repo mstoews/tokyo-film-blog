@@ -11,7 +11,7 @@ export class GalleryComponent implements OnInit {
 
   imageCount = signal<number>(0);
   imageItems = <imageItemIndex[]>([]);
-  
+
 
   ngOnInit(): void {
     initTE({ Lightbox });
@@ -22,9 +22,5 @@ export class GalleryComponent implements OnInit {
     } else {
       this.imageItems = this.imageCollection;
     }
-  }
-
-  onPreviewImage(imageNumber: number) {
-
   }
 }
