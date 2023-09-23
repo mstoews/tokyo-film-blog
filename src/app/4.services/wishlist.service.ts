@@ -60,20 +60,22 @@ export class WishListService {
     return this.wishListCollection.doc(id).get();
   }
 
-  createCart(product: Product)
-  {
+  createCart(product: Product) {
     const collectionRef = this.afs.collection(`users/${this.userId}/cart/`);
-    collectionRef.add(product).then ( (docRef) => {
-      console.debug('Document written with ID: ', docRef.id);
-      this.snack.open('Selection has been added to your cart ...', 'OK', {
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-      panelClass: 'bg-danger',
-      duration: 3000,
-      });
-      }).catch((error) => {
-         console.error('Error adding document: ', error);
-         throwError(() => new Error(error))
+    collectionRef
+      .add(product)
+      .then((docRef) => {
+        console.debug('Document written with ID: ', docRef.id);
+        this.snack.open('Selection has been added to your cart ...', 'OK', {
+          verticalPosition: 'top',
+          horizontalPosition: 'right',
+          panelClass: 'bg-danger',
+          duration: 3000,
+        });
+      })
+      .catch((error) => {
+        console.error('Error adding document: ', error);
+        throwError(() => new Error(error));
       });
   }
 
@@ -260,14 +262,12 @@ export class WishListService {
         this.createCart(product);
         // delete the wish item from the wish list
         this.deleteWishListItemById(productId);
-        this.cartService.cartCounter.set(
-          this.cartService.cartCounter() + 1
-        );
+        this.cartService.cartCounter.set(this.cartService.cartCounter() + 1);
       });
     }
   }
 
-  addToCartFromWishList(productId: string, quantity: number) {
+  addToCart(productId: string, quantity: number) {
     if (this.isProductInCart(productId) === false) {
       let prod = this.findProductById(productId);
 
@@ -305,12 +305,6 @@ export class WishListService {
       }
     }
     return true;
-  }
-
-  addToCart(productId: string, quantity: number) {
-    if (this.isProductInCart(productId) === false) {
-      this.cartService.addToCartWithQuantity(productId, quantity);
-    }
   }
 
   wishListByUserId(userId: string): any {

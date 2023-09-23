@@ -1,10 +1,10 @@
 <ng-container *ngIf="imageCount() > 0">
 
-  <div data-te-lightbox-init class="container relative flex flex-col max-w-6xl mx-auto text-gray-900 md:flex-row md:px-0">
+  <div data-te-lightbox-init class="relative flex flex-col max-w-6xl mx-auto text-gray-900 md:flex-row md:px-0">
       <div class="flex flex-wrap -m-1 md:-m-2">
 
         <div class="flex flex-wrap w-1/2 h-80">
-          <div class="w-1/2 p-1 md:p-2 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto" *ngIf="imageCount() > 0">
+          <div class="w-1/2 p-1 md:p-2 cursor-zoom-in" *ngIf="imageCount() > 0">
             <img alt="Following Made To Images" class="block object-cover object-center w-full h-full rounded-lg"
             [src]="imageItems[0].imageSrc400">
 

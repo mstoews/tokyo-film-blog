@@ -1,13 +1,15 @@
 <!-- <ng-container *ngIf="productItem$ | async as product"> -->
 <ng-container *ngIf="inventoryImages$ | async as images">
-<div class="h-full w-full bg-white">
+<div data-te-lightbox-init class="h-full w-full bg-white">
   <app-header [title]="product.description"></app-header>
   <div class="grid grid-cols-1 gap-y-10 gap-x-6 mx-5 sm:grid-cols-7 bg-white">
     <div class="grid-cols-1 flex-shrink">
       <div class="flex flex-row gap-2 sm:flex-col ">
         <ng-container *ngFor="let p of images">
-          <img class="flex-1 w-auto h-16 items-center justify-between gap-auto rounded-md hover:cursor-pointer" (click)="setImage(p)"
+          <div  class="flex-1 m-1 w-auto h-16 items-center justify-between gap-auto rounded-md">
+          <img class="hover:cursor-pointer rounded-md data-[te-lightbox-disabled]:cursor-auto" (click)="mainImage = p.imageSrc400"
             [ngSrc]="p.imageSrc200" width="200" height="200" alt="image" />
+          </div>
         </ng-container>
       </div>
     </div>

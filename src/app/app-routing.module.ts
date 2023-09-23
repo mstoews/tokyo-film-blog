@@ -77,7 +77,7 @@ const routes: Route[] = [
   {
     path: 'collections-admin',
     loadChildren: () =>
-      import('./1.modules/collections-admin/collections-admin.module').then(
+      import('./1.modules/collections/collections-admin.module').then(
         (mod) => mod.CollectionsAdminModule
       ),
     title: 'Collection Admin',
@@ -95,7 +95,7 @@ const routes: Route[] = [
   {
     path: 'collections-admin/collection',
     loadChildren: () =>
-    import('./1.modules/collections-admin/collections-admin.module').then(
+    import('./1.modules/collections/collections-admin.module').then(
       (mod) => mod.CollectionsAdminModule
     ),
     data: { state: 'collections' },

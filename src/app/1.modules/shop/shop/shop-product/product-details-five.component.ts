@@ -19,6 +19,8 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 import { Cart } from 'app/5.models/cart';
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
 import { UserService } from 'app/4.services/auth/user.service';
+import { Lightbox, initTE } from 'tw-elements';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-product-details-five',
@@ -67,6 +69,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   userId: String;
 
    ngOnInit(): void {
+    initTE({ Lightbox });
     this.userData = this.authService.userData;
 
     this.productIds = [];
@@ -220,7 +223,6 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
       this.loggedIn = user;
       if (this.loggedIn === true) {
         inCart = this.existsInCart();
-        // inCart = false
         if (inCart === false) {
           this.wishlistService.addToCart(this.product.id, this.quantity);
           this.productIds.push(this.product.id);

@@ -23,6 +23,7 @@ export class ShopLandingComponent  {
   Category$ = this.categoryService.getCategoryList();
 
   sTitle = 'Made To Shopping By Categories';
+  sMobileTitle = 'Shopping';
 
   backToHome() {
     this.route.navigate(['home']);

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { WishListService } from 'app/4.services/wishlist.service';
 import { Observable, Subscription } from 'rxjs';
@@ -49,6 +54,6 @@ export class WishListComponent implements OnInit, OnDestroy {
   }
 
   addToCart(productId: string, itemId: string) {
-    this.wishListService.addToCartFromWishList(productId, 1);
+    this.wishListService.addToCart(productId, 1);
   }
 }
