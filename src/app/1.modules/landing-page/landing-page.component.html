@@ -91,13 +91,20 @@
 <section>
       <div class="flex flex-col pb-1 mx-auto bg-transparent sm:bg-transparent t-10 mpt-5 px:-2 md:flex-row">
 
-        <div (click)="onFeatured()"
+        <!-- <div (click)="onFeatured()"
           class=" bg-transparent hover:cursor-pointer block px-4 py-6 mx-auto text-center p-x-4 max-w-7xl sm:px-6 lg:py-10 lg:px-8  transition duration-300 ease-in-out hover:opacity-80">
           <img src="./assets/images/cta_knitting_200x200.png" class="rounded-lg hover:" width="400" height="400">
           <div class="p-2 mb-2 -mt-20 text-3xl sm:text-2xl xl:text-3xl tracking-tight text-gray-100 centered    hover:text-gray-900">
             <span class="uppercase font-garamond">{{mainPageDoc[0].cta_left}}</span>
           </div>
+        </div> -->
+        <div (click)="openShop()"
+        class=" bg-transparent hover:cursor-pointer block px-4 py-6 mx-auto text-center p-x-4 max-w-7xl sm:px-6 lg:py-10 lg:px-8  transition duration-300 ease-in-out hover:opacity-80">
+        <img src="./assets/images/cta_knitting_200x200.png" class="rounded-lg hover:" width="400" height="400">
+        <div class="p-2 mb-2 -mt-20 text-3xl sm:text-2xl xl:text-3xl tracking-tight text-gray-100 centered    hover:text-gray-900">
+          <span class="uppercase font-garamond">{{mainPageDoc[0].cta_left}}</span>
         </div>
+      </div>
 
         <div (click)="onLastestBlog()"
           class="hover:cursor-pointer block px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-10 lg:px-8 hover:transition hover:duration-300 hover:ease-in-out hover:opacity-80">

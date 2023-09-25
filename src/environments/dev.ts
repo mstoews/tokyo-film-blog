@@ -1,35 +1,32 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+import { CdkTreeNodeOutlet } from "@angular/cdk/tree";
 
-import 'zone.js/plugins/zone-error';
-
-export let environment: { production: boolean; api: { stripeUrl: string; baseUrl: string; createMessage: string; createUser: string }; firebase: { storageBucket: string; apiKey: string; messagingSenderId: string; appId: string; projectId: string; measurementId: string; authDomain: string }; useEmulators: boolean };
-environment = {
+export const environment = {
   firebase: {
-    apiKey: "AIzaSyAF8q2eq1tAhBO4PvCeNvVQR7oKy5LYUjw",
-    authDomain: "condo-mgmt.firebaseapp.com",
-    projectId: "condo-mgmt",
-    storageBucket: "condo-mgmt.appspot.com",
-    messagingSenderId: "1023314501312",
-    appId: "1:1023314501312:web:a7cc0b9047944b25b9d725",
-    measurementId: "G-5BFE1ESWF1"
+    apiKey: "AIzaSyB0kkt0xQJbdFwd9Fnh1F7x6taE30F76ME",
+    authDomain: "made-to-cassie.firebaseapp.com",
+    projectId: "made-to-cassie",
+    storageBucket: "made-to-cassie.appspot.com",
+    messagingSenderId: "819679326368",
+    appId: "1:819679326368:web:8bf0a91436ec18a06019c5",
+    measurementId: "G-WGMMJK9NR3"
   },
-  production: false,
+  production: true,
   useEmulators: false,
+  gtm_id: "G-WGMMJK9NR3",
+  stripe: {
+    public_key: 'pk_test_51JogSuCGT3ceZF7pYLMW9IZjEOaMGFqz5YOoBaNGTgT8dl72ThRvLgfx1DEFlQPteFpFlwgfpJLPnuJ1X60UCc8m00yEl0F8ra',
+  },
+  dev: {
+    createMessage: "http://localhost:9000/api/createMessage",
+    createAdmin: "http://localhost:9000/api/createAdmin",
+    paymentIntent: "http://localhost:9000/api/payment_intent",
+  },
   api: {
-    baseUrl: "https://made-to-dev.df.r.appspot.com",
-    stripeUrl: "http://localhost:9000",
-    createMessage: "https://us-central1-made-to-dev.cloudfunctions.net/createMessage",
-    createUser: "https://us-central1-made-to-dev.cloudfunctions.net/createUser"
+    prdUrl: "https://made-to-server.an.r.appspot.com/",
+    baseUrl:  "http://localhost:9000",
+    stripeDevUrl: "https://made-to-dev.df.r.appspot.com",
+    createMessage: "https://made-to-cassie.df.r.appspot.com/api/createMessage",
+    createUser: "https://made-to-cassie.df.r.appspot.com/api/createUser",
+    createAdmin: "https://made-to-cassie.df.r.appspot.com/api/createAdmin",
   }
 };
-
-/*  "http://localhost:9000",
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

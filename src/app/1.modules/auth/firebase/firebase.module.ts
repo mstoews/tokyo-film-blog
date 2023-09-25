@@ -32,7 +32,7 @@ const firebaseUiAuthConfig: any = {
   declarations: [],
   imports: [
     AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    // AngularFireModule.initializeApp(environment.firebase),
     FirebaseUIModule.forRoot(firebaseUiAuthConfig),
   ],
   exports: [FirebaseUIModule, AngularFireModule, AngularFireAuthModule],

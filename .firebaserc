@@ -12,6 +12,13 @@
           "made-to-cassie"
         ]
       }
+    },
+    "made-to-dev": {
+      "hosting": {
+        "made-to": [
+          "made-to-dev"
+        ]
+      }
     }
   },
   "etags": {}

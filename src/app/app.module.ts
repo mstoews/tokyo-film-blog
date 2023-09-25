@@ -54,12 +54,11 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase_dev),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
     }),
-    //NgxStripeModule.forRoot(environment.stripe.public_key),
   ],
   providers: [
     ScrollService,

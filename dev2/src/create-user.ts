@@ -26,15 +26,17 @@ createUserApp.post("/", async (req, res) => {
     }
 
     const email = req.body.email;
-    const password = req.body.password;
     const admin = req.body.admin;
 
-    const user = await auth.createUser({
-      email,
-      password,
-    });
+    const user = await admin.auth().getUserByEmail(email); // 1
+    if (user.customClaims && user.customClaims.moderator === true) {
+        return;
+    } // 2
+    return admin.auth().setCustomUserClaims(user.uid, {
+        moderator: true
+    }); // 3
 
-    await auth.setCustomUserClaims(user.uid, {admin});
+    // await auth.setCustomUserClaims(user.uid, {admin});
 
     db.doc(`users/${user.uid}`).set({});
 

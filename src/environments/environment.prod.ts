@@ -10,6 +10,15 @@ export const environment = {
     appId: "1:819679326368:web:8bf0a91436ec18a06019c5",
     measurementId: "G-WGMMJK9NR3"
   },
+  firebase_dev: {
+    apiKey: "AIzaSyAoyvHYrm3X8JkcpsPBkjKKyYMvO2yp3H4",
+    authDomain: "made-to-dev.firebaseapp.com",
+    projectId: "made-to-dev",
+    storageBucket: "made-to-dev.appspot.com",
+    messagingSenderId: "943801679790",
+    appId: "1:943801679790:web:fc1acc16908ea3a4bc123f",
+    measurementId: "G-4YP76MJH8S"
+  },
   production: true,
   useEmulators: false,
   gtm_id: "G-WGMMJK9NR3",

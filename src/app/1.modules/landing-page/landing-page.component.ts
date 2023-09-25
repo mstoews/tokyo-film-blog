@@ -152,10 +152,14 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.router.navigate(['shop/cart', this.authService.userData.uid]);
   }
 
+  openShop() {
+    this.router.navigate(['shop']);
+  }
+
   openWishList() {
     this.router.navigate(['shop/wishlist', this.authService.userData.uid]);
   }
-  
+
   onAboutUs(service: string) {
     // console.debug(service);
     this.onClickAboutUs();
