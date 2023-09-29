@@ -8,16 +8,14 @@ import {
   signal,
 } from '@angular/core';
 import { Router } from '@angular/router';
-//import { ScrollService } from 'app/4.services/scroll.service';
+
 import { animate, style, transition, trigger } from '@angular/animations';
-//import { Observable, of } from 'rxjs';
+
 import { ContactService } from 'app/4.services/contact.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-//import { Contact } from 'app/5.models/contact';
+
 import { MainPageService } from 'app/4.services/main-page.service';
 import { Mainpage } from 'app/5.models/mainpage';
-//import { imageItem } from 'app/5.models/imageItem';
-//import { AuthService } from 'app/4.services/auth/auth.service';
 import { BlogService } from '../../4.services/blog.service';
 import { MenuToggleService } from '../../4.services/menu-toggle.service';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
@@ -51,8 +49,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   contactGroup: FormGroup;
   mainPageDoc: Mainpage;
   titleMessage = '';
-  // features_image = './assets/images/tailoring.jpg';
-  // services_one = './assets/images/tailoring.jpg';
+  // features_image = './assets/images/Cinema.jpg';
+  // services_one = './assets/images/Cinema.jpg';
   // services_two = './assets/images/knitting.jpg';
   // services_three = './assets/images/repairs.jpg';
   // services_four = './assets/images/bespoke_knitting.jpg';
@@ -120,19 +118,17 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.notifyNavBarToggleMenu.emit();
   }
 
-  onMadeToTailoring() {
-    this.router.navigate(['blog/tailoring']);
+  onMadeToCinema() {
+    this.router.navigate(['blog/Cinema']);
+  }
+
+  onImages() {
+    console.log('onImages');
+    this.router.navigate(['image-admin']);
   }
 
   onLastestBlog() {
-    this.blogService.getAllPublishedBlog().subscribe((blog) => {
-      if (blog.length > 0) {
-        this.router.navigate(['blog/detail', blog[0].id]);
-        return;
-      } else {
-        this.router.navigate(['blog']);
-      }
-    });
+    this.router.navigate(['blog']);
   }
 
   onService() {

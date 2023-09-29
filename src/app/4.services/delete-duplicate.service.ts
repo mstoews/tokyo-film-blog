@@ -217,7 +217,7 @@ export class DeleteDuplicateService implements OnDestroy {
     var fileName = image.fileName.replace(/\.[^/.]+$/, "");
     fileName = fileName.replace(`/${size}`,'').replace(`_${size}x${size}`,'');
     if (size === '200') {
-    fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+    fileName = `/200/${fileName}_${size}x${size}.${fileExt}`;
     } else {
     fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
     }
@@ -263,7 +263,7 @@ export class DeleteDuplicateService implements OnDestroy {
 
         switch (size) {
           case '200':
-            fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+            fileName = `/200/${fileName}_${size}x${size}.${fileExt}`;
                this.storage
               .ref(fileName)
               .getDownloadURL()

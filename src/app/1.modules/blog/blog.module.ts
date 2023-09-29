@@ -14,12 +14,13 @@ import { SharedModule } from '../shared-module/shared.module';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsListComponent } from './comments-list/comments-list.component';
 import { ReplyDialogComponent } from './reply-dialog/reply-dialog.component';
-import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
-import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
-import { TailorCardComponent } from './tailoring-blog/tailor-card/tailor-card.component';
+import { CinemaBlogComponent } from './cinema-blog/cinema-blog.component';
+
+import { TailorCardComponent } from './cinema-blog/cinema-card/cinema-card.component';
 import { CalendarBlogComponent } from './calendar-blog/calendar-blog.component';
 import { CalendarCardComponent } from './calendar-blog/calendar-card/calendar-card.component';
 import { CalendarDetailComponent } from './calendar-blog/calendar-detail/calendar-detail.component';
+import { CinemaDetailComponent } from './cinema-blog/cinema-detail/cinema-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,19 +32,18 @@ import { CalendarDetailComponent } from './calendar-blog/calendar-detail/calenda
     CommentsComponent,
     CommentsListComponent,
     ReplyDialogComponent,
-    TailoringBlogComponent,
-    TailoringDetailComponent,
+    CinemaBlogComponent,
+    CinemaDetailComponent,
     TailorCardComponent,
     CalendarBlogComponent,
     CalendarCardComponent,
-    CalendarDetailComponent
+    CalendarDetailComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     NgOptimizedImage,
     SharedModule,
-
     IconsModule,
     BlogRoutingModule,
   ],

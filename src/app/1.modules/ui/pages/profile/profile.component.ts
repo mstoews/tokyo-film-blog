@@ -42,8 +42,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addAdminUser(email: string, password: string) {
-    const api = environment.api.baseUrl + '/api/addAdminToRole';
-
+    const api = environment.api.createAdmin;
     this.http
       .post(api, {
         email: email,
@@ -62,7 +61,7 @@ export class ProfileComponent implements OnInit {
   }
 
   addUserByFunction() {
-    const api = environment.api.baseUrl + '/api/addAdminToRole';
+    const api = environment.api + '/api/addAdminToRole';
     this.http
       .post(api, {
         email: 'cassandra_harada@hotmail.com',

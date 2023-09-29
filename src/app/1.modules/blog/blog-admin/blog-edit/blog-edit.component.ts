@@ -1,4 +1,11 @@
-import { Component, Inject, Input, OnInit, Optional, inject } from '@angular/core';
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  Optional,
+  inject,
+} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Blog } from 'app/5.models/blog';
@@ -8,8 +15,10 @@ import { Location } from '@angular/common';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DndComponent } from 'app/3.components/loaddnd/dnd.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.service';
-
+import {
+  FilterEnum,
+  ImageToolbarService,
+} from 'app/4.services/image-toolbar.service';
 
 @Component({
   selector: 'app-blog-edit',
@@ -22,7 +31,6 @@ export class BlogEditComponent implements OnInit {
   blogGroup: any;
   //blogImages$: any;
   inventory_images: 'all' | 'not_used' = 'not_used';
-
 
   sub: any;
   blogId: string;
@@ -45,7 +53,6 @@ export class BlogEditComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public parentId: string
   ) {}
 
-
   imageToolbarService = inject(ImageToolbarService);
 
   ngOnInit(): void {
@@ -64,23 +71,20 @@ export class BlogEditComponent implements OnInit {
     }
   }
 
-
   onAllImages() {
     this.imageToolbarService.changeFilter(FilterEnum.all);
-
   }
 
   onNotUsedImages() {
     this.imageToolbarService.changeFilter(FilterEnum.not_used);
   }
 
-
   onUpdate(blog: Blog) {
     const dDate = new Date();
     const updateDate = dDate.toISOString().split('T')[0];
     blog = { ...this.blogGroup.value } as Blog;
     console.debug('Set to be published? ...: ', blog.published);
-    console.debug('Is it a tailored blog post? ...: ', blog.tailoring);
+    console.debug('Is it a tailored blog post? ...: ', blog.cinema);
     if (this.para === undefined) {
       this.para = '';
     }
@@ -126,7 +130,7 @@ export class BlogEditComponent implements OnInit {
       this.createEmptyForm();
       return true;
     }
-    return false
+    return false;
   }
 
   closeDialog() {}
@@ -143,7 +147,7 @@ export class BlogEditComponent implements OnInit {
       date_created: [blog.date_created],
       date_updated: [blog.date_updated],
       published: [blog.published],
-      tailoring: [blog.tailoring],
+      cinema: [blog.cinema],
       calendar: [blog.calendar],
     });
   }

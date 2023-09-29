@@ -60,7 +60,7 @@ import { isPlatformBrowser } from '@angular/common';
     ]),
   ],
 })
-// <script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
+// <script async src="https://www.googletagmanager.com/gtag/js?id=G-HLTMW3M19H"></script>
 export class AppComponent implements OnInit {
   isLoggedOut$: Observable<boolean>;
   User$: Observable<any>;
@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
     const gtmScriptTag = this.renderer.createElement('script');
     gtmScriptTag.type = 'text/javascript';
     gtmScriptTag.src =
-      'https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3';
+      'https://www.googletagmanager.com/gtag/js?id=G-HLTMW3M19H';
     this.renderer.appendChild(this._document.body, gtmScriptTag);
 
     const gtagInitScript = this.renderer.createElement('script');
@@ -107,7 +107,7 @@ export class AppComponent implements OnInit {
     }
     gtag('js', new Date());
 
-    gtag('config', 'G-WGMMJK9NR3');
+    gtag('config', 'G-HLTMW3M19H');
     `;
     this.renderer.appendChild(this._document.body, gtagInitScript);
   }

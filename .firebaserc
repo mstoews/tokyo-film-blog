@@ -1,22 +1,13 @@
 {
   "projects": {
-    "default": "made-to-cassie",
-    "production": "made-to-cassie",
-    "staging": "made-to-dev",
-    "production ": "made-to-cassie"
+    "default": "cinema-blog",
+    "production": "cinema-blog"
   },
   "targets": {
-    "made-to-cassie": {
+    "cinema-blog": {
       "hosting": {
-        "made-to": [
-          "made-to-cassie"
-        ]
-      }
-    },
-    "made-to-dev": {
-      "hosting": {
-        "made-to": [
-          "made-to-dev"
+        "cinema": [
+          "cinema-blog"
         ]
       }
     }

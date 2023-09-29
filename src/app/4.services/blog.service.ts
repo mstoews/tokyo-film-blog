@@ -14,7 +14,6 @@ import { ImageItemIndexService } from './image-item-index.service';
   providedIn: 'root',
 })
 export class BlogService {
-
   private blogCollection: AngularFirestoreCollection<Blog>;
   private blogPartialCollection: AngularFirestoreCollection<BlogPartial>;
   private blogItems: Observable<Blog[]>;
@@ -28,8 +27,6 @@ export class BlogService {
     this.blogItems = this.blogCollection.valueChanges({ idField: 'id' });
     this.blogPartialCollection = afs.collection<BlogPartial>('blog');
   }
-
-
 
   imageItemIndexService = inject(ImageItemIndexService);
 
@@ -102,23 +99,38 @@ export class BlogService {
 
   getAllPublishedBlog() {
     return this.blogItems.pipe(
-      map((blogs) => blogs.filter((pub) => pub.published === true && pub.calendar === false && pub.tailoring === false || pub.tailoring === undefined
-      ))
+      map((blogs) =>
+        blogs.filter(
+          (pub) =>
+            (pub.published === true &&
+              pub.calendar === false &&
+              pub.cinema === false) ||
+            pub.cinema === undefined
+        )
+      )
     );
   }
 
-  getTailoringBlog() {
+  getCinemaBlog() {
     return this.blogItems.pipe(
-      map((blogs) => blogs.filter((pub) => pub.tailoring === true && pub.published === true && pub.calendar !== true))
+      map((blogs) =>
+        blogs.filter(
+          (pub) =>
+            pub.cinema === true &&
+            pub.published === true &&
+            pub.calendar !== true
+        )
+      )
     );
   }
 
   getCalendarBlog() {
     return this.blogItems.pipe(
-      map((blogs) => blogs.filter((pub) => pub.calendar === true && pub.published === true))
+      map((blogs) =>
+        blogs.filter((pub) => pub.calendar === true && pub.published === true)
+      )
     );
   }
-
 
   getAll(): any {
     return this.blogItems;

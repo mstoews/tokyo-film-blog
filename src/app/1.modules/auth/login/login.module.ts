@@ -5,14 +5,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-import { LoginComponent } from './login.component';
 import { LoginRoutingModule } from './login-routing.module';
 import { FirebaseModule } from '../firebase/firebase.module';
-
+import { LoginFirebaseUIComponent } from './login.component';
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [
+    LoginFirebaseUIComponent
+  ],
   imports: [
     FormsModule,
     CommonModule,

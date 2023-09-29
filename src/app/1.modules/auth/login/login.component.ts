@@ -8,7 +8,7 @@ import { FirebaseUISignInFailure, FirebaseUISignInSuccessWithAuthResult } from '
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent implements OnInit {
+export class LoginFirebaseUIComponent implements OnInit {
   constructor(private afAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit(): void {}

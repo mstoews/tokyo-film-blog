@@ -1,7 +1,6 @@
  <div class="h-screen flex-container max-w-screen-2xl">
-  <!-- <mat-drawer-container class="flex-1 bg-fixed  bg-opacity-75 bg-[url('/assets/images/cloth_background_3.jpg')]"> -->
-    <mat-drawer-container class="flex-1 bg-cover md:bg-fixed md:bg-cover bg-center bg-opacity-75" style="background-image: url('/assets/images/cloth_background_3.jpg')">
-
+  <mat-drawer-container class="flex-1 bg-fixed  bg-opacity-75 bg-[url('/assets/films_b_and_w.jpg')]">
+  
     <mat-drawer class="flex-1 ml-1" #drawer [mode]="'side'" open
       [@onMainContentChange]="onSideNavChange ? 'open' : 'close'">
       <app-sidenav

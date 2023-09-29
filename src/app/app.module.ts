@@ -54,7 +54,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AngularFireFunctionsModule,
-    AngularFireModule.initializeApp(environment.firebase_dev),
+    AngularFireModule.initializeApp(environment.firebase),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000'
@@ -81,7 +81,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       provide: 'document',
       useValue: document,
     },
-    { provide: 'googleTagManagerId', useValue: environment.gtm_id },
+    { provide: 'googleTagManagerId', useValue: environment.measurementId },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

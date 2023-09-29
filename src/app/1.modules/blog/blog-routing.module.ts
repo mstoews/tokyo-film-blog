@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BlogResolver, CalendarResolver, TailoringResolver } from 'app/4.services/blog.resolver';
+import {
+  BlogResolver,
+  CalendarResolver,
+  CinemaResolver,
+} from 'app/4.services/blog.resolver';
 import { BlogComponent } from './blog.component';
 import { DetailComponent } from './detail/detail.component';
-import { TailoringBlogComponent } from './tailoring-blog/tailoring-blog.component';
-import { TailoringDetailComponent } from './tailoring-blog/tailoring-detail/tailoring-detail.component';
+import { CinemaBlogComponent } from './cinema-blog/cinema-blog.component';
+import { CinemaDetailComponent } from './cinema-blog/cinema-detail/cinema-detail.component';
 import { CalendarBlogComponent } from './calendar-blog/calendar-blog.component';
 import { CalendarDetailComponent } from './calendar-blog/calendar-detail/calendar-detail.component';
 
@@ -25,18 +29,18 @@ const routes: Routes = [
     data: { state: 'detail/:id' },
   },
   {
-    path: 'tailoring',
+    path: 'Cinema',
     pathMatch: 'full',
-    component: TailoringBlogComponent,
+    component: CinemaBlogComponent,
   },
   {
-    path: 'tailoring/:id',
-    title: 'Tailoring',
-    component: TailoringDetailComponent,
+    path: 'Cinema/:id',
+    title: 'Cinema',
+    component: CinemaDetailComponent,
     resolve: {
       blog: BlogResolver,
     },
-    data: { state: 'tailoring/:id' },
+    data: { state: 'Cinema/:id' },
   },
   {
     path: 'calendar',

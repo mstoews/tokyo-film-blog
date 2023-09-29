@@ -58,7 +58,7 @@ export class ContactsComponent implements OnInit {
 
     if (environment.production === false) {
       this.http
-        .post<any>(environment.dev.createMessage, {
+        .post<any>(environment.api.createMessage, {
           name: contact.name,
           email: contact.email,
           message: contact.message,

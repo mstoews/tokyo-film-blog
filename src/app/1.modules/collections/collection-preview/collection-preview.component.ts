@@ -47,7 +47,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
   }
 
   onUpdate(imgItem: imageItemIndex) {
-    this.imageListService.updateCollectionDescription(imgItem);
+    this.imageListService.updateImageCollectionDescription(imgItem);
   }
 
   createEmptyForm() {
@@ -86,7 +86,7 @@ export class CollectionPreviewComponent implements OnInit, OnDestroy {
     let item = this.collectionsImages.find((x) => x.id === this.id);
     if (item !== undefined || item !== null) {
       item.description = desc;
-      this.imageListService.updateCollectionDescription(item);
+      this.imageListService.updateImageCollectionDescription(item);
     }
   }
 

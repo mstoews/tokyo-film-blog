@@ -59,8 +59,8 @@ const routes: Route[] = [
         './1.modules/admin/image-maintenance/image-maintenance.module'
       ).then((mod) => mod.ImageMaintenanceModule),
     title: 'Image Maintenance',
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: adminOnly },
+    //canActivate: [AngularFireAuthGuard],
+    //data: { authGuardPipe: adminOnly },
   },
 
   {

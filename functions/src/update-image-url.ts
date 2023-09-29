@@ -14,7 +14,7 @@ exports.updateOriginalImageURL = onObjectFinalized({ cpu: 2 }, async (event) => 
     expires: '03-09-2491'
   });
 
-  const size = 'thumbnails';
+  const size = '200';
   var pathStrSplit = filePath.split('/')
   var dirName = pathStrSplit.join('/');
   console.log(dirName);

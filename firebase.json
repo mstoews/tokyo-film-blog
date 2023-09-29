@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "target": "made-to",
+    "target": "cinema-tokyo",
     "public": "dist",
     "ignore": [
       "**/.*"

@@ -8,7 +8,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared-module/shared.module';
 import { MadeToServicesModule } from '../made-to-services/made-to-services.module';
 import { LightboxModule } from '../lightbox';
-import { TailoringComponent } from './tailoring/tailoring.component';
+
 import { ReadyToWearComponent } from './ready-to-wear/ready-to-wear.component';
 import { KnittingComponent } from './knitting/knitting.component';
 import { RepairsComponent } from './repairs/repairs.component';
@@ -23,6 +23,7 @@ import { LastestBlogComponent } from 'app/3.components/lastest-blog/lastest-blog
 import { ServicesComponent } from './made-to-services/services.component';
 import { FollowingComponent } from './following/following.component';
 import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
+import { CinemaComponent } from './cinema/cinema.component';
 
 const routes: Routes = [
   {
@@ -45,11 +46,11 @@ const routes: Routes = [
     data: { state: 'data-policy' },
   },
   {
-    path: 'tailoring',
+    path: 'Cinema',
     pathMatch: 'full',
-    title: 'Services Tailoring',
-    component: TailoringComponent,
-    data: { state: 'tailoring' },
+    title: 'Services Cinema',
+    component: CinemaComponent,
+    data: { state: 'Cinema' },
   },
   {
     path: 'ready-to-wear',
@@ -99,7 +100,7 @@ const routes: Routes = [
     LandingPageComponent,
     BannerComponent,
     GalleryComponent,
-    TailoringComponent,
+    CinemaComponent,
     ReadyToWearComponent,
     KnittingComponent,
     RepairsComponent,
@@ -110,7 +111,6 @@ const routes: Routes = [
     TosComponent,
     ServicesComponent,
     FollowingComponent,
-
   ],
   imports: [
     CommonModule,

@@ -48,7 +48,7 @@ export class GalleryImageSelectionComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
   RefreshList() {
-    throw new Error('Method not implemented.');
+    console.log('Refresh List');
   }
 
   addImageToItemList(image: any) {

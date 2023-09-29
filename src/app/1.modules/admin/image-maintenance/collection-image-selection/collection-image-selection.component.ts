@@ -27,6 +27,7 @@ import { MatDrawer } from '@angular/material/sidenav';
   styleUrls: ['./collection-image-selection.component.css'],
 })
 export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
+
   @Input() productId: string;
 
   currentImage: imageItemIndex;
@@ -55,10 +56,24 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   productService = inject(ProductsService);
   fb = inject(FormBuilder);
 
-
   RefreshList() {
-    //this.deleteDupes.updateImages();
+    alert('RefreshList');
   }
+
+  RefreshImages() { // onDelete(arg0: any) {
+    if (confirm('Are you sure you want to refresh the image list?')) {
+      this.imageItemIndexService.updateMainImageList();
+    }
+  }
+
+  createImageOnce() {
+    alert('createImageOnce');
+  }
+
+  deleteDuplicateImages() {
+    alert('deleteDuplicateImages');
+  }
+
 
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
@@ -122,9 +137,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   async sort(sort: string) {
-    return (
-      await this.imageItemIndexService.getImagesByCategory(sort)
-    ).pipe(
+    return (await this.imageItemIndexService.getImagesByCategory(sort)).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -135,9 +148,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   async sortByProductId(sort: string) {
-    return (
-      await this.imageItemIndexService.getImagesByCategory(sort)
-    ).pipe(
+    return (await this.imageItemIndexService.getImagesByCategory(sort)).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.type < b.type ? -1 : 1;
@@ -148,22 +159,25 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
   }
 
   async Refresh() {
-    this.subNotUsed =
-    (await this.sort(this.IN_NOT_USED)).subscribe((item) => {
+    this.subNotUsed = (await this.sort(this.IN_NOT_USED)).subscribe((item) => {
       this.not_usedImages = item;
     });
 
-    this.subCollections =
-    (await this.sort(this.IN_COLLECTION)).subscribe((item) => {
-      this.collectionsImages = item;  });
+    this.subCollections = (await this.sort(this.IN_COLLECTION)).subscribe(
+      (item) => {
+        this.collectionsImages = item;
+      }
+    );
 
-    this.subGallery =
-    (await this.sort(this.IN_GALLERY)).subscribe((item) => {
-      this.galleryImages = item;  });
+    this.subGallery = (await this.sort(this.IN_GALLERY)).subscribe((item) => {
+      this.galleryImages = item;
+    });
 
-    this.subProducts =
-     (await this.sortByProductId(this.IN_PRODUCTS)).subscribe((item) => {
-      this.productsImages = item;  });
+    this.subProducts = (await this.sortByProductId(this.IN_PRODUCTS)).subscribe(
+      (item) => {
+        this.productsImages = item;
+      }
+    );
   }
 
   ngOnInit() {
@@ -233,7 +247,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.subNotUsed) {
-    this.subNotUsed.unsubscribe();
+      this.subNotUsed.unsubscribe();
     }
     if (this.subCollections) {
       this.subCollections.unsubscribe();
@@ -246,6 +260,5 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     if (this.subProducts) {
       this.subProducts.unsubscribe();
     }
-
   }
 }

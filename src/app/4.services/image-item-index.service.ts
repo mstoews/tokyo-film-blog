@@ -114,11 +114,17 @@ export class ImageItemIndexService implements OnDestroy{
     return this.getImageByType(productId);
   }
 
-  updateCollectionDescription(imgItem: imageItemIndex) {
+  updateImageCollectionDescription(imgItem: imageItemIndex) {
     this.imageIndexCollections.doc(imgItem.id).update(imgItem);
   }
 
-  setCollectionDescription(imgItem: imageItemIndex) {
+  addImageCollection(imgItem: imageItemIndex){
+    this.imageIndexCollections.add(imgItem).then((imgIndex) => {
+      this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
+    });
+  }
+
+  setImageCollectionDescription(imgItem: imageItemIndex) {
     this.imageIndexCollections.doc(imgItem.id).set(imgItem);
   }
 
@@ -210,7 +216,7 @@ export class ImageItemIndexService implements OnDestroy{
     this.hashUsedImagesMap.forEach((value, key) => {
       var fileExt = value.imageAlt.split('.').pop();
       let fileName = value.imageAlt.replace(/\.[^/.]+$/, '');
-      fileName = fileName.replace(`thumbnails/`, '').replace(`_200x200`, '');
+      fileName = fileName.replace(`200/`, '').replace(`_200x200`, '');
       fileName = fileName.replace(`400/`, '').replace(`_400x400`, '');
       fileName = fileName.replace(`800/`, '').replace(`_800x800`, '');
       fileName = `${fileName}.${fileExt}`;
@@ -251,12 +257,13 @@ export class ImageItemIndexService implements OnDestroy{
                 contentType: meta.contentType,
                 id: '',
               };
+
               console.debug('Map Size', this.hashImageItemMap.size);
 
               const file = this.hashImageItemMap.get(imageData.fileName);
               if (file === undefined || file === null) {
-                //this.setCollectionDescription(imageData);
-                console.debug(`Added ${imageData.fileName}`);
+                this.addImageCollection(imageData);
+                this.hashImageItemMap.set(imageData.fileName, imageData);
               }
             });
           });

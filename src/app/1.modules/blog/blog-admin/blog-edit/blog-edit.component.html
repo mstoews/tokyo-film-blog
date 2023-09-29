@@ -1,169 +1,166 @@
 <app-header class="bg-white" [title]="'Thoughts'"></app-header>
 <div class="flex flex-col items-center h-screen bg-white">
 
-        <form class="w-10/12" #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)" >
-          <mat-toolbar class=" bg-slate-300">
-            <span></span>
-            
-            <span class="flex-auto"></span>
-            <mat-checkbox color="primary" formControlName="published">
-              Published
-            </mat-checkbox>
-             <mat-checkbox color="primary" formControlName="calendar">
-              Calendar
-            </mat-checkbox>
-            <mat-checkbox color="primary" formControlName="tailoring">
-              Tailoring
-            </mat-checkbox>
-            <button mat-icon-button (click)="onUpdate(blog)" color="primary" aria-label="Add"   matTooltip="Update Item">
-              <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-            </button>
-            <button (click)="onImages()" mat-icon-button color="primary" matTooltip="Manage Images">
-              <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
-            </button>
-            <button mat-icon-button (click)="onDelete(blog)" color="primary" [disabled]="!blogGroup.valid"
-              matTooltip="Delete Item">
-              <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
-            </button>
-          </mat-toolbar>
+  <form class="w-10/12" #blogForm="ngForm" [formGroup]="blogGroup" (ngSubmit)="onUpdate(blogGroup.value)">
+    <mat-toolbar class=" bg-slate-300">
+      <span></span>
 
-          <mat-form-field class="mt-2 w-full" appearance="outline">
-            <mat-label class="ml-2">Title</mat-label>
-            <input matInput placeholder="Title" formControlName="title" />
-          </mat-form-field>
+      <span class="flex-auto"></span>
+      <mat-checkbox color="primary" formControlName="published">
+        Published
+      </mat-checkbox>
+      <mat-checkbox color="primary" formControlName="calendar">
+        Calendar
+      </mat-checkbox>
+      <mat-checkbox color="primary" formControlName="Cinema">
+        Cinema
+      </mat-checkbox>
+      <button mat-icon-button (click)="onUpdate(blog)" color="primary" aria-label="Add" matTooltip="Update Item">
+        <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+      </button>
+      <button (click)="onImages()" mat-icon-button color="primary" matTooltip="Manage Images">
+        <mat-icon [svgIcon]="'mat_outline:image'"></mat-icon>
+      </button>
+      <button mat-icon-button (click)="onDelete(blog)" color="primary" [disabled]="!blogGroup.valid"
+        matTooltip="Delete Item">
+        <mat-icon [svgIcon]="'mat_outline:delete'"></mat-icon>
+      </button>
+    </mat-toolbar>
 
-          <mat-tab-group #tabGroup class="m-2 min-h-200 bg-white" mat-stretch-tabs="false" mat-align-tabs="start">
-            <mat-tab label="Introduction">
-              <ng-template matTabContent>
-                <dx-html-editor [(value)]="para">
-                  <dxo-toolbar>
-                    <dxi-item name="undo"></dxi-item>
-                    <dxi-item name="redo"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="size"
-                      [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
-                    <dxi-item name="font"
-                      [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="bold"></dxi-item>
-                    <dxi-item name="italic"></dxi-item>
-                    <dxi-item name="strike"></dxi-item>
-                    <dxi-item name="underline"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="alignLeft"></dxi-item>
-                    <dxi-item name="alignCenter"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="link"></dxi-item>
-                    <dxi-item name="image"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="alignRight"></dxi-item>
-                    <dxi-item name="alignJustify"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="orderedList"></dxi-item>
-                    <dxi-item name="bulletList"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
-                    <dxi-item name="separator"></dxi-item>
-                    <dxi-item name="color"></dxi-item>
-                    <dxi-item name="blockquote"></dxi-item>
-                    <dxi-item name="clear"></dxi-item>
-                    <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
-                    <dxo-image-upload [tabs]="currentTab" fileUploadMode="base64">
-                    </dxo-image-upload>
-                  </dxo-toolbar>
-                </dx-html-editor>
-              </ng-template>
-              </mat-tab>
-              <mat-tab label="Main">
-                <ng-template  matTabContent>
-                  <dx-html-editor [(value)]="body">
-                    <dxo-toolbar>
-                      <dxi-item name="undo"></dxi-item>
-                      <dxi-item name="redo"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="size"
-                        [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
-                      <dxi-item name="font"
-                        [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="bold"></dxi-item>
-                      <dxi-item name="italic"></dxi-item>
-                      <dxi-item name="strike"></dxi-item>
-                      <dxi-item name="underline"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="alignLeft"></dxi-item>
-                      <dxi-item name="alignCenter"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="link"></dxi-item>
-                      <dxi-item name="image"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="alignRight"></dxi-item>
-                      <dxi-item name="alignJustify"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="orderedList"></dxi-item>
-                      <dxi-item name="bulletList"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="color"></dxi-item>
-                      <dxi-item name="blockquote"></dxi-item>
-                      <dxi-item name="clear"></dxi-item>
-                    </dxo-toolbar>
-                    <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
-                    <dxo-image-upload [tabs]="currentTab" fileUploadMode="base64">
-                    </dxo-image-upload>
-                  </dx-html-editor>
-                </ng-template>
-              </mat-tab>
-              <mat-tab label="Conclusion">
-                <ng-template matTabContent>
+    <mat-form-field class="mt-2 w-full" appearance="outline">
+      <mat-label class="ml-2">Title</mat-label>
+      <input matInput placeholder="Title" formControlName="title" />
+    </mat-form-field>
 
-                  <dx-html-editor height="400px" [(value)]="conclusion">
-                    <dxo-toolbar>
-                      <dxi-item name="undo"></dxi-item>
-                      <dxi-item name="redo"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="size"
-                        [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
-                      <dxi-item name="font"
-                        [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="bold"></dxi-item>
-                      <dxi-item name="italic"></dxi-item>
-                      <dxi-item name="strike"></dxi-item>
-                      <dxi-item name="underline"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="alignLeft"></dxi-item>
-                      <dxi-item name="alignCenter"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="link"></dxi-item>
-                      <dxi-item name="image"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="alignRight"></dxi-item>
-                      <dxi-item name="alignJustify"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="orderedList"></dxi-item>
-                      <dxi-item name="bulletList"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
-                      <dxi-item name="separator"></dxi-item>
-                      <dxi-item name="color"></dxi-item>
-                      <dxi-item name="blockquote"></dxi-item>
-                      <dxi-item name="clear"></dxi-item>
-                    </dxo-toolbar>
-                  </dx-html-editor>
-                </ng-template>
-              </mat-tab>
-              <mat-tab label="Images">
-                <ng-container>
-                  <blog-image-selection [blogId]="blogId"></blog-image-selection>
-                </ng-container>
-              </mat-tab>
-              <mat-tab label="Preview">
-                <ng-container>
-                  <app-blog-preview [blog]="blog"></app-blog-preview>
-                </ng-container>
-              </mat-tab>
-          </mat-tab-group>
-        </form>
+    <mat-tab-group #tabGroup class="m-2 min-h-200 bg-white" mat-stretch-tabs="false" mat-align-tabs="start">
+      <mat-tab label="Introduction">
+        <ng-template matTabContent>
+          <dx-html-editor [(value)]="para">
+            <dxo-toolbar>
+              <dxi-item name="undo"></dxi-item>
+              <dxi-item name="redo"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="size" [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
+              <dxi-item name="font"
+                [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="bold"></dxi-item>
+              <dxi-item name="italic"></dxi-item>
+              <dxi-item name="strike"></dxi-item>
+              <dxi-item name="underline"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="alignLeft"></dxi-item>
+              <dxi-item name="alignCenter"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="link"></dxi-item>
+              <dxi-item name="image"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="alignRight"></dxi-item>
+              <dxi-item name="alignJustify"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="orderedList"></dxi-item>
+              <dxi-item name="bulletList"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="color"></dxi-item>
+              <dxi-item name="blockquote"></dxi-item>
+              <dxi-item name="clear"></dxi-item>
+              <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
+              <dxo-image-upload [tabs]="currentTab" fileUploadMode="base64">
+              </dxo-image-upload>
+            </dxo-toolbar>
+          </dx-html-editor>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Main">
+        <ng-template matTabContent>
+          <dx-html-editor [(value)]="body">
+            <dxo-toolbar>
+              <dxi-item name="undo"></dxi-item>
+              <dxi-item name="redo"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="size" [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
+              <dxi-item name="font"
+                [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="bold"></dxi-item>
+              <dxi-item name="italic"></dxi-item>
+              <dxi-item name="strike"></dxi-item>
+              <dxi-item name="underline"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="alignLeft"></dxi-item>
+              <dxi-item name="alignCenter"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="link"></dxi-item>
+              <dxi-item name="image"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="alignRight"></dxi-item>
+              <dxi-item name="alignJustify"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="orderedList"></dxi-item>
+              <dxi-item name="bulletList"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="color"></dxi-item>
+              <dxi-item name="blockquote"></dxi-item>
+              <dxi-item name="clear"></dxi-item>
+            </dxo-toolbar>
+            <dxo-media-resizing [enabled]="true"> </dxo-media-resizing>
+            <dxo-image-upload [tabs]="currentTab" fileUploadMode="base64">
+            </dxo-image-upload>
+          </dx-html-editor>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Conclusion">
+        <ng-template matTabContent>
+
+          <dx-html-editor height="400px" [(value)]="conclusion">
+            <dxo-toolbar>
+              <dxi-item name="undo"></dxi-item>
+              <dxi-item name="redo"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="size" [acceptedValues]="['8pt','10pt','12pt','14pt', '18pt','24pt','36pt']"></dxi-item>
+              <dxi-item name="font"
+                [acceptedValues]="['Arial','Courier New','Georgia','Impact','Lucida Console', 'Tahoma','Times New Roman','Verdana']"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="bold"></dxi-item>
+              <dxi-item name="italic"></dxi-item>
+              <dxi-item name="strike"></dxi-item>
+              <dxi-item name="underline"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="alignLeft"></dxi-item>
+              <dxi-item name="alignCenter"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="link"></dxi-item>
+              <dxi-item name="image"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="alignRight"></dxi-item>
+              <dxi-item name="alignJustify"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="orderedList"></dxi-item>
+              <dxi-item name="bulletList"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="header" [acceptedValues]="[false, 1, 2, 3, 4, 5]"></dxi-item>
+              <dxi-item name="separator"></dxi-item>
+              <dxi-item name="color"></dxi-item>
+              <dxi-item name="blockquote"></dxi-item>
+              <dxi-item name="clear"></dxi-item>
+            </dxo-toolbar>
+          </dx-html-editor>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Images">
+        <ng-container>
+          <blog-image-selection [blogId]="blogId"></blog-image-selection>
+        </ng-container>
+      </mat-tab>
+      <mat-tab label="Preview">
+        <ng-container>
+          <app-blog-preview [blog]="blog"></app-blog-preview>
+        </ng-container>
+      </mat-tab>
+    </mat-tab-group>
+  </form>
 </div>

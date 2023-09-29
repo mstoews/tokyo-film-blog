@@ -18,7 +18,7 @@ export interface Blog {
   date_updated?:     string;
   image?:            string;
   published:         boolean;
-  tailoring?:        boolean;
+  cinema?:        boolean;
   calendar?:         boolean;
 }
 

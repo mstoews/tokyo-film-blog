@@ -5,27 +5,34 @@ import { Observable } from 'rxjs';
 import { BlogService } from './blog.service';
 
 @Injectable()
-export class BlogResolver  {
+export class BlogResolver {
   blogService = inject(BlogService);
-  resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot ): Observable<Blog | undefined> {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Blog | undefined> {
     return this.blogService.findBlogByUrl(route.paramMap.get('id')!);
   }
 }
 
-
 @Injectable()
-export class TailoringResolver  {
+export class CinemaResolver {
   blogService = inject(BlogService);
-  resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot ): Observable<Blog | undefined> {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Blog | undefined> {
     return this.blogService.findBlogByUrl(route.paramMap.get('id')!);
   }
 }
 
-
 @Injectable()
-export class CalendarResolver  {
+export class CalendarResolver {
   blogService = inject(BlogService);
-  resolve(route: ActivatedRouteSnapshot,state: RouterStateSnapshot ): Observable<Blog | undefined> {
+  resolve(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): Observable<Blog | undefined> {
     const calender = this.blogService.findBlogByUrl(route.paramMap.get('id')!);
     console.log('calender');
     return calender;

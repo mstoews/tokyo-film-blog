@@ -492,7 +492,7 @@ export class ImageListService {
           });
         break;
       default:
-        let fileNameDefault = `/thumbnails/${imgItem}`;
+        let fileNameDefault = `/200/${imgItem}`;
         var pathReferenceDefault = this.storage
           .ref(fileNameDefault)
           .getDownloadURL()
@@ -519,7 +519,7 @@ export class ImageListService {
       this.rawImagesArray = imageList;
       let ranking = 0;
       this.storage
-        .ref('/thumbnails')
+        .ref('/200')
         .listAll()
         .subscribe((files) => {
           files.items.forEach((imageRef) => {
@@ -559,7 +559,7 @@ export class ImageListService {
       this.rawImagesArray = imageList;
       let ranking = 0;
       this.storage
-        .ref('/thumbnails')
+        .ref('/200')
         .listAll()
         .subscribe((files) => {
           files.items.forEach((imageRef) => {

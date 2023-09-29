@@ -30,7 +30,7 @@ export class CheckoutService {
     );
     if (environment.production === false) {
       return this.http.post<CheckoutSession>(
-        environment.api.baseUrl + '/api/payment-intent',
+        environment.api + '/api/payment-intent',
         {
           cartId,
           callbackUrl: this.buildCallbackUrl(),
@@ -39,7 +39,7 @@ export class CheckoutService {
       );
     } else {
       return this.http.post<CheckoutSession>(
-        environment.api.prdUrl + '/api/payment-intent',
+        environment.api + '/api/payment-intent',
         {
           cartId,
           callbackUrl: this.buildCallbackUrl(),
@@ -57,7 +57,7 @@ export class CheckoutService {
 
     if (environment.production === false) {
       return this.http.post<CheckoutSession>(
-        environment.api.baseUrl + '/api/checkout',
+        environment.api.createMessage,
         {
           cartId,
           callbackUrl: this.buildCallbackUrl(),
@@ -66,7 +66,7 @@ export class CheckoutService {
       );
     } else {
       return this.http.post<CheckoutSession>(
-        environment.api.prdUrl + '/api/checkout',
+        environment.api + '/api/checkout',
         {
           cartId,
           callbackUrl: this.buildCallbackUrl(),

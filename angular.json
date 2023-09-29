@@ -91,7 +91,7 @@
 						},
 						"development": {
 							"browserTarget": "made-to:build:development",
-							"port": 43220
+							"port": 43211
 						}
 					},
 					"defaultConfiguration": "development"

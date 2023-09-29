@@ -13,9 +13,9 @@ module.exports = {
     },
     fontFamily: {
       serif: ['Merriweather', 'serif'],
-      garamond: ['Garamond', 'sans-serif'],
-      primary:['Garamond', 'sans-serif'],
-      sans: ['Garamond', 'sans-serif'],
+      garamond: ['garamond', 'sans-serif'],
+      primary:['garamond', 'sans-serif'],
+      sans: ['garamond', 'sans-serif'],
     },
     extend: {
       colors: {

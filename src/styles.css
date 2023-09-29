@@ -30,7 +30,7 @@
 }
 
 #hero {
-  background-image: url('assets/images/cloth_background_3.jpg');
+  background-image: url('assets/films_bg.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -48,7 +48,6 @@
   background-size: 80% auto;
   background-position: 5px center;
   background-repeat: no-repeat;
-  background-image: url('./assets/made-to-logo-white.svg');
 }
 
 

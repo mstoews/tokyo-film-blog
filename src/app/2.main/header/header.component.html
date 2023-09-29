@@ -1,4 +1,4 @@
-<nav class="relative flex-auto p-2 sm:p-6 bg-white font-garamond">
+<nav class="relative flex-auto p-2 sm:p-6 bg-white font-roboto">
   <div class="items-center justify-between sm:space-x-2 sm:my-6">
     <div class="flex flex-row sm:flex-row sm:space-x-4 sm:mr-10 sm:mt-10 sm:ml-2 ">
       <div class="block m-1 ">
@@ -7,18 +7,17 @@
           <mat-icon [svgIcon]="'mat_outline:menu'"></mat-icon>
         </button>
       </div>
-      <div
-        class="flex-col inline-block align-middle sm:ml-4 sm:w-auto focus:outline-none font-bold text-3xl lg:text-3xl text-gray-900 ">
+      <div  class="flex-col inline-block align-middle sm:ml-4 sm:w-auto focus:outline-none font-bold text-3xl lg:text-3xl text-gray-900 ">
         {{ title }}
       </div>
       <span class="flex-auto"></span>
 
-      <div class="block" *ngIf="cartCounter() > 0" >
+      <div class="block" *ngIf="cartCounter() > 0">
         <button (click)="openShoppingCart()" matTooltip="Shopping Cart"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
           <mat-icon [matBadge]=cartCounter() [matBadgeHidden]="cartCounter()===0"
             [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-      </button>
+        </button>
       </div>
 
       <div class="block" *ngIf="wishCounter() > 0">
@@ -29,9 +28,7 @@
         </button>
       </div>
 
-
-
-       <div class="block" >
+      <div class="block">
         <button (click)="onBack()" matTooltip="Back"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
           <mat-icon [svgIcon]="'heroicons_outline:arrow-left'"></mat-icon>
@@ -39,8 +36,7 @@
       </div>
 
 
-<!--
-
+z      <!--
       <div class="hidden md:block">
         <button (click)="onHome()" matTooltip="Home"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
@@ -99,9 +95,9 @@
     <div class="flex flex-col ml-5 sm:flex-row md:ml-10 mr-20 mt-1 sm:ml-10 bg-white">
       <ng-container>
         <div *ngIf="sub_title != undefined"
-          class="flex-col inline-block align-middle sm:w-auto font-garamond focus:outline-none font-bold text-1xl sm:text-2xl text-gray-500 dark:text-white bg-white">
+          class="flex-col inline-block align-middle sm:w-auto font-roboto focus:outline-none font-bold text-1xl sm:text-2xl text-gray-500 dark:text-white bg-white">
           {{ sub_title }}
-      </div>
+        </div>
         <span class="flex-auto"></span>
       </ng-container>
     </div>

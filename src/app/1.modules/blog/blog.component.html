@@ -1,27 +1,28 @@
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WGMMJK9NR3"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-HLTMW3M19H"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
-  gtag('config', 'G-WGMMJK9NR3');
+  gtag('config', 'G-HLTMW3M19H');
 </script>
 
 <!-- <app-header class="bg-white" [title]="'Thoughts and Images'"
   [sub_title]="'Impressions of our life and work, living in Tokyo'"
   (notifyNavBarToggleMenu)="onToggleMenu()"></app-header> -->
 
-  <app-header class="bg-white hidden sm:block" [title]="'Thoughts and Images'" [sub_title]="'Impressions of our life and work, living in Tokyo'"></app-header>
-  <app-header class="bg-white block sm:hidden" [title]="'Thoughts'"></app-header>
-  <div class="pt-5 sm:bg-white">
-    <ng-container *ngIf="allBlogs$ | async as blogs else loading">
-          <div class="grid grid-cols-1 mt-2 ml-2 mr-1  md:mt-4 md:ml-5 md:mr-5 max-w-lg gap-5 lg:max-w-none lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ">
-            <div *ngFor="let blog of blogs">
-                <blog-card [blog]="blog"></blog-card>
-            </div>
-          </div>
-    </ng-container>
-  </div>
+<app-header class="bg-white hidden sm:block" [title]="'Thoughts and Images'"></app-header>
+<app-header class="bg-white block sm:hidden" [title]="'Thoughts'"></app-header>
+<div class="pt-5 sm:bg-white">
+  <ng-container *ngIf="allBlogs$ | async as blogs else loading">
+    <div
+      class="grid grid-cols-1 mt-2 ml-2 mr-1  md:mt-4 md:ml-5 md:mr-5 max-w-lg gap-5 lg:max-w-none lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 ">
+      <div *ngFor="let blog of blogs">
+        <blog-card [blog]="blog"></blog-card>
+      </div>
+    </div>
+  </ng-container>
+</div>
 
 <!-- <ng-container *ngIf="allBlogs$ | async as blogs else loading">
   <div class="container mx-auto pt-5 bg-white">

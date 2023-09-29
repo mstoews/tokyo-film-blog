@@ -1,13 +1,14 @@
-<div class="h-screen">
+<div class="h-screen ">
   <app-header [title]="'Image Maintenance'"> </app-header>
 
-  <!-- <app-image-menubar
+  <mat-card class="m-10">
+  <app-image-menubar
     (notifyParentRefresh)="RefreshList()"
     (notifyParentAdd)="createImageOnce()"
-    (notifyParentDelete)="DeleteDupes()"
+    (notifyParentDelete)="deleteDuplicateImages()"
     (notifyParentRefreshImage)="RefreshImages()"
-    [title]="'Image Management Selection'">
-  </app-image-menubar> -->
+    [title]="'Drag and Drop Images'">
+  </app-image-menubar>
 
   <mat-drawer-container>
     <mat-drawer class="lg:w-1/4 sm:h-full sm:w-full bg-white-100" #drawer [opened]="false" mode="side"
@@ -66,7 +67,7 @@
         </div>
         <!-- PRODUCTS -->
         <div class="col-start-6 col-end-8 lg-rounded" cdkScrollable>
-          <div class="sticky m-1 h-8 text-center p-1  bg-gray-200 top-0 z-50">Assigned Product Images</div>
+          <div class="sticky m-1 h-8 text-center p-1  bg-gray-200 top-0 z-50">Blog Images</div>
           <div cdkDropList #collections="cdkDropList" [id]="IN_PRODUCTS" [cdkDropListData]="productsImages"
             class="list" (cdkDropListDropped)="drop($event)">
             <div class="flex flex-wrap">
@@ -84,4 +85,5 @@
       </div>
     </mat-drawer-content>
   </mat-drawer-container>
-</div>
+
+</mat-card>

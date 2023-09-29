@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from 'app/1.modules/shared-module/shared.module';
 import { SignInClassicComponent } from './classic/sign-in.component';
+import { LoginModule } from '../login/login.module';
 
 
 const routes: Routes = [
@@ -19,7 +20,7 @@ const routes: Routes = [
         component: SignInClassicComponent,
         data: { state: 'classic' },
       },
-      
+
     ],
   },
 ];
@@ -37,6 +38,7 @@ const modules = [
   MatInputModule,
   MatProgressSpinnerModule,
   SharedModule,
+  LoginModule
 ];
 
 @NgModule({
