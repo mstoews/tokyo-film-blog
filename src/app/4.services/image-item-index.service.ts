@@ -1,97 +1,58 @@
 import { Injectable, OnDestroy, inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { imageItemIndex } from 'app/5.models/imageItem';
-import { Subscription, map } from 'rxjs';
+import { ImageItemIndex } from 'app/5.models/imageItem';
+import { Subject, Subscription, map, takeUntil } from 'rxjs';
 import { DeleteDuplicateService } from './delete-duplicate.service';
 import { ProductsService } from './products.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ImageItemIndexService implements OnDestroy{
+export class ImageItemIndexService implements OnDestroy {
+  ngOnDestroy(): void {
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
+  }
 
   afs = inject(AngularFirestore);
   storage = inject(AngularFireStorage);
-  dup = inject(DeleteDuplicateService)
+  dup = inject(DeleteDuplicateService);
   inventory = inject(ProductsService);
   private sub: Subscription;
 
-  hashUsedImagesMap = new Map<string, imageItemIndex>();
-  hashOriginalIndexMap = new Map<string, imageItemIndex>();
-  hashImageItemMap = new Map<string, imageItemIndex>();
+  hashUsedImagesMap = new Map<string, ImageItemIndex>();
+  hashOriginalIndexMap = new Map<string, ImageItemIndex>();
+  hashImageItemMap = new Map<string, ImageItemIndex>();
 
-  itemsCollection = this.afs.collection<imageItemIndex[]>('originalImageList',
+
+
+  itemsCollection = this.afs.collection<ImageItemIndex[]>(
+    'originalImageList',
     (ref) => ref.orderBy('ranking')
   );
 
   imageItems = this.itemsCollection.valueChanges({ idField: 'id' });
 
-  imageIndexCollections = this.afs.collection<imageItemIndex>(
+  imageIndexCollections = this.afs.collection<ImageItemIndex>(
     'originalImageList',
     (ref) => ref.orderBy('ranking')
   );
 
   imageIndexItems = this.imageIndexCollections.valueChanges({ idField: 'id' });
 
-  createOriginalItem(image: imageItemIndex) {
+  createOriginalItem(image: ImageItemIndex) {
     this.imageIndexCollections.add(image).then((imgIndex) => {
       this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
     });
   }
 
-  updateProductItems() {
-
-    // this.sub = this.inventory.getAll().subscribe((products) => {
-    //   products.forEach((product) => {
-    //     this.getAllImages(product.id).forEach((images) => {
-    //       images.forEach((image) => {
-    //         image.category = 'IN_PRODUCTS';
-    //         this.imageIndexCollections.doc(image.id).update(image);
-    //       });
-    //     });
-    //   });
-    // });
-
-    // this.getAllImages('IN_COLLECTION').forEach((images) => {
-    //   images.forEach((image) => {
-    //     image.category = 'IN_COLLECTION';
-    //     this.imageIndexCollections.doc(image.id).update(image);
-    //   });
-    // });
-
-    // this.getAllImages('IN_INVENTORY').forEach((images) => {
-    //   images.forEach((image) => {
-    //     image.category = 'IN_NOT_USED';
-    //     image.type = 'IN_NOT_USED';
-    //     this.imageIndexCollections.doc(image.id).update(image);
-    //   });
-    // });
-
-    // this.getAllImages('IN_GALLERY').forEach((images) => {
-    //   images.forEach((image) => {
-    //     image.category = 'IN_GALLERY';
-    //     this.imageIndexCollections.doc(image.id).update(image);
-    //   });
-    // });
-
-    // this.getAllImages('IN_FEATURED').forEach((images) => {
-    //   images.forEach((image) => {
-    //     image.category = 'IN_COLLECTION';
-    //     image.type = 'IN_COLLECTION';
-    //     this.imageIndexCollections.doc(image.id).update(image);
-    //   });
-    // });
-
-    // this.getAllImages('IN_INVENTORY').forEach((images) => {
-    //   images.forEach((image) => {
-    //     image.category = 'IN_NOT_USED';
-    //     this.imageIndexCollections.doc(image.id).update(image);
-    //   });
-    // });
-
+  addIndexItem(imageData: ImageItemIndex) {
+    this.imageIndexCollections.add(imageData).then((img) => {
+      imageData.id = img.id;
+      this.imageIndexCollections.doc(imageData.id).update(imageData);
+    });
   }
-
 
   reNumber(type: string) {
     let ranking = 0;
@@ -104,36 +65,30 @@ export class ImageItemIndexService implements OnDestroy{
     });
   }
 
-  ngOnDestroy(): void {
-    if(this.sub !== undefined){
-      this.sub.unsubscribe();
-    }
-  }
-
   async getImagesByType(productId: string) {
     return this.getImageByType(productId);
   }
 
-  updateImageCollectionDescription(imgItem: imageItemIndex) {
+  updateImageCollectionDescription(imgItem: ImageItemIndex) {
     this.imageIndexCollections.doc(imgItem.id).update(imgItem);
   }
 
-  addImageCollection(imgItem: imageItemIndex){
+  addImageCollection(imgItem: ImageItemIndex) {
     this.imageIndexCollections.add(imgItem).then((imgIndex) => {
       this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
-    });
+    }) ;
   }
 
-  setImageCollectionDescription(imgItem: imageItemIndex) {
+  setImageCollectionDescription(imgItem: ImageItemIndex) {
     this.imageIndexCollections.doc(imgItem.id).set(imgItem);
   }
 
-  async getImageIndexList() {
+  getImageIndexList() {
     return this.imageIndexItems;
   }
 
-  async sortNotUsed() {
-    return (await this.getOriginalImageListByType('IN_NOT_USED')).pipe(
+  sortNotUsed() {
+    return this.getOriginalImageListByType('IN_NOT_USED').pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -145,16 +100,14 @@ export class ImageItemIndexService implements OnDestroy{
 
   getAllImages(type: string) {
     if (type === null || type === undefined || type === '') {
-      let imageIndexCollections = this.afs.collection<imageItemIndex>(
-        'originalImageList',
-        (ref) => ref.orderBy('ranking')
-      );
+      let imageIndexCollections = this.afs.collection<ImageItemIndex>(
+        'originalImageList');
       let imageIndexItems = imageIndexCollections.valueChanges({
         idField: 'id',
       });
       return imageIndexItems;
     } else {
-      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+      let imageIndexCollections = this.afs.collection<ImageItemIndex>(
         'originalImageList',
         (ref) => ref.orderBy('ranking')
       );
@@ -165,10 +118,70 @@ export class ImageItemIndexService implements OnDestroy{
     }
   }
 
-  getImagesByTypeId(id: string) {
-    this.imageIndexItems.pipe( map((images) => images.filter((type) => type.type === id)));
+  updateImageIndexList(size: string): void {
+    console.debug(this.hashOriginalIndexMap.size);
+
+    this.hashOriginalIndexMap.forEach((value, key) => {
+      var fileExt  = value.fileName.split('.').pop();
+      let fileName = value.fileName.replace(/\.[^/.]+$/, '');
+      fileName = fileName
+        .replace(`/${size}`, '')
+        .replace(`_${size}x${size}`, '');
+
+      switch (size) {
+        case '200':
+          fileName = `/200/${fileName}_${size}x${size}.${fileExt}`;
+          this.storage
+            .ref(fileName)
+            .getDownloadURL()
+            .subscribe((smallSrc) => {
+              console.debug(smallSrc);
+              value.imageSrc200 = smallSrc;
+              this.imageIndexCollections.doc(value.id).update(value);
+            });
+          break;
+
+        case '400':
+          fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+          this.storage
+            .ref(fileName)
+            .getDownloadURL()
+            .subscribe((mediumSrc) => {
+              value.imageSrc400 = mediumSrc;
+              this.imageIndexCollections.doc(value.id).update(value);
+              //this.imageItemCopyCol.doc(imgItem.id).update(imgItem);
+            });
+          break;
+
+        case '800':
+          fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
+          this.storage
+            .ref(fileName)
+            .getDownloadURL()
+            .subscribe((smallSrc) => {
+              console.debug(smallSrc);
+              value.imageSrc800 = smallSrc;
+              this.imageIndexCollections.doc(value.id).update(value);
+            });
+          break;
+        default:
+          let fileNameDefault = `/${value.fileName}`;
+          this.storage
+            .ref(fileNameDefault)
+            .getDownloadURL()
+            .subscribe((data) => {
+              console.debug(data);
+            });
+          break;
+      }
+    });
   }
 
+  getImagesByTypeId(id: string) {
+    this.imageIndexItems.pipe(
+      map((images) => images.filter((type) => type.type === id))
+    );
+  }
 
   async getImageByType(type: string) {
     return (await this.getImageIndexList()).pipe(
@@ -176,26 +189,30 @@ export class ImageItemIndexService implements OnDestroy{
     );
   }
 
-  async getImagesByCategory(category: string) {
-    return (await this.getImageIndexList()).pipe(
+  getImagesByCategory(category: string) {
+    return this.getImageIndexList().pipe(
       map((images) => images.filter((image) => image.category === category))
     );
   }
 
-
-  async getOriginalImageListByType(type: string) {
-    return (await this.getImageIndexList()).pipe(
+  getOriginalImageListByType(type: string) {
+    return this.getImageIndexList().pipe(
       map((images) => images.filter((image) => image.type === type))
     );
   }
 
-  async createOriginalIndexMaps(): Promise<void> {
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
+
+  createOriginalIndexMaps(): void {
     this.hashOriginalIndexMap.clear();
-    this.getAllImages('').subscribe((images) => {
-      images.forEach((image) => {
-        this.hashOriginalIndexMap.set(image.fileName, image);
+    this.getAllImages('')
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((images) => {
+        images.forEach((image) => {
+          this.hashOriginalIndexMap.set(image.fileName, image);
+        });
+        console.debug(this.hashOriginalIndexMap.size);
       });
-    });
   }
 
   getUsedImagesList() {
@@ -204,12 +221,21 @@ export class ImageItemIndexService implements OnDestroy{
     );
   }
 
-  updateImageList(item: imageItemIndex) {
+  updateImageList(item: ImageItemIndex) {
     this.imageIndexCollections.doc(item.id).update(item);
   }
 
   delete(id: string) {
     this.imageIndexCollections.doc(id).delete();
+  }
+
+  createOriginalImageMaps() {
+    this.hashUsedImagesMap.clear();
+    this.getUsedImagesList().subscribe(async (items) => {
+      items.forEach((item) => {
+        this.hashUsedImagesMap.set(item.id, item);
+      });
+    });
   }
 
   async updateUsedImageList(): Promise<void> {
@@ -232,6 +258,10 @@ export class ImageItemIndexService implements OnDestroy{
     });
   }
 
+  // this creates only a bare bones imageItemIndex
+  // that then needs to call the update function to fill in all the sizes of the
+  // images in the orginalimageList collection.
+
   async updateMainImageList(): Promise<void> {
     let ranking = 0;
     this.storage
@@ -244,7 +274,7 @@ export class ImageItemIndexService implements OnDestroy{
               meta.contentType;
 
               const imageUrl = downloadURL;
-              const imageData: imageItemIndex = {
+              const imageData: ImageItemIndex = {
                 parentId: '',
                 caption: imageRef.fullPath,
                 type: 'IN_NOT_USED',
@@ -262,7 +292,7 @@ export class ImageItemIndexService implements OnDestroy{
 
               const file = this.hashImageItemMap.get(imageData.fileName);
               if (file === undefined || file === null) {
-                this.addImageCollection(imageData);
+                this.addIndexItem(imageData);
                 this.hashImageItemMap.set(imageData.fileName, imageData);
               }
             });
@@ -270,5 +300,49 @@ export class ImageItemIndexService implements OnDestroy{
           console.debug('createRawImagesList_200 completed');
         });
       });
+  }
+  updateProductItems() {
+    // this.sub = this.inventory.getAll().subscribe((products) => {
+    //   products.forEach((product) => {
+    //     this.getAllImages(product.id).forEach((images) => {
+    //       images.forEach((image) => {
+    //         image.category = 'IN_PRODUCTS';
+    //         this.imageIndexCollections.doc(image.id).update(image);
+    //       });
+    //     });
+    //   });
+    // });
+    // this.getAllImages('IN_COLLECTION').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_COLLECTION';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+    // this.getAllImages('IN_INVENTORY').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_NOT_USED';
+    //     image.type = 'IN_NOT_USED';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+    // this.getAllImages('IN_GALLERY').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_GALLERY';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+    // this.getAllImages('IN_FEATURED').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_COLLECTION';
+    //     image.type = 'IN_COLLECTION';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
+    // this.getAllImages('IN_INVENTORY').forEach((images) => {
+    //   images.forEach((image) => {
+    //     image.category = 'IN_NOT_USED';
+    //     this.imageIndexCollections.doc(image.id).update(image);
+    //   });
+    // });
   }
 }

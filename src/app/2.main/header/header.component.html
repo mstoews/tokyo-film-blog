@@ -1,4 +1,4 @@
-<nav class="relative flex-auto p-2 sm:p-6 bg-white font-roboto">
+<nav class="relative flex-auto mb-2 p-2 sm:p-6 bg-gray-100 font-roboto">
   <div class="items-center justify-between sm:space-x-2 sm:my-6">
     <div class="flex flex-row sm:flex-row sm:space-x-4 sm:mr-10 sm:mt-10 sm:ml-2 ">
       <div class="block m-1 ">
@@ -12,22 +12,7 @@
       </div>
       <span class="flex-auto"></span>
 
-      <div class="block" *ngIf="cartCounter() > 0">
-        <button (click)="openShoppingCart()" matTooltip="Shopping Cart"
-          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
-          <mat-icon [matBadge]=cartCounter() [matBadgeHidden]="cartCounter()===0"
-            [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-        </button>
-      </div>
-
-      <div class="block" *ngIf="wishCounter() > 0">
-        <button (click)="openWishList()" matTooltip="Wish List"
-          class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100  dark:hover:bg-gray-700">
-          <mat-icon [matBadge]=wishCounter() [matBadgeHidden]="wishCounter()===0"
-            [svgIcon]="'heroicons_outline:gift'"></mat-icon>
-        </button>
-      </div>
-
+    
       <div class="block">
         <button (click)="onBack()" matTooltip="Back"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">
@@ -35,8 +20,7 @@
         </button>
       </div>
 
-
-z      <!--
+      <!--
       <div class="hidden md:block">
         <button (click)="onHome()" matTooltip="Home"
           class="flex items-center p-2 font-normal text-gray-700 rounded-lg text-1xl grow hover:bg-gray-700 hover:text-gray-100 dark:hover:bg-gray-100">

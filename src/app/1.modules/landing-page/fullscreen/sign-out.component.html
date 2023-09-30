@@ -1,0 +1,29 @@
+<div class="flex min-h-full ml-20 mr-20">
+  <div class="flex flex-1 flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+    <div class="mx-auto w-full max-w-sm lg:w-96">
+      <!-- Logo -->
+      <div class="w-12">
+        <img src="/favicon.ico" />
+      </div>
+      <!-- Sign in form -->
+      <form class="mt-8" formGroup]="signInForm">
+        <!-- Email field -->
+        <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight text-gray-400">
+          Sign Out
+        </div>
+
+
+        <p><br></p>
+        <h2 class="text-gray-400">Signing out will take you back to the home page. </h2>
+         <!-- Submit button -->
+        <button class="mat-button-large w-full mt-6  bg-gray-800 text-gray-100 hover:text-gray-800 hover:bg-gray-100 hover:border-gray-800" mat-flat-button
+           (click)="signOut()">
+          <span> Complete Sign Out </span>
+        </button>
+        
+      </form>
+    </div>
+  </div>
+
+</div>
+

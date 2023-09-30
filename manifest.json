@@ -4,7 +4,7 @@
   "description": "Add the reading time to Chrome Extension documentation articles",
   "version": "1.0",
   "icons": {
-    "32": "assets/images/madetologo.svg"
+    "32": "favicon.ico"
     }
   }
 

@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"made-to": {
+		"cinema-tokyo": {
 			"projectType": "application",
 			"schematics": {},
 			"root": "",
@@ -87,10 +87,10 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "made-to:build:production"
+							"browserTarget": "cinema-tokyo:build:production"
 						},
 						"development": {
-							"browserTarget": "made-to:build:development",
+							"browserTarget": "cinema-tokyo:build:development",
 							"port": 43211
 						}
 					},
@@ -99,7 +99,7 @@
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "made-to:build"
+						"browserTarget": "cinema-tokyo:build"
 					}
 				},
 				"test": {
@@ -128,9 +128,9 @@
 					"options": {
 						"prerender": false,
 						"ssr": false,
-						"browserTarget": "made-to:build:production",
-						"firebaseProject": "made-to-cassie",
-						"firebaseHostingSite": "made-to-cassie"
+						"browserTarget": "cinema:build:production",
+						"firebaseProject": "cinema-tokyo",
+						"firebaseHostingSite": "cinema-tokyo"
 					}
 				}
 			}

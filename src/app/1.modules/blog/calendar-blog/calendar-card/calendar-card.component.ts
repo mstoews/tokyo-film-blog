@@ -2,7 +2,7 @@ import { Component, Input, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 import { Blog } from 'app/5.models/blog';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,9 +10,8 @@ import { Observable } from 'rxjs';
   templateUrl: './calendar-card.component.html',
 })
 export class CalendarCardComponent {
-
   @Input() blog: Blog;
-  blogImages$: Observable<(imageItemIndex & {id: string} )[]>;
+  blogImages$: Observable<(ImageItemIndex & { id: string })[]>;
   imageList = inject(ImageItemIndexService);
   router = inject(Router);
 
@@ -32,5 +31,4 @@ export class CalendarCardComponent {
   valueChangedEvent($event: Event) {
     throw new Error('Method not implemented.');
   }
-
 }

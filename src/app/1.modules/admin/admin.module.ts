@@ -34,6 +34,7 @@ import { InventoryImageCardComponent } from '../shop/shop-inventory-maintenance/
 import { ViewImageItemComponent } from '../shop/shop-inventory-maintenance/inventory-image-card/view-image-item/view-image-item.component';
 import { HeadingModule } from 'app/2.main/header/heading.module';
 import { ImageMaintenanceModule } from './image-maintenance/image-maintenance.module';
+import { MaintenanceModule } from '../maintenance/maintenance.module';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { ImageMaintenanceModule } from './image-maintenance/image-maintenance.mo
     ViewImageItemComponent,
     HeadingModule,
     ImageMaintenanceModule,
+    MaintenanceModule
   ],
   exports: [AdminComponent],
   providers: [BlogResolver, ProductResolver],

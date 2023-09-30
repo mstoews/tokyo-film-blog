@@ -178,8 +178,8 @@ export class BlogEditComponent implements OnInit {
 
   create(data: any) {
     const rawData = this.blogGroup.getRawValue();
-    this.blogService.update(rawData);
-    this.afs.collection('blog').doc(rawData.id).collection('images').add(data);
+    //this.blogService.update(rawData);
+    //this.afs.collection('blog').doc(rawData.id).collection('images').add(data);
   }
 
   createEmptyForm() {

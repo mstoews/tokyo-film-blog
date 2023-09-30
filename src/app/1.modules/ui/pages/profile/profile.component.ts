@@ -60,25 +60,6 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  addUserByFunction() {
-    const api = environment.api + '/api/addAdminToRole';
-    this.http
-      .post(api, {
-        email: 'cassandra_harada@hotmail.com',
-        password: 'secret123',
-      })
-      .pipe(
-        catchError((err) => {
-          // console.debug(err);
-          alert('Could not update User to Admin');
-          return throwError(() => new Error());
-        })
-      )
-      .subscribe((user) => {
-        // console.debug('Admin updated ... ', user);
-      });
-  }
-
   ngOnInit() {
     this.loggedIn = false;
     this.afAuth.currentUser

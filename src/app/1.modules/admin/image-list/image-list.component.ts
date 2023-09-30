@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
-import { imageItemIndex } from '../../../5.models/imageItem';
+import { ImageItemIndex } from '../../../5.models/imageItem';
 import { Subject, Subscription, takeUntil } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import {
@@ -22,11 +22,11 @@ export class ImageListComponent implements OnDestroy {
   IN_CREATION = 'IN_CREATION';
   IN_GALLERY = 'IN_GALLERY';
 
-  not_usedImages: imageItemIndex[] = [];
-  featuredImages: imageItemIndex[] = [];
-  collectionsImages: imageItemIndex[] = [];
-  creationsImages: imageItemIndex[] = [];
-  galleryImages: imageItemIndex[] = [];
+  not_usedImages: ImageItemIndex[] = [];
+  featuredImages: ImageItemIndex[] = [];
+  collectionsImages: ImageItemIndex[] = [];
+  creationsImages: ImageItemIndex[] = [];
+  galleryImages: ImageItemIndex[] = [];
 
   constructor(
     public imageItemIndexService: ImageItemIndexService,
@@ -34,38 +34,46 @@ export class ImageListComponent implements OnDestroy {
   ) {}
 
   async Refresh() {
-     (
+    (
       await (
         await this.imageItemIndexService.getImageByType(this.IN_NOT_USED)
-      ).pipe(takeUntil(this._unsubscribeAll)) ).subscribe((item) => {
+      ).pipe(takeUntil(this._unsubscribeAll))
+    ).subscribe((item) => {
       this.not_usedImages = item;
-    });
-     (
-      await (
-        await this.imageItemIndexService.getImageByType(this.IN_FEATURED)).pipe(takeUntil(this._unsubscribeAll)) ).subscribe((item) => {
-        this.featuredImages = item;
-    });
-     (
-      await (
-        await this.imageItemIndexService.getImageByType(this.IN_COLLECTION)).pipe(takeUntil(this._unsubscribeAll))).subscribe((item) => {
-        this.collectionsImages = item;
     });
     (
       await (
-        await this.imageItemIndexService.getImageByType(this.IN_CREATION)).pipe(takeUntil(this._unsubscribeAll))).subscribe((item) => {
-        this.creationsImages = item;
+        await this.imageItemIndexService.getImageByType(this.IN_FEATURED)
+      ).pipe(takeUntil(this._unsubscribeAll))
+    ).subscribe((item) => {
+      this.featuredImages = item;
     });
-     (
-      await this.imageItemIndexService.getImageByType(this.IN_GALLERY)).pipe(takeUntil(this._unsubscribeAll)) .subscribe((item) => {
+    (
+      await (
+        await this.imageItemIndexService.getImageByType(this.IN_COLLECTION)
+      ).pipe(takeUntil(this._unsubscribeAll))
+    ).subscribe((item) => {
+      this.collectionsImages = item;
+    });
+    (
+      await (
+        await this.imageItemIndexService.getImageByType(this.IN_CREATION)
+      ).pipe(takeUntil(this._unsubscribeAll))
+    ).subscribe((item) => {
+      this.creationsImages = item;
+    });
+    (await this.imageItemIndexService.getImageByType(this.IN_GALLERY))
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((item) => {
         this.galleryImages = item;
-    });
+      });
   }
 
   ngOnInit() {
     this.Refresh();
   }
 
-  drop(event: CdkDragDrop<imageItemIndex[]>) {
+  drop(event: CdkDragDrop<ImageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,

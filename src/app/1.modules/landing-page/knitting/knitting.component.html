@@ -1,34 +1,170 @@
-<app-header [title]="'Bespoke Knitting'"></app-header>
-<div class="relative bg-white sm:h-screen h-full ">
-  <div class="lg:absolute lg:inset-0 rounded">
-    <div class="lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 lg-rounded w-auto h-auto">
-      <img class="w-full max-w-fit object-cover lg:h-full" [ngSrc]="knitting_image" width="800" height="800" alt="">
-    </div>
-  </div>
-  <div class="relative px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:mx-auto lg:grid lg:max-w-7xl lg:grid-cols-2 lg:px-8">
-    <div class="lg:col-start-2 lg:pl-8">
-      <div class="mx-auto max-w-prose text-base lg:ml-auto lg:mr-0 lg:max-w-lg">
-        <div class="font-roboto mt-2 text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">Our
-          Process</div>
-        <p class="mt-8 text-lg text-gray-800"></p>
-        <div class="font-roboto text-2xl mt-5 text-gray-800">
-          <div>Cassandra Harada has been knitting and making garments with natural fibers for over 22 years.
-            She has been designing for publications like “Keitodama” and contributing to seasonal collections for
-            yarn companies like Jamieson’s of Shetland for 15 years. While designing patterns for original knitwear
-            is a joy, Cassandra really prefers to work with singular customers who are in need of something specific
-            to suit their needs.</div>
-          <p>
-            Reach out to Cassandra via our <a> <button (click)="onContacts()"><strong>Contacts</strong></button></a>
-            form or at cassandra@cinema-tokyo.com to discuss your needs and schedule a fitting.</p>
-          <p>Garments can also be made from measurements or sending a well loved item that fits, in order to achieve
-            a specific shape and silhouette.</p>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-        </div>
+<app-header [title]="'Sign In'"></app-header>
+
+<div class="flex flex-col m-10 sm:flex-row items-center md:items-start sm:justify-center md:justify-start flex-auto  " >
+  <div class="md:flex md:items-center md:justify-end w-full sm:w-auto md:h-full md:w-1/2 py-8 px-4 sm:p-12 md:p-16 sm:rounded-2xl md:rounded-none sm:shadow md:shadow-none sm:bg-card bg-gray-100">
+      <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0 ">
+
+          <div class="w-12">
+              <img src="favicon.ico">
+          </div>
+
+
+          <div class="mt-8 text-4xl font-extrabold tracking-tight leading-tight text-gray-700">Sign in</div>
+          <div class="flex items-baseline mt-0.5 text-gray-700">
+              <div>Don't have an account?</div>
+              <a
+                  class="ml-1 text-gray-500 hover:underline"
+                  [routerLink]="['/sign-up']">Sign up
+              </a>
+          </div>
+
+
+          <form
+              class="mt-8"
+              [formGroup]="signInForm"
+              #signInNgForm="ngForm">
+
+
+              <mat-form-field class="w-full">
+                  <mat-label>Email address</mat-label>
+                  <input
+                      type="email"
+                      id="email"
+                      matInput
+                      [formControlName]="'email'">
+                  <mat-error *ngIf="signInForm.get('email').hasError('required')">
+                      Email address is required
+                  </mat-error>
+                  <mat-error *ngIf="signInForm.get('email').hasError('email')">
+                      Please enter a valid email address
+                  </mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field class="w-full">
+                  <mat-label>Password</mat-label>
+                  <input
+                      id="password"
+                      matInput
+                      type="password"
+                      [formControlName]="'password'"
+                      #passwordField>
+                  <button
+                      mat-icon-button
+                      type="button"
+                      (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                      matSuffix>
+                      <mat-icon
+                          class="icon-size-5"
+                          *ngIf="passwordField.type === 'password'"
+                          [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                      <mat-icon
+                          class="icon-size-5"
+                          *ngIf="passwordField.type === 'text'"
+                          [svgIcon]="'heroicons_solid:eye-slash'"></mat-icon>
+                  </button>
+                  <mat-error>
+                      Password is required
+                  </mat-error>
+              </mat-form-field>
+
+
+              <div class="inline-flex items-center justify-between w-full mt-1.5">
+                  <mat-checkbox
+                      class="-ml-2"
+                      [color]="'primary'"
+                      [formControlName]="'rememberMe'">
+                      Remember me
+                  </mat-checkbox>
+                  <a
+                      class="text-sm hover:underline text-gray-400"
+                      [routerLink]="['/forgot-password']">Forgot password?
+                  </a>
+              </div>
+
+
+              <button
+                  class="fuse-mat-button-large w-full mt-6"
+                  mat-flat-button
+                  [color]="'primary'"
+                  [disabled]="signInForm.disabled"
+                  (click)="onSignIn()">
+                  <span *ngIf="!signInForm.disabled">
+                      Sign in
+                  </span>
+                  <mat-progress-spinner
+                      *ngIf="signInForm.disabled"
+                      [diameter]="24"
+                      [mode]="'indeterminate'"></mat-progress-spinner>
+              </button>
+
+
+              <div class="flex items-center mt-8">
+                  <div class="flex-auto mt-px border-t"></div>
+                  <!-- <div class="mx-2 text-secondary">Or continue with</div> -->
+                  <div class="flex-auto mt-px border-t"></div>
+              </div>
+
+
+              <!-- <div class="flex items-center mt-8 space-x-4">
+                  <button
+                      class="flex-auto"
+                      type="button"
+                      mat-stroked-button>
+                      <mat-icon
+                          class="icon-size-5"
+                          [svgIcon]="'feather:facebook'"></mat-icon>
+                  </button>
+                  <button
+                      class="flex-auto"
+                      type="button"
+                      mat-stroked-button>
+                      <mat-icon
+                          class="icon-size-5"
+                          [svgIcon]="'feather:twitter'"></mat-icon>
+                  </button>
+                  <button
+                      class="flex-auto"
+                      type="button"
+                      mat-stroked-button>
+                      <mat-icon
+                          class="icon-size-5"
+                          [svgIcon]="'feather:github'"></mat-icon>
+                  </button>
+              </div> -->
+          </form>
       </div>
-    </div>
+  </div>
+  <div class="relative hidden md:flex flex-auto items-center justify-center w-1/2 h-full p-16 lg:px-28 overflow-hidden bg-gray-800 dark:border-l">
+      <svg class="absolute inset-0 pointer-events-none"
+           viewBox="0 0 960 540" width="100%" height="100%" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+          <g class="text-gray-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+              <circle r="234" cx="196" cy="23"></circle>
+              <circle r="234" cx="790" cy="491"></circle>
+          </g>
+      </svg>
+
+      <svg class="absolute -top-16 -right-16 text-gray-700"
+           viewBox="0 0 220 192" width="220" height="192" fill="none">
+          <defs>
+              <pattern id="837c3e70-6c3a-44e6-8854-cc48c737b659" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <rect x="0" y="0" width="4" height="4" fill="currentColor"></rect>
+              </pattern>
+          </defs>
+          <rect width="220" height="192" fill="url(#837c3e70-6c3a-44e6-8854-cc48c737b659)"></rect>
+      </svg>
+      <div class="z-10 relative w-full max-w-2xl">
+          <div class="text-7xl font-bold leading-none text-gray-100">
+              <div>Welcome to</div>
+              <div>our application</div>
+          </div>
+          <div class="mt-6 text-lg tracking-tight leading-6 text-gray-400">
+              Cinemafile Note is a platform for movie lovers to share their thoughts and opinions on movies.
+          </div>
+
+      </div>
   </div>
 </div>
+
+
+

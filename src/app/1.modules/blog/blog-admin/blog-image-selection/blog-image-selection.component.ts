@@ -3,14 +3,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, Subscription, map } from 'rxjs';
 
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
-import { imageItem, imageItemIndex } from 'app/5.models/imageItem';
+import { imageItem, ImageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
   moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
-
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'blog-image-selection',
@@ -26,18 +26,17 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   subNotUsed: Subscription;
   subThoughts: Subscription;
 
-  not_usedImages: imageItemIndex[] = [];
-  blogImages: imageItemIndex[] = [];
+  not_usedImages: ImageItemIndex[] = [];
+  blogImages: ImageItemIndex[] = [];
 
   constructor(
+    
     public imageItemIndexService: ImageItemIndexService,
     private fb: FormBuilder
   ) {}
 
   async sortNotUsed() {
-    return (
-      await this.imageItemIndexService.getAllImages('IN_NOT_USED')
-    ).pipe(
+    return (await this.imageItemIndexService.getAllImages('IN_NOT_USED')).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.ranking < b.ranking ? -1 : 1;
@@ -47,11 +46,11 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
     );
   }
 
-  updateImageSelection(image: imageItemIndex) {
+  updateImageSelection(image: ImageItemIndex) {
     console.log('updateImageSelection', image.fileName);
   }
 
-  onAddImage(e: imageItemIndex) {
+  onAddImage(e: ImageItemIndex) {
     e.ranking = 0;
     e.type = this.blogId;
     console.debug('Update Image Type', JSON.stringify(e));

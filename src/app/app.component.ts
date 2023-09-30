@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
     );
   }
 
-  title = 'Made-To';
+  title = 'Tokyo Cinema';
   getState(outlet: any) {
     return outlet.activatedRouteData.state;
   }

@@ -9,7 +9,7 @@ import {
 import { Product } from 'app/5.models/products';
 import { Router } from '@angular/router';
 import { Observable, Subject, Subscription, takeUntil } from 'rxjs';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
@@ -17,13 +17,12 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
   templateUrl: './shop-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ShopCardComponent  {
+export class ShopCardComponent {
   @Input() product: Product;
-  
+
   router = inject(Router);
-  
+
   openProductDetail() {
     this.router.navigate(['shop/product', this.product.id]);
   }
-
 }

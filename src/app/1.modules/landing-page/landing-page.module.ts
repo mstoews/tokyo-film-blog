@@ -24,6 +24,7 @@ import { ServicesComponent } from './made-to-services/services.component';
 import { FollowingComponent } from './following/following.component';
 import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
 import { CinemaComponent } from './cinema/cinema.component';
+import { SignOutClassicComponent } from '../ui/pages/authentication/sign-out/classic/sign-out.component';
 
 const routes: Routes = [
   {
@@ -53,23 +54,22 @@ const routes: Routes = [
     data: { state: 'Cinema' },
   },
   {
-    path: 'ready-to-wear',
+    path: 'profile',
     pathMatch: 'full',
-    component: ReadyToWearComponent,
-    data: { state: 'read-to-wear' },
-  },
-  {
-    path: 'knitting',
-    pathMatch: 'full',
+    title: 'LogIn',
     component: KnittingComponent,
-    data: { state: 'knitting' },
+    data: { state: 'profile' },
   },
+
   {
-    path: 'repairs',
+    path: 'sign-out',
     pathMatch: 'full',
-    component: RepairsComponent,
-    data: { state: 'repairs' },
+    title: 'Sign Out',
+    component: SignOutClassicComponent,
+    data: { state: 'sign-out' },
   },
+
+  
   {
     path: 'services',
     pathMatch: 'full',

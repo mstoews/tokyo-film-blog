@@ -38,6 +38,8 @@ import { HeadingModule } from './2.main/header/heading.module';
 import { UserService } from './4.services/auth/user.service';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { provideAuth } from './1.modules/auth/auth/auth.provider';
+
 
 @NgModule({
   declarations: [AppComponent, CookieBannerComponent],
@@ -67,6 +69,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     WishListResolver,
     BlogResolver,
     CalendarResolver,
+
     UserService,
     {
       provide: HTTP_INTERCEPTORS,

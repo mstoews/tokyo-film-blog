@@ -23,18 +23,20 @@ export class LoginComponent implements OnInit, OnDestroy {
     ngOnInit() {
 
         this.afAuth.app.then(app => {
-            const uiConfig = {
+
+          const uiConfig = {
                 signInOptions: [
                     EmailAuthProvider.PROVIDER_ID,
                 ],
                 callbacks: {
                     signInSuccessWithAuthResult: this.onLoginSuccessful.bind(this)
-                }
+                },
+                credentialHelper: firebaseui.auth.CredentialHelper.NONE
             };
 
             this.ui = new firebaseui.auth.AuthUI(app.auth());
             this.ui.start("#firebaseui-auth-container", uiConfig);
-            this.ui.disableAutoSignIn();
+            // this.ui.disableAutoSignIn();
         });
 
     }

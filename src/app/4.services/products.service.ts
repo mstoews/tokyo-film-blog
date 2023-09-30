@@ -6,7 +6,7 @@ import {
 import { first, from, map, Observable } from 'rxjs';
 import { Product } from 'app/5.models/products';
 import { convertSnaps } from './db-utils';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ImageItemIndexService } from './image-item-index.service';
 
@@ -22,12 +22,16 @@ export class ProductsService {
   constructor(
     public imageItemIndexService: ImageItemIndexService,
     public afs: AngularFirestore,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {
     this.productsCollection = afs.collection<Product>('inventory');
-    this.inventoryItems = this.productsCollection.valueChanges({  idField: 'id', });
+    this.inventoryItems = this.productsCollection.valueChanges({
+      idField: 'id',
+    });
     this.productPartialCollection = afs.collection<Product>('inventory');
-    this.inventoryPartialItems = this.productPartialCollection.valueChanges({ idField: 'id', });
+    this.inventoryPartialItems = this.productPartialCollection.valueChanges({
+      idField: 'id',
+    });
   }
 
   createPartial(productPartial: Product) {
@@ -101,9 +105,11 @@ export class ProductsService {
   }
 
   getProductImage(parentId: string): any {
-    var productImages: Observable<imageItemIndex[]>;
-    var productImagesCollection: AngularFirestoreCollection<imageItemIndex>;
-    productImagesCollection = this.afs.collection<imageItemIndex>(`inventory/${parentId}/images` );
+    var productImages: Observable<ImageItemIndex[]>;
+    var productImagesCollection: AngularFirestoreCollection<ImageItemIndex>;
+    productImagesCollection = this.afs.collection<ImageItemIndex>(
+      `inventory/${parentId}/images`
+    );
     productImages = productImagesCollection.valueChanges({ idField: 'id' });
     return productImages.pipe(
       map((images) => images.filter((product) => product.parentId === parentId))
@@ -112,7 +118,7 @@ export class ProductsService {
 
   async getImageListByProduct(type: string) {
     if (type === null || type === undefined || type === '') {
-      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+      let imageIndexCollections = this.afs.collection<ImageItemIndex>(
         'originalImageList',
         (ref) => ref.orderBy('ranking')
       );
@@ -121,7 +127,7 @@ export class ProductsService {
       });
       return imageIndexItems;
     } else {
-      let imageIndexCollections = this.afs.collection<imageItemIndex>(
+      let imageIndexCollections = this.afs.collection<ImageItemIndex>(
         'originalImageList',
         (ref) => ref.orderBy('ranking')
       );

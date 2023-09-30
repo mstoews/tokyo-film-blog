@@ -1,16 +1,16 @@
 <!-- side bar -->
 <div class="h-screen flex transition duration-150 ease-in-out">
-  <aside class="sm:ml-6 lg:ml-0 relative text-gray-800 bg-white h-full flex-col justify-between" aria-label="Sidebar">
+  <aside class="sm:ml-6 mt-10 lg:ml-0 relative text-gray-800 bg-white h-full flex-col justify-between" aria-label="Sidebar">
     <div class="ml-4">
-      <!-- <img src="assets/madetologo-black.svg" alt="logo"> -->
+      <img src="favicon.ico" alt="logo">
     </div>
 
     <div class="overflow-y-auto">
       <div class="px-3 text-gray-100 rounded dark:bg-gray-800 ">
         <ul class="space-y-2">
 
-          <!-- <ng-container *ngIf="(userService.roles$ | async) as roles">
-            <div *ngIf="roles.admin"> -->
+           <ng-container *ngIf="(userService.roles$ | async) as roles">
+            <div *ngIf="roles.admin">
               <li
                 class="mt-3 flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-300"
                 (click)="isToggle === 1 ? (isToggle = 2) : (isToggle = 1)">
@@ -27,8 +27,8 @@
                     [svgIcon]="'heroicons_outline:chevron-down'"></mat-icon>
                 </div>
               </li>
-            <!-- </div>
-          </ng-container> -->
+             </div>
+          </ng-container>
           <ul *ngIf="isToggle === 1" class="text-sm mt-3 leading-none w-full">
             <li>
               <a routerLink="home" (click)="onClose()"
@@ -46,44 +46,14 @@
                 <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Thoughts</span>
               </a>
             </li>
-            <!-- <li>
-              <a (click)="onShop()"
-                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
-                <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:shop'"></mat-icon>
-                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Shop</span>
-              </a>
-            </li>
-            <li>
-              <a (click)="onWishList()"
-                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
-                <mat-icon class="text-gray-800" [svgIcon]="'heroicons_outline:gift'"></mat-icon>
-                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Wish List</span>
-              </a>
-            </li>
 
             <li>
-              <a (click)="onCart()"
-                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base pr- grow hover:bg-gray-300 dark:hover:bg-gray-300 hover:cursor-pointer">
-                <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:shopping_cart'"></mat-icon>
-                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap" [matBadge]=cartCount
-                  [matBadgeHidden]="cartCount===0">Shopping Cart</span>
-              </a>
-            </li> -->
-            <!-- <li>
-              <a routerLink="home/services" (click)="onClose()"
-                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
-                <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:miscellaneous_services'"></mat-icon>
-                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Services</span>
-              </a>
-            </li> -->
-
-            <!-- <li>
               <a routerLink="home/following" (click)="onClose()"
                 class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
                 <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:follow_the_signs'"></mat-icon>
-                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Follow Us</span>
+                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Gallery</span>
               </a>
-            </li> -->
+            </li>
             <li>
               <a routerLink="collections-admin/collections" (click)="onClose()"
                 class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
@@ -91,13 +61,7 @@
                 <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Collections</span>
               </a>
             </li>
-            <!-- <li>
-              <a routerLink="blog/calendar" (click)="onClose()"
-                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
-                <mat-icon class="text-gray-800" [svgIcon]="'heroicons_outline:calendar'"></mat-icon>
-                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Calendar</span>
-              </a>
-            </li> -->
+
             <li>
               <a routerLink="home/about_us" (click)="onClose()"
                 class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
@@ -105,11 +69,35 @@
                 <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">About Us</span>
               </a>
             </li>
+
+
+            <!-- <li>
+              <a routerLink="profile" (click)="onClose()"
+                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+                <mat-icon class="text-gray-800" [svgIcon]="'heroicons_outline:login'"></mat-icon>
+                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Profile</span>
+              </a>
+            </li> -->
+            <li>
+              <a routerLink="home/profile" (click)="onClose()"
+                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+                <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:login'"></mat-icon>
+                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Sign-In</span>
+              </a>
+            </li>
+            <li>
+              <a routerLink="home/sign-out" (click)="onClose()"
+                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+                <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:logout'"></mat-icon>
+                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Sign-Out</span>
+              </a>
+            </li>
+
+
           </ul>
 
-
-          <!-- <ng-container *ngIf="(userService.roles$ | async) as roles">
-            <div *ngIf="roles.admin"> -->
+           <ng-container *ngIf="(userService.roles$ | async) as roles">
+            <div *ngIf="roles.admin">
               <li
                 class="mt-3 transition-transform duration-300 motion-reduce:transition-none flex items-center p-2 pr-5 font-normal text-gray-700 rounded-lg text-base grow hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-300"
                 (click)="isToggle === 2 ? (isToggle = 1) : (isToggle = 2)">
@@ -187,21 +175,19 @@
                   </a>
                 </li> -->
               </ul>
-            <!-- </div>
-          </ng-container> -->
+            </div>
+          </ng-container>
         </ul>
 
       </div>
     </div>
     <div class="flex items-center p-4 border-t mb-14 mt-14 hover:bg-gray-300">
       <div class="w-10 h-10 bg-cover rounded-md mr-3 ">
-        <img class="rounded-full h-full w-full overflow-hidden shadow bg-slate-700"
-          src="assets/images/madetologowhite.svg" alt="avatar" role="img" />
+        <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:supervised_user_circle'"></mat-icon>
       </div>
       <div>
+        <p class="text-sm font-medium leading-none text-gray-600">User</p>
         <p class="text-sm font-medium leading-none text-gray-600">{{userEmail}}</p>
-        <p class="m-1 text-sm font-medium leading-none text-gray-600 hover:cursor-pointer hover:text-gray-900 "
-          (click)="onProfile()">See Profile</p>
       </div>
     </div>
   </aside>

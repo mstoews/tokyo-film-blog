@@ -14,7 +14,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Category } from 'app/5.models/category';
 import { CategoryService } from 'app/4.services/category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 
 @Component({
@@ -24,7 +24,6 @@ import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CategoryGridComponent implements OnInit, OnDestroy {
-
   @ViewChild('drawer') drawer: MatDrawer;
   drawOpen: 'open' | 'close' = 'open';
   categoryGroup: FormGroup;
@@ -43,22 +42,21 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
 
   subNotUsed: Subscription;
 
-  not_usedImages: imageItemIndex[] = [];
+  not_usedImages: ImageItemIndex[] = [];
 
   allCategories$ = this.categoryService.getAll();
 
   async onRefresh() {
     this.allCategories$ = this.categoryService.getAll();
-    (await this.sortNotUsed()).pipe(
-    takeUntil(this._unsubscribeAll)).subscribe((item) => {
-      this.not_usedImages = item;
-    });
+    (await this.sortNotUsed())
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((item) => {
+        this.not_usedImages = item;
+      });
   }
 
   async sortNotUsed() {
-    return (
-      await this.imageItemIndexService.getAllImages('IN_NOT_USED')
-    ).pipe(
+    return (await this.imageItemIndexService.getAllImages('IN_NOT_USED')).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
@@ -100,7 +98,7 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
     });
   }
 
-  UpdateCategoryURL(e: imageItemIndex) {
+  UpdateCategoryURL(e: ImageItemIndex) {
     this.categoryGroup.patchValue({
       image: e.imageSrc200,
     });
@@ -167,13 +165,11 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
     }
   }
 
-
   onCreate() {
     this.currentDoc = '';
     this.createEmptyForm();
     this.openDrawer();
   }
-
 
   onUpdate(category: Partial<Category>) {
     if (this.currentDoc !== '') {
@@ -213,5 +209,4 @@ export class CategoryGridComponent implements OnInit, OnDestroy {
       this.createEmptyForm();
     }
   }
-
 }

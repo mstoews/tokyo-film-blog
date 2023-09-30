@@ -102,14 +102,12 @@ export class BlogService {
       map((blogs) =>
         blogs.filter(
           (pub) =>
-            (pub.published === true &&
-              pub.calendar === false &&
-              pub.cinema === false) ||
-            pub.cinema === undefined
-        )
+            (pub.published === true ))
       )
     );
   }
+
+
 
   getCinemaBlog() {
     return this.blogItems.pipe(

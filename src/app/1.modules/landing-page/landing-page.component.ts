@@ -124,36 +124,11 @@ export class LandingPageComponent implements OnInit, OnDestroy {
 
   onImages() {
     console.log('onImages');
-    this.router.navigate(['image-admin']);
-  }
-
-  onLastestBlog() {
-    this.router.navigate(['blog']);
-  }
-
-  onService() {
-    this.router.navigate(['home/services']);
+    this.router.navigate(['collections-admin/collections']);
   }
 
   onFollowing() {
     this.router.navigate(['home/following']);
-  }
-
-  onServices(service: string) {
-    // console.debug(service);
-    this.router.navigate(['service']);
-  }
-
-  openShoppingCart() {
-    this.router.navigate(['shop/cart', this.authService.userData.uid]);
-  }
-
-  openShop() {
-    this.router.navigate(['shop']);
-  }
-
-  openWishList() {
-    this.router.navigate(['shop/wishlist', this.authService.userData.uid]);
   }
 
   onAboutUs(service: string) {

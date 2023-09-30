@@ -6,7 +6,7 @@ import {
 import {
   ImageItemSnap,
   imageItem,
-  imageItemIndex,
+  ImageItemIndex,
 } from 'app/5.models/imageItem';
 import { rawImageItem } from 'app/5.models/rawImagesList';
 import { convertSnaps } from './db-utils';
@@ -45,14 +45,14 @@ export class ImageListService {
   private smallImageCol: AngularFirestoreCollection<imageItem>;
   private largeImageCol: AngularFirestoreCollection<imageItem>;
   private imageItemCopyCol: AngularFirestoreCollection<imageItem>;
-  private imageItemIndexCol: AngularFirestoreCollection<imageItemIndex>;
+  private imageItemIndexCol: AngularFirestoreCollection<ImageItemIndex>;
 
   private updateItemsCollection: AngularFirestoreCollection<imageItem>;
   private rawImageItems: Observable<rawImageItem[]>;
   private loadImageItems: Observable<imageItem[]>;
   private imageItems: Observable<imageItem[]>;
   private imageCopy: Observable<imageItem[]>;
-  private imageItemIndex: Observable<imageItemIndex[]>;
+  private imageItemIndex: Observable<ImageItemIndex[]>;
 
   private largeImageItems: Observable<imageItem[]>;
   private smallImageItems: Observable<imageItem[]>;
@@ -75,7 +75,7 @@ export class ImageListService {
     this.imageItemCopyCol = afs.collection<imageItem>('imageItemCopyList');
 
     this.imageItemIndexCol =
-      afs.collection<imageItemIndex>('originalImageList');
+      afs.collection<ImageItemIndex>('originalImageList');
     this.imageItemIndex = this.imageItemIndexCol.valueChanges({
       idField: 'id',
     });
@@ -457,7 +457,7 @@ export class ImageListService {
 
     switch (size) {
       case '200':
-        fileName = `/thumbnails/${fileName}_${size}x${size}.${fileExt}`;
+        fileName = `/${size}/${fileName}_${size}x${size}.${fileExt}`;
         var pathReference = this.storage
           .ref(fileName)
           .getDownloadURL()

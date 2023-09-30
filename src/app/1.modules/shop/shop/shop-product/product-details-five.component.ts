@@ -14,7 +14,7 @@ import { AuthService } from 'app/4.services/auth/auth.service';
 import { CategoryService } from 'app/4.services/category.service';
 import { Category } from 'app/5.models/category';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
 import { Cart } from 'app/5.models/cart';
 import { MenuToggleService } from 'app/4.services/menu-toggle.service';
@@ -37,7 +37,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   product: Product;
   isLoggedIn$: Observable<boolean>;
 
-  inventoryImages$: Observable<imageItemIndex[]>;
+  inventoryImages$: Observable<ImageItemIndex[]>;
   imagesList: string[];
   cart: Observable<Cart[]>;
 
@@ -62,13 +62,11 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
   quantity: number = 1.0;
   total_cost: number = 0.0;
 
-
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   userData: any;
   userId: String;
 
-   ngOnInit(): void {
-
+  ngOnInit(): void {
     initTE({ Lightbox });
 
     this.userData = this.authService.userData;
@@ -89,7 +87,8 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
     if (this.authService.userData) {
       this.cartService
-        .cartByUserId(this.authService.userData.uid).pipe(takeUntil(this._unsubscribeAll))
+        .cartByUserId(this.authService.userData.uid)
+        .pipe(takeUntil(this._unsubscribeAll))
         .subscribe((cart) => {
           this.cartCount = cart.length;
           cart.forEach((item) => {
@@ -107,12 +106,14 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
           });
         });
     }
-    this.inventoryImages$ = this.imageItemIndexService.getAllImages( this.product.id);
+    this.inventoryImages$ = this.imageItemIndexService.getAllImages(
+      this.product.id
+    );
     this.menuToggleService.setCartListCount(this.productIds.length);
     this.menuToggleService.setWishListCount(this.wishListIds.length);
   }
 
-  setImage(e: imageItemIndex) {
+  setImage(e: ImageItemIndex) {
     this.mainImage = e.imageSrc400;
   }
 
@@ -183,7 +184,7 @@ export class ProductDetailsFiveComponent implements OnInit, OnDestroy {
 
   existsInCart(): boolean {
     let found = this.productIds.find((item) => {
-      return item === this.product.id
+      return item === this.product.id;
     });
     if (found) {
       this.snackBar.open('The item already exists in your cart ... ', 'OK', {

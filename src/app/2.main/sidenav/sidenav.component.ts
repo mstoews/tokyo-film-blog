@@ -2,9 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { AuthService } from 'app/4.services/auth/auth.service';
 import { UserService } from 'app/4.services/auth/user.service';
-import { Carousel, Dropdown, Sidenav, Ripple, initTE } from 'tw-elements';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-sidenav',
@@ -12,19 +10,17 @@ import { Observable } from 'rxjs';
 })
 export class SideNavComponent implements OnInit {
   constructor(
-    public authService: AuthService,
+    
     public auth: AngularFireAuth,
     public userService: UserService,
     public snackBar: MatSnackBar,
     private route: Router,
 
   ) {
-    this.authService.afAuth.authState.subscribe((user) => {
-      this.userEmail = user?.email;
-      console.debug('User Email: ' + this.userEmail);
-    });
+    
   }
   isToggle: number = 1;
+  isLoggin = false;
   status: boolean = false;
     clickEvent() {
         this.status = !this.status;
@@ -43,11 +39,10 @@ export class SideNavComponent implements OnInit {
 
   ngOnInit() {
     this.auth.authState.subscribe((user) => {
-      if (user) {
-        this.userId = user.uid;
-      }
+      this.userEmail = user?.email;
+      this.isLoggin = true;
+      console.debug('User Email: ' + this.userEmail);
     });
-    initTE({ Carousel, Dropdown, Sidenav, Ripple });
   }
 
 
@@ -80,55 +75,9 @@ export class SideNavComponent implements OnInit {
     }
   }
 
-  onShop() {
-    this.route.navigate(['shop']);
-    this.notifyParentCloseDrawer.emit();
-  }
-
   onProfile() {
-    this.route.navigate(['profile']);
+    this.route.navigate(['/home/profile']);
     this.notifyParentCloseDrawer.emit();
   }
-
-
-  onWishList() {
-    this.userService.isLoggedIn$.subscribe((user) => {
-      if (user === false) {
-        this.snackBar.open('Please sign in to access the wish list', 'OK', {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          panelClass: 'bg-danger',
-          duration: 3000,
-        });
-        this.route.navigate(['profile']);
-      } else {
-        this.auth.authState.subscribe((user) => {
-          if (user) {
-            this.userId = user.uid;
-          }
-          this.route.navigate(['/shop/wishlist/', this.userId]);
-          this.notifyParentCloseDrawer.emit();
-        });
-      }
-    });
-  }
-
-  onCart() {
-    this.userService.isLoggedIn$.subscribe((user) => {
-      if (user === false) {
-        this.snackBar.open('Please sign in to access the cart', 'OK', {
-          verticalPosition: 'top',
-          horizontalPosition: 'right',
-          panelClass: 'bg-danger',
-          duration: 3000,
-        });
-        this.route.navigate(['profile']);
-      } else {
-        this.route.navigate(['/shop/cart/', this.userId]);
-        this.notifyParentCloseDrawer.emit();
-      }
-    });
-  }
-
 
 }

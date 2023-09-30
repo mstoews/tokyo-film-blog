@@ -1,23 +1,21 @@
 import { Component, Input, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { initTE, Lightbox } from 'tw-elements';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 
 @Component({
   selector: 'app-tw-lightbox',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './tw-lighthouse.component.html',
-  styleUrls: ['./tw-lighthouse.component.css']
+  styleUrls: ['./tw-lighthouse.component.css'],
 })
-export class TwLighthouseComponent implements OnInit   {
-
-  @Input() public imageCollection: imageItemIndex[] = [];
+export class TwLighthouseComponent implements OnInit {
+  @Input() public imageCollection: ImageItemIndex[] = [];
   imageCount = signal<number>(0);
-  imageItems = <imageItemIndex[]>([]);
+  imageItems = <ImageItemIndex[]>[];
 
   imageURL: string;
-
 
   ngOnInit() {
     initTE({ Lightbox });
@@ -30,5 +28,4 @@ export class TwLighthouseComponent implements OnInit   {
     }
     this.imageURL = this.imageItems[0].imageSrc800;
   }
-
 }

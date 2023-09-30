@@ -1,5 +1,5 @@
 <ng-container *ngIf="featuredList$ | async as galleryList">
-  <app-header class="bg-white" [title]="'Follow Us'"></app-header>
+  <app-header class="bg-white" [title]="'Image Gallery'"></app-header>
   <div>
     <!-- <iframe class="embed-responsive-item h-[800px] w-full p-20"
       src="https://www.youtube.com/embed/vlDzYIIOYmM?enablejsapi=1&amp;origin=https%3A%2F%2Fmdbootstrap.com"
@@ -7,23 +7,12 @@
     </iframe> -->
   </div>
   <div class="bg-white">
-    <app-tw-lightbox class="hidden" [imageCollection]="galleryList"></app-tw-lightbox>
+    <!-- <app-tw-lightbox class="hidden" [imageCollection]="galleryList"></app-tw-lightbox> -->
     <div class="px-6 mx-auto text-gray-900 max-w-7xl md:px-0 h-[1000px]">
       <div class="flex items-center justify-center grow">
         <div
           class="flex flex-col items-start space-y-5 md:w-auto lg:flex-row lg:justify-center lg:items-center lg:space-x-2">
-          <div class="flex flex-col items-start justify-start space-y-2">
-            <h1 class="text-xl leading-5 text-gray-800 md:text-2xl lg:text-4xl md:leading-6 lg:leading-9 font-roboto">
-              Social Media</h1>
-            <p class="text-base max-w-[280px] leading-2 text-gray-600">To see what we’re making in the atelier today,
-              please have a look at our social media!</p>
-            <a class="pb-px text-lg text-gray-600 border-transparent leading-2 hover:bg-gray-600 hover:text-gray-900 hover:rounded"
-              href="https://www.facebook.com/profile.php?id=100083068317439">@Facebook</a>
-            <a class="text-lg text-gray-600 border-transparent leading-2 m-1pb-px hover:bg-gray-600 hover:text-gray-900 hover:rounded"
-              href="https://www.instagram.com/made.to.atelier/">@made.to.atelier</a>
-            <a class="pb-px text-lg text-gray-600 leading-2 hover:bg-gray-600 hover:text-gray-900 hover:rounded"
-              href="https://www.instagram.com/cassandra_harada/">@cassandra_harada</a>
-          </div>
+
           <div class="flex items-center justify-center grow">
             <app-gallery [imageCollection]="galleryList"></app-gallery>
           </div>

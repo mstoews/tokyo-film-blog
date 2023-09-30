@@ -79,7 +79,7 @@
     <div class="col-start-2 col-span-3 text-center sm:grid-cols-5 gap-4 content-start mt-20">
       <button (click)="onMenuToggle()" class="visiable pl-20 xl:visible">
         <!-- <img class="h-40 w-80 hover:caret-context-menu" src="assets/made-to-logo-white.svg" /> -->
-        <div class="text-8xl font-roboto">Cinema Tokyo</div>
+        <div class="text-8xl font-roboto">{{mainPageDoc[0].features_header}}</div>
       </button>
       <div
         class="col-start-2 col-span-3 text-center text-2xl m-20 font-bold text-gray-100 uppercase font-roboto sm:m-1 md:text-3xl lg:text-4xl">
@@ -119,7 +119,7 @@
         </div>
       </div>
 
-      <div (click)="onContactUs()"
+      <div (click)="onFollowing()"
         class="hover:cursor-pointer block px-4 py-6 mx-auto text-center max-w-7xl sm:px-6 lg:py-10 lg:px-8 transition duration-300 ease-in-out hover:opacity-80">
         <img src="./assets/films_b_and_w.jpg" class="rounded-lg hover:" width="400" height="400">
         <div

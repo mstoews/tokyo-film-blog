@@ -1,13 +1,14 @@
 {
   "projects": {
-    "default": "cinema-blog",
-    "production": "cinema-blog"
+    "default": "cinema-tokyo",
+    "production": "cinema-tokyo",
+    "prod": "cinema-tokyo"
   },
   "targets": {
-    "cinema-blog": {
+    "cinema-tokyo": {
       "hosting": {
-        "cinema": [
-          "cinema-blog"
+        "cinema-tokyo": [
+          "cinema-tokyo"
         ]
       }
     }

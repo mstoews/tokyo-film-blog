@@ -18,39 +18,27 @@ const routes: Route[] = [
         (mod) => mod.LandingPageModule
       ),
     data: { state: 'home' },
-    title: 'Made To',
+    title: 'FFT Home',
   },
+
   {
-    path: 'authentication',
+    path: 'profile',
     loadChildren: () =>
-      import('./1.modules/ui/pages/authentication/authentication.module').then(
-        (mod) => mod.AuthenticationModule
+      import('./1.modules/ui/pages/profile/profile.module').then(
+        (mod) => mod.ProfileModule
       ),
-    data: { state: 'authenication' },
-    title: 'Login',
+      canActivate: [AngularFireAuthGuard],
+      data: { authGuardPipe: adminOnly },
   },
-  {
-    path: 'login',
-    loadChildren: () =>
-      import('./1.modules/auth/auth.module').then((mod) => mod.AuthModule),
-    data: { state: 'login' },
-    title: 'Login',
-  },
-  {
-    path: 'shop',
-    loadChildren: () =>
-      import('./1.modules/shop/shop.module').then((mod) => mod.ShopModule),
-    data: { state: 'shop' },
-    title: 'Shop',
-  },
+
   {
     path: 'blog',
     loadChildren: () =>
       import('./1.modules/blog/blog.module').then(
         (mod) => mod.MadeToBlogModule
       ),
-    data: { state: 'blog' },
-    title: 'Thoughts',
+      canActivate: [AngularFireAuthGuard],
+      data: { authGuardPipe: adminOnly },
   },
   {
     path: 'image-admin',
@@ -59,8 +47,8 @@ const routes: Route[] = [
         './1.modules/admin/image-maintenance/image-maintenance.module'
       ).then((mod) => mod.ImageMaintenanceModule),
     title: 'Image Maintenance',
-    //canActivate: [AngularFireAuthGuard],
-    //data: { authGuardPipe: adminOnly },
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
   },
 
   {
@@ -101,23 +89,15 @@ const routes: Route[] = [
     data: { state: 'collections' },
     title: 'Featured',
   },
-  {
-    path: 'profile',
-    loadChildren: () =>
-      import('./1.modules/ui/pages/profile/profile.module').then(
-        (mod) => mod.ProfileModule
-      ),
-    data: { state: 'profile' },
-    title: 'Profile',
-  },
+
   {
     path: 'policy',
     loadChildren: () =>
       import('./1.modules/policy/policy.module').then(
         (mod) => mod.PolicyModule
       ),
-    data: { state: 'policy' },
-    title: 'Policy',
+      canActivate: [AngularFireAuthGuard],
+      data: { authGuardPipe: adminOnly },
   },
   {
     path: 'tos',
@@ -125,16 +105,16 @@ const routes: Route[] = [
       import('./1.modules/policy/policy.module').then(
         (mod) => mod.PolicyModule
       ),
-    data: { state: 'tos' },
-    title: 'Terms of Service',
+      canActivate: [AngularFireAuthGuard],
+      data: { authGuardPipe: adminOnly },
   },
-
   {
     path: '**',
     redirectTo: '/home',
     data: { state: 'home' },
     // Maybe create a page not found component page instead of just going to the 'home'
   },
+
 ];
 
 @NgModule({

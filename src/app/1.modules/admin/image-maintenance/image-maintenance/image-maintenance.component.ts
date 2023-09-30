@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ImageListService } from 'app/4.services/image-list.service';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 
 import {
   CdkDragDrop,
@@ -30,7 +30,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   onUpdate: any;
   cRAG: any;
   sTitle: any;
-  currentImage: imageItemIndex;
+  currentImage: ImageItemIndex;
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_COLLECTION = 'IN_COLLECTION';
@@ -42,10 +42,10 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   subGallery: Subscription;
   subProducts: Subscription;
 
-  not_usedImages: imageItemIndex[] = [];
-  collectionsImages: imageItemIndex[] = [];
-  galleryImages: imageItemIndex[] = [];
-  productsImages: imageItemIndex[] = [];
+  not_usedImages: ImageItemIndex[] = [];
+  collectionsImages: ImageItemIndex[] = [];
+  galleryImages: ImageItemIndex[] = [];
+  productsImages: ImageItemIndex[] = [];
 
   constructor(
     public imageItemIndexService: ImageListService,
@@ -55,9 +55,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
   ) {}
 
   RefreshList() {
-
     alert('RefreshList');
-
   }
 
   RefreshImageList() {
@@ -106,7 +104,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     });
   }
 
-  Refresh() { }
+  Refresh() {}
 
   createEmptyForm() {
     this.imageGroup = this.fb.group({
@@ -164,7 +162,7 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
 
-  drop(event: CdkDragDrop<imageItemIndex[]>) {
+  drop(event: CdkDragDrop<ImageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -223,6 +221,5 @@ export class ImageMaintenanceComponent implements OnInit, OnDestroy {
     this.subCollections.unsubscribe();
     this.subGallery.unsubscribe();
     this.subProducts.unsubscribe();
-
   }
 }

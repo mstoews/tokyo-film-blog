@@ -1,12 +1,19 @@
-import {Component, OnInit, OnDestroy, Input, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subject, map, shareReplay, takeUntil } from 'rxjs';
-import { imageItemIndex } from 'app/5.models/imageItem';
-import { CdkDragDrop, moveItemInArray, transferArrayItem }  from '@angular/cdk/drag-drop';
+import { ImageItemIndex } from 'app/5.models/imageItem';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { ProductsService } from 'app/4.services/products.service';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
 import { ImageItemIndexService } from 'app/4.services/image-item-index.service';
-import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.service';
+import {
+  FilterEnum,
+  ImageToolbarService,
+} from 'app/4.services/image-toolbar.service';
 
 @Component({
   selector: 'inventory-image-selection',
@@ -14,32 +21,31 @@ import { FilterEnum, ImageToolbarService } from 'app/4.services/image-toolbar.se
   styleUrls: ['./inventory-image-selection.component.css'],
 })
 export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
-
   @Input() productId: string;
   @Input() imageQuery: string;
 
   _unsubscribeAll: Subject<any> = new Subject<any>();
 
-  currentImage: imageItemIndex;
+  currentImage: ImageItemIndex;
   IN_NOT_USED = 'IN_NOT_USED';
 
-
-  not_usedImages: imageItemIndex[] = [];
-  collectionsImages: imageItemIndex[] = [];
+  not_usedImages: ImageItemIndex[] = [];
+  collectionsImages: ImageItemIndex[] = [];
 
   imageToolbarService = inject(ImageToolbarService);
   filterSig = this.imageToolbarService.filterSig;
-
 
   constructor(
     private deleteDupes: DeleteDuplicateService,
     public imageItemIndexService: ImageItemIndexService,
     private productService: ProductsService,
     private fb: FormBuilder
-  )
-  {
+  ) {
     this.imageQuery = 'all';
-    console.debug('inventory-image-selection.component.ts: filterSig', this.filterSig);
+    console.debug(
+      'inventory-image-selection.component.ts: filterSig',
+      this.filterSig
+    );
     this.imageItemIndexService.updateProductItems();
   }
 
@@ -49,32 +55,31 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     this.imageItemIndexService.updateImageList(image);
   }
 
-  createImageOnce() {
+  createImageOnce() {}
 
-  }
+  refreshList() {}
 
-  refreshList() {
-
-  }
-
-  UpdateInventoryItem(e: imageItemIndex) {
+  UpdateInventoryItem(e: ImageItemIndex) {
     e.type = this.productId;
     this.imageItemIndexService.updateImageList(e);
   }
 
   async sortNotUsed(query: string) {
-    query = this.imageToolbarService.filterSig()
-    if (query ===  FilterEnum.all) {
-       query = null;
-    }  else {
+    query = this.imageToolbarService.filterSig();
+    if (query === FilterEnum.all) {
+      query = null;
+    } else {
       query = FilterEnum.not_used;
     }
 
-    return ( await this.imageItemIndexService.getAllImages(this.IN_NOT_USED)).pipe(
+    return (
+      await this.imageItemIndexService.getAllImages(this.IN_NOT_USED)
+    ).pipe(
       map((data) => {
         data.sort((a, b) => {
           return a.caption < b.caption ? -1 : 1;
-        }), shareReplay() ;
+        }),
+          shareReplay();
         return data;
       })
     );
@@ -88,18 +93,26 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     (await this.sortNotUsed(this.IN_NOT_USED))
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((images) => {
-       this.not_usedImages = images;
-    });
+        this.not_usedImages = images;
+      });
 
-    (await this.imageItemIndexService.getOriginalImageListByType(this.productId))
-      .pipe(takeUntil(this._unsubscribeAll), shareReplay()).subscribe((item) => {
-      this.collectionsImages = item;
-    });
+    (
+      await this.imageItemIndexService.getOriginalImageListByType(
+        this.productId
+      )
+    )
+      .pipe(takeUntil(this._unsubscribeAll), shareReplay())
+      .subscribe((item) => {
+        this.collectionsImages = item;
+      });
   }
 
   ngOnInit() {
     this.Refresh(this.imageToolbarService.filterSig());
-    console.debug('inventory-image-selection.component.ts: sortNotUsed()', this.filterSig);
+    console.debug(
+      'inventory-image-selection.component.ts: sortNotUsed()',
+      this.filterSig
+    );
   }
 
   ngOnDestroy() {
@@ -107,7 +120,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     this._unsubscribeAll.complete();
   }
 
-  drop(event: CdkDragDrop<imageItemIndex[]>) {
+  drop(event: CdkDragDrop<ImageItemIndex[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -159,5 +172,5 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     image.type = newContainerId;
     console.debug('Update Image Type', image);
     this.imageItemIndexService.updateImageList(image);
-    }
   }
+}

@@ -20,7 +20,7 @@ import { MaterialModule } from '../../material.module';
 import { ProgressComponent } from '../progress/progress.component';
 import { DndDirective } from './dnd.directive';
 import { ReactiveFormsModule } from '@angular/forms';
-import { imageItemIndex } from 'app/5.models/imageItem';
+import { ImageItemIndex } from 'app/5.models/imageItem';
 import { DeleteDuplicateService } from 'app/4.services/delete-duplicate.service';
 
 @Component({
@@ -49,7 +49,6 @@ export class DndComponent implements OnDestroy {
     this.createForm();
   }
 
-
   private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   @ViewChild('fileDropRef', { static: false })
@@ -61,11 +60,10 @@ export class DndComponent implements OnDestroy {
   fileData: any;
   VERSION_NO = 1;
   percentageChange$: Observable<number | undefined>;
-  public imageItemIndex!: imageItemIndex;
-  allImages: imageItemIndex[] = [];
-  hashOriginalIndexMap = new Map<string, imageItemIndex>();
+  public imageItemIndex!: ImageItemIndex;
+  allImages: ImageItemIndex[] = [];
+  hashOriginalIndexMap = new Map<string, ImageItemIndex>();
   deleteDuplicateService = inject(DeleteDuplicateService);
-
 
   async sortAllImages() {
     return (await this.deleteDuplicateService.getAllImages('')).pipe(
@@ -163,14 +161,20 @@ export class DndComponent implements OnDestroy {
     let complete = true;
 
     this.percentageChange$ = task.percentageChanges();
-    this.percentageChange$.pipe(takeUntil(this._unsubscribeAll), shareReplay()).subscribe(async (data) => {
-
-      if (data === 100 && complete === true ) {
-        complete = false; // make sure this is only called once
-        console.debug(`complete: ${complete}`);
-        await this.deleteDuplicateService.getImageURL(fileRef, imageDt, file, path);
-      }
-    });
+    this.percentageChange$
+      .pipe(takeUntil(this._unsubscribeAll), shareReplay())
+      .subscribe(async (data) => {
+        if (data === 100 && complete === true) {
+          complete = false; // make sure this is only called once
+          console.debug(`complete: ${complete}`);
+          await this.deleteDuplicateService.getImageURL(
+            fileRef,
+            imageDt,
+            file,
+            path
+          );
+        }
+      });
   }
 
   async onCreate() {
@@ -202,5 +206,4 @@ export class DndComponent implements OnDestroy {
     this._unsubscribeAll.next(null);
     this._unsubscribeAll.complete();
   }
-
 }

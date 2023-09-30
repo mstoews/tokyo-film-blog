@@ -1,4 +1,4 @@
-import { DocumentReference } from "firebase/firestore";
+import { DocumentReference } from 'firebase/firestore';
 
 export interface imageItem {
   id: string;
@@ -16,7 +16,7 @@ export interface imageItem {
   size?: string;
 }
 
-export interface imageItemIndex {
+export interface ImageItemIndex {
   id: string;
   fullPath: string;
   size: string;
@@ -35,9 +35,8 @@ export interface imageItemIndex {
   category?: string;
 }
 
-
 export interface imageItemIndexMap {
-  [key: string]: imageItemIndex;
+  [key: string]: ImageItemIndex;
 }
 
 export interface imageItemPartial {
@@ -53,8 +52,11 @@ interface HashMap<T> {
   [key: string]: T;
 }
 
-
-export type ListUpdate<T, K = any> = { key: T, item: K, type: 'added' | 'removed' }
+export type ListUpdate<T, K = any> = {
+  key: T;
+  item: K;
+  type: 'added' | 'removed';
+};
 
 export type OverviewUpdate = ListUpdate<'overview', string>;
 
@@ -64,7 +66,5 @@ export type ImageItemListUpdate = ImageItemUpdate | OverviewUpdate;
 export type ImageItemRef = DocumentReference<imageItem>;
 
 export interface ImageItemSnap extends imageItem {
-    images: imageItem[];
+  images: imageItem[];
 }
-
-

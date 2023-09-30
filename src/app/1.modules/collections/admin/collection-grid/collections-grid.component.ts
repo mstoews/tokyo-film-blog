@@ -60,7 +60,7 @@ export class CollectionsAdminComponent implements OnInit {
     private collectionService: CollectionsService,
     private fb: FormBuilder,
     private route: Router,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {}
 
   onOpenRow(row: any) {
@@ -76,7 +76,6 @@ export class CollectionsAdminComponent implements OnInit {
   ngOnInit() {
     this.Refresh();
     this.cRAG = '#238823';
-    this.createForm(this.collection);
   }
 
   contentReady = (e: any) => {
@@ -106,8 +105,8 @@ export class CollectionsAdminComponent implements OnInit {
   }
 
   Refresh() {
-    this.sTitle = 'Collections Lists';
     this.allCollections$ = this.collectionService.getAll();
+    this.createForm(this.collection);
   }
 
   onCreate(data: any) {
