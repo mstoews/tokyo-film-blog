@@ -101,7 +101,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     private _lightboxWindowRef: LightboxWindowRef,
     private _fileSaverService: FileSaverService,
     private _sanitizer: DomSanitizer,
-    @Inject(DOCUMENT) private _documentRef: any
+    @Inject(DOCUMENT) private _documentRef
   ) {
     // initialize data
     this.options = this.options || {};
@@ -144,15 +144,14 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     this._event = {};
     this._lightboxElem = this._elemRef;
     this._event.subscription = this._lightboxEvent.lightboxEvent$
-      .subscribe((event: any) => {
-        this._onReceivedEvent(event)});
+      .subscribe((event: IEvent) => this._onReceivedEvent(event));
     this.rotate = 0;
   }
 
   ngOnInit(): void {
     this.album.forEach(album => {
       if (album.caption) {
-        album.caption = this._sanitizer.sanitize(SecurityContext.HTML, album.caption) as string;
+        album.caption = this._sanitizer.sanitize(SecurityContext.HTML, album.caption);
       }
     });
   }
@@ -218,11 +217,11 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
         _this._fileSaverService.save(blob, fileName)
       }, 'image/jpeg', 0.75);
     };
-     preloader.crossOrigin = '';
-     if(downloadUrl && downloadUrl.length > 0)
-       preloader.src = this._sanitizer.sanitize(SecurityContext.URL, downloadUrl)?.toString() as string;
-     else
-       preloader.src = this._sanitizer.sanitize(SecurityContext.URL, url)?.toString() as string;
+    preloader.crossOrigin = '';
+    if(downloadUrl && downloadUrl.length > 0)
+      preloader.src = this._sanitizer.sanitize(SecurityContext.URL, downloadUrl);
+    else
+      preloader.src = this._sanitizer.sanitize(SecurityContext.URL, url);
   }
 
   public control($event: any): void {
@@ -362,7 +361,7 @@ export class LightboxComponent implements OnInit, AfterViewInit, OnDestroy, OnIn
     }
 
     const src: any = this.album[this.currentImageIndex].src;
-    preloader.src = this._sanitizer.sanitize(SecurityContext.URL, src) as string;
+    preloader.src = this._sanitizer.sanitize(SecurityContext.URL, src);
   }
 
   /**

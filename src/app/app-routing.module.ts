@@ -7,7 +7,7 @@ import {
 } from '@angular/fire/compat/auth-guard';
 
 // const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['authentication/split-screen/sign-in']);
-const redirectLoggedInToHome = () => redirectUnauthorizedTo(['home']);
+const redirectLoggedInToHome = () => redirectUnauthorizedTo(['login']);
 const adminOnly = () => hasCustomClaim('admin');
 
 const routes: Route[] = [
@@ -76,9 +76,8 @@ const routes: Route[] = [
     path: 'admin',
     loadChildren: () =>
       import('./1.modules/admin/admin.module').then((mod) => mod.AdminModule),
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectLoggedInToHome },
-    title: 'Maintenance',
+      canActivate: [AngularFireAuthGuard],
+      data: { authGuardPipe: adminOnly },
   },
   {
     path: 'collections-admin/collection',
@@ -86,10 +85,9 @@ const routes: Route[] = [
     import('./1.modules/collections/collections-admin.module').then(
       (mod) => mod.CollectionsAdminModule
     ),
-    data: { state: 'collections' },
-    title: 'Featured',
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
   },
-
   {
     path: 'policy',
     loadChildren: () =>

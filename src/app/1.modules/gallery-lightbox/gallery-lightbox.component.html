@@ -8,29 +8,14 @@
       <div class="text-white font-normal text-lg">{{data.description}}</div>
     </div>
   </mat-card>
-</div>  
-  <!-- <div class="gallery">
-    <mat-card
-      cdkDropList
-      *ngFor="let data of galleryData; let i = index"
-      class="gallery-img"
-      cdkDrag>
-      <img
-        (click)="onPreviewImage(i)"
-        [src]="data.imageSrc200"
-        width="400"
-        height="400"
-        [alt]="data.description"
-      />  
-    </mat-card> -->
-    
-  
+</div>
+
   <div *ngIf="showMask" class="lightbox" @animation2>
     <span *ngIf="showCount" class="count">
       {{ currentIndex + 1 }}/{{ totalImageCount }}
     </span>
 
-    <button 
+    <button
       *ngIf="controls"
       class="close-btn"
       mat-icon-button
@@ -39,7 +24,7 @@
       <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
     </button>
 
-    <button 
+    <button
       *ngIf="controls"
       class="btn-lightbox-carousel btn-prev"
       mat-icon-button

@@ -22,35 +22,39 @@ import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.mo
 import { CollectionGalleryComponent } from './collection-page/collection-gallery/gallery.component';
 import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
 import { SafePipe } from './safe.pipe';
+import { Lightbox, LightboxModule } from '../lightbox';
+import { LightboxGalleryComponent } from "../lightbox-gallery/lightbox-gallery.component";
 
 @NgModule({
-  declarations: [
-    CollectionsEditComponent,
-    CollectionsAdminComponent,
-    CollectionsImageSelectionComponent,
-    CollectionsAddDialog,
-    CollectionsDetailsAddDialog,
-    CollectionsDetailsGridComponent,
-    CollectionPreviewComponent,
-    CollectionImageCardComponent,
-    CollectionMainComponent,
-    CollectionPage,
-    ProductCardComponent,
-    CollectionGalleryComponent,
-    SafePipe,
-  ],
-  providers: [CollectionResolver],
-  imports: [
-    CommonModule,
-    MaterialModule,
-    DxHtmlEditorModule,
-    NgOptimizedImage,
-    GalleryLightboxModule,
-    CollectionsEditRoutingModule,
-    ImageMaintenanceModule,
-    TwLighthouseComponent,
-    IconsModule,
-    SharedModule,
-  ],
+    declarations: [
+        CollectionsEditComponent,
+        CollectionsAdminComponent,
+        CollectionsImageSelectionComponent,
+        CollectionsAddDialog,
+        CollectionsDetailsAddDialog,
+        CollectionsDetailsGridComponent,
+        CollectionPreviewComponent,
+        CollectionImageCardComponent,
+        CollectionMainComponent,
+        CollectionPage,
+        ProductCardComponent,
+        CollectionGalleryComponent,
+        SafePipe,
+    ],
+    providers: [CollectionResolver],
+    imports: [
+        CommonModule,
+        MaterialModule,
+        DxHtmlEditorModule,
+        NgOptimizedImage,
+        GalleryLightboxModule,
+        CollectionsEditRoutingModule,
+        ImageMaintenanceModule,
+        TwLighthouseComponent,
+        IconsModule,
+        SharedModule,
+        LightboxModule,
+        LightboxGalleryComponent
+    ]
 })
 export class CollectionsAdminModule {}

@@ -17,7 +17,7 @@ export class LightboxConfig {
   public showZoom: boolean;
   public showRotate: boolean;
   public showDownloadButton: boolean;
-  public containerElementResolver: (document?: any) => HTMLElement;
+  public containerElementResolver: (document: any) => HTMLElement;
 
   constructor() {
     this.fadeDuration = 0.7;

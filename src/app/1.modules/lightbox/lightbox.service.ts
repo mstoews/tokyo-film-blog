@@ -1,10 +1,10 @@
 import {
   ApplicationRef,
+  ComponentFactoryResolver,
   ComponentRef,
   Inject,
   Injectable,
-  Injector,
-  ViewContainerRef
+  Injector
 } from '@angular/core';
 import { LightboxComponent } from './lightbox.component';
 import { LightboxConfig } from './lightbox-config.service';
@@ -15,13 +15,12 @@ import { DOCUMENT } from '@angular/common';
 @Injectable()
 export class Lightbox {
   constructor(
-
-    private viewContainerRef: ViewContainerRef,
+    private _componentFactoryResolver: ComponentFactoryResolver,
     private _injector: Injector,
     private _applicationRef: ApplicationRef,
     private _lightboxConfig: LightboxConfig,
     private _lightboxEvent: LightboxEvent,
-    @Inject(DOCUMENT) private _documentRef: any
+    @Inject(DOCUMENT) private _documentRef
   ) { }
 
   open(album: Array<IAlbum>, curIndex = 0, options = {}): void {
@@ -56,10 +55,9 @@ export class Lightbox {
         this._applicationRef.detachView(componentRef.hostView);
       });
 
-      const containerElement = this.viewContainerRef.createComponent(this._documentRef);
-      // containerElement.
-      // containerElement. pendChild(overlayComponentRef.location.nativeElement);
-      // containerElement.appendChild(componentRef.location.nativeElement);
+      const containerElement = newOptions.containerElementResolver(this._documentRef);
+      containerElement.appendChild(overlayComponentRef.location.nativeElement);
+      containerElement.appendChild(componentRef.location.nativeElement);
     });
   }
 
@@ -70,7 +68,9 @@ export class Lightbox {
   }
 
   _createComponent(ComponentClass: any): ComponentRef<any> {
-    const component = this.viewContainerRef.createComponent(ComponentClass);
+    const factory = this._componentFactoryResolver.resolveComponentFactory(ComponentClass);
+    const component = factory.create(this._injector);
+
     return component;
   }
 }

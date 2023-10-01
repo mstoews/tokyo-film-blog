@@ -7,32 +7,33 @@
   gtag('config', 'G-HLTMW3M19H');
 </script>
 
-<!-- <app-header class="bg-white" [title]="'Thoughts and Images'"
-  [sub_title]="'Impressions of our life and work, living in Tokyo'"
-  (notifyNavBarToggleMenu)="onToggleMenu()"></app-header> -->
-<div class="h-full bg-white">
-<div class="min-h-screen flex flex-col" *ngIf="collectionImages$ | async as images">
-  <app-header class="bg-white hidden sm:block" [title]="'cinema-tokyo Collections'"></app-header>
-  <app-header class="bg-white block  sm:hidden" [title]="'Collections'"></app-header>
 
 
-    <div class="flex-1 flex flex-col sm:flex-row">
-      <main class="flex-1 ">
-        <div class="flex-row m-5 " >
-          <collection-gallery [imageCollection]="images"></collection-gallery> 
+  <div class="h-full bg-white data-te-lightbox-init">
+  <app-header class="bg-slate-100 hidden sm:block" [title]="'cinema-tokyo Collections'"></app-header>
+  <app-header class="bg-slate-100 block  sm:hidden" [title]="'Collections'"></app-header>
+    <div class="min-h-screen flex flex-row" *ngIf="collectionImages$ | async as images">
+        <div class="text-slate-100 bg-slate-100 min-w-[450px]">
+          <nav class="order-first w-[450px] ">
+            <div class="h-30 py-10 m-5 text-3xl font-roboto text-bold lg:text-4xl text-center text-gray-700">
+              {{collection.title}}
+            </div>
+            <div class="ml-4 mr-2 text-3xl font-roboto lg:text-4xl leading-7 xl:leading-9 text-center text-gray-700"
+              [innerHTML]="collection.body | safe: 'html'">
+            </div>
+          </nav>
         </div>
-      </main>
+        <div class="text-gray-100  bg-slate-100">
 
-      <nav class="order-first w-[450px] ">
-        <div class="h-30 py-10 m-5 text-3xl font-roboto text-bold lg:text-4xl text-center text-gray-700">
-          {{collection.title}}
+          <div class="flex flex-wrap">
+            <div class="min-w-100" *ngFor="let p of images">
+              <img class="hover:cursor-zoom-in rounded-md min-w-[400px] h-auto m-1.5 cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto"
+                [src]="p.imageSrc400" width="400" height="400"
+                [data-te-img]="p.imageSrc800"
+                [alt]="p.alt" />
+            </div>
+          </div>
         </div>
-        <div class="ml-4 mr-2 text-3xl font-roboto lg:text-4xl leading-7 xl:leading-9 text-center text-gray-700"
-          [innerHTML]="collection.body | safe: 'html'">
-        </div>
-      </nav>
-
-    </div>
 
   </div>
-</div>
+

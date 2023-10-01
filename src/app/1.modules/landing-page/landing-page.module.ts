@@ -25,6 +25,9 @@ import { FollowingComponent } from './following/following.component';
 import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
 import { CinemaComponent } from './cinema/cinema.component';
 import { SignOutClassicComponent } from '../ui/pages/authentication/sign-out/classic/sign-out.component';
+import { AngularFireAuthGuard, hasCustomClaim } from '@angular/fire/compat/auth-guard';
+
+const adminOnly = () => hasCustomClaim('admin');
 
 const routes: Routes = [
   {
@@ -69,7 +72,7 @@ const routes: Routes = [
     data: { state: 'sign-out' },
   },
 
-  
+
   {
     path: 'services',
     pathMatch: 'full',
@@ -79,15 +82,16 @@ const routes: Routes = [
   {
     path: 'following',
     pathMatch: 'full',
-    component: FollowingComponent,
-    data: { state: 'following' },
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
   },
 
   {
     path: 'about_us',
     pathMatch: 'full',
     component: AboutUsComponent,
-    data: { state: 'about_us' },
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
   },
   {
     path: '**',
