@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@angular-devkit/build-angular': ^16.0.5
   '@angular/animations': ^16.0.5
-  '@angular/cdk': ^16.0.4
+  '@angular/cdk': ^16.2.6
   '@angular/cli': ~16.0.5
   '@angular/common': ^16.0.5
   '@angular/compiler': ^16.0.5
@@ -77,13 +77,13 @@ specifiers:
 
 dependencies:
   '@angular/animations': 16.0.5_@angular+core@16.0.5
-  '@angular/cdk': 16.0.4_xbz22gwnpaazzkrxdhannngvly
+  '@angular/cdk': 16.2.6_xbz22gwnpaazzkrxdhannngvly
   '@angular/common': 16.0.5_uek5jouww4uqkunfi5bazu3s4a
   '@angular/compiler': 16.0.5_@angular+core@16.0.5
   '@angular/core': 16.0.5_rxjs@7.5.7+zone.js@0.13.0
   '@angular/fire': 7.6.1_b2db4hypn2hoyzpnq4px372gce
   '@angular/forms': 16.0.5_4qq3iruz7kfh6amajr4i2lp45e
-  '@angular/material': 16.0.4_cv7k2jvy6m3cvmdnarudcxmxum
+  '@angular/material': 16.0.4_urxfb6q4bai3bsifkbcrcxpvza
   '@angular/platform-browser': 16.0.5_fgrhal5a2xhvk72xhq4nx6awrm
   '@angular/platform-browser-dynamic': 16.0.5_rz6shu4schnzqf3jdyauivwhwy
   '@angular/router': 16.0.5_4qq3iruz7kfh6amajr4i2lp45e
@@ -115,7 +115,7 @@ dependencies:
   marked: 4.3.0
   md-block: 0.0.1
   moment: 2.29.4
-  ng-gallery: 11.0.0_omuvsstuia7hvsm4kz4sx6pesm
+  ng-gallery: 11.0.0_kzks2kcfyr434ir5ruzshj7ifi
   ngx-filesaver: 14.0.0_wjbx3jsmwztujm3ulvhxwpytxe
   ngx-image-compress: 13.1.16_fgbwqzfbdk2zmlbknakcbkzbue
   ngx-image-cropper: 6.3.2_fgbwqzfbdk2zmlbknakcbkzbue
@@ -429,8 +429,8 @@ packages:
       tslib: 2.5.0
     dev: false
 
-  /@angular/cdk/16.0.4_xbz22gwnpaazzkrxdhannngvly:
-    resolution: {integrity: sha512-IIIACQJE6HOKiJo6ZnxZ1B8kSZmUcb7PZOllJhnerQzaJ2qL6tvwhPBTXlj5ekIh8j78VsQWswgr1ooFseYxhg==}
+  /@angular/cdk/16.2.6_xbz22gwnpaazzkrxdhannngvly:
+    resolution: {integrity: sha512-vSaPs69xutbxc6IbZz4I5fMzZhlypsMg5JKKNAufmyYNNHQYgSQytpUd1/RxHhPF/JoEvj/J8QjauRriZFN+SA==}
     peerDependencies:
       '@angular/common': ^16.0.0 || ^17.0.0
       '@angular/core': ^16.0.0 || ^17.0.0
@@ -602,7 +602,7 @@ packages:
       - supports-color
     dev: true
 
-  /@angular/material/16.0.4_cv7k2jvy6m3cvmdnarudcxmxum:
+  /@angular/material/16.0.4_urxfb6q4bai3bsifkbcrcxpvza:
     resolution: {integrity: sha512-N/jjaXf9wvQqajq+xbmt6MO9m0BpEOdAS4kiBZ0c53gSAFvpiv2YNCMXD/ok6kyoG5f5FDM+0tlE4LotKDmKxg==}
     peerDependencies:
       '@angular/animations': ^16.0.0 || ^17.0.0
@@ -614,7 +614,7 @@ packages:
       rxjs: ^6.5.3 || ^7.4.0
     dependencies:
       '@angular/animations': 16.0.5_@angular+core@16.0.5
-      '@angular/cdk': 16.0.4_xbz22gwnpaazzkrxdhannngvly
+      '@angular/cdk': 16.2.6_xbz22gwnpaazzkrxdhannngvly
       '@angular/common': 16.0.5_uek5jouww4uqkunfi5bazu3s4a
       '@angular/core': 16.0.5_rxjs@7.5.7+zone.js@0.13.0
       '@angular/forms': 16.0.5_4qq3iruz7kfh6amajr4i2lp45e
@@ -8844,7 +8844,7 @@ packages:
     engines: {node: '>= 0.4.0'}
     dev: false
 
-  /ng-gallery/11.0.0_omuvsstuia7hvsm4kz4sx6pesm:
+  /ng-gallery/11.0.0_kzks2kcfyr434ir5ruzshj7ifi:
     resolution: {integrity: sha512-xG0WD4Hd8FrKAinrH+dseH3dpbthhgc+n6EKUCv1WuwdUJC7YiEMuPOl1aV2t8DxSblVUokR2w5Y6pAFRo9Ixw==}
     peerDependencies:
       '@angular/cdk': '>=16.0.0'
@@ -8852,7 +8852,7 @@ packages:
       '@angular/core': '>=16.0.0'
       rxjs: '>=7.0.0'
     dependencies:
-      '@angular/cdk': 16.0.4_xbz22gwnpaazzkrxdhannngvly
+      '@angular/cdk': 16.2.6_xbz22gwnpaazzkrxdhannngvly
       '@angular/common': 16.0.5_uek5jouww4uqkunfi5bazu3s4a
       '@angular/core': 16.0.5_rxjs@7.5.7+zone.js@0.13.0
       rxjs: 7.5.7
