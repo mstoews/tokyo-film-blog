@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { LandingPageComponent } from './landing-page.component';
 import { GalleryCardComponent } from '../../3.components/gallery-card/gallery-card.component';
-import { GalleryComponent } from '../../3.components/gallery/gallery.component';
+// import { GalleryComponent } from '../../3.components/gallery/gallery.component';
 import { BannerComponent } from './banner/banner.component';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../shared-module/shared.module';
@@ -26,6 +26,7 @@ import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lightho
 import { CinemaComponent } from './cinema/cinema.component';
 import { SignOutClassicComponent } from '../ui/pages/authentication/sign-out/classic/sign-out.component';
 import { AngularFireAuthGuard, hasCustomClaim } from '@angular/fire/compat/auth-guard';
+import { GalleryMaintenanceComponent } from './image-maintenance/image-maintenance.component';
 
 const adminOnly = () => hasCustomClaim('admin');
 
@@ -71,17 +72,10 @@ const routes: Routes = [
     component: SignOutClassicComponent,
     data: { state: 'sign-out' },
   },
-
-
   {
-    path: 'services',
+    path: 'images',
     pathMatch: 'full',
-    component: ServicesComponent,
-    data: { state: 'services' },
-  },
-  {
-    path: 'following',
-    pathMatch: 'full',
+    component: GalleryMaintenanceComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly },
   },
@@ -103,7 +97,7 @@ const routes: Routes = [
   declarations: [
     LandingPageComponent,
     BannerComponent,
-    GalleryComponent,
+    GalleryMaintenanceComponent,
     CinemaComponent,
     ReadyToWearComponent,
     KnittingComponent,

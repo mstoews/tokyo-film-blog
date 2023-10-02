@@ -12,7 +12,7 @@
             <section class="flex md:flex-row">
 
               <div *ngIf="!categoryGroup.value.image" class="flex flex-col mt-4">
-                <img src='assets/madetologo.svg' width="40" height="40" alt="thumbnails">
+                <img src='favicon.ico' width="40" height="40" alt="thumbnails">
               </div>
               <div *ngIf="categoryGroup.value.image" class="flex flex-col m-2">
                 <img [src]="categoryGroup.value.image" width="40" height="40" lg-rounded alt="image">
@@ -106,7 +106,7 @@
   <ng-container *ngIf="allCategories$ | async as rows">
     <div class="m-1 h-full">
       <dx-data-grid flex id="categoryGrid" [dataSource]="rows" [showBorders]="true" [focusedRowEnabled]="true"
-        
+
         [focusedRowIndex]="0" (onCellDblClick)="onCellDoublClicked($event)" [repaintChangesOnly]="true" keyExpr="name">
         <dxi-column dataField="name"> </dxi-column>
         <dxi-column dataField="description"> </dxi-column>

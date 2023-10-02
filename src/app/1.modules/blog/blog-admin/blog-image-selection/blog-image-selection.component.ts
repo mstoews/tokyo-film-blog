@@ -30,7 +30,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   blogImages: ImageItemIndex[] = [];
 
   constructor(
-    
+
     public imageItemIndexService: ImageItemIndexService,
     private fb: FormBuilder
   ) {}
@@ -53,9 +53,8 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
   onAddImage(e: ImageItemIndex) {
     e.ranking = 0;
     e.type = this.blogId;
-    console.debug('Update Image Type', JSON.stringify(e));
-    this.imageItemIndexService.updateImageList(e);
-    this.imageItemIndexService.reNumber(this.IN_NOT_USED);
+    this.imageItemIndexService.updateImageList(e, 'IN_THOUGHTS', e.type);
+    //this.imageItemIndexService.reNumber(this.IN_NOT_USED);
     this.Refresh();
   }
 
@@ -123,7 +122,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i * 2;
-        this.imageItemIndexService.updateImageList(image);
+        this.imageItemIndexService.updateImageList(image, 'IN_THOUGHTS', image.type);
         i++;
       });
       console.debug('updateRanking', previousData);
@@ -143,7 +142,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
         let i = 1;
         previousData.forEach((image) => {
           image.ranking = i;
-          this.imageItemIndexService.updateImageList(image);
+          this.imageItemIndexService.updateImageList(image, image.category, image.type);
           i++;
         });
         console.log('updateRanking', previousData);
@@ -161,7 +160,7 @@ export class BlogImageSelectionComponent implements OnInit, OnDestroy {
     image.ranking = 0;
     image.type = newContainerId;
     console.debug('Update Image Type', image);
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image, 'IN_THOUGHTS', image.type);
   }
 
   ngOnDestroy() {

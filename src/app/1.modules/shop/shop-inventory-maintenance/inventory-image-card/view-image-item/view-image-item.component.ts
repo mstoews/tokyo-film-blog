@@ -55,7 +55,7 @@ export class ViewImageItemComponent {
       this.item.type = 'IN_DELETED';
     }
     this.item.description = results.description;
-    this.imageListService.updateImageList(this.item);
+    this.imageListService.updateImageList(this.item, this.item.category, this.item.type);
     this.close();
   }
 

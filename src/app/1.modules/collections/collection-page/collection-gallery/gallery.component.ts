@@ -12,8 +12,7 @@ export class CollectionGalleryComponent implements OnInit {
   imageCount = signal<number>(0);
 
   ngOnInit(): void {
-    initTE({ Lightbox });
+     initTE({ Lightbox });
      this.imageCount.set(this.imageCollection.length);
-    }
-
+  }
 }

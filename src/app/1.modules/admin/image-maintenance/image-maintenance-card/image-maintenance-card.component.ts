@@ -25,7 +25,7 @@ export class ImageMaintenanceCardComponent {
 
   onDblClick(e: any) {
     this.imageSelected.emit(this.image);
-    // openViewComponentDialog(this.dialog, this.image, this.productId);
+    // openViewComponentDialog(this.dialog, this.productId);
   }
 
   onView() {

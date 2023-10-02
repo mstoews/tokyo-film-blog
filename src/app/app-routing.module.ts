@@ -88,6 +88,16 @@ const routes: Route[] = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: adminOnly },
   },
+
+  {
+    path: 'images',
+    loadChildren: () =>
+    import('./1.modules/admin/image-maintenance/image-maintenance.module').then(
+      (mod) => mod.ImageMaintenanceModule
+    ),
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: adminOnly },
+  },
   {
     path: 'policy',
     loadChildren: () =>

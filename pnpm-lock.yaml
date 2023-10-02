@@ -54,6 +54,7 @@ specifiers:
   marked: ^4.3.0
   md-block: 0.0.1
   moment: ^2.29.4
+  ng-gallery: ^11.0.0
   ngx-filesaver: ^14.0.0
   ngx-image-compress: ^13.1.16
   ngx-image-cropper: ^6.3.2
@@ -114,6 +115,7 @@ dependencies:
   marked: 4.3.0
   md-block: 0.0.1
   moment: 2.29.4
+  ng-gallery: 11.0.0_omuvsstuia7hvsm4kz4sx6pesm
   ngx-filesaver: 14.0.0_wjbx3jsmwztujm3ulvhxwpytxe
   ngx-image-compress: 13.1.16_fgbwqzfbdk2zmlbknakcbkzbue
   ngx-image-cropper: 6.3.2_fgbwqzfbdk2zmlbknakcbkzbue
@@ -5766,7 +5768,7 @@ packages:
       '@angular/core': 16.0.5_rxjs@7.5.7+zone.js@0.13.0
       '@angular/forms': 16.0.5_4qq3iruz7kfh6amajr4i2lp45e
       devextreme: 23.1.2-beta
-      devextreme-schematics: 1.6.0
+      devextreme-schematics: 1.6.1
       inferno-server: 7.4.11
       tslib: 2.5.0
     dev: false
@@ -5808,8 +5810,8 @@ packages:
       '@schematics/angular': 12.2.18
     dev: false
 
-  /devextreme-schematics/1.6.0:
-    resolution: {integrity: sha512-1rYH+sIp6mu0m1/ibVKGCvgu22q+00QmG3VhCk9g88W2Lj11+wrWE3f50kBwuPoNVsBD2txL8aSNMhwbiXn9Gw==}
+  /devextreme-schematics/1.6.1:
+    resolution: {integrity: sha512-ux/cUouyZM8bVTM/YSZxd7sGHYqG26cvM/C9fMd395LcuaWzGW0JwZRzWQDo5fKcPEPUvTOsu8uxxIhCLPUEcg==}
     dependencies:
       '@angular-devkit/core': 12.2.18
       '@angular-devkit/schematics': 12.2.18
@@ -8840,6 +8842,21 @@ packages:
   /netmask/2.0.2:
     resolution: {integrity: sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==}
     engines: {node: '>= 0.4.0'}
+    dev: false
+
+  /ng-gallery/11.0.0_omuvsstuia7hvsm4kz4sx6pesm:
+    resolution: {integrity: sha512-xG0WD4Hd8FrKAinrH+dseH3dpbthhgc+n6EKUCv1WuwdUJC7YiEMuPOl1aV2t8DxSblVUokR2w5Y6pAFRo9Ixw==}
+    peerDependencies:
+      '@angular/cdk': '>=16.0.0'
+      '@angular/common': '>=16.0.0'
+      '@angular/core': '>=16.0.0'
+      rxjs: '>=7.0.0'
+    dependencies:
+      '@angular/cdk': 16.0.4_xbz22gwnpaazzkrxdhannngvly
+      '@angular/common': 16.0.5_uek5jouww4uqkunfi5bazu3s4a
+      '@angular/core': 16.0.5_rxjs@7.5.7+zone.js@0.13.0
+      rxjs: 7.5.7
+      tslib: 2.5.0
     dev: false
 
   /ngx-filesaver/14.0.0_wjbx3jsmwztujm3ulvhxwpytxe:

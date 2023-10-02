@@ -1,0 +1,22 @@
+<div class="h-screen">
+  <app-header [title]="'Collections'"></app-header>
+  <div *ngIf="collectionImages$ | async as collections else loading">
+    <div class="flex flex-wrap gap-4 flex-row w-full items-center justify-center data-te-lightbox-init">
+
+          <div *ngFor="let image of collections">
+            <div class="data-[te-lightbox-disabled]:cursor-auto">
+                  <img [alt]="image.caption"
+                  class="block object-cover object-center h-[460px] rounded-lg w-[400px] cursor-zoom-in data-[te-lightbox-disabled]:cursor-auto"
+                  [src]="image.imageSrc400">
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="flex flex-col items-center justify-center h-screen">
+    <mat-spinner [diameter]="60"></mat-spinner>
+    <p class="text-gray-500 text-2xl">Loading...</p>
+  </div>
+</ng-template>

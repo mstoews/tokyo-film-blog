@@ -104,7 +104,7 @@ export class ImageListComponent implements OnDestroy {
       let i = 1;
       previousData.forEach((image) => {
         image.ranking = i;
-        this.imageItemIndexService.updateImageList(image);
+        this.imageItemIndexService.updateImageList(image, image.category, image.type);
         i++;
       });
     }
@@ -120,8 +120,7 @@ export class ImageListComponent implements OnDestroy {
       let i = 1;
       newData.forEach((image: any) => {
         image.ranking = i;
-        image.type = newContainerId;
-        this.imageItemIndexService.updateImageList(image);
+        this.imageItemIndexService.updateImageList(image, image.category, newContainerId);
         i++;
       });
     }

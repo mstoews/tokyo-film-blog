@@ -24,6 +24,7 @@ import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lightho
 import { SafePipe } from './safe.pipe';
 import { Lightbox, LightboxModule } from '../lightbox';
 import { LightboxGalleryComponent } from "../lightbox-gallery/lightbox-gallery.component";
+import { CollectionImagesComponent } from './collection-page/collection-gallery/collection-images.component';
 
 @NgModule({
     declarations: [
@@ -38,6 +39,7 @@ import { LightboxGalleryComponent } from "../lightbox-gallery/lightbox-gallery.c
         CollectionMainComponent,
         CollectionPage,
         ProductCardComponent,
+        CollectionImagesComponent,
         CollectionGalleryComponent,
         SafePipe,
     ],

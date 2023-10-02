@@ -221,7 +221,9 @@ export class ImageItemIndexService implements OnDestroy {
     );
   }
 
-  updateImageList(item: ImageItemIndex) {
+  updateImageList(item: ImageItemIndex, category: string, type: string) {
+    item.category = category;
+    item.type = type;
     this.imageIndexCollections.doc(item.id).update(item);
   }
 

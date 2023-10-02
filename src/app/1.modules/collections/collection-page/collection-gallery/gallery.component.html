@@ -1,13 +1,9 @@
-<div class="data-te-lightbox-init">
-  <div class="flex flex-col max-w-6xl mx-auto text-gray-900 md:flex-row md:px-0">
-      <div class="flex flex-wrap -m-1 md:-m-2">
-        <div class="flex flex-wrap w-1/3 h-1/2 cursor-zoom-in  data-[te-lightbox-disabled]:cursor-auto">
-          <div class="w-full p-1 md:p-2" *ngFor="let image of imageCollection">
+
+  <div *ngFor="let image of imageCollection">
+      <div class="data-[te-lightbox-disabled]:cursor-auto">
             <img [alt]="image.caption"
-            class="block object-cover object-center w-full h-[460px] rounded-lg"
+            class="block object-cover object-center h-[460px] rounded-lg w-[400px]"
             [src]="image.imageSrc400">
-          </div>
-        </div>
-    </div>
+      </div>
   </div>
-</div>
+

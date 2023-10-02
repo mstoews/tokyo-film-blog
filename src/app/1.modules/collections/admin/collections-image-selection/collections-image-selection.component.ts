@@ -107,12 +107,12 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
 
   addImageToItemList(image: any) {
     image.parentId = this.collectionsId;
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image, this.IN_COLLECTION, image.type);
   }
 
   UpdateInventoryItem(e: ImageItemIndex) {
     e.type = this.IN_COLLECTION;
-    this.imageItemIndexService.updateImageList(e);
+    this.imageItemIndexService.updateImageList(e, this.IN_COLLECTION, e.type);
   }
 
   async sortNotUsed() {
@@ -183,12 +183,12 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
       const image = imageItem[currentIndex];
       if (image.type === newContainerId) {
         image.ranking = 0;
-        this.imageItemIndexService.updateImageList(image);
+        this.imageItemIndexService.updateImageList(image, this.IN_COLLECTION, image.type);
         return;
       }
       image.ranking = 0;
       image.type = newContainerId;
-      this.imageItemIndexService.updateImageList(image);
+      this.imageItemIndexService.updateImageList(image, this.IN_COLLECTION, image.type);
     }
   }
 
@@ -202,7 +202,7 @@ export class CollectionsImageSelectionComponent implements OnInit, OnDestroy {
     image.ranking = 0;
     image.type = newContainerId;
     console.debug('Update Image Type', image);
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image,'IN_COLLECTIONS', image.type);
   }
 
   ngOnDestroy() {

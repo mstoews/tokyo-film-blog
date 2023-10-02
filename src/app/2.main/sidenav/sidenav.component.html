@@ -48,7 +48,7 @@
             </li>
 
             <li>
-              <a routerLink="home/following" (click)="onClose()"
+              <a routerLink="collections-admin/gallery" (click)="onClose()"
                 class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-md grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
                 <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:follow_the_signs'"></mat-icon>
                 <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Gallery</span>
@@ -121,7 +121,13 @@
                     <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Landing Page</span>
                   </a>
                 </li>
-
+                <li>
+                  <a routerLink="admin/category"
+                    class="flex items-center pr-2 pl-4 pt-2 pb-2 font-normal text-gray-700 rounded-lg text-base grow hover:bg-gray-300 dark:hover:bg-gray-300">
+                    <mat-icon (onclick)="onClose()" class="text-gray-800" [svgIcon]="'mat_outline:category'"></mat-icon>
+                    <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Main Page Category</span>
+                  </a>
+                </li>
                 <li>
                   <a routerLink="blog-admin"
                     class="flex items-center pr-2 pl-4 pt-2 pb-2 font-normal text-gray-700 rounded-lg text-md pr- grow hover:bg-gray-300 dark:hover:bg-gray-300">

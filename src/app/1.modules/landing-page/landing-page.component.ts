@@ -118,8 +118,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     this.notifyNavBarToggleMenu.emit();
   }
 
-  onMadeToCinema() {
-    this.router.navigate(['blog/Cinema']);
+  onBlog() {
+    this.router.navigate(['blog']);
   }
 
   onImages() {
@@ -128,7 +128,7 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   }
 
   onFollowing() {
-    this.router.navigate(['home/following']);
+    this.router.navigate(['images']);
   }
 
   onAboutUs(service: string) {

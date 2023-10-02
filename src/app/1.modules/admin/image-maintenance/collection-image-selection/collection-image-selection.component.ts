@@ -36,7 +36,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
 
   IN_NOT_USED = 'IN_NOT_USED';
   IN_COLLECTION = 'IN_COLLECTION';
-  IN_PRODUCTS = 'IN_PRODUCTS';
+  IN_PRODUCTS = 'IN_THOUGHTS';
   IN_GALLERY = 'IN_GALLERY';
 
   subNotUsed: Subscription;
@@ -141,19 +141,26 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
 
   addImageToItemList(image: any) {
     image.parentId = this.productId;
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image, this.IN_GALLERY, image.type);
   }
 
   UpdateInventoryItem(e: ImageItemIndex) {
-    // e.type = this.IN_COLLECTION;
-    this.imageItemIndexService.updateImageList(e);
+    if (e.category === this.IN_NOT_USED) {
+      this.imageItemIndexService.updateImageList(e, this.IN_GALLERY, e.type);
+    }
+    else
+    {
+      if (e.category === this.IN_GALLERY) {
+        this.imageItemIndexService.updateImageList(e, this.IN_NOT_USED, e.type);
+      }
+    }
   }
 
   sort(sort: string) {
     return this.imageItemIndexService.getImagesByCategory(sort).pipe(
       map((data) => {
         data.sort((a, b) => {
-          return a.caption < b.caption ? -1 : 1;
+          return a.ranking < b.ranking ? -1 : 1;
         });
         return data;
       })
@@ -235,12 +242,12 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
       const image = imageItem[currentIndex];
       if (image.type === newContainerId) {
         image.ranking = 0;
-        this.imageItemIndexService.updateImageList(image);
+        this.imageItemIndexService.updateImageList(image, image.category, image.type);
         return;
       }
       image.ranking = 0;
       image.type = newContainerId;
-      this.imageItemIndexService.updateImageList(image);
+      this.imageItemIndexService.updateImageList(image, image.category, image.type);
     }
   }
 
@@ -254,7 +261,7 @@ export class CollectionImageSelectionComponent implements OnInit, OnDestroy {
     image.ranking = 0;
     image.type = newContainerId;
     console.debug('Update Image Type', image);
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image, image.category, image.type);
   }
 
   ngOnDestroy() {

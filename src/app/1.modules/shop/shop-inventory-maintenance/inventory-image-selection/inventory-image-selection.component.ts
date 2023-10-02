@@ -52,7 +52,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   addImageToItemList(image: any) {
     image.parentId = this.productId;
     // search for the image in the list 400 size and add it to the list
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image, 'IN_PRODUCTS', this.productId);
   }
 
   createImageOnce() {}
@@ -60,8 +60,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
   refreshList() {}
 
   UpdateInventoryItem(e: ImageItemIndex) {
-    e.type = this.productId;
-    this.imageItemIndexService.updateImageList(e);
+    this.imageItemIndexService.updateImageList(e, 'IN_PRODUCTS', this.productId);
   }
 
   async sortNotUsed(query: string) {
@@ -156,7 +155,7 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     if (newContainerId !== this.IN_NOT_USED) {
       imageItemIndex.forEach((element: any) => {
         element.ranking = imageItemIndex.indexOf(element);
-        this.imageItemIndexService.updateImageList(element);
+        this.imageItemIndexService.updateImageList(element, element.category, newContainerId);
       });
     }
   }
@@ -171,6 +170,6 @@ export class InventoryImageSelectionComponent implements OnInit, OnDestroy {
     image.ranking = 0;
     image.type = newContainerId;
     console.debug('Update Image Type', image);
-    this.imageItemIndexService.updateImageList(image);
+    this.imageItemIndexService.updateImageList(image, image.category , newContainerId );
   }
 }

@@ -5,6 +5,8 @@ import { CollectionsEditComponent } from './admin/collection-edit/collections-ed
 import { CollectionsAdminComponent } from './admin/collection-grid/collections-grid.component';
 import { CollectionPage } from './collection-page/collection-page/collection-page.component';
 import { CollectionMainComponent } from './collection-page/collection-main.component';
+import { CollectionGalleryComponent } from './collection-page/collection-gallery/gallery.component';
+import { CollectionImagesComponent } from './collection-page/collection-gallery/collection-images.component';
 
 const routes: Routes = [
   {
@@ -22,6 +24,12 @@ const routes: Routes = [
       collection: CollectionResolver,
     },
     data: { state: 'item/:id' },
+  },
+  {
+    path: 'gallery',
+    title: 'Gallery',
+    component: CollectionImagesComponent,
+    data: { state: 'gallery' },
   },
   {
     path: 'collections',

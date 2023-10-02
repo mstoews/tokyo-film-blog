@@ -7,7 +7,7 @@
     (notifyParentAdd)="createImageOnce()"
     (notifyParentDelete)="deleteDuplicateImages()"
     (notifyParentRefreshImage)="RefreshImages()"
-    [title]="'Drag and Drop Images'">
+    [title]="'Images Usage and Maintenance'">
   </app-image-menubar>
 
   <mat-drawer-container>
@@ -74,7 +74,7 @@
               <div *ngFor="let item of productsImages" cdkDrag>
                 <div class="flex-none object-cover p-1">
                   <image-maintenance-card
-                    (imageSelected)="UpdateInventoryItem($event)" [productId]="IN_PRODUCTS"
+                    (imageSelected)="UpdateInventoryItem($event)" [productId]="IN_THOUGHTS"
                     [image]="item">
                   </image-maintenance-card>
                 </div>
