@@ -81,9 +81,9 @@ export class NgLightboxComponent implements OnInit, OnDestroy {
         // Load items manually into the lightbox gallery ref
         this.gallery
           .ref('lightbox', {
-            thumbPosition: 'top',
+            thumbPosition: 'left',
             imageSize: 'cover',
-            autoHeight: false,
+            autoHeight: true,
           })
           .load(items);
         return items;
