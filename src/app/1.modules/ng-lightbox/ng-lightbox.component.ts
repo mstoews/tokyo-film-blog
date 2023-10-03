@@ -67,11 +67,13 @@ export class NgLightboxComponent implements OnInit, OnDestroy {
     return this._imageItemIndexService.getImagesByCategory(category).pipe(
       map((data) => {
         return data.map((item) => {
-          return new ImageItem({ src: item.imageSrc800, thumb: item.imageSrc200, alt: item.fileName });
+          return new ImageItem({ src: item.imageSrc, thumb: item.imageSrc200, alt: item.fileName });
         });
       })
     );
   }
+
+  galleryId = 'myLightbox';
 
   ngOnInit() {
 
@@ -79,8 +81,18 @@ export class NgLightboxComponent implements OnInit, OnDestroy {
     this.space$ = this.imageItems('IN_NOT_USED').pipe(
       map((items: GalleryItem[]) => {
         // Load items manually into the lightbox gallery ref
+        // this.gallery
+        //   .ref('lightbox', {
+        //     thumbPosition: 'left',
+        //     imageSize: 'cover',
+        //     autoHeight: true,
+
+        //   })
+        //   .load(items);
+
+        // Load items manually into the lightbox gallery ref
         this.gallery
-          .ref('lightbox', {
+          .ref(this.galleryId , {
             thumbPosition: 'left',
             imageSize: 'cover',
             autoHeight: true,
@@ -89,6 +101,12 @@ export class NgLightboxComponent implements OnInit, OnDestroy {
         return items;
       })
     );
+  }
+
+  openfullscreen(index: number) {
+    this.lightbox.open(index, this.galleryId, {
+      panelClass: 'fullscreen'
+    });
   }
 
   ngOnDestroy() {
