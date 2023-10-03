@@ -80,6 +80,14 @@ const routes: Route[] = [
       data: { authGuardPipe: adminOnly },
   },
   {
+    path: 'ng-lightbox',
+    loadComponent: () =>
+      import('./1.modules/ng-lightbox/ng-lightbox.component').then(
+        (mod) => mod.NgLightboxComponent),
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: adminOnly },
+  },
+  {
     path: 'collections-admin/collection',
     loadChildren: () =>
     import('./1.modules/collections/collections-admin.module').then(

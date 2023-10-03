@@ -18,6 +18,8 @@ specifiers:
   '@angular/router': ^16.2.7
   '@angular/service-worker': ^16.2.7
   '@babel/runtime': ^7.21.0
+  '@fortawesome/angular-fontawesome': 0.13.0
+  '@fortawesome/fontawesome-svg-core': ^6.4.2
   '@github/browser-support': ^1.3.2
   '@stripe/firestore-stripe-payments': ^0.0.6
   '@stripe/stripe-js': ^1.52.1
@@ -56,9 +58,11 @@ specifiers:
   moment: ^2.29.4
   ng-gallery: ^11.0.0
   ngx-filesaver: ^14.0.0
+  ngx-highlightjs: ^10.0.0
   ngx-image-compress: ^13.1.16
   ngx-image-cropper: ^6.3.2
   ngx-lightbox: ^2.6.2
+  ngx-scrollbar: ^13.0.3
   ngx-spinner: ^15.0.1
   postcss: ^8.4.21
   prettier: ^2.8.7
@@ -89,6 +93,8 @@ dependencies:
   '@angular/router': 16.2.7_ds6jhosn4wq43zylobrforkjdq
   '@angular/service-worker': 16.2.7_vgyi5ghxyhfsk66oz63zpgodjy
   '@babel/runtime': 7.21.0
+  '@fortawesome/angular-fontawesome': 0.13.0_ajnquqmpsjn2pilwzdio6yy4uy
+  '@fortawesome/fontawesome-svg-core': 6.4.2
   '@github/browser-support': 1.3.2
   '@stripe/firestore-stripe-payments': 0.0.6
   '@stripe/stripe-js': 1.52.1
@@ -117,9 +123,11 @@ dependencies:
   moment: 2.29.4
   ng-gallery: 11.0.0_masu5jtb3fpcw3q3f4occka7be
   ngx-filesaver: 14.0.0_wjbx3jsmwztujm3ulvhxwpytxe
+  ngx-highlightjs: 10.0.0_iwvv5gg6tvlt3ax6pelw2qy23q
   ngx-image-compress: 13.1.16_vgyi5ghxyhfsk66oz63zpgodjy
   ngx-image-cropper: 6.3.2_vgyi5ghxyhfsk66oz63zpgodjy
   ngx-lightbox: 2.6.2_@types+file-saver@2.0.5
+  ngx-scrollbar: 13.0.3_masu5jtb3fpcw3q3f4occka7be
   ngx-spinner: 15.0.1_vgyi5ghxyhfsk66oz63zpgodjy
   prettier: 2.8.7
   prettier-standalone: 1.3.1-0
@@ -2942,6 +2950,31 @@ packages:
 
   /@firebase/webchannel-wrapper/0.9.0:
     resolution: {integrity: sha512-BpiZLBWdLFw+qFel9p3Zs1jD6QmH7Ii4aTDu6+vx8ShdidChZUXqDhYJly4ZjSgQh54miXbBgBrk0S+jTIh/Qg==}
+    dev: false
+
+  /@fortawesome/angular-fontawesome/0.13.0_ajnquqmpsjn2pilwzdio6yy4uy:
+    resolution: {integrity: sha512-gzSPRdveOXNO7NIiMgTyB46aiHG0i98KinnAEqHXi8qzraM/kCcHn/0y3f4MhemX6kftwsFli0IU8RyHmtXlSQ==}
+    peerDependencies:
+      '@angular/core': ^16.0.0
+      '@fortawesome/fontawesome-svg-core': ~1.2.27 || ~1.3.0-beta2 || ^6.1.0
+    dependencies:
+      '@angular/core': 16.2.7_rxjs@7.5.7+zone.js@0.13.0
+      '@fortawesome/fontawesome-svg-core': 6.4.2
+      tslib: 2.6.1
+    dev: false
+
+  /@fortawesome/fontawesome-common-types/6.4.2:
+    resolution: {integrity: sha512-1DgP7f+XQIJbLFCTX1V2QnxVmpLdKdzzo2k8EmvDOePfchaIGQ9eCHj2up3/jNEbZuBqel5OxiaOJf37TWauRA==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dev: false
+
+  /@fortawesome/fontawesome-svg-core/6.4.2:
+    resolution: {integrity: sha512-gjYDSKv3TrM2sLTOKBc5rH9ckje8Wrwgx1CxAPbN5N3Fm4prfi7NsJVWd1jklp7i5uSCVwhZS5qlhMXqLrpAIg==}
+    engines: {node: '>=6'}
+    requiresBuild: true
+    dependencies:
+      '@fortawesome/fontawesome-common-types': 6.4.2
     dev: false
 
   /@github/browser-support/1.3.2:
@@ -7411,6 +7444,11 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: false
 
+  /highlight.js/11.8.0:
+    resolution: {integrity: sha512-MedQhoqVdr0U6SSnWPzfiadUcDHfN/Wzq25AkXiQv9oiOO/sG0S7XkvpFIqWBl9Yq1UYyYOOVORs5UW2XlPyzg==}
+    engines: {node: '>=12.0.0'}
+    dev: false
+
   /hosted-git-info/6.1.1:
     resolution: {integrity: sha512-r0EI+HBMcXadMrugk0GCQ+6BQV39PiWAZVfq7oIckeGiN7sjRGyQxPdft3nQekFTCQbYxLBH+/axZMeH8UX6+w==}
     engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0}
@@ -9137,6 +9175,20 @@ packages:
       tslib: 1.14.1
     dev: false
 
+  /ngx-highlightjs/10.0.0_iwvv5gg6tvlt3ax6pelw2qy23q:
+    resolution: {integrity: sha512-F5VXB6vnpiTPMADUoCEkyc2wnqpKUNvfeAP4tO//NrwdQP2sQK6MfPg+jHL2adoJE5LIchsJlpq6C0r+KmlOSA==}
+    peerDependencies:
+      '@angular/common': '>=16.0.0'
+      '@angular/core': '>=16.0.0'
+      rxjs: '>=7.0.0'
+    dependencies:
+      '@angular/common': 16.2.7_qx7enxxm7e5lanv4l2zf6kob5y
+      '@angular/core': 16.2.7_rxjs@7.5.7+zone.js@0.13.0
+      highlight.js: 11.8.0
+      rxjs: 7.5.7
+      tslib: 2.6.1
+    dev: false
+
   /ngx-image-compress/13.1.16_vgyi5ghxyhfsk66oz63zpgodjy:
     resolution: {integrity: sha512-qVcBaoqwa7O73/yTyLG4s/XXMKqFs4p2q72Zep2gCYfG5jn47uxgX2SekqK0aMXo701ozvFJ/genGJBMjUR6oA==}
     peerDependencies:
@@ -9166,6 +9218,21 @@ packages:
       ngx-filesaver: 8.1.0_wjbx3jsmwztujm3ulvhxwpytxe
     transitivePeerDependencies:
       - '@types/file-saver'
+    dev: false
+
+  /ngx-scrollbar/13.0.3_masu5jtb3fpcw3q3f4occka7be:
+    resolution: {integrity: sha512-ZpjNm9y7F5OSQh7p4x2PrwRkNl5zARPqPbRdkS5HjP8lHpG7hAFpbsjW+WlsM/6lAL5pesfVRCSlvcRJihM2sg==}
+    peerDependencies:
+      '@angular/cdk': '>=16.0.0'
+      '@angular/common': '>=16.0.0'
+      '@angular/core': '>=16.0.0'
+      rxjs: '>=7.0.0'
+    dependencies:
+      '@angular/cdk': 16.2.6_iwvv5gg6tvlt3ax6pelw2qy23q
+      '@angular/common': 16.2.7_qx7enxxm7e5lanv4l2zf6kob5y
+      '@angular/core': 16.2.7_rxjs@7.5.7+zone.js@0.13.0
+      rxjs: 7.5.7
+      tslib: 2.6.1
     dev: false
 
   /ngx-spinner/15.0.1_vgyi5ghxyhfsk66oz63zpgodjy:

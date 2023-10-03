@@ -1,0 +1,11 @@
+<app-header [title]="'ImageList'" ></app-header>
+    <div class="grid">
+      <button mat-raised-button
+              class="grid-item"
+              *ngFor="let item of space$ | async; let i = index"
+              [lightbox]="i"
+              gallery="lightbox">
+
+        <img class="grid-image" loading="lazy" [src]="item.data.thumb"/>
+      </button>
+    </div>

@@ -21,6 +21,7 @@ import { AuthTokenService } from './4.services/auth/auth-token.service';
 import { UserService } from './4.services/auth/user.service';
 import { DOCUMENT } from '@angular/common';
 import { isPlatformBrowser } from '@angular/common';
+import { initTE, Lightbox } from 'tw-elements';
 
 @Component({
   selector: 'app-root',
@@ -81,6 +82,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    initTE({ Lightbox });
     this.isLoggedOut$ = this.afAuth.authState.pipe(
       map((loggedIn) => !loggedIn)
     );

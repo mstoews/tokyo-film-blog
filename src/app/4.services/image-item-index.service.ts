@@ -2,9 +2,17 @@ import { Injectable, OnDestroy, inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { ImageItemIndex } from 'app/5.models/imageItem';
-import { Subject, Subscription, map, takeUntil } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  Subscription,
+  map,
+  shareReplay,
+  takeUntil,
+} from 'rxjs';
 import { DeleteDuplicateService } from './delete-duplicate.service';
 import { ProductsService } from './products.service';
+import { GalleryItem, ImageItem } from 'ng-gallery';
 
 @Injectable({
   providedIn: 'root',
@@ -24,8 +32,6 @@ export class ImageItemIndexService implements OnDestroy {
   hashUsedImagesMap = new Map<string, ImageItemIndex>();
   hashOriginalIndexMap = new Map<string, ImageItemIndex>();
   hashImageItemMap = new Map<string, ImageItemIndex>();
-
-
 
   itemsCollection = this.afs.collection<ImageItemIndex[]>(
     'originalImageList',
@@ -76,7 +82,7 @@ export class ImageItemIndexService implements OnDestroy {
   addImageCollection(imgItem: ImageItemIndex) {
     this.imageIndexCollections.add(imgItem).then((imgIndex) => {
       this.imageIndexCollections.doc(imgIndex.id).update(imgIndex);
-    }) ;
+    });
   }
 
   setImageCollectionDescription(imgItem: ImageItemIndex) {
@@ -100,8 +106,8 @@ export class ImageItemIndexService implements OnDestroy {
 
   getAllImages(type: string) {
     if (type === null || type === undefined || type === '') {
-      let imageIndexCollections = this.afs.collection<ImageItemIndex>(
-        'originalImageList');
+      let imageIndexCollections =
+        this.afs.collection<ImageItemIndex>('originalImageList');
       let imageIndexItems = imageIndexCollections.valueChanges({
         idField: 'id',
       });
@@ -118,11 +124,29 @@ export class ImageItemIndexService implements OnDestroy {
     }
   }
 
+  getImageLightboxList(category: string) {
+    return this.getImagesByCategory(category).pipe(
+      map((data: any) =>
+        data.map(
+          (item: ImageItemIndex & { id: string }) =>
+            new ImageItem({
+              src: item.imageSrc800,
+              thumb: item.imageSrc200,
+              alt: item.caption,
+            })
+        )
+      )
+    );
+    shareReplay(1)
+  }
+
+
+
   updateImageIndexList(size: string): void {
     console.debug(this.hashOriginalIndexMap.size);
 
     this.hashOriginalIndexMap.forEach((value, key) => {
-      var fileExt  = value.fileName.split('.').pop();
+      var fileExt = value.fileName.split('.').pop();
       let fileName = value.fileName.replace(/\.[^/.]+$/, '');
       fileName = fileName
         .replace(`/${size}`, '')

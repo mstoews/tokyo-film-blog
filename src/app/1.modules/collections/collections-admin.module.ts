@@ -20,11 +20,11 @@ import { CollectionPage } from './collection-page/collection-page/collection-pag
 import { ProductCardComponent } from './collection-page/product-card/product-card.component';
 import { GalleryLightboxModule } from '../gallery-lightbox/gallery-lighthouse.module';
 import { CollectionGalleryComponent } from './collection-page/collection-gallery/gallery.component';
-import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
 import { SafePipe } from './safe.pipe';
-import { Lightbox, LightboxModule } from '../lightbox';
-import { LightboxGalleryComponent } from "../lightbox-gallery/lightbox-gallery.component";
 import { CollectionImagesComponent } from './collection-page/collection-gallery/collection-images.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { GalleryModule, Gallery, GalleryItem } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
 
 @NgModule({
     declarations: [
@@ -52,11 +52,10 @@ import { CollectionImagesComponent } from './collection-page/collection-gallery/
         GalleryLightboxModule,
         CollectionsEditRoutingModule,
         ImageMaintenanceModule,
-        TwLighthouseComponent,
         IconsModule,
         SharedModule,
-        LightboxModule,
-        LightboxGalleryComponent
+        LightboxModule, NgFor, AsyncPipe
+
     ]
 })
 export class CollectionsAdminModule {}

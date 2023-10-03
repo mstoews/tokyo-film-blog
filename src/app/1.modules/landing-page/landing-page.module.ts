@@ -22,7 +22,6 @@ import { TosComponent } from './tos/tos.component';
 import { LastestBlogComponent } from 'app/3.components/lastest-blog/lastest-blog.component';
 import { ServicesComponent } from './made-to-services/services.component';
 import { FollowingComponent } from './following/following.component';
-import { TwLighthouseComponent } from 'app/3.components/tw-lighthouse/tw-lighthouse.component';
 import { CinemaComponent } from './cinema/cinema.component';
 import { SignOutClassicComponent } from '../ui/pages/authentication/sign-out/classic/sign-out.component';
 import { AngularFireAuthGuard, hasCustomClaim } from '@angular/fire/compat/auth-guard';
@@ -121,7 +120,6 @@ const routes: Routes = [
     MaterialModule,
     IconsModule,
     LastestBlogComponent,
-    TwLighthouseComponent,
   ],
 })
 export class LandingPageModule {}

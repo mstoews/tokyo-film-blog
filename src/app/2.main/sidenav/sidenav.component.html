@@ -54,6 +54,15 @@
                 <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Gallery</span>
               </a>
             </li>
+
+            <li>
+              <a routerLink="ng-lightbox" (click)="onClose()"
+                class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-md grow hover:bg-gray-300 dark:hover:bg-gray-300 ">
+                <mat-icon class="text-gray-800" [svgIcon]="'mat_outline:follow_the_signs'"></mat-icon>
+                <span class="text-gray-800 flex-1 ml-3 whitespace-nowrap">Gallery One</span>
+              </a>
+            </li>
+
             <li>
               <a routerLink="collections-admin/collections" (click)="onClose()"
                 class="flex pr-2 pl-4 pt-2 pb-2 items-center font-normal text-gray-700 rounded-lg text-md grow hover:bg-gray-300 dark:hover:bg-gray-300">
